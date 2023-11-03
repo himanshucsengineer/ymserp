@@ -193,8 +193,14 @@ $(function () {
                     }, 2000);
                 },
                 error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
                     var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${error.responseJSON.message}</p></div>`;
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
                     document.getElementById('apiMessages').appendChild(callout);
                     setTimeout(function() {
                         callout.remove();

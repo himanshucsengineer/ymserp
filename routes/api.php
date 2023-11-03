@@ -95,4 +95,9 @@ $api->version('v1', function($api){
         $api->get('/get', 'App\Http\Controllers\MasterTransportController@get');
     });
 
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){
+        $api->post('/create','App\Http\Controllers\GateInController@store');
+        $api->get('/get', 'App\Http\Controllers\GateInController@get');
+    });
+
 });

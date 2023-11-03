@@ -24,6 +24,11 @@ class MasterTransportController extends Controller
         return view('transport.create');
     }
 
+    public function get()
+    {
+        return MasterTransport::get();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
