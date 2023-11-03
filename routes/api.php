@@ -98,6 +98,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){
         $api->post('/create','App\Http\Controllers\GateInController@store');
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
+        $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');
+        $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
     });
 
 });

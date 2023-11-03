@@ -33,6 +33,10 @@ Route::get('/transport/create', 'App\Http\Controllers\MasterTransportController@
 Route::get('/tarrif/create', 'App\Http\Controllers\MasterTarrifController@index');
 
 Route::get('/gatein/create', 'App\Http\Controllers\GateInController@index');
+Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');
+Route::get('/surveyor/containershow', 'App\Http\Controllers\GateInController@containershow');
+
+
 
 
 

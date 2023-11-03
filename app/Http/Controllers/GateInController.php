@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GateIn;
+use App\Models\MasterTransport;
+use App\Models\MasterLine;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -21,6 +23,102 @@ class GateInController extends Controller
     public function index()
     {
         return view('gatein.create');
+    }
+
+    public function inspection()
+    {
+        return view('surveyor.inspection');
+    }
+
+    public function containershow(){
+        return view('surveyor.containershow');
+    }
+
+    public function getDataById(Request $request){
+        return GateIn::where('id',$request->id)->first();
+    }
+
+    public function getInspectionData(Request $request){
+        
+        $datalimit= '';
+        if($request->limit){
+            $datalimit = $request->limit;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+
+       
+            $getInspection = GateIn::where([
+                ['container_no', '!=', Null],
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }]
+            ])->paginate($datalimit);
+
+        $formattedInspection = [];
+
+        foreach($getInspection as $inspection){
+            $transport = MasterTransport::where('id', $inspection->transport_id)->first();
+            $line = MasterLine::where('id', $inspection->line_id)->first();
+
+            $formattedInspection[] = [
+                'id'=> (int) $inspection->id,
+                'container_no' => $inspection->container_no,
+                'container_type' => $inspection->container_type,
+                'container_size' => $inspection->container_size,
+                'transport' => $transport,
+                'inward_date' => $inspection->inward_date,
+                'inward_time' => $inspection->inward_time,
+                'driver_name' => $inspection->driver_name,
+                'vehicle_number' => $inspection->vehicle_number,
+                'contact_number' => $inspection->contact_number,
+                'third_party' => $inspection->third_party,
+                'line' => $line,
+                'arrive_from' => $inspection->arrive_from,
+                'port_name' => $inspection->port_name,
+                'driver_photo' => url('/') . "/uploads/gatein/" . $inspection->driver_photo,
+                'challan' => url('/') . "/uploads/gatein/" . $inspection->challan,
+                'driver_license' => url('/') . "/uploads/gatein/" . $inspection->driver_license,
+                'do_copy' => url('/') . "/uploads/gatein/" . $inspection->do_copy,
+                'aadhar' => url('/') . "/uploads/gatein/" . $inspection->aadhar,
+                'pan' => url('/') . "/uploads/gatein/" . $inspection->pan,
+            ];
+        }
+
+    	return response()->json([
+            'data' => $formattedInspection,
+            'pagination' => [
+                'current_page' => $getInspection->currentPage(),
+                'per_page' => $getInspection->perPage(),
+                'total' => $getInspection->total(),
+                'last_page' => $getInspection->lastPage(),
+                'from' => $getInspection->firstItem(),
+                'to' => $getInspection->lastItem(),
+                'links' => [
+                    'prev' => $getInspection->previousPageUrl(),
+                    'next' => $getInspection->nextPageUrl(),
+                    'all_pages' => $getInspection->getUrlRange(1, $getInspection->lastPage()),
+                ],
+            ],
+        ]);
     }
 
     /**
