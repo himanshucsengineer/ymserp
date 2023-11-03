@@ -28,6 +28,11 @@ class MasterLineController extends Controller
         return MasterLine::get();
     }
 
+    public function getbyid(Request $request)
+    {
+        return MasterLine::where('id',$request->id)->first();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

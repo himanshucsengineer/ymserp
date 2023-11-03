@@ -30,10 +30,6 @@ class GateInController extends Controller
         return view('surveyor.inspection');
     }
 
-    public function containershow(){
-        return view('surveyor.containershow');
-    }
-
     public function getDataById(Request $request){
         return GateIn::where('id',$request->id)->first();
     }
@@ -208,6 +204,7 @@ class GateInController extends Controller
         }
 
     }
+
 
     /**
      * Display the specified resource.

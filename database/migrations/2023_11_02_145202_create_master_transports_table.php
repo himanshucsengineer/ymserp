@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('master_transports', function (Blueprint $table) {
             $table->id();
-            $table->string('transport_id')->nullable();
             $table->string('name')->nullable();
             $table->longtext('address')->nullable();
             $table->string('city')->nullable();

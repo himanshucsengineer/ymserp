@@ -83,6 +83,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'line'], function($api){
         $api->post('/create','App\Http\Controllers\MasterLineController@store');
         $api->get('/get', 'App\Http\Controllers\MasterLineController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterLineController@getbyid');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'tarrif'], function($api){
@@ -93,6 +94,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transport'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTransportController@store');
         $api->get('/get', 'App\Http\Controllers\MasterTransportController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterTransportController@getbyid');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){
@@ -100,6 +102,10 @@ $api->version('v1', function($api){
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
         $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');
         $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
+    });
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
+        $api->post('/create','App\Http\Controllers\ContainerVerifyController@store');
     });
 
 });

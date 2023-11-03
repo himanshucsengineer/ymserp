@@ -10,7 +10,6 @@ class MasterTransport extends Model
     use HasFactory;
 
     protected $fillable = [
-       'transport_id',
         'name',
         'address',
         'city',

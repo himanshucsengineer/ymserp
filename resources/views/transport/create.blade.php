@@ -37,17 +37,13 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="transport_id">Transport ID <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="transport_id" name="transport_id" placeholder="Enter Transport ID">
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Transport Name <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Transport Name">
+                                    <label for="name"> Name <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter  Name">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="address">Transport Address <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter Transport Address">
+                                    <label for="address"> Address <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter  Address">
                                 </div>
 
                                 <div class="form-group">
@@ -102,7 +98,6 @@ $(function () {
 
     $.validator.setDefaults({
     submitHandler: function () {
-        var transport_id = $("#transport_id").val();
         var name = $("#name").val();
         var address = $("#address").val();
         var city = $("#city").val();
@@ -115,7 +110,6 @@ $(function () {
         var is_transport = $("#is_transport").val();
 
             const data = {
-                'transport_id':transport_id,
                 'name':name,
                 'address':address,
                 'city':city,
@@ -135,9 +129,6 @@ $(function () {
 
     $('#transportForm').validate({
     rules: {
-        transport_id: {
-            required: true,
-        },
         name: {
             required: true,
         },
@@ -170,9 +161,7 @@ $(function () {
         }
     },
     messages: {
-        transport_id: {
-            required: "This field is required",
-        },
+
         name: {
             required: "This field is required",
         },

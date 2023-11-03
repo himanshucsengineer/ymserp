@@ -29,6 +29,11 @@ class MasterTransportController extends Controller
         return MasterTransport::get();
     }
 
+    public function getbyid(Request $request)
+    {
+        return MasterTransport::where('id',$request->id)->first();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,7 +43,6 @@ class MasterTransportController extends Controller
     public function store(Request $request)
     {
         $createTransport = MasterTransport::create([
-            'transport_id' => $request->transport_id,
             'name' => $request->name,
             'address' => $request->address,
             'city' => $request->city,
