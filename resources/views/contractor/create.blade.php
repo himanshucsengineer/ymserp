@@ -71,34 +71,7 @@
 </div>
 
 <script>
-$(document).ready(function () {
-        $("#contractorForm").submit(function (e) {
-            e.preventDefault();
-            var contractorcode = $("#contractorcode").val();
-            var fullname = $("#fullname").val();
-            var company = $("#company").val();
-            var address = $("#address").val();
-            var pincode = $("#pincode").val();
-            var license = $("#license").val();
-            var gst = $("#gst").val();
-            var contact = $("#contact").val();
 
-            if(contractorcode && fullname && company){
-
-                const data = {
-                    'contractorcode':contractorcode,
-                    'fullname':fullname,
-                    'company':company,
-                    'address':address,
-                    'pincode':pincode,
-                    'license':license,
-                    'gst':gst,
-                    'contact':contact
-                }
-                post('contractor/create',data);
-            }
-        });
-    });
 
 $(function () {
     var user_id = localStorage.getItem('user_id');

@@ -55,16 +55,29 @@ class AuthController extends Controller
         $getUser = User::where('username', $request->username)->first();
 
         if($getUser){
-            $getDepo = MasterDepo::where('id', $getUser->depot_id)->first();    
-            return response()->json([
-                'status' => "success",
-                'data' => $getDepo,
-            ], 200);
+            if($getUser->status != 1){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "User is not active please contact admin!",
+                ], 400);
+            }else{
+                $explodeDepoid = explode(',',$getUser->depot_id);
+                $getTotalDepo = array();
+
+                for($i=0; $i<count($explodeDepoid); $i++){
+                    $getDepo = MasterDepo::where('id', $explodeDepoid[$i])->first();
+                    array_push($getTotalDepo,$getDepo);
+                }   
+                return response()->json([
+                    'status' => "success",
+                    'data' => $getTotalDepo,
+                ], 200);
+            }
         }else{
             return response()->json([
                 'status' => "error",
                 'message' => "User Not Found",
-            ], 402);
+            ], 400);
         }
 
 

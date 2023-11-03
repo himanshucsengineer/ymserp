@@ -102,8 +102,13 @@
                         username: username
                     },
                     success: function (data) {
+                        $.each(data.data, function(index, item) {
+                            $('#depo').append($("<option>", {
+                                value: item.id,
+                                text: item.name
+                            }));
+                        });
                         $('#username1').val(username);
-                        $('#depo').append(`<option value="${data.data.id}">${data.data.name}</option>`)
                         $("#loginForm1").show();
                         $("#loginForm").hide();
                     },

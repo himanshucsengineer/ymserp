@@ -98,7 +98,7 @@ class MasterContractorController extends Controller
             'company'=> $request->company,
             'address'=> $request->address,
             'pincode'=> $request->pincode,
-            'contact '=> $request->contact,
+            'contact'=> $request->contact,
             'license'=> $request->license,
             'gst'=> $request->gst,
             'createdby' => $request->user_id,
