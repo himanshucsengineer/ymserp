@@ -33,6 +33,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="component_code">Component Code <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="component_code" name="component_code" placeholder="Enter Component Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="repai_location_code">Location Code <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="repai_location_code" name="repai_location_code" placeholder="Enter Location Code">
+                                </div>
+                                <div class="form-group">
                                     <label for="damade_id">Demage Code <span style="color:red;">*</span></label>
                                     <select name="damade_id" id="damade_id" class="form-control">
                                         <option value="">Select Demage Code</option>
@@ -50,9 +58,10 @@
                                         <option value="">Select Material Code</option>
                                     </select>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="repai_location_code">RepaiLocationCode <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="repai_location_code" name="repai_location_code" placeholder="Enter RepaiLocationCode">
+                                    <label for="desc">Description <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="desc" name="desc" placeholder="Enter Description">
                                 </div>
 
                                 <div class="form-group">
@@ -73,6 +82,21 @@
                                 <div class="form-group">
                                     <label for="dimension_h">Dimension H <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="dimension_h" name="dimension_h" placeholder="Enter Dimension H">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="qty">Quantity <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Quantity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="repair_type">Repair Type <span style="color:red;">*</span></label>
+                                    <select name="repair_type" id="repair_type" class="form-control">
+                                        <option value="">Please Select Repair Type</option>
+                                        <option value="repair">Repair</option>
+                                        <option value="pti">PTI</option>
+                                        <option value="washing">Washing</option>
+                                        <option value="decabling">decabling</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -240,7 +264,12 @@ $(function () {
         var tax = $("#tax").val();
         var tax_cost = $("#tax_cost").val();
         var total_cost = $("#total_cost").val();
-
+        var component_code = $("#component_code").val();
+        var desc = $("#desc").val();
+        var qty = $("#qty").val();
+        var repair_type = $('#repair_type').val();
+        
+        
             const data = {
                 'line_id':line_id,
                 'damade_id':damade_id,
@@ -262,8 +291,13 @@ $(function () {
                 'total_cost':total_cost,
                 'user_id':user_id,
                 'depo_id':depo_id,
+                'component_code':component_code,
+                'desc':desc,
+                'qty':qty,
+                'repair_type':repair_type
 
             }
+
             post('tarrif/create',data);
     }
   });
@@ -317,6 +351,18 @@ $(function () {
         },
         total_cost: {
             required: true,
+        },
+        component_code: {
+            required: true,
+        },
+        desc: {
+            required: true,
+        },
+        qty: {
+            required: true,
+        },
+        repair_type: {
+            required: true,
         }
     },
     messages: {
@@ -366,6 +412,18 @@ $(function () {
             required: "This Field is required",
         },
         total_cost: {
+            required: "This Field is required",
+        },
+        component_code: {
+            required: "This Field is required",
+        },
+        desc: {
+            required: "This Field is required",
+        },
+        qty: {
+            required: "This Field is required",
+        },
+        repair_type: {
             required: "This Field is required",
         }
     },

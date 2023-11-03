@@ -49,7 +49,11 @@ class MasterTarrifController extends Controller
             'tax_cost'=> $request->tax_cost,
             'total_cost'=> $request->total_cost,
             'createdby' => $request->user_id,
-            'depo_id' => $request->depo_id
+            'depo_id' => $request->depo_id,
+            'component_code' => $request->component_code,
+            'desc' => $request->desc,
+            'qty' => $request->qty,
+            'repair_type' => $request->repair_type
         ]);
 
 

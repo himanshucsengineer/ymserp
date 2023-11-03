@@ -33,6 +33,10 @@ return new class extends Migration
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();
+            $table->string('component_code')->nullable();
+            $table->longtext('desc')->nullable();
+            $table->string('qty')->nullable();
+            $table->string('repair_type')->nullable();
             $table->timestamps();
         });
     }

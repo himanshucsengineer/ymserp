@@ -28,6 +28,10 @@ class MasterTarrif extends Model
         'total_cost',
         'createdby',
         'updatedby',
-        'depo_id'
+        'depo_id',
+        'component_code',
+        'desc',
+        'qty',
+        'repair_type'
     ];
 }
