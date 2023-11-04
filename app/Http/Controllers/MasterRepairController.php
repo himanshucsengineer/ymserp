@@ -29,6 +29,11 @@ class MasterRepairController extends Controller
         return MasterRepair::where('damage_id', $request->id)->get();
     }
 
+    public function getbyid(Request $request){
+        return MasterRepair::where('id',$request->id)->get();
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

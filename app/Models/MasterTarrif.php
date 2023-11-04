@@ -25,6 +25,7 @@ class MasterTarrif extends Model
         'material_cost',
         'tax',
         'tax_cost',
+        'sub_total',
         'total_cost',
         'createdby',
         'updatedby',

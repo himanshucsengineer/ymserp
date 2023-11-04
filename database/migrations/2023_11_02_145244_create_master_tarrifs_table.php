@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('material_cost')->nullable();
             $table->string('tax')->nullable();
             $table->string('tax_cost')->nullable();
+            $table->string('sub_total')->nullable();
             $table->string('total_cost')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();

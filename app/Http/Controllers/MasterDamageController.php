@@ -28,6 +28,10 @@ class MasterDamageController extends Controller
         return MasterDamage::get();
     }
 
+    public function getbyid(Request $request){
+        return MasterDamage::where('id',$request->id)->get();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

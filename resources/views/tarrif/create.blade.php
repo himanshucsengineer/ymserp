@@ -195,16 +195,20 @@
                                     <input type="text" class="form-control" id="material_cost" name="material_cost" placeholder="Enter Material Cost">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tax">Tax  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="tax" name="tax" placeholder="Enter Tax">
+                                    <label for="sub_total">Sub Total  <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="sub_total" name="sub_total" readonly placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tax_cost">Tax Cost  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="tax_cost" name="tax_cost" placeholder="Enter Tax Cost ">
+                                    <label for="tax">Tax (in percentage without %)  <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="tax" name="tax" placeholder="Enter Tax Percentage">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tax_cost">Tax Cost <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" readonly id="tax_cost" name="tax_cost" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="total_cost">Total Cost <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="total_cost" name="total_cost" placeholder="Enter Total Cost">
+                                    <input type="text" class="form-control" readonly id="total_cost" name="total_cost" placeholder="Enter Total Cost">
                                 </div>
 
                             </div>
@@ -222,6 +226,20 @@
 <script>
 $(document).ready(function () {
     var checkToken = localStorage.getItem('token');
+
+    $('#labour_cost, #material_cost,#tax').on('keyup', function() {
+        var material_cost = $('#material_cost').val();
+        var labour_cost = $('#labour_cost').val();
+        var tax = $('#tax').val();
+        var sub_total = parseInt(labour_cost) + parseInt(material_cost);
+        $('#sub_total').val(sub_total);
+        var tax_cost =  (parseInt(tax) / 100 ) * sub_total;
+        $('#tax_cost').val(tax_cost);
+        var total = tax_cost + sub_total;
+        $('#total_cost').val(total);
+    });
+
+
     $.ajax({
         type: "GET",
         url: "/api/line/get",
@@ -343,7 +361,8 @@ $(function () {
         var material_cost = $("#material_cost").val();
 
         var tax = $("#tax").val();
-        var tax_cost = $("#tax_cost").val();
+        var sub_total = $("#sub_total").val();
+        var tax_cost = $('#tax_cost').val();
         var total_cost = $("#total_cost").val();
         var component_code = $("#component_code").val();
         var desc = $("#desc").val();
@@ -368,6 +387,7 @@ $(function () {
                 'material_cost':material_cost,
 
                 'tax':tax,
+                'sub_total':sub_total,
                 'tax_cost':tax_cost,
                 'total_cost':total_cost,
                 'user_id':user_id,
@@ -423,6 +443,9 @@ $(function () {
         material_cost: {
             required: true,
         },
+        tax_cost:{
+            required:true,
+        },
 
         tax: {
             required: true,
@@ -430,7 +453,7 @@ $(function () {
         tax_cost: {
             required: true,
         },
-        total_cost: {
+        sub_total: {
             required: true,
         },
         component_code: {
@@ -447,6 +470,9 @@ $(function () {
         }
     },
     messages: {
+        tax_cost:{
+            required:"This Field Is Required",
+        },
         line_id: {
             required: "This Field is required",
         },
@@ -489,7 +515,7 @@ $(function () {
         tax: {
             required: "This Field is required",
         },
-        tax_cost: {
+        sub_total: {
             required: "This Field is required",
         },
         total_cost: {

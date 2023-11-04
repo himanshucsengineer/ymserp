@@ -29,6 +29,10 @@ class MasterMaterialController extends Controller
     }
 
 
+    public function getbyid(Request $request){
+        return MasterMaterial::where('id',$request->id)->get();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

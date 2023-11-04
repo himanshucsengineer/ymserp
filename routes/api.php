@@ -68,16 +68,20 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'damage'], function($api){
         $api->post('/create','App\Http\Controllers\MasterDamageController@store');
         $api->get('/get', 'App\Http\Controllers\MasterDamageController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterDamageController@getbyid');
+
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'repair'], function($api){
         $api->post('/create','App\Http\Controllers\MasterRepairController@store');
         $api->post('/get', 'App\Http\Controllers\MasterRepairController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterRepairController@getbyid');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'material'], function($api){
         $api->post('/create','App\Http\Controllers\MasterMaterialController@store');
         $api->post('/get', 'App\Http\Controllers\MasterMaterialController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterMaterialController@getbyid');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'line'], function($api){
@@ -109,6 +113,12 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
         $api->post('/create','App\Http\Controllers\ContainerVerifyController@store');
         $api->post('/getbyid','App\Http\Controllers\ContainerVerifyController@getbyid');
+
+    });
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transcation'], function($api){
+        $api->post('/create','App\Http\Controllers\TransactionController@store');
+        $api->post('/getbytarrif','App\Http\Controllers\TransactionController@getbytarrif');
 
     });
 

@@ -45,7 +45,7 @@ class MasterTarrifController extends Controller
             'unit_of_measure'=> $request->unit_of_measure,
             'dimension_l'=> $request->dimension_l,
             'dimension_w'=> $request->dimension_w,
-
+            'sub_total'=> $request->sub_total,
             'dimension_h'=> $request->dimension_h,
             'labour_hour'=> $request->labour_hour,
             'labour_cost'=> $request->labour_cost,
