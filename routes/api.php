@@ -89,6 +89,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'tarrif'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTarrifController@store');
         $api->get('/get', 'App\Http\Controllers\MasterTarrifController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterTarrifController@getbyid');
+
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transport'], function($api){
@@ -106,6 +108,8 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
         $api->post('/create','App\Http\Controllers\ContainerVerifyController@store');
+        $api->post('/getbyid','App\Http\Controllers\ContainerVerifyController@getbyid');
+
     });
 
 });

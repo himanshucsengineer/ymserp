@@ -25,6 +25,15 @@ class ContainerVerifyController extends Controller
         return view('surveyor.containershow');
     }
 
+    public function masterserveyor()
+    {
+        return view('surveyor.master');
+    }
+
+
+    public function getbyid(Request $request){
+        return ContainerVerify::where('gate_in_id', $request->gate_in_id)->orderBy('id','desc')->take(1)->first();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -33,7 +42,7 @@ class ContainerVerifyController extends Controller
      */
     public function store(Request $request)
     {
-        $verifyContainer = ContainerVerify::create([
+        $verifyContainer = ContainerVerify::firstOrCreate([
             'status_name' => $request->status_name,
             'job_work_no' => $request->job_work_no,
             'gross_weight' => $request->gross_weight,

@@ -22,7 +22,9 @@ class MasterTarrifController extends Controller
     {
         return view('tarrif.create');
     }
-
+    public function getbyid(Request $request){
+        return MasterTarrif::where('line_id',$request->id)->first();
+    }
     /**
      * Store a newly created resource in storage.
      *

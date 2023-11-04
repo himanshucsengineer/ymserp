@@ -262,6 +262,9 @@
 $(document).ready(function () {
     var containerid = <?= $getid[1]?>;
     var checkToken = localStorage.getItem('token');
+
+    
+
     $.ajax({
         type: "POST",
         url: "/api/gatein/getDataById",
@@ -317,8 +320,11 @@ $(document).ready(function () {
         }
     });
 
+    
+
 });
 
+ 
 function getline(id){
     $.ajax({
         type: "POST",
@@ -352,12 +358,49 @@ function getTranport(id){
         success: function (data) {
             console.log(data);
             $("#transport_id").val(data.name);
+            getverifydata();
         },
         error: function (error) {
             console.log(error);
         }
     });
 }
+
+function getverifydata(){
+    var containerid = <?= $getid[1]?>;
+    var checkToken = localStorage.getItem('token'); 
+    $.ajax({
+        type: "POST",
+        url: "/api/containerverify/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'gate_in_id':containerid
+        },
+        success: function (data) {
+            $('#status_name').val(data.status_name);
+            $('#job_work_no').val(data.job_work_no);
+            $('#gross_weight').val(data.gross_weight);
+            $('#tare_weight').val(data.tare_weight);
+            $('#vessel_name').val(data.vessel_name);
+            $('#grade').val(data.grade);
+            $('#sub_lease_unity').val(data.sub_lease_unity);
+            $('#voyage').val(data.voyage);
+            $('#consignee').val(data.consignee);
+            $('#region').val(data.region);
+            $('#destuffung').val(data.destuffung);
+            $('#rftype').val(data.rftype);
+            $('#empty_repositioning').val(data.empty_repositioning);
+            $('#er_no').val(data.er_no);
+            $('#remarks').val(data.remarks);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
 
 
 $(function () {
@@ -403,7 +446,8 @@ $(function () {
             'depo_id': depo_id,
             'gate_in_id' : containerid
         }
-        post('containerverify/create',data);
+        post('containerverify/create',data)
+        window.location = `/surveyor/masterserveyor?id=${containerid}`
 
     }
   });
