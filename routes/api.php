@@ -90,7 +90,7 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\MasterTarrifController@store');
         $api->get('/get', 'App\Http\Controllers\MasterTarrifController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterTarrifController@getbyid');
-
+        $api->post('/getTarrifByLine', 'App\Http\Controllers\MasterTarrifController@getTarrifByLine');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transport'], function($api){

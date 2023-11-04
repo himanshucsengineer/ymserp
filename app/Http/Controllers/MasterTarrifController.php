@@ -23,7 +23,10 @@ class MasterTarrifController extends Controller
         return view('tarrif.create');
     }
     public function getbyid(Request $request){
-        return MasterTarrif::where('line_id',$request->id)->first();
+        return MasterTarrif::where('line_id',$request->line_id)->where('repai_location_code',$request->location_code)->first();
+    }
+    public function getTarrifByLine(Request $request){
+        return MasterTarrif::where('line_id',$request->line_id)->get();
     }
     /**
      * Store a newly created resource in storage.
@@ -33,7 +36,7 @@ class MasterTarrifController extends Controller
      */
     public function store(Request $request)
     {
-        $createTarrif = MasterTarrif::create([
+        $createTarrif = MasterTarrif::firstOrCreate([
             'line_id'=> $request->line_id,
             'damade_id'=> $request->damade_id,
             'repair_id'=> $request->repair_id,

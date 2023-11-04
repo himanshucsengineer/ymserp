@@ -7,6 +7,9 @@
 @section('content')
 
 <style>
+    .hidden{
+        display:none;
+    }
 .card-primary.card-outline{
     border-top: 3px solid #63bf84;
 }
@@ -197,96 +200,96 @@ a.open:hover  .circle img{
                                             <hr>
                                             <img src="/assets/img/right.jpeg" alt="Image with Hotspots" style="width:100%" id="image">
                                             <div class="hotspot" style="left: 10px; top: 65px;">
-                                                <a href="#" class="open"  data-id="RH1X">
+                                                <a href="#" class="open hidden" id="RH1X" data-id="RH1X" >
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 130px; ">
-                                                <a href="#" class="open" data-id="RX1N">
+                                                <a href="#" class="open hidden" data-id="RX1N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="RX6N">
+                                                <a href="#" class="open hidden" data-id="RX6N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="RB1X">
+                                                <a href="#" class="open hidden" data-id="RB1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; top: 130px; " >
-                                                <a href="#" class="open" data-id="RX2N">
+                                                <a href="#" class="open hidden" data-id="RX2N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; top: 240px; " >
-                                                <a href="#" class="open" data-id="RX7N">
+                                                <a href="#" class="open hidden" data-id="RX7N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="RB2X">
+                                                <a href="#" class="open hidden" data-id="RB2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             
                                             <div class="hotspot" style="left: 300px; top: 130px; " >
-                                                <a href="#" class="open" data-id="RX3N">
+                                                <a href="#" class="open hidden" data-id="RX3N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 300px; top: 240px; " >
-                                                <a href="#" class="open" data-id="RX8N">
+                                                <a href="#" class="open hidden" data-id="RX8N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; top: 130px; " >
-                                                <a href="#" class="open" data-id="RX4N">
+                                                <a href="#" class="open hidden" data-id="RX4N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; top: 240px; " >
-                                                <a href="#" class="open" data-id="RX9N">
+                                                <a href="#" class="open hidden" data-id="RX9N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="RB3X">
+                                                <a href="#" class="open hidden" data-id="RB3X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; top: 65px; " >
-                                                <a href="#" class="open" data-id="RH2X">
+                                                <a href="#" class="open hidden" data-id="RH2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 130px; " >
-                                                <a href="#" class="open" data-id="RX5N">
+                                                <a href="#" class="open hidden" data-id="RX5N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="RX0N">
+                                                <a href="#" class="open hidden" data-id="RX0N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="RB4X">
+                                                <a href="#" class="open hidden" data-id="RB4X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -298,96 +301,96 @@ a.open:hover  .circle img{
                                             <hr>
                                             <img src="/assets/img/left.jpeg" alt="Image with Hotspots" style="width:100%" id="image">
                                             <div class="hotspot" style="left: 10px; top: 65px;">
-                                                <a href="#" class="open"  data-id="LH1X">
+                                                <a href="#" class="open hidden"  data-id="LH1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 130px; ">
-                                                <a href="#" class="open" data-id="LX1N">
+                                                <a href="#" class="open hidden" data-id="LX1N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="LX6N">
+                                                <a href="#" class="open hidden" data-id="LX6N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="LB1X">
+                                                <a href="#" class="open hidden" data-id="LB1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; top: 130px; " >
-                                                <a href="#" class="open" data-id="LX2N">
+                                                <a href="#" class="open hidden" data-id="LX2N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; top: 240px; " >
-                                                <a href="#" class="open" data-id="LX7N">
+                                                <a href="#" class="open hidden" data-id="LX7N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="LB2X">
+                                                <a href="#" class="open hidden" data-id="LB2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             
                                             <div class="hotspot" style="left: 300px; top: 130px; " >
-                                                <a href="#" class="open" data-id="LX3N">
+                                                <a href="#" class="open hidden" data-id="LX3N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 300px; top: 240px; " >
-                                                <a href="#" class="open" data-id="LX8N">
+                                                <a href="#" class="open hidden" data-id="LX8N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; top: 130px; " >
-                                                <a href="#" class="open" data-id="LX4N">
+                                                <a href="#" class="open hidden" data-id="LX4N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; top: 240px; " >
-                                                <a href="#" class="open" data-id="LX9N">
+                                                <a href="#" class="open hidden" data-id="LX9N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="LB3X">
+                                                <a href="#" class="open hidden" data-id="LB3X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; top: 65px; " >
-                                                <a href="#" class="open" data-id="LH2X">
+                                                <a href="#" class="open hidden" data-id="LH2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 130px; " >
-                                                <a href="#" class="open" data-id="LX5N">
+                                                <a href="#" class="open hidden" data-id="LX5N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="LX0N">
+                                                <a href="#" class="open hidden" data-id="LX0N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="LB4X">
+                                                <a href="#" class="open hidden" data-id="LB4X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -399,23 +402,23 @@ a.open:hover  .circle img{
                                             <hr>
                                             <img src="/assets/img/top.jpeg" alt="Image with Hotspots" style="width:100%" id="image">
                                             <div class="hotspot" style="left: 10px; top: 65px; ">
-                                                <a href="#" class="open" data-id="TH1X">
+                                                <a href="#" class="open hidden" data-id="TH1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 130px; " >
-                                                <a href="#" class="open" data-id="TX1N">
+                                                <a href="#" class="open hidden" data-id="TX1N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="TX6N">
+                                                <a href="#" class="open hidden" data-id="TX6N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="TB1X">
+                                                <a href="#" class="open hidden" data-id="TB1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -423,13 +426,13 @@ a.open:hover  .circle img{
                                             
 
                                             <div class="hotspot" style="left: 180px; top: 130px; " >
-                                                <a href="#" class="open" data-id="TX2N">
+                                                <a href="#" class="open hidden" data-id="TX2N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; top: 240px; " >
-                                                <a href="#" class="open" data-id="TX7N">
+                                                <a href="#" class="open hidden" data-id="TX7N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -438,13 +441,13 @@ a.open:hover  .circle img{
 
                                             
                                             <div class="hotspot" style="left: 300px; top: 130px; " >
-                                                <a href="#" class="open" data-id="TX3N">
+                                                <a href="#" class="open hidden" data-id="TX3N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 300px; top: 240px; " >
-                                                <a href="#" class="open" data-id="TX8N">
+                                                <a href="#" class="open hidden" data-id="TX8N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -452,37 +455,37 @@ a.open:hover  .circle img{
                                             
 
                                             <div class="hotspot" style="left: 420px; top: 130px; " >
-                                                <a href="#" class="open" data-id="TX4N">
+                                                <a href="#" class="open hidden" data-id="TX4N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; top: 240px; " >
-                                                <a href="#" class="open" data-id="TX9N">
+                                                <a href="#" class="open hidden" data-id="TX9N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; top: 65px; " >
-                                                <a href="#" class="open" data-id="TH2X">
+                                                <a href="#" class="open hidden" data-id="TH2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 130px; " >
-                                                <a href="#" class="open" data-id="TX5N">
+                                                <a href="#" class="open hidden" data-id="TX5N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="TX0N">
+                                                <a href="#" class="open hidden" data-id="TX0N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="TB2X">
+                                                <a href="#" class="open hidden" data-id="TB2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -494,23 +497,23 @@ a.open:hover  .circle img{
                                             <hr>
                                             <img src="/assets/img/bottom.jpeg" alt="Image with Hotspots" style="width:100%" id="image">
                                             <div class="hotspot" style="left: 10px; top: 65px; ">
-                                                <a href="#" class="open" data-id="BH1X">
+                                                <a href="#" class="open hidden" data-id="BH1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 130px; " >
-                                                <a href="#" class="open" data-id="BX1N">
+                                                <a href="#" class="open hidden" data-id="BX1N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="BX6N">
+                                                <a href="#" class="open hidden" data-id="BX6N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="BB1X">
+                                                <a href="#" class="open hidden" data-id="BB1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -518,13 +521,13 @@ a.open:hover  .circle img{
                                             
 
                                             <div class="hotspot" style="left: 180px; top: 130px; " >
-                                                <a href="#" class="open" data-id="BX2N">
+                                                <a href="#" class="open hidden" data-id="BX2N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; top: 240px; " >
-                                                <a href="#" class="open" data-id="BX7N">
+                                                <a href="#" class="open hidden" data-id="BX7N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -533,13 +536,13 @@ a.open:hover  .circle img{
 
                                             
                                             <div class="hotspot" style="left: 300px; top: 130px; " >
-                                                <a href="#" class="open" data-id="BX3N">
+                                                <a href="#" class="open hidden" data-id="BX3N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 300px; top: 240px; " >
-                                                <a href="#" class="open" data-id="BX8N">
+                                                <a href="#" class="open hidden" data-id="BX8N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -547,37 +550,37 @@ a.open:hover  .circle img{
                                             
 
                                             <div class="hotspot" style="left: 420px; top: 130px; " >
-                                                <a href="#" class="open" data-id="BX4N">
+                                                <a href="#" class="open hidden" data-id="BX4N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 420px; top: 240px; " >
-                                                <a href="#" class="open" data-id="BX9N">
+                                                <a href="#" class="open hidden" data-id="BX9N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; top: 65px; " >
-                                                <a href="#" class="open" data-id="BH2X">
+                                                <a href="#" class="open hidden" data-id="BH2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 130px; " >
-                                                <a href="#" class="open" data-id="BX5N">
+                                                <a href="#" class="open hidden" data-id="BX5N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 60px; top: 240px; " >
-                                                <a href="#" class="open" data-id="BX0N">
+                                                <a href="#" class="open hidden" data-id="BX0N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 10px; bottom: -10px; " >
-                                                <a href="#" class="open" data-id="BB2X">
+                                                <a href="#" class="open hidden" data-id="BB2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -589,47 +592,47 @@ a.open:hover  .circle img{
                                             <hr>
                                             <img src="/assets/img/front.jpeg" alt="Image with Hotspots" style="width:100%" id="image">
                                             <div class="hotspot" style="left: 20px; top: 80px; ">
-                                                <a href="#" class="open" data-id="FH1X">
+                                                <a href="#" class="open hidden" data-id="FH1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 20px; bottom: 10px; " >
-                                                <a href="#" class="open" data-id="FB1X">
+                                                <a href="#" class="open hidden" data-id="FB1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 20px; top: 80px; ">
-                                                <a href="#" class="open" data-id="FH2X">
+                                                <a href="#" class="open hidden" data-id="FH2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="right: 20px; bottom: 10px; " >
-                                                <a href="#" class="open" data-id="FB2X">
+                                                <a href="#" class="open hidden" data-id="FB2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             
                                             <div class="hotspot" style="left: 180px; top: 230px; " >
-                                                <a href="#" class="open" data-id="FX1N">
+                                                <a href="#" class="open hidden" data-id="FX1N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; bottom: 180px; " >
-                                                <a href="#" class="open" data-id="FX3N">
+                                                <a href="#" class="open hidden" data-id="FX3N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 450px; top: 230px; " >
-                                                <a href="#" class="open" data-id="FX2N">
+                                                <a href="#" class="open hidden" data-id="FX2N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 450px; bottom: 180px; " >
-                                                <a href="#" class="open" data-id="FX4N">
+                                                <a href="#" class="open hidden" data-id="FX4N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
@@ -640,54 +643,52 @@ a.open:hover  .circle img{
                                             <hr>
                                             <img src="/assets/img/back.jpeg" alt="Image with Hotspots" style="width:100%" id="image">
                                             <div class="hotspot" style="left: 20px; top: 80px; ">
-                                                <a href="#" class="open" data-id="DH1X">
+                                                <a href="#" class="open hidden" data-id="DH1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="left: 20px; bottom: 10px; " >
-                                                <a href="#" class="open" data-id="DB1X">
+                                                <a href="#" class="open hidden" data-id="DB1X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="right: 20px; top: 80px; ">
-                                                <a href="#" class="open" data-id="DH2X">
+                                                <a href="#" class="open hidden" data-id="DH2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             <div class="hotspot" style="right: 20px; bottom: 10px; " >
-                                                <a href="#" class="open" data-id="DB2X">
+                                                <a href="#" class="open hidden" data-id="DB2X">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                             
                                             <div class="hotspot" style="left: 180px; top: 230px; " >
-                                                <a href="#" class="open" data-id="DX1N">
+                                                <a href="#" class="open hidden" data-id="DX1N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 180px; bottom: 180px; " >
-                                                <a href="#" class="open" data-id="DX3N">
+                                                <a href="#" class="open hidden" data-id="DX3N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 450px; top: 230px; " >
-                                                <a href="#" class="open" data-id="DX2N">
+                                                <a href="#" class="open hidden" data-id="DX2N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
 
                                             <div class="hotspot" style="left: 450px; bottom: 180px; " >
-                                                <a href="#" class="open" data-id="DX4N">
+                                                <a href="#" class="open hidden" data-id="DX4N">
                                                     <span class="circle small"></span>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                    
-
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel"
                                     aria-labelledby="custom-tabs-three-profile-tab">
@@ -700,13 +701,14 @@ a.open:hover  .circle img{
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                    <input type="text" id="line_id_no">
                 </div>
             </div>
         </div>
     </section>
 </div>
+
 
 
 <script>
@@ -765,15 +767,12 @@ function showDoor(){
     $('#door').show();
 }
 
-function openModel(){
-    console.log();
-}
+
 $('.open').click(function() {
-        // Get the data-id attribute value
         var dataIdValue = $(this).data('id');
-        
-        // Do something with the dataIdValue
-        console.log('data-id attribute value: ' + dataIdValue);
+        var line_id = $('#line_id_no').val();
+        gettarrif(dataIdValue, line_id);
+        $('#side').val(dataIdValue);
         $('#modal-xl').modal('show');
     });
 
@@ -790,9 +789,10 @@ $(document).ready(function() {
             'id': containerid
         },
         success: function(data) {
-            console.log(data);
             $('.container_no').text(data.container_no);
-            gettarrif(data.line_id);
+            $('#modal_container_no').val(data.container_no);
+            $('#line_id_no').val(data.line_id);
+            getTarrifByLine(data.line_id);
         },
         error: function(error) {
             console.log(error);
@@ -801,7 +801,247 @@ $(document).ready(function() {
 });
 
 
-function gettarrif(id) {
+function getTarrifByLine(line_id) {
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/getTarrifByLine",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: {
+            'line_id': line_id,
+        },
+        success: function(data) {
+            if(data.find(x => x.repai_location_code == 'RH1X')){
+                $('a[data-id="RH1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX1N')){
+                $('a[data-id="RX1N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX6N')){
+                $('a[data-id="RX6N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RB1X')){
+                $('a[data-id="RB1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX2N')){
+                $('a[data-id="RX2N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX7N')){
+                $('a[data-id="RX7N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RB2X')){
+                $('a[data-id="RB2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX3N')){
+                $('a[data-id="RX3N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX8N')){
+                $('a[data-id="RX8N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX4N')){
+                $('a[data-id="RX4N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX9N')){
+                $('a[data-id="RX9N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RB3X')){
+                $('a[data-id="RB3X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RH2X')){
+                $('a[data-id="RH2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX5N')){
+                $('a[data-id="RX5N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RX0N')){
+                $('a[data-id="RX0N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'RB4X')){
+                $('a[data-id="RB4X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LH1X')){
+                $('a[data-id="LH1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX1N')){
+                $('a[data-id="LX1N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX6N')){
+                $('a[data-id="LX6N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LB1X')){
+                $('a[data-id="LB1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX2N')){
+                $('a[data-id="LX2N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX7N')){
+                $('a[data-id="LX7N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LB2X')){
+                $('a[data-id="LB2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX3N')){
+                $('a[data-id="LX3N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX8N')){
+                $('a[data-id="LX8N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX4N')){
+                $('a[data-id="LX4N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX9N')){
+                $('a[data-id="LX9N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LB3X')){
+                $('a[data-id="LB3X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LH2X')){
+                $('a[data-id="LH2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX5N')){
+                $('a[data-id="LX5N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LX0N')){
+                $('a[data-id="LX0N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'LB4X')){
+                $('a[data-id="LB4X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TH1X')){
+                $('a[data-id="TH1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX1N')){
+                $('a[data-id="TX1N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX6N')){
+                $('a[data-id="TX6N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TB1X')){
+                $('a[data-id="TB1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX2N')){
+                $('a[data-id="TX2N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX7N')){
+                $('a[data-id="TX7N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX8N')){
+                $('a[data-id="TX8N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX4N')){
+                $('a[data-id="TX4N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX9N')){
+                $('a[data-id="TX9N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TH2X')){
+                $('a[data-id="TH2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX5N')){
+                $('a[data-id="TX5N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TX0N')){
+                $('a[data-id="TX0N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'TB2X')){
+                $('a[data-id="TB2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BH1X')){
+                $('a[data-id="BH1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX1N')){
+                $('a[data-id="BX1N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX6N')){
+                $('a[data-id="BX6N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BB1X')){
+                $('a[data-id="BB1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX2N')){
+                $('a[data-id="BX2N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX7N')){
+                $('a[data-id="BX7N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX8N')){
+                $('a[data-id="BX8N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX4N')){
+                $('a[data-id="BX4N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX9N')){
+                $('a[data-id="BX9N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BH2X')){
+                $('a[data-id="BH2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX5N')){
+                $('a[data-id="BX5N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BX0N')){
+                $('a[data-id="BX0N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'BB2X')){
+                $('a[data-id="BB2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FH1X')){
+                $('a[data-id="FH1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FB1X')){
+                $('a[data-id="FB1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FH2X')){
+                $('a[data-id="FH2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FB2X')){
+                $('a[data-id="FB2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FX1N')){
+                $('a[data-id="FX1N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FX3N')){
+                $('a[data-id="FX3N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FX2N')){
+                $('a[data-id="FX2N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'FX4N')){
+                $('a[data-id="FX4N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DH1X')){
+                $('a[data-id="DH1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DB1X')){
+                $('a[data-id="DB1X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DH2X')){
+                $('a[data-id="DH2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DB2X')){
+                $('a[data-id="DB2X').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DX1N')){
+                $('a[data-id="DX1N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DX3N')){
+                $('a[data-id="DX3N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DX2N')){
+                $('a[data-id="DX2N').show();
+            }
+            if(data.find(x => x.repai_location_code == 'DX4N')){
+                $('a[data-id="DX4N').show();
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function gettarrif(location_code,line_id) {
     $.ajax({
         type: "POST",
         url: "/api/tarrif/getbyid",
@@ -809,11 +1049,11 @@ function gettarrif(id) {
             'Authorization': 'Bearer ' + checkToken
         },
         data: {
-            'id': id
+            'line_id': line_id,
+            'location_code':location_code
         },
         success: function(data) {
-            console.log(data);
-            // $("#line_id").val(data.name);
+            $("#component_code").val(data.component_code);
         },
         error: function(error) {
             console.log(error);
@@ -828,13 +1068,72 @@ function gettarrif(id) {
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Extra Large Modal</h4>
+                <h4 class="modal-title">Create Transaction</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <div class="row"> 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Component Code</label>
+                            <input type="text" id="component_code" class="form-control" readonly>
+                        </div>
+                    </div>   
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Location Code</label>
+                            <input type="text" id="side" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Container No.</label>
+                            <input type="text" id="modal_container_no" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Damage code</label>
+                                    <select multiple="" class="form-control" id="damage_code">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                    <label>Repair code</label>
+                                    <select multiple="" class="form-control" id="repair_code">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                    <label>Material Code code</label>
+                                    <select multiple="" class="form-control" id="material_code">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
