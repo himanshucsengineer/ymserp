@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterDepo;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -196,9 +198,89 @@ class MasterDepoController extends Controller
      * @param  \App\Models\MasterDepo  $masterDepo
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMasterDepoRequest $request, MasterDepo $masterDepo)
+    public function update(Request $request)
     {
-        //
+        $getContractor = MasterDepo::where('id',$request->id)->first();
+        $contractorDetails = MasterDepo::find($request->id);
+
+        if($getContractor->phone != $request->phone){
+            $phone = MasterDepo::where('phone',$request->phone)->get();
+            if(count($phone) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "phone no. is already Taken"
+                ], 500);
+            }
+            $contractorDetails->phone = is_null($request->phone) ? $contractorDetails->phone : $request->phone;
+        }
+        if($getContractor->email != $request->email){
+            $email = MasterDepo::where('email',$request->email)->get();
+            if(count($email) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "email is already Taken"
+                ], 500);
+            }
+            $contractorDetails->email = is_null($request->email) ? $contractorDetails->email : $request->email;
+        }
+        if($getContractor->tan != $request->tan){
+            $tan = MasterDepo::where('tan',$request->tan)->get();
+            if(count($tan) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "tan no. is already Taken"
+                ], 500);
+            }
+            $contractorDetails->tan = is_null($request->tan) ? $contractorDetails->tan : $request->tan;
+        }
+        if($getContractor->pan != $request->pan){
+            $pan = MasterDepo::where('pan',$request->pan)->get();
+            if(count($pan) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Pan NO. is already Taken"
+                ], 500);
+            }
+            $contractorDetails->pan = is_null($request->pan) ? $contractorDetails->pan : $request->pan;
+        }
+        if($getContractor->gst != $request->gst){
+            $getgst = MasterDepo::where('gst',$request->gst)->get();
+            if(count($getgst) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Gst NO. is already Taken"
+                ], 500);
+            }
+            $contractorDetails->gst = is_null($request->gst) ? $contractorDetails->gst : $request->gst;
+        }
+
+        $contractorDetails->name = is_null($request->name) ? $contractorDetails->name : $request->name;
+        $contractorDetails->address = is_null($request->address) ? $contractorDetails->address : $request->address;
+        $contractorDetails->status = is_null($request->status) ? $contractorDetails->status : $request->status;
+        $contractorDetails->service_tax = is_null($request->service_tax) ? $contractorDetails->service_tax : $request->service_tax;
+        $contractorDetails->vattin = is_null($request->vattin) ? $contractorDetails->vattin : $request->vattin;
+        $contractorDetails->state = is_null($request->state) ? $contractorDetails->state : $request->state;
+        $contractorDetails->state_code = is_null($request->state_code) ? $contractorDetails->state_code : $request->state_code;
+        $contractorDetails->billing_name = is_null($request->billing_name) ? $contractorDetails->billing_name : $request->billing_name;
+        $contractorDetails->company_name = is_null($request->company_name) ? $contractorDetails->company_name : $request->company_name;
+        $contractorDetails->company_address = is_null($request->company_address) ? $contractorDetails->company_address : $request->company_address;
+        $contractorDetails->company_phone = is_null($request->company_phone) ? $contractorDetails->company_phone : $request->company_phone;
+        $contractorDetails->company_email = is_null($request->company_email) ? $contractorDetails->company_email : $request->company_email;
+
+
+        $contractorDetails  = $contractorDetails->save();
+
+        if($contractorDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Depo Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**
@@ -207,8 +289,35 @@ class MasterDepoController extends Controller
      * @param  \App\Models\MasterDepo  $masterDepo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterDepo $masterDepo)
+    public function destroy(Request $request)
     {
-        //
+        $geteEmployee = User::orWhere('depo_id', 'LIKE', '%' . $request->id . '%')->get();
+
+        if(count($geteEmployee) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Depo is assigned to user can not delete"
+            ], 500);
+        }
+        $contractor = MasterDepo::find($request->id);
+
+        
+        if (is_null($contractor)) {
+            throw new NotFoundHttpException('Invalid Workshop Id!');
+        }else{
+            
+            $deletecontractor= $contractor->delete();
+            if($deletecontractor){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Depo Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

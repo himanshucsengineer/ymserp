@@ -9,6 +9,9 @@
     border:none;
     outline:none;
 }
+.form-control{
+    width:200px !important;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,12 +19,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Contractor</h1>
+                    <h1 class="m-0">All Depo</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Contractor</li>
+                        <li class="breadcrumb-item active">All Depo</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -38,14 +41,24 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Code</th>
-                                        <th>Full Name</th>
-                                        <th>Company</th>
+                                        <th>Name</th>
                                         <th>Address</th>
-                                        <th>Pincode</th>
-                                        <th>Contact</th>
-                                        <th>License </th>
-                                        <th>GST NO.</th>
+                                        <th>Active Status</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Tan no.</th>
+                                        <th>Pan No. </th>
+                                        <th>Service Tax NO.</th>
+                                        <th>Vatin No.</th>
+                                        <th>Gst No.</th>
+                                        <th>State Name</th>
+                                        <th>State Code</th>
+                                        <th>Billing Name</th>
+                                        <th>Company Name</th>
+                                        <th>Company Address</th>
+                                        <th>Company Phone</th>
+                                        <th>Company Email</th>
+                               
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -76,7 +89,7 @@ function refreshTable(){
     var checkToken = localStorage.getItem('token');
     $.ajax({
         type: "get",
-        url: "/api/contractor/get",
+        url: "/api/depo/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -85,16 +98,32 @@ function refreshTable(){
 
             var i =1;
             response.forEach(function(item) {
+                var activeStatus = '';
+                if(item.status == 1){
+                    activeStatus = "Active";
+                }else{
+                    activeStatus = "Deactive";
+                }
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.contractor_code));
-                row.append($('<td>').append(item.fullname));
-                row.append($('<td>').append(item.company));
+                row.append($('<td>').append(item.name));
                 row.append($('<td>').append(item.address));
-                row.append($('<td>').append(item.pincode));
-                row.append($('<td>').append(item.contact));
-                row.append($('<td>').append(item.license));
+                row.append($('<td>').append(activeStatus));
+                row.append($('<td>').append(item.phone));
+                row.append($('<td>').append(item.email));
+                row.append($('<td>').append(item.tan));
+                row.append($('<td>').append(item.pan));
+                row.append($('<td>').append(item.service_tax));
+                row.append($('<td>').append(item.vattin));
                 row.append($('<td>').append(item.gst));
+                row.append($('<td>').append(item.state));
+                row.append($('<td>').append(item.state_code));
+                row.append($('<td>').append(item.billing_name));
+                row.append($('<td>').append(item.company_name));
+                row.append($('<td>').append(item.company_address));
+                row.append($('<td>').append(item.company_phone));
+                row.append($('<td>').append(item.company_email));
+                
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -127,8 +156,21 @@ function refreshTable(){
                     var dataCell = $(this);
                     var inputId = 'input_' + index;
                     var inputValue = dataCell.text();
-        
-                    var inputField = $('<input>')
+                    // console.log();
+                    if(index === 0){
+                        dataCell.empty().append(inputValue);
+                    }else if(index === 3){
+                        var selectBox = $('<select>')
+                        .attr({
+                            'id': inputId,
+                            'class': 'form-control'
+                        })
+                        .append($('<option>').val('1').text('Active'))
+                        .append($('<option>').val('0').text('Deactive'));
+
+                    dataCell.empty().append(selectBox);
+                    }else{
+                        var inputField = $('<input>')
                         .attr({
                             'id': inputId,
                             'type': 'text',
@@ -136,7 +178,7 @@ function refreshTable(){
                         })
                         .val(inputValue);
                         dataCell.empty().append(inputField);
-                        
+                    }  
                 });
                 actionCell.find('.edit-button').hide();
                 actionCell.find('.delete-button').hide();
@@ -147,13 +189,22 @@ function refreshTable(){
                 var row = $(this).closest('tr');
                 var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
                 var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input'); // Select all input fields in the row
+                var inputFields = row.find('input');
+                var selectFields = row.find('select');
+
                 var inputData = {};
 
                 dataCells.each(function(index) {
                     var dataCell = $(this);
                     var newValue = dataCell.find('input').val();
                     dataCell.empty().text(newValue);
+                });
+
+                selectFields.each(function() {
+                    var selectField = $(this);
+                    var selectId = selectField.attr('id');
+                    var selectValue = selectField.val();
+                    inputData[selectId] = selectValue;
                 });
 
                 inputFields.each(function() {
@@ -177,7 +228,7 @@ function refreshTable(){
                 var data = {
                     'id':dataId
                 }
-                post('contractor/delete',data);
+                post('depo/delete',data);
                 refreshTable();
             });
         },
@@ -191,20 +242,28 @@ function refreshTable(){
 var tbody = $('#tbody');
 
 function updateData(id,inputData){
-    
+
     var data = {
-        'contractor_code' : inputData.input_1,
-        'fullname' : inputData.input_2,
-        'company' : inputData.input_3,
-        'address' : inputData.input_4,
-        'pincode' : inputData.input_5,
-        'contact' : inputData.input_6,
-        'license' : inputData.input_7,
-        'gst' : inputData.input_8,
-        'id' : id
+        'name' : inputData.input_1,
+        'address' : inputData.input_2,
+        'status' : inputData.input_3,
+        'phone' : inputData.input_4,
+        'email' : inputData.input_5,
+        'tan' : inputData.input_6,
+        'pan' : inputData.input_7,
+        'service_tax' : inputData.input_8,
+        'vattin' : inputData.input_9,
+        'gst' : inputData.input_10,
+        'state' : inputData.input_11,
+        'state_code' : inputData.input_12,
+        'billing_name' : inputData.input_13,
+        'company_name' : inputData.input_14,
+        'company_address' : inputData.input_15,
+        'company_phone' : inputData.input_16,
+        'company_email' : inputData.input_17,
+        'id' :id
     }
-    console.log(data);
-    post('contractor/update',data);
+    post('depo/update',data);
 }
 
 

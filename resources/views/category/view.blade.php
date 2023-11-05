@@ -9,6 +9,9 @@
     border:none;
     outline:none;
 }
+.form-control{
+    width:200px !important;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -114,7 +117,10 @@ function refreshTable(){
                     var inputId = 'input_' + index;
                     var inputValue = dataCell.text();
         
-                    var inputField = $('<input>')
+                    if(index === 0){
+                        dataCell.empty().append(inputValue);
+                    }else{
+                        var inputField = $('<input>')
                         .attr({
                             'id': inputId,
                             'type': 'text',
@@ -122,6 +128,7 @@ function refreshTable(){
                         })
                         .val(inputValue);
                         dataCell.empty().append(inputField);
+                    }
                         
                 });
                 actionCell.find('.edit-button').hide();

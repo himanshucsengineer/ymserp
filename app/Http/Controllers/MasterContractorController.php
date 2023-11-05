@@ -156,14 +156,37 @@ class MasterContractorController extends Controller
         $contractorDetails = MasterContractor::find($request->id);
 
         if($getContractor->contractor_code != $request->contractor_code){
+
+            $contractor_code = MasterContractor::where('contractor_code',$request->contractor_code)->get();
+            if(count($contractor_code) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Contractor Code is already Taken"
+                ], 500);
+            }
+
             $contractorDetails->contractor_code = is_null($request->contractor_code) ? $contractorDetails->contractor_code : $request->contractor_code;
         }
 
         if($getContractor->contact != $request->contact){
+            $contact = MasterContractor::where('contact',$request->contact)->get();
+            if(count($contact) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Contact is already Taken"
+                ], 500);
+            }
             $contractorDetails->contact = is_null($request->contact) ? $contractorDetails->contact : $request->contact;
         }
 
         if($getContractor->gst != $request->gst){
+            $gst = MasterContractor::where('gst',$request->gst)->get();
+            if(count($gst) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "gst is already Taken"
+                ], 500);
+            }
             $contractorDetails->gst = is_null($request->gst) ? $contractorDetails->gst : $request->contact;
         }
 
