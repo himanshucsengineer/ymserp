@@ -18,19 +18,40 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+
 Route::get('/contractor/create', 'App\Http\Controllers\MasterContractorController@index');
+Route::get('/contractor/all', 'App\Http\Controllers\MasterContractorController@all');
+
 Route::get('/category/create', 'App\Http\Controllers\MasterCategoryController@index');
+Route::get('/category/all', 'App\Http\Controllers\MasterCategoryController@all');
+
 Route::get('/employee/create', 'App\Http\Controllers\MasterEmployeeController@index');
+Route::get('/employee/all', 'App\Http\Controllers\MasterEmployeeController@all');
+
 Route::get('/user/create', 'App\Http\Controllers\MasterUserController@index');
+Route::get('/user/all', 'App\Http\Controllers\MasterUserController@all');
+
 Route::get('/depo/create', 'App\Http\Controllers\MasterDepoController@index');
+Route::get('/depo/all', 'App\Http\Controllers\MasterDepoController@all');
 
 Route::get('/repair/create', 'App\Http\Controllers\MasterRepairController@index');
+Route::get('/repair/all', 'App\Http\Controllers\MasterRepairController@all');
+
 Route::get('/material/create', 'App\Http\Controllers\MasterMaterialController@index');
+Route::get('/material/all', 'App\Http\Controllers\MasterMaterialController@all');
+
 Route::get('/damage/create', 'App\Http\Controllers\MasterDamageController@index');
+Route::get('/damage/all', 'App\Http\Controllers\MasterDamageController@all');
 
 Route::get('/line/create', 'App\Http\Controllers\MasterLineController@index');
+Route::get('/line/all', 'App\Http\Controllers\MasterLineController@all');
+
 Route::get('/transport/create', 'App\Http\Controllers\MasterTransportController@index');
+Route::get('/transport/all', 'App\Http\Controllers\MasterTransportController@all');
+
 Route::get('/tarrif/create', 'App\Http\Controllers\MasterTarrifController@index');
+Route::get('/tarrif/all', 'App\Http\Controllers\MasterTarrifController@all');
+
 
 Route::get('/gatein/create', 'App\Http\Controllers\GateInController@index');
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');

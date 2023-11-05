@@ -23,6 +23,10 @@ class MasterDepoController extends Controller
     {
         return view('depo.create');
     }
+    public function all()
+    {
+        return view('depo.view');
+    }
 
     public function get()
     {

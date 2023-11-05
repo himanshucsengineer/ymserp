@@ -23,6 +23,12 @@ class MasterDamageController extends Controller
         return view('damage.create');
     }
 
+    public function all()
+    {
+        return view('damage.view');
+    }
+
+
     public function get()
     {
         return MasterDamage::get();

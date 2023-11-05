@@ -36,27 +36,37 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'contractor'], function($api){
         $api->post('/create','App\Http\Controllers\MasterContractorController@store');
         $api->get('/get', 'App\Http\Controllers\MasterContractorController@get');
+        $api->post('/delete', 'App\Http\Controllers\MasterContractorController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterContractorController@update');
     });
 
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'category'], function($api){
         $api->post('/create','App\Http\Controllers\MasterCategoryController@store');
         $api->get('/get', 'App\Http\Controllers\MasterCategoryController@get');
+        $api->post('/delete', 'App\Http\Controllers\MasterCategoryController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterCategoryController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'depo'], function($api){
         $api->post('/create','App\Http\Controllers\MasterDepoController@store');
         $api->get('/get', 'App\Http\Controllers\MasterDepoController@get');
+        $api->post('/delete', 'App\Http\Controllers\MasterDepoController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterDepoController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'employee'], function($api){
         $api->post('/create','App\Http\Controllers\MasterEmployeeController@store');
         $api->get('/get', 'App\Http\Controllers\MasterEmployeeController@get');
+        $api->post('/delete', 'App\Http\Controllers\MasterEmployeeController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterEmployeeController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'user'], function($api){
         $api->post('/create','App\Http\Controllers\MasterUserController@store');
         $api->get('/get', 'App\Http\Controllers\MasterEmployeeController@index');
+        $api->post('/delete', 'App\Http\Controllers\MasterEmployeeController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterEmployeeController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'role'], function($api){
@@ -69,6 +79,8 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\MasterDamageController@store');
         $api->get('/get', 'App\Http\Controllers\MasterDamageController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterDamageController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\MasterDamageController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterDamageController@update');
 
     });
 
@@ -76,18 +88,24 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\MasterRepairController@store');
         $api->post('/get', 'App\Http\Controllers\MasterRepairController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterRepairController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\MasterRepairController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterRepairController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'material'], function($api){
         $api->post('/create','App\Http\Controllers\MasterMaterialController@store');
         $api->post('/get', 'App\Http\Controllers\MasterMaterialController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterMaterialController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\MasterMaterialController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterMaterialController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'line'], function($api){
         $api->post('/create','App\Http\Controllers\MasterLineController@store');
         $api->get('/get', 'App\Http\Controllers\MasterLineController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterLineController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\MasterLineController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterLineController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'tarrif'], function($api){
@@ -95,12 +113,16 @@ $api->version('v1', function($api){
         $api->get('/get', 'App\Http\Controllers\MasterTarrifController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterTarrifController@getbyid');
         $api->post('/getTarrifByLine', 'App\Http\Controllers\MasterTarrifController@getTarrifByLine');
+        $api->post('/delete', 'App\Http\Controllers\MasterTarrifController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterTarrifController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transport'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTransportController@store');
         $api->get('/get', 'App\Http\Controllers\MasterTransportController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterTransportController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\MasterTransportController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterTransportController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){

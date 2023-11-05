@@ -22,6 +22,13 @@ class MasterTarrifController extends Controller
     {
         return view('tarrif.create');
     }
+
+
+    public function all()
+    {
+        return view('tarrif.view');
+    }
+
     public function getbyid(Request $request){
         return MasterTarrif::where('line_id',$request->line_id)->where('repai_location_code',$request->location_code)->first();
     }

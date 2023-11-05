@@ -324,6 +324,7 @@
                                 
                             </ul>
                         </li>
+                        
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
@@ -334,63 +335,204 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/contractor/create" class="nav-link">
-                                        <p>Contractor Master</p>
+                                    <a href="#" class="nav-link">
+                                        <p>Contractor Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/category/create" class="nav-link">
-                                        <p>Category Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/depo/create" class="nav-link">
-                                        <p>Depo Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/employee/create" class="nav-link">
-                                        <p>Employee Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/user/create" class="nav-link">
-                                        <p>User Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/damage/create" class="nav-link">
-                                        <p>Damage Code Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/repair/create" class="nav-link">
-                                        <p>Repair Code Master</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/material/create" class="nav-link">
-                                        <p>Material Code Master</p>
-                                    </a>
-                                </li>   
-                                <li class="nav-item">
-                                    <a href="/line/create" class="nav-link">
-                                        <p>Line Master</p>
-                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/contractor/create" class="nav-link">
+                                                <p> Create Contractor </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/contractor/all" class="nav-link">
+                                                <p>All Contractor</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="/tarrif/create" class="nav-link">
-                                        <p>Tarrif Code Master</p>
+                                    <a href="#" class="nav-link">
+                                        <p>Category Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/category/create" class="nav-link">
+                                                <p>Create Category </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/category/all" class="nav-link">
+                                                <p>All Category</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                
+
                                 <li class="nav-item">
-                                    <a href="/transport/create" class="nav-link">
-                                        <p>Transport /Consignee  Master</p>
+                                    <a href="#" class="nav-link">
+                                        <p>Depo Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/depo/create" class="nav-link">
+                                                <p>Create Depo </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/depo/all" class="nav-link">
+                                                <p>All Depo</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Employee Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/employee/create" class="nav-link">
+                                                <p>Create Employee </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/employee/all" class="nav-link">
+                                                <p>All Employee</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>User Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/user/create" class="nav-link">
+                                                <p>Create User </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/user/all" class="nav-link">
+                                                <p>All User</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Damage Code Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/damage/create" class="nav-link">
+                                                <p>Create Damage Code </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/damage/all" class="nav-link">
+                                                <p>All Damage Code</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Repair Code Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/repair/create" class="nav-link">
+                                                <p>Create Repair Code </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/repair/all" class="nav-link">
+                                                <p>All Repair Code</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Material Code Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/material/create" class="nav-link">
+                                                <p>Create Material Code </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/material/all" class="nav-link">
+                                                <p>All Material Code</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Line Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/line/create" class="nav-link">
+                                                <p>Create Line </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/line/all" class="nav-link">
+                                                <p>All Line</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                               
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Tarrif Code Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/tarrif/create" class="nav-link">
+                                                <p>Create Tarrif Code </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/tarrif/all" class="nav-link">
+                                                <p>All Tarrif Code</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                        
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Transport /Consignee Master <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/transport/create" class="nav-link">
+                                                <p>Create Transport /Consignee </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/transport/all" class="nav-link">
+                                                <p>All Transport /Consignee</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 
                             </ul>
                         </li>

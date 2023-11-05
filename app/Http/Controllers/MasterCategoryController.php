@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterCategory;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -21,6 +23,11 @@ class MasterCategoryController extends Controller
     public function index()
     {
         return view('category.create');
+    }
+
+    public function all()
+    {
+        return view('category.view');
     }
 
 
@@ -104,9 +111,29 @@ class MasterCategoryController extends Controller
      * @param  \App\Models\MasterCategory  $masterCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMasterCategoryRequest $request, MasterCategory $masterCategory)
+    public function update(Request $request)
     {
-        //
+        $getContractor = MasterCategory::where('id',$request->id)->first();
+        
+        $contractorDetails = MasterCategory::find($request->id);
+
+        if($getContractor->name != $request->name){
+            $contractorDetails->name = is_null($request->name) ? $contractorDetails->name : $request->name;
+        }
+
+        $contractorDetails  = $contractorDetails->save();
+
+        if($contractorDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Category Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**
@@ -115,8 +142,35 @@ class MasterCategoryController extends Controller
      * @param  \App\Models\MasterCategory  $masterCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterCategory $masterCategory)
+    public function destroy(Request $request)
     {
-        //
+        $geteEmployee = User::orWhere('category_id', 'LIKE', '%' . $request->id . '%')->get();
+
+        if(count($geteEmployee) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Category is assigned to user can not delete"
+            ], 500);
+        }
+        $contractor = MasterCategory::find($request->id);
+
+        
+        if (is_null($contractor)) {
+            throw new NotFoundHttpException('Invalid Workshop Id!');
+        }else{
+            
+            $deletecontractor= $contractor->delete();
+            if($deletecontractor){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Category Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

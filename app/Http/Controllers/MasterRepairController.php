@@ -24,6 +24,11 @@ class MasterRepairController extends Controller
         return view('repair.create');
     }
 
+    public function all()
+    {
+        return view('repair.view');
+    }
+
     public function get(Request $request)
     {
         return MasterRepair::where('damage_id', $request->id)->get();

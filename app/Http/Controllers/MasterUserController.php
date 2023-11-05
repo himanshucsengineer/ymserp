@@ -25,6 +25,11 @@ class MasterUserController extends Controller
         return view('user.create');
     }
 
+    public function all()
+    {
+        return view('user.view');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

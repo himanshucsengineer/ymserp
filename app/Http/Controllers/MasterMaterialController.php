@@ -23,6 +23,11 @@ class MasterMaterialController extends Controller
         return view('material.create');
     }
 
+    public function all()
+    {
+        return view('material.view');
+    }
+
     public function get(Request $request)
     {
         return MasterMaterial::where('damage_id',$request->damage_id)->where('repiar_id',$request->repair_id)->get();

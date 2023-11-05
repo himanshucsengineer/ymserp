@@ -23,6 +23,11 @@ class MasterLineController extends Controller
         return view('line.create');
     }
 
+    public function all()
+    {
+        return view('line.view');
+    }
+
     public function get()
     {
         return MasterLine::get();

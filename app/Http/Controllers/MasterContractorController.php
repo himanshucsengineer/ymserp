@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterContractor;
+use App\Models\MasterEmployee;
+
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -21,6 +23,11 @@ class MasterContractorController extends Controller
     public function index()
     {
         return view('contractor.create');
+    }
+
+    public function all()
+    {
+        return view('contractor.view');
     }
 
     public function get()
@@ -138,9 +145,48 @@ class MasterContractorController extends Controller
      * @param  \App\Models\MasterContractor  $masterContractor
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMasterContractorRequest $request, MasterContractor $masterContractor)
+    public function update(Request $request)
     {
-        //
+
+
+        
+
+        $getContractor = MasterContractor::where('id',$request->id)->first();
+        
+        $contractorDetails = MasterContractor::find($request->id);
+
+        if($getContractor->contractor_code != $request->contractor_code){
+            $contractorDetails->contractor_code = is_null($request->contractor_code) ? $contractorDetails->contractor_code : $request->contractor_code;
+        }
+
+        if($getContractor->contact != $request->contact){
+            $contractorDetails->contact = is_null($request->contact) ? $contractorDetails->contact : $request->contact;
+        }
+
+        if($getContractor->gst != $request->gst){
+            $contractorDetails->gst = is_null($request->gst) ? $contractorDetails->gst : $request->contact;
+        }
+
+        $contractorDetails->address =  is_null($request->address) ? $contractorDetails->address : $request->address;
+        $contractorDetails->company = is_null($request->company) ? $contractorDetails->company : $request->company;
+        $contractorDetails->fullname = is_null($request->fullname) ? $contractorDetails->fullname : $request->fullname;
+        $contractorDetails->license = is_null($request->license) ? $contractorDetails->license : $request->license;
+        $contractorDetails->pincode = is_null($request->pincode) ? $contractorDetails->pincode : $request->pincode;
+
+        $contractorDetails  = $contractorDetails->save();
+
+        if($contractorDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Contractor Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
+
     }
 
     /**
@@ -149,8 +195,35 @@ class MasterContractorController extends Controller
      * @param  \App\Models\MasterContractor  $masterContractor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterContractor $masterContractor)
+    public function destroy(Request $request)
     {
-        //
+        $geteEmployee = MasterEmployee::where('contractor_id',$request->id)->get();
+
+        if(count($geteEmployee) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Contractore is assigned to employee you can not delete this Contractor!"
+            ], 500);
+        }
+        $contractor = MasterContractor::find($request->id);
+
+        
+        if (is_null($contractor)) {
+            throw new NotFoundHttpException('Invalid Workshop Id!');
+        }else{
+            
+            $deletecontractor= $contractor->delete();
+            if($deletecontractor){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "contractor Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

@@ -23,6 +23,11 @@ class MasterEmployeeController extends Controller
         return view('employee.create');
     }
 
+    public function all()
+    {
+        return view('employee.view');
+    }
+
     public function get()
     {
         return MasterEmployee::get();

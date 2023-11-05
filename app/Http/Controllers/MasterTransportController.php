@@ -24,6 +24,11 @@ class MasterTransportController extends Controller
         return view('transport.create');
     }
 
+    public function all()
+    {
+        return view('transport.view');
+    }
+
     public function get()
     {
         return MasterTransport::get();
