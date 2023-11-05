@@ -9,6 +9,9 @@
     border:none;
     outline:none;
 }
+.form-control{
+    width:200px !important;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,12 +19,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Contractor</h1>
+                    <h1 class="m-0">All Line</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Contractor</li>
+                        <li class="breadcrumb-item active">All Line</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -38,14 +41,26 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Code</th>
-                                        <th>Full Name</th>
-                                        <th>Company</th>
-                                        <th>Address</th>
-                                        <th>Pincode</th>
-                                        <th>Contact</th>
-                                        <th>License </th>
-                                        <th>GST NO.</th>
+                                        <th>Name</th>
+                                        <th>Alise</th>
+                                        <th>Free Days</th>
+                                        <th>Labour Rate</th>
+                                        <th>Line Address</th>
+                                        <th>Email </th>
+                                        <th>Phone </th>
+                                        <th>Mobile</th>
+                                        <th>GSTIN </th>
+                                        <th>PAN NO</th>
+                                        <th>GST State</th>
+                                        <th>State Code</th>
+                                        <th>Top Image</th>
+                                        <th>Bottom Image</th>
+                                        <th>Right Image</th>
+                                        <th>Left Image</th>
+                                        <th>Front Image</th>
+                                        <th>Door Image</th>
+                                        <th>Interior Image</th>
+   
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -76,7 +91,7 @@ function refreshTable(){
     var checkToken = localStorage.getItem('token');
     $.ajax({
         type: "get",
-        url: "/api/contractor/get",
+        url: "/api/line/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -85,16 +100,35 @@ function refreshTable(){
 
             var i =1;
             response.forEach(function(item) {
+
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.contractor_code));
-                row.append($('<td>').append(item.fullname));
-                row.append($('<td>').append(item.company));
-                row.append($('<td>').append(item.address));
-                row.append($('<td>').append(item.pincode));
-                row.append($('<td>').append(item.contact));
-                row.append($('<td>').append(item.license));
+                row.append($('<td>').append(item.name));
+                row.append($('<td>').append(item.alise));
+                row.append($('<td>').append(item.material_code));
+                row.append($('<td>').append(item.labour_rate));
+
+                row.append($('<td>').append(item.line_address));
+                row.append($('<td>').append(item.email));
+                row.append($('<td>').append(item.phone));
+                row.append($('<td>').append(item.mobile));
+
                 row.append($('<td>').append(item.gst));
+                row.append($('<td>').append(item.pan));
+                row.append($('<td>').append(item.gst_state));
+                row.append($('<td>').append(item.state_code));
+
+                row.append($('<td>').append(item.name));
+                row.append($('<td>').append(item.alise));
+                row.append($('<td>').append(item.material_code));
+                row.append($('<td>').append(item.labour_rate));
+
+                row.append($('<td>').append(item.name));
+                row.append($('<td>').append(item.alise));
+                row.append($('<td>').append(item.material_code));
+                row.append($('<td>').append(item.labour_rate));
+
+                
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -127,8 +161,27 @@ function refreshTable(){
                     var dataCell = $(this);
                     var inputId = 'input_' + index;
                     var inputValue = dataCell.text();
-        
-                    var inputField = $('<input>')
+                    // console.log();
+                    if(index === 0){
+                        dataCell.empty().append(inputValue);
+                    }else if(index === 1){
+                        var selectBox = $('<select>')
+                        .attr({
+                            'id': inputId,
+                            'class': 'form-control select-box'
+                        })
+                        dataCell.empty().append(selectBox)
+                        // getDamage(selectBox)
+
+                    }else if (index === 2){
+                        var selectBox = $('<select>')
+                        .attr({
+                            'id': inputId,
+                            'class': 'form-control select-box'
+                        })
+                        dataCell.empty().append(selectBox)
+                    }else{
+                        var inputField = $('<input>')
                         .attr({
                             'id': inputId,
                             'type': 'text',
@@ -136,7 +189,7 @@ function refreshTable(){
                         })
                         .val(inputValue);
                         dataCell.empty().append(inputField);
-                        
+                    }  
                 });
                 actionCell.find('.edit-button').hide();
                 actionCell.find('.delete-button').hide();
@@ -147,13 +200,22 @@ function refreshTable(){
                 var row = $(this).closest('tr');
                 var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
                 var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input'); // Select all input fields in the row
+                var inputFields = row.find('input');
+                var selectFields = row.find('select');
+
                 var inputData = {};
 
                 dataCells.each(function(index) {
                     var dataCell = $(this);
                     var newValue = dataCell.find('input').val();
                     dataCell.empty().text(newValue);
+                });
+
+                selectFields.each(function() {
+                    var selectField = $(this);
+                    var selectId = selectField.attr('id');
+                    var selectValue = selectField.val();
+                    inputData[selectId] = selectValue;
                 });
 
                 inputFields.each(function() {
@@ -168,7 +230,7 @@ function refreshTable(){
                 actionCell.find('.delete-button').show();
                 actionCell.find('.save-button').hide();
                 var dataId = $(this).data('id');
-                updateData(dataId,inputData);
+                // updateData(dataId,inputData);
                 refreshTable();
             });
 
@@ -177,7 +239,7 @@ function refreshTable(){
                 var data = {
                     'id':dataId
                 }
-                post('contractor/delete',data);
+                // post('repair/delete',data);
                 refreshTable();
             });
         },
@@ -191,20 +253,33 @@ function refreshTable(){
 var tbody = $('#tbody');
 
 function updateData(id,inputData){
-    
+
     var data = {
-        'contractor_code' : inputData.input_1,
-        'fullname' : inputData.input_2,
-        'company' : inputData.input_3,
-        'address' : inputData.input_4,
-        'pincode' : inputData.input_5,
-        'contact' : inputData.input_6,
-        'license' : inputData.input_7,
-        'gst' : inputData.input_8,
-        'id' : id
+        'damage_id' :inputData.input_1,
+        'repair_code' : inputData.input_2,
+        'desc' : inputData.input_3,
+        'id' :id
     }
-    console.log(data);
-    post('contractor/update',data);
+    post('repair/update',data);
+}
+
+function getDamage(selectBox){
+    var checkToken = localStorage.getItem('token');
+    $.ajax({
+        type: "GET",
+        url: "/api/damage/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        success: function (data) {
+            data.forEach(function(item) {
+                selectBox.append($('<option>').val(item.id).text(item.code));
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 }
 
 

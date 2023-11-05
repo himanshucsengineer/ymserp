@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Contractor</h1>
+                    <h1 class="m-0 text">Create Contractor</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Contractor</li>
+                        <li class="breadcrumb-item active text">Create Contractor</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -74,11 +74,46 @@
 
 
 $(function () {
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/contractor/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            console.log(response);
+            $('.text').text('Update Contractor');
+            $("#contractorcode").val(response.contractor_code);
+            $("#fullname").val(response.fullname);
+            $("#company").val(response.company);
+            $("#address").val(response.address);
+            $("#pincode").val(response.pincode);
+            $("#license").val(response.license);
+            $("#gst").val(response.gst);
+            $("#contact").val(response.contact);
+            
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     $.validator.setDefaults({
     submitHandler: function () {
-        var contractorcode = $("#contractorcode").val();
+            var contractorcode = $("#contractorcode").val();
             var fullname = $("#fullname").val();
             var company = $("#company").val();
             var address = $("#address").val();
@@ -87,19 +122,38 @@ $(function () {
             var gst = $("#gst").val();
             var contact = $("#contact").val();
 
-            const data = {
-                'contractorcode':contractorcode,
-                'fullname':fullname,
-                'company':company,
-                'address':address,
-                'pincode':pincode,
-                'license':license,
-                'gst':gst,
-                'contact':contact,
-                'user_id':user_id,
-                'depo_id':depo_id,
+            if(getCateId[1]){
+                const data = {
+                    'contractor_code':contractorcode,
+                    'fullname':fullname,
+                    'company':company,
+                    'address':address,
+                    'pincode':pincode,
+                    'license':license,
+                    'gst':gst,
+                    'contact':contact,
+                    'user_id':user_id,
+                    'depo_id':depo_id,
+                    'id':getCateId[1]
+                }
+                post('contractor/update',data); 
+            }else{
+                const data = {
+                    'contractorcode':contractorcode,
+                    'fullname':fullname,
+                    'company':company,
+                    'address':address,
+                    'pincode':pincode,
+                    'license':license,
+                    'gst':gst,
+                    'contact':contact,
+                    'user_id':user_id,
+                    'depo_id':depo_id,
+                }
+                post('contractor/create',data); 
             }
-            post('contractor/create',data); 
+        window.location = `/contractor/all`
+            
     }
   });
 

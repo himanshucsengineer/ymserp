@@ -36,6 +36,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'contractor'], function($api){
         $api->post('/create','App\Http\Controllers\MasterContractorController@store');
         $api->get('/get', 'App\Http\Controllers\MasterContractorController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterContractorController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterContractorController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterContractorController@update');
     });
@@ -44,6 +45,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'category'], function($api){
         $api->post('/create','App\Http\Controllers\MasterCategoryController@store');
         $api->get('/get', 'App\Http\Controllers\MasterCategoryController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterCategoryController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterCategoryController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterCategoryController@update');
     });
@@ -51,6 +53,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'depo'], function($api){
         $api->post('/create','App\Http\Controllers\MasterDepoController@store');
         $api->get('/get', 'App\Http\Controllers\MasterDepoController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterDepoController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterDepoController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterDepoController@update');
     });
@@ -58,15 +61,19 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'employee'], function($api){
         $api->post('/create','App\Http\Controllers\MasterEmployeeController@store');
         $api->get('/get', 'App\Http\Controllers\MasterEmployeeController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterEmployeeController@getbyid');
+
+        $api->get('/getData', 'App\Http\Controllers\MasterEmployeeController@getdata');
         $api->post('/delete', 'App\Http\Controllers\MasterEmployeeController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterEmployeeController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'user'], function($api){
         $api->post('/create','App\Http\Controllers\MasterUserController@store');
-        $api->get('/get', 'App\Http\Controllers\MasterEmployeeController@index');
-        $api->post('/delete', 'App\Http\Controllers\MasterEmployeeController@destroy');
-        $api->post('/update', 'App\Http\Controllers\MasterEmployeeController@update');
+        $api->get('/get', 'App\Http\Controllers\MasterUserController@index');
+        $api->get('/getData', 'App\Http\Controllers\MasterUserController@getData');
+        $api->post('/delete', 'App\Http\Controllers\MasterUserController@destroy');
+        $api->post('/update', 'App\Http\Controllers\MasterUserController@update');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'role'], function($api){
@@ -87,6 +94,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'repair'], function($api){
         $api->post('/create','App\Http\Controllers\MasterRepairController@store');
         $api->post('/get', 'App\Http\Controllers\MasterRepairController@get');
+        $api->get('/getData', 'App\Http\Controllers\MasterRepairController@getData');
+
         $api->post('/getbyid', 'App\Http\Controllers\MasterRepairController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterRepairController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterRepairController@update');
@@ -95,6 +104,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'material'], function($api){
         $api->post('/create','App\Http\Controllers\MasterMaterialController@store');
         $api->post('/get', 'App\Http\Controllers\MasterMaterialController@get');
+        $api->get('/getData', 'App\Http\Controllers\MasterMaterialController@getData');
+
         $api->post('/getbyid', 'App\Http\Controllers\MasterMaterialController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterMaterialController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterMaterialController@update');

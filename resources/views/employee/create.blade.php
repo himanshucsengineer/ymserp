@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Employee</h1>
+                    <h1 class="m-0 text">Create Employee</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Employee</li>
+                        <li class="breadcrumb-item active text">Create Employee</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -102,6 +102,41 @@ $(document).ready(function () {
 });
 
 $(function () {
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/employee/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            console.log(response);
+            $('.text').text('Update Employee');
+            $("#employee_code").val(response.employee_code);
+            $("#firstname").val(response.firstname);
+            $("#middlename").val(response.middlename);
+            $("#lastname").val(response.lastname);
+            $("#contractor_id").val(response.contractor_id);
+            $("#address").val(response.address);
+            $("#pincode").val(response.pincode);
+            $("#contact").val(response.contact);
+            $("#aadhar").val(response.aadhar);
+            
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     
@@ -117,20 +152,41 @@ $(function () {
         var contact = $("#contact").val();
         var aadhar = $("#aadhar").val();
 
-        const data = {
-            'employee_code':employee_code,
-            'firstname':firstname,
-            'middlename':middlename,
-            'lastname':lastname,
-            'contractor_id':contractor_id,
-            'address':address,
-            'pincode':pincode,
-            'contact':contact,
-            'aadhar':aadhar,
-            'user_id':user_id,
-            'depo_id':depo_id,
+        if(getCateId[1]){
+            const data = {
+                'employee_code':employee_code,
+                'firstname':firstname,
+                'middlename':middlename,
+                'lastname':lastname,
+                'contractor_id':contractor_id,
+                'address':address,
+                'pincode':pincode,
+                'contact':contact,
+                'aadhar':aadhar,
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'id':getCateId[1]
+            }
+            post('employee/update',data);
+        }else{
+            const data = {
+                'employee_code':employee_code,
+                'firstname':firstname,
+                'middlename':middlename,
+                'lastname':lastname,
+                'contractor_id':contractor_id,
+                'address':address,
+                'pincode':pincode,
+                'contact':contact,
+                'aadhar':aadhar,
+                'user_id':user_id,
+                'depo_id':depo_id,
+            }
+            post('employee/create',data);
         }
-        post('employee/create',data);
+        window.location = `/employee/all`
+
+        
     }
   });
 

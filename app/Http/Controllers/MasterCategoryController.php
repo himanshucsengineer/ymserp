@@ -36,6 +36,10 @@ class MasterCategoryController extends Controller
         return MasterCategory::get();
     }
 
+    public function getbyid(Request $request)
+    {
+        return MasterCategory::where('id',$request->id)->first();
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -113,6 +117,32 @@ class MasterCategoryController extends Controller
      */
     public function update(Request $request)
     {
+
+        $rules=[
+            'name'=>[
+                'required',
+            ],
+        ];
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('name')){
+                $validationFormate->name = $messages->first('name');
+            }
+
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+
         $getContractor = MasterCategory::where('id',$request->id)->first();
         
         $contractorDetails = MasterCategory::find($request->id);

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MasterRepair;
+use App\Models\MasterDamage;
 use App\Models\MasterMaterial;
+use App\Models\MasterTarrif;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -27,6 +30,27 @@ class MasterMaterialController extends Controller
     {
         return view('material.view');
     }
+
+
+    public function getData(){
+
+        $repairData = MasterMaterial::get();
+        $formattedEmployee = [];
+        foreach($repairData as $repair){
+            $damageData = MasterDamage::where('id',$repair->damage_id)->first();
+            $repairData = MasterRepair::where('id',$repair->repiar_id)->first();
+
+            $formattedEmployee[] = [
+                'id'=> (int) $repair->id,
+                'damage_id' => $damageData->code,
+                'repiar_id' => $repairData->repair_code,
+                'material_code' => $repair->material_code,
+                'desc' => $repair->desc 
+            ];
+        }
+        return $formattedEmployee;
+    }
+
 
     public function get(Request $request)
     {

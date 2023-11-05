@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterDamage;
+use App\Models\MasterRepair;
+use App\Models\MasterMaterial;
+use App\Models\MasterTarrif;
+
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -120,9 +124,72 @@ class MasterDamageController extends Controller
      * @param  \App\Models\MasterDamage  $masterDamage
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMasterDamageRequest $request, MasterDamage $masterDamage)
+    public function update(Request $request)
     {
-        //
+        $rules=[
+            'code'=>[
+                'required',
+            ],
+            'desc' => [
+                'required'
+            ]
+        ];
+
+        
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('code')){
+                $validationFormate->code = $messages->first('code');
+            }
+
+            if ($messages->has('desc')){
+                $validationFormate->desc = $messages->first('desc');
+            }
+
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+
+
+        $getContractor = MasterDamage::where('id',$request->id)->first();
+        
+        $contractorDetails = MasterDamage::find($request->id);
+
+        if($getContractor->code != $request->code ){
+
+            $code = MasterDamage::where('code',$request->code)->get();
+            if(count($code) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Damage Code is already Taken"
+                ], 500);
+            }
+            $contractorDetails->code = is_null($request->code) ? $contractorDetails->code : $request->code;
+        }
+
+        $contractorDetails->desc =  is_null($request->desc) ? $contractorDetails->desc : $request->desc;
+
+        $contractorDetails  = $contractorDetails->save();
+
+        if($contractorDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Damage Code Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**
@@ -131,8 +198,55 @@ class MasterDamageController extends Controller
      * @param  \App\Models\MasterDamage  $masterDamage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterDamage $masterDamage)
+    public function destroy(Request $request)
     {
-        //
+  
+        $geteRepair = MasterRepair::orWhere('damage_id', 'LIKE', '%' . $request->id . '%')->get();
+
+        if(count($geteRepair) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Damage code is assigned to Repair Code can not delete this"
+            ], 500);
+        }
+
+        $geteMaterial = MasterMaterial::orWhere('damage_id', 'LIKE', '%' . $request->id . '%')->get();
+
+        if(count($geteMaterial) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Damage code is assigned to Material Code can not delete this"
+            ], 500);
+        }
+
+        $geteTarrif = MasterTarrif::orWhere('damade_id', 'LIKE', '%' . $request->id . '%')->get();
+
+        if(count($geteTarrif) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Damage code is assigned to Tarrif can not delete this"
+            ], 500);
+        }
+
+        $contractor = MasterDamage::find($request->id);
+
+        
+        if (is_null($contractor)) {
+            throw new NotFoundHttpException('Invalid Workshop Id!');
+        }else{
+            
+            $deletecontractor= $contractor->delete();
+            if($deletecontractor){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Damage Code Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

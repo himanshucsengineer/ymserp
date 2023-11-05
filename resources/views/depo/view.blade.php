@@ -133,15 +133,10 @@ function refreshTable(){
                     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
                     .attr('data-id', item.id)
                     .attr('class', 'delete-button')
-                var saveButton = $('<button style="display:none;">')
-                    .text('Save')
-                    .attr('data-id', item.id)
-                    .attr('class', 'save-button btn-primary')
 
                 var td = $('<td>');
                 td.append(editButton);
                 td.append(deleteButton);
-                td.append(saveButton);
                 row.append(td);
 
                 tbody.append(row);
@@ -149,80 +144,9 @@ function refreshTable(){
             });
 
             $('.edit-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var inputId = 'input_' + index;
-                    var inputValue = dataCell.text();
-                    // console.log();
-                    if(index === 0){
-                        dataCell.empty().append(inputValue);
-                    }else if(index === 3){
-                        var selectBox = $('<select>')
-                        .attr({
-                            'id': inputId,
-                            'class': 'form-control'
-                        })
-                        .append($('<option>').val('1').text('Active'))
-                        .append($('<option>').val('0').text('Deactive'));
-
-                    dataCell.empty().append(selectBox);
-                    }else{
-                        var inputField = $('<input>')
-                        .attr({
-                            'id': inputId,
-                            'type': 'text',
-                            'class': 'form-control'
-                        })
-                        .val(inputValue);
-                        dataCell.empty().append(inputField);
-                    }  
-                });
-                actionCell.find('.edit-button').hide();
-                actionCell.find('.delete-button').hide();
-                actionCell.find('.save-button').show();                
-            });
-
-            $('.save-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input');
-                var selectFields = row.find('select');
-
-                var inputData = {};
-
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var newValue = dataCell.find('input').val();
-                    dataCell.empty().text(newValue);
-                });
-
-                selectFields.each(function() {
-                    var selectField = $(this);
-                    var selectId = selectField.attr('id');
-                    var selectValue = selectField.val();
-                    inputData[selectId] = selectValue;
-                });
-
-                inputFields.each(function() {
-                    var inputField = $(this);
-                    var inputId = inputField.attr('id');
-                    var inputValue = inputField.val();
-                    inputData[inputId] = inputValue;
-                });
-
-                // Show "Edit" and "Delete" buttons and hide "Save" button
-                actionCell.find('.edit-button').show();
-                actionCell.find('.delete-button').show();
-                actionCell.find('.save-button').hide();
                 var dataId = $(this).data('id');
-                updateData(dataId,inputData);
-                refreshTable();
+                window.location = `/depo/create?id=${dataId}`      
             });
-
             $('.delete-button').click(function() {
                 var dataId = $(this).data('id');
                 var data = {
@@ -239,32 +163,6 @@ function refreshTable(){
 }
 
 
-var tbody = $('#tbody');
-
-function updateData(id,inputData){
-
-    var data = {
-        'name' : inputData.input_1,
-        'address' : inputData.input_2,
-        'status' : inputData.input_3,
-        'phone' : inputData.input_4,
-        'email' : inputData.input_5,
-        'tan' : inputData.input_6,
-        'pan' : inputData.input_7,
-        'service_tax' : inputData.input_8,
-        'vattin' : inputData.input_9,
-        'gst' : inputData.input_10,
-        'state' : inputData.input_11,
-        'state_code' : inputData.input_12,
-        'billing_name' : inputData.input_13,
-        'company_name' : inputData.input_14,
-        'company_address' : inputData.input_15,
-        'company_phone' : inputData.input_16,
-        'company_email' : inputData.input_17,
-        'id' :id
-    }
-    post('depo/update',data);
-}
 
 
 

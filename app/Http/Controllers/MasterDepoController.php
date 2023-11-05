@@ -35,6 +35,10 @@ class MasterDepoController extends Controller
         return MasterDepo::get();
     }
 
+    public function getbyid(Request $request){
+        return MasterDepo::where('id',$request->id)->first();
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -200,6 +204,107 @@ class MasterDepoController extends Controller
      */
     public function update(Request $request)
     {
+
+
+        $rules=[
+            'name'=>[
+                'required',
+            ],
+            'address' => [
+                'required'
+            ],
+            'status' =>[
+                'required'
+            ],
+            'phone' => [
+                'required',
+
+            ],
+            'email' => [
+                'required',
+
+            ],
+            'tan' => [
+                'required',
+
+            ],
+            'pan' => [
+                'required',
+
+            ],
+            'service_tax' => [
+                'required',
+            ],
+            'vattin' => [
+                'required',
+            ],
+            'gst' => [
+                'required',
+
+            ],
+            'state_code' => [
+                'required'
+            ],
+            'state' => [
+                'required',
+            ],
+            'billing_name' => [
+                'required',
+            ],
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            if ($messages->has('name')){
+                $validationFormate->name = $messages->first('name');
+            }
+            if ($messages->has('address')){
+                $validationFormate->address = $messages->first('address');
+            }
+            if ($messages->has('status')){
+                $validationFormate->status = $messages->first('status');
+            }
+            if ($messages->has('phone')){
+                $validationFormate->phone = $messages->first('phone');
+            }
+            if ($messages->has('email')){
+                $validationFormate->email = $messages->first('email');
+            }
+            if ($messages->has('tan')){
+                $validationFormate->tan = $messages->first('tan');
+            }
+            if ($messages->has('pan')){
+                $validationFormate->pan = $messages->first('pan');
+            }
+            if ($messages->has('service_tax')){
+                $validationFormate->service_tax = $messages->first('service_tax');
+            }
+            if ($messages->has('vattin')){
+                $validationFormate->vattin = $messages->first('vattin');
+            }
+            if ($messages->has('gst')){
+                $validationFormate->gst = $messages->first('gst');
+            }
+            if ($messages->has('state_code')){
+                $validationFormate->state_code = $messages->first('state_code');
+            }
+            if ($messages->has('state')){
+                $validationFormate->state = $messages->first('state');
+            }
+            if ($messages->has('billing_name')){
+                $validationFormate->billing_name = $messages->first('billing_name');
+            }
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+
         $getContractor = MasterDepo::where('id',$request->id)->first();
         $contractorDetails = MasterDepo::find($request->id);
 

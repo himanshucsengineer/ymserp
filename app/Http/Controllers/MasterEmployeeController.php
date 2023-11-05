@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterEmployee;
+use App\Models\MasterContractor;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -31,6 +34,34 @@ class MasterEmployeeController extends Controller
     public function get()
     {
         return MasterEmployee::get();
+    }
+
+    public function getbyid(Request $request)
+    {
+        return MasterEmployee::where('id',$request->id)->first();
+    }
+
+    public function getdata(){
+        $employeeData = MasterEmployee::get();
+        $formattedEmployee = [];
+        foreach($employeeData as $employee){
+            $contractorData = MasterContractor::where('id',$employee->contractor_id)->first();
+
+            $formattedEmployee[] = [
+                'id'=> (int) $employee->id,
+                'employee_code' => $employee->employee_code,
+                'firstname' => $employee->firstname,
+                'middlename' => $employee->middlename,
+                'lastname' => $employee->lastname,
+                'address' => $employee->address,
+                'pincode' => $employee->pincode,
+                'contact' => $employee->contact,
+                'aadhar' => $employee->aadhar,
+                'contractor' => $contractorData->fullname,
+            ];
+        }
+        return $formattedEmployee;
+
     }
 
 
@@ -145,9 +176,126 @@ class MasterEmployeeController extends Controller
      * @param  \App\Models\MasterEmployee  $masterEmployee
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMasterEmployeeRequest $request, MasterEmployee $masterEmployee)
+    public function update(Request $request)
     {
-        //
+
+        $rules=[
+            'employee_code'=>[
+                'required',
+
+            ],
+            'firstname' => [
+                'required'
+            ],
+            'lastname' =>[
+                'required'
+            ],
+            'contractor_id' => [
+                'required',
+            ],
+            'contact' => [
+                'required',
+
+            ],
+            'aadhar' => [
+                'required',
+
+            ]
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            if ($messages->has('employee_code')){
+                $validationFormate->employee_code = $messages->first('employee_code');
+            }
+            if ($messages->has('firstname')){
+                $validationFormate->firstname = $messages->first('firstname');
+            }
+            if ($messages->has('lastname')){
+                $validationFormate->lastname = $messages->first('lastname');
+            }
+            if ($messages->has('contractor_id')){
+                $validationFormate->contractor_id = $messages->first('contractor_id');
+            }
+            if ($messages->has('contact')){
+                $validationFormate->contact = $messages->first('contact');
+            }
+            if ($messages->has('aadhar')){
+                $validationFormate->aadhar = $messages->first('aadhar');
+            }
+        
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+
+        
+        $getContractor = MasterEmployee::where('id',$request->id)->first();
+        
+        $contractorDetails = MasterEmployee::find($request->id);
+
+        if($getContractor->employee_code != $request->employee_code ){
+
+            $employee_code = MasterEmployee::where('employee_code',$request->employee_code)->get();
+            if(count($employee_code) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Employee Code is already Taken"
+                ], 500);
+            }
+            $contractorDetails->employee_code = is_null($request->employee_code) ? $contractorDetails->employee_code : $request->employee_code;
+        }
+
+        if($getContractor->contact != $request->contact){
+            $contact = MasterEmployee::where('contact',$request->contact)->get();
+            if(count($contact) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Contact is already Taken"
+                ], 500);
+            }
+            $contractorDetails->contact = is_null($request->contact) ? $contractorDetails->contact : $request->contact;
+        }
+
+        if($getContractor->aadhar != $request->aadhar){
+            $aadhar = MasterContractor::where('aadhar',$request->aadhar)->get();
+            if(count($aadhar) > 0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "gaadharst is already Taken"
+                ], 500);
+            }
+            $contractorDetails->aadhar = is_null($request->aadhar) ? $contractorDetails->aadhar : $request->aadhar;
+        }
+
+        $contractorDetails->firstname =  is_null($request->firstname) ? $contractorDetails->firstname : $request->firstname;
+        $contractorDetails->middlename = is_null($request->middlename) ? $contractorDetails->middlename : $request->middlename;
+        $contractorDetails->lastname = is_null($request->lastname) ? $contractorDetails->lastname : $request->lastname;
+        $contractorDetails->contractor_id = is_null($request->contractor_id) ? $contractorDetails->contractor_id : $request->contractor_id;
+        $contractorDetails->address = is_null($request->address) ? $contractorDetails->address : $request->address;
+        $contractorDetails->pincode = is_null($request->pincode) ? $contractorDetails->pincode : $request->pincode;
+
+
+
+        $contractorDetails  = $contractorDetails->save();
+
+        if($contractorDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Employee Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**
@@ -156,8 +304,35 @@ class MasterEmployeeController extends Controller
      * @param  \App\Models\MasterEmployee  $masterEmployee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterEmployee $masterEmployee)
+    public function destroy(Request $request)
     {
-        //
+        $geteEmployee = User::where('employee_id',$request->id)->get();
+
+        if(count($geteEmployee) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Employee is assigned to user can not delete this Employee"
+            ], 500);
+        }
+        $contractor = MasterEmployee::find($request->id);
+
+        
+        if (is_null($contractor)) {
+            throw new NotFoundHttpException('Invalid Workshop Id!');
+        }else{
+            
+            $deletecontractor= $contractor->delete();
+            if($deletecontractor){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Employee Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

@@ -1,3 +1,5 @@
+
+
 @extends('common.layout')
 
 @section('content')
@@ -7,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Category</h1>
+                    <h1 class="m-0 text" id="">Create Category</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Category</li>
+                        <li class="breadcrumb-item active text">Create Category</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -45,18 +47,59 @@
 <script>
 
 
+
 $(function () {
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/category/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            console.log(response);
+            $('#name').val(response.name);
+            $('.text').text('Update Category');
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     $.validator.setDefaults({
     submitHandler: function () {
         var name = $("#name").val();
-        const data = {
-            'name':name,
-            'user_id':user_id,
-            'depo_id':depo_id,
+        
+        if(getCateId[1]){
+            const data = {
+                'name':name,
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'id':getCateId[1]
+            }
+            post('category/update',data);
+            
+        }else{
+            const data = {
+                'name':name,
+                'user_id':user_id,
+                'depo_id':depo_id,
+            }
+            post('category/create',data);
         }
-        post('category/create',data);
+        window.location = `/category/all`
     }
   });
     $('#categoryForm').validate({

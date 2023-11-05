@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Depo</h1>
+                    <h1 class="m-0 text">Create Depo</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Depo</li>
+                        <li class="breadcrumb-item active text">Create Depo</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -115,6 +115,50 @@
 <script>
 
 $(function () {
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/depo/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            console.log(response);
+            $('.text').text('Update Depo');
+            $("#name").val(response.name);
+            $("#address").val(response.address);
+            $("#status").val(response.status);
+            $("#phone").val(response.phone);
+            $("#email").val(response.email);
+            $("#tan").val(response.tan);
+            $("#pan").val(response.pan);
+            $("#service_tax").val(response.service_tax);
+            $("#vattin").val(response.vattin);
+            $("#gst").val(response.gst);
+            $("#state").val(response.state);
+            $("#state_code").val(response.state_code);
+            $("#billing_name").val(response.billing_name);
+            $("#company_email").val(response.company_email);
+            $("#company_name").val(response.company_name);
+            $("#company_address").val(response.company_address);
+            $("#company_phone").val(response.company_phone);
+            
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
     $.validator.setDefaults({
     submitHandler: function () {
         var user_id = localStorage.getItem('user_id');
@@ -139,29 +183,61 @@ $(function () {
         var company_address = $("#company_address").val();
         var company_phone = $("#company_phone").val();
 
-        const data = {
-            'name':name,
-            'address':address,
-            'status':status,
-            'phone':phone,
-            'email':email,
-            'tan':tan,
-            'pan':pan,
-            'service_tax':service_tax,
-            'vattin':vattin,
-            'gst':gst,
-            'state_code':state_code,
-            'state':state,
-            'billing_name':billing_name,
-            'company_email':company_email,
-            'company_name':company_name,
-            'company_address':company_address,
-            'company_phone':company_phone,
-            'created_by' : user_id,
-            'depo_id':depo_id,
 
+        if(getCateId[1]){
+            const data = {
+                'name':name,
+                'address':address,
+                'status':status,
+                'phone':phone,
+                'email':email,
+                'tan':tan,
+                'pan':pan,
+                'service_tax':service_tax,
+                'vattin':vattin,
+                'gst':gst,
+                'state_code':state_code,
+                'state':state,
+                'billing_name':billing_name,
+                'company_email':company_email,
+                'company_name':company_name,
+                'company_address':company_address,
+                'company_phone':company_phone,
+                'created_by' : user_id,
+                'depo_id':depo_id,
+                'id':getCateId[1]
+
+            }
+            post('depo/update',data);
+
+        }else{
+            const data = {
+                'name':name,
+                'address':address,
+                'status':status,
+                'phone':phone,
+                'email':email,
+                'tan':tan,
+                'pan':pan,
+                'service_tax':service_tax,
+                'vattin':vattin,
+                'gst':gst,
+                'state_code':state_code,
+                'state':state,
+                'billing_name':billing_name,
+                'company_email':company_email,
+                'company_name':company_name,
+                'company_address':company_address,
+                'company_phone':company_phone,
+                'created_by' : user_id,
+                'depo_id':depo_id,
+
+            }
+            post('depo/create',data);
         }
-       post('depo/create',data);
+        window.location = `/depo/all`
+
+        
     }
   });
     $('#depoForm').validate({

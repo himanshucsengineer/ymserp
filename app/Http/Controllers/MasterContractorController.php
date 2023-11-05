@@ -35,6 +35,11 @@ class MasterContractorController extends Controller
         return MasterContractor::get();
     }
 
+    public function getbyid(Request $request){
+        return MasterContractor::where('id',$request->id)->first();
+    }
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -148,6 +153,46 @@ class MasterContractorController extends Controller
     public function update(Request $request)
     {
 
+
+        $rules=[
+            'contractor_code'=>[
+                'required',
+            ],
+            'fullname' => [
+                'required'
+            ],
+            'company' =>[
+                'required'
+            ],
+            
+        ];
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('contractor_code')){
+                $validationFormate->contractor_code = $messages->first('contractor_code');
+            }
+
+            if ($messages->has('fullname')){
+                $validationFormate->fullname = $messages->first('fullname');
+            }
+
+            if ($messages->has('company')){
+                $validationFormate->company = $messages->first('company');
+            }
+
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
 
         
 

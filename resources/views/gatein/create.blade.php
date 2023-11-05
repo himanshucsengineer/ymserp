@@ -28,9 +28,31 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="container_no">Container Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                    <input type="text" class="" style="font-size:100px; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
                                 </div>
                                 <div class="form-group">
+                                    <label for="vehicle_number">Vehicle Number <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="vehicle_number" name="vehicle_number" placeholder="Enter Vehicle Number">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="driver_name" name="driver_name" placeholder="Enter Driver Name">
+                                </div>
+                                
+
+                                <div class="form-group">
+                                    <label for="contact_number">Driver Contact Number <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Enter Contact Number">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="line_id">Line Name <span style="color:red;">*</span></label>
+                                    <select name="line_id" id="line_id" class="form-control">
+                                        <option value="">Select Line</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="form-group">
                                     <label for="container_size">Container Size <span style="color:red;">*</span></label>
                                     <select name="container_size" id="container_size" class="form-control">
                                         <option value="">Please Select Container Size</option>
@@ -52,14 +74,14 @@
                                         <option value="TK">TK</option>
                                         <option value="SR">SR</option>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="transport_id">Transport <span style="color:red;">*</span></label>
-                                    <select name="transport_id" id="transport_id" class="form-control">
-                                        <option value="">Please Select Transport</option>
-                                    </select>
-                                </div>
-
+                                </div> -->
+                                        <div class="form-group">
+                                            <label for="transport_id">Transport </label>
+                                            <select name="transport_id" id="transport_id" class="form-control">
+                                                <option value="">Please Select Transport</option>
+                                            </select>
+                                        </div>
+<!-- 
                                 <div class="form-group">
                                     <label for="inward_date">Inward Date <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="inward_date" name="inward_date" value="<?= date('Y-m-d')?>">
@@ -67,23 +89,11 @@
                                 <div class="form-group">
                                     <label for="inward_time">Inward Time  <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="inward_time" name="inward_time" value="<?= date('H:i:s')?>">
-                                </div>
+                                </div> -->
 
+                                
                                 <div class="form-group">
-                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name" placeholder="Enter Driver Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="vehicle_number">Vehicle Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="vehicle_number" name="vehicle_number" placeholder="Enter Vehicle Number">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="contact_number">Contact Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Enter Contact Number">
-                                </div>
-                                <div class="form-group">
-                                    <label for="third_party">Third Party <span style="color:red;">*</span></label>
+                                    <label for="third_party">Third Party </label>
                                     <select name="third_party" id="third_party"  class="form-control">
                                         <option value="">Select an option</option>
                                         <option value="yes">yes</option>
@@ -91,65 +101,48 @@
                                     </select>
                                 </div>
 
+                                
                                 <div class="form-group">
-                                    <label for="line_id">Line Name <span style="color:red;">*</span></label>
-                                    <select name="line_id" id="line_id" class="form-control">
-                                        <option value="">Select Line</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="arrive_from">Arrive From <span style="color:red;">*</span></label>
-                                    <select name="arrive_from" id="arrive_from" class="form-control">
-                                        <option value="">Select an option</option>
-                                        <option value="Mumbai">Mumbai</option>
-                                        <option value="Rajasthan">Rajasthan</option>
-                                        <option value="Cochine">Cochine</option>
-                                        <option value="Hyderabad">Hyderabad</option>
-                                        <option value="Kerla">Kerla</option>
-                                        <option value="Others">Others</option>
-                                    </select>
+                                    <label for="arrive_from">Arrive From </label>
+                                    <input type="text" name="arrive_from" id="arrive_from" class="form-control" placeholder="Arrive From">
+                                    
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="port_name">Port Name <span style="color:red;">*</span></label>
-                                    <select name="port_name" id="port_name" class="form-control">
-                                        <option value="">Select an option</option>
-                                        <option value="Mundra port">Mundra port</option>
-                                        <option value="Kandla">Kandla</option>
-                                        <option value="Paradip Port">Paradip Port</option>
-                                        <option value="Jawaharlal Nehru Port">Jawaharlal Nehru Port</option>
-                                        <option value="Visakhapatnam Port">Visakhapatnam Port</option>
-                                    </select>
+                                    <label for="port_name">Port Name </label>
+                                    <input type="text" name="port_name" id="port_name" class="form-control" placeholder="Port Name">
+
+
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="driver_photo">Driver Photo <span style="color:red;">*</span></label>
+                                    <label for="driver_photo">Driver Photo </label>
                                     <input type="file" class="form-control" name="driver_photo" id="driver_photo">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="challan">Challan <span style="color:red;">*</span></label>
+                                    <label for="challan">Challan </label>
                                     <input type="file" class="form-control" name="challan" id="challan">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="driver_license">Driver License <span style="color:red;">*</span></label>
+                                    <label for="driver_license">Driver License </label>
                                     <input type="file" class="form-control" name="driver_license" id="driver_license">
                                     
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="do_copy">D.O. Copy <span style="color:red;">*</span></label>
+                                    <label for="do_copy">D.O. Copy </label>
                                     <input type="file" class="form-control" name="do_copy" id="do_copy">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="aadhar">Aadhar Card <span style="color:red;">*</span></label>
+                                    <label for="aadhar">Aadhar Card </label>
                                     <input type="file" class="form-control" name="aadhar" id="aadhar">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="pan">PAN Card <span style="color:red;">*</span></label>
+                                    <label for="pan">PAN Card </label>
                                     <input type="file" class="form-control" name="pan" id="pan">
                                 </div>
                             </div>
