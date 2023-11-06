@@ -52,6 +52,12 @@ Route::get('/transport/all', 'App\Http\Controllers\MasterTransportController@all
 Route::get('/tarrif/create', 'App\Http\Controllers\MasterTarrifController@index');
 Route::get('/tarrif/all', 'App\Http\Controllers\MasterTarrifController@all');
 
+Route::get('/role/create', 'App\Http\Controllers\RoleController@index');
+Route::get('/role/all', 'App\Http\Controllers\RoleController@all');
+
+Route::get('/permission/create', 'App\Http\Controllers\PermissionController@index');
+Route::get('/permission/all', 'App\Http\Controllers\PermissionController@all');
+
 
 Route::get('/gatein/create', 'App\Http\Controllers\GateInController@index');
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');

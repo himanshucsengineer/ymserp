@@ -33,6 +33,16 @@ $api->version('v1', function($api){
     }); 
 
 
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'role'], function($api){
+        $api->post('/create','App\Http\Controllers\RoleController@store');
+        $api->get('/get', 'App\Http\Controllers\RoleController@get');
+        $api->get('/getwithpermissions', 'App\Http\Controllers\RoleController@getwithpermissions');
+        $api->post('/getbyid', 'App\Http\Controllers\RoleController@getbyid');
+        $api->post('/update', 'App\Http\Controllers\RoleController@update');
+        $api->post('/delete', 'App\Http\Controllers\RoleController@destroy');
+    });
+
+
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'contractor'], function($api){
         $api->post('/create','App\Http\Controllers\MasterContractorController@store');
         $api->get('/get', 'App\Http\Controllers\MasterContractorController@get');

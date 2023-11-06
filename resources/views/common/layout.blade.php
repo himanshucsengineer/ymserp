@@ -321,6 +321,24 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Roles and Permission Management <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/role/create" class="nav-link">
+                                                <p> Create Role </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/role/all" class="nav-link">
+                                                <p>All Roles</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
                                 
                             </ul>
                         </li>
