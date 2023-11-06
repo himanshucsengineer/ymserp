@@ -57,9 +57,7 @@
     <script>
         var checkToken = localStorage.getItem('token');
         var role_id = localStorage.getItem('role');
-
-
-        console.log(checkToken);
+        var user_id = localStorage.getItem('user_id');
 
         $.ajax({
         type: "post",
@@ -71,46 +69,49 @@
             'id':role_id
         },
         success: function(response) {       
-            console.log(response);
             var permissions = response[0].permissions;
-            
-            var valueToCheck = "GATE_IN";
-
             if($.inArray("DASHBOARD", permissions) !== -1){
                 $('#dash').show();
             }
-
             if($.inArray("SECURITY", permissions) !== -1){
                 $('#security').show();
             }
-
             if($.inArray("SURVEYOR", permissions) !== -1){
                 $('#SURVEYOR').show();
             }
-
             if($.inArray("BILLING", permissions) !== -1){
                 $('#BILLING').show();
             }
-
             if($.inArray("DEPOS", permissions) !== -1){
                 $('#DEPOS').show();
             }
-
             if($.inArray("MANAGEMENT", permissions) !== -1){
                 $('#MANAGEMENT').show();
             }
-
             if($.inArray("MASTERS", permissions) !== -1){
                 $('#MASTERS').show();
             }
-
-
-
             if($.inArray("STORES", permissions) !== -1){
                 $('#STORES').show();
             }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
 
 
+    $.ajax({
+        type: "post",
+        url: "/api/user/getemployee",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':user_id
+        },
+        success: function(response) {
+           $('#username').text(response.firstname + ' ' + response.lastname);
         },
         error: function(error) {
             console.log(error);
@@ -207,7 +208,7 @@
                         <img src="/assets/img/logo_icon.png" class="img-circle " alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block" id="username"></a>
                     </div>
                 </div>
 

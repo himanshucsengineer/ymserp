@@ -38,6 +38,12 @@ class MasterUserController extends Controller
         return User::where('id',$request->id)->first();
     }
 
+
+    public function getemployee(Request $request){
+        $get_user =  User::where('id',$request->id)->first();
+        return MasterEmployee::where('id',$get_user->employee_id)->first();
+    }
+
     public function getData(){
 
         $getUserData = User::get();
