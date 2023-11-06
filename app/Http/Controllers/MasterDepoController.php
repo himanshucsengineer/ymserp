@@ -30,9 +30,13 @@ class MasterDepoController extends Controller
         return view('depo.view');
     }
 
-    public function get()
+    public function get(Request $request)
     {
-        return MasterDepo::get();
+        if($request->user_id == 1){
+            return MasterDepo::get();
+        }else{
+            return MasterDepo::where('depo_id',$request->depo_id)->get();
+        }
     }
 
     public function getbyid(Request $request){
@@ -371,6 +375,10 @@ class MasterDepoController extends Controller
         $contractorDetails->company_address = is_null($request->company_address) ? $contractorDetails->company_address : $request->company_address;
         $contractorDetails->company_phone = is_null($request->company_phone) ? $contractorDetails->company_phone : $request->company_phone;
         $contractorDetails->company_email = is_null($request->company_email) ? $contractorDetails->company_email : $request->company_email;
+
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');;
+
 
 
         $contractorDetails  = $contractorDetails->save();

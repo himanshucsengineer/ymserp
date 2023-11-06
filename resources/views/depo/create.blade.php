@@ -203,7 +203,7 @@ $(function () {
                 'company_name':company_name,
                 'company_address':company_address,
                 'company_phone':company_phone,
-                'created_by' : user_id,
+                'user_id' : user_id,
                 'depo_id':depo_id,
                 'id':getCateId[1]
 
