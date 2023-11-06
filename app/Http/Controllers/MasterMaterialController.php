@@ -32,9 +32,15 @@ class MasterMaterialController extends Controller
     }
 
 
-    public function getData(){
+    public function getData(Request $request){
 
-        $repairData = MasterMaterial::get();
+
+        if($request->user_id == 1){
+            $repairData = MasterMaterial::get();
+        }else{
+            $repairData = MasterMaterial::where('depo_id',$request->depo_id)->get();
+        }
+
         $formattedEmployee = [];
         foreach($repairData as $repair){
             $damageData = MasterDamage::where('id',$repair->damage_id)->first();
@@ -59,7 +65,7 @@ class MasterMaterialController extends Controller
 
 
     public function getbyid(Request $request){
-        return MasterMaterial::where('id',$request->id)->get();
+        return MasterMaterial::where('id',$request->id)->first();
     }
 
     /**
@@ -157,9 +163,79 @@ class MasterMaterialController extends Controller
      * @param  \App\Models\MasterMaterial  $masterMaterial
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMasterMaterialRequest $request, MasterMaterial $masterMaterial)
+    public function update(Request $request)
     {
-        //
+        $rules=[
+            'material_code'=>[
+                'required',
+            ],
+            'desc' => [
+                'required'
+            ],
+            'damage_id' => [
+                'required'
+            ],
+            'repiar_id' => [
+                'required'
+            ]
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('material_code')){
+                $validationFormate->material_code = $messages->first('material_code');
+            }
+
+            if ($messages->has('desc')){
+                $validationFormate->desc = $messages->first('desc');
+            }
+
+            if ($messages->has('damage_id')){
+                $validationFormate->damage_id = $messages->first('damage_id');
+            }
+            if ($messages->has('repiar_id')){
+                $validationFormate->repiar_id = $messages->first('repiar_id');
+            }
+
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+        $getContractor = MasterMaterial::where('id',$request->id)->first();
+
+
+        $contractorDetails = MasterMaterial::find($request->id);
+
+        if($getContractor->material_code != $request->material_code){
+            $contractorDetails->material_code = is_null($request->material_code) ? $contractorDetails->material_code : $request->material_code;
+        }
+        $contractorDetails->desc = is_null($request->desc) ? $contractorDetails->desc : $request->desc;
+        $contractorDetails->damage_id = is_null($request->damage_id) ? $contractorDetails->damage_id : $request->damage_id;
+        $contractorDetails->repiar_id = is_null($request->repiar_id) ? $contractorDetails->repiar_id : $request->repiar_id;
+
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');
+
+        $contractorDetails  = $contractorDetails->save();
+
+        if($contractorDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Material Code Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**
@@ -168,8 +244,38 @@ class MasterMaterialController extends Controller
      * @param  \App\Models\MasterMaterial  $masterMaterial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterMaterial $masterMaterial)
+    public function destroy(Request $request)
     {
-        //
+       
+
+        $geteTarrif = MasterTarrif::orWhere('material_id', 'LIKE', '%' . $request->id . '%')->get();
+
+        if(count($geteTarrif) > 0){
+            return response()->json([
+                'status'=> "error",
+                'message' => "Repair code is assigned to Tarrif can not delete this"
+            ], 500);
+        }
+
+        $contractor = MasterMaterial::find($request->id);
+
+        
+        if (is_null($contractor)) {
+            throw new NotFoundHttpException('Invalid Workshop Id!');
+        }else{
+            
+            $deletecontractor= $contractor->delete();
+            if($deletecontractor){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Material Code Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

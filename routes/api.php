@@ -106,7 +106,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'repair'], function($api){
         $api->post('/create','App\Http\Controllers\MasterRepairController@store');
         $api->post('/get', 'App\Http\Controllers\MasterRepairController@get');
-        $api->get('/getData', 'App\Http\Controllers\MasterRepairController@getData');
+        $api->post('/getData', 'App\Http\Controllers\MasterRepairController@getData');
 
         $api->post('/getbyid', 'App\Http\Controllers\MasterRepairController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterRepairController@destroy');
@@ -116,7 +116,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'material'], function($api){
         $api->post('/create','App\Http\Controllers\MasterMaterialController@store');
         $api->post('/get', 'App\Http\Controllers\MasterMaterialController@get');
-        $api->get('/getData', 'App\Http\Controllers\MasterMaterialController@getData');
+        $api->post('/getData', 'App\Http\Controllers\MasterMaterialController@getData');
 
         $api->post('/getbyid', 'App\Http\Controllers\MasterMaterialController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterMaterialController@destroy');

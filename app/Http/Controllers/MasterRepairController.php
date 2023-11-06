@@ -33,8 +33,14 @@ class MasterRepairController extends Controller
         return view('repair.view');
     }
 
-    public function getData(){
-        $repairData = MasterRepair::get();
+    public function getData(Request $request){
+
+        if($request->user_id == 1){
+            $repairData = MasterRepair::get();
+        }else{
+            $repairData = MasterRepair::where('depo_id',$request->depo_id)->get();
+        }
+
         $formattedEmployee = [];
         foreach($repairData as $repair){
             $damageData = MasterDamage::where('id',$repair->damage_id)->first();
@@ -55,7 +61,7 @@ class MasterRepairController extends Controller
     }
 
     public function getbyid(Request $request){
-        return MasterRepair::where('id',$request->id)->get();
+        return MasterRepair::where('id',$request->id)->first();
     }
 
 
@@ -196,7 +202,8 @@ class MasterRepairController extends Controller
 
         $contractorDetails->damage_id =  is_null($request->damage_id) ? $contractorDetails->damage_id : $request->damage_id;
         $contractorDetails->desc = is_null($request->desc) ? $contractorDetails->desc : $request->desc;
-
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');
 
         $contractorDetails  = $contractorDetails->save();
 

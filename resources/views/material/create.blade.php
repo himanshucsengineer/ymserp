@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Material Code</h1>
+                    <h1 class="m-0 text">Create Material Code</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Material Code</li>
+                        <li class="breadcrumb-item active text">Create Material Code</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -61,12 +61,19 @@
 <script>
 $(document).ready(function () {
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     
     $.ajax({
-        type: "GET",
+        type: "post",
         url: "/api/damage/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function (data) {
             var select = document.getElementById('damage_id');
@@ -112,6 +119,37 @@ $(document).ready(function () {
 });
 
 $(function () {
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/material/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            $('.text').text('Update Material Code');
+            $("#damage_id").val(response.damage_id);
+            $("#repiar_id").val(response.repiar_id);
+            $("#material_code").val(response.material_code);
+            $("#desc").val(response.desc);
+            
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     $.validator.setDefaults({
@@ -121,6 +159,19 @@ $(function () {
         var material_code = $("#material_code").val();
         var desc = $("#desc").val();
 
+        if(getCateId[1]){
+            const data = {
+                'damage_id':damage_id,
+                'repiar_id':repiar_id,
+                'material_code':material_code,
+                'desc':desc,
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'id':getCateId[1]
+            }
+            post('material/update',data);
+
+        }else{
             const data = {
                 'damage_id':damage_id,
                 'repiar_id':repiar_id,
@@ -130,6 +181,10 @@ $(function () {
                 'depo_id':depo_id,
             }
             post('material/create',data);
+        }
+        window.location = `/material/all`
+
+            
     }
   });
 
