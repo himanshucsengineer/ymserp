@@ -28,9 +28,13 @@ class MasterLineController extends Controller
         return view('line.view');
     }
 
-    public function get()
+    public function get(Request $request)
     {
-        return MasterLine::get();
+        if($request->user_id == 1){
+            return MasterLine::get();
+        }else{
+            return MasterLine::where('depo_id',$request->depo_id)->get();
+        }
     }
 
     public function getbyid(Request $request)

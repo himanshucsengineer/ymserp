@@ -89,11 +89,18 @@ function clearTableBody() {
 function refreshTable(){
     clearTableBody()
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
-        type: "get",
+        type: "post",
         url: "/api/line/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function(response) {
             var tbody = $('#table-body');
@@ -105,7 +112,7 @@ function refreshTable(){
                 row.append($('<td>').text(i));
                 row.append($('<td>').append(item.name));
                 row.append($('<td>').append(item.alise));
-                row.append($('<td>').append(item.material_code));
+                row.append($('<td>').append(item.free_days));
                 row.append($('<td>').append(item.labour_rate));
 
                 row.append($('<td>').append(item.line_address));
@@ -118,15 +125,26 @@ function refreshTable(){
                 row.append($('<td>').append(item.gst_state));
                 row.append($('<td>').append(item.state_code));
 
-                row.append($('<td>').append(item.name));
-                row.append($('<td>').append(item.alise));
-                row.append($('<td>').append(item.material_code));
-                row.append($('<td>').append(item.labour_rate));
+                var top_img = $('<a>').attr({'href':'/uploads/line/'+item.top_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(top_img));
 
-                row.append($('<td>').append(item.name));
-                row.append($('<td>').append(item.alise));
-                row.append($('<td>').append(item.material_code));
-                row.append($('<td>').append(item.labour_rate));
+                var bottom_img = $('<a>').attr({'href':'/uploads/line/'+item.bottom_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(bottom_img));
+
+                var right_img = $('<a>').attr({'href':'/uploads/line/'+item.right_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(right_img));
+
+                var left_img = $('<a>').attr({'href':'/uploads/line/'+item.left_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(left_img));
+
+                var front_img = $('<a>').attr({'href':'/uploads/line/'+item.front_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(front_img));
+
+                var door_img = $('<a>').attr({'href':'/uploads/line/'+item.door_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(door_img));
+
+                var interior_img = $('<a>').attr({'href':'/uploads/line/'+item.interior_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(interior_img));
 
                 
                 var editButton = $('<span>')
@@ -138,15 +156,10 @@ function refreshTable(){
                     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
                     .attr('data-id', item.id)
                     .attr('class', 'delete-button')
-                var saveButton = $('<button style="display:none;">')
-                    .text('Save')
-                    .attr('data-id', item.id)
-                    .attr('class', 'save-button btn-primary')
 
                 var td = $('<td>');
                 td.append(editButton);
                 td.append(deleteButton);
-                td.append(saveButton);
                 row.append(td);
 
                 tbody.append(row);
@@ -154,84 +167,7 @@ function refreshTable(){
             });
 
             $('.edit-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var inputId = 'input_' + index;
-                    var inputValue = dataCell.text();
-                    // console.log();
-                    if(index === 0){
-                        dataCell.empty().append(inputValue);
-                    }else if(index === 1){
-                        var selectBox = $('<select>')
-                        .attr({
-                            'id': inputId,
-                            'class': 'form-control select-box'
-                        })
-                        dataCell.empty().append(selectBox)
-                        // getDamage(selectBox)
-
-                    }else if (index === 2){
-                        var selectBox = $('<select>')
-                        .attr({
-                            'id': inputId,
-                            'class': 'form-control select-box'
-                        })
-                        dataCell.empty().append(selectBox)
-                    }else{
-                        var inputField = $('<input>')
-                        .attr({
-                            'id': inputId,
-                            'type': 'text',
-                            'class': 'form-control'
-                        })
-                        .val(inputValue);
-                        dataCell.empty().append(inputField);
-                    }  
-                });
-                actionCell.find('.edit-button').hide();
-                actionCell.find('.delete-button').hide();
-                actionCell.find('.save-button').show();                
-            });
-
-            $('.save-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input');
-                var selectFields = row.find('select');
-
-                var inputData = {};
-
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var newValue = dataCell.find('input').val();
-                    dataCell.empty().text(newValue);
-                });
-
-                selectFields.each(function() {
-                    var selectField = $(this);
-                    var selectId = selectField.attr('id');
-                    var selectValue = selectField.val();
-                    inputData[selectId] = selectValue;
-                });
-
-                inputFields.each(function() {
-                    var inputField = $(this);
-                    var inputId = inputField.attr('id');
-                    var inputValue = inputField.val();
-                    inputData[inputId] = inputValue;
-                });
-
-                // Show "Edit" and "Delete" buttons and hide "Save" button
-                actionCell.find('.edit-button').show();
-                actionCell.find('.delete-button').show();
-                actionCell.find('.save-button').hide();
-                var dataId = $(this).data('id');
-                // updateData(dataId,inputData);
-                refreshTable();
+                             
             });
 
             $('.delete-button').click(function() {
@@ -239,7 +175,7 @@ function refreshTable(){
                 var data = {
                     'id':dataId
                 }
-                // post('repair/delete',data);
+                post('line/delete',data);
                 refreshTable();
             });
         },
@@ -248,40 +184,6 @@ function refreshTable(){
         }
     });
 }
-
-
-var tbody = $('#tbody');
-
-function updateData(id,inputData){
-
-    var data = {
-        'damage_id' :inputData.input_1,
-        'repair_code' : inputData.input_2,
-        'desc' : inputData.input_3,
-        'id' :id
-    }
-    post('repair/update',data);
-}
-
-function getDamage(selectBox){
-    var checkToken = localStorage.getItem('token');
-    $.ajax({
-        type: "GET",
-        url: "/api/damage/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        success: function (data) {
-            data.forEach(function(item) {
-                selectBox.append($('<option>').val(item.id).text(item.code));
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
-
 
 
   
