@@ -32,14 +32,17 @@ class MasterDamageController extends Controller
         return view('damage.view');
     }
 
-
-    public function get()
+    public function get(Request $request)
     {
-        return MasterDamage::get();
+        if($request->user_id == 1){
+            return MasterDamage::get();
+        }else{
+            return MasterDamage::where('depo_id',$request->depo_id)->get();
+        }
     }
 
     public function getbyid(Request $request){
-        return MasterDamage::where('id',$request->id)->get();
+        return MasterDamage::where('id',$request->id)->first();
     }
 
     /**
@@ -176,6 +179,8 @@ class MasterDamageController extends Controller
         }
 
         $contractorDetails->desc =  is_null($request->desc) ? $contractorDetails->desc : $request->desc;
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');
 
         $contractorDetails  = $contractorDetails->save();
 

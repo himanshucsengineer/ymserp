@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Damage Code</h1>
+                    <h1 class="m-0 text">Create Damage Code</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Damage Code</li>
+                        <li class="breadcrumb-item active text">Create Damage Code</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -50,6 +50,32 @@
 <script>
 
 $(function () {
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/damage/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            $('.text').text('Update Damage Code');
+            $('#code').val(response.code);
+            $('#desc').val(response.desc);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     $.validator.setDefaults({
@@ -57,6 +83,17 @@ $(function () {
         var code = $("#code").val();
         var desc = $("#desc").val();
 
+
+        if(getCateId[1]){
+            const data = {
+                'code':code,
+                'desc':desc,
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'id':getCateId[1]
+            }
+            post('damage/update',data);
+        }else{
             const data = {
                 'code':code,
                 'desc':desc,
@@ -64,8 +101,10 @@ $(function () {
                 'depo_id':depo_id,
             }
             post('damage/create',data);
+        }
+        window.location = `/damage/all`
     }
-  });
+  }); 
 
     $('#damageForm').validate({
     rules: {

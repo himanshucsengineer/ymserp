@@ -71,11 +71,18 @@ function clearTableBody() {
 function refreshTable(){
     clearTableBody()
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
-        type: "get",
+        type: "post",
         url: "/api/damage/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function(response) {
             var tbody = $('#table-body');
@@ -97,15 +104,10 @@ function refreshTable(){
                     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
                     .attr('data-id', item.id)
                     .attr('class', 'delete-button')
-                var saveButton = $('<button style="display:none;">')
-                    .text('Save')
-                    .attr('data-id', item.id)
-                    .attr('class', 'save-button btn-primary')
 
                 var td = $('<td>');
                 td.append(editButton);
                 td.append(deleteButton);
-                td.append(saveButton);
                 row.append(td);
 
                 tbody.append(row);
@@ -113,61 +115,8 @@ function refreshTable(){
             });
 
             $('.edit-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var inputId = 'input_' + index;
-                    var inputValue = dataCell.text();
-                    // console.log();
-                    if(index === 0){
-                        dataCell.empty().append(inputValue);
-                    }else{
-                        var inputField = $('<input>')
-                        .attr({
-                            'id': inputId,
-                            'type': 'text',
-                            'class': 'form-control'
-                        })
-                        .val(inputValue);
-                        dataCell.empty().append(inputField);
-                    }  
-                });
-                actionCell.find('.edit-button').hide();
-                actionCell.find('.delete-button').hide();
-                actionCell.find('.save-button').show();                
-            });
-
-            $('.save-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input');
-
-
-                var inputData = {};
-
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var newValue = dataCell.find('input').val();
-                    dataCell.empty().text(newValue);
-                });
-
-                inputFields.each(function() {
-                    var inputField = $(this);
-                    var inputId = inputField.attr('id');
-                    var inputValue = inputField.val();
-                    inputData[inputId] = inputValue;
-                });
-
-                // Show "Edit" and "Delete" buttons and hide "Save" button
-                actionCell.find('.edit-button').show();
-                actionCell.find('.delete-button').show();
-                actionCell.find('.save-button').hide();
                 var dataId = $(this).data('id');
-                updateData(dataId,inputData);
-                refreshTable();
+                window.location = `/damage/create?id=${dataId}`
             });
 
             $('.delete-button').click(function() {
@@ -185,18 +134,6 @@ function refreshTable(){
     });
 }
 
-
-var tbody = $('#tbody');
-
-function updateData(id,inputData){
-
-    var data = {
-        'code' :inputData.input_1,
-        'desc' : inputData.input_2,
-        'id' :id
-    }
-    post('damage/update',data);
-}
 
 
 

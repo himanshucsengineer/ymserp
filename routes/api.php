@@ -96,7 +96,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'damage'], function($api){
         $api->post('/create','App\Http\Controllers\MasterDamageController@store');
-        $api->get('/get', 'App\Http\Controllers\MasterDamageController@get');
+        $api->post('/get', 'App\Http\Controllers\MasterDamageController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterDamageController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterDamageController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterDamageController@update');
