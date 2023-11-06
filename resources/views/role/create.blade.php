@@ -35,57 +35,15 @@
                                 <div class="form-group">
                                     <label for="permission">Select Permissions <span style="color:red;">*</span></label>
                                     <select name="permission" multiple="" id="permission" class="form-control">
-                                        <option value="CREATE_CONTRACTOR">CREATE CONTRACTOR</option>
-                                        <option value="VIEW_CONTRACTOR">VIEW CONTRACTOR</option>
-                                        <option value="UPDATE_CONTRACTOR">UPDATE CONTRACTOR</option>
-                                        <option value="DELETE_CONTRACTOR">DELETE CONTRACTOR</option>
-                                        <option value="CREATE_CATEGORY">CREATE CATEGORY</option>
-                                        <option value="VIEW_CATEGORY">VIEW CATEGORY</option>
-                                        <option value="UPDATE_CATEGORY">UPDATE CATEGORY</option>
-                                        <option value="DELETE_CATEGORY">DELETE CATEGORY</option>
-                                        <option value="CREATE_DEPO">CREATE DEPO</option>
-                                        <option value="VIEW_DEPO">VIEW DEPO</option>
-                                        <option value="UPDATE_DEPO">UPDATE DEPO</option>
-                                        <option value="DELETE_DEPO">DELETE DEPO</option>
-                                        <option value="CREATE_EMPLOYEE">CREATE EMPLOYEE</option>
-                                        <option value="VIEW_EMPLOYEE">VIEW EMPLOYEE</option>
-                                        <option value="UPDATE_EMPLOYEE">UPDATE EMPLOYEE</option>
-                                        <option value="DELETE_EMPLOYEE">DELETE EMPLOYEE</option>
-                                        <option value="CREATE_USER">CREATE USER</option>
-                                        <option value="VIEW_USER">VIEW USER</option>
-                                        <option value="UPDATE_USER">UPDATE USER</option>
-                                        <option value="DELETE_USER">DELETE USER</option>
-                                        <option value="CREATE_DAMAGE">CREATE DAMAGE</option>
-                                        <option value="VIEW_DAMAGE">VIEW DAMAGE</option>
-                                        <option value="UPDATE_DAMAGE">UPDATE DAMAGE</option>
-                                        <option value="DELETE_DAMAGE">DELETE DAMAGE</option>
-                                        <option value="CREATE_REPAIR">CREATE REPAIR</option>
-                                        <option value="VIEW_REPAIR">VIEW REPAIR</option>
-                                        <option value="UPDATE_REPAIR">UPDATE REPAIR</option>
-                                        <option value="DELETE_REPAIR">DELETE REPAIR</option>
-                                        <option value="CREATE_MATERIAL">CREATE MATERIAL</option>
-                                        <option value="VIEW_MATERIAL">VIEW MATERIAL</option>
-                                        <option value="UPDATE_MATERIAL">UPDATE MATERIAL</option>
-                                        <option value="DELETE_MATERIAL">DELETE MATERIAL</option>
-                                        <option value="CREATE_LINE">CREATE LINE</option>
-                                        <option value="VIEW_LINE">VIEW LINE</option>
-                                        <option value="UPDATE_LINE">UPDATE LINE</option>
-                                        <option value="DELETE_LINE">DELETE LINE</option>
-                                        <option value="CREATE_TARRIF">CREATE TARRIF</option>
-                                        <option value="VIEW_TARRIF">VIEW TARRIF</option>
-                                        <option value="UPDATE_TARRIF">UPDATE TARRIF</option>
-                                        <option value="DELETE_TARRIF">DELETE TARRIF</option>
-                                        <option value="CREATE_TRANSPORT">CREATE TRANSPORT</option>
-                                        <option value="VIEW_TRANSPORT">VIEW TRANSPORT</option>
-                                        <option value="UPDATE_TRANSPORT">UPDATE TRANSPORT</option>
-                                        <option value="DELETE_TRANSPORT">DELETE TRANSPORT</option>
-                                        <option value="GATE_IN">GATE IN</option>
-                                        <option value="GATE_OUT">GATE OUT</option>
-                                        <option value="INSPECTION">INSPECTION</option>
-                                        <option value="CREATE_ROLE">CREATE ROLE</option>
-                                        <option value="VIEW_ROLE">VIEW ROLE</option>
-                                        <option value="UPDATE_ROLE">UPDATE ROLE</option>
-                                        <option value="DELETE_ROLE">DELETE ROLE</option>
+                                        <option value="MASTERS">MASTERS</option>
+                                        <option value="MANAGEMENT">MANAGEMENT</option>
+                                        <option value="DEPOS">DEPOTS</option>
+                                        <option value="STORES">STORES</option>
+                                        <option value="BILLING">BILLING</option>
+                                        <option value="SURVEYOR">SURVEYOR</option>
+                                        <option value="SECURITY">SECURITY</option>
+                                        <!-- <option value="DASHBOARD">DASHBOARD</option> -->
+
                                     </select>
                                 </div>
                             </div>

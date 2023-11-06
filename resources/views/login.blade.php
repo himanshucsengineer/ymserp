@@ -152,6 +152,7 @@
                     localStorage.setItem('token', data.token.original.access_token)
                     localStorage.setItem('user_id', data.currentUser.user_id)
                     localStorage.setItem('depo_id', depo)
+                    localStorage.setItem('role', data.currentUser.role_id)
                     window.location.href = '/dashboard';
                 },
                 error: function (error) {

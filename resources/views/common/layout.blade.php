@@ -39,6 +39,9 @@
         .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active{
             background-color:#63bf84;
         }
+        .hidden{
+            display:none;
+        }
     </style>
     <style>
         .callout{
@@ -49,6 +52,72 @@
             z-index: 100000;
         }
     </style>
+
+
+    <script>
+        var checkToken = localStorage.getItem('token');
+        var role_id = localStorage.getItem('role');
+
+
+        console.log(checkToken);
+
+        $.ajax({
+        type: "post",
+        url: "/api/role/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':role_id
+        },
+        success: function(response) {       
+            console.log(response);
+            var permissions = response[0].permissions;
+            
+            var valueToCheck = "GATE_IN";
+
+            if($.inArray("DASHBOARD", permissions) !== -1){
+                $('#dash').show();
+            }
+
+            if($.inArray("SECURITY", permissions) !== -1){
+                $('#security').show();
+            }
+
+            if($.inArray("SURVEYOR", permissions) !== -1){
+                $('#SURVEYOR').show();
+            }
+
+            if($.inArray("BILLING", permissions) !== -1){
+                $('#BILLING').show();
+            }
+
+            if($.inArray("DEPOS", permissions) !== -1){
+                $('#DEPOS').show();
+            }
+
+            if($.inArray("MANAGEMENT", permissions) !== -1){
+                $('#MANAGEMENT').show();
+            }
+
+            if($.inArray("MASTERS", permissions) !== -1){
+                $('#MASTERS').show();
+            }
+
+
+
+            if($.inArray("STORES", permissions) !== -1){
+                $('#STORES').show();
+            }
+
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+    </script>
 </head>
 <div id="apiMessages"> </div>
 <body class="sidebar-mini layout-navbar-fixed">
@@ -161,7 +230,7 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
+                        <li class="nav-item menu-open" >
                             
                             <a href="pages/gallery.html" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -171,7 +240,7 @@
                             </a>
                             
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="security">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-fingerprint"></i>
                                 <p>
@@ -180,29 +249,22 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item " id="gatein">
                                     <a href="/gatein/create" class="nav-link">
                                         <i class="fas fa-door-open nav-icon"></i>
                                         <p>Gate In</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item " id="gateout">
                                     <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-door-closed nav-icon"></i>
                                         <p>Gate Out</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/boxed.html" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
-                                        <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Reports</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="SURVEYOR">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -212,22 +274,16 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item" id="inspection">
                                     <a href="/surveyor/inspection" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Inspection</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Reports</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="BILLING">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>
@@ -253,7 +309,7 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="STORES">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-edit"></i> -->
                                 <i class="fas fa-store nav-icon"></i>
@@ -283,7 +339,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="DEPOS">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-warehouse nav-icon"></i>
                                 <p>
@@ -312,7 +368,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="MANAGEMENT">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-tasks nav-icon"></i>
                                 <p>
@@ -321,17 +377,17 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item " id="roles">
                                     <a href="#" class="nav-link">
                                         <p>Roles and Permission Management <i class="fas fa-angle-left right"></i></p>
                                     </a>
-                                    <ul class="nav nav-treeview">
+                                    <ul class="nav nav-treeview " id="createrole">
                                         <li class="nav-item">
                                             <a href="/role/create" class="nav-link">
                                                 <p> Create Role </p>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item " id="viewrole">
                                             <a href="/role/all" class="nav-link">
                                                 <p>All Roles</p>
                                             </a>
@@ -343,7 +399,7 @@
                             </ul>
                         </li>
                         
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="MASTERS">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>

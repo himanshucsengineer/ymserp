@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\MasterEmployee;
+
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rules\Password;
@@ -150,6 +152,8 @@ class AuthController extends Controller
         $getToken = $this->respondWithToken($token);
         $permission = $currentUser->roles[0]->permissions;
 
+        $employeeDetails = MasterEmployee::where('id',$currentUser->employee_id)->first();
+
         $userPermissions = new stdClass();
         for($i=0; $i < count($permission); $i++){
             $permissionKey = $permission[$i]->name;
@@ -157,8 +161,11 @@ class AuthController extends Controller
         }
         $formatePermission = $userPermissions;
 
+        $employeeName = $employeeDetails->firstname . ' ' .$employeeDetails->lastname;
+
         $transformoutput = [
             'user_id' =>  $currentUser->id,
+            'employeeName' => $employeeName,
             'username' => $currentUser->username,
             'role_id' => $currentUser->roles[0]->id,
             'role_name' => $currentUser->roles[0]->name,
