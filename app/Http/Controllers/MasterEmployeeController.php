@@ -41,8 +41,13 @@ class MasterEmployeeController extends Controller
         return MasterEmployee::where('id',$request->id)->first();
     }
 
-    public function getdata(){
-        $employeeData = MasterEmployee::get();
+    public function getdata(Request $request){
+        if($request->user_id == 1){
+            $employeeData = MasterEmployee::get();
+        }else{
+            $employeeData = MasterEmployee::where('depo_id',$request->depo_id)->get();
+        }
+
         $formattedEmployee = [];
         foreach($employeeData as $employee){
             $contractorData = MasterContractor::where('id',$employee->contractor_id)->first();
@@ -280,7 +285,8 @@ class MasterEmployeeController extends Controller
         $contractorDetails->contractor_id = is_null($request->contractor_id) ? $contractorDetails->contractor_id : $request->contractor_id;
         $contractorDetails->address = is_null($request->address) ? $contractorDetails->address : $request->address;
         $contractorDetails->pincode = is_null($request->pincode) ? $contractorDetails->pincode : $request->pincode;
-
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');
 
 
         $contractorDetails  = $contractorDetails->save();

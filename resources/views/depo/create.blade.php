@@ -132,7 +132,6 @@ $(function () {
             'id':getCateId[1]
         },
         success: function(response) {
-            console.log(response);
             $('.text').text('Update Depo');
             $("#name").val(response.name);
             $("#address").val(response.address);

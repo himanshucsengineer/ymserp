@@ -91,7 +91,6 @@ $(function () {
             'id':getCateId[1]
         },
         success: function(response) {
-            console.log(response);
             $('.text').text('Update Contractor');
             $("#contractorcode").val(response.contractor_code);
             $("#fullname").val(response.fullname);

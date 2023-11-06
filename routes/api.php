@@ -73,7 +73,7 @@ $api->version('v1', function($api){
         $api->get('/get', 'App\Http\Controllers\MasterEmployeeController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterEmployeeController@getbyid');
 
-        $api->get('/getData', 'App\Http\Controllers\MasterEmployeeController@getdata');
+        $api->post('/getData', 'App\Http\Controllers\MasterEmployeeController@getdata');
         $api->post('/delete', 'App\Http\Controllers\MasterEmployeeController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterEmployeeController@update');
     });

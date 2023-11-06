@@ -65,7 +65,6 @@ $(function () {
             'id':getCateId[1]
         },
         success: function(response) {
-            console.log(response);
             $('#name').val(response.name);
             $('.text').text('Update Category');
         },

@@ -79,14 +79,20 @@
 <script>
 $(document).ready(function () {
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/api/contractor/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
         success: function (data) {
-            console.log(data);
             var select = document.getElementById('contractor_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
@@ -118,7 +124,6 @@ $(function () {
             'id':getCateId[1]
         },
         success: function(response) {
-            console.log(response);
             $('.text').text('Update Employee');
             $("#employee_code").val(response.employee_code);
             $("#firstname").val(response.firstname);

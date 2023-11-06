@@ -154,7 +154,7 @@ class MasterCategoryController extends Controller
             $contractorDetails->name = is_null($request->name) ? $contractorDetails->name : $request->name;
         }
         $contractorDetails->updatedby = $request->user_id;
-        $contractorDetails->updated_at = date('Y-m-d H:i:s');;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');
 
         $contractorDetails  = $contractorDetails->save();
 
