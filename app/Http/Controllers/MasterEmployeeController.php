@@ -31,9 +31,14 @@ class MasterEmployeeController extends Controller
         return view('employee.view');
     }
 
-    public function get()
+    public function get(Request $request)
     {
-        return MasterEmployee::get();
+
+        if($request->user_id == 1){
+            return MasterEmployee::get();
+        }else{
+            return MasterEmployee::where('depo_id',$request->depo_id)->get();
+        }
     }
 
     public function getbyid(Request $request)

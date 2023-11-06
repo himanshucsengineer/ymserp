@@ -70,7 +70,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'employee'], function($api){
         $api->post('/create','App\Http\Controllers\MasterEmployeeController@store');
-        $api->get('/get', 'App\Http\Controllers\MasterEmployeeController@get');
+        $api->post('/get', 'App\Http\Controllers\MasterEmployeeController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterEmployeeController@getbyid');
 
         $api->post('/getData', 'App\Http\Controllers\MasterEmployeeController@getdata');
@@ -81,7 +81,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'user'], function($api){
         $api->post('/create','App\Http\Controllers\MasterUserController@store');
         $api->get('/get', 'App\Http\Controllers\MasterUserController@index');
-        $api->get('/getData', 'App\Http\Controllers\MasterUserController@getData');
+        $api->post('/getData', 'App\Http\Controllers\MasterUserController@getData');
         $api->post('/getbyid', 'App\Http\Controllers\MasterUserController@getbyid');
         $api->post('/getemployee', 'App\Http\Controllers\MasterUserController@getemployee');
         $api->post('/delete', 'App\Http\Controllers\MasterUserController@destroy');

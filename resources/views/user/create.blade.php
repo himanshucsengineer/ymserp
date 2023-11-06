@@ -99,11 +99,18 @@
 <script>
 $(document).ready(function () {
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/api/employee/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function (data) {
             var select = document.getElementById('employee_id');
@@ -121,13 +128,17 @@ $(document).ready(function () {
 
 
     $.ajax({
-        type: "GET",
+        type: "post",
         url: "/api/depo/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
         success: function (data) {
-            console.log(data);
+  
             var select = document.getElementById('depot_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
@@ -142,10 +153,14 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        type: "GET",
+        type: "post",
         url: "/api/category/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function (data) {
             var select = document.getElementById('category_id');
@@ -184,45 +199,8 @@ $(document).ready(function () {
 
 $(function () {
 
-
-    var currentURL = window.location.href;
-    var getCateId = currentURL.split('=');
     var checkToken = localStorage.getItem('token');
 
-
-    if(getCateId[1]){
-        $.ajax({
-        type: "post",
-        url: "/api/user/getbyid",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'id':getCateId[1]
-        },
-        success: function(response) {
-            console.log(response);
-            var cate = response.category_id.split(',');
-            console.log(cate);
-            $('.text').text('Update Employee');
-            $("#employee_id").val(response.employee_id);
-            $("#role_id").val(response.role_id);
-            $("#category_id").val(cate);
-            $("#depot_id").val(response.depot_id);
-            $("#username").val(response.username);
-            $("#password").val(response.password);
-            $("#c_password").val(response.c_password);
-            $("#recovery_number").val(response.recovery_number);
-            $("#ans1").val(response.ans1);
-            $("#ans2").val(response.ans2);
-            $("#ans3").val(response.ans3);
-            $("#status").val(response.status);    
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-    }
 
     $.validator.setDefaults({
     submitHandler: function () {

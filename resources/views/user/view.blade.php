@@ -13,7 +13,7 @@
     width:200px !important;
 }
 
-        #image-container {
+        /* #image-container {
             position: relative;
         }
 
@@ -24,7 +24,7 @@
             height: 10px;
             border-radius: 50%;
             cursor: pointer;
-        }
+        } */
   
 </style>
 <div class="content-wrapper">
@@ -44,10 +44,10 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <div id="image-container">
+    <!-- <div id="image-container">
 
     <img id="image" src="/assets/img/right.jpeg" width="800" alt="Image" />
-    </div>
+    </div> -->
 
     <section class="content">
         <div class="container-fluid">
@@ -63,6 +63,8 @@
                                         <th>Category Name</th>
                                         <th>Depo Name</th>
                                         <th>Login Id</th>
+                                        <th>Role</th>
+                                        <th>Recovery No.</th>
                                         <th>Ans 1</th>
                                         <th>Ans 2</th>
                                         <th>Ans 3</th>
@@ -86,26 +88,26 @@
     
 $(document).ready(function() {
 
-    const imageContainer = document.getElementById('image-container');
-        const image = document.getElementById('image');
-        const hotspots = [];
+    // const imageContainer = document.getElementById('image-container');
+    //     const image = document.getElementById('image');
+    //     const hotspots = [];
 
-        imageContainer.addEventListener('click', (e) => {
-            const x = e.clientX - image.getBoundingClientRect().left;
-            const y = e.clientY - image.getBoundingClientRect().top;
-            createHotspot(x, y);
-        });
+    //     imageContainer.addEventListener('click', (e) => {
+    //         const x = e.clientX - image.getBoundingClientRect().left;
+    //         const y = e.clientY - image.getBoundingClientRect().top;
+    //         createHotspot(x, y);
+    //     });
 
-        function createHotspot(x, y) {
-            const hotspotDiv = document.createElement('div');
-            hotspotDiv.className = 'hotspot';
-            hotspotDiv.style.left = x + 'px';
-            hotspotDiv.style.top = y + 'px';
-            imageContainer.appendChild(hotspotDiv);
+    //     function createHotspot(x, y) {
+    //         const hotspotDiv = document.createElement('div');
+    //         hotspotDiv.className = 'hotspot';
+    //         hotspotDiv.style.left = x + 'px';
+    //         hotspotDiv.style.top = y + 'px';
+    //         imageContainer.appendChild(hotspotDiv);
 
-            hotspots.push({ x, y });
-        }
-        console.log(hotspots);
+    //         hotspots.push({ x, y });
+    //     }
+    //     console.log(hotspots);
 
     var checkToken = localStorage.getItem('token');
     refreshTable();
@@ -117,13 +119,22 @@ function clearTableBody() {
 function refreshTable(){
     clearTableBody()
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
-        type: "get",
+        type: "post",
         url: "/api/user/getData",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
         success: function(response) {
+
+
             var tbody = $('#table-body');
 
             var i =1;
@@ -143,15 +154,14 @@ function refreshTable(){
                 row.append($('<td>').append(item.cate_name));
                 row.append($('<td>').append(item.depo_name));
                 row.append($('<td>').append(item.username));
+                row.append($('<td>').append(item.role));
+                row.append($('<td>').append(item.recovery_number));
+
                 row.append($('<td>').append(item.ans1));
                 row.append($('<td>').append(item.ans2));
                 row.append($('<td>').append(item.ans3));
                 row.append($('<td>').append(userStatus));
-                
-                var editButton = $('<span>')
-                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id) 
-                    .attr('class', 'edit-button');
+
 
                 var deleteButton = $('<span>')
                     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
@@ -159,7 +169,6 @@ function refreshTable(){
                     .attr('class', 'delete-button')
 
                 var td = $('<td>');
-                td.append(editButton);
                 td.append(deleteButton);
                 row.append(td);
 
@@ -167,10 +176,6 @@ function refreshTable(){
                 i++;
             });
 
-            $('.edit-button').click(function() {
-                var dataId = $(this).data('id');
-                window.location = `/user/create?id=${dataId}`        
-            });
 
          
             $('.delete-button').click(function() {

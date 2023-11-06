@@ -35,7 +35,7 @@ class MasterUserController extends Controller
     }
 
     public function getbyid(Request $request){
-        return User::where('id',$request->id)->first();
+        return User::with('roles')->where('id',$request->id)->first();
     }
 
 
@@ -44,10 +44,14 @@ class MasterUserController extends Controller
         return MasterEmployee::where('id',$get_user->employee_id)->first();
     }
 
-    public function getData(){
+    public function getData(Request $request){
 
-        $getUserData = User::get();
-
+        if($request->user_id == 1){
+            $getUserData = User::with('roles')->where('id','!=',1)->get();
+        }else{
+            $getUserData = User::with('roles')->where('id','!=',1)->where('depo_id',$request->depo_id)->get();
+        }
+ 
         $formattedData = []; 
 
         foreach($getUserData  as $user){
@@ -72,6 +76,8 @@ class MasterUserController extends Controller
                 'cate_name' => $cateNames,
                 'depo_name' => $depoNames,
                 'username' => $user->username,
+                'role' => $user->roles[0]->name,
+                'recovery_number' => $user->recovery_number,
                 'ans1' => $user->ans1,
                 'ans2' => $user->ans2,
                 'ans3' => $user->ans3,
