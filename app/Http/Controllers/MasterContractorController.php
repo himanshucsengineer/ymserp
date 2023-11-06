@@ -30,9 +30,13 @@ class MasterContractorController extends Controller
         return view('contractor.view');
     }
 
-    public function get()
+    public function get(Request $request)
     {
-        return MasterContractor::get();
+        if($request->user_id == 1){
+            return MasterContractor::get();
+        }else{
+            return MasterContractor::where('depo_id',$request->depo_id)->get();
+        }
     }
 
     public function getbyid(Request $request){
@@ -240,6 +244,8 @@ class MasterContractorController extends Controller
         $contractorDetails->fullname = is_null($request->fullname) ? $contractorDetails->fullname : $request->fullname;
         $contractorDetails->license = is_null($request->license) ? $contractorDetails->license : $request->license;
         $contractorDetails->pincode = is_null($request->pincode) ? $contractorDetails->pincode : $request->pincode;
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');;
 
         $contractorDetails  = $contractorDetails->save();
 

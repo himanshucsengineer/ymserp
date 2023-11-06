@@ -78,11 +78,18 @@ function clearTableBody() {
 function refreshTable(){
     clearTableBody()
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
-        type: "get",
+        type: "post",
         url: "/api/contractor/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function(response) {
             var tbody = $('#table-body');

@@ -45,7 +45,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'contractor'], function($api){
         $api->post('/create','App\Http\Controllers\MasterContractorController@store');
-        $api->get('/get', 'App\Http\Controllers\MasterContractorController@get');
+        $api->post('/get', 'App\Http\Controllers\MasterContractorController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterContractorController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterContractorController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterContractorController@update');
