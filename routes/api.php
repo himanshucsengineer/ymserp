@@ -72,6 +72,8 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\MasterUserController@store');
         $api->get('/get', 'App\Http\Controllers\MasterUserController@index');
         $api->get('/getData', 'App\Http\Controllers\MasterUserController@getData');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterUserController@getbyid');
+
         $api->post('/delete', 'App\Http\Controllers\MasterUserController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterUserController@update');
     });

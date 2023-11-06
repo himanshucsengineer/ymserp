@@ -34,6 +34,9 @@ class MasterUserController extends Controller
         return view('user.view');
     }
 
+    public function getbyid(Request $request){
+        return User::where('id',$request->id)->first();
+    }
 
     public function getData(){
 
@@ -43,7 +46,7 @@ class MasterUserController extends Controller
 
         foreach($getUserData  as $user){
             $getEmployee = MasterEmployee::where('id',$user->employee_id)->first();
-
+            $getRole = Role::where('id',$user->role_id)->first();
             $explodeDepo = explode(',',$user->depot_id);
             $getDepos = MasterDepo::whereIn('id', $explodeDepo)->get();
             $fetDepoNames = $getDepos->pluck('name')->toArray();
