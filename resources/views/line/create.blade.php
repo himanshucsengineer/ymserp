@@ -1,6 +1,18 @@
 @extends('common.layout')
 
 @section('content')
+
+<style>
+.img_prv_box{
+    margin-top:.5rem;
+    /* border:1px solid #cdcdcd; */
+    width:200px;
+    /* height:200px; */
+}
+.img_prv_box img{
+    width:100%;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -83,37 +95,57 @@
                                 <div class="form-group">
                                     <label for="top_img">Top Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="top_img" id="top_img">
+                                    <div class="img_prv_box">
+                                        <img id="top_img_prev" src="" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="bottom_img">Bottom Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="bottom_img" id="bottom_img">
+                                    <div class="img_prv_box">
+                                        <img id="bottom_img_prev" src="" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="right_img">Right Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="right_img" id="right_img">
-                                    
+                                    <div class="img_prv_box">
+                                        <img id="right_img_prev" src="" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="left_img">Left Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="left_img" id="left_img">
+                                    <div class="img_prv_box">
+                                        <img id="left_img_prev" src="" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="front_img">Front Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="front_img" id="front_img">
+                                    <div class="img_prv_box">
+                                        <img id="front_img_prev" src="" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="door_img">Door Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="door_img" id="door_img">
+                                    <div class="img_prv_box">
+                                        <img id="door_img_prev" src="" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="interior_img">Interior Image <span style="color:red;">*</span></label>
                                     <input type="file" class="form-control" name="interior_img" id="interior_img">
+                                    <div class="img_prv_box">
+                                        <img id="interior_img_prev" src="" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -128,6 +160,87 @@
 </div>
 
 <script>
+
+$(document).ready(function () {
+    // Listen for changes in the file input
+    $('#top_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#top_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#bottom_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#bottom_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#right_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#right_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#left_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#left_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#front_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#front_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#door_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#door_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#interior_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#interior_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+});
+
 
 $(function () {
     var user_id = localStorage.getItem('user_id');
