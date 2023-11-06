@@ -29,13 +29,16 @@ class MasterCategoryController extends Controller
     {
         return view('category.view');
     }
+ 
 
-
-    public function get()
+    public function get(Request $request)
     {
-        return MasterCategory::get();
+        if($request->user_id == 1){
+            return MasterCategory::get();
+        }else{
+            return MasterCategory::where('depo_id',$request->depo_id)->get();
+        }
     }
-
     public function getbyid(Request $request)
     {
         return MasterCategory::where('id',$request->id)->first();
@@ -150,6 +153,8 @@ class MasterCategoryController extends Controller
         if($getContractor->name != $request->name){
             $contractorDetails->name = is_null($request->name) ? $contractorDetails->name : $request->name;
         }
+        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_at = date('Y-m-d H:i:s');;
 
         $contractorDetails  = $contractorDetails->save();
 

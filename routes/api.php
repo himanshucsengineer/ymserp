@@ -54,7 +54,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'category'], function($api){
         $api->post('/create','App\Http\Controllers\MasterCategoryController@store');
-        $api->get('/get', 'App\Http\Controllers\MasterCategoryController@get');
+        $api->post('/get', 'App\Http\Controllers\MasterCategoryController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterCategoryController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterCategoryController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterCategoryController@update');
