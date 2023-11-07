@@ -29,10 +29,14 @@ class MasterTransportController extends Controller
         return view('transport.view');
     }
 
-    public function get()
+    public function get(Request $request)
     {
-        return MasterTransport::get();
-    }
+        if($request->user_id == 1){
+            return MasterTransport::get();
+        }else{
+            return MasterTransport::where('depo_id',$request->depo_id)->get();
+        }
+    } 
 
     public function getbyid(Request $request)
     {

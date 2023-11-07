@@ -5,6 +5,18 @@
 @extends('common.layout')
 
 @section('content')
+
+<style>
+.img_prv_box{
+    margin-top:.5rem;
+    /* border:1px solid #cdcdcd; */
+    width:400px;
+    /* height:200px; */
+}
+.img_prv_box img{
+    width:100%;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -32,97 +44,125 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="container_no">Container Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                    <input type="text" class="form-control" id="container_no" name="container_no" placeholder="Enter Container Number ">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="container_img">Container Image</label>
+                                    <div class="img_prv_box"><span class="container_img"></span></div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="container_size">Container Size <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="container_size" name="container_size" placeholder="Enter Container Number ">
+                                    <select name="container_size" id="container_size" class="form-control">
+                                        <option value="">Select Container Size</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="40">40</option>
+                                        <option value="45">45</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="container_type">Container Type <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="container_type" name="container_type" placeholder="Enter Container Number ">
+                                    <select name="container_type" id="container_type" class="form-control">
+                                        <option value="">Select Container Type</option>
+                                        <option value="DRY">DRY</option>
+                                        <option value="REEFER">REEFER</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="transport_id">Transport <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="transport_id" name="transport_id" placeholder="Enter Container Number ">
-                                    
+                                    <select name="transport_id" id="transport_id" class="form-control">
+                                        <option value="">Select Transport</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inward_date">Inward Date <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="inward_date" name="inward_date" readonly>
+                                    <input type="text" class="form-control" id="inward_date" name="inward_date" placeholder="Enter inward date">
                                 </div>
                                 <div class="form-group">
                                     <label for="inward_time">Inward Time  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="inward_time" name="inward_time" readonly>
+                                    <input type="text" class="form-control" id="inward_time" name="inward_time"  placeholder="Enter inward time">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name" readonly placeholder="Enter Driver Name">
+                                    <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="vehicle_number">Vehicle Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="vehicle_number" name="vehicle_number" readonly placeholder="Enter Vehicle Number">
+                                    <input type="text" class="form-control" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="vehicle_img">Vehicle Image</label>
+                                    <div class="img_prv_box"><span class="vehicle_img"></span></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="contact_number">Contact Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number" readonly placeholder="Enter Contact Number">
+                                    <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="third_party">Third Party <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="third_party" name="third_party" readonly placeholder="Enter Contact Number">
+                                    <select name="third_party" id="third_party"  class="form-control">
+                                        <option value="">Select an option</option>
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="line_id">Line Name <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="line_id" name="line_id" placeholder="Enter Container Number ">
-
+                                    <select name="line_id" id="line_id" class="form-control">
+                                        <option value="">Select Line</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="arrive_from">Arrive From <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="arrive_from" name="arrive_from" readonly placeholder="Enter Contact Number">
+                                    <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="port_name">Port Name <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="port_name" name="port_name" readonly placeholder="Enter Contact Number">
+                                    <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="driver_photo">Driver Photo <span style="color:red;">*</span></label></br>
-                                    <img src="" alt="" id="driver_photo" width="150">
+                                    <input type="file" id="driver_photo" name="driver_photo" class="form-control">
+                                    <div class="img_prv_box"><span class="driver_photo"></span></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="challan">Challan <span style="color:red;">*</span></label></br>
-                                    <img src="" alt="" id="challan" width="150">
+                                    <input type="file" id="challan" name="challan" class="form-control">
+                                    <div class="img_prv_box"><span class="challan"></span></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="driver_license">Driver License <span style="color:red;">*</span></label></br>
-                                    <img src="" alt="" id="driver_license" width="150">
-                                     
+                                    <input type="file" id="driver_license" name="driver_license" class="form-control">
+                                    <div class="img_prv_box"><span class="driver_license"></span></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="do_copy">D.O. Copy <span style="color:red;">*</span></label></br>
-                                    <img src="" alt="" id="do_copy" width="150">
-
+                                    <input type="file" id="do_copy" name="do_copy" class="form-control">
+                                    <div class="img_prv_box"><span class="do_copy"></span></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="aadhar">Aadhar Card <span style="color:red;">*</span></label></br>
-                                    <img src="" alt="" id="aadhar" width="150">
-                                
+                                    <input type="file" id="aadhar" name="aadhar" class="form-control">
+                                    <div class="img_prv_box"><span class="aadhar"></span></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="pan">PAN Card <span style="color:red;">*</span></label></br>
-                                    <img src="" alt="" id="pan" width="150">
-                                
+                                    <input type="file" id="pan" name="pan" class="form-control">
+                                    <div class="img_prv_box"><span class="pan"></span></div>
                                 </div>
                                 </hr>
                                 <div class="form-group">
@@ -262,7 +302,58 @@
 $(document).ready(function () {
     var containerid = <?= $getid[1]?>;
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
 
+
+
+    $.ajax({
+        type: "post",
+        url: "/api/line/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            var select = document.getElementById('line_id');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                select.appendChild(option);
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+    $.ajax({
+        type: "post",
+        url: "/api/transport/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            var select = document.getElementById('transport_id');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                select.appendChild(option);
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
     
 
     $.ajax({
@@ -275,8 +366,61 @@ $(document).ready(function () {
             'id':containerid
         },
         success: function (data) {
-            getline(data.line_id);
-            getTranport(data.transport_id);
+
+            if(data.container_img){
+                $('.container_img').html(`<img src="/uploads/gatein/${data.container_img}">`);
+            }else{
+                $('.container_img').html('<p>No Image Available</p>');
+            }
+
+            if(data.vehicle_img){
+                $('.vehicle_img').html(`<img src="/uploads/gatein/${data.vehicle_img}">`);
+            }else{
+                $('.vehicle_img').html('<p>No Image Available</p>');
+            }
+
+            if(data.driver_photo){
+                $('.driver_photo').html(`<img src="/uploads/gatein/${data.driver_photo}">`);
+            }else{
+                $('.driver_photo').html('<p>No Image Available</p>');
+            }
+
+            if(data.challan){
+                $('.challan').html(`<img src="/uploads/gatein/${data.challan}">`);
+            }else{
+                $('.challan').html('<p>No Image Available</p>');
+            }
+            if(data.driver_license){
+                $('.driver_license').html(`<img src="/uploads/gatein/${data.driver_license}">`);
+            }else{
+                $('.driver_license').html('<p>No Image Available</p>');
+            }
+
+            if(data.do_copy){
+                $('.do_copy').html(`<img src="/uploads/gatein/${data.do_copy}">`);
+            }else{
+                $('.do_copy').html('<p>No Image Available</p>');
+            }
+
+            if(data.aadhar){
+                $('.aadhar').html(`<img src="/uploads/gatein/${data.aadhar}">`);
+            }else{
+                $('.aadhar').html('<p>No Image Available</p>');
+            }
+
+            if(data.pan){
+                $('.pan').html(`<img src="/uploads/gatein/${data.pan}">`);
+            }else{
+                $('.pan').html('<p>No Image Available</p>');
+            }
+
+            if(data.line_id){
+                getline(data.line_id);
+            }
+            if(data.transport_id){
+                getTranport(data.transport_id);
+            }
+
             $("#container_no").val(data.container_no)
             $("#container_type").val(data.container_type)
             $("#container_size").val(data.container_size)
@@ -288,12 +432,6 @@ $(document).ready(function () {
             $("#third_party").val(data.third_party)
             $("#arrive_from").val(data.arrive_from)
             $("#port_name").val(data.port_name)
-            $('#driver_photo').attr('src',`/uploads/gatein/${data.driver_photo}`)
-            $('#challan').attr('src',`/uploads/gatein/${data.challan}`)
-            $('#driver_license').attr('src',`/uploads/gatein/${data.driver_license}`)
-            $('#do_copy').attr('src',`/uploads/gatein/${data.do_copy}`)
-            $('#aadhar').attr('src',`/uploads/gatein/${data.aadhar}`)
-            $('#pan').attr('src',`/uploads/gatein/${data.pan}`)
         },
         error: function (error) {
             console.log(error);
@@ -301,10 +439,14 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        type: "get",
+        type: "post",
         url: "/api/transport/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function (data) {
             var select = document.getElementById('consignee');
@@ -424,9 +566,28 @@ $(function () {
         var rftype = $("#rftype").val();
         var empty_repositioning = $("#empty_repositioning").val();
         var er_no = $("#er_no").val();  
-        var remarks = $("#remarks").val();  
+        var remarks = $("#remarks").val(); 
+        
+        
 
-        data = {
+
+
+        var container_no = $("#container_no").val();
+        var container_size = $("#container_size").val();
+        var container_type = $("#container_type").val();
+        var transport_id = $("#transport_id").val();
+        var inward_date = $("#inward_date").val();
+        var inward_time = $("#inward_time").val();
+        var driver_name = $("#driver_name").val();
+        var vehicle_number = $("#vehicle_number").val();
+        var contact_number = $("#contact_number").val();
+        var third_party = $("#third_party").val();
+        var line_id = $("#line_id").val();
+        var arrive_from = $("#arrive_from").val();
+        var port_name = $("#port_name").val();
+
+
+        newdata = {
             'status_name': status_name,
             'job_work_no': job_work_no,
             'gross_weight': gross_weight,
@@ -446,11 +607,79 @@ $(function () {
             'depo_id': depo_id,
             'gate_in_id' : containerid
         }
-        post('containerverify/create',data)
-        window.location = `/surveyor/masterserveyor?id=${containerid}`
+
+
+
+            var formData = new FormData();
+
+            formData.append('container_no', container_no);
+            formData.append('id', containerid);
+
+            formData.append('container_size', container_size);
+            formData.append('container_type', container_type);
+            formData.append('transport_id', transport_id);
+            formData.append('inward_date', inward_date);
+            formData.append('inward_time', inward_time);
+            formData.append('driver_name', driver_name);
+            formData.append('vehicle_number', vehicle_number);
+            formData.append('contact_number', contact_number);
+            formData.append('third_party', third_party);
+            formData.append('line_id', line_id);
+            formData.append('arrive_from', arrive_from);
+            formData.append('port_name', port_name);
+            formData.append('user_id', user_id);
+            formData.append('depo_id', depo_id);
+
+            formData.append('driver_photo', $('#driver_photo')[0].files[0]);
+            formData.append('challan', $('#challan')[0].files[0]);
+            formData.append('driver_license', $('#driver_license')[0].files[0]);
+            formData.append('do_copy', $('#do_copy')[0].files[0]);
+            formData.append('aadhar', $('#aadhar')[0].files[0]);
+            formData.append('pan', $('#pan')[0].files[0]);
+
+            $.ajax({
+                url: '/api/gatein/update',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    // var callout = document.createElement('div');
+                    // callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                    // document.getElementById('apiMessages').appendChild(callout);
+                    // setTimeout(function() {
+                    //     callout.remove();
+                    // }, 2000);
+                    post('containerverify/create',newdata)
+                    window.location = `/surveyor/masterserveyor?id=${containerid}`
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            });
+
+        
+        
 
     }
   });
+
+
+  
 
     $('#gateinForm').validate({
     rules: {
@@ -501,6 +730,51 @@ $(function () {
             required: true,
         },
 
+        container_no: {
+            required: true,
+        },
+        container_type: {
+            required: true,
+        },
+        container_size: {
+            required: true,
+        },
+
+        inward_date: {
+            required: true,
+        },
+        inward_time: {
+            required: true,
+        },
+        driver_name: {
+            required: true,
+        },
+
+        contact_number: {
+            required: true,
+        },
+        third_party: {
+            required: true,
+        },
+        arrive_from: {
+            required: true,
+        },
+
+        port_name: {
+            required: true,
+        },
+
+        transport_id:{
+            required: true,
+        },
+        vehicle_number:{
+            required: true,
+        },
+        line_id:{
+            required: true,
+        },
+       
+
     },
     messages: {
         job_work_no: {
@@ -547,6 +821,40 @@ $(function () {
             required: "This Field Is Required",
         },
         remarks: {
+            required: "This Field Is Required",
+        },
+
+        container_no: {
+            required: "This Field Is Required",
+        },
+        container_type: {
+            required: "This Field Is Required",
+        },
+        container_size: {
+            required: "This Field Is Required",
+        },
+
+        inward_date: {
+            required: "This Field Is Required",
+        },
+        inward_time: {
+            required: "This Field Is Required",
+        },
+        driver_name: {
+            required: "This Field Is Required",
+        },
+
+        contact_number: {
+            required: "This Field Is Required",
+        },
+        third_party: {
+            required: "This Field Is Required",
+        },
+        arrive_from: {
+            required: "This Field Is Required",
+        },
+
+        port_name: {
             required: "This Field Is Required",
         },
 

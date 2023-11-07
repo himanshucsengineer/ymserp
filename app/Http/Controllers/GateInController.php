@@ -128,9 +128,104 @@ class GateInController extends Controller
      * @param  \App\Models\GateIn  $gateIn
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGateInRequest $request, GateIn $gateIn)
+    public function update(Request $request)
     {
-        //
+        if($request->line_id == ''){
+            return response()->json([
+                'status' => "error",
+                'message' => "Line is required"
+            ], 500);
+        }
+
+        $gateInDetails = GateIn::find($request->id);
+
+        if ($request->hasFile('driver_photo')) {
+            $driver_photo = $request->file('driver_photo');
+            $driver_photo_name = time() . '_' . $driver_photo->getClientOriginalName();
+            $driver_photo->move(public_path('uploads/gatein'), $driver_photo_name);
+        }else{
+            $driver_photo_name = $gateInDetails->driver_photo;
+        }
+
+        if ($request->hasFile('challan')) {
+            $challan = $request->file('challan');
+            $challan_name = time() . '_' . $challan->getClientOriginalName();
+            $challan->move(public_path('uploads/gatein'), $challan_name);
+        }else{
+            $challan_name = $gateInDetails->challan;
+        }
+
+        if ($request->hasFile('driver_license')) {
+            $driver_license = $request->file('driver_license');
+            $driver_license_name = time() . '_' . $driver_license->getClientOriginalName();
+            $driver_license->move(public_path('uploads/gatein'), $driver_license_name);
+        }else{
+            $driver_license_name = $gateInDetails->driver_license;
+        }
+
+        if ($request->hasFile('do_copy')) {
+            $do_copy = $request->file('do_copy');
+            $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
+            $do_copy->move(public_path('uploads/gatein'), $do_copy_name);
+        }else{
+            $do_copy_name = $gateInDetails->do_copy;
+        }
+
+        if ($request->hasFile('aadhar')) {
+            $aadhar = $request->file('aadhar');
+            $aadhar_name = time() . '_' . $aadhar->getClientOriginalName();
+            $aadhar->move(public_path('uploads/gatein'), $aadhar_name);
+        }else{
+            $aadhar_name = $gateInDetails->aadhar;
+        }
+
+        if ($request->hasFile('pan')) {
+            $pan = $request->file('pan');
+            $pan_name = time() . '_' . $pan->getClientOriginalName();
+            $pan->move(public_path('uploads/gatein'), $pan_name);
+        }else{
+            $pan_name = $gateInDetails->pan;
+        }
+
+
+        $gateInDetails->container_no = is_null($request->container_no) ? $gateInDetails->container_no : $request->container_no;
+        $gateInDetails->container_size = is_null($request->container_size) ? $gateInDetails->container_size : $request->container_size;
+        $gateInDetails->container_type = is_null($request->container_type) ? $gateInDetails->container_type : $request->container_type;
+        $gateInDetails->transport_id = is_null($request->transport_id) ? $gateInDetails->transport_id : $request->transport_id;
+        $gateInDetails->inward_date = is_null($request->inward_date) ? $gateInDetails->inward_date : $request->inward_date;
+        $gateInDetails->inward_time = is_null($request->inward_time) ? $gateInDetails->inward_time : $request->inward_time;
+        $gateInDetails->driver_name = is_null($request->driver_name) ? $gateInDetails->driver_name : $request->driver_name;
+        $gateInDetails->vehicle_number = is_null($request->vehicle_number) ? $gateInDetails->vehicle_number : $request->vehicle_number;
+        $gateInDetails->contact_number = is_null($request->contact_number) ? $gateInDetails->contact_number : $request->contact_number;
+        $gateInDetails->third_party = is_null($request->third_party) ? $gateInDetails->third_party : $request->third_party;
+        $gateInDetails->line_id = is_null($request->line_id) ? $gateInDetails->line_id : $request->line_id;
+        $gateInDetails->arrive_from = is_null($request->arrive_from) ? $gateInDetails->arrive_from : $request->arrive_from;
+        $gateInDetails->port_name = is_null($request->port_name) ? $gateInDetails->port_name : $request->port_name;
+        $gateInDetails->driver_photo = $driver_photo_name;
+        $gateInDetails->challan = $challan_name;
+        $gateInDetails->driver_license = $driver_license_name;
+        $gateInDetails->do_copy = $do_copy_name;
+        $gateInDetails->aadhar = $aadhar_name;
+        $gateInDetails->pan = $pan_name;
+
+        $gateInDetails->updatedby = $request->user_id;
+        $gateInDetails->updated_at = date('Y-m-d H:i:s');
+
+        $gateInDetails  = $gateInDetails->save();
+
+        if($gateInDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Gate In Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
+
+
     }
 
     /**

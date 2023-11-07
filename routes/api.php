@@ -142,7 +142,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transport'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTransportController@store');
-        $api->get('/get', 'App\Http\Controllers\MasterTransportController@get');
+        $api->post('/get', 'App\Http\Controllers\MasterTransportController@get');
         $api->post('/getbyid', 'App\Http\Controllers\MasterTransportController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterTransportController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterTransportController@update');
@@ -152,13 +152,14 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\GateInController@store');
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
         $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');
+        $api->post('/update', 'App\Http\Controllers\GateInController@update');
+
         $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
         $api->post('/create','App\Http\Controllers\ContainerVerifyController@store');
         $api->post('/getbyid','App\Http\Controllers\ContainerVerifyController@getbyid');
-
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transcation'], function($api){

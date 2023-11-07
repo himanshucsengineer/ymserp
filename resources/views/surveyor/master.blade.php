@@ -813,14 +813,40 @@ a.open:hover .circle img {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel"
-                                    aria-labelledby="custom-tabs-three-profile-tab">
-                                    Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra
-                                    purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et
-                                    ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl
-                                    ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus,
-                                    elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                <div class="card mt-5">
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Container No.</th>
+                                    <th>Compoment Code</th>
+                                    <th>Location Code</th>
+                                    <th>Damage Code</th>
+                                    <th>Repair code</th>
+                                    <th>Material code</th>
+                                    <th>UOM</th>
+                                    <th>Width</th>
+                                    <th>Length</th>
+                                    <th>Height</th>
+                                    <th>Quantity</th>
+                                    <th>Labour Hr.</th>
+                                    <th>Labour Cost</th>
+                                    <th>Material Cost</th>
+                                    <th>Sub Total</th>
+                                    <th>GST</th>
+                                    <th>Tax Cost</th>
+                                    <th>Total Cost</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
                                 </div>
                             </div>
                         </div>
@@ -1231,12 +1257,14 @@ function getTransactionData(tarrif_id, tarrifData){
                 row.append($('<td>').text(tarrifData.dimension_w));
                 row.append($('<td>').text(tarrifData.dimension_l));
                 row.append($('<td>').text(tarrifData.dimension_h));
-                row.append($('<td>').text(tarrifData.qty));
+
+                var qty = $('<input>').attr({'type':'text', 'id':'transaction_qty', 'class':'form-control'}).val(tarrifData.qty);
+                row.append($('<td>').append(qty));
                 var labour_hr = $('<input>').attr({'type':'text', 'id':'transaction_labour_hr', 'class':'form-control'}).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
-                var labour_cost = $('<input>').attr({'type':'text', 'id':'transaction_labour_cost', 'class':'form-control'}).val(item.labour_cost);
+                var labour_cost = $('<input>').attr({'type':'text', 'id':'transaction_labour_cost','readonly':'readonly', 'class':'form-control'}).val(item.labour_cost);
                 row.append($('<td>').append(labour_cost));
-                var material_cost = $('<input>').attr({'type':'text', 'id':'transaction_material_cost','class':'form-control'}).val(item.material_cost);
+                var material_cost = $('<input>').attr({'type':'text', 'id':'transaction_material_cost','readonly':'readonly','class':'form-control'}).val(item.material_cost);
                 row.append($('<td>').append(material_cost));
                 var sab_total = $('<input>').attr({'type':'text', 'id':'transaction_sub_total', 'readonly':'readonly', 'class':'form-control'}).val(item.sab_total);
                 row.append($('<td>').append(sab_total));
@@ -1270,12 +1298,10 @@ function getDamage(id) {
         },
         success: function(data) {
             var select = document.getElementById('damage_code');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.code;
+            var option = document.createElement('option');
+                option.value = data.id;
+                option.text = data.code;
                 select.appendChild(option);
-            });
         },
         error: function(error) {
             console.log(error);
@@ -1295,12 +1321,10 @@ function getRepair(id) {
         },
         success: function(data) {
             var select = document.getElementById('repair_code');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.repair_code;
+            var option = document.createElement('option');
+                option.value = data.id;
+                option.text = data.repair_code;
                 select.appendChild(option);
-            });
         },
         error: function(error) {
             console.log(error);
@@ -1320,12 +1344,10 @@ function getMaterial(id) {
         },
         success: function(data) {
             var select = document.getElementById('material_code');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.material_code;
+            var option = document.createElement('option');
+                option.value = data.id;
+                option.text = data.material_code;
                 select.appendChild(option);
-            });
         },
         error: function(error) {
             console.log(error);
