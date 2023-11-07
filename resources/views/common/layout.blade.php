@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- summernote -->
     <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -639,6 +641,7 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
+
     <!-- Bootstrap 4 -->
     <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
@@ -646,6 +649,7 @@
     <!-- Sparkline -->
     <script src="/assets/plugins/sparklines/sparkline.js"></script>
     <!-- JQVMap -->
+    <script src="/assets/plugins/select2/js/select2.full.min.js"></script>
     <script src="/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
     <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
@@ -681,7 +685,24 @@
     <script src="/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+    <script>
+//   $(function () {
+//     //Initialize Select2 Elements
+//     $('.select2').select2()
 
+//     //Initialize Select2 Elements
+//     $('.select2bs4').select2({
+//       theme: 'bootstrap4'
+//     })
+
+   
+
+//   })
+ 
+
+
+
+</script>
 </body>
 
 </html>

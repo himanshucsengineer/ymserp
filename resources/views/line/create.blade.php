@@ -12,6 +12,21 @@
 .img_prv_box img{
     width:100%;
 }
+.select2-container .select2-selection--single{
+    height:40px !important;
+}
+.select2-dropdown{
+    z-index: 0;
+}
+.addNewButton{
+    border:none;
+    background:#63bf84;
+    color:white;
+    outline:none;
+    padding:.5rem .7rem;
+    border-radius:6px;
+    font-size:14px;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -45,6 +60,19 @@
                                 <div class="form-group">
                                     <label for="alise">Line Alise <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="alise" name="alise" placeholder="Enter Line Alise">
+                                </div>
+                                <div class="form-group">
+                                    <label>Container Type</label>
+                                    <select class="form-control select2bs4" id="containerType" name="containerType" style="width: 100%;">
+                                       
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Container Size</label>
+                                    <select class="form-control select2bs4" id="containerSize" name="containerSize" style="width: 100%;">
+                                       
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -162,6 +190,43 @@
 <script>
 
 $(document).ready(function () {
+    $('#containerType').select2({
+        placeholder: 'Select an option',
+        data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="addNewButton" onclick="containerType()">Add New</button></center>';
+            }
+        }
+    });
+
+    $('#containerSize').select2({
+        placeholder: 'Select an option',
+        data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="addNewButton" onclick="containerSize()">Add New</button></center>';
+            }
+        }
+    });
+});
+
+function containerType(){
+    $('#contType').modal('show');
+}
+
+function containerSize(){
+    $('#contSize').modal('show');
+}
+$(document).ready(function () {
+
+    
     // Listen for changes in the file input
     $('#top_img').on('change', function (e) {
         var fileInput = $(this)[0];
@@ -322,7 +387,7 @@ $(function () {
             });
 
     }
-  });
+    });
 
     $('#lineForm').validate({
     rules: {
@@ -468,6 +533,155 @@ $(function () {
     }
   });
 });
+
+function createContainerType(){
+
+
+
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    $.validator.setDefaults({
+    submitHandler: function () {
+        var name = $("#containertypename").val();
+
+        data = {
+            'name' : name,
+            'user_id' : user_id,
+            'depo_id' : depo_id,
+        }
+
+        post('containertype/create',$data);
+
+
+        }
+    });
+
+    $('#containerTypeForm').validate({
+    rules: {
+        containertypename: {
+            required: true,
+        },
+    },
+    messages: {
+        containertypename: {
+            required: "This Field Is required",
+        },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+}
+
+
+function createContainerSize(){
+
+
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    $.validator.setDefaults({
+    submitHandler: function () {
+        var size = $("#containersizename").val();
+
+        data = {
+            'size' : size,
+            'user_id' : user_id,
+            'depo_id' : depo_id,
+        }
+        post('containersize/create',$data);
+        }
+    });
+
+    $('#containerSizeForm').validate({
+    rules: {
+        containersizename: {
+            required: true,
+        },
+    },
+    messages: {
+        containersizename: {
+            required: "This Field Is required",
+        },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+}
 </script>
+
+
+
+<div class="modal fade" style="z-index:10000000" id="contType">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Container Type</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="containerTypeForm" novalidate="novalidate">
+                        <div class="form-group" >
+                            <label>Enter Type Name</label>
+                            <input type="text" id="containertypename" name="containertypename" class="form-control" >
+                        </div>
+                        <button type="submit" class="btn btn-primary" onclick="createContainerType()">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" style="z-index:10000000" id="contSize">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Container Size</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="containerSizeForm" novalidate="novalidate">
+                        <div class="form-group" >
+                            <label>Enter Size</label>
+                            <input type="text" id="containersizename" name="containersizename" class="form-control" >
+                        </div>
+                        <button type="submit" class="btn btn-primary" onclick="createContainerSize()">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
