@@ -65,7 +65,10 @@ class MasterTarrifController extends Controller
             'component_code' => $request->component_code,
             'desc' => $request->desc,
             'qty' => $request->qty,
-            'repair_type' => $request->repair_type
+            'repair_type' => $request->repair_type,
+            'container_side'=>$request->container_side,
+            'hotspot_coor_y'=>$request->hotspot_coor_y,
+            'hotspot_coor_x'=>$request->hotspot_coor_x,
         ]);
 
 

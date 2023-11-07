@@ -37,6 +37,9 @@ class GateIn extends Model
         'port_name',
         'createdby',
         'updatedby',
-        'depo_id'
+        'depo_id',
+        'container_img',
+        'vehicle_img',
+        'gateintype',
     ];
 }

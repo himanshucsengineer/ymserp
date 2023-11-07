@@ -12,19 +12,6 @@
 .form-control{
     width:200px !important;
 }
-
-        /* #image-container {
-            position: relative;
-        }
-
-        .hotspot {
-            position: absolute;
-            background-color: red;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-        } */
   
 </style>
 <div class="content-wrapper">
@@ -44,10 +31,7 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <!-- <div id="image-container">
-
-    <img id="image" src="/assets/img/right.jpeg" width="800" alt="Image" />
-    </div> -->
+    
 
     <section class="content">
         <div class="container-fluid">
@@ -87,27 +71,6 @@
 <script>
     
 $(document).ready(function() {
-
-    // const imageContainer = document.getElementById('image-container');
-    //     const image = document.getElementById('image');
-    //     const hotspots = [];
-
-    //     imageContainer.addEventListener('click', (e) => {
-    //         const x = e.clientX - image.getBoundingClientRect().left;
-    //         const y = e.clientY - image.getBoundingClientRect().top;
-    //         createHotspot(x, y);
-    //     });
-
-    //     function createHotspot(x, y) {
-    //         const hotspotDiv = document.createElement('div');
-    //         hotspotDiv.className = 'hotspot';
-    //         hotspotDiv.style.left = x + 'px';
-    //         hotspotDiv.style.top = y + 'px';
-    //         imageContainer.appendChild(hotspotDiv);
-
-    //         hotspots.push({ x, y });
-    //     }
-    //     console.log(hotspots);
 
     var checkToken = localStorage.getItem('token');
     refreshTable();

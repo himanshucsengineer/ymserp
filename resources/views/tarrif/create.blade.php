@@ -1,6 +1,21 @@
 @extends('common.layout')
 
 @section('content')
+
+<style>
+#image-container {
+    position: relative;
+}
+
+.hotspot {
+position: absolute;
+background-color: red;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+cursor: pointer;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -117,9 +132,21 @@
                                         <option value="DX3N">DX3N</option>
                                         <option value="DX2N">DX2N</option>
                                         <option value="DX4N">DX4N</option>
-                                       
                                     </select>
                         
+                                </div>
+                                <div class="form-group">
+                                    <label for="container_side">Container Side <span style="color:red;">*</span></label>
+                                    <select name="container_side" id="container_side" class="form-control">
+                                        <option value="">Select Container Side</option>
+                                        <option value="right">Right</option>
+                                        <option value="left">Left</option>
+                                        <option value="top">Top</option>
+                                        <option value="bottom">Bottom</option>
+                                        <option value="front">Front</option>
+                                        <option value="door">Door</option>
+                                        <option value="interior">Interior</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="damade_id">Demage Code <span style="color:red;">*</span></label>
@@ -210,6 +237,8 @@
                                     <label for="total_cost">Total Cost <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" readonly id="total_cost" name="total_cost" placeholder="Enter Total Cost">
                                 </div>
+                                <input type="hidden" id="hotspot_coor_x">
+                                <input type="hidden" id="hotspot_coor_y">
 
                             </div>
                             <div class="card-footer">
@@ -224,8 +253,126 @@
 </div>
 
 <script>
+
+$(document).ready(function () {
+    const imageContainer = document.getElementById('image-container');
+    const image = document.getElementById('image');
+    imageContainer.addEventListener('click', (e) => {
+        const x = e.clientX - image.getBoundingClientRect().left;
+        const y = e.clientY - image.getBoundingClientRect().top;
+        createHotspot(x, y);
+    });
+
+    function createHotspot(x, y) {
+        const hotspotDiv = document.createElement('div');
+        hotspotDiv.className = 'hotspot';
+        hotspotDiv.style.left = x + 'px';
+        hotspotDiv.style.top = y + 'px';
+        imageContainer.appendChild(hotspotDiv);
+        $('#hotspot_coor_x').val(x);
+        $('#hotspot_coor_y').val(y);
+        $('#container_side').attr('disabled', true);
+        $('#modal-xl').modal('hide');
+    }
+
+
+});
+
+$('#container_side').on('change', function (){
+
+    var side = $(this).val();
+    var line_id = $('#line_id').val();
+
+    if(!line_id){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line Name First</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }else{
+        $.ajax({
+        type: "post",
+        url: "/api/line/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':line_id
+        },
+        success: function (data) {
+            var imageUrl = '';
+            if(side == "right"){
+                imageUrl = '/uploads/line/' + data.right_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "left"){
+                imageUrl = '/uploads/line/' + data.left_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "top"){
+                imageUrl = '/uploads/line/' + data.top_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "bottom"){
+                imageUrl = '/uploads/line/' + data.bottom_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "front"){
+                imageUrl = '/uploads/line/' + data.front_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "door"){
+                imageUrl = '/uploads/line/' + data.door_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "interior"){
+                imageUrl = '/uploads/line/' + data.interior_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else{
+                var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Choose Correct Option</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+    }
+
+});
+
 $(document).ready(function () {
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
 
     $('#labour_cost, #material_cost,#tax').on('keyup', function() {
         var material_cost = $('#material_cost').val();
@@ -241,10 +388,14 @@ $(document).ready(function () {
 
 
     $.ajax({
-        type: "GET",
+        type: "post",
         url: "/api/line/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function (data) {
             var select = document.getElementById('line_id');
@@ -261,10 +412,14 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        type: "GET",
+        type: "post",
         url: "/api/damage/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
         },
         success: function (data) {
             var select = document.getElementById('damade_id');
@@ -349,6 +504,11 @@ $(function () {
         var damade_id = $("#damade_id").val();
         var repair_id = $("#repair_id").val();
         var material_id = $("#material_id").val();
+        var container_side = $("#container_side").val();
+        var hotspot_coor_x = $("#hotspot_coor_x").val();
+        var hotspot_coor_y = $("#hotspot_coor_y").val();
+
+
 
         var repai_location_code = $("#repai_location_code").val();
         var unit_of_measure = $("#unit_of_measure").val();
@@ -375,17 +535,14 @@ $(function () {
                 'damade_id':damade_id,
                 'repair_id':repair_id,
                 'material_id':material_id,
-
                 'repai_location_code':repai_location_code,
                 'unit_of_measure':unit_of_measure,
                 'dimension_l':dimension_l,
                 'dimension_w':dimension_w,
-
                 'dimension_h':dimension_h,
                 'labour_hour':labour_hour,
                 'labour_cost':labour_cost,
                 'material_cost':material_cost,
-
                 'tax':tax,
                 'sub_total':sub_total,
                 'tax_cost':tax_cost,
@@ -395,7 +552,10 @@ $(function () {
                 'component_code':component_code,
                 'desc':desc,
                 'qty':qty,
-                'repair_type':repair_type
+                'repair_type':repair_type,
+                'hotspot_coor_y':hotspot_coor_y,
+                'hotspot_coor_x':hotspot_coor_x,
+                'container_side':container_side
 
             }
 
@@ -467,6 +627,9 @@ $(function () {
         },
         repair_type: {
             required: true,
+        },
+        container_side:{
+            required: true,
         }
     },
     messages: {
@@ -532,6 +695,9 @@ $(function () {
         },
         repair_type: {
             required: "This Field is required",
+        },
+        container_side:{
+            required: "This Field is required",
         }
     },
     errorElement: 'span',
@@ -548,5 +714,30 @@ $(function () {
   });
 });
 </script>
+
+
+
+
+<div class="modal fade" id="modal-xl">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Hotspot</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="image-container">
+                            <center><img id="image" src="" style="width:100%" alt="Image" /></center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 @endsection

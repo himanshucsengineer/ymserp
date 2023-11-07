@@ -33,6 +33,9 @@ class MasterTarrif extends Model
         'component_code',
         'desc',
         'qty',
-        'repair_type'
+        'repair_type',
+        'container_side',
+        'hotspot_coor_y',
+        'hotspot_coor_x'
     ];
 }

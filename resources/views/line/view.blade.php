@@ -43,6 +43,8 @@
                                         <th>Sr. No.</th>
                                         <th>Name</th>
                                         <th>Alise</th>
+                                        <th>Container Type</th>
+                                        <th>Container Size</th>
                                         <th>Free Days</th>
                                         <th>Labour Rate</th>
                                         <th>Line Address</th>
@@ -112,6 +114,10 @@ function refreshTable(){
                 row.append($('<td>').text(i));
                 row.append($('<td>').append(item.name));
                 row.append($('<td>').append(item.alise));
+
+                row.append($('<td>').append(item.containerType));
+                row.append($('<td>').append(item.containerSize));
+
                 row.append($('<td>').append(item.free_days));
                 row.append($('<td>').append(item.labour_rate));
 

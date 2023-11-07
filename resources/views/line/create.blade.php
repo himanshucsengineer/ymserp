@@ -284,7 +284,7 @@ $(function () {
     var depo_id = localStorage.getItem('depo_id');
     var checkToken = localStorage.getItem('token');
 
-    $('#lineForm').validator({
+    $.validator.setDefaults({
     submitHandler: function () {
         var name = $("#name").val();
         var alise = $("#alise").val();
@@ -506,7 +506,7 @@ $(function () {
             required: "Container Type Is Required",
         },
         'containerSize':{
-            required: "Container Size Is Required",,
+            required: "Container Size Is Required",
         },
 
     },

@@ -38,6 +38,10 @@ return new class extends Migration
             $table->longtext('desc')->nullable();
             $table->string('qty')->nullable();
             $table->string('repair_type')->nullable();
+            $table->string('hotspot_coor_y')->nullable();
+            $table->string('hotspot_coor_x')->nullable();
+            $table->string('container_side')->nullable();
+
             $table->timestamps();
         });
     }

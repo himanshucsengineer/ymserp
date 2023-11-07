@@ -125,69 +125,47 @@ class GateInController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('driver_photo')) {
-            $driverfile = $request->file('driver_photo');
-            $driverfileName = time() . '_' . $driverfile->getClientOriginalName();
-            $driverfile->move(public_path('uploads/gatein'), $driverfileName);
+        if ($request->hasFile('container_img')) {
+            $container_img = $request->file('container_img');
+            $container_img_name = time() . '_' . $container_img->getClientOriginalName();
+            $container_img->move(public_path('uploads/gatein'), $container_img_name);
+        }else{
+            $container_img_name = '';
         }
 
-        if ($request->hasFile('challan')) {
-            $challanfile = $request->file('challan');
-            $challanfileName = time() . '_' . $challanfile->getClientOriginalName();
-            $challanfile->move(public_path('uploads/gatein'), $challanfileName);
+        if ($request->hasFile('vehicle_img')) {
+            $vehicle_img = $request->file('vehicle_img');
+            $vehicle_img_name = time() . '_' . $vehicle_img->getClientOriginalName();
+            $vehicle_img->move(public_path('uploads/gatein'), $vehicle_img_name);
+        }else{
+            $vehicle_img_name = '';
         }
 
-        if ($request->hasFile('driver_license')) {
-            $driver_license = $request->file('driver_license');
-            $driver_licensename = time() . '_' . $driver_license->getClientOriginalName();
-            $driver_license->move(public_path('uploads/gatein'), $driver_licensename);
+        if($request->vehicle_number == ''  && $vehicle_img_name == ''){
+            return response()->json([
+                'status' => "error",
+                'message' => "Please Fill at least one thing for vhicle"
+            ], 500);
         }
 
-        if ($request->hasFile('do_copy')) {
-            $do_copy = $request->file('do_copy');
-            $do_copyname = time() . '_' . $do_copy->getClientOriginalName();
-            $do_copy->move(public_path('uploads/gatein'), $do_copyname);
-        }
-
-        if ($request->hasFile('aadhar')) {
-            $aadhar = $request->file('aadhar');
-            $aadharname = time() . '_' . $aadhar->getClientOriginalName();
-            $aadhar->move(public_path('uploads/gatein'), $aadharname);
-        }
-
-        if ($request->hasFile('pan')) {
-            $pan = $request->file('pan');
-            $panname = time() . '_' . $pan->getClientOriginalName();
-            $pan->move(public_path('uploads/gatein'), $panname);
+        if($request->container_no == ''  && $container_img_name == ''){
+            $gateintype = "without container";
+        }else{
+            $gateintype = "with container";
         }
 
         $createGatein = GateIn::create([
-            'driver_photo'=> $driverfileName,
-            'challan'=> $challanfileName,
-            'driver_license'=> $driver_licensename,
-            'do_copy'=> $do_copyname,
-
-            'aadhar'=> $aadharname,
-            'pan'=> $panname,
-
+            'container_img' => $container_img_name,
+            'vehicle_img' => $vehicle_img_name,
             'container_no'=> $request->container_no,
-
             'container_type'=> $request->container_type,
             'container_size'=> $request->container_size,
-            'transport_id'=> $request->transport_id,
-            'inward_date'=> $request->inward_date,
-
-            'inward_time'=> $request->inward_time,
             'driver_name'=> $request->driver_name,
             'vehicle_number'=> $request->vehicle_number,
             'contact_number'=> $request->contact_number,
-
-            'third_party'=> $request->third_party,
-            'line_id' => $request->line_id,
-            'arrive_from' => $request->arrive_from,
-            'port_name' => $request->port_name,
             'depo_id' => $request->depo_id,
-            'createdby' => $request->user_id
+            'createdby' => $request->user_id,
+            'gateintype' => $gateintype
         ]);
 
 
