@@ -35,6 +35,9 @@ class MasterLine extends Model
         'state_code',
         'createdby',
         'updatedby',
-        'depo_id'
+        'depo_id',
+        'containerSize',
+        'containerType',
+
     ];
 }

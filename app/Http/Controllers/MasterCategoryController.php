@@ -10,7 +10,7 @@ use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Facades\Validator;
-use \stdClass;
+use \stdClass; 
 
 class MasterCategoryController extends Controller
 {

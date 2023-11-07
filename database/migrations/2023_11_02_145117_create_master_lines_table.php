@@ -37,6 +37,8 @@ return new class extends Migration
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();
+            $table->string('containerSize')->nullable();
+            $table->string('containerType')->nullable();
             $table->timestamps();
         });
     }

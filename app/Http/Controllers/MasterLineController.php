@@ -119,7 +119,10 @@ class MasterLineController extends Controller
             'gst_state' => $request->gst_state,
             'state_code' => $request->state_code,
             'createdby' => $request->user_id,
-            'depo_id' => $request->depo_id
+            'depo_id' => $request->depo_id,
+            'containerSize' => $request->containerSize,
+            'containerType' => $request->containerType,
+
         ]);
 
 

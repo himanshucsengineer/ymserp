@@ -62,16 +62,22 @@
                                     <input type="text" class="form-control" id="alise" name="alise" placeholder="Enter Line Alise">
                                 </div>
                                 <div class="form-group">
-                                    <label>Container Type</label>
-                                    <select class="form-control select2bs4" id="containerType" name="containerType" style="width: 100%;">
-                                       
+                                    <label>Container Type <span style="color:red;">*</span></label>
+                                    <select class="form-control" id="containerType" name="containerType">
+                                       <option value="">Select Container Type</option>
+                                       <option value="DRY">DRY</option>
+                                       <option value="REEFER">REEFER</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Container Size</label>
-                                    <select class="form-control select2bs4" id="containerSize" name="containerSize" style="width: 100%;">
-                                       
+                                    <label>Container Size <span style="color:red;">*</span></label>
+                                    <select class="form-control" id="containerSize" name="containerSize" >
+                                       <option value="">Select Container Size</option>
+                                       <option value="10">10</option>
+                                       <option value="20">20</option>
+                                       <option value="40">40</option>
+                                       <option value="45">45</option>
                                     </select>
                                 </div>
 
@@ -189,41 +195,7 @@
 
 <script>
 
-$(document).ready(function () {
-    $('#containerType').select2({
-        placeholder: 'Select an option',
-        data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        language: {
-            noResults: function () {
-                return '<center><button class="addNewButton" onclick="containerType()">Add New</button></center>';
-            }
-        }
-    });
 
-    $('#containerSize').select2({
-        placeholder: 'Select an option',
-        data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        language: {
-            noResults: function () {
-                return '<center><button class="addNewButton" onclick="containerSize()">Add New</button></center>';
-            }
-        }
-    });
-});
-
-function containerType(){
-    $('#contType').modal('show');
-}
-
-function containerSize(){
-    $('#contSize').modal('show');
-}
 $(document).ready(function () {
 
     
@@ -310,9 +282,9 @@ $(document).ready(function () {
 $(function () {
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-
     var checkToken = localStorage.getItem('token');
-    $.validator.setDefaults({
+
+    $('#lineForm').validator({
     submitHandler: function () {
         var name = $("#name").val();
         var alise = $("#alise").val();
@@ -327,10 +299,16 @@ $(function () {
         var gst_state = $("#gst_state").val();
         var state_code = $("#state_code").val();
 
+        var containerSize = $("#containerSize").val();
+        var containerType = $("#containerType").val();
+
+
 
             var formData = new FormData();
 
             formData.append('name', name);
+            formData.append('containerSize', containerSize);
+            formData.append('containerType', containerType);
             formData.append('alise', alise);
             formData.append('free_days', free_days);
             formData.append('labour_rate', labour_rate);
@@ -452,7 +430,13 @@ $(function () {
         },
         interior_img: {
             required: true,
-        }
+        },
+        'containerType':{
+            required: true,
+        },
+        'containerSize':{
+            required: true,
+        },
 
     },
     messages: {
@@ -517,7 +501,13 @@ $(function () {
         },
         interior_img: {
             required: "Interior Image Is required",
-        }
+        },
+        'containerType':{
+            required: "Container Type Is Required",
+        },
+        'containerSize':{
+            required: "Container Size Is Required",,
+        },
 
     },
     errorElement: 'span',
@@ -534,154 +524,14 @@ $(function () {
   });
 });
 
-function createContainerType(){
 
 
 
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-    $.validator.setDefaults({
-    submitHandler: function () {
-        var name = $("#containertypename").val();
-
-        data = {
-            'name' : name,
-            'user_id' : user_id,
-            'depo_id' : depo_id,
-        }
-
-        post('containertype/create',$data);
 
 
-        }
-    });
 
-    $('#containerTypeForm').validate({
-    rules: {
-        containertypename: {
-            required: true,
-        },
-    },
-    messages: {
-        containertypename: {
-            required: "This Field Is required",
-        },
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-}
-
-
-function createContainerSize(){
-
-
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-    $.validator.setDefaults({
-    submitHandler: function () {
-        var size = $("#containersizename").val();
-
-        data = {
-            'size' : size,
-            'user_id' : user_id,
-            'depo_id' : depo_id,
-        }
-        post('containersize/create',$data);
-        }
-    });
-
-    $('#containerSizeForm').validate({
-    rules: {
-        containersizename: {
-            required: true,
-        },
-    },
-    messages: {
-        containersizename: {
-            required: "This Field Is required",
-        },
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-}
 </script>
 
 
-
-<div class="modal fade" style="z-index:10000000" id="contType">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Create Container Type</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="containerTypeForm" novalidate="novalidate">
-                        <div class="form-group" >
-                            <label>Enter Type Name</label>
-                            <input type="text" id="containertypename" name="containertypename" class="form-control" >
-                        </div>
-                        <button type="submit" class="btn btn-primary" onclick="createContainerType()">Create</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" style="z-index:10000000" id="contSize">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Create Container Size</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="containerSizeForm" novalidate="novalidate">
-                        <div class="form-group" >
-                            <label>Enter Size</label>
-                            <input type="text" id="containersizename" name="containersizename" class="form-control" >
-                        </div>
-                        <button type="submit" class="btn btn-primary" onclick="createContainerSize()">Create</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
