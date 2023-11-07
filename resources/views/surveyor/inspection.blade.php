@@ -35,17 +35,17 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Container No.</th>
+                                        <th>Container Image</th>
                                         <th>Container Size</th>
-                                        <th>Inward Date</th>
-                                        <th>Inward Time</th>
+                                        <th>Container Type</th>
                                         <th>Vhicle No.</th>
-                                        <th>Transport</th>
-                                        <th>Arive From</th>
-                                        <th>Driver</th>
+                                        <th>Vhicle image</th>
+                                        <th>Driver Name</th>
+                                        <th>Driver Contact</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="table-body">
                                    
                                 </tbody>
                             </table>
@@ -60,40 +60,68 @@
 <script>
     
 $(document).ready(function() {
-    const dataTable = $('#inspectionData').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true,
-      "responsive": true,
-      "pageLength": 25
-    });
+    
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     $.ajax({
         type: "post",
         url: "/api/gatein/getInspectionData",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
-        data:{},
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
         success: function(response) {
-            for (let i = 0; i < response.data.length; i++) {
-                const data = response.data[i];
-                dataTable.row.add([
-                    i+1,
-                    data.container_no,
-                    data.container_size,
-                    data.inward_date	,
-                    data.inward_time,
-                    data.vehicle_number,
-                    data.transport.name,
-                    data.arrive_from,
-                    data.driver_name,
-                    `<span class="eye" onclick="showContainer(${data.id})"><i class="far fa-eye" style="color:green;"></i></span>`
-                ]).draw();
-            }
+            var tbody = $('#table-body');
+
+            var i =1;
+            response.forEach(function(item) {
+                var container_img = '';
+                if(item.container_img){
+                    container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
+                }else{
+                    container_img = "No Imgae Available";
+                }
+                var vehicle_img = '';
+                if(item.vehicle_img){
+                    vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
+                }else{
+                    vehicle_img = "No Imgae Available";
+                }
+
+                var row = $('<tr>');
+                row.append($('<td>').text(i));
+                row.append($('<td>').append(item.container_no));
+                row.append($('<td>').append(container_img));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.vehicle_number));
+                row.append($('<td>').append(vehicle_img));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                
+                var viewButton = $('<span>')
+                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
+                    .attr('data-id', item.id) 
+                    .attr('class', 'view-button');
+
+                var td = $('<td>');
+                td.append(viewButton);
+                row.append(td);
+
+                tbody.append(row);
+                i++;
+            });
+
+
+            $('.view-button').click(function() {
+                var dataId = $(this).data('id');
+                window.location = `/surveyor/containershow?id=${dataId}`
+            });
         },
         error: function(error) {
             console.log(error);
@@ -101,10 +129,6 @@ $(document).ready(function() {
     });
 });
 
-
-function showContainer(id){
-    window.location = `/surveyor/containershow?id=${id}`
-}
 
 
   

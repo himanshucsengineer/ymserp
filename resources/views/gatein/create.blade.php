@@ -1,6 +1,18 @@
 @extends('common.layout')
 
 @section('content')
+
+<style>
+.img_prv_box{
+    margin-top:.5rem;
+    /* border:1px solid #cdcdcd; */
+    width:400px;
+    /* height:200px; */
+}
+.img_prv_box img{
+    width:100%;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -35,6 +47,9 @@
                                 <div class="form-group">
                                     <label for="container_img">Container Image</label>
                                     <input type="file" class="form-control" id="container_img" name="container_img" placeholder="Enter Vehicle Number">
+                                    <div class="img_prv_box">
+                                        <img id="container_img_prev" src="" />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="vehicle_number">Vehicle Number</label>
@@ -44,6 +59,10 @@
                                 <div class="form-group">
                                     <label for="vehicle_img">Vehicle Image</label>
                                     <input type="file" class="form-control" id="vehicle_img" name="vehicle_img" placeholder="Enter Vehicle Number">
+                                    <div class="img_prv_box">
+                                        <img id="vehicle_img_prev" src="" />
+                                    </div>
+                                
                                 </div>
 
                                 <div class="form-group">
@@ -91,6 +110,36 @@
 </div>
 
 <script>
+$(document).ready(function () {
+
+    
+// Listen for changes in the file input
+$('#container_img').on('change', function (e) {
+    var fileInput = $(this)[0];
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#container_img_prev').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+});
+
+$('#vehicle_img').on('change', function (e) {
+    var fileInput = $(this)[0];
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#vehicle_img_prev').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+});
+
+
+
+
+});
 
 
 function validateInput(input) {
