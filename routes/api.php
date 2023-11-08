@@ -165,7 +165,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transcation'], function($api){
         $api->post('/create','App\Http\Controllers\TransactionController@store');
         $api->post('/getbytarrif','App\Http\Controllers\TransactionController@getbytarrif');
-
+        $api->post('/getbygatein','App\Http\Controllers\TransactionController@getbygatein');
     });
 
 });

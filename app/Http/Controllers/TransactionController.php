@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\MasterTarrif;
+use App\Models\GateIn;
+use App\Models\MasterDamage;
+use App\Models\MasterRepair;
+use App\Models\MasterMaterial;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -25,9 +30,59 @@ class TransactionController extends Controller
         //
     }
 
+    public function getbygatein(Request $request){
+        $getTransaction = Transaction::where('gatein_id',$request->gatein_id)->get();
+
+        $formatedData = [];
+
+        foreach($getTransaction as $transaction){
+            $tarrif = MasterTarrif::where('id',$transaction->tarrif_id)->first();
+            $gatein = GateIn::where('id',$transaction->gatein_id)->first();
+            $damage = MasterDamage::where('id',$tarrif->damade_id)->first();
+            $repair = MasterRepair::where('id',$tarrif->repair_id)->first();
+            $material = MasterMaterial::where('id',$tarrif->material_id)->first();
+
+            $formatedData[] = [
+                'labour_hr' => $transaction->labour_hr,
+                'labour_cost' => $transaction->labour_cost,
+                'material_cost' => $transaction->material_cost,
+                'sab_total' => $transaction->sab_total,
+                'gst' => $transaction->gst,
+                'tax_cost' => $transaction->tax_cost,
+                'total' => $transaction->total,
+                'qty' => $transaction->qty,
+                'tarrifData' => $tarrif,
+                'gateindata' => $gatein,
+                'damage' => $damage,
+                'repair' => $repair,
+                'material' => $material
+            ];
+        }
+        return $formatedData;
+    }
+
     public function getbytarrif(Request $request){
-        $getTransaction = Transaction::where('tarrif_id',$request->tarrif_id)->get();
-        return $getTransaction;
+
+        $getTransaction = Transaction::where('tarrif_id',$request->tarrif_id)->where('gatein_id',$request->gatein_id)->get();
+
+        $formatedData = [];
+
+        foreach($getTransaction as $transaction){
+            $tarrif = MasterTarrif::where('id',$transaction->tarrif_id)->first();
+            $formatedData[] = [
+                'labour_hr' => $transaction->labour_hr,
+                'labour_cost' => $transaction->labour_cost,
+                'material_cost' => $transaction->material_cost,
+                'sab_total' => $transaction->sab_total,
+                'gst' => $transaction->gst,
+                'tax_cost' => $transaction->tax_cost,
+                'total' => $transaction->total,
+                'qty' => $transaction->qty,
+                'tarrifData' => $tarrif,
+            ];
+        }
+
+        return $formatedData;
     }
 
     /**
@@ -48,7 +103,9 @@ class TransactionController extends Controller
             'sab_total' => $request->sab_total,
             'gst' => $request->gst,
             'total' => $request->total,
-            'tax_cost' => $request->tax_cost
+            'tax_cost' => $request->tax_cost,
+            'gatein_id' => $request->gatein_id,
+            'qty' => $request->qty
         ]);
 
         if($createTransaction){

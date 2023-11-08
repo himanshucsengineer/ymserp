@@ -7,6 +7,9 @@
 @section('content')
 
 <style>
+.reportinput{
+    width:100px !important;
+}
 #transaction_total, #transaction_sub_total, #transaction_tax, #transaction_tax_cost, #transaction_material_cost, #transaction_labour_hr, #transaction_labour_cost{
     width: 100px !important;
 }
@@ -815,38 +818,37 @@ a.open:hover .circle img {
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                                 <div class="card mt-5">
-                    <div class="card-body p-0">
-                        <table class="table table-striped table-responsive">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Container No.</th>
-                                    <th>Compoment Code</th>
-                                    <th>Location Code</th>
-                                    <th>Damage Code</th>
-                                    <th>Repair code</th>
-                                    <th>Material code</th>
-                                    <th>UOM</th>
-                                    <th>Width</th>
-                                    <th>Length</th>
-                                    <th>Height</th>
-                                    <th>Quantity</th>
-                                    <th>Labour Hr.</th>
-                                    <th>Labour Cost</th>
-                                    <th>Material Cost</th>
-                                    <th>Sub Total</th>
-                                    <th>GST</th>
-                                    <th>Tax Cost</th>
-                                    <th>Total Cost</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body">
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
+                                    <div class="card-body p-0">
+                                        <table class="table table-striped table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Container No.</th>
+                                                    <th>Compoment Code</th>
+                                                    <th>Location Code</th>
+                                                    <th>Damage Code</th>
+                                                    <th>Repair code</th>
+                                                    <th>Material code</th>
+                                                    <th>UOM</th>
+                                                    <th>Width</th>
+                                                    <th>Length</th>
+                                                    <th>Height</th>
+                                                    <th>Quantity</th>
+                                                    <th>Labour Hr.</th>
+                                                    <th>Labour Cost</th>
+                                                    <th>Material Cost</th>
+                                                    <th>Sub Total</th>
+                                                    <th>GST</th>
+                                                    <th>Tax Cost</th>
+                                                    <th>Total Cost</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="reporting">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -939,8 +941,10 @@ $(document).ready(function() {
         success: function(data) {
             $('.container_no').text(data.container_no);
             $('#modal_container_no').val(data.container_no);
+            $('#gateinid').val(data.id);
             $('#line_id_no').val(data.line_id);
             getTarrifByLine(data.line_id);
+            getReportingData();
         },
         error: function(error) {
             console.log(error);
@@ -1204,6 +1208,7 @@ function gettarrif(location_code, line_id) {
             $("#component_code").val(data.component_code);
             $("#tarrif_id").val(data.id);
             $("#labour_hr").val(data.labour_hour);
+            $("#qty").val(data.qty);
             $("#labour_cost").val(data.labour_cost);
             $("#material_cost").val(data.material_cost);
             $("#sab_total").val(data.sub_total);
@@ -1218,7 +1223,7 @@ function gettarrif(location_code, line_id) {
             getRepair(data.repair_id);
             getMaterial(data.material_id);
 
-            getTransactionData(data.id, tarrifData);
+            getTransactionData();
 
         },
         error: function(error) {
@@ -1226,9 +1231,21 @@ function gettarrif(location_code, line_id) {
         }
     });
 }
+function clearTable() {
+    const tableBody = document.getElementById("table-body");
+    tableBody.innerHTML = ""; // This will remove all rows inside the table body.
+}
 
+function clearreposrtingTable(){
+    const tableBody = document.getElementById("reporting");
+    tableBody.innerHTML = ""; // This will remove all rows inside the table body.
+}
 
-function getTransactionData(tarrif_id, tarrifData){
+function getTransactionData(){
+    var gatein_id = $('#gateinid').val();
+    var tarrif_id = $('#tarrif_id').val();
+
+    console.log(gatein_id);
     $.ajax({
         type: "POST",
         url: "/api/transcation/getbytarrif",
@@ -1237,10 +1254,10 @@ function getTransactionData(tarrif_id, tarrifData){
         },
         data: {
             'tarrif_id': tarrif_id,
+            'gatein_id':gatein_id
         },
         success: function(data) {
-            console.log('fhdjksfhkjds',data);
-            console.log('tarrifData',tarrifData)
+            clearTable();
             var tbody = $('#table-body');
             
             var i =1;
@@ -1248,19 +1265,19 @@ function getTransactionData(tarrif_id, tarrifData){
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
                 row.append($('<td>').text($('#modal_container_no').val()));
-                row.append($('<td>').text(tarrifData.component_code));
-                row.append($('<td>').text(tarrifData.repai_location_code));
+                row.append($('<td>').text(item.tarrifData.component_code));
+                row.append($('<td>').text(item.tarrifData.repai_location_code));
                 row.append($('<td>').text($('#damage_code').text()));
                 row.append($('<td>').text($('#repair_code').text()));
                 row.append($('<td>').text($('#material_code').text()));
-                row.append($('<td>').text(tarrifData.unit_of_measure));
-                row.append($('<td>').text(tarrifData.dimension_w));
-                row.append($('<td>').text(tarrifData.dimension_l));
-                row.append($('<td>').text(tarrifData.dimension_h));
+                row.append($('<td>').text(item.tarrifData.unit_of_measure));
+                row.append($('<td>').text(item.tarrifData.dimension_w));
+                row.append($('<td>').text(item.tarrifData.dimension_l));
+                row.append($('<td>').text(item.tarrifData.dimension_h));
 
-                var qty = $('<input>').attr({'type':'text', 'id':'transaction_qty', 'class':'form-control'}).val(tarrifData.qty);
+                var qty = $('<input>').attr({'type':'text', 'id':'transaction_qty', 'readonly':'readonly', 'class':'form-control'}).val(item.qty);
                 row.append($('<td>').append(qty));
-                var labour_hr = $('<input>').attr({'type':'text', 'id':'transaction_labour_hr', 'class':'form-control'}).val(item.labour_hr);
+                var labour_hr = $('<input>').attr({'type':'text', 'id':'transaction_labour_hr', 'readonly':'readonly', 'class':'form-control'}).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
                 var labour_cost = $('<input>').attr({'type':'text', 'id':'transaction_labour_cost','readonly':'readonly', 'class':'form-control'}).val(item.labour_cost);
                 row.append($('<td>').append(labour_cost));
@@ -1274,9 +1291,176 @@ function getTransactionData(tarrif_id, tarrifData){
                 row.append($('<td>').append(tax_cost));
                 var total = $('<input>').attr({'type':'text', 'id':'transaction_total', 'readonly':'readonly', 'class':'form-control'}).val(item.total);
                 row.append($('<td>').append(total));
-                row.append($('<td>').text(item.labour_cost));
                 tbody.append(row);
                 i++;
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+
+function getReportingData(){
+    var gatein_id = $('#gateinid').val();
+    $.ajax({
+        type: "POST",
+        url: "/api/transcation/getbygatein",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: {
+            'gatein_id':gatein_id
+        },
+        success: function(data) {
+            clearreposrtingTable();
+            var tbody = $('#reporting');
+            
+            var i =1;
+            data.forEach(function(item) {
+                var row = $('<tr>');
+                row.append($('<td>').text(i));
+                row.append($('<td>').text($('#modal_container_no').val()));
+                row.append($('<td>').text(item.tarrifData.component_code));
+                row.append($('<td>').text(item.tarrifData.repai_location_code));
+                row.append($('<td>').text(item.damage.code));
+                row.append($('<td>').text(item.repair.repair_code));
+                row.append($('<td>').text(item.material.material_code));
+                row.append($('<td>').text(item.tarrifData.unit_of_measure));
+                row.append($('<td>').text(item.tarrifData.dimension_w));
+                row.append($('<td>').text(item.tarrifData.dimension_l));
+                row.append($('<td>').text(item.tarrifData.dimension_h));
+
+                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty', 'class':'form-control reportinput'}).val(item.qty);
+                row.append($('<td>').append(qty));
+                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr', 'class':'form-control reportinput'}).val(item.labour_hr);
+                row.append($('<td>').append(labour_hr));
+                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost','readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_cost);
+                var labour_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_labour_cost_text','readonly':'readonly', 'class':'reportinput form-control'}).val(item.labour_cost);
+                var labour_cost_td = $('<td>');
+                labour_cost_td.append(labour_cost);
+                labour_cost_td.append(labour_cost_text);
+
+                row.append(labour_cost_td);
+                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
+                var material_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_material_cost_text','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
+                var material_cost_td = $('<td>');
+                material_cost_td.append(material_cost);
+                material_cost_td.append(material_cost_text);
+                row.append(material_cost_td);
+                var sab_total = $('<input>').attr({'type':'text', 'id':'reporting_sub_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.sab_total);
+                row.append($('<td>').append(sab_total));
+                var gst = $('<input>').attr({'type':'text', 'id':'reporting_tax', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.gst);
+                row.append($('<td>').append(gst));
+                var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.tax_cost);
+                row.append($('<td>').append(tax_cost));
+                var total = $('<input>').attr({'type':'text', 'id':'reporting_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.total);
+                row.append($('<td>').append(total));
+                // var editButton = $('<span>')
+                //     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
+                //     .attr('data-id', item.id) 
+                //     .attr('class', 'edit-button');
+
+                // var deleteButton = $('<span>')
+                //     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
+                //     .attr('data-id', item.id)
+                //     .attr('class', 'delete-button')
+                // var saveButton = $('<button style="display:none;">')
+                //     .text('Save')
+                //     .attr('data-id', item.id)
+                //     .attr('class', 'save-button btn-primary')
+
+                // var td = $('<td>');
+                // td.append(editButton);
+                // td.append(deleteButton);
+                // td.append(saveButton);
+                // row.append(td);
+                tbody.append(row);
+                i++;
+            });
+            $('#reporting_qty, #reporting_labour_hr').on('keyup', function() {
+                var reporting_qty = $('#reporting_qty').val();
+                var reporting_labour_hr = $('#reporting_labour_hr').val();
+                var reporting_tax = $('#reporting_tax').val();
+                var reporting_labour_cost = $('#reporting_labour_cost_text').val();
+                var reporting_material_cost = $('#reporting_material_cost_text').val();
+                var labour_cost = parseInt(reporting_labour_hr) * parseInt(reporting_labour_cost);
+                var material_cost = parseInt(reporting_qty) * parseInt(reporting_material_cost);
+                var sub_total = parseInt(labour_cost) + parseInt(material_cost);
+                var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
+                var total = parseInt(tax_cost) + parseInt(sub_total);
+                $('#reporting_labour_cost').val(labour_cost);
+                $('#reporting_material_cost').val(material_cost);
+                $('#reporting_sub_total').val(sub_total);
+                $('#reporting_tax_cost').val(tax_cost);
+                $('#reporting_total').val(total);
+            });
+
+            $('.edit-button').click(function() {
+                var row = $(this).closest('tr');
+                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
+                var actionCell = row.find('td:last-child');
+                dataCells.each(function(index) {
+                    var dataCell = $(this);
+                    var inputId = 'input_' + index;
+                    var inputValue = dataCell.text();
+        
+                    var inputField = $('<input>')
+                        .attr({
+                            'id': inputId,
+                            'type': 'text',
+                            'class': 'form-control'
+                        })
+                        .val(inputValue);
+                        dataCell.empty().append(inputField);
+                        
+                });
+                actionCell.find('.edit-button').hide();
+                actionCell.find('.delete-button').hide();
+                actionCell.find('.save-button').show();                
+            });
+
+            $('.save-button').click(function() {
+                var row = $(this).closest('tr');
+                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
+                var actionCell = row.find('td:last-child');
+                var inputFields = row.find('input'); // Select all input fields in the row
+                var inputData = {};
+
+                dataCells.each(function(index) {
+                    var dataCell = $(this);
+                    var newValue = dataCell.find('input').val();
+                    dataCell.empty().text(newValue);
+                    // if(index === ){
+
+                    // }
+                });
+
+                inputFields.each(function() {
+                    var inputField = $(this);
+                    var inputId = inputField.attr('id');
+                    var inputValue = inputField.val();
+                    inputData[inputId] = inputValue;
+                });
+
+                // Show "Edit" and "Delete" buttons and hide "Save" button
+                actionCell.find('.edit-button').show();
+                actionCell.find('.delete-button').show();
+                actionCell.find('.save-button').hide();
+                var dataId = $(this).data('id');
+                updateData(dataId,inputData);
+                refreshTable();
+            });
+
+            $('.delete-button').click(function() {
+                var dataId = $(this).data('id');
+                var data = {
+                    'id':dataId
+                }
+                post('contractor/delete',data);
+                refreshTable();
             });
 
         },
@@ -1364,7 +1548,9 @@ function createTransaction(){
     var depo_id = localStorage.getItem('depo_id');
 
     var tarrif_id = $('#tarrif_id').val();
+    var gatein_id = $('#gateinid').val();
     var labour_hr = $('#labour_hr').val();
+    var qty = $('#qty').val();
     var labour_cost = $('#labour_cost').val();
     var material_cost = $('#material_cost').val();
     var sab_total = $('#sab_total').val();
@@ -1383,29 +1569,18 @@ function createTransaction(){
         'sab_total':sab_total,
         'gst':gst,
         'total':total,
-        'tax_cost':tax_cost
+        'tax_cost':tax_cost,
+        'gatein_id':gatein_id,
+        'qty':qty
     }
 
     post('transcation/create',data)
-
-
+    getTransactionData();
+    getReportingData();
 }
 
 
-$('#transaction_labour_cost, #transaction_material_cost').on('keyup', function() {
 
-console.log('gfgfduhu');
-
-// var material_cost = $('#transaction_material_cost').val();
-// var labour_cost = $('#transaction_labour_cost').val();
-// var tax = $('#transaction_tax').val();
-// var sub_total = parseInt(labour_cost) + parseInt(material_cost);
-// $('#transaction_sub_total').val(sub_total);
-// var tax_cost =  (parseInt(tax) / 100 ) * sub_total;
-// $('#transaction_tax_cost').val(tax_cost);
-// var total = tax_cost + sub_total;
-// $('#transaction_total').val(total);
-});
 
 </script>
 
@@ -1471,6 +1646,8 @@ console.log('gfgfduhu');
                 </div>
 
                 <form id="create_transaction">
+                    <input type="hidden" id="qty">
+                    <input type="hidden" id="gateinid">
                     <input type="hidden" id="tarrif_id">
                     <input type="hidden" id="labour_hr">
                     <input type="hidden" id="labour_cost">
@@ -1505,16 +1682,13 @@ console.log('gfgfduhu');
                                     <th>GST</th>
                                     <th>Tax Cost</th>
                                     <th>Total Cost</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-                
             </div>
         </div>
     </div>

@@ -22,5 +22,7 @@ class Transaction extends Model
         'createdby',
         'updatedby',
         'depo_id',
+        'gatein_id',
+        'qty'
     ];
 }

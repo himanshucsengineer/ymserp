@@ -206,7 +206,7 @@ class MasterDepoController extends Controller
         $contractorDetails->company_phone = is_null($request->company_phone) ? $contractorDetails->company_phone : $request->company_phone;
         $contractorDetails->company_email = is_null($request->company_email) ? $contractorDetails->company_email : $request->company_email;
 
-        $contractorDetails->updatedby = $request->user_id;
+        $contractorDetails->updated_by = $request->user_id;
         $contractorDetails->updated_at = date('Y-m-d H:i:s');;
 
 

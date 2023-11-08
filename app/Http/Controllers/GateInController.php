@@ -51,6 +51,32 @@ class GateInController extends Controller
      */
     public function store(Request $request)
     {
+
+        $rules=[
+            'container_no'=>[
+                'unique:master_categories,gate_ins'
+            ],
+        ];
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('container_no')){
+                $validationFormate->container_no = $messages->first('container_no');
+            }
+
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+
         if ($request->hasFile('container_img')) {
             $container_img = $request->file('container_img');
             $container_img_name = time() . '_' . $container_img->getClientOriginalName();
@@ -188,7 +214,19 @@ class GateInController extends Controller
         }
 
 
-        $gateInDetails->container_no = is_null($request->container_no) ? $gateInDetails->container_no : $request->container_no;
+
+        if($gateInDetails->container_no != $request->container_no){
+            $gateIndata = GateIn::where('container_no',$request->container_no)->get();
+            if(count($gateIndata) > 0){
+                return response()->json([
+                    'status' => "success",
+                    'message' => "Container No Already Exist!"
+                ], 200);
+            }
+
+            $gateInDetails->container_no = is_null($request->container_no) ? $gateInDetails->container_no : $request->container_no;
+        }
+
         $gateInDetails->container_size = is_null($request->container_size) ? $gateInDetails->container_size : $request->container_size;
         $gateInDetails->container_type = is_null($request->container_type) ? $gateInDetails->container_type : $request->container_type;
         $gateInDetails->transport_id = is_null($request->transport_id) ? $gateInDetails->transport_id : $request->transport_id;

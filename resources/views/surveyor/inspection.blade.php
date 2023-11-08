@@ -30,7 +30,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <table id="inspectionData" class="table table-bordered table-hover">
+                            <table id="inspectionData" class="table table-bordered table-hover table-responsive">
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
@@ -38,8 +38,8 @@
                                         <th>Container Image</th>
                                         <th>Container Size</th>
                                         <th>Container Type</th>
-                                        <th>Vhicle No.</th>
-                                        <th>Vhicle image</th>
+                                        <th>Vehicle No.</th>
+                                        <th>Vehicle image</th>
                                         <th>Driver Name</th>
                                         <th>Driver Contact</th>
                                         <th>Action</th>

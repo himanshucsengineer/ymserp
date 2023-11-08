@@ -40,7 +40,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="container_no">Container Number</label>
-                                    <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:100px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
+                                    <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
                                     <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
                                 </div>
                                 <h3 style="text-align:center">OR</h3>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="vehicle_number">Vehicle Number</label>
-                                    <input type="text" class="" style="font-size:100px; width:100%; text-transform:uppercase;" id="vehicle_number" name="vehicle_number" placeholder="">
+                                    <input type="text" class="" style="font-size:50px; width:100%; text-transform:uppercase;" id="vehicle_number" name="vehicle_number" placeholder="">
                                 </div>
                                 <h3 style="text-align:center">OR</h3>
                                 <div class="form-group">
@@ -66,19 +66,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name" placeholder="Enter Driver Name">
-                                </div>
-                                
-
-                                <div class="form-group">
-                                    <label for="contact_number">Driver Contact Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Enter Contact Number">
-                                </div>
-
-                                <div class="form-group">
                                     <label for="container_size">Container Size <span style="color:red;">*</span></label>
-                                    <select name="container_size" id="container_size" class="form-control">
+                                    <select name="container_size" id="container_size" style="font-size:30px; height:50px" class="form-control">
                                         <option value="">Select Container Size</option>
                                         <option value="10">10</option>
                                         <option value="20">20</option>
@@ -90,12 +79,25 @@
 
                                 <div class="form-group">
                                     <label for="container_type">Container Type <span style="color:red;">*</span></label>
-                                    <select name="container_type" id="container_type" class="form-control">
+                                    <select name="container_type" id="container_type" style="font-size:30px; height:50px" class="form-control">
                                         <option value="">Select Container Type</option>
                                         <option value="DRY">DRY</option>
                                         <option value="REEFER">REEFER</option>
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="driver_name" name="driver_name" style="font-size:30px; height:50px" placeholder="Enter Driver Name">
+                                </div>
+                                
+
+                                <div class="form-group">
+                                    <label for="contact_number">Driver Contact Number <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="contact_number" name="contact_number" style="font-size:30px; height:50px" placeholder="Enter Contact Number">
+                                </div>
+
+                                
 
                             </div>
                             <div class="card-footer">

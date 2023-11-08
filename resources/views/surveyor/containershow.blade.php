@@ -80,11 +80,11 @@
 
                                 <div class="form-group">
                                     <label for="inward_date">Inward Date <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="inward_date" name="inward_date" placeholder="Enter inward date">
+                                    <input type="text" class="form-control" id="inward_date" name="inward_date" readonly value="<?= date('Y-m-d')?>" placeholder="Enter inward date">
                                 </div>
                                 <div class="form-group">
                                     <label for="inward_time">Inward Time  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="inward_time" name="inward_time"  placeholder="Enter inward time">
+                                    <input type="text" class="form-control" id="inward_time" name="inward_time" readonly value="<?= date('H:i:s')?>"  placeholder="Enter inward time">
                                 </div>
 
                                 <div class="form-group">
@@ -683,93 +683,7 @@ $(function () {
 
     $('#gateinForm').validate({
     rules: {
-        job_work_no: {
-            required: true,
-        },
-        status_name: {
-            required: true,
-        },
-        gross_weight: {
-            required: true,
-        },
-        tare_weight: {
-            required: true,
-        },
-        vessel_name: {
-            required: true,
-        },
-        grade: {
-            required: true,
-        },
-        sub_lease_unity: {
-            required: true,
-        },
-        voyage: {
-            required: true,
-        },
-        consignee: {
-            required: true,
-        },
-        region: {
-            required: true,
-        },
-        destuffung: {
-            required: true,
-        },
-        rftype: {
-            required: true,
-        },
-
-        empty_repositioning: {
-            required: true,
-        },
-        er_no: {
-            required: true,
-        },
-        remarks: {
-            required: true,
-        },
-
-        container_no: {
-            required: true,
-        },
-        container_type: {
-            required: true,
-        },
-        container_size: {
-            required: true,
-        },
-
-        inward_date: {
-            required: true,
-        },
-        inward_time: {
-            required: true,
-        },
-        driver_name: {
-            required: true,
-        },
-
-        contact_number: {
-            required: true,
-        },
-        third_party: {
-            required: true,
-        },
-        arrive_from: {
-            required: true,
-        },
-
-        port_name: {
-            required: true,
-        },
-
-        transport_id:{
-            required: true,
-        },
-        vehicle_number:{
-            required: true,
-        },
+        
         line_id:{
             required: true,
         },
