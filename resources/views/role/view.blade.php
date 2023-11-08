@@ -50,6 +50,7 @@
                                    
                                 </tbody>
                             </table>
+                            <div id="pagination"></div>
                         </div>
                     </div>
                 </div>
@@ -64,16 +65,22 @@ $(document).ready(function() {
     var checkToken = localStorage.getItem('token');
     refreshTable();
 });
-
 function clearTableBody() {
         $('#table-body').empty();
     }
-function refreshTable(){
+function refreshTable(page){
     clearTableBody()
     var checkToken = localStorage.getItem('token');
+    var url = '';
+
+    if(page){
+        url = `/api/role/getwithpermissions?page=${page}`;
+    }else{
+        url= `/api/role/getwithpermissions`;
+    }
     $.ajax({
         type: "get",
-        url: "/api/role/getwithpermissions",
+        url: url,
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -82,7 +89,7 @@ function refreshTable(){
             var tbody = $('#table-body');
 
             var i =1;
-            response.forEach(function(item) {
+            response.data.forEach(function(item) {
 
                 var outputArray = [];
 
@@ -115,6 +122,55 @@ function refreshTable(){
                 tbody.append(row);
                 i++;
             });
+
+            const paginationDiv = document.getElementById("pagination");
+            paginationDiv.innerHTML = "";
+
+            if (response.pagination.last_page > 1) {
+                const startPage = Math.max(response.pagination.current_page - Math.floor(5 / 2), 1);
+                const endPage = Math.min(startPage + 5 - 1, response.pagination.last_page);
+
+                // Create the "Previous" button
+                if (response.pagination.links.prev) {
+                    var splitPrev = response.pagination.links.prev.split('=');
+                    const prevLink = document.createElement("button");
+                    prevLink.textContent = "Previous";
+                    prevLink.className  = "pagination-btn prev";
+                    prevLink.setAttribute("data-id", splitPrev[1]);
+                    prevLink.href = response.pagination.links.prev;
+                    prevLink.addEventListener("click", function() {
+                        refreshTable(prevLink.getAttribute("data-id"))
+                    });
+                    paginationDiv.appendChild(prevLink);
+                }
+
+                // Create page links within the sliding window
+                for (let page = startPage; page <= endPage; page++) {
+                    var splitPage = response.pagination.links.all_pages[page].split('=');
+                    const pageLink = document.createElement("button");
+                    pageLink.textContent = page;
+                    pageLink.className  = "pagination-btn page";
+                    pageLink.setAttribute("data-id", splitPage[1]);
+                    pageLink.addEventListener("click", function() {
+                        refreshTable(pageLink.getAttribute("data-id"))
+                    });
+                    paginationDiv.appendChild(pageLink);
+                }
+
+                // Create the "Next" button
+                if (response.pagination.links.next) {
+                    var splitNext = response.pagination.links.next.split('=');
+                    const nextLink = document.createElement("button");
+                    nextLink.textContent = "Next";
+                    nextLink.className  = "pagination-btn next";
+                    nextLink.setAttribute("data-id", splitNext[1]);
+
+                    nextLink.addEventListener("click", function() {
+                        refreshTable(nextLink.getAttribute("data-id"))
+                    });
+                    paginationDiv.appendChild(nextLink);
+                }
+            }
 
             $('.edit-button').click(function() {
                 var dataId = $(this).data('id');

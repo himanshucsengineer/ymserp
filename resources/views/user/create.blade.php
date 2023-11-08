@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Login Id <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Login Id">
+                                    <input type="text" class="form-control" id="loginid" name="username" placeholder="Enter Login Id">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password <span style="color:red;">*</span></label>
@@ -208,7 +208,8 @@ $(function () {
         var role_id = $("#role_id").val();
         var category_id = $("#category_id").val();
         var depot_id = $("#depot_id").val();
-        var username = $("#username").val();
+        var username = $("#loginid").val();
+        console.log(username);
         var password = $("#password").val();
         var c_password = $("#c_password").val();
         var recovery_number = $("#recovery_number").val();
@@ -245,8 +246,6 @@ $(function () {
                 callout.remove();
             }, 2000);
         }
-
-        
     }
   });
 

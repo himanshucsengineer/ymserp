@@ -47,21 +47,73 @@ class RoleController extends Controller
         return Role::where('id','!=', 1)->get();
     }
 
-    public function getwithpermissions(){
+    public function getwithpermissions(Request $request){
+
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+
+        
+        $roles = Role::where([
+            ['name', '!=', Null],
+            [function ($query) use ($request) {
+                if (($search = $request->search)) {
+                    $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                        ->get();
+                }
+            }],
+            ['id','!=', 1]
+        ])->paginate($datalimit);
+
         $rolesWithPermissions = [];
 
-        $roles = Role::where('id','!=', 1)->get();
-
-        foreach ($roles as $role) {
+        foreach($roles as $role){
             $permissions = $role->permissions()->pluck('name')->toArray();
-            
             $rolesWithPermissions[] = [
                 'role' => $role->name,
                 'role_id' => $role->id,
                 'permissions' => $permissions,
             ];
+            
         }
-        return response()->json($rolesWithPermissions);
+    	return response()->json([
+            'data' => $rolesWithPermissions,
+            'pagination' => [
+                'current_page' => $roles->currentPage(),
+                'per_page' => $roles->perPage(),
+                'total' => $roles->total(),
+                'last_page' => $roles->lastPage(),
+                'from' => $roles->firstItem(),
+                'to' => $roles->lastItem(),
+                'links' => [
+                    'prev' => $roles->previousPageUrl(),
+                    'next' => $roles->nextPageUrl(),
+                    'all_pages' => $roles->getUrlRange(1, $roles->lastPage()),
+                ],
+            ],
+        ]); 
+
+
     }
 
     public function getbyid(Request $request){

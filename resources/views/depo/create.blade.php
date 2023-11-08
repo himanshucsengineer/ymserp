@@ -32,7 +32,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Depot Address <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" name="address" id="address" placeholder="Enter Depot Address">
+                                    <textarea name="address" id="address" cols="30" rows="3"  class="form-control" placeholder="Enter Address"></textarea>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Depot Active <span style="color:red;">*</span></label>
@@ -43,43 +44,43 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Depot Phone <span style="color:red;">*</span></label>
+                                    <label for="phone">Depot Phone</label>
                                     <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter Depot Phone">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Depot Email <span style="color:red;">*</span></label>
+                                    <label for="email">Depot Email </label>
                                     <input type="email" class="form-control" name="email" id="email" placeholder="Enter Depot Email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tan">Depot TAN Number <span style="color:red;">*</span></label>
+                                    <label for="tan">Depot TAN Number </label>
                                     <input type="text" class="form-control" id="tan" name="tan" placeholder="Enter Depot TAN Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pan">Depot PAN Number <span style="color:red;">*</span></label>
+                                    <label for="pan">Depot PAN Number </label>
                                     <input type="text" class="form-control" id="pan" name="pan" placeholder="Enter Depot PAN Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="service_tax">Depot ServiceTax Number <span style="color:red;">*</span></label>
+                                    <label for="service_tax">Depot ServiceTax Number </label>
                                     <input type="text" class="form-control" id="service_tax" name="service_tax" placeholder="Enter Depot ServiceTax Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="vattin">Depot VatTin  Number <span style="color:red;">*</span></label>
+                                    <label for="vattin">Depot VatTin  Number</label>
                                     <input type="text" class="form-control" id="vattin" name="vattin" placeholder="Enter Depot VatTin  Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="gst">Depot GST  Number <span style="color:red;">*</span></label>
+                                    <label for="gst">Depot GST  Number </label>
                                     <input type="text" class="form-control" id="gst" name="gst" placeholder="Enter Depot GST Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="state">Depot State Name <span style="color:red;">*</span></label>
+                                    <label for="state">Depot State Name </label>
                                     <input type="text" class="form-control" id="state" name="state" placeholder="Enter Depot State Name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="state_code">Depot State Code <span style="color:red;">*</span></label>
+                                    <label for="state_code">Depot State Code </label>
                                     <input type="text" class="form-control" id="state_code" name="state_code" placeholder="Enter Depot State Code">
                                 </div>
                                 <div class="form-group">
-                                    <label for="billing_name">Depot Billing Name <span style="color:red;">*</span></label>
+                                    <label for="billing_name">Depot Billing Name </label>
                                     <input type="text" class="form-control" id="billing_name" name="billing_name" placeholder="Enter Depot Billing Name">
                                 </div>
                                 <hr>
@@ -249,41 +250,8 @@ $(function () {
         },
         status: {
             required: true,
-        },
-        phone: {
-            required: true,
-        },
-        email: {
-            required: true,
-            email:true
-        },
-        tan: {
-            required: true,
-        },
-        pan: {
-            required: true,
-        },
-        service_tax: {
-            required: true,
-        },
-        vattin: {
-            required: true,
-        },
-        gst: {
-            required: true,
-        },
-        state: {
-            required: true,
-        },
-        state_code: {
-            required: true,
-        },
-        billing_name: {
-            required: true,
-        },
-        company_email: {
-            email:true
-        },
+        }
+      
     },
     messages: {
         name: {

@@ -28,7 +28,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="employee_code">Employee Code <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" name="employee_code" id="employee_code" placeholder="Enter Contractor Code">
+                                    <input type="text" class="form-control" name="employee_code" id="employee_code" placeholder="Enter Employee Code">
                                 </div>
                                 <div class="form-group">
                                     <label for="firstname">Employee First Name <span style="color:red;">*</span></label>
@@ -43,9 +43,9 @@
                                     <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter Surname">
                                 </div>
                                 <div class="form-group">
-                                    <label for="contractor_id">Contractor Name <span style="color:red;">*</span></label>
+                                    <label for="contractor_id">On / Off Role <span style="color:red;">*</span></label>
                                     <select name="contractor_id" class="form-control" id="contractor_id">
-                                        <option value="">select Contractor</option>
+                                        <option value="">select An Option</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -57,11 +57,11 @@
                                     <input type="text" class="form-control" name="pincode" id="pincode" placeholder="Enter Employee Pincode">
                                 </div>
                                 <div class="form-group">
-                                    <label for="contact">Employee Contact <span style="color:red;">*</span></label>
+                                    <label for="contact">Employee Contact </label>
                                     <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Employee Contact">
                                 </div>
                                 <div class="form-group">
-                                    <label for="aadhar">Employee Aadhar Number <span style="color:red;">*</span></label>
+                                    <label for="aadhar">Employee Aadhar Number</label>
                                     <input type="text" class="form-control" id="aadhar" name="aadhar" placeholder="Enter Employee Aadhar Number">
                                 </div>
                             </div>
@@ -208,12 +208,6 @@ $(function () {
             required: true,
         },
         contractor_id: {
-            required: true,
-        },
-        contact: {
-            required: true,
-        },
-        aadhar: {
             required: true,
         },
     },

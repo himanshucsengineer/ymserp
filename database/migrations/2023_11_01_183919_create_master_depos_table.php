@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->enum('status',[0,1])->default(1);
-            $table->string('phone')->nullable()->unique();
-            $table->string('email')->nullable()->unique();
-            $table->string('tan')->nullable()->unique();
-            $table->string('pan')->nullable()->unique();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('tan')->nullable();
+            $table->string('pan')->nullable();
             $table->string('service_tax')->nullable();
             $table->string('vattin')->nullable();
-            $table->string('gst')->nullable()->unique();
+            $table->string('gst')->nullable();
             $table->string('state')->nullable();
             $table->string('state_code')->nullable();
             $table->string('billing_name')->nullable();

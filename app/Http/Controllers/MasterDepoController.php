@@ -62,41 +62,6 @@ class MasterDepoController extends Controller
             'status' =>[
                 'required'
             ],
-            'phone' => [
-                'required',
-                'unique:master_depos,phone'
-            ],
-            'email' => [
-                'required',
-                'unique:master_depos,email'
-            ],
-            'tan' => [
-                'required',
-                'unique:master_depos,tan'
-            ],
-            'pan' => [
-                'required',
-                'unique:master_depos,pan'
-            ],
-            'service_tax' => [
-                'required',
-            ],
-            'vattin' => [
-                'required',
-            ],
-            'gst' => [
-                'required',
-                'unique:master_depos,gst'
-            ],
-            'state_code' => [
-                'required'
-            ],
-            'state' => [
-                'required',
-            ],
-            'billing_name' => [
-                'required',
-            ],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -113,36 +78,8 @@ class MasterDepoController extends Controller
             if ($messages->has('status')){
                 $validationFormate->status = $messages->first('status');
             }
-            if ($messages->has('phone')){
-                $validationFormate->phone = $messages->first('phone');
-            }
-            if ($messages->has('email')){
-                $validationFormate->email = $messages->first('email');
-            }
-            if ($messages->has('tan')){
-                $validationFormate->tan = $messages->first('tan');
-            }
-            if ($messages->has('pan')){
-                $validationFormate->pan = $messages->first('pan');
-            }
-            if ($messages->has('service_tax')){
-                $validationFormate->service_tax = $messages->first('service_tax');
-            }
-            if ($messages->has('vattin')){
-                $validationFormate->vattin = $messages->first('vattin');
-            }
-            if ($messages->has('gst')){
-                $validationFormate->gst = $messages->first('gst');
-            }
-            if ($messages->has('state_code')){
-                $validationFormate->state_code = $messages->first('state_code');
-            }
-            if ($messages->has('state')){
-                $validationFormate->state = $messages->first('state');
-            }
-            if ($messages->has('billing_name')){
-                $validationFormate->billing_name = $messages->first('billing_name');
-            }
+           
+           
             $validationError[] = $validationFormate;
 
             return response()->json([
@@ -220,41 +157,8 @@ class MasterDepoController extends Controller
             'status' =>[
                 'required'
             ],
-            'phone' => [
-                'required',
-
-            ],
-            'email' => [
-                'required',
-
-            ],
-            'tan' => [
-                'required',
-
-            ],
-            'pan' => [
-                'required',
-
-            ],
-            'service_tax' => [
-                'required',
-            ],
-            'vattin' => [
-                'required',
-            ],
-            'gst' => [
-                'required',
-
-            ],
-            'state_code' => [
-                'required'
-            ],
-            'state' => [
-                'required',
-            ],
-            'billing_name' => [
-                'required',
-            ],
+           
+          
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -271,36 +175,8 @@ class MasterDepoController extends Controller
             if ($messages->has('status')){
                 $validationFormate->status = $messages->first('status');
             }
-            if ($messages->has('phone')){
-                $validationFormate->phone = $messages->first('phone');
-            }
-            if ($messages->has('email')){
-                $validationFormate->email = $messages->first('email');
-            }
-            if ($messages->has('tan')){
-                $validationFormate->tan = $messages->first('tan');
-            }
-            if ($messages->has('pan')){
-                $validationFormate->pan = $messages->first('pan');
-            }
-            if ($messages->has('service_tax')){
-                $validationFormate->service_tax = $messages->first('service_tax');
-            }
-            if ($messages->has('vattin')){
-                $validationFormate->vattin = $messages->first('vattin');
-            }
-            if ($messages->has('gst')){
-                $validationFormate->gst = $messages->first('gst');
-            }
-            if ($messages->has('state_code')){
-                $validationFormate->state_code = $messages->first('state_code');
-            }
-            if ($messages->has('state')){
-                $validationFormate->state = $messages->first('state');
-            }
-            if ($messages->has('billing_name')){
-                $validationFormate->billing_name = $messages->first('billing_name');
-            }
+           
+           
             $validationError[] = $validationFormate;
 
             return response()->json([
@@ -309,60 +185,14 @@ class MasterDepoController extends Controller
             ], 400);
         }
 
-        $getContractor = MasterDepo::where('id',$request->id)->first();
+
         $contractorDetails = MasterDepo::find($request->id);
 
-        if($getContractor->phone != $request->phone){
-            $phone = MasterDepo::where('phone',$request->phone)->get();
-            if(count($phone) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "phone no. is already Taken"
-                ], 500);
-            }
-            $contractorDetails->phone = is_null($request->phone) ? $contractorDetails->phone : $request->phone;
-        }
-        if($getContractor->email != $request->email){
-            $email = MasterDepo::where('email',$request->email)->get();
-            if(count($email) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "email is already Taken"
-                ], 500);
-            }
-            $contractorDetails->email = is_null($request->email) ? $contractorDetails->email : $request->email;
-        }
-        if($getContractor->tan != $request->tan){
-            $tan = MasterDepo::where('tan',$request->tan)->get();
-            if(count($tan) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "tan no. is already Taken"
-                ], 500);
-            }
-            $contractorDetails->tan = is_null($request->tan) ? $contractorDetails->tan : $request->tan;
-        }
-        if($getContractor->pan != $request->pan){
-            $pan = MasterDepo::where('pan',$request->pan)->get();
-            if(count($pan) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Pan NO. is already Taken"
-                ], 500);
-            }
-            $contractorDetails->pan = is_null($request->pan) ? $contractorDetails->pan : $request->pan;
-        }
-        if($getContractor->gst != $request->gst){
-            $getgst = MasterDepo::where('gst',$request->gst)->get();
-            if(count($getgst) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Gst NO. is already Taken"
-                ], 500);
-            }
-            $contractorDetails->gst = is_null($request->gst) ? $contractorDetails->gst : $request->gst;
-        }
-
+        $contractorDetails->phone = is_null($request->phone) ? $contractorDetails->phone : $request->phone;
+        $contractorDetails->email = is_null($request->email) ? $contractorDetails->email : $request->email;
+        $contractorDetails->tan = is_null($request->tan) ? $contractorDetails->tan : $request->tan;
+        $contractorDetails->pan = is_null($request->pan) ? $contractorDetails->pan : $request->pan;       
+        $contractorDetails->gst = is_null($request->gst) ? $contractorDetails->gst : $request->gst;
         $contractorDetails->name = is_null($request->name) ? $contractorDetails->name : $request->name;
         $contractorDetails->address = is_null($request->address) ? $contractorDetails->address : $request->address;
         $contractorDetails->status = is_null($request->status) ? $contractorDetails->status : $request->status;

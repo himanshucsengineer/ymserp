@@ -76,7 +76,6 @@ class MasterRepairController extends Controller
         $rules=[
             'repair_code'=>[
                 'required',
-                'unique:master_repairs,repair_code'
             ],
             'desc' => [
                 'required'
@@ -180,25 +179,9 @@ class MasterRepairController extends Controller
                 'message' => $validationError
             ], 400);
         }
-
-
-        
-        $getContractor = MasterRepair::where('id',$request->id)->first();
         
         $contractorDetails = MasterRepair::find($request->id);
-
-        if($getContractor->repair_code != $request->repair_code ){
-
-            $repair_code = MasterRepair::where('repair_code',$request->repair_code)->get();
-            if(count($repair_code) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Repair Code is already Taken"
-                ], 500);
-            }
-            $contractorDetails->repair_code = is_null($request->repair_code) ? $contractorDetails->repair_code : $request->repair_code;
-        }
-
+        $contractorDetails->repair_code = is_null($request->repair_code) ? $contractorDetails->repair_code : $request->repair_code;
 
         $contractorDetails->damage_id =  is_null($request->damage_id) ? $contractorDetails->damage_id : $request->damage_id;
         $contractorDetails->desc = is_null($request->desc) ? $contractorDetails->desc : $request->desc;

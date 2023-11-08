@@ -98,14 +98,7 @@ class MasterEmployeeController extends Controller
             'contractor_id' => [
                 'required',
             ],
-            'contact' => [
-                'required',
-                'unique:master_employees,contact'
-            ],
-            'aadhar' => [
-                'required',
-                'unique:master_employees,aadhar'
-            ]
+            
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -125,12 +118,7 @@ class MasterEmployeeController extends Controller
             if ($messages->has('contractor_id')){
                 $validationFormate->contractor_id = $messages->first('contractor_id');
             }
-            if ($messages->has('contact')){
-                $validationFormate->contact = $messages->first('contact');
-            }
-            if ($messages->has('aadhar')){
-                $validationFormate->aadhar = $messages->first('aadhar');
-            }
+            
         
             $validationError[] = $validationFormate;
 
@@ -203,14 +191,7 @@ class MasterEmployeeController extends Controller
             'contractor_id' => [
                 'required',
             ],
-            'contact' => [
-                'required',
 
-            ],
-            'aadhar' => [
-                'required',
-
-            ]
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -230,13 +211,7 @@ class MasterEmployeeController extends Controller
             if ($messages->has('contractor_id')){
                 $validationFormate->contractor_id = $messages->first('contractor_id');
             }
-            if ($messages->has('contact')){
-                $validationFormate->contact = $messages->first('contact');
-            }
-            if ($messages->has('aadhar')){
-                $validationFormate->aadhar = $messages->first('aadhar');
-            }
-        
+           
             $validationError[] = $validationFormate;
 
             return response()->json([
@@ -262,27 +237,9 @@ class MasterEmployeeController extends Controller
             $contractorDetails->employee_code = is_null($request->employee_code) ? $contractorDetails->employee_code : $request->employee_code;
         }
 
-        if($getContractor->contact != $request->contact){
-            $contact = MasterEmployee::where('contact',$request->contact)->get();
-            if(count($contact) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Contact is already Taken"
-                ], 500);
-            }
-            $contractorDetails->contact = is_null($request->contact) ? $contractorDetails->contact : $request->contact;
-        }
-
-        if($getContractor->aadhar != $request->aadhar){
-            $aadhar = MasterContractor::where('aadhar',$request->aadhar)->get();
-            if(count($aadhar) > 0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "gaadharst is already Taken"
-                ], 500);
-            }
-            $contractorDetails->aadhar = is_null($request->aadhar) ? $contractorDetails->aadhar : $request->aadhar;
-        }
+        
+        $contractorDetails->contact = is_null($request->contact) ? $contractorDetails->contact : $request->contact;
+        $contractorDetails->aadhar = is_null($request->aadhar) ? $contractorDetails->aadhar : $request->aadhar;
 
         $contractorDetails->firstname =  is_null($request->firstname) ? $contractorDetails->firstname : $request->firstname;
         $contractorDetails->middlename = is_null($request->middlename) ? $contractorDetails->middlename : $request->middlename;

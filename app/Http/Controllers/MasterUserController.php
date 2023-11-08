@@ -198,6 +198,15 @@ class MasterUserController extends Controller
             ], 400);
         }
 
+        $getUser = User::where('employee_id',$request->employee_id)->get();
+
+        if(count($getUser) > 0){
+            return response()->json([
+                'status' => "error",
+                'message' => "Employee is already Assigned!"
+            ], 500);
+        }
+
         $roleDetails = Role::find($request->role_id);
       
         $user = User::create([

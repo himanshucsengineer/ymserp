@@ -79,7 +79,6 @@ class MasterMaterialController extends Controller
         $rules=[
             'material_code'=>[
                 'required',
-                'unique:master_materials,material_code'
             ],
             'desc' => [
                 'required'
@@ -208,14 +207,12 @@ class MasterMaterialController extends Controller
                 'message' => $validationError
             ], 400);
         }
-        $getContractor = MasterMaterial::where('id',$request->id)->first();
 
 
         $contractorDetails = MasterMaterial::find($request->id);
 
-        if($getContractor->material_code != $request->material_code){
-            $contractorDetails->material_code = is_null($request->material_code) ? $contractorDetails->material_code : $request->material_code;
-        }
+        $contractorDetails->material_code = is_null($request->material_code) ? $contractorDetails->material_code : $request->material_code;
+
         $contractorDetails->desc = is_null($request->desc) ? $contractorDetails->desc : $request->desc;
         $contractorDetails->damage_id = is_null($request->damage_id) ? $contractorDetails->damage_id : $request->damage_id;
         $contractorDetails->repiar_id = is_null($request->repiar_id) ? $contractorDetails->repiar_id : $request->repiar_id;
