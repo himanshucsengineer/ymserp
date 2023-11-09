@@ -117,7 +117,10 @@ class GateInController extends Controller
             'contact_number'=> $request->contact_number,
             'depo_id' => $request->depo_id,
             'createdby' => $request->user_id,
-            'gateintype' => $gateintype
+            'gateintype' => $gateintype,
+
+            'inward_date' => date('Y-m-d'),
+            'inward_time' => date('H:i:s'),
         ]);
 
 

@@ -45,6 +45,8 @@
                                 <div class="form-group">
                                     <label for="container_no">Container Number <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                    <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
+
                                 </div>
 
                                 <div class="form-group">
