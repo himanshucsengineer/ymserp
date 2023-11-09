@@ -222,9 +222,9 @@ class GateInController extends Controller
             $gateIndata = GateIn::where('container_no',$request->container_no)->get();
             if(count($gateIndata) > 0){
                 return response()->json([
-                    'status' => "success",
+                    'status' => "error",
                     'message' => "Container No Already Exist!"
-                ], 200);
+                ], 500);
             }
 
             $gateInDetails->container_no = is_null($request->container_no) ? $gateInDetails->container_no : $request->container_no;
