@@ -54,7 +54,7 @@ class GateInController extends Controller
 
         $rules=[
             'container_no'=>[
-                'unique:master_categories,gate_ins'
+                'unique:gate_ins,container_no'
             ],
         ];
 
