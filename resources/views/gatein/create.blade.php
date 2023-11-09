@@ -230,6 +230,7 @@ $(function () {
                     setTimeout(function() {
                         callout.remove();
                     }, 2000);
+                    location.reload();
                 },
                 error: function(error) {
                     var finalValue = '';
