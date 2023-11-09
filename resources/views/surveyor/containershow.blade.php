@@ -44,7 +44,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="container_no">Container Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                    <input type="text" style="text-transform:uppercase;" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
                                     <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
 
                                 </div>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="vehicle_number">Vehicle Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
+                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="vehicle_img">Vehicle Image</label>
