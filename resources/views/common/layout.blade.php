@@ -206,9 +206,9 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
+                    <!-- <div class="image">
                         <img src="/assets/img/logo_icon.png" class="img-circle " alt="User Image">
-                    </div>
+                    </div> -->
                     <div class="info">
                         <a href="#" class="d-block" id="username"></a>
                     </div>

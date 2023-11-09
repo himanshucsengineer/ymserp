@@ -44,7 +44,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="container_no">Container Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                    <input type="text" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
                                 </div>
 
                                 <div class="form-group">
@@ -299,6 +299,43 @@
 </div>
 
 <script>
+
+function validateInput(input) {
+    input.style.color = 'black';
+    document.getElementById('errorText').textContent = "";
+    const inputField = document.getElementById('container_no');
+    inputField.setAttribute('maxlength', '11');
+    const inputValue = input.value;
+
+    let checkFirstChar = isNaN(inputValue);
+    if(checkFirstChar == false){
+    document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+    inputField.setAttribute('maxlength', '1');
+    input.style.color = 'red';
+    }
+
+    if(inputValue.length <= 4){
+    const checkNumber = /\d/; // This regex matches any digit (0-9)
+    let chechkNumberforstart =  checkNumber.test(inputValue);
+    if(chechkNumberforstart){
+        document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+        inputField.setAttribute('maxlength', inputValue.length);
+        input.style.color = 'red';
+    }
+    }
+
+    if(inputValue.length > 4){
+        const part2 = inputValue.substring(4);
+        let checkNumber = isNaN(part2);
+        if(checkNumber == true){
+            document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+            inputField.setAttribute('maxlength', inputValue.length);
+            input.style.color = 'red';
+        }
+    }
+}
+
+
 $(document).ready(function () {
     var containerid = <?= $getid[1]?>;
     var checkToken = localStorage.getItem('token');
