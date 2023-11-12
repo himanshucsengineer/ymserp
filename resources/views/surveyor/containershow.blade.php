@@ -43,7 +43,7 @@
                         <form id="gateinForm" novalidate="novalidate">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="container_no">Container Number <span style="color:red;">*</span></label>
+                                    <label for="container_no">Container Number</label>
                                     <input type="text" style="text-transform:uppercase;" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
                                     <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
 
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="container_size">Container Size <span style="color:red;">*</span></label>
+                                    <label for="container_size">Container Size</label>
                                     <select name="container_size" id="container_size" class="form-control">
                                         <option value="">Select Container Size</option>
                                         <option value="10">10</option>
@@ -66,7 +66,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="container_type">Container Type <span style="color:red;">*</span></label>
+                                    <label for="container_type">Container Type</label>
                                     <select name="container_type" id="container_type" class="form-control">
                                         <option value="">Select Container Type</option>
                                         <option value="DRY">DRY</option>
@@ -74,27 +74,27 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="transport_id">Transport <span style="color:red;">*</span></label>
+                                    <label for="transport_id">Transport</label>
                                     <select name="transport_id" id="transport_id" class="form-control">
                                         <option value="">Select Transport</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inward_date">Inward Date <span style="color:red;">*</span></label>
+                                    <label for="inward_date">Inward Date</label>
                                     <input type="text" class="form-control" id="inward_date" name="inward_date" readonly value="<?= date('Y-m-d')?>" placeholder="Enter inward date">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inward_time">Inward Time  <span style="color:red;">*</span></label>
+                                    <label for="inward_time">Inward Time</label>
                                     <input type="text" class="form-control" id="inward_time" name="inward_time" readonly value="<?= date('H:i:s')?>"  placeholder="Enter inward time">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
+                                    <label for="driver_name">Driver Name</label>
                                     <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="vehicle_number">Vehicle Number <span style="color:red;">*</span></label>
+                                    <label for="vehicle_number">Vehicle Number</label>
                                     <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
                                 </div>
                                 <div class="form-group">
@@ -103,11 +103,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="contact_number">Contact Number <span style="color:red;">*</span></label>
+                                    <label for="contact_number">Contact Number</label>
                                     <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="third_party">Third Party <span style="color:red;">*</span></label>
+                                    <label for="third_party">Third Party</label>
                                     <select name="third_party" id="third_party"  class="form-control">
                                         <option value="">Select an option</option>
                                         <option value="yes">yes</option>
@@ -122,53 +122,53 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="arrive_from">Arrive From <span style="color:red;">*</span></label>
+                                    <label for="arrive_from">Arrive From</label>
                                     <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="port_name">Port Name <span style="color:red;">*</span></label>
+                                    <label for="port_name">Port Name</label>
                                     <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="driver_photo">Driver Photo <span style="color:red;">*</span></label></br>
+                                    <label for="driver_photo">Driver Photo</label></br>
                                     <input type="file" id="driver_photo" name="driver_photo" class="form-control">
                                     <div class="img_prv_box"><span class="driver_photo"></span></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="challan">Challan <span style="color:red;">*</span></label></br>
+                                    <label for="challan">Challan</label></br>
                                     <input type="file" id="challan" name="challan" class="form-control">
                                     <div class="img_prv_box"><span class="challan"></span></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="driver_license">Driver License <span style="color:red;">*</span></label></br>
+                                    <label for="driver_license">Driver License</label></br>
                                     <input type="file" id="driver_license" name="driver_license" class="form-control">
                                     <div class="img_prv_box"><span class="driver_license"></span></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="do_copy">D.O. Copy <span style="color:red;">*</span></label></br>
+                                    <label for="do_copy">D.O. Copy</label></br>
                                     <input type="file" id="do_copy" name="do_copy" class="form-control">
                                     <div class="img_prv_box"><span class="do_copy"></span></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="aadhar">Aadhar Card <span style="color:red;">*</span></label></br>
+                                    <label for="aadhar">Aadhar Card</label></br>
                                     <input type="file" id="aadhar" name="aadhar" class="form-control">
                                     <div class="img_prv_box"><span class="aadhar"></span></div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="pan">PAN Card <span style="color:red;">*</span></label></br>
+                                    <label for="pan">PAN Card</label></br>
                                     <input type="file" id="pan" name="pan" class="form-control">
                                     <div class="img_prv_box"><span class="pan"></span></div>
                                 </div>
                                 </hr>
                                 <div class="form-group">
-                                    <label for="status_name">Status Name <span style="color:red;">*</span></label>
+                                    <label for="status_name">Status Name</label>
                                     <select class="form-control" name="status_name" id="status_name">
                                         <option value="">Select an option</option>
                                         <option value=" DIRECT A/V "> DIRECT A/V </option>
@@ -191,27 +191,27 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="job_work_no">Job Work No <span style="color:red;">*</span></label>
+                                    <label for="job_work_no">Job Work No</label>
                                     <input type="text" class="form-control" id="job_work_no" name="job_work_no" placeholder="Enter Job Work No">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="gross_weight">Gross Weight <span style="color:red;">*</span></label>
+                                    <label for="gross_weight">Gross Weight</label>
                                     <input type="text" class="form-control" id="gross_weight" name="gross_weight" placeholder="Enter Gross Weight">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tare_weight">Tare Weight <span style="color:red;">*</span></label>
+                                    <label for="tare_weight">Tare Weight</label>
                                     <input type="text" class="form-control" id="tare_weight" name="tare_weight" placeholder="Enter Tare Weight">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="vessel_name">Vessel Name <span style="color:red;">*</span></label>
+                                    <label for="vessel_name">Vessel Name</label>
                                     <input type="text" class="form-control" id="vessel_name" name="vessel_name"  placeholder="Enter Vessel Name">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="grade">Grade <span style="color:red;">*</span></label>
+                                    <label for="grade">Grade</label>
                                     <select name="grade" id="grade" class="form-control">
                                         <option value="">Select Grade</option>
                                         <option value="A">A</option>
@@ -222,7 +222,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sub_lease_unity">Sub-Lease Unity <span style="color:red;">*</span></label>
+                                    <label for="sub_lease_unity">Sub-Lease Unity</label>
                                     <select name="sub_lease_unity" id="sub_lease_unity" class="form-control">
                                         <option value="">select an option</option>
                                         <option value="yes">yes</option>
@@ -231,19 +231,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="voyage">Voyage <span style="color:red;">*</span></label>
+                                    <label for="voyage">Voyage</label>
                                     <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="consignee">Consignee / Tranport <span style="color:red;">*</span></label>
+                                    <label for="consignee">Consignee / Tranport</label>
                                     <select name="consignee" id="consignee" class="form-control">
                                         <option value="">please Select An Option</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="region">Region <span style="color:red;">*</span></label>
+                                    <label for="region">Region</label>
                                     <select name="region" id="region" class="form-control">
                                         <option value="">Select Region</option>
                                         <option value="DOMESTIC">DOMESTIC</option>
@@ -252,7 +252,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="destuffung">Destuffung <span style="color:red;">*</span></label>
+                                    <label for="destuffung">Destuffung</label>
                                     <select name="destuffung" id="destuffung" class="form-control">
                                         <option value="">Select destuffung</option>
                                         <option value="FD">FD</option>
@@ -261,7 +261,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="rftype">RF Type <span style="color:red;">*</span></label>
+                                    <label for="rftype">RF Type</label>
                                     <select class="form-control" name="rftype" id="rftype">
                                         <option value="">select an option</option>
                                         <option value="HUMANITY-NO">HUMANITY-NO</option>
@@ -271,7 +271,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="empty_repositioning">Empty Repositioning <span style="color:red;">*</span></label>
+                                    <label for="empty_repositioning">Empty Repositioning</label>
                                     <select name="empty_repositioning" id="empty_repositioning" class="form-control">
                                         <option value="">Select Empty Repositioning</option>
                                         <option value="YES">YES</option>
@@ -280,12 +280,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="er_no">ER Number <span style="color:red;">*</span></label>
+                                    <label for="er_no">ER Number</label>
                                     <input type="text" class="form-control" id="er_no" name="er_no"  placeholder="Enter ER Number">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="remarks">Remarks <span style="color:red;">*</span></label>
+                                    <label for="remarks">Remarks</label>
                                     <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
                                 </div>
                             </div>

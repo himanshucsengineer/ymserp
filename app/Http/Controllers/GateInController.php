@@ -35,7 +35,6 @@ class GateInController extends Controller
     }
 
 
-
     public function filterByDate(Request $request){
         
         $datalimit = '';
@@ -75,13 +74,13 @@ class GateInController extends Controller
 
             $gateInData = GateIn::where([
                 ['status','In']
-            ])->whereBetween('inward_date', [$startDate, $endDate])->paginate($datalimit);
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
             $gateInData = GateIn::where([
                 ['status','In'],
                 ['depo_id',$request->depo_id],
-            ])->whereBetween('inward_date', [$startDate, $endDate])->paginate($datalimit);
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }
         
        
@@ -166,7 +165,7 @@ class GateInController extends Controller
                     }
                 }],
                 ['status','In']
-            ])->paginate($datalimit);
+            ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
             $gateInData = GateIn::where([
@@ -185,7 +184,7 @@ class GateInController extends Controller
                 }],
                 ['status','In'],
                 ['depo_id',$request->depo_id],
-            ])->paginate($datalimit);
+            ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
        

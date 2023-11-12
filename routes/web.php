@@ -60,11 +60,12 @@ Route::get('/permission/all', 'App\Http\Controllers\PermissionController@all');
 
 
 Route::get('/gatein/create', 'App\Http\Controllers\GateInController@index');
+
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');
 Route::get('/surveyor/containershow', 'App\Http\Controllers\ContainerVerifyController@index');
 Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\ContainerVerifyController@masterserveyor');
 
-
+Route::get('/genrateastimate', 'App\Http\Controllers\PdfController@genrateastimate');
 
 
 
