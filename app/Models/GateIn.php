@@ -41,5 +41,6 @@ class GateIn extends Model
         'container_img',
         'vehicle_img',
         'gateintype',
+        'status'
     ];
 }

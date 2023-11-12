@@ -107,13 +107,91 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <h3>Inward Entry</h3>
+                        <div class="card-body">
+                            <table id="inspectionData" class="table table-bordered table-hover table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Container No.</th>
+                                        <th>Container Image</th>
+                                        <th>Container Size</th>
+                                        <th>Container Type</th>
+                                        <th>Vehicle No.</th>
+                                        <th>Vehicle image</th>
+                                        <th>Driver Name</th>
+                                        <th>Driver Contact</th>
+                                        <!-- <th>Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
 
 <script>
 $(document).ready(function () {
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
 
+    $.ajax({
+        type: "post",
+        url: "/api/gatein/getInspectionData",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function(response) {
+            var tbody = $('#table-body');
+
+            var i =1;
+            response.forEach(function(item) {
+                var container_img = '';
+                if(item.container_img){
+                    container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
+                }else{
+                    container_img = "No Imgae Available";
+                }
+                var vehicle_img = '';
+                if(item.vehicle_img){
+                    vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
+                }else{
+                    vehicle_img = "No Imgae Available";
+                }
+
+                var row = $('<tr>');
+                row.append($('<td>').text(i));
+                row.append($('<td>').append(item.container_no));
+                row.append($('<td>').append(container_img));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.vehicle_number));
+                row.append($('<td>').append(vehicle_img));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                tbody.append(row);
+                i++;
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
     
 // Listen for changes in the file input
 $('#container_img').on('change', function (e) {

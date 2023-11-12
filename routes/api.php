@@ -155,6 +155,8 @@ $api->version('v1', function($api){
         $api->post('/update', 'App\Http\Controllers\GateInController@update');
 
         $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
+        $api->post('/filterByDate', 'App\Http\Controllers\GateInController@filterByDate');
+
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){

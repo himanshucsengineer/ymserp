@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('container_img')->nullable();
             $table->string('vehicle_img')->nullable();
             $table->string('gateintype')->nullable();
+            $table->enum('status',['In','Out']);
             $table->timestamps();
         });
     }
