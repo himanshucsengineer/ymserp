@@ -156,10 +156,8 @@ $api->version('v1', function($api){
         $api->post('/update', 'App\Http\Controllers\GateInController@update');
         $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
         $api->post('/filterByDate', 'App\Http\Controllers\GateInController@filterByDate');
-
         $api->post('/updateestimate', 'App\Http\Controllers\GateInController@updateestimate');
-
-
+        $api->post('/updateapprove', 'App\Http\Controllers\GateInController@updateapprove');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
@@ -172,5 +170,14 @@ $api->version('v1', function($api){
         $api->post('/getbytarrif','App\Http\Controllers\TransactionController@getbytarrif');
         $api->post('/getbygatein','App\Http\Controllers\TransactionController@getbygatein');
     });
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'supervisor'], function($api){
+        $api->post('/getInspectionDataSupervisor', 'App\Http\Controllers\GateInController@getInspectionDataSupervisor');
+        $api->post('/filterByDateSupervisor', 'App\Http\Controllers\GateInController@filterByDateSupervisor');
+
+        $api->post('/filterbystatus', 'App\Http\Controllers\GateInController@filterbystatus');
+
+    });
+
 
 });

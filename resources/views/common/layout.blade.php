@@ -294,7 +294,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item hidden" id="SURVEYOR">
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -305,7 +305,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item" id="inspection">
-                                    <a href="/surveyor/inspection" class="nav-link">
+                                    <a href="/supervisor/inspection" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Inspection</p>

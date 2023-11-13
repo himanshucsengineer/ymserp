@@ -24,10 +24,15 @@ class GateInController extends Controller
     {
         return view('gatein.create');
     }
-
+    
     public function inspection()
     {
         return view('surveyor.inspection');
+    }
+
+    public function supervisor_inspection()
+    {
+        return view('supervisor.inspection');
     }
 
     public function reports(){
@@ -36,6 +41,91 @@ class GateInController extends Controller
 
     public function getDataById(Request $request){
         return GateIn::where('id',$request->id)->first();
+    }
+    
+
+
+    public function filterByDateSupervisor(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->startDate != '' && $request->endDate ==  ''){
+            $startDate = $request->startDate;
+            $endDate = date('Y-m-d');
+        }else if($request->startDate == '' && $request->endDate !=  ''){
+            $endDate = $request->endDate;
+            $startDate = date('Y-m-d');
+        }else if($request->startDate != '' && $request->endDate !=  ''){
+            $startDate = $request->startDate;
+            $endDate = $request->endDate;
+        }
+
+        if($request->user_id == 1){
+
+            $gateInData = GateIn::where([
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $gateInData = GateIn::where([
+                ['depo_id',$request->depo_id],
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+       
+
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+            $formetedData[] = [
+                'container_no' => $gateIn->container_no,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'contact_number' => $gateIn->contact_number,
+                'driver_name' => $gateIn->driver_name,
+                'inward_no' => $gateIn->inward_no,
+                'container_img' => $gateIn->container_img,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
     }
 
 
@@ -126,6 +216,210 @@ class GateInController extends Controller
         ]); 
     }
 
+
+
+    public function filterbystatus(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+
+        if($request->status == "Gate In"){
+            $field = "status";
+            $value = "In";
+        }else if($request->status == "Gate Out"){
+            $field = "status";
+            $value = "Out";
+        }else if($request->status == "Inspection Done"){
+            $field = "is_estimate_done";
+            $value = 1;
+        }
+        else if($request->status == "Inspection Approved"){
+            $field = "is_approve";
+            $value = 1;
+        }
+        else if($request->status == "Inspection Pending"){
+            $field = "is_estimate_done";
+            $value = 0;
+        }
+        else if($request->status == "Repair Pending"){
+            $field = "is_repaired";
+            $value = 0;
+        }
+        else if($request->status == "Repair Done"){
+            $field = "is_repaired";
+            $value = 1;
+        }
+
+
+        if($request->user_id == 1){
+            if($request->status == "All"){
+                $gateInData = GateIn::where([
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [$field,$value],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }
+        }else{
+            if($request->status == "All"){
+                $gateInData = GateIn::where([
+                    ['depo_id',$request->depo_id],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [$field,$value],
+                    ['depo_id',$request->depo_id],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }
+            
+        }
+        
+       
+
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+            $formetedData[] = [
+                'container_no' => $gateIn->container_no,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'contact_number' => $gateIn->contact_number,
+                'driver_name' => $gateIn->driver_name,
+                'inward_no' => $gateIn->inward_no,
+                'container_img' => $gateIn->container_img,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
+
+
+
+    public function getInspectionDataSupervisor(Request $request){
+        
+        
+
+
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $gateInData = GateIn::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $gateInData = GateIn::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+       
+
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+            $formetedData[] = [
+                'container_no' => $gateIn->container_no,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'contact_number' => $gateIn->contact_number,
+                'driver_name' => $gateIn->driver_name,
+                'inward_no' => $gateIn->inward_no,
+                'container_img' => $gateIn->container_img,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
 
 
     public function getInspectionData(Request $request){
@@ -456,6 +750,26 @@ class GateInController extends Controller
         $gateInDetails->estimate_updatedby = $request->user_id;
         $gateInDetails->estimate_updated_at = date('Y-m-d H:i:s');
 
+        $gateInDetails  = $gateInDetails->save();
+
+        if($gateInDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
+    }
+
+    public function updateapprove(Request $request){
+        $gateInDetails = GateIn::find($request->gateinid);
+        $gateInDetails->is_approve = 1;
+        $gateInDetails->approve_updatedby = $request->user_id;
+        $gateInDetails->approve_updatedat = date('Y-m-d H:i:s');
         $gateInDetails  = $gateInDetails->save();
 
         if($gateInDetails){

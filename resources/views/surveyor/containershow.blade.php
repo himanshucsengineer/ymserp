@@ -1,5 +1,8 @@
 <?php $currentUrl = url()->full(); 
-    $getid = explode('=',$currentUrl);
+    $breakurl = explode('=',$currentUrl);
+    $getid = explode('&',$breakurl[1]);
+    // print_r($getid);
+    // die;
 ?>
 
 @extends('common.layout')
@@ -337,7 +340,7 @@ function validateInput(input) {
 
 
 $(document).ready(function () {
-    var containerid = <?= $getid[1]?>;
+    var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
@@ -548,7 +551,8 @@ function getTranport(id){
 }
 
 function getverifydata(){
-    var containerid = <?= $getid[1]?>;
+    var containerid = <?= $getid[0]?>;
+    
     var checkToken = localStorage.getItem('token'); 
     $.ajax({
         type: "POST",
@@ -582,13 +586,26 @@ function getverifydata(){
     });
 }
 
+<?php 
+
+    if(isset($breakurl[2])){
+        $checkSupervisor = 1;
+    }else{
+        $checkSupervisor = 0;
+    }
+?>
+
 
 
 $(function () {
+    
+
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-    var containerid = <?= $getid[1]?>;
+    var containerid = <?= $getid[0]?>;
+    
+
     $.validator.setDefaults({
     submitHandler: function () {
         var status_name = $("#status_name").val();
@@ -693,7 +710,12 @@ $(function () {
                     //     callout.remove();
                     // }, 2000);
                     post('containerverify/create',newdata)
-                    window.location = `/surveyor/masterserveyor?id=${containerid}`
+                        var checkSuperbisor = <?php echo $checkSupervisor?>;
+                    if(checkSuperbisor == 1){
+                        window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
+                    }else{
+                        window.location = `/surveyor/masterserveyor?id=${containerid}`
+                    }
                 },
                 error: function(error) {
                     var finalValue = '';

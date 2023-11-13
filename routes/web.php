@@ -68,6 +68,7 @@ Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\ContainerVerifyCont
 
 Route::get('/genrateastimate', 'App\Http\Controllers\PdfController@genrateastimate');
 
+Route::get('/supervisor/inspection', 'App\Http\Controllers\GateInController@supervisor_inspection');
 
 
 

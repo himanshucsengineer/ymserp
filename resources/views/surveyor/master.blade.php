@@ -1,5 +1,11 @@
 <?php $currentUrl = url()->full(); 
-    $getid = explode('=',$currentUrl);
+    $breakurl = explode('=',$currentUrl);
+    $getid = explode('&',$breakurl[1]);
+    if(isset($breakurl[2])){
+        $checkSupervisor = 1;
+    }else{
+        $checkSupervisor = 0;
+    }
 ?>
 
 @extends('common.layout')
@@ -817,7 +823,7 @@ a.open:hover .circle img {
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                                <button data-toggle="modal" data-target="#modal-default">Save Estimate</button>
+                                <button data-toggle="modal" data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
                                 <div class="card mt-5">
                                     <div class="card-body p-0">
                                         <table class="table table-striped table-responsive">
@@ -922,7 +928,7 @@ function showDoor() {
 
 
 function printastimate(){
-    // var containerid = <?= $getid[1]?>;
+    // var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     $.ajax({
         type: "get",
@@ -948,7 +954,7 @@ $('.open').click(function() {
 });
 
 $(document).ready(function() {
-    var containerid = <?= $getid[1]?>;
+    var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     $.ajax({
         type: "POST",
@@ -1599,9 +1605,18 @@ function updateEstimate(){
         'depo_id':depo_id,
         'gateinid':gateinid
     }
-    post('gatein/updateestimate',data);
 
-    location.href="/surveyor/inspection";
+    var checkSuperVisor = <?php echo $checkSupervisor;?>
+
+    if(checkSuperVisor == 1){
+        post('gatein/updateapprove',data);
+        location.href="/supervisor/inspection";
+    }else{
+        post('gatein/updateestimate',data);
+        location.href="/surveyor/inspection";
+    }
+
+    
 
 }
 
@@ -1751,8 +1766,8 @@ function updateEstimate(){
                 </button>
             </div>
             <div class="modal-body">
-                <input type="hidden" id="estimate_gate_in" value="<?php echo  $getid[1]?>">
-                <h4>Are You Sure To Submit This Estimate?</h4>
+                <input type="hidden" id="estimate_gate_in" value="<?php echo  $getid[0]?>">
+                <h4>Are You Sure To Submit?</h4>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
