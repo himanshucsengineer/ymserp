@@ -30,6 +30,10 @@ class GateInController extends Controller
         return view('surveyor.inspection');
     }
 
+    public function reports(){
+        return view('surveyor.report');
+    }
+
     public function getDataById(Request $request){
         return GateIn::where('id',$request->id)->first();
     }
