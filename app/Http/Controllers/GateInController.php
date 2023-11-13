@@ -46,7 +46,7 @@ class GateInController extends Controller
         if($request->page == "*"){
             $datalimit= 999999999;
         }else{
-            $datalimit = 1;
+            $datalimit = 25;
         }
 
         if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
@@ -135,7 +135,7 @@ class GateInController extends Controller
         if($request->page == "*"){
             $datalimit= 999999999;
         }else{
-            $datalimit = 1;
+            $datalimit = 25;
         }
 
         if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){

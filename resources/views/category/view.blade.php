@@ -11,7 +11,7 @@
 }
 .form-control{
     width:200px !important;
-}
+} 
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

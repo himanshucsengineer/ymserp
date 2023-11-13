@@ -434,7 +434,9 @@ $(function () {
                     setTimeout(function() {
                         callout.remove();
                     }, 2000);
-                    location.reload();
+                    // location.reload();
+                    $("#gateinForm")[0].reset();
+                    refreshTable();
                 },
                 error: function(error) {
                     var finalValue = '';
