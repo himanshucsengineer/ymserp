@@ -122,7 +122,7 @@ class MasterLineController extends Controller
             'depo_id' => $request->depo_id,
             'containerSize' => $request->containerSize,
             'containerType' => $request->containerType,
-
+            'line_budget' =>$request->line_budget
         ]);
 
 

@@ -38,6 +38,7 @@ class MasterLine extends Model
         'depo_id',
         'containerSize',
         'containerType',
+        'line_budget'
 
     ];
 }

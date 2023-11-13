@@ -82,6 +82,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="line_budget">Line Budget <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="line_budget" name="line_budget" placeholder="Enter Line Budget">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="free_days">Free Days <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="free_days" name="free_days" placeholder="Enter Free Days">
                                 </div>
@@ -298,15 +303,13 @@ $(function () {
         var pan = $("#pan").val();
         var gst_state = $("#gst_state").val();
         var state_code = $("#state_code").val();
-
+        var line_budget = $('#line_budget').val();
         var containerSize = $("#containerSize").val();
         var containerType = $("#containerType").val();
 
-
-
             var formData = new FormData();
-
             formData.append('name', name);
+            formData.append('line_budget', line_budget);
             formData.append('containerSize', containerSize);
             formData.append('containerType', containerType);
             formData.append('alise', alise);
@@ -437,7 +440,9 @@ $(function () {
         'containerSize':{
             required: true,
         },
-
+        'line_budget':{
+            required: true,
+        }
     },
     messages: {
         name: {
@@ -508,6 +513,9 @@ $(function () {
         'containerSize':{
             required: "Container Size Is Required",
         },
+        'line_budget':{
+            required: "This Field is required!",
+        }
 
     },
     errorElement: 'span',

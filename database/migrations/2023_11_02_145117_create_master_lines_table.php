@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('master_lines', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('line_budget')->nullable();
             $table->string('alise')->nullable();
             $table->string('free_days')->nullable();
             $table->string('labour_rate')->nullable();
