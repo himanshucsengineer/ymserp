@@ -109,9 +109,8 @@
                                 <div class="form-group">
                                     <label for="third_party">Third Party</label>
                                     <select name="third_party" id="third_party"  class="form-control">
-                                        <option value="">Select an option</option>
-                                        <option value="yes">yes</option>
                                         <option value="no">no</option>
+                                        <option value="yes">yes</option>
                                     </select>
                                 </div>
 
@@ -171,7 +170,7 @@
                                     <label for="status_name">Status Name</label>
                                     <select class="form-control" name="status_name" id="status_name">
                                         <option value="">Select an option</option>
-                                        <option value=" DIRECT A/V "> DIRECT A/V </option>
+                                        <option value="DIRECT A/V"> DIRECT A/V </option>
                                         <option value="AV">AV</option>
                                         <option value="C/R">C/R</option>
                                         <option value="DIRECT A/V">DIRECT A/V</option>
@@ -264,9 +263,8 @@
                                     <label for="rftype">RF Type</label>
                                     <select class="form-control" name="rftype" id="rftype">
                                         <option value="">select an option</option>
-                                        <option value="HUMANITY-NO">HUMANITY-NO</option>
-                                        <option value="HUMANITY-YES">HUMANITY-YES</option>
-                                        <option value="HUMANITY-NO">HUMANITY-NO</option>
+                                        <option value="HUMIDITY-NO">HUMIDITY-NO</option>
+                                        <option value="HUMIDITY-YES">HUMIDITY-YES</option>
                                     </select>
                                 </div>
 
@@ -468,7 +466,11 @@ $(document).ready(function () {
             $("#driver_name").val(data.driver_name)
             $("#vehicle_number").val(data.vehicle_number)
             $("#contact_number").val(data.contact_number)
-            $("#third_party").val(data.third_party)
+            if(data.third_party){
+                $("#third_party").val(data.third_party)
+            }else{
+                $("#third_party").val("no")
+            }
             $("#arrive_from").val(data.arrive_from)
             $("#port_name").val(data.port_name)
         },

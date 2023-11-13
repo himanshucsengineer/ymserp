@@ -99,6 +99,7 @@ class GateInController extends Controller
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
                 'driver_name' => $gateIn->driver_name,
+                'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
                 'id' => $gateIn->id,
@@ -203,6 +204,7 @@ class GateInController extends Controller
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
                 'driver_name' => $gateIn->driver_name,
+                'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
                 'id' => $gateIn->id,
@@ -273,6 +275,11 @@ class GateInController extends Controller
             $gateintype = "with container";
         }
 
+        $currentDateTime = new \DateTime();
+        $formattedDateTime = $currentDateTime->format('YmdHisu');
+
+        $inwardNo = $request->depo_id.$formattedDateTime;
+
         $createGatein = GateIn::create([
             'container_img' => $container_img_name,
             'vehicle_img' => $vehicle_img_name,
@@ -285,7 +292,10 @@ class GateInController extends Controller
             'depo_id' => $request->depo_id,
             'createdby' => $request->user_id,
             'gateintype' => $gateintype,
+            'inward_no' => $inwardNo,
             'status' => 'In',
+            'is_approve' => 0,
+            'is_repaired' => 0,
             'inward_date' => date('Y-m-d'),
             'inward_time' => date('H:i:s'),
         ]);

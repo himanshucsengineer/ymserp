@@ -315,8 +315,8 @@ a.open:hover .circle img {
                                     </div>
                                     <hr>
                                     <div class="row justify-content-center">
-                                        <div class="col-md-8" id="right">
-                                            <h3>SIDE RIGHT CONTAINER NUMBER:<span class="container_no"></span></h3>
+                                        <div class="col-md-10" id="right">
+                                            <h5>Side: Right | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
                                             <img src="/assets/img/right.jpeg" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
@@ -417,8 +417,8 @@ a.open:hover .circle img {
 
                                         </div>
 
-                                        <div class="col-md-8" id="left" style="display:none">
-                                            <h3>SIDE LEFT CONTAINER NUMBER:<span class="container_no"></span></h3>
+                                        <div class="col-md-10" id="left" style="display:none">
+                                            <h5>Side: Left | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
                                             <img src="/assets/img/left.jpeg" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
@@ -519,8 +519,8 @@ a.open:hover .circle img {
 
                                         </div>
 
-                                        <div class="col-md-8" id="top" style="display:none">
-                                            <h3>SIDE TOP CONTAINER NUMBER:<span class="container_no"></span></h3>
+                                        <div class="col-md-10" id="top" style="display:none">
+                                            <h5>Side: Top | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
                                             <img src="/assets/img/top.jpeg" alt="Image with Hotspots" style="width:100%"
                                                 id="image">
@@ -615,8 +615,8 @@ a.open:hover .circle img {
 
                                         </div>
 
-                                        <div class="col-md-8" id="bottom" style="display:none">
-                                            <h3>SIDE BOTTOM CONTAINER NUMBER:<span class="container_no"></span></h3>
+                                        <div class="col-md-10" id="bottom" style="display:none">
+                                            <h5>Side: Bottom | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
                                             <img src="/assets/img/bottom.jpeg" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
@@ -711,8 +711,8 @@ a.open:hover .circle img {
 
                                         </div>
 
-                                        <div class="col-md-8" id="front" style="display:none">
-                                            <h3>SIDE FRONT CONTAINER NUMBER:<span class="container_no"></span></h3>
+                                        <div class="col-md-10" id="front" style="display:none">
+                                            <h5>Side: Front | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
                                             <img src="/assets/img/front.jpeg" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
@@ -763,8 +763,8 @@ a.open:hover .circle img {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-8" id="door" style="display:none">
-                                            <h3>SIDE DOOR CONTAINER NUMBER:<span class="container_no"></span></h3>
+                                        <div class="col-md-10" id="door" style="display:none">
+                                            <h5>Side: Door | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
                                             <img src="/assets/img/back.jpeg" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
@@ -958,6 +958,7 @@ $(document).ready(function() {
         },
         success: function(data) {
             $('.container_no').text(data.container_no);
+            $('.inward_no').text(data.inward_no);
             $('#modal_container_no').val(data.container_no);
             $('#gateinid').val(data.id);
             $('#line_id_no').val(data.line_id);
@@ -1262,8 +1263,6 @@ function clearreposrtingTable(){
 function getTransactionData(){
     var gatein_id = $('#gateinid').val();
     var tarrif_id = $('#tarrif_id').val();
-
-    console.log(gatein_id);
     $.ajax({
         type: "POST",
         url: "/api/transcation/getbytarrif",
@@ -1351,18 +1350,18 @@ function getReportingData(){
                 row.append($('<td>').text(item.tarrifData.dimension_l));
                 row.append($('<td>').text(item.tarrifData.dimension_h));
 
-                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty', 'readonly':'readonly', 'class':'form-control reportinput'}).val(item.qty);
+                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty', 'class':'form-control reportinput'}).val(item.qty);
                 row.append($('<td>').append(qty));
-                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr', 'readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_hr);
+                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr', 'class':'form-control reportinput'}).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
-                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost', 'readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_cost);
+                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost', 'class':'form-control reportinput'}).val(item.labour_cost);
                 var labour_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_labour_cost_text','readonly':'readonly', 'class':'reportinput form-control'}).val(item.labour_cost);
                 var labour_cost_td = $('<td>');
                 labour_cost_td.append(labour_cost);
                 labour_cost_td.append(labour_cost_text);
 
                 row.append(labour_cost_td);
-                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost', 'readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
+                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost','class':'reportinput form-control'}).val(item.material_cost);
                 var material_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_material_cost_text','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
                 var material_cost_td = $('<td>');
                 material_cost_td.append(material_cost);
@@ -1372,7 +1371,7 @@ function getReportingData(){
                 row.append($('<td>').append(sab_total));
                 var gst = $('<input>').attr({'type':'text', 'id':'reporting_tax', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.gst);
                 row.append($('<td>').append(gst));
-                var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.tax_cost);
+                var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost', 'class':'reportinput form-control'}).val(item.tax_cost);
                 row.append($('<td>').append(tax_cost));
                 var total = $('<input>').attr({'type':'text', 'id':'reporting_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.total);
                 row.append($('<td>').append(total));

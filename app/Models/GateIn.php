@@ -41,6 +41,13 @@ class GateIn extends Model
         'container_img',
         'vehicle_img',
         'gateintype',
-        'status'
+        'status',
+        'inward_no',
+        'is_approve',
+        'is_repaired',
+        'repair_updatedby',
+        'repair_updatedat',
+        'approve_updatedby',
+        'approve_updatedat',
     ];
 }

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('gate_ins', function (Blueprint $table) {
             $table->id();
+            $table->string('inward_no')->nullable();
             $table->string('container_no')->nullable();
             $table->string('container_type')->nullable();
             $table->string('container_size')->nullable();
@@ -40,6 +41,12 @@ return new class extends Migration
             $table->string('container_img')->nullable();
             $table->string('vehicle_img')->nullable();
             $table->string('gateintype')->nullable();
+            $table->enum('is_approve',[1,0])->nullable();
+            $table->enum('is_repaired',[1,0])->nullable();
+            $table->string('repair_updatedby')->nullable();
+            $table->string('repair_updatedat')->nullable();
+            $table->string('approve_updatedby')->nullable();
+            $table->string('approve_updatedat')->nullable();
             $table->enum('status',['In','Out']);
             $table->timestamps();
         });

@@ -88,6 +88,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
+                                        <th>Inward No.</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Container Size</th>
@@ -168,6 +169,7 @@ function filterByDate(){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
+                row.append($('<td>').append(item.inward_no));
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));
@@ -309,6 +311,7 @@ function refreshTable(page,search){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
+                row.append($('<td>').append(item.inward_no));
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));
