@@ -174,10 +174,17 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'supervisor'], function($api){
         $api->post('/getInspectionDataSupervisor', 'App\Http\Controllers\GateInController@getInspectionDataSupervisor');
         $api->post('/filterByDateSupervisor', 'App\Http\Controllers\GateInController@filterByDateSupervisor');
-
         $api->post('/filterbystatus', 'App\Http\Controllers\GateInController@filterbystatus');
 
     });
+
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'maintenance'], function($api){
+        $api->post('/getInspectionDataRepair', 'App\Http\Controllers\GateInController@getInspectionDataRepair');
+        $api->post('/filterByDateRepair', 'App\Http\Controllers\GateInController@filterByDateRepair');
+
+    });
+
 
 
 });
