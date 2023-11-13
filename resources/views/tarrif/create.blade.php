@@ -254,6 +254,47 @@ cursor: pointer;
 
 <script>
 
+// $(document).ready(function () {
+//     $('#dimension_l').select2({
+//         placeholder: 'Select an option',
+//         data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
+//         escapeMarkup: function (markup) {
+//             return markup;
+//         },
+//         language: {
+//             noResults: function () {
+//                 return '<center><button class="addNewButton" onclick="containerType()">Add New</button></center>';
+//             }
+//         }
+//     });
+
+//     $('#dimension_w').select2({
+//         placeholder: 'Select an option',
+//         data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
+//         escapeMarkup: function (markup) {
+//             return markup;
+//         },
+//         language: {
+//             noResults: function () {
+//                 return '<center><button class="addNewButton" onclick="containerSize()">Add New</button></center>';
+//             }
+//         }
+//     });
+
+//     $('#dimension_h').select2({
+//         placeholder: 'Select an option',
+//         data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
+//         escapeMarkup: function (markup) {
+//             return markup;
+//         },
+//         language: {
+//             noResults: function () {
+//                 return '<center><button class="addNewButton" onclick="containerSize()">Add New</button></center>';
+//             }
+//         }
+//     });
+// });
+
 $(document).ready(function () {
     const imageContainer = document.getElementById('image-container');
     const image = document.getElementById('image');
