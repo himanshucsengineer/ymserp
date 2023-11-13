@@ -43,6 +43,9 @@ return new class extends Migration
             $table->string('gateintype')->nullable();
             $table->enum('is_approve',[1,0])->nullable();
             $table->enum('is_repaired',[1,0])->nullable();
+            $table->enum('is_estimate_done',[1,0])->nullable();
+            $table->string('estimate_updatedby')->nullable();
+            $table->string('estimate_updated_at')->nullable();
             $table->string('repair_updatedby')->nullable();
             $table->string('repair_updatedat')->nullable();
             $table->string('approve_updatedby')->nullable();

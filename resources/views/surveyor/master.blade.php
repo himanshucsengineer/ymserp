@@ -817,6 +817,7 @@ a.open:hover .circle img {
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                <button data-toggle="modal" data-target="#modal-default">Save Estimate</button>
                                 <div class="card mt-5">
                                     <div class="card-body p-0">
                                         <table class="table table-striped table-responsive">
@@ -841,6 +842,8 @@ a.open:hover .circle img {
                                                     <th>GST</th>
                                                     <th>Tax Cost</th>
                                                     <th>Total Cost</th>
+                                                    <th>Damage Image 1</th>
+                                                    <th>Damage Image 2</th>
                                                     <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
@@ -1308,6 +1311,12 @@ function getTransactionData(){
                 row.append($('<td>').append(tax_cost));
                 var total = $('<input>').attr({'type':'text', 'id':'transaction_total', 'readonly':'readonly', 'class':'form-control'}).val(item.total);
                 row.append($('<td>').append(total));
+                var file1 = `/uploads/transaction/${item.before_file1}`
+                var before_file1 = $('<img style="width:100px">').attr({'src': file1});
+                row.append($('<td>').append(before_file1));
+                var file2 = `/uploads/transaction/${item.before_file2}`
+                var before_file2 = $('<img style="width:100px">').attr({'src': file2});
+                row.append($('<td>').append(before_file2));
                 tbody.append(row);
                 i++;
             });
@@ -1375,6 +1384,13 @@ function getReportingData(){
                 row.append($('<td>').append(tax_cost));
                 var total = $('<input>').attr({'type':'text', 'id':'reporting_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.total);
                 row.append($('<td>').append(total));
+                
+                var file1 = `/uploads/transaction/${item.before_file1}`
+                var before_file1 = $('<img style="width:100px">').attr({'src': file1});
+                row.append($('<td>').append(before_file1));
+                var file2 = `/uploads/transaction/${item.before_file2}`
+                var before_file2 = $('<img style="width:100px">').attr({'src': file2});
+                row.append($('<td>').append(before_file2));
                 tbody.append(row);
                 i++;
             });
@@ -1501,38 +1517,93 @@ function createTransaction(){
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var tarrif_id = $('#tarrif_id').val();
-    var gatein_id = $('#gateinid').val();
-    var labour_hr = $('#labour_hr').val();
-    var qty = $('#qty').val();
-    var labour_cost = $('#labour_cost').val();
-    var material_cost = $('#material_cost').val();
-    var sab_total = $('#sab_total').val();
-    var gst = $('#gst').val();
-    var total = $('#total').val();
-    var tax_cost = $('#tax_cost').val();
-   
+    if($('#file1')[0].files[0] && $('#file1')[0].files[0]){
+        var tarrif_id = $('#tarrif_id').val();
+        var gatein_id = $('#gateinid').val();
+        var labour_hr = $('#labour_hr').val();
+        var qty = $('#qty').val();
+        var labour_cost = $('#labour_cost').val();
+        var material_cost = $('#material_cost').val();
+        var sab_total = $('#sab_total').val();
+        var gst = $('#gst').val();
+        var total = $('#total').val();
+        var tax_cost = $('#tax_cost').val();
 
-    var data = {
-        'user_id':user_id,
-        'depo_id':depo_id,
-        'tarrif_id':tarrif_id,
-        'labour_hr':labour_hr,
-        'labour_cost':labour_cost,
-        'material_cost':material_cost,
-        'sab_total':sab_total,
-        'gst':gst,
-        'total':total,
-        'tax_cost':tax_cost,
-        'gatein_id':gatein_id,
-        'qty':qty
+        var formData = new FormData();
+            formData.append('tax_cost', tax_cost);
+            formData.append('total', total);
+            formData.append('gst', gst);
+            formData.append('sab_total', sab_total);
+            formData.append('material_cost', material_cost);
+            formData.append('labour_cost', labour_cost);
+            formData.append('qty', qty);
+            formData.append('labour_hr', labour_hr);
+            formData.append('gatein_id', gatein_id);
+            formData.append('tarrif_id', tarrif_id);
+
+            formData.append('before_file1', $('#file1')[0].files[0]);
+            formData.append('before_file2', $('#file2')[0].files[0]);
+
+            $.ajax({
+                url: '/api/transcation/create',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                    getTransactionData();
+                    getReportingData();
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            });
+        
+    }else{
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Images</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
     }
-
-    post('transcation/create',data)
-    getTransactionData();
-    getReportingData();
 }
 
+function updateEstimate(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+    var gateinid = $('#estimate_gate_in').val();
+    data = {
+        'user_id':user_id,
+        'depo_id':depo_id,
+        'gateinid':gateinid
+    }
+    post('gatein/updateestimate',data);
+
+    location.href="/surveyor/inspection";
+
+}
 
 
 
@@ -1599,6 +1670,25 @@ function createTransaction(){
                     </div>
                 </div>
 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image 1</label>
+                                    <input type="file" class="form-control" name="file1" id="file1" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image 2</label>
+                                    <input type="file" class="form-control" name="file2" id="file2" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <form id="create_transaction">
                     <input type="hidden" id="qty">
                     <input type="hidden" id="gateinid">
@@ -1636,6 +1726,8 @@ function createTransaction(){
                                     <th>GST</th>
                                     <th>Tax Cost</th>
                                     <th>Total Cost</th>
+                                    <th>Damage Image 1</th>
+                                    <th>Damage Image 2</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
@@ -1643,6 +1735,28 @@ function createTransaction(){
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Default Modal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="estimate_gate_in" value="<?php echo  $getid[1]?>">
+                <h4>Are You Sure To Submit This Estimate?</h4>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateEstimate()">Save changes</button>
             </div>
         </div>
     </div>

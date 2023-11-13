@@ -28,6 +28,10 @@ return new class extends Migration
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();
+            $table->string('before_file1')->nullable();
+            $table->string('before_file2')->nullable();
+            $table->string('after_file1')->nullable();
+            $table->string('after_file2')->nullable();
             $table->timestamps();
         });
     }

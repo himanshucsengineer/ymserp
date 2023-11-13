@@ -49,5 +49,8 @@ class GateIn extends Model
         'repair_updatedat',
         'approve_updatedby',
         'approve_updatedat',
+        'is_estimate_done',
+        'estimate_updatedby',
+        'estimate_updated_at'
     ];
 }

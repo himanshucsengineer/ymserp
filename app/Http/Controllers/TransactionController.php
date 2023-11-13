@@ -43,6 +43,8 @@ class TransactionController extends Controller
             $material = MasterMaterial::where('id',$tarrif->material_id)->first();
 
             $formatedData[] = [
+                'before_file1'=> $transaction->before_file1,
+                'before_file2'=> $transaction->before_file2,
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => $transaction->labour_cost,
                 'material_cost' => $transaction->material_cost,
@@ -70,6 +72,8 @@ class TransactionController extends Controller
         foreach($getTransaction as $transaction){
             $tarrif = MasterTarrif::where('id',$transaction->tarrif_id)->first();
             $formatedData[] = [
+                'before_file1'=> $transaction->before_file1,
+                'before_file2'=> $transaction->before_file2,
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => $transaction->labour_cost,
                 'material_cost' => $transaction->material_cost,
@@ -93,6 +97,21 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        if ($request->hasFile('before_file1')) {
+            $before_file1 = $request->file('before_file1');
+            $before_file1_Name = time() . '_' . $before_file1->getClientOriginalName();
+            $before_file1->move(public_path('uploads/transaction'), $before_file1_Name);
+        }
+
+        if ($request->hasFile('before_file2')) {
+            $before_file2 = $request->file('before_file2');
+            $before_file2_Name = time() . '_' . $before_file2->getClientOriginalName();
+            $before_file2->move(public_path('uploads/transaction'), $before_file2_Name);
+        }
+
+
         $createTransaction = Transaction::create([
             'createdby' => $request->user_id,
             'depo_id' => $request->depo_id,
@@ -105,7 +124,9 @@ class TransactionController extends Controller
             'total' => $request->total,
             'tax_cost' => $request->tax_cost,
             'gatein_id' => $request->gatein_id,
-            'qty' => $request->qty
+            'qty' => $request->qty,
+            'before_file1' => $before_file1_Name,
+            'before_file2' => $before_file2_Name,
         ]);
 
         if($createTransaction){

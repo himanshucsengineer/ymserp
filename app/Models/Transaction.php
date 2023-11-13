@@ -23,6 +23,10 @@ class Transaction extends Model
         'updatedby',
         'depo_id',
         'gatein_id',
-        'qty'
+        'qty',
+        'before_file1',
+        'before_file2',
+        'after_file1',
+        'after_file2'
     ];
 }
