@@ -818,7 +818,6 @@ a.open:hover .circle img {
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                                 <div class="card mt-5">
-                                    <a href="/genrateastimate?id=<?= $getid[1]?>"><button >Print</button></a>
                                     <div class="card-body p-0">
                                         <table class="table table-striped table-responsive">
                                             <thead>
@@ -842,7 +841,7 @@ a.open:hover .circle img {
                                                     <th>GST</th>
                                                     <th>Tax Cost</th>
                                                     <th>Total Cost</th>
-                                                    <th>Action</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody id="reporting">
@@ -1352,18 +1351,18 @@ function getReportingData(){
                 row.append($('<td>').text(item.tarrifData.dimension_l));
                 row.append($('<td>').text(item.tarrifData.dimension_h));
 
-                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty', 'class':'form-control reportinput'}).val(item.qty);
+                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty', 'readonly':'readonly', 'class':'form-control reportinput'}).val(item.qty);
                 row.append($('<td>').append(qty));
-                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr', 'class':'form-control reportinput'}).val(item.labour_hr);
+                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr', 'readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
-                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost', 'class':'form-control reportinput'}).val(item.labour_cost);
+                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost', 'readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_cost);
                 var labour_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_labour_cost_text','readonly':'readonly', 'class':'reportinput form-control'}).val(item.labour_cost);
                 var labour_cost_td = $('<td>');
                 labour_cost_td.append(labour_cost);
                 labour_cost_td.append(labour_cost_text);
 
                 row.append(labour_cost_td);
-                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost','class':'reportinput form-control'}).val(item.material_cost);
+                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost', 'readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
                 var material_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_material_cost_text','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
                 var material_cost_td = $('<td>');
                 material_cost_td.append(material_cost);
@@ -1371,31 +1370,12 @@ function getReportingData(){
                 row.append(material_cost_td);
                 var sab_total = $('<input>').attr({'type':'text', 'id':'reporting_sub_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.sab_total);
                 row.append($('<td>').append(sab_total));
-                var gst = $('<input>').attr({'type':'text', 'id':'reporting_tax', 'class':'reportinput form-control'}).val(item.gst);
+                var gst = $('<input>').attr({'type':'text', 'id':'reporting_tax', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.gst);
                 row.append($('<td>').append(gst));
                 var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.tax_cost);
                 row.append($('<td>').append(tax_cost));
                 var total = $('<input>').attr({'type':'text', 'id':'reporting_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.total);
                 row.append($('<td>').append(total));
-                // var editButton = $('<span>')
-                //     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
-                //     .attr('data-id', item.id) 
-                //     .attr('class', 'edit-button');
-
-                // var deleteButton = $('<span>')
-                //     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
-                //     .attr('data-id', item.id)
-                //     .attr('class', 'delete-button')
-                // var saveButton = $('<button style="display:none;">')
-                //     .text('Save')
-                //     .attr('data-id', item.id)
-                //     .attr('class', 'save-button btn-primary')
-
-                // var td = $('<td>');
-                // td.append(editButton);
-                // td.append(deleteButton);
-                // td.append(saveButton);
-                // row.append(td);
                 tbody.append(row);
                 i++;
             });
@@ -1436,71 +1416,6 @@ function getReportingData(){
                 var total = parseInt(tax_cost) + parseInt(sub_total);
                 $('#reporting_tax_cost').val(tax_cost);
                 $('#reporting_total').val(total);
-            });
-
-            $('.edit-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var inputId = 'input_' + index;
-                    var inputValue = dataCell.text();
-        
-                    var inputField = $('<input>')
-                        .attr({
-                            'id': inputId,
-                            'type': 'text',
-                            'class': 'form-control'
-                        })
-                        .val(inputValue);
-                        dataCell.empty().append(inputField);
-                        
-                });
-                actionCell.find('.edit-button').hide();
-                actionCell.find('.delete-button').hide();
-                actionCell.find('.save-button').show();                
-            });
-
-            $('.save-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input'); // Select all input fields in the row
-                var inputData = {};
-
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var newValue = dataCell.find('input').val();
-                    dataCell.empty().text(newValue);
-                    // if(index === ){
-
-                    // }
-                });
-
-                inputFields.each(function() {
-                    var inputField = $(this);
-                    var inputId = inputField.attr('id');
-                    var inputValue = inputField.val();
-                    inputData[inputId] = inputValue;
-                });
-
-                // Show "Edit" and "Delete" buttons and hide "Save" button
-                actionCell.find('.edit-button').show();
-                actionCell.find('.delete-button').show();
-                actionCell.find('.save-button').hide();
-                var dataId = $(this).data('id');
-                updateData(dataId,inputData);
-                refreshTable();
-            });
-
-            $('.delete-button').click(function() {
-                var dataId = $(this).data('id');
-                var data = {
-                    'id':dataId
-                }
-                post('contractor/delete',data);
-                refreshTable();
             });
 
         },

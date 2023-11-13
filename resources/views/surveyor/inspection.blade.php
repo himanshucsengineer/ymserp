@@ -72,11 +72,11 @@
                                     <div class="flex_date_range">
                                         <div class="left">
                                             <label for="">Start Date</label>
-                                            <input type="date" id="startDate" class="form-control" onchange="filterByDate()"> 
+                                            <input type="date" id="startDate" value="<?= date('Y-m-d')?>" class="form-control" onchange="filterByDate()"> 
                                         </div>
                                         <div class="right">
                                             <label for="">End Date</label>
-                                            <input type="date" id="endDate" class="form-control" onchange="filterByDate()"> 
+                                            <input type="date" id="endDate" value="<?= date('Y-m-d')?>" class="form-control" onchange="filterByDate()"> 
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
 <script>
     
 $(document).ready(function() {
-    refreshTable();
+    filterByDate();
 });
 
 
@@ -168,13 +168,13 @@ function filterByDate(){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.container_no));
+                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));
                 row.append($('<td>').append(item.container_type));
-                row.append($('<td>').append(item.vehicle_number));
+                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                row.append($('<td>').append(item.driver_name));
+                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
                 row.append($('<td>').append(item.contact_number));
                 
                 var viewButton = $('<span>')
@@ -309,13 +309,13 @@ function refreshTable(page,search){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.container_no));
+                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));
                 row.append($('<td>').append(item.container_type));
-                row.append($('<td>').append(item.vehicle_number));
+                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                row.append($('<td>').append(item.driver_name));
+                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
                 row.append($('<td>').append(item.contact_number));
                 
                 var viewButton = $('<span>')

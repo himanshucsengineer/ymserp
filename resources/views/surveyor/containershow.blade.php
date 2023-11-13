@@ -517,8 +517,7 @@ function getline(id){
             'id':id
         },
         success: function (data) {
-            console.log(data);
-            $("#line_id").val(data.name);
+            $("#line_id").val(data.id);
         },
         error: function (error) {
             console.log(error);
@@ -537,8 +536,7 @@ function getTranport(id){
             'id':id
         },
         success: function (data) {
-            console.log(data);
-            $("#transport_id").val(data.name);
+            $("#transport_id").val(data.id);
             getverifydata();
         },
         error: function (error) {
