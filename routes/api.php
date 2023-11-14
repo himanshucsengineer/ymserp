@@ -197,13 +197,10 @@ $api->version('v1', function($api){
 
     });
 
-
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'outward'], function($api){
         $api->post('/filterByOutStatus', 'App\Http\Controllers\GateInController@filterByOutStatus');
         $api->post('/getInspectionDataOutStatus', 'App\Http\Controllers\GateInController@getInspectionDataOutStatus');
-
+        $api->post('/create', 'App\Http\Controllers\OutwardOfficerController@store');
     });
-
-
 
 });

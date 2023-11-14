@@ -77,6 +77,9 @@ Route::get('/gateout/create', 'App\Http\Controllers\GateoutController@index');
 Route::get('/outward/view', 'App\Http\Controllers\OutwardOfficerController@index');
 Route::get('/outward/manage', 'App\Http\Controllers\OutwardOfficerController@manage');
 
+Route::get('/print/outward', 'App\Http\Controllers\OutwardOfficerController@outward_print');
+
+
 
 
 

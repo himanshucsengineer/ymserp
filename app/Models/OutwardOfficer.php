@@ -26,6 +26,12 @@ class OutwardOfficer extends Model
                 'depo_id',
                 'createdby',
                 'updatedby',
-                'status'
+                'status',
+                'do_number',
+                'driver_license',
+                'driver_aadhar',
+                'do_image',
+                'driver_license_image',
+                'driver_aadhar_image'
             ];
 }

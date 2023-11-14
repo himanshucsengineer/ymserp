@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
-                        <form id="gateinForm" novalidate="novalidate">
+                        <form id="outwardForm" novalidate="novalidate">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="container_no">Container Number</label>
@@ -112,6 +112,36 @@
                                 <div class="form-group">
                                     <label for="vehicle_img">Vehicle Image</label>
                                     <div class="img_prv_box"><span class="vehicle_img"></span></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="do_number">DO Number</label>
+                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="do_number" name="do_number"  placeholder="Enter DO Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="do_img">DO Image</label>
+                                    <input type="file" class="form-control"  id="do_img" name="do_img"  placeholder="Enter DO Number">
+                                    <div class="img_prv_box"><img class="do_img" src="" id="do_image"/></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="driver_license">Driver License</label>
+                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="driver_license" name="driver_license"  placeholder="Enter Driver License">
+                                </div>
+                                <div class="form-group">
+                                    <label for="driver_license_img">Driver License Image</label>
+                                    <input type="file" class="form-control"  id="driver_license_img" name="driver_license_img"  placeholder="Enter DO Number">
+                                    <div class="img_prv_box"><img class="driver_license_img" src="" id="driver_license_image"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="driver_aadhar">Driver Aadhar</label>
+                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="driver_aadhar" name="driver_aadhar"  placeholder="Enter Driver Aadhar">
+                                </div>
+                                <div class="form-group">
+                                    <label for="driver_aadhar_img">Driver Aadhar Image</label>
+                                    <input type="file" class="form-control"  id="driver_aadhar_img" name="driver_aadhar_img"  placeholder="Enter DO Number">
+                                    <div class="img_prv_box"><img class="driver_aadhar_img" src="" id="driver_aadhar_image"></div>
                                 </div>
 
                                 <div class="form-group">
@@ -190,6 +220,41 @@
 
 
 $(document).ready(function () {
+
+    
+    $('#driver_license_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.driver_license_img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#driver_aadhar_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.driver_aadhar_img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
+    $('#do_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.do_img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+
     var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
@@ -310,103 +375,77 @@ $('#driver_contact_number').on('change', function(){
 
 
 
-
-$(function () {
+$('#outwardForm').on('submit',function(e){
+    event.preventDefault();
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     var containerid = <?= $getid[0]?>;
-    
 
-    $.validator.setDefaults({
-    submitHandler: function () {
-        var status_name = $("#status_name").val();
-        var job_work_no = $("#job_work_no").val();
-        var gross_weight = $("#gross_weight").val();
-        var tare_weight = $("#tare_weight").val();
-        var vessel_name = $("#vessel_name").val();
-        var grade = $("#grade").val();
-        var sub_lease_unity = $("#sub_lease_unity").val();
-        var voyage = $("#voyage").val();
-        var consignee   = $("#consignee").val();
-        var region = $("#region").val();
-        var destuffung = $("#destuffung").val();
-        var rftype = $("#rftype").val();
-        var empty_repositioning = $("#empty_repositioning").val();
-        var er_no = $("#er_no").val();  
-        var remarks = $("#remarks").val(); 
-        
-        
+        var gate_in_id = "<?php echo $getid[0]?>";
+        var gate_out_id = $('#driver_contact_number').val();
+        var vehical_no =  $('#vehicle_number').val();
+        var do_number =  $('#do_number').val();
+        var driver_license =  $('#driver_license').val();
+        var driver_aadhar =  $('#driver_aadhar').val();
+        var transport_id =  $('#transport_id').val();
+        var destination =  $('#destination').val();
+        var shippers =  $('#shippers').val();
+        var vessel =  $('#vessel').val();
+        var voyage =  $('#voyage').val();
+        var port_name =  $('#port_name').val();
+        var seal_no =  $('#seal_no').val();
+        var vent_seal_no =  $('#vent_seal_no').val();
+        var temprature =  $('#temprature').val();
+        var receipt =  $('#receipt').val();
+        var cash =  $('#cash').val();
+        var remarks =  $('#remarks').val();
 
 
 
-        var container_no = $("#container_no").val();
-        var container_size = $("#container_size").val();
-        var container_type = $("#container_type").val();
-        var transport_id = $("#transport_id").val();
-        var inward_date = $("#inward_date").val();
-        var inward_time = $("#inward_time").val();
-        var driver_name = $("#driver_name").val();
-        var vehicle_number = $("#vehicle_number").val();
-        var contact_number = $("#contact_number").val();
-        var third_party = $("#third_party").val();
-        var line_id = $("#line_id").val();
-        var arrive_from = $("#arrive_from").val();
-        var port_name = $("#port_name").val();
+        var formData = new FormData();
 
+        formData.append('gate_in_id', gate_in_id);
+        formData.append('gate_out_id', gate_out_id);
+        formData.append('vehical_no', vehical_no);
+        formData.append('do_number', do_number);
+        formData.append('driver_license', driver_license);
+        formData.append('driver_aadhar', driver_aadhar);
+        formData.append('transport_id', transport_id);
+        formData.append('destination', destination);
+        formData.append('shippers', shippers);
+        formData.append('vessel', vessel);
+        formData.append('voyage', voyage);
+        formData.append('port_name', port_name);
+        formData.append('seal_no', seal_no);
+        formData.append('vent_seal_no', vent_seal_no);
+        formData.append('temprature', temprature);
+        formData.append('receipt', receipt);
+        formData.append('cash', cash);
+        formData.append('remarks', remarks);
+        formData.append('user_id', user_id);
+        formData.append('depo_id', depo_id);
 
-        newdata = {
-            'status_name': status_name,
-            'job_work_no': job_work_no,
-            'gross_weight': gross_weight,
-            'tare_weight': tare_weight,
-            'vessel_name': vessel_name,
-            'grade': grade,
-            'sub_lease_unity': sub_lease_unity,
-            'voyage': voyage,
-            'consignee': consignee,
-            'region': region,
-            'destuffung': destuffung,
-            'rftype': rftype,
-            'empty_repositioning': empty_repositioning,
-            'er_no': er_no,
-            'remarks': remarks,
-            'user_id' :user_id,
-            'depo_id': depo_id,
-            'gate_in_id' : containerid
+        if ($('#do_image')[0].files && $('#do_image')[0].files.length > 0) {
+            formData.append('do_image', $('#do_image')[0].files[0]);
+        }else{
+            formData.append('do_image', '');
         }
 
+        if ($('#driver_license_image')[0].files && $('#driver_license_image')[0].files.length > 0) {
+            formData.append('driver_license_image', $('#driver_license_image')[0].files[0]);
+        }else{
+            formData.append('driver_license_image', '');
+        }
 
-
-            var formData = new FormData();
-
-            formData.append('container_no', container_no);
-            formData.append('id', containerid);
-
-            formData.append('container_size', container_size);
-            formData.append('container_type', container_type);
-            formData.append('transport_id', transport_id);
-            formData.append('inward_date', inward_date);
-            formData.append('inward_time', inward_time);
-            formData.append('driver_name', driver_name);
-            formData.append('vehicle_number', vehicle_number);
-            formData.append('contact_number', contact_number);
-            formData.append('third_party', third_party);
-            formData.append('line_id', line_id);
-            formData.append('arrive_from', arrive_from);
-            formData.append('port_name', port_name);
-            formData.append('user_id', user_id);
-            formData.append('depo_id', depo_id);
-
-            formData.append('driver_photo', $('#driver_photo')[0].files[0]);
-            formData.append('challan', $('#challan')[0].files[0]);
-            formData.append('driver_license', $('#driver_license')[0].files[0]);
-            formData.append('do_copy', $('#do_copy')[0].files[0]);
-            formData.append('aadhar', $('#aadhar')[0].files[0]);
-            formData.append('pan', $('#pan')[0].files[0]);
-
-            $.ajax({
-                url: '/api/gatein/update',
+        if ($('#driver_aadhar_image')[0].files && $('#driver_aadhar_image')[0].files.length > 0) {
+            formData.append('driver_aadhar_image', $('#driver_aadhar_image')[0].files[0]);
+        }else{
+            formData.append('driver_aadhar_image', '');
+        }
+        
+        $.ajax({
+                url: '/api/outward/create',
                 type: 'POST',
                 headers: {
                     'Authorization': 'Bearer ' + checkToken
@@ -415,14 +454,15 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    // var callout = document.createElement('div');
-                    // callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
-                    // document.getElementById('apiMessages').appendChild(callout);
-                    // setTimeout(function() {
-                    //     callout.remove();
-                    // }, 2000);
-                    post('containerverify/create',newdata)
-                  
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+
+                    window.open('/print/outward', '_blank');
+                    location.href="/outward/view";
                 },
                 error: function(error) {
                     var finalValue = '';
@@ -439,108 +479,25 @@ $(function () {
                     }, 2000);
                 }
             });
-
-        
-        
-
-    }
-  });
+})
 
 
-  
 
-    $('#gateinForm').validate({
+$(function () {
+    
+
+    $('#outwardForm').validate({
     rules: {
-        
-        line_id:{
-            required: true,
-        },
-       
-
+        // vehicle_number:{
+        //     required:true,
+        // }
     },
-    messages: {
-        job_work_no: {
-            required: "This Field Is Required",
-        },
-        status_name: {
-            required: "This Field Is Required",
-        },
-        gross_weight: {
-            required: "This Field Is Required",
-        },
-        tare_weight: {
-            required: "This Field Is Required",
-        },
-        vessel_name: {
-            required: "This Field Is Required",
-        },
-        grade: {
-            required: "This Field Is Required",
-        },
-        sub_lease_unity: {
-            required: "This Field Is Required",
-        },
-        voyage: {
-            required: "This Field Is Required",
-        },
-        consignee: {
-            required: "This Field Is Required",
-        },
-        region: {
-            required: "This Field Is Required",
-        },
-        destuffung: {
-            required: "This Field Is Required",
-        },
-        rftype: {
-            required: "This Field Is Required",
-        },
-
-        empty_repositioning: {
-            required: "This Field Is Required",
-        },
-        er_no: {
-            required: "This Field Is Required",
-        },
-        remarks: {
-            required: "This Field Is Required",
-        },
-
-        container_no: {
-            required: "This Field Is Required",
-        },
-        container_type: {
-            required: "This Field Is Required",
-        },
-        container_size: {
-            required: "This Field Is Required",
-        },
-
-        inward_date: {
-            required: "This Field Is Required",
-        },
-        inward_time: {
-            required: "This Field Is Required",
-        },
-        driver_name: {
-            required: "This Field Is Required",
-        },
-
-        contact_number: {
-            required: "This Field Is Required",
-        },
-        third_party: {
-            required: "This Field Is Required",
-        },
-        arrive_from: {
-            required: "This Field Is Required",
-        },
-
-        port_name: {
-            required: "This Field Is Required",
-        },
-
+    messages:{
+        vehicle_number:{
+            required:"This Field Is Required",
+        }
     },
+
     errorElement: 'span',
     errorPlacement: function (error, element) {
       error.addClass('invalid-feedback');

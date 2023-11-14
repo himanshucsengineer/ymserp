@@ -29,6 +29,12 @@ return new class extends Migration
             $table->string('receipt_no')->nullable();
             $table->string('cash')->nullable();
             $table->string('remark')->nullable();
+            $table->string('do_number')->nullable();
+            $table->string('driver_license')->nullable();
+            $table->string('driver_aadhar')->nullable();
+            $table->string('do_image')->nullable();
+            $table->string('driver_license_image')->nullable();
+            $table->string('driver_aadhar_image')->nullable();
             $table->string('depo_id')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
