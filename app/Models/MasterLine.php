@@ -38,7 +38,8 @@ class MasterLine extends Model
         'depo_id',
         'containerSize',
         'containerType',
-        'line_budget'
+        'line_budget',
+        'parking_charges'
 
     ];
 }

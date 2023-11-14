@@ -275,7 +275,7 @@ a.open:hover .circle img {
                         <div class="card-header p-0 pt-1 border-bottom-0">
                             <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                                    <a class="nav-link active" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                         href="#custom-tabs-three-profile" role="tab"
                                         aria-controls="custom-tabs-three-profile" aria-selected="false">DETAILS</a>
                                 </li>
@@ -285,7 +285,7 @@ a.open:hover .circle img {
                         <div class="card-body">
                             <div class="tab-content" id="custom-tabs-three-tabContent">
                                 <div class="tab-pane fade active show" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                                <button data-toggle="modal" data-target="#modal-default">Save Repair Report</button>
+                                <button data-toggle="modal" data-target="#modal-default"><?php if($checkSupervisor == 1){ echo "Submit";}else{echo "Save Repair Report";}?></button>
                                 <div class="card mt-5">
                                     <div class="card-body p-0">
                                         <table class="table table-striped table-responsive">
@@ -435,13 +435,23 @@ function getReportingData(){
                 row.append($('<td>').append(before_file1));
                 var file2 = `/uploads/transaction/${item.before_file2}`
                 var before_file2 = $('<img style="width:100px">').attr({'src': file2});
-                row.append($('<td>').append(before_file2));
-                var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'class':'reportinput form-control'}).val(item.qty);
-                row.append($('<td>').append(actual_amterial));
-                var repair_photo1 = $('<input>').attr({'type':'file', 'id':'repair_photo1', 'class':'reportinput form-control'});
-                row.append($('<td>').append(repair_photo1));
-                var repair_photo2 = $('<input>').attr({'type':'file', 'id':'repair_photo2', 'class':'reportinput form-control'});
-                row.append($('<td>').append(repair_photo2));
+                row.append($('<td>').append(before_file2)); 
+                var checkSupervisor = "<?php echo $checkSupervisor?>";
+                if(checkSupervisor == 1){
+                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.qty);
+                    row.append($('<td>').append(actual_amterial));
+                    var repair_photo1 = $('<input>').attr({'type':'file', 'id':'repair_photo1', 'class':'reportinput form-control'});
+                    row.append($('<td>').append(repair_photo1));
+                    var repair_photo2 = $('<input>').attr({'type':'file', 'id':'repair_photo2', 'class':'reportinput form-control'});
+                    row.append($('<td>').append(repair_photo2));
+                }else{
+                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'class':'reportinput form-control'}).val(item.qty);
+                    row.append($('<td>').append(actual_amterial));
+                    var repair_photo1 = $('<input>').attr({'type':'file', 'id':'repair_photo1', 'class':'reportinput form-control'});
+                    row.append($('<td>').append(repair_photo1));
+                    var repair_photo2 = $('<input>').attr({'type':'file', 'id':'repair_photo2', 'class':'reportinput form-control'});
+                    row.append($('<td>').append(repair_photo2));
+                }
                 tbody.append(row);
                 i++;
             });
@@ -498,13 +508,16 @@ function updateEstimate(){
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     var gateinid = $('#estimate_gate_in').val();
+    var out_status = $('#out_status').val();
     data = {
         'user_id':user_id,
         'depo_id':depo_id,
-        'gateinid':gateinid
+        'gateinid':gateinid,
+        'out_status':out_status
     }
-    post('gatein/updaterepair',data);
-    location.href="/maintenance/view";
+    console.log(data);
+    // post('gatein/updaterepair',data);
+    // location.href="/maintenance/view";
 }
 
 </script>
@@ -645,14 +658,18 @@ function updateEstimate(){
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="estimate_gate_in" value="<?php echo  $getid[0]?>">
-                <h4>Are You Sure To Submit?</h4>
+                <h4>Please Choose Outward Container Status</h4>
+                <select name="out_status" id="out_status" class="form-control">
+                    <option value="">Select An Option</option>
+                    <option value="in stack">Move to Stacking</option>
+                    <option value="out">Ready For Outward</option>
+                </select>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

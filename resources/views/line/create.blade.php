@@ -90,6 +90,11 @@
                                     <label for="free_days">Free Days <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="free_days" name="free_days" placeholder="Enter Free Days">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="parking_charges">Parking Charges (Per Day)<span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="parking_charges" name="parking_charges" placeholder="Enter Parking Charges">
+                                </div>
                                 <div class="form-group">
                                     <label for="labour_rate">Labour Rate <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="labour_rate" name="labour_rate" placeholder="Enter Labour Rate">
@@ -306,9 +311,11 @@ $(function () {
         var line_budget = $('#line_budget').val();
         var containerSize = $("#containerSize").val();
         var containerType = $("#containerType").val();
+        var parking_charges = $('#parking_charges').val();
 
             var formData = new FormData();
             formData.append('name', name);
+            formData.append('parking_charges', parking_charges);
             formData.append('line_budget', line_budget);
             formData.append('containerSize', containerSize);
             formData.append('containerType', containerType);
@@ -442,6 +449,9 @@ $(function () {
         },
         'line_budget':{
             required: true,
+        },
+        'parking_charges' :{
+            required: true,
         }
     },
     messages: {
@@ -514,6 +524,9 @@ $(function () {
             required: "Container Size Is Required",
         },
         'line_budget':{
+            required: "This Field is required!",
+        },
+        'parking_charges' :{
             required: "This Field is required!",
         }
 
