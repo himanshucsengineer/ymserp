@@ -179,6 +179,12 @@ $api->version('v1', function($api){
 
     });
 
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gateout'], function($api){
+        $api->post('/create','App\Http\Controllers\GateoutController@store');
+        $api->post('/truckEntryData', 'App\Http\Controllers\GateoutController@truckEntryData');
+       
+    });
+
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'maintenance'], function($api){
         $api->post('/getInspectionDataRepair', 'App\Http\Controllers\GateInController@getInspectionDataRepair');

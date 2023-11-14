@@ -259,8 +259,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item " id="gateout">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                                    <a href="/gateout/create" class="nav-link">
                                         <i class="fas fa-door-closed nav-icon"></i>
                                         <p>Gate Out</p>
                                     </a>
