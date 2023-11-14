@@ -114,6 +114,7 @@ class GateInController extends Controller
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'is_repaired' => $gateIn->is_repaired,
                 'id' => $gateIn->id,
             ];
             
@@ -176,13 +177,13 @@ class GateInController extends Controller
 
             $gateInData = GateIn::where([
                 ['status','In'],
-                ['is_estimate_done',0]
+                ['is_estimate_done','0']
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
             $gateInData = GateIn::where([
                 ['status','In'],
-                ['is_estimate_done',0],
+                ['is_estimate_done','0'],
                 ['depo_id',$request->depo_id],
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }
@@ -330,23 +331,23 @@ class GateInController extends Controller
             $value = "Out";
         }else if($request->status == "Inspection Done"){
             $field = "is_estimate_done";
-            $value = 1;
+            $value = '1';
         }
         else if($request->status == "Inspection Approved"){
             $field = "is_approve";
-            $value = 1;
+            $value = '1';
         }
         else if($request->status == "Inspection Pending"){
             $field = "is_estimate_done";
-            $value = 0;
+            $value = '0';
         }
         else if($request->status == "Repair Pending"){
             $field = "is_repaired";
-            $value = 0;
+            $value = '0';
         }
         else if($request->status == "Repair Done"){
             $field = "is_repaired";
-            $value = 1;
+            $value = '1';
         }
 
 
@@ -388,6 +389,7 @@ class GateInController extends Controller
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'is_repaired' => $gateIn->is_repaired,
                 'id' => $gateIn->id,
             ];
             
@@ -492,6 +494,7 @@ class GateInController extends Controller
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'is_repaired' => $gateIn->is_repaired,
                 'id' => $gateIn->id,
             ];
             
@@ -559,7 +562,7 @@ class GateInController extends Controller
                     }
                 }],
                 ['status','In'],
-                ['is_estimate_done',0],
+                ['is_estimate_done','0'],
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -579,7 +582,7 @@ class GateInController extends Controller
                 }],
                 ['status','In'],
                 ['depo_id',$request->depo_id],
-                ['is_estimate_done',0],
+                ['is_estimate_done','0'],
             ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
@@ -789,9 +792,9 @@ class GateInController extends Controller
             'gateintype' => $gateintype,
             'inward_no' => $inwardNo,
             'status' => 'In',
-            'is_approve' => 0,
-            'is_repaired' => 0,
-            'is_estimate_done' => 0,
+            'is_approve' => '0',
+            'is_repaired' => '0',
+            'is_estimate_done' => '0',
             'inward_date' => date('Y-m-d'),
             'inward_time' => date('H:i:s'),
         ]);
@@ -943,7 +946,7 @@ class GateInController extends Controller
 
     public function updateestimate(Request $request){
         $gateInDetails = GateIn::find($request->gateinid);
-        $gateInDetails->is_estimate_done = 1;
+        $gateInDetails->is_estimate_done = '1';
         $gateInDetails->estimate_updatedby = $request->user_id;
         $gateInDetails->estimate_updated_at = date('Y-m-d H:i:s');
 
@@ -964,7 +967,7 @@ class GateInController extends Controller
 
     public function updateapprove(Request $request){
         $gateInDetails = GateIn::find($request->gateinid);
-        $gateInDetails->is_approve = 1;
+        $gateInDetails->is_approve = '1';
         $gateInDetails->approve_updatedby = $request->user_id;
         $gateInDetails->approve_updatedat = date('Y-m-d H:i:s');
         $gateInDetails  = $gateInDetails->save();
@@ -985,9 +988,30 @@ class GateInController extends Controller
 
     public function updaterepair(Request $request){
         $gateInDetails = GateIn::find($request->gateinid);
-        $gateInDetails->is_repaired = 1;
+        $gateInDetails->is_repaired = '1';
         $gateInDetails->repair_updatedby = $request->user_id;
         $gateInDetails->repair_updatedat = date('Y-m-d H:i:s');
+        $gateInDetails  = $gateInDetails->save();
+
+        if($gateInDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
+    }
+
+
+    public function updateout(Request $request){
+        $gateInDetails = GateIn::find($request->gateinid);
+        $gateInDetails->status = $request->out_status;
+        $gateInDetails->status_updatedby = $request->user_id;
+        $gateInDetails->status_updatedat = date('Y-m-d H:i:s');
         $gateInDetails  = $gateInDetails->save();
 
         if($gateInDetails){

@@ -509,15 +509,28 @@ function updateEstimate(){
     var depo_id = localStorage.getItem('depo_id');
     var gateinid = $('#estimate_gate_in').val();
     var out_status = $('#out_status').val();
-    data = {
-        'user_id':user_id,
-        'depo_id':depo_id,
-        'gateinid':gateinid,
-        'out_status':out_status
+
+    var checkSupervisor = "<?php echo $checkSupervisor?>";
+
+    if(checkSupervisor == 1){
+        data = {
+            'user_id':user_id,
+            'depo_id':depo_id,
+            'gateinid':gateinid,
+            'out_status':out_status
+        }
+        post('gatein/updateout',data);
+        location.href="/supervisor/inspection";
+    }else{
+        data = {
+            'user_id':user_id,
+            'depo_id':depo_id,
+            'gateinid':gateinid,
+        }
+        post('gatein/updaterepair',data);
+        location.href="/maintenance/view";
     }
-    console.log(data);
-    // post('gatein/updaterepair',data);
-    // location.href="/maintenance/view";
+    
 }
 
 </script>
@@ -664,12 +677,17 @@ function updateEstimate(){
             </div>
             <div class="modal-body">
                 <input type="hidden" id="estimate_gate_in" value="<?php echo  $getid[0]?>">
+
+                <?php if( $checkSupervisor == 1){?>
                 <h4>Please Choose Outward Container Status</h4>
                 <select name="out_status" id="out_status" class="form-control">
                     <option value="">Select An Option</option>
-                    <option value="in stack">Move to Stacking</option>
+                    <option value="ready">Move to Stacking</option>
                     <option value="out">Ready For Outward</option>
                 </select>
+                <?php }else{?>
+                    <h4>Are You sure you want to submit this report</h4>
+                <?php }?>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

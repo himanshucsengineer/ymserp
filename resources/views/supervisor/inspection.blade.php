@@ -196,7 +196,8 @@ $('#filterbystatus').on('change',function(){
                 
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id) 
+                    .attr('data-id', item.id)
+                    .attr('data-value',item.is_repaired) 
                     .attr('class', 'view-button');
 
                 var td = $('<td>');
@@ -271,8 +272,8 @@ $('#filterbystatus').on('change',function(){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-
-                if(status == 'Repair Done'){
+                var dataValue = $(this).data('value');
+                if(dataValue == '1'){
                     window.location = `/maintenance/manage?id=${dataId}&supervisor=yes`
                 }else{
                     window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
@@ -339,6 +340,7 @@ function filterByDate(){
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
+                    .attr('data-value',item.is_repaired) 
                     .attr('class', 'view-button');
 
                 var td = $('<td>');
@@ -413,7 +415,12 @@ function filterByDate(){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-                window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
+                var dataValue = $(this).data('value');
+                if(dataValue == '1'){
+                    window.location = `/maintenance/manage?id=${dataId}&supervisor=yes`
+                }else{
+                    window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
+                }
             });
         },
         error: function(error) {
@@ -481,6 +488,7 @@ function refreshTable(page,search){
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
+                    .attr('data-value',item.is_repaired) 
                     .attr('class', 'view-button');
 
                 var td = $('<td>');
@@ -555,7 +563,12 @@ function refreshTable(page,search){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-                window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
+                var dataValue = $(this).data('value');
+                if(dataValue == '1'){
+                    window.location = `/maintenance/manage?id=${dataId}&supervisor=yes`
+                }else{
+                    window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
+                }
             });
         },
         error: function(error) {

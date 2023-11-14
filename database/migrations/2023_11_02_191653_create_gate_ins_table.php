@@ -50,6 +50,9 @@ return new class extends Migration
             $table->string('repair_updatedat')->nullable();
             $table->string('approve_updatedby')->nullable();
             $table->string('approve_updatedat')->nullable();
+
+            $table->string('status_updatedat')->nullable();
+            $table->string('status_updatedby')->nullable();
             $table->enum('status',['In','Out','Ready']);
             $table->timestamps();
         });

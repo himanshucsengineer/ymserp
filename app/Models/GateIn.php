@@ -51,6 +51,8 @@ class GateIn extends Model
         'approve_updatedat',
         'is_estimate_done',
         'estimate_updatedby',
-        'estimate_updated_at'
+        'estimate_updated_at',
+        'status_updatedat',
+        'status_updatedby'
     ];
 }
