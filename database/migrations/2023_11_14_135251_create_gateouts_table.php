@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('updatedby')->nullable();
             $table->string('in_date')->nullable();
             $table->string('in_time')->nullable();
+            $table->enum('status',[0,1]);
             $table->timestamps();
         });
     }
