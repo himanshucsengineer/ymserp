@@ -28,7 +28,19 @@ class GateoutController extends Controller
      * @param  \App\Http\Requests\StoreGateoutRequest  $request
      * @return \Illuminate\Http\Response
      */
+    
+     public function get(Request $request)
+     {
+         if($request->user_id == 1){
+             return Gateout::get();
+         }else{
+             return Gateout::where('depo_id',$request->depo_id)->get();
+         }
+     }
 
+     public function getbyid(Request $request){
+        return Gateout::where('id',$request->id)->first();
+     }
 
 
      public function truckEntryData(Request $request){

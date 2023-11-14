@@ -15,7 +15,11 @@ class OutwardOfficerController extends Controller
      */
     public function index()
     {
-        //
+        return view('outward.view');
+    }
+    public function manage()
+    {
+        return view('outward.create');
     }
 
     /**

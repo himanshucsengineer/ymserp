@@ -153,6 +153,8 @@ $api->version('v1', function($api){
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
         $api->get('/genrateastimate', 'App\Http\Controllers\GateInController@genrateastimate');
         $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');
+        $api->post('/getDataByIdOutward', 'App\Http\Controllers\GateInController@getDataByIdOutward');
+
         $api->post('/update', 'App\Http\Controllers\GateInController@update');
         $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
         $api->post('/filterByDate', 'App\Http\Controllers\GateInController@filterByDate');
@@ -183,13 +185,22 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gateout'], function($api){
         $api->post('/create','App\Http\Controllers\GateoutController@store');
         $api->post('/truckEntryData', 'App\Http\Controllers\GateoutController@truckEntryData');
-       
+        $api->post('/get', 'App\Http\Controllers\GateoutController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\GateoutController@getbyid');
+    
     });
 
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'maintenance'], function($api){
         $api->post('/getInspectionDataRepair', 'App\Http\Controllers\GateInController@getInspectionDataRepair');
         $api->post('/filterByDateRepair', 'App\Http\Controllers\GateInController@filterByDateRepair');
+
+    });
+
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'outward'], function($api){
+        $api->post('/filterByOutStatus', 'App\Http\Controllers\GateInController@filterByOutStatus');
+        $api->post('/getInspectionDataOutStatus', 'App\Http\Controllers\GateInController@getInspectionDataOutStatus');
 
     });
 

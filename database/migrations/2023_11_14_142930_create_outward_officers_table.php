@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('destination')->nullable();
             $table->string('shippers')->nullable();
             $table->string('vessel')->nullable();
+            $table->string('voyage')->nullable();
             $table->string('port_name')->nullable();
             $table->string('seal_no')->nullable();
             $table->string('vent_seal_no')->nullable();

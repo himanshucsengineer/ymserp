@@ -15,6 +15,7 @@ class OutwardOfficer extends Model
                 'destination',
                 'shippers',
                 'vessel',
+                'voyage',
                 'port_name',
                 'seal_no',
                 'vent_seal_no',
