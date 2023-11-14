@@ -39,6 +39,10 @@ class GateInController extends Controller
         return view('maintenance.view');
     }
 
+    public function maintenance_manage(){
+        return view('maintenance.manage');
+    }
+
     public function reports(){
         return view('surveyor.report');
     }
@@ -963,6 +967,27 @@ class GateInController extends Controller
         $gateInDetails->is_approve = 1;
         $gateInDetails->approve_updatedby = $request->user_id;
         $gateInDetails->approve_updatedat = date('Y-m-d H:i:s');
+        $gateInDetails  = $gateInDetails->save();
+
+        if($gateInDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
+    }
+
+
+    public function updaterepair(Request $request){
+        $gateInDetails = GateIn::find($request->gateinid);
+        $gateInDetails->is_repaired = 1;
+        $gateInDetails->repair_updatedby = $request->user_id;
+        $gateInDetails->repair_updatedat = date('Y-m-d H:i:s');
         $gateInDetails  = $gateInDetails->save();
 
         if($gateInDetails){

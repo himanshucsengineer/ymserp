@@ -408,7 +408,7 @@ function filterByDate(){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-                window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
+                window.location = `/maintenance/manage?id=${dataId}`
             });
         },
         error: function(error) {
@@ -550,7 +550,7 @@ function refreshTable(page,search){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-                window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
+                window.location = `/maintenance/manage?id=${dataId}`
             });
         },
         error: function(error) {
