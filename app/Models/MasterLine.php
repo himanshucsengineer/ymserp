@@ -39,7 +39,9 @@ class MasterLine extends Model
         'containerSize',
         'containerType',
         'line_budget',
-        'parking_charges'
+        'parking_charges',
+        'washing_charges',
+        'lolo_charges'
 
     ];
 }

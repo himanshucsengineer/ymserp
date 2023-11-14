@@ -95,6 +95,17 @@
                                     <label for="parking_charges">Parking Charges (Per Day)<span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="parking_charges" name="parking_charges" placeholder="Enter Parking Charges">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="lolo_charges">LOLO Charges <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="lolo_charges" name="lolo_charges" placeholder="Enter Parking Charges">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="washing_charges">Washing Charges <span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="washing_charges" name="washing_charges" placeholder="Enter Parking Charges">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="labour_rate">Labour Rate <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="labour_rate" name="labour_rate" placeholder="Enter Labour Rate">
@@ -310,11 +321,15 @@ $(function () {
         var state_code = $("#state_code").val();
         var line_budget = $('#line_budget').val();
         var containerSize = $("#containerSize").val();
-        var containerType = $("#containerType").val();
+        var containerType = $("#containerType").val();lolo_charges
         var parking_charges = $('#parking_charges').val();
+        var lolo_charges = $('#lolo_charges').val();
+        var washing_charges = $('#washing_charges').val();
 
             var formData = new FormData();
             formData.append('name', name);
+            formData.append('lolo_charges', lolo_charges);
+            formData.append('washing_charges', washing_charges);
             formData.append('parking_charges', parking_charges);
             formData.append('line_budget', line_budget);
             formData.append('containerSize', containerSize);

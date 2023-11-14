@@ -41,6 +41,9 @@ return new class extends Migration
             $table->string('depo_id')->nullable();
             $table->string('containerSize')->nullable();
             $table->string('containerType')->nullable();
+            $table->string('lolo_charges')->nullable();
+            $table->string('washing_charges')->nullable();
+
             $table->timestamps();
         });
     }
