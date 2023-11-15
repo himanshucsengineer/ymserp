@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Contractor</h1>
+                    <h1 class="m-0">All Tariff</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Contractor</li>
+                        <li class="breadcrumb-item active">All Tariff</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -38,14 +38,27 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Code</th>
-                                        <th>Full Name</th>
-                                        <th>Company</th>
-                                        <th>Address</th>
-                                        <th>Pincode</th>
-                                        <th>Contact</th>
-                                        <th>License </th>
-                                        <th>GST NO.</th>
+                                        <th>Line Name</th>
+                                        <th>Component Code</th>
+                                        <th>Location Code</th>
+                                        <th>Container Side</th>
+                                        <th>Damage Code</th>
+                                        <th>Repair Code</th>
+                                        <th>Material Code </th>
+                                        <th>Description</th>
+                                        <th>Unit Of Measurement</th>
+                                        <th>Length</th>
+                                        <th>Width</th>
+                                        <th>Height</th>
+                                        <th>Quantity</th>
+                                        <th>Repair Type</th>
+                                        <th>Labour Hour</th>
+                                        <th>Labour Cost</th>
+                                        <th>Material Cost</th>
+                                        <th>Sub Total</th>
+                                        <th>Tax</th>
+                                        <th>Tax Cost</th>
+                                        <th>Total Cost</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

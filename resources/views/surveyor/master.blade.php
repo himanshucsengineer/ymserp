@@ -324,9 +324,9 @@ a.open:hover .circle img {
                                         <div class="col-md-10" id="right">
                                             <h5>Side: Right | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
-                                            <img src="/assets/img/right.jpeg" alt="Image with Hotspots"
+                                            <img src="" id="right_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <div class="hotspot" style="left: 10px; top: 65px;">
+                                            <!-- <div class="hotspot" style="left: 10px; top: 65px;">
                                                 <a href="#" class="open hidden" id="RH1X" data-id="RH1X">
                                                     <span class="circle small"></span>
                                                 </a>
@@ -419,7 +419,7 @@ a.open:hover .circle img {
                                                 <a href="#" class="open hidden" data-id="RB4X">
                                                     <span class="circle small"></span>
                                                 </a>
-                                            </div>
+                                            </div> -->
 
                                         </div>
 
@@ -972,6 +972,8 @@ $(document).ready(function() {
             $('#gateinid').val(data.id);
             $('#line_id_no').val(data.line_id);
             getTarrifByLine(data.line_id);
+            getLineData(data.line_id);
+
             getReportingData();
         },
         error: function(error) {
@@ -980,6 +982,30 @@ $(document).ready(function() {
     });
 });
 
+
+function getLineData(line_id){
+    $.ajax({
+        type: "POST",
+        url: "/api/line/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: {
+            'id': line_id,
+        },
+        success: function(data) {
+            $('#right_img').attr({'src':`/uploads/line/${data.right_img}`})
+            $('#left_img').attr({'src':`/uploads/line/${data.left_img}`})
+            $('#top_img').attr({'src':`/uploads/line/${data.top_img}`})
+            $('#bottom_img').attr({'src':`/uploads/line/${data.bottom_img}`})
+            $('#front_img').attr({'src':`/uploads/line/${data.front_img}`})
+            $('#door_img').attr({'src':`/uploads/line/${data.door_img}`})
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
 
 function getTarrifByLine(line_id) {
     $.ajax({
