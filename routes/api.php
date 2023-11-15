@@ -129,13 +129,16 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\MasterLineController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterLineController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterLineController@update');
-    });
+    }); 
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'tarrif'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTarrifController@store');
         $api->get('/get', 'App\Http\Controllers\MasterTarrifController@get');
-        $api->post('/getbyid', 'App\Http\Controllers\MasterTarrifController@getbyid');
+        $api->post('/getbylineid', 'App\Http\Controllers\MasterTarrifController@getbylineid');
         $api->post('/getTarrifByLine', 'App\Http\Controllers\MasterTarrifController@getTarrifByLine');
+        $api->post('/checktarrifbycode', 'App\Http\Controllers\MasterTarrifController@checktarrifbycode');
+        $api->post('/checktarrifbydimention', 'App\Http\Controllers\MasterTarrifController@checktarrifbydimention');
+
         $api->post('/delete', 'App\Http\Controllers\MasterTarrifController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterTarrifController@update');
     });

@@ -29,11 +29,35 @@ class MasterTarrifController extends Controller
         return view('tarrif.view');
     }
 
-    public function getbyid(Request $request){
-        return MasterTarrif::where('line_id',$request->line_id)->where('repai_location_code',$request->location_code)->first();
+    public function getbylineid(Request $request){
+        return MasterTarrif::where('line_id',$request->line_id)->where('repai_location_code',$request->location_code)->get();
     }
     public function getTarrifByLine(Request $request){
         return MasterTarrif::where('line_id',$request->line_id)->get();
+    }
+
+    public function checktarrifbycode(Request $request){
+        $getData =  MasterTarrif::where('damade_id',$request->damageCode)->where('repair_id',$request->repairCode)->where('material_id',$request->materialCode)->get();
+        if(count($getData)>0){
+            return $getData;
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Invalid Damage Code for tariff!"
+            ], 500);
+        }
+    }
+
+    public function checktarrifbydimention(Request $request){
+        $getData =  MasterTarrif::where('damade_id',$request->damageCode)->where('repair_id',$request->repairCode)->where('material_id',$request->materialCode)->where('dimension_l',$request->master_length)->where('dimension_w',$request->master_width)->where('dimension_h',$request->master_height)->get();
+        if(count($getData)>0){
+            return $getData;
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Invalid Diamensions for tariff!"
+            ], 500);
+        }
     }
     /**
      * Store a newly created resource in storage.

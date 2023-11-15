@@ -980,6 +980,125 @@ $(document).ready(function() {
             console.log(error);
         }
     });
+
+        $('#damage_code').on('change',function(){
+            $('#repair_code').removeAttr('readonly');
+        });
+
+        $('#repair_code').on('change',function(){
+            $('#material_code').removeAttr('readonly');
+        });
+
+        $('#master_length').on('change',function(){
+            $('#master_width').removeAttr('readonly');
+        });
+
+        $('#master_width').on('change',function(){
+            $('#master_height').removeAttr('readonly');
+        });
+
+        $('#material_code').on('change',function(){
+            var damageCode = $('#damage_code').val();
+            var repairCode = $('#repair_code').val();
+            var materialCode = $('#material_code').val();
+
+            console.log(damageCode);
+
+            $.ajax({
+                type: "POST",
+                url: "/api/tarrif/checktarrifbycode",
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: {
+                    'damageCode': damageCode,
+                    'repairCode': repairCode,
+                    'materialCode': materialCode,
+                },
+                success: function(data) {
+                    $('#master_length').removeAttr('readonly');
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                    $('#damage_code').val('');
+                    $('#repair_code').val('');
+                    $('#material_code').val('');
+                    $('#repair_code').attr({'readonly':'readonly'});
+                    $('#material_code').attr({'readonly':'readonly'});
+                }
+            });
+        });
+
+        $('#master_height').on('change',function(){
+            var damageCode = $('#damage_code').val();
+            var repairCode = $('#repair_code').val();
+            var materialCode = $('#material_code').val();
+
+            var master_length = $('#master_length').val();
+            var master_width = $('#master_width').val();
+            var master_height = $('#master_height').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/tarrif/checktarrifbydimention",
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: {
+                    'damageCode': damageCode,
+                    'repairCode': repairCode,
+                    'materialCode': materialCode,
+                    'master_length': master_length,
+                    'master_width': master_width,
+                    'master_height': master_height,
+                },
+                success: function(data) {
+                    $("#component_code").val(data[0].component_code);
+                    $("#tarrif_id").val(data[0].id);
+                    $("#labour_hr").val(data[0].labour_hour);
+                    $("#qty").val(data[0].qty);
+                    $("#labour_cost").val(data[0].labour_cost);
+                    $("#material_cost").val(data[0].material_cost);
+                    $("#sab_total").val(data[0].sub_total);
+                    $("#tax_cost").val(data[0].tax_cost);
+                    $("#gst").val(data[0].tax);
+                    $("#total").val(data[0].total_cost);
+
+                    $('#addButton').removeAttr('disabled');
+
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                    $('#master_width').val('');
+                    $('#master_height').val('');
+                    $('#master_length').val('');
+                    $('#master_width').attr({'readonly':'readonly'});
+                    $('#master_height').attr({'readonly':'readonly'});
+                }
+            });
+        });
 });
 
 
@@ -2080,6 +2199,7 @@ function getTarrifByLine(line_id) {
                     innerDiv.html('<span class="circle small"></span>');
                 }
             }
+
             $('.open').click(function() {
                 var dataIdValue = $(this).data('id');
                 var line_id = $('#line_id_no').val();
@@ -2097,7 +2217,7 @@ function getTarrifByLine(line_id) {
 function gettarrif(location_code, line_id) {
     $.ajax({
         type: "POST",
-        url: "/api/tarrif/getbyid",
+        url: "/api/tarrif/getbylineid",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -2106,24 +2226,31 @@ function gettarrif(location_code, line_id) {
             'location_code': location_code
         },
         success: function(data) {
-            $("#component_code").val(data.component_code);
-            $("#tarrif_id").val(data.id);
-            $("#labour_hr").val(data.labour_hour);
-            $("#qty").val(data.qty);
-            $("#labour_cost").val(data.labour_cost);
-            $("#material_cost").val(data.material_cost);
-            $("#sab_total").val(data.sub_total);
-            $("#tax_cost").val(data.tax_cost);
-            $("#gst").val(data.tax);
-            $("#total").val(data.total_cost);
-
             var tarrifData = data;
 
+            data.forEach(function(item) {
+                getDamage(item.damade_id);
+                getRepair(item.repair_id);
+                getMaterial(item.material_id);
 
-            getDamage(data.damade_id);
-            getRepair(data.repair_id);
-            getMaterial(data.material_id);
+                var master_length = document.getElementById('master_length');
+                var master_length_option = document.createElement('option');
+                master_length_option.value = item.dimension_l;
+                master_length_option.text = item.dimension_l;
+                master_length.appendChild(master_length_option);
 
+                var master_width = document.getElementById('master_width');
+                var master_width_option = document.createElement('option');
+                master_width_option.value = item.dimension_w;
+                master_width_option.text = item.dimension_w;
+                master_width.appendChild(master_width_option);
+
+                var master_height = document.getElementById('master_height');
+                var master_height_option = document.createElement('option');
+                master_height_option.value = item.dimension_h;
+                master_height_option.text = item.dimension_h;
+                master_height.appendChild(master_height_option);
+            });
             getTransactionData();
 
         },
@@ -2495,6 +2622,8 @@ function updateEstimate(){
 
 
 
+
+
 </script>
 
 
@@ -2529,14 +2658,15 @@ function updateEstimate(){
                     </div>
                 </div>
 
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Damage code</label>
-                                    <select readonly class="form-control" id="damage_code">
-
+                                    <select  class="form-control" id="damage_code">
+                                        <option value="">Select Damage Code</option>
                                     </select>
                                 </div>
                             </div>
@@ -2544,6 +2674,7 @@ function updateEstimate(){
                                 <div class="form-group">
                                     <label>Repair code</label>
                                     <select readonly class="form-control" id="repair_code">
+                                        <option value="">Select Repair Code</option>
                                     </select>
                                 </div>
                             </div>
@@ -2551,6 +2682,38 @@ function updateEstimate(){
                                 <div class="form-group">
                                     <label>Material Code code</label>
                                     <select readonly class="form-control" id="material_code">
+                                        <option value="">Select Material Code</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Length</label>
+                                    <select readonly class="form-control" id="master_length">
+                                        <option value="">Select Length</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Width</label>
+                                    <select readonly  class="form-control" id="master_width">
+                                        <option value="">Select Width</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Height</label>
+                                    <select readonly  class="form-control" id="master_height">
+                                        <option value="">Select Height</option>
                                     </select>
                                 </div>
                             </div>
@@ -2588,7 +2751,7 @@ function updateEstimate(){
                     <input type="hidden" id="gst">
                     <input type="hidden" id="total">
                     <input type="hidden" id="tax_cost">
-                    <button type="button" class="btn btn-primary" onclick="createTransaction()">Add</button>
+                    <button type="button" class="btn btn-primary" onclick="createTransaction()" id="addButton" disabled>Add</button>
                 </form>
                 <div class="card mt-5">
                     <div class="card-body p-0">
