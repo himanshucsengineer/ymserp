@@ -30,6 +30,10 @@ class OutwardOfficerController extends Controller
         return view('outward.create');
     }
 
+    public function invoice_view(){
+        return view('invoice.view');
+    }
+
 
     public function outward_print(){
         return view('print.outward');

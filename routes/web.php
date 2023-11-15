@@ -79,6 +79,9 @@ Route::get('/outward/manage', 'App\Http\Controllers\OutwardOfficerController@man
 
 Route::get('/print/outward', 'App\Http\Controllers\OutwardOfficerController@outward_print');
 
+Route::get('/billing/invoice', 'App\Http\Controllers\OutwardOfficerController@invoice_view');
+
+
 
 
 
