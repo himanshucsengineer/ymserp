@@ -1254,185 +1254,832 @@ function getTarrifByLine(line_id) {
             }
 
 
-            
+            if(getleftSide.length > 0){
+                if (data.find(x => x.repai_location_code == 'LH1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LH1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LH1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX1N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX1N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX1N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX6N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX6N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX6N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LB1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LB1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LB1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX2N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX2N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX2N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX7N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX7N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX7N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LB2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LB2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LB2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX3N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX3N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX3N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX8N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX8N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX8N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX4N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX4N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX4N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX9N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX9N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX9N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LB3X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LB3X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LB3X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LH2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LH2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LH2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX5N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX5N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX5N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'LX0N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LX0N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LX0N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'c')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'LB4X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'LB4X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+            }
 
+            if(gettopSide.length > 0){
+                if (data.find(x => x.repai_location_code == 'TH1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TH1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TH1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX1N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX1N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX1N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX6N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX6N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX6N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TB1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TB1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TB1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX2N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX2N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX2N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX7N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX7N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX7N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX8N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX8N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX8N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX4N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX4N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX4N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX9N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX9N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX9N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TH2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TH2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TH2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX5N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX5N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX5N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TX0N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TX0N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TX0N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'TB2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'TB2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'TB2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+            }
 
-            
-            if (data.find(x => x.repai_location_code == 'LH1X')) {
-                $('a[data-id="LH1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX1N')) {
-                $('a[data-id="LX1N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX6N')) {
-                $('a[data-id="LX6N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LB1X')) {
-                $('a[data-id="LB1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX2N')) {
-                $('a[data-id="LX2N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX7N')) {
-                $('a[data-id="LX7N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LB2X')) {
-                $('a[data-id="LB2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX3N')) {
-                $('a[data-id="LX3N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX8N')) {
-                $('a[data-id="LX8N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX4N')) {
-                $('a[data-id="LX4N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX9N')) {
-                $('a[data-id="LX9N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LB3X')) {
-                $('a[data-id="LB3X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LH2X')) {
-                $('a[data-id="LH2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX5N')) {
-                $('a[data-id="LX5N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LX0N')) {
-                $('a[data-id="LX0N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'LB4X')) {
-                $('a[data-id="LB4X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TH1X')) {
-                $('a[data-id="TH1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX1N')) {
-                $('a[data-id="TX1N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX6N')) {
-                $('a[data-id="TX6N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TB1X')) {
-                $('a[data-id="TB1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX2N')) {
-                $('a[data-id="TX2N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX7N')) {
-                $('a[data-id="TX7N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX8N')) {
-                $('a[data-id="TX8N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX4N')) {
-                $('a[data-id="TX4N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX9N')) {
-                $('a[data-id="TX9N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TH2X')) {
-                $('a[data-id="TH2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX5N')) {
-                $('a[data-id="TX5N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TX0N')) {
-                $('a[data-id="TX0N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'TB2X')) {
-                $('a[data-id="TB2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BH1X')) {
-                $('a[data-id="BH1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX1N')) {
-                $('a[data-id="BX1N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX6N')) {
-                $('a[data-id="BX6N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BB1X')) {
-                $('a[data-id="BB1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX2N')) {
-                $('a[data-id="BX2N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX7N')) {
-                $('a[data-id="BX7N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX8N')) {
-                $('a[data-id="BX8N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX4N')) {
-                $('a[data-id="BX4N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX9N')) {
-                $('a[data-id="BX9N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BH2X')) {
-                $('a[data-id="BH2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX5N')) {
-                $('a[data-id="BX5N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BX0N')) {
-                $('a[data-id="BX0N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'BB2X')) {
-                $('a[data-id="BB2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FH1X')) {
-                $('a[data-id="FH1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FB1X')) {
-                $('a[data-id="FB1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FH2X')) {
-                $('a[data-id="FH2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FB2X')) {
-                $('a[data-id="FB2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FX1N')) {
-                $('a[data-id="FX1N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FX3N')) {
-                $('a[data-id="FX3N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FX2N')) {
-                $('a[data-id="FX2N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'FX4N')) {
-                $('a[data-id="FX4N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DH1X')) {
-                $('a[data-id="DH1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DB1X')) {
-                $('a[data-id="DB1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DH2X')) {
-                $('a[data-id="DH2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DB2X')) {
-                $('a[data-id="DB2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DX1N')) {
-                $('a[data-id="DX1N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DX3N')) {
-                $('a[data-id="DX3N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DX2N')) {
-                $('a[data-id="DX2N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'DX4N')) {
-                $('a[data-id="DX4N').show();
+            if(getbottomSide.length > 0){
+                if (data.find(x => x.repai_location_code == 'BH1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BH1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BH1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX1N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX1N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX1N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX6N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX6N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX6N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BB1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BB1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BB1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX2N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX2N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX2N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX7N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX7N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX7N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX8N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX8N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX8N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX4N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX4N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX4N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX9N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX9N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX9N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BH2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BH2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BH2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX5N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX5N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX5N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BX0N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BX0N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BX0N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'BB2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'BB2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'BB2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
             }
 
+            if(getfrontSide.length > 0){
+                if (data.find(x => x.repai_location_code == 'FH1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FH1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FH1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FB1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FB1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FB1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FH2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FH2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FH2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FB2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FB2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FB2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FX1N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FX1N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FX1N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FX3N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FX3N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FX3N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FX2N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FX2N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FX2N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'FX4N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'FX4N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'FX4N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+            }
+
+            if(getdoorSide.length > 0){
+                if (data.find(x => x.repai_location_code == 'DH1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DH1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DH1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DB1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DB1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DB1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DH2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DH2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DH2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DB2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DB2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DB2X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DX1N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DX1N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DX1N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DX3N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DX3N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DX3N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DX2N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DX2N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DX2N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'DX4N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'DX4N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'DX4N','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+            }
             $('.open').click(function() {
                 var dataIdValue = $(this).data('id');
                 var line_id = $('#line_id_no').val();
