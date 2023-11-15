@@ -13,6 +13,9 @@
 @section('content')
 
 <style>
+    #right{
+        position: relative;
+    }
 .reportinput{
     width:100px !important;
 }
@@ -41,6 +44,8 @@
 .hotspot {
     position: absolute;
     cursor: pointer;
+    width: 10px;
+    height: 10px;
 }
 
 .circle img,
@@ -326,6 +331,7 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="right_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
+                                            
                                             <!-- <div class="hotspot" style="left: 10px; top: 65px;">
                                                 <a href="#" class="open hidden" id="RH1X" data-id="RH1X">
                                                     <span class="circle small"></span>
@@ -426,9 +432,9 @@ a.open:hover .circle img {
                                         <div class="col-md-10" id="left" style="display:none">
                                             <h5>Side: Left | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
-                                            <img src="/assets/img/left.jpeg" alt="Image with Hotspots"
+                                            <img src="" id="left_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <div class="hotspot" style="left: 10px; top: 65px;">
+                                            <!-- <div class="hotspot" style="left: 10px; top: 65px;">
                                                 <a href="#" class="open hidden" data-id="LH1X">
                                                     <span class="circle small"></span>
                                                 </a>
@@ -521,16 +527,16 @@ a.open:hover .circle img {
                                                 <a href="#" class="open hidden" data-id="LB4X">
                                                     <span class="circle small"></span>
                                                 </a>
-                                            </div>
+                                            </div> -->
 
                                         </div>
 
                                         <div class="col-md-10" id="top" style="display:none">
                                             <h5>Side: Top | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
-                                            <img src="/assets/img/top.jpeg" alt="Image with Hotspots" style="width:100%"
+                                            <img src="" id="top_img" alt="Image with Hotspots" style="width:100%"
                                                 id="image">
-                                            <div class="hotspot" style="left: 10px; top: 65px; ">
+                                            <!-- <div class="hotspot" style="left: 10px; top: 65px; ">
                                                 <a href="#" class="open hidden" data-id="TH1X">
                                                     <span class="circle small"></span>
                                                 </a>
@@ -617,16 +623,16 @@ a.open:hover .circle img {
                                                 <a href="#" class="open hidden" data-id="TB2X">
                                                     <span class="circle small"></span>
                                                 </a>
-                                            </div>
+                                            </div> -->
 
                                         </div>
 
                                         <div class="col-md-10" id="bottom" style="display:none">
                                             <h5>Side: Bottom | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
-                                            <img src="/assets/img/bottom.jpeg" alt="Image with Hotspots"
+                                            <img src="" id="bottom_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <div class="hotspot" style="left: 10px; top: 65px; ">
+                                            <!-- <div class="hotspot" style="left: 10px; top: 65px; ">
                                                 <a href="#" class="open hidden" data-id="BH1X">
                                                     <span class="circle small"></span>
                                                 </a>
@@ -713,16 +719,16 @@ a.open:hover .circle img {
                                                 <a href="#" class="open hidden" data-id="BB2X">
                                                     <span class="circle small"></span>
                                                 </a>
-                                            </div>
+                                            </div> -->
 
                                         </div>
 
                                         <div class="col-md-10" id="front" style="display:none">
                                             <h5>Side: Front | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
-                                            <img src="/assets/img/front.jpeg" alt="Image with Hotspots"
+                                            <img src="" id="front_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <div class="hotspot" style="left: 20px; top: 80px; ">
+                                            <!-- <div class="hotspot" style="left: 20px; top: 80px; ">
                                                 <a href="#" class="open hidden" data-id="FH1X">
                                                     <span class="circle small"></span>
                                                 </a>
@@ -766,15 +772,15 @@ a.open:hover .circle img {
                                                 <a href="#" class="open hidden" data-id="FX4N">
                                                     <span class="circle small"></span>
                                                 </a>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <div class="col-md-10" id="door" style="display:none">
                                             <h5>Side: Door | Inword No: <span class="inward_no"></span> | Container Number: <span class="container_no"></span></h5>
                                             <hr>
-                                            <img src="/assets/img/back.jpeg" alt="Image with Hotspots"
+                                            <img src="" id="door_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <div class="hotspot" style="left: 20px; top: 80px; ">
+                                            <!-- <div class="hotspot" style="left: 20px; top: 80px; ">
                                                 <a href="#" class="open hidden" data-id="DH1X">
                                                     <span class="circle small"></span>
                                                 </a>
@@ -818,7 +824,7 @@ a.open:hover .circle img {
                                                 <a href="#" class="open hidden" data-id="DX4N">
                                                     <span class="circle small"></span>
                                                 </a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -945,13 +951,7 @@ function printastimate(){
     });
 }
 
-$('.open').click(function() {
-    var dataIdValue = $(this).data('id');
-    var line_id = $('#line_id_no').val();
-    gettarrif(dataIdValue, line_id);
-    $('#side').val(dataIdValue);
-    $('#modal-xl').modal('show');
-});
+
 
 $(document).ready(function() {
     var containerid = <?= $getid[0]?>;
@@ -1018,55 +1018,246 @@ function getTarrifByLine(line_id) {
             'line_id': line_id,
         },
         success: function(data) {
-            console.log(data);
-            if (data.find(x => x.repai_location_code == 'RH1X')) {
-                $('a[data-id="RH1X').show();
+            var getrightSide  = data.filter(x => x.container_side == 'right');
+            var getleftSide  = data.filter(x => x.container_side == 'left');
+            var gettopSide  = data.filter(x => x.container_side == 'top');
+            var getbottomSide  = data.filter(x => x.container_side == 'bottom');
+            var getfrontSide  = data.filter(x => x.container_side == 'front');
+            var getdoorSide  = data.filter(x => x.container_side == 'door');
+
+            if(getrightSide.length > 0){
+                if (data.find(x => x.repai_location_code == 'RH1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RH1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr({'data-id':'RH1X','href':'#'})
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                    
+                }
+                if (data.find(x => x.repai_location_code == 'RX1N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX1N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX1N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX6N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX6N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX6N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RB1X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RB1X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RB1X')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX2N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX2N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX2N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX7N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX7N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX7N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RB2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RB2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RB2X')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX3N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX3N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX3N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX8N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX8N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX8N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX4N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX4N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX4N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX9N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX9N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX9N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RB3X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RB3X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RB3X')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RH2X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RH2X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RH2X')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX5N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX5N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX5N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RX0N')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RX0N');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RX0N')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
+                if (data.find(x => x.repai_location_code == 'RB4X')) {
+                    var getDATA = data.find(x => x.repai_location_code == 'RB4X');
+                    var gettop = parseInt(getDATA.hotspot_coor_y) + 155;
+                    var getLeft = parseInt(getDATA.hotspot_coor_x) + 68.66667175292969;
+                    var newDiv = $('<div>');
+                    newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
+                    newDiv.addClass('hotspot');
+                    $('#right').append(newDiv);
+                    var innerDiv = $('<a>');
+                    innerDiv.addClass('open')
+                    innerDiv.attr('data-id','RB4X')
+                    newDiv.append(innerDiv);
+                    innerDiv.html('<span class="circle small"></span>');
+                }
             }
-            if (data.find(x => x.repai_location_code == 'RX1N')) {
-                $('a[data-id="RX1N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX6N')) {
-                $('a[data-id="RX6N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RB1X')) {
-                $('a[data-id="RB1X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX2N')) {
-                $('a[data-id="RX2N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX7N')) {
-                $('a[data-id="RX7N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RB2X')) {
-                $('a[data-id="RB2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX3N')) {
-                $('a[data-id="RX3N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX8N')) {
-                $('a[data-id="RX8N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX4N')) {
-                $('a[data-id="RX4N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX9N')) {
-                $('a[data-id="RX9N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RB3X')) {
-                $('a[data-id="RB3X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RH2X')) {
-                $('a[data-id="RH2X').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX5N')) {
-                $('a[data-id="RX5N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RX0N')) {
-                $('a[data-id="RX0N').show();
-            }
-            if (data.find(x => x.repai_location_code == 'RB4X')) {
-                $('a[data-id="RB4X').show();
-            }
+
+
+            
+
+
+            
             if (data.find(x => x.repai_location_code == 'LH1X')) {
                 $('a[data-id="LH1X').show();
             }
@@ -1241,6 +1432,14 @@ function getTarrifByLine(line_id) {
             if (data.find(x => x.repai_location_code == 'DX4N')) {
                 $('a[data-id="DX4N').show();
             }
+
+            $('.open').click(function() {
+                var dataIdValue = $(this).data('id');
+                var line_id = $('#line_id_no').val();
+                gettarrif(dataIdValue, line_id);
+                $('#side').val(dataIdValue);
+                $('#modal-xl').modal('show');
+            });
         },
         error: function(error) {
             console.log(error);

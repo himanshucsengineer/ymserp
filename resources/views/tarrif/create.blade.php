@@ -307,11 +307,18 @@ $(document).ready(function () {
     function createHotspot(x, y) {
         const hotspotDiv = document.createElement('div');
         hotspotDiv.className = 'hotspot';
-        hotspotDiv.style.left = x + 'px';
-        hotspotDiv.style.top = y + 'px';
+
+        const containerRect = imageContainer.getBoundingClientRect();
+        const top = y - containerRect.top;
+        const left = x - containerRect.left;
+
+        hotspotDiv.style.top = top + 'px';
+        hotspotDiv.style.left = left + 'px';
+        
         imageContainer.appendChild(hotspotDiv);
-        $('#hotspot_coor_x').val(x);
-        $('#hotspot_coor_y').val(y);
+
+        $('#hotspot_coor_x').val(left);
+        $('#hotspot_coor_y').val(top);
         $('#container_side').attr('disabled', true);
         $('#modal-xl').modal('hide');
     }
