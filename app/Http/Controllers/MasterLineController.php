@@ -168,8 +168,58 @@ class MasterLineController extends Controller
      * @param  \App\Models\MasterLine  $masterLine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterLine $masterLine)
+    public function destroy(Request $request)
     {
-        //
+        $line = MasterLine::find($id);
+        
+        if (is_null($line)) {
+            throw new NotFoundHttpException('Invalid line Id!');
+        }else{
+            $top_img = public_path('uploads/line/'.$line->top_img);
+            if (file_exists($top_img)) {
+                unlink($top_img);
+            }
+
+            $bottom_img = public_path('uploads/line/'.$line->bottom_img);
+            if (file_exists($bottom_img)) {
+                unlink($bottom_img);
+            }
+
+            $right_img = public_path('uploads/line/'.$line->right_img);
+            if (file_exists($right_img)) {
+                unlink($right_img);
+            }
+            $left_img = public_path('uploads/line/'.$line->left_img);
+            if (file_exists($left_img)) {
+                unlink($left_img);
+            }
+
+            $front_img = public_path('uploads/line/'.$line->front_img);
+            if (file_exists($front_img)) {
+                unlink($front_img);
+            }
+
+            $door_img = public_path('uploads/line/'.$line->door_img);
+            if (file_exists($door_img)) {
+                unlink($door_img);
+            }
+
+            $interior_img = public_path('uploads/line/'.$line->interior_img);
+            if (file_exists($interior_img)) {
+                unlink($interior_img);
+            }
+            $deleteline = $line->delete();
+            if($deleteline){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Line Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

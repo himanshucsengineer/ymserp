@@ -992,6 +992,7 @@ function getTarrifByLine(line_id) {
             'line_id': line_id,
         },
         success: function(data) {
+            console.log(data);
             if (data.find(x => x.repai_location_code == 'RH1X')) {
                 $('a[data-id="RH1X').show();
             }

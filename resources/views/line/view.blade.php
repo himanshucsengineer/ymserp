@@ -173,7 +173,8 @@ function refreshTable(){
             });
 
             $('.edit-button').click(function() {
-                             
+                var dataId = $(this).data('id');
+                window.location = `/line/create?id=${dataId}` 
             });
 
             $('.delete-button').click(function() {

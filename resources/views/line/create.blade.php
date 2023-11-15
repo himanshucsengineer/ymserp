@@ -34,12 +34,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Line</h1>
+                    <h1 class="m-0 text">Create Line</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Line</li>
+                        <li class="breadcrumb-item active text">Create Line</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -304,6 +304,55 @@ $(function () {
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     var checkToken = localStorage.getItem('token');
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/line/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            $('#name').val(response.name);
+            $("#alise").val(response.alise);
+            $("#free_days").val(response.free_days);
+            $("#labour_rate").val(response.labour_rate);
+            $("#line_address").val(response.line_address);
+            $("#email").val(response.email);
+            $("#phone").val(response.phone);
+            $("#mobile").val(response.mobile);
+            $("#gst").val(response.gst);
+            $("#pan").val(response.pan);
+            $("#gst_state").val(response.gst_state);
+            $("#state_code").val(response.state_code);
+            $('#line_budget').val(response.line_budget);
+            $("#containerSize").val(response.containerSize);
+            $("#containerType").val(response.containerType);
+            $('#parking_charges').val(response.parking_charges);
+            $('#lolo_charges').val(response.lolo_charges);
+            $('#washing_charges').val(response.washing_charges);
+            $('#top_img_prev').attr({'src':`/uploads/line/${response.top_img}`});
+            $('#bottom_img_prev').attr({'src':`/uploads/line/${response.bottom_img}`});
+            $('#right_img_prev').attr({'src':`/uploads/line/${response.right_img}`});
+            $('#left_img_prev').attr({'src':`/uploads/line/${response.left_img}`});
+            $('#front_img_prev').attr({'src':`/uploads/line/${response.front_img}`});
+            $('#door_img_prev').attr({'src':`/uploads/line/${response.door_img}`});
+            $('#interior_img_prev').attr({'src':`/uploads/line/${response.interior_img}`});
+            $('.text').text('Update Line');
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
+    
 
     $.validator.setDefaults({
     submitHandler: function () {
@@ -321,12 +370,77 @@ $(function () {
         var state_code = $("#state_code").val();
         var line_budget = $('#line_budget').val();
         var containerSize = $("#containerSize").val();
-        var containerType = $("#containerType").val();lolo_charges
+        var containerType = $("#containerType").val();
         var parking_charges = $('#parking_charges').val();
         var lolo_charges = $('#lolo_charges').val();
         var washing_charges = $('#washing_charges').val();
 
-            var formData = new FormData();
+            
+
+            if(getCateId[1]){
+                var formData = new FormData();
+            formData.append('name', name);
+            formData.append('lolo_charges', lolo_charges);
+            formData.append('washing_charges', washing_charges);
+            formData.append('parking_charges', parking_charges);
+            formData.append('line_budget', line_budget);
+            formData.append('containerSize', containerSize);
+            formData.append('containerType', containerType);
+            formData.append('alise', alise);
+            formData.append('free_days', free_days);
+            formData.append('labour_rate', labour_rate);
+            formData.append('line_address', line_address);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('mobile', mobile);
+            formData.append('gst', gst);
+            formData.append('pan', pan);
+            formData.append('gst_state', gst_state);
+            formData.append('state_code', state_code);
+            formData.append('user_id', user_id);
+            formData.append('depo_id', depo_id);
+            formData.append('id', getCateId[1]);
+            formData.append('top_img', $('#top_img')[0].files[0]);
+            formData.append('bottom_img', $('#bottom_img')[0].files[0]);
+            formData.append('right_img', $('#right_img')[0].files[0]);
+            formData.append('left_img', $('#left_img')[0].files[0]);
+            formData.append('front_img', $('#front_img')[0].files[0]);
+            formData.append('door_img', $('#door_img')[0].files[0]);
+            formData.append('interior_img', $('#interior_img')[0].files[0]);
+                $.ajax({
+                url: '/api/line/update',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            });
+            }else{
+                var formData = new FormData();
             formData.append('name', name);
             formData.append('lolo_charges', lolo_charges);
             formData.append('washing_charges', washing_charges);
@@ -354,9 +468,7 @@ $(function () {
             formData.append('front_img', $('#front_img')[0].files[0]);
             formData.append('door_img', $('#door_img')[0].files[0]);
             formData.append('interior_img', $('#interior_img')[0].files[0]);
-
-            // Now, you can send formData in an AJAX request
-            $.ajax({
+                $.ajax({
                 url: '/api/line/create',
                 type: 'POST',
                 headers: {
@@ -388,6 +500,10 @@ $(function () {
                     }, 2000);
                 }
             });
+            }
+
+            // Now, you can send formData in an AJAX request
+            
 
     }
     });
