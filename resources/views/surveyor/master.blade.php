@@ -2326,7 +2326,7 @@ function clearreposrtingTable(){
 
 function getTransactionData(){
     var gatein_id = $('#gateinid').val();
-    var tarrif_id = $('#tarrif_id').val();
+    var location_code = $('#side').val();
     $.ajax({
         type: "POST",
         url: "/api/transcation/getbytarrif",
@@ -2334,7 +2334,7 @@ function getTransactionData(){
             'Authorization': 'Bearer ' + checkToken
         },
         data: {
-            'tarrif_id': tarrif_id,
+            'location_code': location_code,
             'gatein_id':gatein_id
         },
         success: function(data) {
@@ -2348,9 +2348,9 @@ function getTransactionData(){
                 row.append($('<td>').text($('#modal_container_no').val()));
                 row.append($('<td>').text(item.tarrifData.component_code));
                 row.append($('<td>').text(item.tarrifData.repai_location_code));
-                row.append($('<td>').text($('#damage_code').text()));
-                row.append($('<td>').text($('#repair_code').text()));
-                row.append($('<td>').text($('#material_code').text()));
+                row.append($('<td>').text(item.damage_code));
+                row.append($('<td>').text(item.repair_code));
+                row.append($('<td>').text(item.material_code));
                 row.append($('<td>').text(item.tarrifData.unit_of_measure));
                 row.append($('<td>').text(item.tarrifData.dimension_w));
                 row.append($('<td>').text(item.tarrifData.dimension_l));
@@ -2599,6 +2599,7 @@ function createTransaction(){
         var gst = $('#gst').val();
         var total = $('#total').val();
         var tax_cost = $('#tax_cost').val();
+        var location_code = $('#side').val();
 
         var formData = new FormData();
             formData.append('tax_cost', tax_cost);
@@ -2608,6 +2609,7 @@ function createTransaction(){
             formData.append('material_cost', material_cost);
             formData.append('labour_cost', labour_cost);
             formData.append('qty', qty);
+            formData.append('location_code',location_code);
             formData.append('labour_hr', labour_hr);
             formData.append('gatein_id', gatein_id);
             formData.append('tarrif_id', tarrif_id);

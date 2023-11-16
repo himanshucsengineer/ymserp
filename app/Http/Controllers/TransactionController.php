@@ -65,12 +65,15 @@ class TransactionController extends Controller
 
     public function getbytarrif(Request $request){
 
-        $getTransaction = Transaction::where('tarrif_id',$request->tarrif_id)->where('gatein_id',$request->gatein_id)->get();
+        $getTransaction = Transaction::where('location_code',$request->location_code)->where('gatein_id',$request->gatein_id)->get();
 
         $formatedData = [];
 
         foreach($getTransaction as $transaction){
             $tarrif = MasterTarrif::where('id',$transaction->tarrif_id)->first();
+            $damage = MasterDamage::where('id',$tarrif->damade_id)->first();
+            $repair = MasterRepair::where('id',$tarrif->repair_id)->first();
+            $material = MasterMaterial::where('id',$tarrif->material_id)->first();
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
                 'before_file2'=> $transaction->before_file2,
@@ -83,6 +86,10 @@ class TransactionController extends Controller
                 'total' => $transaction->total,
                 'qty' => $transaction->qty,
                 'tarrifData' => $tarrif,
+                'damage_code' => $damage->code,
+                'repair_code' => $repair->repair_code,
+                'material_code' => $material->material_code,
+
             ];
         }
 
@@ -127,6 +134,7 @@ class TransactionController extends Controller
             'qty' => $request->qty,
             'before_file1' => $before_file1_Name,
             'before_file2' => $before_file2_Name,
+            'location_code' => $request->location_code
         ]);
 
         if($createTransaction){

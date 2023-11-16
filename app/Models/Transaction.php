@@ -27,6 +27,7 @@ class Transaction extends Model
         'before_file1',
         'before_file2',
         'after_file1',
-        'after_file2'
+        'after_file2',
+        'location_code'
     ];
 }

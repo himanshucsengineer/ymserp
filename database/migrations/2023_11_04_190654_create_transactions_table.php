@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('gatein_id')->nullable();
+            $table->string('location_code')->nullable();
             $table->string('tarrif_id')->nullable();
             $table->string('labour_hr')->nullable();
             $table->string('qty')->nullable();
