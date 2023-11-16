@@ -107,7 +107,6 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\MasterRepairController@store');
         $api->post('/get', 'App\Http\Controllers\MasterRepairController@get');
         $api->post('/getData', 'App\Http\Controllers\MasterRepairController@getData');
-
         $api->post('/getbyid', 'App\Http\Controllers\MasterRepairController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterRepairController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterRepairController@update');

@@ -982,11 +982,29 @@ $(document).ready(function() {
     });
 
         $('#damage_code').on('change',function(){
-            $('#repair_code').removeAttr('readonly');
+            var repair_code = $('#repair_code');
+            repair_code.empty();
+            var repair_code_create = document.getElementById('repair_code');
+            var repair_code_create_option = document.createElement('option');
+            repair_code_create_option.value = '';
+            repair_code_create_option.text = "Select Repair Code";
+            repair_code_create.appendChild(repair_code_create_option);
+            getRepair($(this).val());
         });
 
         $('#repair_code').on('change',function(){
-            $('#material_code').removeAttr('readonly');
+            // $('#material_code').removeAttr('readonly');
+
+            var material_code = $('#material_code');
+            material_code.empty();
+            var material_code_create = document.getElementById('material_code');
+            var material_code_create_option = document.createElement('option');
+            material_code_create_option.value = '';
+            material_code_create_option.text = "Select Material Code";
+            material_code_create.appendChild(material_code_create_option);
+            var damage_id = $('#damage_code').val();
+            var repair_id = $(this).val();
+            getMaterial(damage_id,repair_id);
         });
 
         $('#master_length').on('change',function(){
@@ -2227,11 +2245,48 @@ function gettarrif(location_code, line_id) {
         },
         success: function(data) {
             var tarrifData = data;
+            var damage_code = $('#damage_code');
+            damage_code.empty();
+
+            var master_length = $('#master_length');
+            master_length.empty();
+
+            var master_width = $('#master_width');
+            master_width.empty();
+
+            var master_height = $('#master_height');
+            master_height.empty();
+
+
+            var damage_code_create = document.getElementById('damage_code');
+            var damage_code_create_option = document.createElement('option');
+            damage_code_create_option.value = '';
+            damage_code_create_option.text = "Select Damage Code";
+            damage_code_create.appendChild(damage_code_create_option);
+
+
+            var master_length_create = document.getElementById('master_length');
+            var master_length_create_option = document.createElement('option');
+            master_length_create_option.value = '';
+            master_length_create_option.text = "Select Length";
+            master_length_create.appendChild(master_length_create_option);
+
+            var master_width_create = document.getElementById('master_width');
+            var master_width_create_option = document.createElement('option');
+            master_width_create_option.value = '';
+            master_width_create_option.text = "Select Width";
+            master_width_create.appendChild(master_width_create_option);
+
+            var master_height_create = document.getElementById('master_height');
+            var master_height_create_option = document.createElement('option');
+            master_height_create_option.value = '';
+            master_height_create_option.text = "Select Height";
+            master_height_create.appendChild(master_height_create_option);
 
             data.forEach(function(item) {
                 getDamage(item.damade_id);
-                getRepair(item.repair_id);
-                getMaterial(item.material_id);
+                // getRepair(item.repair_id);
+                // getMaterial(item.material_id);
 
                 var master_length = document.getElementById('master_length');
                 var master_length_option = document.createElement('option');
@@ -2457,6 +2512,7 @@ function getDamage(id) {
             'id': id,
         },
         success: function(data) {
+            
             var select = document.getElementById('damage_code');
             var option = document.createElement('option');
                 option.value = data.id;
@@ -2472,7 +2528,7 @@ function getDamage(id) {
 function getRepair(id) {
     $.ajax({
         type: "POST",
-        url: "/api/repair/getbyid",
+        url: "/api/repair/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -2480,11 +2536,15 @@ function getRepair(id) {
             'id': id
         },
         success: function(data) {
-            var select = document.getElementById('repair_code');
-            var option = document.createElement('option');
-                option.value = data.id;
-                option.text = data.repair_code;
+            $('#repair_code').removeAttr('readonly');
+            data.forEach(function(item) {
+                var select = document.getElementById('repair_code');
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.repair_code;
                 select.appendChild(option);
+            })
+            
         },
         error: function(error) {
             console.log(error);
@@ -2492,22 +2552,27 @@ function getRepair(id) {
     });
 }
 
-function getMaterial(id) {
+function getMaterial(damage_id,repair_id) {
     $.ajax({
         type: "POST",
-        url: "/api/material/getbyid",
+        url: "/api/material/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
         data: {
-            'id': id
+            'damage_id': damage_id,
+            'repair_id':repair_id
         },
         success: function(data) {
-            var select = document.getElementById('material_code');
-            var option = document.createElement('option');
-                option.value = data.id;
-                option.text = data.material_code;
+            $('#material_code').removeAttr('readonly');
+            data.forEach(function(item) {
+                var select = document.getElementById('material_code');
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.material_code;
                 select.appendChild(option);
+            })
+            
         },
         error: function(error) {
             console.log(error);
