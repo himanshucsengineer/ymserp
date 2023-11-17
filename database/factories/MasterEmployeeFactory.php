@@ -17,9 +17,9 @@ class MasterEmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'firstname' => 'Himanshu',
+            'firstname' => 'Bhavani',
             'middlename' => '',
-            'lastname' => 'Goyal',
+            'lastname' => 'Group',
             'employee_code' => 1,
             'contractor_id' => 1,
             'address' => 'Vaishali Nagar',

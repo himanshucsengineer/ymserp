@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'ans3' => 'ans3',
             'createdby' => 1,
             'status' => '1',
-            'password' => '@Himanshu1',
+            'password' => 'admin',
             'remember_token' => Str::random(10),
         ];
     }

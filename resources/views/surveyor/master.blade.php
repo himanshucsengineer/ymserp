@@ -331,101 +331,6 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="right_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            
-                                            <!-- <div class="hotspot" style="left: 10px; top: 65px;">
-                                                <a href="#" class="open hidden" id="RH1X" data-id="RH1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="RX1N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="RX6N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="RB1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="RX2N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="RX7N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="RB2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-                                            <div class="hotspot" style="left: 300px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="RX3N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 300px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="RX8N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="RX4N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="RX9N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="RB3X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; top: 65px; ">
-                                                <a href="#" class="open hidden" data-id="RH2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="RX5N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="RX0N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="RB4X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div> -->
 
                                         </div>
 
@@ -434,100 +339,7 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="left_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <!-- <div class="hotspot" style="left: 10px; top: 65px;">
-                                                <a href="#" class="open hidden" data-id="LH1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="LX1N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="LX6N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="LB1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="LX2N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="LX7N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="LB2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-                                            <div class="hotspot" style="left: 300px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="LX3N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 300px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="LX8N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="LX4N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="LX9N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="LB3X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; top: 65px; ">
-                                                <a href="#" class="open hidden" data-id="LH2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="LX5N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="LX0N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="LB4X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div> -->
+                                           
 
                                         </div>
 
@@ -536,94 +348,7 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="top_img" alt="Image with Hotspots" style="width:100%"
                                                 id="image">
-                                            <!-- <div class="hotspot" style="left: 10px; top: 65px; ">
-                                                <a href="#" class="open hidden" data-id="TH1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="TX1N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="TX6N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="TB1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-
-                                            <div class="hotspot" style="left: 180px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="TX2N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="TX7N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-
-
-                                            <div class="hotspot" style="left: 300px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="TX3N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 300px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="TX8N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-
-                                            <div class="hotspot" style="left: 420px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="TX4N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="TX9N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; top: 65px; ">
-                                                <a href="#" class="open hidden" data-id="TH2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="TX5N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="TX0N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="TB2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div> -->
+                                           
 
                                         </div>
 
@@ -632,94 +357,7 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="bottom_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <!-- <div class="hotspot" style="left: 10px; top: 65px; ">
-                                                <a href="#" class="open hidden" data-id="BH1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="BX1N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="BX6N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="BB1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-
-                                            <div class="hotspot" style="left: 180px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="BX2N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="BX7N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-
-
-                                            <div class="hotspot" style="left: 300px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="BX3N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 300px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="BX8N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-
-
-                                            <div class="hotspot" style="left: 420px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="BX4N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 420px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="BX9N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; top: 65px; ">
-                                                <a href="#" class="open hidden" data-id="BH2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 130px; ">
-                                                <a href="#" class="open hidden" data-id="BX5N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 60px; top: 240px; ">
-                                                <a href="#" class="open hidden" data-id="BX0N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 10px; bottom: -10px; ">
-                                                <a href="#" class="open hidden" data-id="BB2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div> -->
+                                            
 
                                         </div>
 
@@ -728,51 +366,7 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="front_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <!-- <div class="hotspot" style="left: 20px; top: 80px; ">
-                                                <a href="#" class="open hidden" data-id="FH1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 20px; bottom: 10px; ">
-                                                <a href="#" class="open hidden" data-id="FB1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 20px; top: 80px; ">
-                                                <a href="#" class="open hidden" data-id="FH2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="right: 20px; bottom: 10px; ">
-                                                <a href="#" class="open hidden" data-id="FB2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 230px; ">
-                                                <a href="#" class="open hidden" data-id="FX1N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; bottom: 180px; ">
-                                                <a href="#" class="open hidden" data-id="FX3N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 450px; top: 230px; ">
-                                                <a href="#" class="open hidden" data-id="FX2N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 450px; bottom: 180px; ">
-                                                <a href="#" class="open hidden" data-id="FX4N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div> -->
+                                            
                                         </div>
 
                                         <div class="col-md-10" id="door" style="display:none">
@@ -780,51 +374,7 @@ a.open:hover .circle img {
                                             <hr>
                                             <img src="" id="door_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
-                                            <!-- <div class="hotspot" style="left: 20px; top: 80px; ">
-                                                <a href="#" class="open hidden" data-id="DH1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="left: 20px; bottom: 10px; ">
-                                                <a href="#" class="open hidden" data-id="DB1X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="right: 20px; top: 80px; ">
-                                                <a href="#" class="open hidden" data-id="DH2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-                                            <div class="hotspot" style="right: 20px; bottom: 10px; ">
-                                                <a href="#" class="open hidden" data-id="DB2X">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; top: 230px; ">
-                                                <a href="#" class="open hidden" data-id="DX1N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 180px; bottom: 180px; ">
-                                                <a href="#" class="open hidden" data-id="DX3N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 450px; top: 230px; ">
-                                                <a href="#" class="open hidden" data-id="DX2N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div>
-
-                                            <div class="hotspot" style="left: 450px; bottom: 180px; ">
-                                                <a href="#" class="open hidden" data-id="DX4N">
-                                                    <span class="circle small"></span>
-                                                </a>
-                                            </div> -->
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -1399,7 +949,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LH1X','href':'#'})
@@ -1413,7 +963,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX1N','href':'#'})
@@ -1427,7 +977,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX6N','href':'#'})
@@ -1441,7 +991,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LB1X','href':'#'})
@@ -1455,7 +1005,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX2N','href':'#'})
@@ -1469,7 +1019,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX7N','href':'#'})
@@ -1483,7 +1033,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LB2X','href':'#'})
@@ -1497,7 +1047,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX3N','href':'#'})
@@ -1511,7 +1061,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX8N','href':'#'})
@@ -1525,7 +1075,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX4N','href':'#'})
@@ -1539,7 +1089,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX9N','href':'#'})
@@ -1553,7 +1103,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LB3X','href':'#'})
@@ -1567,7 +1117,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LH2X','href':'#'})
@@ -1581,7 +1131,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX5N','href':'#'})
@@ -1595,7 +1145,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LX0N','href':'#'})
@@ -1609,7 +1159,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#left').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'LB4X','href':'#'})
@@ -1626,7 +1176,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TH1X','href':'#'})
@@ -1640,7 +1190,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX1N','href':'#'})
@@ -1654,7 +1204,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX6N','href':'#'})
@@ -1668,7 +1218,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TB1X','href':'#'})
@@ -1682,7 +1232,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX2N','href':'#'})
@@ -1696,7 +1246,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX7N','href':'#'})
@@ -1710,7 +1260,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX8N','href':'#'})
@@ -1724,7 +1274,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX4N','href':'#'})
@@ -1738,7 +1288,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX9N','href':'#'})
@@ -1752,7 +1302,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TH2X','href':'#'})
@@ -1766,7 +1316,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX5N','href':'#'})
@@ -1780,7 +1330,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TX0N','href':'#'})
@@ -1794,7 +1344,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#top').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'TB2X','href':'#'})
@@ -1811,7 +1361,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BH1X','href':'#'})
@@ -1825,7 +1375,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX1N','href':'#'})
@@ -1839,7 +1389,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX6N','href':'#'})
@@ -1853,7 +1403,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BB1X','href':'#'})
@@ -1867,7 +1417,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX2N','href':'#'})
@@ -1881,7 +1431,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX7N','href':'#'})
@@ -1895,7 +1445,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX8N','href':'#'})
@@ -1909,7 +1459,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX4N','href':'#'})
@@ -1923,7 +1473,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX9N','href':'#'})
@@ -1937,7 +1487,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BH2X','href':'#'})
@@ -1951,7 +1501,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX5N','href':'#'})
@@ -1965,7 +1515,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BX0N','href':'#'})
@@ -1979,7 +1529,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#bottom').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'BB2X','href':'#'})
@@ -1996,7 +1546,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FH1X','href':'#'})
@@ -2010,7 +1560,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FB1X','href':'#'})
@@ -2024,7 +1574,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FH2X','href':'#'})
@@ -2038,7 +1588,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FB2X','href':'#'})
@@ -2052,7 +1602,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FX1N','href':'#'})
@@ -2066,7 +1616,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FX3N','href':'#'})
@@ -2080,7 +1630,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FX2N','href':'#'})
@@ -2094,7 +1644,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#front').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'FX4N','href':'#'})
@@ -2111,7 +1661,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DH1X','href':'#'})
@@ -2125,7 +1675,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DB1X','href':'#'})
@@ -2139,7 +1689,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DH2X','href':'#'})
@@ -2153,7 +1703,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DB2X','href':'#'})
@@ -2167,7 +1717,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DX1N','href':'#'})
@@ -2181,7 +1731,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DX3N','href':'#'})
@@ -2195,7 +1745,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DX2N','href':'#'})
@@ -2209,7 +1759,7 @@ function getTarrifByLine(line_id) {
                     var newDiv = $('<div>');
                     newDiv.attr('style', `top:${gettop}px; left:${getLeft}px`);
                     newDiv.addClass('hotspot');
-                    $('#right').append(newDiv);
+                    $('#door').append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
                     innerDiv.attr({'data-id':'DX4N','href':'#'})
