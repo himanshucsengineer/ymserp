@@ -39,6 +39,10 @@ class MasterDepoController extends Controller
         }
     }
 
+    public function getall(){
+        return MasterDepo::get();
+    }
+
     public function getbyid(Request $request){
         return MasterDepo::where('id',$request->id)->first();
     }

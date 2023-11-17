@@ -49,6 +49,7 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\MasterContractorController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterContractorController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterContractorController@update');
+        $api->get('/getall', 'App\Http\Controllers\MasterContractorController@getall');
     });
 
 
@@ -63,6 +64,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'depo'], function($api){
         $api->post('/create','App\Http\Controllers\MasterDepoController@store');
         $api->post('/get', 'App\Http\Controllers\MasterDepoController@get');
+        $api->get('/getall', 'App\Http\Controllers\MasterDepoController@getall');
         $api->post('/getbyid', 'App\Http\Controllers\MasterDepoController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterDepoController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterDepoController@update');
@@ -128,6 +130,9 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\MasterLineController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterLineController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterLineController@update');
+
+        $api->get('/getall', 'App\Http\Controllers\MasterLineController@getall');
+
     }); 
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'tarrif'], function($api){
@@ -148,6 +153,8 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\MasterTransportController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterTransportController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterTransportController@update');
+        $api->get('/getall', 'App\Http\Controllers\MasterTransportController@getall');
+
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){

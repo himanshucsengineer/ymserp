@@ -38,6 +38,10 @@ class MasterTransportController extends Controller
         }
     } 
 
+    public function getall(){
+        return MasterTransport::get();
+    }
+
     public function getbyid(Request $request)
     {
         return MasterTransport::where('id',$request->id)->first();

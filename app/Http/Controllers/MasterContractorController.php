@@ -30,6 +30,8 @@ class MasterContractorController extends Controller
         return view('contractor.view');
     }
 
+   
+
     public function get(Request $request)
     {
         if($request->user_id == 1){

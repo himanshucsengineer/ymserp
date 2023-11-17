@@ -37,6 +37,10 @@ class MasterLineController extends Controller
         }
     }
 
+    public function getall(){
+        return MasterLine::get();
+    }
+
     public function getbyid(Request $request)
     {
         return MasterLine::where('id',$request->id)->first();
