@@ -57,7 +57,8 @@ class TransactionController extends Controller
                 'gateindata' => $gatein,
                 'damage' => $damage,
                 'repair' => $repair,
-                'material' => $material
+                'material' => $material,
+                'id' => $transaction->id
             ];
         }
         return $formatedData;
@@ -89,6 +90,7 @@ class TransactionController extends Controller
                 'damage_code' => $damage->code,
                 'repair_code' => $repair->repair_code,
                 'material_code' => $material->material_code,
+                'id' => $transaction->id
 
             ];
         }
@@ -168,9 +170,32 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
+    public function update(Request $request)
     {
-        //
+        $transactionDetails = Transaction::find($request->id);
+        $transactionDetails->labour_hr = is_null($request->reporting_labour_hr) ? $transactionDetails->labour_hr : $request->reporting_labour_hr;
+        $transactionDetails->labour_cost =  is_null($request->reporting_labour_cost) ? $transactionDetails->labour_cost : $request->reporting_labour_cost;
+        $transactionDetails->material_cost = is_null($request->reporting_material_cost) ? $transactionDetails->material_cost : $request->reporting_material_cost;
+        
+        $transactionDetails->sab_total = is_null($request->reporting_sub_total) ? $transactionDetails->sab_total : $request->reporting_sub_total;
+        $transactionDetails->tax_cost = is_null($request->reporting_tax_cost) ? $transactionDetails->tax_cost : $request->reporting_tax_cost;
+        $transactionDetails->gst = is_null($request->reporting_tax) ? $transactionDetails->gst : $request->reporting_tax;
+        $transactionDetails->total = is_null($request->reporting_total) ? $transactionDetails->reporting_total : $request->reporting_total;
+        $transactionDetails->qty = is_null($request->reporting_qty) ? $transactionDetails->qty : $request->reporting_qty;
+        
+        $transactionDetails  = $transactionDetails->save();
+
+        if($transactionDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Repair Code Updated Successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**
@@ -179,8 +204,38 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
-    {
-        //
+    public function destroy(Request $request){
+        $line = Transaction::find($request->id);
+        
+        if (is_null($line)) {
+            throw new NotFoundHttpException('Invalid Id!');
+        }else{
+            if($request->before_file1){
+                $before_file1 = public_path('uploads/transaction/'.$line->before_file1);
+                if (file_exists($before_file1)) {
+                    unlink($before_file1);
+                }
+            }
+
+            if($request->before_file2){
+                $before_file2 = public_path('uploads/transaction/'.$line->before_file2);
+                if (file_exists($before_file2)) {
+                    unlink($before_file2);
+                }
+            }
+        
+            $deleteline = $line->delete();
+            if($deleteline){
+                return response()->json([
+                    'status'=> "success",
+                    'message' => "Transaction Deleted Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'=> "error",
+                    'message' => "Error In Deletion"
+                ], 500);
+            }
+        }
     }
 }

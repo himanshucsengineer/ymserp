@@ -106,7 +106,6 @@
                                     <label for="container_size">Container Size <span style="color:red;">*</span></label>
                                     <select name="container_size" id="container_size" style="font-size:30px; height:50px" class="form-control">
                                         <option value="">Select Container Size</option>
-                                        <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="40">40</option>
                                         <option value="45">45</option>

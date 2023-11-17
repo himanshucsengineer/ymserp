@@ -406,7 +406,7 @@ a.open:hover .circle img {
                                                     <th>Total Cost</th>
                                                     <th>Damage Image 1</th>
                                                     <th>Damage Image 2</th>
-                                                    <!-- <th>Action</th> -->
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="reporting">
@@ -1970,18 +1970,18 @@ function getReportingData(){
                 row.append($('<td>').text(item.tarrifData.dimension_l));
                 row.append($('<td>').text(item.tarrifData.dimension_h));
 
-                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty', 'class':'form-control reportinput'}).val(item.qty);
+                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty','readonly':'readonly', 'class':'form-control reportinput'}).val(item.qty);
                 row.append($('<td>').append(qty));
-                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr', 'class':'form-control reportinput'}).val(item.labour_hr);
+                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr','readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
-                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost', 'class':'form-control reportinput'}).val(item.labour_cost);
+                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost','readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_cost);
                 var labour_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_labour_cost_text','readonly':'readonly', 'class':'reportinput form-control'}).val(item.labour_cost);
                 var labour_cost_td = $('<td>');
                 labour_cost_td.append(labour_cost);
                 labour_cost_td.append(labour_cost_text);
 
                 row.append(labour_cost_td);
-                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost','class':'reportinput form-control'}).val(item.material_cost);
+                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
                 var material_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_material_cost_text','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
                 var material_cost_td = $('<td>');
                 material_cost_td.append(material_cost);
@@ -1991,7 +1991,7 @@ function getReportingData(){
                 row.append($('<td>').append(sab_total));
                 var gst = $('<input>').attr({'type':'text', 'id':'reporting_tax', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.gst);
                 row.append($('<td>').append(gst));
-                var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost', 'class':'reportinput form-control'}).val(item.tax_cost);
+                var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost','readonly':'readonly', 'class':'reportinput form-control'}).val(item.tax_cost);
                 row.append($('<td>').append(tax_cost));
                 var total = $('<input>').attr({'type':'text', 'id':'reporting_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.total);
                 row.append($('<td>').append(total));
@@ -2002,6 +2002,27 @@ function getReportingData(){
                 var file2 = `/uploads/transaction/${item.before_file2}`
                 var before_file2 = $('<img style="width:100px">').attr({'src': file2});
                 row.append($('<td>').append(before_file2));
+
+                var editButton = $('<span>')
+                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
+                    .attr('data-id', item.id) 
+                    .attr('class', 'edit-button');
+
+                var deleteButton = $('<span>')
+                    .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
+                    .attr('data-id', item.id)
+                    .attr('class', 'delete-button')
+                var saveButton = $('<button style="display:none;">')
+                    .text('Save')
+                    .attr('data-id', item.id)
+                    .attr('class', 'save-button btn-primary')
+
+                var td = $('<td>');
+                td.append(editButton);
+                td.append(deleteButton);
+                td.append(saveButton);
+                row.append(td);
+
                 tbody.append(row);
                 i++;
             });
@@ -2042,6 +2063,62 @@ function getReportingData(){
                 var total = parseInt(tax_cost) + parseInt(sub_total);
                 $('#reporting_tax_cost').val(tax_cost);
                 $('#reporting_total').val(total);
+            });
+
+
+            $('.edit-button').click(function() {
+                $("#reporting_qty").removeAttr("readonly");
+                $("#reporting_labour_hr").removeAttr("readonly");
+                $("#reporting_labour_cost").removeAttr("readonly");
+                $("#reporting_material_cost").removeAttr("readonly");
+                $("#reporting_tax").removeAttr("readonly");
+                var row = $(this).closest('tr');
+
+                var actionCell = row.find('td:last-child');
+
+                actionCell.find('.edit-button').hide();
+                actionCell.find('.delete-button').hide();
+                actionCell.find('.save-button').show();                
+            });
+
+            $('.save-button').click(function() {
+                var reporting_qty = $("#reporting_qty").val();
+                var reporting_labour_hr = $("#reporting_labour_hr").val();
+                var reporting_labour_cost = $("#reporting_labour_cost").val();
+                var reporting_material_cost = $("#reporting_material_cost").val();
+                var reporting_sub_total = $("#reporting_sub_total").val();
+                var reporting_tax = $("#reporting_tax").val();
+                var reporting_tax_cost = $("#reporting_tax_cost").val();
+                var reporting_total = $("#reporting_total").val();
+                var dataId = $(this).data('id');
+                var data = {
+                    'reporting_qty':reporting_qty,
+                    'reporting_labour_hr':reporting_labour_hr,
+                    'reporting_labour_cost':reporting_labour_cost,
+                    'reporting_material_cost':reporting_material_cost,
+                    'reporting_sub_total':reporting_sub_total,
+                    'reporting_tax_cost':reporting_tax_cost,
+                    'reporting_total':reporting_total,
+                    'reporting_tax':reporting_tax,
+                    'id':dataId
+                }
+                
+                var row = $(this).closest('tr');
+                var actionCell = row.find('td:last-child');
+                actionCell.find('.edit-button').show();
+                actionCell.find('.delete-button').show();
+                actionCell.find('.save-button').hide();
+                post('transcation/update',data);
+                getReportingData();
+            });
+
+            $('.delete-button').click(function() {
+                var dataId = $(this).data('id');
+                var data = {
+                    'id':dataId
+                }
+                post('transcation/delete',data);
+                getReportingData();
             });
 
         },

@@ -175,6 +175,9 @@ $api->version('v1', function($api){
         $api->post('/create','App\Http\Controllers\TransactionController@store');
         $api->post('/getbytarrif','App\Http\Controllers\TransactionController@getbytarrif');
         $api->post('/getbygatein','App\Http\Controllers\TransactionController@getbygatein');
+        $api->post('/update', 'App\Http\Controllers\TransactionController@update');
+        $api->post('/delete', 'App\Http\Controllers\TransactionController@destroy');
+
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'supervisor'], function($api){
