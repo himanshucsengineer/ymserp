@@ -9,7 +9,51 @@
     border:none;
     outline:none;
 }
+.top_flex{
+    width:100%;
+    height:auto;
+    display:flex;
+    text-align:center;
+}
+.top_flex .col_1{
+    width:5%;
+    border:1px solid #cdcdcd;
+}
+.top_flex .col_2{
+    width:33%;
+    border:1px solid #cdcdcd;
+    padding:.5rem 0;
+    font-weight:800;
+}
+.top_flex .col_3{
+    width:8%;
+    border:1px solid #cdcdcd;
 
+}
+.top_flex .col_4{
+    width:14%;
+    border:1px solid #cdcdcd;
+
+}
+.top_flex .col_5{
+    width:14%;
+    border:1px solid #cdcdcd;
+
+}
+.top_flex .col_6{
+    width:8%;
+    border:1px solid #cdcdcd;
+
+}
+.top_flex .col_7{
+    width:8%;
+    border:1px solid #cdcdcd;
+
+}
+.top_flex .col_8{
+    width:10%;
+    border:1px solid #cdcdcd;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -35,6 +79,24 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="">Third Party</label>
+                                    <select name="third_party" id="third_party" class="form-control">
+                                        <option value="">Select an option</option>
+                                        <option value="yes">YES</option>
+                                        <option value="no">NO</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6" id="container_div" style="display:none">
+                                    <label for="">Container No</label>
+                                    <select name="container_no" id="container_no" class="form-control">
+                                        <option value="">Select Container</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row mb-4">
                                 <div class="col-md-4">
                                     <label for="">Select Depot</label>
@@ -87,15 +149,21 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="top_flex">
-                        <div class="col_1"></div>
-                        <div class="col_2">INVOICE SUMMARY : Toatl Containers - 0</div>
-                        <div class="col_3"></div>
-                        <div class="col_4">Invoice No. : MUM/1/23-24</div>
-                        <div class="col_5">Invoice Date : 17/11/2023</div>
-                        <div class="col_6"></div>
-                        <div class="col_7"></div>
-                        <div class="col_8"></div>
+                    <div class="card">
+                        <div class="card-body" style="padding:1rem .5rem;">
+                            <div class="top_flex">
+                                <div class="col_1"></div>
+                                <div class="col_2">INVOICE SUMMARY : Toatl Containers - 0</div>
+                                <div class="col_3"></div>
+                                <div class="col_4">Invoice No. : MUM/1/23-24</div>
+                                <div class="col_5">Invoice Date : 17/11/2023</div>
+                                <div class="col_6"></div>
+                                <div class="col_7"></div>
+                                <div class="col_8"></div>
+                            </div>
+
+                            <button class="btn btn-primary" onclick="saveInvoice()">Save and Print Invoice</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -168,11 +236,180 @@ $(document).ready(function () {
             console.log(error);
         }
     });
+
+    $.ajax({
+        type: "get",
+        url: "/api/gatein/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        success: function (data) {
+            var select = document.getElementById('container_no');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.container_no;
+                select.appendChild(option);
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 });
 
-function genrateInvoice(){
-    console.log('hiii');
+$('#third_party').on('change',function(){
+    var checkThirdParty = $(this).val();
+    if(checkThirdParty == 'yes'){
+        $('#container_div').show();
+    }else{
+    $('#container_div').hide();
+    }
+})
 
+function genrateInvoice(){
+
+    var third_party = $('#third_party').val();
+    var container_no = $('#container_no').val();
+    var depos = $('#depos').val();
+    var lines = $('#lines').val();
+    var party = $('#party').val();
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
+    var invoice_type = $('#invoice_type').val();
+
+    if(third_party == "yes"){
+        if(container_no == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container No</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+        if(depos == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Depo</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(lines == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(party == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Party</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+        if(start_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Start Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(end_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select End Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+        if(invoice_type == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Invoice Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+    }else{
+        if(depos == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Depo</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(lines == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(party == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Party</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+        if(start_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Start Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(end_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select End Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+        if(invoice_type == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Invoice Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+    }
+
+}
+
+function saveInvoice(){
+    var third_party = $('#third_party').val();
+    var container_no = $('#container_no').val();
+    var depos = $('#depos').val();
+    var lines = $('#lines').val();
+    var party = $('#party').val();
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
+    var invoice_type = $('#invoice_type').val();
+
+    if(third_party == "yes"){
+        location.href= "/print/thirdparty"
+    }else{
+        location.href= "/print/line"
+    }
+    
 }
 
   

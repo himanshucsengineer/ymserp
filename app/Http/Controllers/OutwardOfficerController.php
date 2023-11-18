@@ -39,6 +39,14 @@ class OutwardOfficerController extends Controller
         return view('print.outward');
     }
 
+    public function thirdparty(){
+        return view('print.thirdparty');
+    }
+
+    public function line(){
+        return view('print.linebill');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

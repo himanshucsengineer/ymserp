@@ -53,6 +53,9 @@ class GateInController extends Controller
         return GateIn::where('id',$request->id)->first();
     }
 
+    public function get(){
+        return GateIn::get();
+    }
 
 
     public function getDataByIdOutward(Request $request){
