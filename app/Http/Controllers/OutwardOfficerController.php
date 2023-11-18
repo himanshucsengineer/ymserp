@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\OutwardOfficer;
 use App\Models\GateIn;
 use App\Models\Gateout;
+use App\Models\MasterTransport;
+use App\Models\MasterLine;
 
 
 use Illuminate\Http\Request;
@@ -34,13 +36,29 @@ class OutwardOfficerController extends Controller
         return view('invoice.view');
     }
 
+    public function centeral_view(){
+        return view('invoice.central');
+    }
+
 
     public function outward_print(){
         return view('print.outward');
     }
 
-    public function thirdparty(){
-        return view('print.thirdparty');
+    public function thirdparty(Request $request){
+        $gateInid = $request->gatein;
+        $invoice_type = $request->type;
+        $getGetInData = GateIn::where('id',$gateInid)->first();
+        $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
+        $line = MasterLine::where('id', $getGetInData->line_id)->first();
+        $data['invoice_data'] = array(
+            'invoice_type' => $invoice_type,
+            'gateindata' => $getGetInData,
+            'transaporterdata' => $transporter,
+            'linedata' => $line,
+        );
+
+        return view('print.thirdparty',$data);
     }
 
     public function line(){

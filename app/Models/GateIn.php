@@ -15,7 +15,7 @@ class GateIn extends Model
         'challan',
         'driver_license',
         'do_copy',
-
+        'sub_type',
         'aadhar',
         'pan',
 

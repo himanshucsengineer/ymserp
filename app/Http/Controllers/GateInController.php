@@ -76,6 +76,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'inward_date' => $gateIn->inward_date,
                 'inward_time' => $gateIn->inward_time,
@@ -148,6 +149,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -237,6 +239,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -322,6 +325,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -403,6 +407,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -504,6 +509,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -608,6 +614,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -712,6 +719,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -811,6 +819,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -915,6 +924,7 @@ class GateInController extends Controller
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
                 'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
                 'contact_number' => $gateIn->contact_number,
@@ -1001,6 +1011,7 @@ class GateInController extends Controller
             'container_no'=> $request->container_no,
             'container_type'=> $request->container_type,
             'container_size'=> $request->container_size,
+            'sub_type'=> $request->sub_type,
             'driver_name'=> $request->driver_name,
             'vehicle_number'=> $request->vehicle_number,
             'contact_number'=> $request->contact_number,
@@ -1124,6 +1135,8 @@ class GateInController extends Controller
         }
 
         $gateInDetails->container_size = is_null($request->container_size) ? $gateInDetails->container_size : $request->container_size;
+        $gateInDetails->sub_type = is_null($request->sub_type) ? $gateInDetails->sub_type : $request->sub_type;
+    
         $gateInDetails->container_type = is_null($request->container_type) ? $gateInDetails->container_type : $request->container_type;
         $gateInDetails->transport_id = is_null($request->transport_id) ? $gateInDetails->transport_id : $request->transport_id;
         $gateInDetails->inward_date = is_null($request->inward_date) ? $gateInDetails->inward_date : $request->inward_date;

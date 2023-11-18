@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('inward_no')->nullable();
             $table->string('container_no')->nullable();
             $table->string('container_type')->nullable();
+            $table->string('sub_type')->nullable();
             $table->string('container_size')->nullable();
             $table->string('transport_id')->nullable();
             $table->string('inward_date')->nullable();

@@ -1817,6 +1817,10 @@
         margin-bottom: 0.75in;
     }
     </style>
+
+
+<?php print_r($invoice_data);?>
+   
     <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
         <col class="col0">
         <col class="col1">
@@ -1853,12 +1857,12 @@
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE.NO. :
                         Y1/11-2023/00165<br />
                     </span><span style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE :
-                        Maharashtra STATE CODE : 27 PERIOD : 17/11/2023 TO : 17/11/2023</span></td>
+                        Maharashtra STATE CODE : 27 </span></td>
                 <td class="column6 style11 s style13" colspan="4"><span
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE
-                        DATE:17/11/2023<br />
+                        DATE: <?php echo date('d-m-Y')?><br />
                     </span><span style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE
-                        TYPE: LIFT-OFF</span></td>
+                        TYPE: <?php if($invoice_data['invoice_type'] == "lolo"){ echo "LIFT-OFF";}else if($invoice_data['invoice_type'] == "parking"){echo "PARKING";}?></span></td>
             </tr>
             <tr class="row3">
                 <td class="column0 style5 s style7" colspan="6"><span
@@ -2206,7 +2210,7 @@
     </table>
 
     <script>
-        window.print();
+        // window.print();
     </script>
 </body>
 

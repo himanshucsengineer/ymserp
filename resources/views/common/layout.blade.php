@@ -391,9 +391,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/icons.html" class="nav-link">
+                                    <a href="/billing/centeral" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Depot Billing Reports</p>
+                                        <p>Central Billing</p>
                                     </a>
                                 </li>
                                 

@@ -61,12 +61,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Depot Billing</h1>
+                    <h1 class="m-0">Billing</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Depot Billing</li>
+                        <li class="breadcrumb-item active">Billing</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -81,36 +81,19 @@
                         <div class="card-body">
 
                             <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="">Third Party</label>
-                                    <select name="third_party" id="third_party" class="form-control">
-                                        <option value="">Select an option</option>
-                                        <option value="yes">YES</option>
-                                        <option value="no">NO</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6" id="container_div" style="display:none">
-                                    <label for="">Container No</label>
-                                    <select name="container_no" id="container_no" class="form-control">
-                                        <option value="">Select Container</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-4">
-                                <div class="col-md-4" id="depo_div" style="display:none">
+                                <div class="col-md-4" >
                                     <label for="">Select Depot</label>
                                     <select name="depos" id="depos" class="form-control">
                                         <option value="">Select Depot</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4" id="line_div" style="display:none">
+                                <div class="col-md-4" >
                                     <label for="">Select Line</label>
                                     <select name="lines" id="lines" class="form-control">
                                         <option value="">Select Line</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4" id="party_div" style="display:none">
+                                <div class="col-md-4">
                                     <label for="">Select Party</label>
                                     <select name="party" id="party" class="form-control">
                                         <option value="">Select Party</option>
@@ -118,6 +101,14 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="">From</label>
+                                    <input type="date" name="start_date" id="start_date" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="">To</label>
+                                    <input type="date" name="end_date" id="end_date" class="form-control">
+                                </div>
                                 <div class="col-md-4">
                                     <label for="">Invoice Type</label>
                                     <select name="invoice_type" id="invoice_type" class="form-control">
@@ -228,40 +219,9 @@ $(document).ready(function () {
             console.log(error);
         }
     });
-
-    $.ajax({
-        type: "get",
-        url: "/api/gatein/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        success: function (data) {
-            var select = document.getElementById('container_no');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.container_no;
-                select.appendChild(option);
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
 });
 
-$('#third_party').on('change',function(){
-    var checkThirdParty = $(this).val();
-    if(checkThirdParty == 'yes'){
-        $('#container_div').show();
-    }else{
-        $('#container_div').hide();
-        $('#depo_div').show();
-        $('#line_div').show();
-        $('#party_div').show();
 
-    }
-})
 
 function genrateInvoice(){
     var third_party = $('#third_party').val();
@@ -269,6 +229,8 @@ function genrateInvoice(){
     var depos = $('#depos').val();
     var lines = $('#lines').val();
     var party = $('#party').val();
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
     var invoice_type = $('#invoice_type').val();
 
     if(third_party == "yes"){
@@ -280,7 +242,23 @@ function genrateInvoice(){
                 callout.remove();
             }, 2000);
         }
+        if(start_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Start Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
 
+        if(end_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select End Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
         if(invoice_type == ''){
             var callout = document.createElement('div');
             callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Invoice Type</p></div>`;
@@ -289,7 +267,7 @@ function genrateInvoice(){
                 callout.remove();
             }, 2000);
         }
-        if(container_no != '' && invoice_type != ''){
+        if(container_no != '' && start_date != '' && end_date != '' && invoice_type != ''){
             $('#genrateInvoice').show();
         }
     }else{
@@ -319,7 +297,23 @@ function genrateInvoice(){
                 callout.remove();
             }, 2000);
         }
-       
+        if(start_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Start Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(end_date == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select End Date</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
         if(invoice_type == ''){
             var callout = document.createElement('div');
             callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Invoice Type</p></div>`;
@@ -339,10 +333,12 @@ function saveInvoice(){
     var depos = $('#depos').val();
     var lines = $('#lines').val();
     var party = $('#party').val();
+    var start_date = $('#start_date').val();
+    var end_date = $('#end_date').val();
     var invoice_type = $('#invoice_type').val();
 
     if(third_party == "yes"){
-        location.href= `/print/thirdparty?gatein=${container_no}&type=${invoice_type}`
+        location.href= `/print/thirdparty?gatein=${container_no}&from=${start_date}&to=${end_date}&type=${invoice_type}`
     }else{
         location.href= "/print/line"
     }

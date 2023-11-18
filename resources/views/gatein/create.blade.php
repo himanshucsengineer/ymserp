@@ -101,7 +101,14 @@
                                     </div>
                                 
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="container_type">Container Type <span style="color:red;">*</span></label>
+                                    <select name="container_type" id="container_type" style="font-size:30px; height:50px" class="form-control">
+                                        <option value="">Select Container Type</option>
+                                        <option value="DRY">DRY</option>
+                                        <option value="REEFER">REEFER</option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="container_size">Container Size <span style="color:red;">*</span></label>
                                     <select name="container_size" id="container_size" style="font-size:30px; height:50px" class="form-control">
@@ -113,15 +120,32 @@
                                 </div>
 
 
+                                
                                 <div class="form-group">
-                                    <label for="container_type">Container Type <span style="color:red;">*</span></label>
-                                    <select name="container_type" id="container_type" style="font-size:30px; height:50px" class="form-control">
-                                        <option value="">Select Container Type</option>
-                                        <option value="DRY">DRY</option>
-                                        <option value="REEFER">REEFER</option>
+                                    <label for="sub_type">Type  <span style="color:red;">*</span></label>
+                                    <select name="sub_type" id="sub_type" class="form-control" style="font-size:30px; height:50px">
+                                        <option value="">Please Select Sub Type</option>
+                                        <option value="DC">DC</option>
+                                        <option value="DV">DV</option>
+                                        <option value="FB">FB</option>
+                                        <option value="FR">FR</option>
+                                        <option value="HC">HC</option>
+                                        <option value="HCOT">HCOT</option>
+                                        <option value="HD">HD</option>
+                                        <option value="HR">HR</option>
+                                        <option value="HT">HT</option>
+                                        <option value="OQ">OQ</option>
+                                        <option value="OT">OT</option>
+                                        <option value="RE">RE</option>
+                                        <option value="RF">RF</option>
+                                        <option value="SHC">SHC</option>
+                                        <option value="SR">SR</option>
+                                        <option value="TK">TK</option>
+                                        <option value="TN">TN</option>
+                                        <option value="VB">VB</option>
+                                        <option value="VT">VT</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="driver_name" name="driver_name" style="font-size:30px; height:50px" placeholder="Enter Driver Name">
@@ -165,6 +189,7 @@
                                         <th>Container Image</th>
                                         <th>Container Size</th>
                                         <th>Container Type</th>
+                                        <th>Type</th>
                                         <th>Vehicle No.</th>
                                         <th>Vehicle image</th>
                                         <th>Driver Name</th>
@@ -270,6 +295,7 @@ function refreshTable(page,search){
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));
                 row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.sub_type));
                 row.append($('<td>').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
                 row.append($('<td>').append(item.driver_name));
@@ -398,12 +424,14 @@ $(function () {
         var driver_name = $("#driver_name").val();
         var vehicle_number = $("#vehicle_number").val();
         var contact_number   = $("#contact_number").val();
+        var sub_type = $('#sub_type').val();
 
 
 
             var formData = new FormData();
 
             formData.append('container_no', container_no);
+            formData.append('sub_type', sub_type);
             formData.append('container_type', container_type);
             formData.append('container_size', container_size);
             formData.append('driver_name', driver_name);
@@ -470,6 +498,9 @@ $(function () {
         contact_number: {
             required: true,
         },
+        sub_type:{
+            required: true,
+        }
 
     },
     messages: {
@@ -485,6 +516,9 @@ $(function () {
         contact_number: {
             required: "This Field Is Required!",
         },
+        sub_type:{
+            required: "This Field Is Required!",
+        }
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {
