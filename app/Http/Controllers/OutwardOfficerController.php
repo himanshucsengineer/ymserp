@@ -48,12 +48,28 @@ class OutwardOfficerController extends Controller
     public function thirdparty(Request $request){
         $gateInid = $request->gatein;
         $invoice_type = $request->type;
+
+        if($invoice_type == "lolo"){
+            $final_invoice_type= "LIFT-OFF";
+            $hsnCode = "9967";
+        }else if($invoice_type == "parking"){
+            $final_invoice_type= "PARKING";
+            $hsnCode = "9987";
+        }
+        else if($invoice_type == "washing"){
+            $final_invoice_type= "WASHING";
+            $hsnCode = "9987";
+        }else if($invoice_type == "repair"){
+            $final_invoice_type= "REPAIR";
+            $hsnCode = "9987";
+        }
+
         $getGetInData = GateIn::where('id',$gateInid)->first();
         $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
-        $line = MasterLine::where('id', $getGetInData->line_id)->first();
+        $line = MasterLine::where('id', $getGetInData->line_id)->where('containerSize',$getGetInData->container_size)->first();
+
         $data['invoice_data'] = array(
-            'invoice_type' => $invoice_type,
-            'gateindata' => $getGetInData,
+            'invoice_type' => $final_invoice_type,
             'buyer_name' =>$transporter->name,
             'buyer_address' =>$transporter->address,
             'buyer_gst' =>$transporter->gst,
@@ -66,8 +82,11 @@ class OutwardOfficerController extends Controller
             'line_pan' => $line->pan,
             'line_state' => $line->gst_state,
             'line_state_code' => $line->state_code,
+            'container_no' =>$getGetInData->container_no,
+            'container_size' =>$getGetInData->container_size,
+            'sub_type' =>$getGetInData->sub_type,
+            'hsn_code' => $hsnCode,
         );
-
         return view('print.thirdparty',$data);
     }
 

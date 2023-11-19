@@ -1819,7 +1819,6 @@
     </style>
 
 
-<?php print_r($invoice_data);?>
    
     <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
         <col class="col0">
@@ -1862,7 +1861,7 @@
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE
                         DATE: <?php echo date('d-m-Y')?><br />
                     </span><span style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE
-                        TYPE: <?php if($invoice_data['invoice_type'] == "lolo"){ echo "LIFT-OFF";}else if($invoice_data['invoice_type'] == "parking"){echo "PARKING";}?></span></td>
+                        TYPE: <?php echo $invoice_data['invoice_type']?></span></td>
             </tr>
             <tr class="row3">
                 <td class="column0 style5 s style7" colspan="6"><span
@@ -1922,13 +1921,13 @@
             <tr class="row7">
                 <td class="column0 style21 n">1</td>
                 <td class="column1 style22 s"><span
-                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">TGBU8769656</span></td>
+                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt"><?php echo $invoice_data['container_no'] ?></span></td>
                 <td class="column2 style22 s"><span
-                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">40HC</span></td>
+                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt"><?php echo $invoice_data['container_size'] ?><?php echo $invoice_data['sub_type'] ?></span></td>
                 <td class="column3 style23 s style25" colspan="3"><span
-                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">CONTAINER LIFT-OFF CHARGES</span>
+                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">CONTAINER <?php echo $invoice_data['invoice_type'] ?> CHARGES</span>
                 </td>
-                <td class="column6 style26 n">9967</td>
+                <td class="column6 style26 n"><?php echo $invoice_data['hsn_code'] ?></td>
                 <td class="column7 style27 n">1.00</td>
                 <td class="column8 style28 n">3135.59</td>
                 <td class="column9 style28 n">3135.59</td>
@@ -2112,7 +2111,7 @@
     </table>
 
     <script>
-        // window.print();
+        window.print();
     </script>
 </body>
 
