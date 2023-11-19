@@ -1816,9 +1816,11 @@
         margin-top: 0.75in;
         margin-bottom: 0.75in;
     }
+
+
     </style>
 
-
+    <button class="no-print" onclick="printPage()">Print Page</button>
    
     <table border="0" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
         <col class="col0">
@@ -1928,9 +1930,9 @@
                         style="color:#000000; font-family:'Carlito'; font-size:7.5pt">CONTAINER <?php echo $invoice_data['invoice_type'] ?> CHARGES</span>
                 </td>
                 <td class="column6 style26 n"><?php echo $invoice_data['hsn_code'] ?></td>
-                <td class="column7 style27 n">1.00</td>
-                <td class="column8 style28 n">3135.59</td>
-                <td class="column9 style28 n">3135.59</td>
+                <td class="column7 style27 n"><?php echo $invoice_data['quantity'] ?></td>
+                <td class="column8 style28 n"><?php echo $invoice_data['amount'] ?></td>
+                <td class="column9 style28 n"><?php echo $invoice_data['amount'] ?></td>
             </tr>
             <tr class="row8">
                 <td class="column0 style20 null"></td>
@@ -2001,12 +2003,12 @@
                         Amt.</span></td>
             </tr>
             <tr class="row25">
-                <td class="column0 style42 n style43" colspan="2">9967</td>
-                <td class="column2 style44 n">3,135.59</td>
+                <td class="column0 style42 n style43" colspan="2"><?php echo $invoice_data['hsn_code'] ?></td>
+                <td class="column2 style44 n"><?php echo $invoice_data['amount'] ?></td>
                 <td class="column3 style28 n">9.00</td>
-                <td class="column4 style28 n">282.20</td>
+                <td class="column4 style28 n"><?php echo $invoice_data['sgst'] ?></td>
                 <td class="column5 style28 n">9.00</td>
-                <td class="column6 style28 n">282.20</td>
+                <td class="column6 style28 n"><?php echo $invoice_data['cgst'] ?></td>
             </tr>
             <tr class="row26">
                 <td class="column0 style29 null style31" colspan="2"></td>
@@ -2018,7 +2020,7 @@
                 <td class="column7 style35 null style35" rowspan="4"></td>
                 <td class="column8 style22 s"><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">Amount
                         Before Tax</span></td>
-                <td class="column9 style44 n">3,135.59</td>
+                <td class="column9 style44 n"><?php echo $invoice_data['amount'] ?></td>
             </tr>
             <tr class="row27">
                 <td class="column0 style29 null style31" colspan="2"></td>
@@ -2029,7 +2031,7 @@
                 <td class="column6 style20 null"></td>
                 <td class="column8 style22 s"><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">Add
                         GST</span></td>
-                <td class="column9 style28 n">564.40</td>
+                <td class="column9 style28 n"><?php echo $invoice_data['totalgst'] ?></td>
             </tr>
             <tr class="row28">
                 <td class="column0 style29 null style31" colspan="2"></td>
@@ -2046,14 +2048,14 @@
                 <td class="column0 style5 s style7" colspan="2"><span
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">TOTALS</span>
                 </td>
-                <td class="column2 style44 n">3,135.59</td>
+                <td class="column2 style44 n"><?php echo $invoice_data['amount'] ?></td>
                 <td class="column3 style20 null"></td>
-                <td class="column4 style28 n">282.20</td>
+                <td class="column4 style28 n"><?php echo $invoice_data['sgst'] ?></td>
                 <td class="column5 style20 null"></td>
-                <td class="column6 style28 n">282.20</td>
+                <td class="column6 style28 n"><?php echo $invoice_data['cgst'] ?></td>
                 <td class="column8 style22 s"><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">Final
                         Invoice Amount</span></td>
-                <td class="column9 style44 n">3,700.00</td>
+                <td class="column9 style44 n"><?php echo $invoice_data['final_amount'] ?></td>
             </tr>
             <tr class="row30">
                 <td class="column0 style29 null style31" colspan="10"></td>
@@ -2065,8 +2067,7 @@
             </tr>
             <tr class="row32">
                 <td class="column0 style15 s style17" colspan="10"><span
-                        style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">RUPEES : three
-                        thousand seven hundred only</span></td>
+                        style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">RUPEES : <?php echo $invoice_data['final_amount_in_words'] ?> only</span></td>
             </tr>
             <tr class="row33">
                 <td class="column0 style29 null style31" colspan="10"></td>
@@ -2111,7 +2112,16 @@
     </table>
 
     <script>
-        window.print();
+    function printPage() {
+            // Hide the button before printing
+            document.querySelector('.no-print').style.display = 'none';
+
+            // Print the page
+            window.print();
+
+            // Show the button after printing
+            document.querySelector('.no-print').style.display = 'block';
+        }
     </script>
 </body>
 

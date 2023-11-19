@@ -8,7 +8,6 @@ use App\Models\Gateout;
 use App\Models\MasterTransport;
 use App\Models\MasterLine;
 
-
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -45,28 +44,85 @@ class OutwardOfficerController extends Controller
         return view('print.outward');
     }
 
+    public function numberToWord($num = ''){
+        $num    = ( string ) ( ( int ) $num );
+        if( ( int ) ( $num ) && ctype_digit( $num ) ){
+            $words  = array( );
+            $num    = str_replace( array( ',' , ' ' ) , '' , trim( $num ) );
+            $list1  = array('','one','two','three','four','five','six','seven',
+                'eight','nine','ten','eleven','twelve','thirteen','fourteen',
+                'fifteen','sixteen','seventeen','eighteen','nineteen');
+            $list2  = array('','ten','twenty','thirty','forty','fifty','sixty',
+                'seventy','eighty','ninety','hundred');
+            $list3  = array('','thousand','million','billion','trillion',
+                'quadrillion','quintillion','sextillion','septillion',
+                'octillion','nonillion','decillion','undecillion',
+                'duodecillion','tredecillion','quattuordecillion',
+                'quindecillion','sexdecillion','septendecillion',
+                'octodecillion','novemdecillion','vigintillion');
+            $num_length = strlen( $num );
+            $levels = ( int ) ( ( $num_length + 2 ) / 3 );
+            $max_length = $levels * 3;
+            $num    = substr( '00'.$num , -$max_length );
+            $num_levels = str_split( $num , 3 );
+    
+            foreach( $num_levels as $num_part ){
+                $levels--;
+                $hundreds   = ( int ) ( $num_part / 100 );
+                $hundreds   = ( $hundreds ? ' ' . $list1[$hundreds] . ' Hundred' . ( $hundreds == 1 ? '' : 's' ) . ' ' : '' );
+                $tens       = ( int ) ( $num_part % 100 );
+                $singles    = '';
+                if( $tens < 20 ) { $tens = ( $tens ? ' ' . $list1[$tens] . ' ' : '' ); } else { $tens = ( int ) ( $tens / 10 ); $tens = ' ' . $list2[$tens] . ' '; $singles = ( int ) ( $num_part % 10 ); $singles = ' ' . $list1[$singles] . ' '; } $words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_part ) ) ? ' ' . $list3[$levels] . ' ' : '' ); } $commas = count( $words ); if( $commas > 1 ){
+                    $commas = $commas - 1;
+                }
+                $words  = implode( ', ' , $words );
+                $words  = trim( str_replace( ' ,' , ',' , ucwords( $words ) )  , ', ' );
+                if( $commas ){
+                    $words  = str_replace( ',' , ' and' , $words );
+                }
+                return $words;
+            }else if( ! ( ( int ) $num ) ){
+                return 'Zero';
+            }
+            return '';
+        }
+
+
     public function thirdparty(Request $request){
         $gateInid = $request->gatein;
         $invoice_type = $request->type;
+        
+        $getGetInData = GateIn::where('id',$gateInid)->first();
+        $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
+        $line = MasterLine::where('id', $getGetInData->line_id)->where('containerSize',$getGetInData->container_size)->first();
 
         if($invoice_type == "lolo"){
             $final_invoice_type= "LIFT-OFF";
             $hsnCode = "9967";
+            $charges = $line->lolo_charges;
         }else if($invoice_type == "parking"){
             $final_invoice_type= "PARKING";
             $hsnCode = "9987";
+            $charges = $line->parking_charges;
         }
         else if($invoice_type == "washing"){
             $final_invoice_type= "WASHING";
             $hsnCode = "9987";
+            $charges = $line->washing_charges;
         }else if($invoice_type == "repair"){
             $final_invoice_type= "REPAIR";
             $hsnCode = "9987";
         }
 
-        $getGetInData = GateIn::where('id',$gateInid)->first();
-        $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
-        $line = MasterLine::where('id', $getGetInData->line_id)->where('containerSize',$getGetInData->container_size)->first();
+        $sgst = (9/100)*$charges;
+        $cgst = (9/100)*$charges;
+
+        $totalGst = $cgst + $sgst;
+        $final_amount = $totalGst + $charges;
+
+      
+
+        $finalAmountInWords = $this->numberToWord($final_amount);;
 
         $data['invoice_data'] = array(
             'invoice_type' => $final_invoice_type,
@@ -86,6 +142,14 @@ class OutwardOfficerController extends Controller
             'container_size' =>$getGetInData->container_size,
             'sub_type' =>$getGetInData->sub_type,
             'hsn_code' => $hsnCode,
+            'quantity' => 1,
+            'amount' => $charges,
+            'sgst' => $sgst,
+            'cgst' => $cgst,
+            'totalgst' => $totalGst,
+            'final_amount' => $final_amount,
+            'final_amount_in_words' => $finalAmountInWords
+
         );
         return view('print.thirdparty',$data);
     }
