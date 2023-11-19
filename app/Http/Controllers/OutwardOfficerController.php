@@ -142,11 +142,11 @@ class OutwardOfficerController extends Controller
             'sub_type' =>$getGetInData->sub_type,
             'hsn_code' => $hsnCode,
             'quantity' => 1,
-            'amount' => $charges,
-            'sgst' => $sgst,
-            'cgst' => $cgst,
-            'totalgst' => $totalGst,
-            'final_amount' => $final_amount,
+            'amount' => number_format($charges, 2),
+            'sgst' => number_format($sgst,2),
+            'cgst' => number_format($cgst,2),
+            'totalgst' => number_format($totalGst,2),
+            'final_amount' => number_format($final_amount,2),
             'final_amount_in_words' => $finalAmountInWords,
             'payment_type' => $payment_type
         );
