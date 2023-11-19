@@ -91,6 +91,7 @@ class OutwardOfficerController extends Controller
     public function thirdparty(Request $request){
         $gateInid = $request->gatein;
         $invoice_type = $request->type;
+        $payment_type = $request->p_type;
         
         $getGetInData = GateIn::where('id',$gateInid)->first();
         $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
@@ -120,8 +121,6 @@ class OutwardOfficerController extends Controller
         $totalGst = $cgst + $sgst;
         $final_amount = $totalGst + $charges;
 
-      
-
         $finalAmountInWords = $this->numberToWord($final_amount);;
 
         $data['invoice_data'] = array(
@@ -148,8 +147,8 @@ class OutwardOfficerController extends Controller
             'cgst' => $cgst,
             'totalgst' => $totalGst,
             'final_amount' => $final_amount,
-            'final_amount_in_words' => $finalAmountInWords
-
+            'final_amount_in_words' => $finalAmountInWords,
+            'payment_type' => $payment_type
         );
         return view('print.thirdparty',$data);
     }

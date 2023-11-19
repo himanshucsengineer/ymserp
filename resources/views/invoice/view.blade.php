@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label for="">Invoice Type</label>
                                     <select name="invoice_type" id="invoice_type" class="form-control">
                                         <option value="">Select Invoice Type</option>
@@ -128,33 +128,17 @@
                                         <option value="parking">Parking</option>
                                     </select>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="">Payment Type</label>
+                                    <select name="payment_type" id="payment_type" class="form-control">
+                                        <option value="">Select Payment Type</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="upi">Upi</option>
+                                        <option value="netbanking">Netbanking</option>
+                                    </select>
+                                </div>
                             </div>
                             <button class="btn btn-primary" onclick="genrateInvoice()">Genrate Invoice</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content" id="genrateInvoice" style="display:none">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body" style="padding:1rem .5rem;">
-                            <div class="top_flex">
-                                <div class="col_1"></div>
-                                <div class="col_2">INVOICE SUMMARY : Toatl Containers - 0</div>
-                                <div class="col_3"></div>
-                                <div class="col_4">Invoice No. : MUM/1/23-24</div>
-                                <div class="col_5">Invoice Date : 17/11/2023</div>
-                                <div class="col_6"></div>
-                                <div class="col_7"></div>
-                                <div class="col_8"></div>
-                            </div>
-
-                            <button class="btn btn-primary" onclick="saveInvoice()">Save and Print Invoice</button>
                         </div>
                     </div>
                 </div>
@@ -277,7 +261,7 @@ function genrateInvoice(){
     var lines = $('#lines').val();
     var party = $('#party').val();
     var invoice_type = $('#invoice_type').val();
-
+    var payment_type = $('#payment_type').val();
     if(third_party == "yes"){
         if(container_no == ''){
             var callout = document.createElement('div');
@@ -296,8 +280,18 @@ function genrateInvoice(){
                 callout.remove();
             }, 2000);
         }
-        if(container_no != '' && invoice_type != ''){
-            $('#genrateInvoice').show();
+
+        if(payment_type == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Payment Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
+
+        if(container_no != '' && invoice_type != '' && invoice_type != '' && payment_type != ''){
+            location.href= `/print/thirdparty?gatein=${container_no}&type=${invoice_type}&p_type=${payment_type}`
         }
     }else{
         if(depos == ''){
@@ -336,24 +330,9 @@ function genrateInvoice(){
             }, 2000);
         }
         $('#genrateInvoice').show();
-    }
-
-}
-
-function saveInvoice(){
-    var third_party = $('#third_party').val();
-    var container_no = $('#container_no').val();
-    var depos = $('#depos').val();
-    var lines = $('#lines').val();
-    var party = $('#party').val();
-    var invoice_type = $('#invoice_type').val();
-
-    if(third_party == "yes"){
-        location.href= `/print/thirdparty?gatein=${container_no}&type=${invoice_type}`
-    }else{
         location.href= "/print/line"
     }
-    
+
 }
 
   

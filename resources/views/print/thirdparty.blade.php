@@ -2074,8 +2074,8 @@
             </tr>
             <tr class="row34">
                 <td class="column0 style15 s style17" colspan="10"><span
-                        style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">MODE OF PAYMENT
-                        : CASH</span></td>
+                        style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt; text-transform:uppercase">MODE OF PAYMENT
+                        : <?php echo $invoice_data['payment_type'] ?></span></td>
             </tr>
             <tr class="row35">
                 <td class="column0 style45 s style47" colspan="10"><span
