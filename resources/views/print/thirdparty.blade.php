@@ -1857,7 +1857,7 @@
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE.NO. :
                         Y1/11-2023/00165<br />
                     </span><span style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE :
-                        Maharashtra STATE CODE : 27 </span></td>
+                        <?php echo $invoice_data['line_state']?> STATE CODE : <?php echo $invoice_data['line_state_code']?> </span></td>
                 <td class="column6 style11 s style13" colspan="4"><span
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE
                         DATE: <?php echo date('d-m-Y')?><br />
@@ -1874,22 +1874,20 @@
             </tr>
             <tr class="row4">
                 <td class="column0 style8 s style10" colspan="6"><span
-                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">M/S: CHEMICAL CORP PVT LTD<br />
+                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">M/S: <?php echo $invoice_data['buyer_name']?><br />
                     </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">Address:
-                        MAHARASHTRA<br />
-                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">GSTIN: 27AACCC5620P1ZF
-                        PAN No: AACCC5620P<br />
-                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE: MAHARASHTRA STATE
-                        CODE: 27</span></td>
+                        <?php echo $invoice_data['buyer_address']?><br />
+                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">GSTIN: <?php echo $invoice_data['buyer_gst']?>
+                        PAN No: <?php echo $invoice_data['buyer_pan']?><br />
+                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE: <?php echo $invoice_data['buyer_state']?> STATE
+                        CODE: <?php echo $invoice_data['buyer_state_code']?></span></td>
                 <td class="column6 style8 s style10" colspan="4"><span
-                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">M/S: ORIENT OVERSEAS CONTAINER
-                        LINE LTD<br />
-                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">Address: M/S. ORIENT
-                        OVERSEAS CONTAINER LINE LTD ICC CHAMBERS, 5TH FLOOR, SAHI VIHAR ROAD, POWAI, MUMBAI-400072<br />
-                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">GSTIN: 27AAACO5679E1Z9
-                        PAN No: AAACO5679E<br />
-                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE: MAHARASHTRA STATE
-                        CODE: 27</span></td>
+                        style="color:#000000; font-family:'Carlito'; font-size:7.5pt">M/S: <?php echo $invoice_data['line_name']?><br />
+                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">Address: <?php echo $invoice_data['line_address']?><br />
+                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">GSTIN: <?php echo $invoice_data['line_gst']?>
+                        PAN No: <?php echo $invoice_data['line_pan']?><br />
+                    </span><span style="color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE: <?php echo $invoice_data['line_state']?> STATE
+                        CODE: <?php echo $invoice_data['line_state_code']?></span></td>
             </tr>
             <tr class="row5">
                 <td class="column0 style4 s"><span
@@ -1975,106 +1973,10 @@
                 <td class="column8 style20 null"></td>
                 <td class="column9 style20 null"></td>
             </tr>
-            <tr class="row12">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row13">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row14">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row15">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row16">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row17">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row18">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row19">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row20">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
-            <tr class="row21">
-                <td class="column0 style20 null"></td>
-                <td class="column1 style20 null"></td>
-                <td class="column2 style20 null"></td>
-                <td class="column3 style29 null style31" colspan="3"></td>
-                <td class="column6 style20 null"></td>
-                <td class="column7 style20 null"></td>
-                <td class="column8 style20 null"></td>
-                <td class="column9 style20 null"></td>
-            </tr>
+            
+            
+            
+            
             <tr class="row22">
                 <td class="column0 style32 null style34" colspan="10"></td>
             </tr>

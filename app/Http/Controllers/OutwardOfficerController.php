@@ -54,8 +54,18 @@ class OutwardOfficerController extends Controller
         $data['invoice_data'] = array(
             'invoice_type' => $invoice_type,
             'gateindata' => $getGetInData,
-            'transaporterdata' => $transporter,
-            'linedata' => $line,
+            'buyer_name' =>$transporter->name,
+            'buyer_address' =>$transporter->address,
+            'buyer_gst' =>$transporter->gst,
+            'buyer_pan' =>$transporter->pan,
+            'buyer_state' =>$transporter->state,
+            'buyer_state_code' =>$transporter->state_code,
+            'line_name' => $line->name,
+            'line_address' => $line->line_address,
+            'line_gst' => $line->gst,
+            'line_pan' => $line->pan,
+            'line_state' => $line->gst_state,
+            'line_state_code' => $line->state_code,
         );
 
         return view('print.thirdparty',$data);

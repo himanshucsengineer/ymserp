@@ -254,12 +254,19 @@ $('#third_party').on('change',function(){
     var checkThirdParty = $(this).val();
     if(checkThirdParty == 'yes'){
         $('#container_div').show();
-    }else{
+        $('#depo_div').hide();
+        $('#line_div').hide();
+        $('#party_div').hide();
+    }else if(checkThirdParty == 'no'){
         $('#container_div').hide();
         $('#depo_div').show();
         $('#line_div').show();
         $('#party_div').show();
-
+    }else{
+        $('#container_div').hide();
+        $('#depo_div').hide();
+        $('#line_div').hide();
+        $('#party_div').hide();
     }
 })
 
