@@ -63,6 +63,27 @@ class GateInController extends Controller
     }
 
 
+    public function getContainerList(Request $request){
+
+        $getIndata =  GateIn::where('depo_id',$request->depo_id)->where('line_id',$request->line_id)->where('container_type',$request->container_type)->where('container_size',$request->container_size)->where('sub_type',$request->sub_type)->get();
+
+        $formetedData = [];
+
+        foreach($getIndata as $gateIn){
+            $containerVarify = ContainerVerify::where('gate_in_id',$gateIn->id)->where('grade',$request->grade)->where('status_name',$request->status_name)->get();
+
+            if(count($containerVarify)>0){
+                $formetedData[] = [
+                    'container_no' => $gateIn->container_no,
+                    'id' => $gateIn->id,
+                ];
+            }
+        }
+        return $formetedData;
+
+    }
+
+
 
     public function getDataByIdOutward(Request $request){
         $getIndata =  GateIn::where('id',$request->id)->get();

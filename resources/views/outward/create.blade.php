@@ -1,10 +1,3 @@
-<?php $currentUrl = url()->full(); 
-    $breakurl = explode('=',$currentUrl);
-    $getid = explode('&',$breakurl[1]);
-    // print_r($getid);
-    // die;
-?>
-
 @extends('common.layout')
 
 @section('content')
@@ -26,12 +19,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Outward Container</h1>
+                    <h1 class="m-0">Outward Entry</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Outward Container</li>
+                        <li class="breadcrumb-item active">Outward Entry</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -45,170 +38,253 @@
                     <div class="card card-primary">
                         <form id="outwardForm" novalidate="novalidate">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="container_no">Container Number</label>
-                                    <input type="text" style="text-transform:uppercase;" readonly class="form-control"    id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="do_no">D.O. Number</label>
+                                            <input type="text"   class="form-control"    id="do_no" name="do_no" placeholder="Enter D.O. Number ">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="do_copy">D.O. Photo</label>
+                                            <input type="file"   class="form-control"    id="do_copy" name="do_copy" placeholder="Enter Container Number ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="challan_no">Challan Number</label>
+                                            <input type="text" class="form-control"    id="challan_no" name="challan_no" placeholder="Enter Challan Number ">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="challan_copy">Challan Photo</label>
+                                            <input type="file"   class="form-control"    id="challan_copy" name="challan_copy" placeholder="Enter Container Number ">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="container_size">Container Size</label>
-                                    <input type="text" class="form-control" readonly name="container_size" id="container_size">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="line_id">Line Name</label>
+                                            <select name="line_id" id="line_id" class="form-control">
+                                                <option value="">Select Line</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transport_id">Transporters</label>
+                                            <select name="transport_id" id="transport_id" class="form-control">
+                                                <option value="">Select Transporters</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="container_type">Container Type</label>
+                                            <select class="form-control" id="container_type" name="container_type">
+                                                <option value="">Select Container Type</option>
+                                                <option value="DRY">DRY</option>
+                                                <option value="REEFER">REEFER</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="sub_type">Sub Type</label>
+                                            <select name="sub_type" id="sub_type" class="form-control">
+                                                <option value="">Please Select Sub Type</option>
+                                                <option value="DC">DC</option>
+                                                <option value="DV">DV</option>
+                                                <option value="FB">FB</option>
+                                                <option value="FR">FR</option>
+                                                <option value="HC">HC</option>
+                                                <option value="HR">HR</option>
+                                                <option value="HT">HT</option>
+                                                <option value="OT">OT</option>
+                                                <option value="RE">RE</option>
+                                                <option value="RF">RF</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="container_size">Container Size</label>
+                                            <select class="form-control" id="container_size" name="container_size" >
+                                                <option value="">Select Container Size</option>
+                                                <option value="20">20</option>
+                                                <option value="40">40</option>
+                                                <option value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="grade">Grade</label>
+                                            <select name="grade" id="grade" class="form-control">
+                                                <option value="">Select Grade</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status_name">Status Name</label>
+                                            <select class="form-control" name="status_name" id="status_name">
+                                                <option value="">Select an option</option>
+                                                <option value="DIRECT A/V"> DIRECT A/V </option>
+                                                <option value="AV">AV</option>
+                                                <option value="C/R">C/R</option>
+                                                <option value="DIRECT A/V">DIRECT A/V</option>
+                                                <option value="F/W">F/W</option>
+                                                <option value="H/R">H/R</option>
+                                                <option value="H/W">H/W</option>
+                                                <option value="HDM">HDM</option>
+                                                <option value="L/D">L/D</option>
+                                                <option value="LDM">LDM</option>
+                                                <option value="M/DMG">M/DMG</option>
+                                                <option value="N/W">N/W</option>
+                                                <option value="OK">OK</option>
+                                                <option value="RF">RF</option>
+                                                <option value="S/0">S/0</option>
+                                                <option value="SW">SW</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="driver_name">Driver Name</label>
+                                            <input type="text"  class="form-control"    id="driver_name" name="driver_name" placeholder="Enter Driver Name ">
+                                        </div>
+                                    </div>
                                     
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="container_type">Container Type</label>
-                                    <input type="text" class="form-control" readonly name="container_type" id="container_type">
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="driver_copy">Driver Photo</label>
+                                            <input type="file"   class="form-control"    id="driver_copy" name="driver_copy" placeholder="Enter Container Number ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="vehicle_no">Vehicle Number</label>
+                                            <input type="text" style="text-transform:uppercase;"  class="form-control"    id="vehicle_no" name="vehicle_no" placeholder="Enter Vehicle Number ">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inward_date">Inward Date</label>
-                                    <input type="text" class="form-control" id="inward_date" name="inward_date" readonly  placeholder="Enter inward date">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inward_time">Inward Time</label>
-                                    <input type="text" class="form-control" id="inward_time" name="inward_time" readonly  placeholder="Enter inward time">
-                                </div>
+                                
+                                
 
-                                <div class="form-group">
-                                    <label for="inward_done_by">Inward Done By</label>
-                                    <input type="text" class="form-control" id="inward_done_by" name="inward_done_by" readonly   placeholder="Enter inward time">
-                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="container_no">Container Number</label>
+                                            <select name="container_no" id="container_no" class="form-control">
+                                                <option value="">Please Select Container No.</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="survayor_date">Surveyor Date</label>
-                                    <input type="text" class="form-control" id="survayor_date" name="survayor_date" readonly   placeholder="Enter inward time">
+                                    <div class="col-md-6">
+                                    </div>
+                                   
                                 </div>
+                                <button type="submit" class="btn btn-primary">Print Out_Receipt</button>
 
-                                <div class="form-group">
-                                    <label for="survayor_done_by">Surveyor Done By</label>
-                                    <input type="text" class="form-control" id="survayor_done_by" name="survayor_done_by" readonly placeholder="Enter inward time">
-                                </div>
+                                </form>
 
-                                <div class="form-group">
-                                    <label for="repair_date">Repair Completion Date</label>
-                                    <input type="text" class="form-control" id="repair_date" name="repair_date" readonly   placeholder="Enter inward time">
-                                </div>
+                                <hr>
 
-                                <div class="form-group">
-                                    <label for="repair_done_by">Repair Done By</label>
-                                    <input type="text" class="form-control" id="repair_done_by" name="repair_done_by" readonly   placeholder="Enter inward time">
-                                </div>
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="consignee_id">Consignee</label>
+                                                <select name="consignee_id" id="consignee_id" class="form-control">
+                                                    <option value="">Select Consignee</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="shippers">Shippers</label>
+                                                <input type="text"   class="form-control"    id="shippers" name="shippers" placeholder="Enter shippers ">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="driver_contact_number">Select Driver Contact</label>
-                                    <select name="driver_contact_number" id="driver_contact_number" class="form-control">
-                                        <option value="">Please Select Driver Contact</option>
-                                    </select>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="licence_no">Licence Number</label>
+                                                <input type="text" class="form-control"    id="licence_no" name="licence_no" placeholder="Enter Licence Number ">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="licence_copy">Licence Photo</label>
+                                                <input type="file"   class="form-control"    id="licence_copy" name="licence_copy" placeholder="Enter Container Number ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="aadhar_no">Aadhar Number</label>
+                                                <input type="text" class="form-control"    id="aadhar_no" name="aadhar_no" placeholder="Enter Aadhar Number ">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="aadhar_copy">Aadhar Photo</label>
+                                                <input type="file"   class="form-control"    id="aadhar_copy" name="aadhar_copy" placeholder="Enter Container Number ">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="driver_name">Driver Name</label>
-                                    <input type="text" class="form-control" readonly id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pan_no">Pan Number</label>
+                                                <input type="text" class="form-control"    id="pan_no" name="pan_no" placeholder="Enter Pan Number ">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pan_copy">Pan Photo</label>
+                                                <input type="file"   class="form-control"    id="pan_copy" name="pan_copy" placeholder="Enter Container Number ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="line_id_2">Line Name</label>
+                                                <select name="line_id_2" id="line_id_2" class="form-control">
+                                                    <option value="">Select Line</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="seal_no">Seal Number</label>
+                                                <input type="text" class="form-control"    id="seal_no" name="seal_no" placeholder="Enter Seal Number ">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="vehicle_number">Vehicle Number</label>
-                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
-                                </div>
-                                <div class="form-group">
-                                    <label for="vehicle_img">Vehicle Image</label>
-                                    <div class="img_prv_box"><span class="vehicle_img"></span></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="do_number">DO Number</label>
-                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="do_number" name="do_number"  placeholder="Enter DO Number">
-                                </div>
-                                <div class="form-group">
-                                    <label for="do_img">DO Image</label>
-                                    <input type="file" class="form-control"  id="do_img" name="do_img"  placeholder="Enter DO Number">
-                                    <div class="img_prv_box"><img class="do_img" src="" id="do_image"/></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="driver_license">Driver License</label>
-                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="driver_license" name="driver_license"  placeholder="Enter Driver License">
-                                </div>
-                                <div class="form-group">
-                                    <label for="driver_license_img">Driver License Image</label>
-                                    <input type="file" class="form-control"  id="driver_license_img" name="driver_license_img"  placeholder="Enter DO Number">
-                                    <div class="img_prv_box"><img class="driver_license_img" src="" id="driver_license_image"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="driver_aadhar">Driver Aadhar</label>
-                                    <input type="text" class="form-control" style="text-transform:uppercase;" id="driver_aadhar" name="driver_aadhar"  placeholder="Enter Driver Aadhar">
-                                </div>
-                                <div class="form-group">
-                                    <label for="driver_aadhar_img">Driver Aadhar Image</label>
-                                    <input type="file" class="form-control"  id="driver_aadhar_img" name="driver_aadhar_img"  placeholder="Enter DO Number">
-                                    <div class="img_prv_box"><img class="driver_aadhar_img" src="" id="driver_aadhar_image"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="transport_id">Transporter Name</label>
-                                    <select name="transport_id" id="transport_id"  class="form-control">
-                                        <option value="">Select Transporter</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="destination">Destination </label>
-                                    <input type="text" class="form-control" name="destination" id="destination" placeholder="Enter Destination">
-                                </div>
-                                <div class="form-group">
-                                    <label for="shippers">Shippers</label>
-                                    <input type="text" class="form-control" id="shippers" name="shippers"  placeholder="Enter shippers">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="vessel">Vessel</label>
-                                    <input type="text" class="form-control" id="vessel" name="vessel"  placeholder="Enter Vessel">
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="voyage">Voyage</label>
-                                    <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="port_name">Port Name</label>
-                                    <input type="text" class="form-control" id="port_name" name="port_name" placeholder="Enter Port Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="seal_no">Seal no.</label>
-                                    <input type="text" class="form-control" id="seal_no" name="seal_no" placeholder="Enter Seal No.">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="vent_seal_no">Vent Seal No.</label>
-                                    <input type="text" class="form-control" id="vent_seal_no" name="vent_seal_no" placeholder="Enter Vent Seal No.">
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="temprature">Temprature</label>
-                                    <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Enter Temprature">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="receipt">Receipt No.</label>
-                                    <input type="text" class="form-control" id="receipt" name="receipt" placeholder="Enter Receipt No.">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cash">Cash amount</label>
-                                    <input type="text" class="form-control" id="cash" name="cash" placeholder="Enter Cash Amount">
-                                </div>
-                                <div class="form-group">
-                                    <label for="remarks">Remarks</label>
-                                    <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
-                                </div>
-                            </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Print Gate Pass</button>
                             </div>
-                        </form>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -221,45 +297,9 @@
 
 $(document).ready(function () {
 
-    
-    $('#driver_license_img').on('change', function (e) {
-        var fileInput = $(this)[0];
-        if (fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.driver_license_img').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-    });
-
-    $('#driver_aadhar_img').on('change', function (e) {
-        var fileInput = $(this)[0];
-        if (fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.driver_aadhar_img').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-    });
-
-    $('#do_img').on('change', function (e) {
-        var fileInput = $(this)[0];
-        if (fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.do_img').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-    });
-
-    var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-
 
     $.ajax({
         type: "post",
@@ -279,6 +319,14 @@ $(document).ready(function () {
                 option.text = item.name;
                 select.appendChild(option);
             });
+
+            var select_2 = document.getElementById('consignee_id');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                select_2.appendChild(option);
+            });
         },
         error: function (error) {
             console.log(error);
@@ -286,34 +334,8 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        type: "POST",
-        url: "/api/gatein/getDataByIdOutward",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'id':containerid
-        },
-        success: function (data) {
-            $("#container_no").val(data[0].container_no)
-            $("#container_type").val(data[0].container_type)
-            $("#container_size").val(data[0].container_size)
-            $("#inward_date").val(data[0].inward_date)
-            $("#inward_time").val(data[0].inward_time)
-            $("#inward_done_by").val(data[0].inward_done_by)
-            $("#survayor_date").val(data[0].survayor_date)
-            $("#survayor_done_by").val(data[0].survayor_done_by)
-            $("#repair_date").val(data[0].repair_complete)
-            $("#repair_done_by").val(data[0].repair_done_by)            
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "/api/gateout/get",
+        type: "post",
+        url: "/api/line/get",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -322,53 +344,137 @@ $(document).ready(function () {
             'depo_id':depo_id
         },
         success: function (data) {
-            var select = document.getElementById('driver_contact_number');
+            var select = document.getElementById('line_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
                 option.value = item.id;
-                option.text = item.contact_number;
+                option.text = item.name;
                 select.appendChild(option);
+            });
+
+            var select_2 = document.getElementById('line_id_2');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                select_2.appendChild(option);
             });
         },
         error: function (error) {
             console.log(error);
         }
     });
+
+
+
 });
 
-$('#driver_contact_number').on('change', function(){
-    var containerid = <?= $getid[0]?>;
-    var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-    var id = $(this).val();
+$('#status_name').on('change',function(){
+    var line_id = $('#line_id').val();
+    var container_type = $('#container_type').val();
+    var sub_type = $('#sub_type').val();
+    var container_size = $('#container_size').val();
+    var grade = $('#grade').val();
+    var status_name = $(this).val();
+    
+    if(line_id == ''){
+        
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
 
-    $.ajax({
-        type: "POST",
-        url: "/api/gateout/getbyid",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id,
-            'id':id
-        },
-        success: function (data) {
-            console.log(data);
-            $('#driver_name').val(data.driver_name);
-            $('#vehicle_number').val(data.vehicle_number);
-            if(data.vehicle_img){
-                $('.vehicle_img').html(`<img src="/uploads/gateout/${data.vehicle_img}">`);
-            }else{
-                $('.vehicle_img').html('<p>No Image Available</p>');
+    if(container_type == ''){
+       
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(sub_type == ''){
+        
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Sub Type</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(container_size == ''){
+        
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select container Size</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(grade == ''){
+        
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Grade</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(status_name == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Valid Status</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(status_name != '' && grade != '' && container_size != '' && sub_type != '' && container_type != '' && line_id != ''){
+       
+        var checkToken = localStorage.getItem('token');
+        var user_id = localStorage.getItem('user_id');
+        var depo_id = localStorage.getItem('depo_id');
+
+        $.ajax({
+            type: "post",
+            url: "/api/gatein/getContainerList",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'status_name' :status_name,
+                'grade' :grade,
+                'container_size' :container_size,
+                'sub_type' :sub_type,
+                'container_type' :container_type,
+                'line_id' :line_id,
+            },
+            success: function (data) {
+                var select = document.getElementById('container_no');
+                data.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.container_no;
+                    option.text = item.container_no;
+                    select.appendChild(option);
+                });
+            },
+            error: function (error) {
+                console.log(error);
             }
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
+        });
+    }
+
 })
+
  
 
 
@@ -380,68 +486,57 @@ $('#outwardForm').on('submit',function(e){
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-    var containerid = <?= $getid[0]?>;
 
-        var gate_in_id = "<?php echo $getid[0]?>";
-        var gate_out_id = $('#driver_contact_number').val();
-        var vehical_no =  $('#vehicle_number').val();
-        var do_number =  $('#do_number').val();
-        var driver_license =  $('#driver_license').val();
-        var driver_aadhar =  $('#driver_aadhar').val();
+        var do_no = $('#do_no').val();
+        var challan_no =  $('#challan_no').val();
+        var line_id =  $('#line_id').val();
         var transport_id =  $('#transport_id').val();
-        var destination =  $('#destination').val();
-        var shippers =  $('#shippers').val();
-        var vessel =  $('#vessel').val();
-        var voyage =  $('#voyage').val();
-        var port_name =  $('#port_name').val();
-        var seal_no =  $('#seal_no').val();
-        var vent_seal_no =  $('#vent_seal_no').val();
-        var temprature =  $('#temprature').val();
-        var receipt =  $('#receipt').val();
-        var cash =  $('#cash').val();
-        var remarks =  $('#remarks').val();
+        var container_type =  $('#container_type').val();
+        var container_size =  $('#container_size').val();
+        var sub_type =  $('#sub_type').val();
+        var grade =  $('#grade').val();
+        var status_name =  $('#status_name').val();
+        var driver_name =  $('#driver_name').val();
+        var vehicle_no =  $('#vehicle_no').val();
+        var container_no =  $('#container_no').val();
 
 
 
         var formData = new FormData();
 
-        formData.append('gate_in_id', gate_in_id);
-        formData.append('gate_out_id', gate_out_id);
-        formData.append('vehical_no', vehical_no);
-        formData.append('do_number', do_number);
-        formData.append('driver_license', driver_license);
-        formData.append('driver_aadhar', driver_aadhar);
+        formData.append('do_no', do_no);
+        formData.append('challan_no', challan_no);
+        formData.append('line_id', line_id);
         formData.append('transport_id', transport_id);
-        formData.append('destination', destination);
-        formData.append('shippers', shippers);
-        formData.append('vessel', vessel);
-        formData.append('voyage', voyage);
-        formData.append('port_name', port_name);
-        formData.append('seal_no', seal_no);
-        formData.append('vent_seal_no', vent_seal_no);
-        formData.append('temprature', temprature);
-        formData.append('receipt', receipt);
-        formData.append('cash', cash);
-        formData.append('remarks', remarks);
+        formData.append('container_type', container_type);
+        formData.append('container_size', container_size);
+        formData.append('sub_type', sub_type);
+        formData.append('grade', grade);
+        formData.append('status_name', status_name);
+        formData.append('driver_name', driver_name);
+        formData.append('vehicle_no', vehicle_no);
+        formData.append('container_no', container_no);
         formData.append('user_id', user_id);
         formData.append('depo_id', depo_id);
 
-        if ($('#do_image')[0].files && $('#do_image')[0].files.length > 0) {
-            formData.append('do_image', $('#do_image')[0].files[0]);
+        
+
+        if ($('#do_copy')[0].files && $('#do_copy')[0].files.length > 0) {
+            formData.append('do_copy', $('#do_copy')[0].files[0]);
         }else{
-            formData.append('do_image', '');
+            formData.append('do_copy', '');
         }
 
-        if ($('#driver_license_image')[0].files && $('#driver_license_image')[0].files.length > 0) {
-            formData.append('driver_license_image', $('#driver_license_image')[0].files[0]);
+        if ($('#challan_copy')[0].files && $('#challan_copy')[0].files.length > 0) {
+            formData.append('challan_copy', $('#challan_copy')[0].files[0]);
         }else{
-            formData.append('driver_license_image', '');
+            formData.append('challan_copy', '');
         }
 
-        if ($('#driver_aadhar_image')[0].files && $('#driver_aadhar_image')[0].files.length > 0) {
-            formData.append('driver_aadhar_image', $('#driver_aadhar_image')[0].files[0]);
+        if ($('#driver_copy')[0].files && $('#driver_copy')[0].files.length > 0) {
+            formData.append('driver_copy', $('#driver_copy')[0].files[0]);
         }else{
-            formData.append('driver_aadhar_image', '');
+            formData.append('driver_copy', '');
         }
         
         $.ajax({
@@ -462,7 +557,7 @@ $('#outwardForm').on('submit',function(e){
                     }, 2000);
 
                     window.open('/print/outward', '_blank');
-                    location.href="/outward/view";
+                    // location.href="/outward/view";
                 },
                 error: function(error) {
                     var finalValue = '';

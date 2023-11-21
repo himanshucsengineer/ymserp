@@ -384,7 +384,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item" >
-                                    <a href="/inward/executive" class="nav-link">
+                                    <a href="/outward/manage" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Outward Entry</p>

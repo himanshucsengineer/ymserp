@@ -156,14 +156,14 @@ $api->version('v1', function($api){
         $api->get('/getall', 'App\Http\Controllers\MasterTransportController@getall');
 
     });
-
+    
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){
         $api->post('/create','App\Http\Controllers\GateInController@store');
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
         $api->get('/genrateastimate', 'App\Http\Controllers\GateInController@genrateastimate');
         $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');
         $api->post('/getDataByIdOutward', 'App\Http\Controllers\GateInController@getDataByIdOutward');
-
+        $api->post('/getContainerList', 'App\Http\Controllers\GateInController@getContainerList');
         $api->post('/update', 'App\Http\Controllers\GateInController@update');
         $api->post('/getInspectionData', 'App\Http\Controllers\GateInController@getInspectionData');
         $api->post('/filterByDate', 'App\Http\Controllers\GateInController@filterByDate');
