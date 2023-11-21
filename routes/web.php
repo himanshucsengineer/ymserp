@@ -62,8 +62,11 @@ Route::get('/permission/all', 'App\Http\Controllers\PermissionController@all');
 Route::get('/gatein/create', 'App\Http\Controllers\GateInController@index');
 
 Route::get('/surveyor/reports', 'App\Http\Controllers\GateInController@reports');
+Route::get('/inward/executive', 'App\Http\Controllers\GateInController@inward_executive');
+
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');
 Route::get('/surveyor/containershow', 'App\Http\Controllers\ContainerVerifyController@index');
+Route::get('/inward/executiveshow', 'App\Http\Controllers\ContainerVerifyController@executiveshow');
 Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\ContainerVerifyController@masterserveyor');
 
 Route::get('/genrateastimate', 'App\Http\Controllers\PdfController@genrateastimate');

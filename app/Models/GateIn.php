@@ -53,6 +53,11 @@ class GateIn extends Model
         'estimate_updatedby',
         'estimate_updated_at',
         'status_updatedat',
-        'status_updatedby'
+        'status_updatedby',
+        'receipt_no',
+        'amount',
+        'do_no',
+        'return',
+        'empty_latter',
     ];
 }

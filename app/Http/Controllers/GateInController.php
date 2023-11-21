@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\MasterEmployee;
+use App\Models\ContainerVerify;
 
 use App\Models\GateIn;
 use App\Models\MasterTransport;
@@ -49,6 +50,10 @@ class GateInController extends Controller
         return view('surveyor.report');
     }
 
+    public function inward_executive(){
+        return view('surveyor.inwardExexutive');
+    }
+
     public function getDataById(Request $request){
         return GateIn::where('id',$request->id)->first();
     }
@@ -56,6 +61,7 @@ class GateInController extends Controller
     public function get(){
         return GateIn::where('third_party','yes')->get();
     }
+
 
 
     public function getDataByIdOutward(Request $request){
@@ -158,6 +164,106 @@ class GateInController extends Controller
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
                 'is_repaired' => $gateIn->is_repaired,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
+    public function filterByDateSurvey(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->startDate != '' && $request->endDate ==  ''){
+            $startDate = $request->startDate;
+            $endDate = date('Y-m-d');
+        }else if($request->startDate == '' && $request->endDate !=  ''){
+            $endDate = $request->endDate;
+            $startDate = date('Y-m-d');
+        }else if($request->startDate != '' && $request->endDate !=  ''){
+            $startDate = $request->startDate;
+            $endDate = $request->endDate;
+        }
+
+        if($request->user_id == 1){
+
+            $gateInData = GateIn::where([
+                ['status','In'],
+                ['is_estimate_done','0']
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+            $gateInData = GateIn::where([
+                ['status','In'],
+                ['is_estimate_done','0'],
+                ['depo_id',$request->depo_id],
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+    
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
+
+            $formetedData[] = [
+                'container_no' => $gateIn->container_no,
+                'container_img' => $gateIn->container_img,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'line_name' => $line->name,
+                'container_size' => $gateIn->container_size,
+                'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
+                'survayor_date' => $surveyour->survayor_date,
+                'survayor_time' => $surveyour->survayor_time,
+                'status_name' => $surveyour->status_name,
+                'grade' => $surveyour->grade,
+                'gross_weight' => $surveyour->gross_weight,
+                'tare_weight' => $surveyour->tare_weight,
+                'mfg_date' => $surveyour->mfg_date,
+                'rftype' => $surveyour->rftype,
+                'job_work_no' => $surveyour->job_work_no,
+                'sub_lease_unity' => $surveyour->sub_lease_unity,
                 'id' => $gateIn->id,
             ];
             
@@ -711,8 +817,6 @@ class GateInController extends Controller
             ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
-       
-
         $formetedData = [];
 
         foreach($gateInData as $gateIn){
@@ -727,6 +831,120 @@ class GateInController extends Controller
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
+    public function getInspectionDataSurvey(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $gateInData = GateIn::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['status','In'],
+                ['is_estimate_done','0'],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $gateInData = GateIn::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['status','In'],
+                ['depo_id',$request->depo_id],
+                ['is_estimate_done','0'],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
+
+            $formetedData[] = [
+                'container_no' => $gateIn->container_no,
+                'container_img' => $gateIn->container_img,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'line_name' => $line->name,
+                'container_size' => $gateIn->container_size,
+                'container_type' => $gateIn->container_type,
+                'sub_type' => $gateIn->sub_type,
+                'survayor_date' => $surveyour->survayor_date,
+                'survayor_time' => $surveyour->survayor_time,
+                'status_name' => $surveyour->status_name,
+                'grade' => $surveyour->grade,
+                'gross_weight' => $surveyour->gross_weight,
+                'tare_weight' => $surveyour->tare_weight,
+                'mfg_date' => $surveyour->mfg_date,
+                'rftype' => $surveyour->rftype,
+                'job_work_no' => $surveyour->job_work_no,
+                'sub_lease_unity' => $surveyour->sub_lease_unity,
                 'id' => $gateIn->id,
             ];
             
@@ -1009,12 +1227,12 @@ class GateInController extends Controller
             'container_img' => $container_img_name,
             'vehicle_img' => $vehicle_img_name,
             'container_no'=> $request->container_no,
-            'container_type'=> $request->container_type,
-            'container_size'=> $request->container_size,
-            'sub_type'=> $request->sub_type,
-            'driver_name'=> $request->driver_name,
+            // 'container_type'=> $request->container_type,
+            // 'container_size'=> $request->container_size,
+            // 'sub_type'=> $request->sub_type,
+            // 'driver_name'=> $request->driver_name,
             'vehicle_number'=> $request->vehicle_number,
-            'contact_number'=> $request->contact_number,
+            // 'contact_number'=> $request->contact_number,
             'depo_id' => $request->depo_id,
             'createdby' => $request->user_id,
             'gateintype' => $gateintype,
@@ -1072,13 +1290,7 @@ class GateInController extends Controller
 
         $gateInDetails = GateIn::find($request->id);
 
-        if ($request->hasFile('driver_photo')) {
-            $driver_photo = $request->file('driver_photo');
-            $driver_photo_name = time() . '_' . $driver_photo->getClientOriginalName();
-            $driver_photo->move(public_path('uploads/gatein'), $driver_photo_name);
-        }else{
-            $driver_photo_name = $gateInDetails->driver_photo;
-        }
+        
 
         if ($request->hasFile('challan')) {
             $challan = $request->file('challan');
@@ -1088,13 +1300,7 @@ class GateInController extends Controller
             $challan_name = $gateInDetails->challan;
         }
 
-        if ($request->hasFile('driver_license')) {
-            $driver_license = $request->file('driver_license');
-            $driver_license_name = time() . '_' . $driver_license->getClientOriginalName();
-            $driver_license->move(public_path('uploads/gatein'), $driver_license_name);
-        }else{
-            $driver_license_name = $gateInDetails->driver_license;
-        }
+        
 
         if ($request->hasFile('do_copy')) {
             $do_copy = $request->file('do_copy');
@@ -1104,21 +1310,15 @@ class GateInController extends Controller
             $do_copy_name = $gateInDetails->do_copy;
         }
 
-        if ($request->hasFile('aadhar')) {
-            $aadhar = $request->file('aadhar');
-            $aadhar_name = time() . '_' . $aadhar->getClientOriginalName();
-            $aadhar->move(public_path('uploads/gatein'), $aadhar_name);
+        if ($request->hasFile('empty_latter')) {
+            $empty_latter = $request->file('empty_latter');
+            $empty_latter_name = time() . '_' . $empty_latter->getClientOriginalName();
+            $empty_latter->move(public_path('uploads/gatein'), $empty_latter_name);
         }else{
-            $aadhar_name = $gateInDetails->aadhar;
+            $empty_latter_name = $gateInDetails->empty_latter;
         }
 
-        if ($request->hasFile('pan')) {
-            $pan = $request->file('pan');
-            $pan_name = time() . '_' . $pan->getClientOriginalName();
-            $pan->move(public_path('uploads/gatein'), $pan_name);
-        }else{
-            $pan_name = $gateInDetails->pan;
-        }
+       
 
 
 
@@ -1148,12 +1348,15 @@ class GateInController extends Controller
         $gateInDetails->line_id = is_null($request->line_id) ? $gateInDetails->line_id : $request->line_id;
         $gateInDetails->arrive_from = is_null($request->arrive_from) ? $gateInDetails->arrive_from : $request->arrive_from;
         $gateInDetails->port_name = is_null($request->port_name) ? $gateInDetails->port_name : $request->port_name;
-        $gateInDetails->driver_photo = $driver_photo_name;
+        $gateInDetails->receipt_no = is_null($request->receipt_no) ? $gateInDetails->receipt_no : $request->receipt_no;
+        $gateInDetails->amount = is_null($request->amount) ? $gateInDetails->amount : $request->amount;
+        $gateInDetails->do_no = is_null($request->do_no) ? $gateInDetails->do_no : $request->do_no;
+        $gateInDetails->return = is_null($request->return) ? $gateInDetails->return : $request->return;
+        
+        
         $gateInDetails->challan = $challan_name;
-        $gateInDetails->driver_license = $driver_license_name;
         $gateInDetails->do_copy = $do_copy_name;
-        $gateInDetails->aadhar = $aadhar_name;
-        $gateInDetails->pan = $pan_name;
+        $gateInDetails->empty_latter = $empty_latter_name;
 
         $gateInDetails->updatedby = $request->user_id;
         $gateInDetails->updated_at = date('Y-m-d H:i:s');

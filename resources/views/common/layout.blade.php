@@ -292,6 +292,32 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                                <i class="fas fa-poll nav-icon"></i>
+                                <p>
+                                    Inward Executive
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item" id="inspection">
+                                    <a href="/inward/executive" class="nav-link">
+                                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                                        <i class="fas fa-search-location nav-icon"></i>
+                                        <p>Inward Executive</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item" id="inspection">
+                                    <a href="/surveyor/reports" class="nav-link">
+                                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                                        <i class="fas fa-search-location nav-icon"></i>
+                                        <p>Reports</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -352,7 +378,7 @@
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
                                 <p>
-                                    Outward Officer
+                                    Outward Executive
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>

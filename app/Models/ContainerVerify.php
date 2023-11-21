@@ -27,6 +27,9 @@ class ContainerVerify extends Model
         'remarks',
         'createdby',
         'depo_id',
-        'gate_in_id'
+        'gate_in_id',
+        'survayor_date',
+        'survayor_time',
+        'mfg_date',
      ];
 }

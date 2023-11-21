@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('container_verifies', function (Blueprint $table) {
             $table->id();
             $table->string('status_name')->nullable();
+            $table->string('survayor_date')->nullable();
+            $table->string('survayor_time')->nullable();
+            $table->string('mfg_date')->nullable();
+
             $table->string('job_work_no')->nullable();
             $table->string('gross_weight')->nullable();
             $table->string('tare_weight')->nullable();

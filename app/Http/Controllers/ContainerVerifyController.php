@@ -30,6 +30,10 @@ class ContainerVerifyController extends Controller
         return view('surveyor.master');
     }
 
+    public function executiveshow(){
+        return view('surveyor.inwardShow');
+    }
+
 
     public function getbyid(Request $request){
         return ContainerVerify::where('gate_in_id', $request->gate_in_id)->orderBy('id','desc')->take(1)->first();
@@ -47,17 +51,17 @@ class ContainerVerifyController extends Controller
             'job_work_no' => $request->job_work_no,
             'gross_weight' => $request->gross_weight,
             'tare_weight' => $request->tare_weight,
-            'vessel_name' => $request->vessel_name,
+            'survayor_date' => $request->survayor_date,
             'grade' => $request->grade,
             'sub_lease_unity' => $request->sub_lease_unity,
-            'voyage' => $request->voyage,
-            'consignee' => $request->consignee,
-            'region' => $request->region,
-            'destuffung' => $request->destuffung,
+            'survayor_time' => $request->survayor_time,
+            'mfg_date' => $request->mfg_date,
+            // 'region' => $request->region,
+            // 'destuffung' => $request->destuffung,
             'rftype' => $request->rftype,
-            'empty_repositioning' => $request->empty_repositioning,
-            'er_no' => $request->er_no,
-            'remarks' => $request->remarks,
+            // 'empty_repositioning' => $request->empty_repositioning,
+            // 'er_no' => $request->er_no,
+            // 'remarks' => $request->remarks,
             'createdby' => $request->user_id,
             'depo_id' => $request->depo_id,
             'gate_in_id' => $request->gate_in_id

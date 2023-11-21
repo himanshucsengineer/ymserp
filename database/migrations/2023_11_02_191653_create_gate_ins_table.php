@@ -36,6 +36,11 @@ return new class extends Migration
             $table->string('do_copy')->nullable();
             $table->string('aadhar')->nullable();
             $table->string('pan')->nullable();
+            $table->string('receipt_no')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('return')->nullable();
+            $table->string('do_no')->nullable();
+            $table->string('empty_latter')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();

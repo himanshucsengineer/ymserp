@@ -76,7 +76,7 @@
                         <form id="gateinForm" novalidate="novalidate">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="container_no">Container Number</label>
+                                    <label for="container_no">Container Number <span style="color:red;">*</span></label>
                                     <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
                                     <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
                                 </div>
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="vehicle_number">Vehicle Number</label>
+                                    <label for="vehicle_number">Vehicle Number <span style="color:red;">*</span></label>
                                     <input type="text" class="" style="font-size:50px; width:100%; text-transform:uppercase;" id="vehicle_number" name="vehicle_number" placeholder="">
                                 </div>
                                 <h3 style="text-align:center">OR</h3>
@@ -101,7 +101,7 @@
                                     </div>
                                 
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="container_type">Container Type <span style="color:red;">*</span></label>
                                     <select name="container_type" id="container_type" style="font-size:30px; height:50px" class="form-control">
                                         <option value="">Select Container Type</option>
@@ -147,15 +147,15 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
+                                    <label for="driver_name">Driver Name  </label>
                                     <input type="text" class="form-control" id="driver_name" name="driver_name" style="font-size:30px; height:50px" placeholder="Enter Driver Name">
                                 </div>
                                 
 
                                 <div class="form-group">
-                                    <label for="contact_number">Driver Contact Number <span style="color:red;">*</span></label>
+                                    <label for="contact_number">Driver Contact Number </label>
                                     <input type="text" class="form-control" id="contact_number" name="contact_number" style="font-size:30px; height:50px" placeholder="Enter Contact Number">
-                                </div>
+                                </div> -->
 
                                 
 
@@ -187,13 +187,13 @@
                                         <th>Sr. No.</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
-                                        <th>Container Size</th>
+                                        <!-- <th>Container Size</th>
                                         <th>Container Type</th>
-                                        <th>Type</th>
+                                        <th>Type</th> -->
                                         <th>Vehicle No.</th>
                                         <th>Vehicle image</th>
-                                        <th>Driver Name</th>
-                                        <th>Driver Contact</th>
+                                        <!-- <th>Driver Name</th>
+                                        <th>Driver Contact</th> -->
                                         <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
@@ -293,13 +293,13 @@ function refreshTable(page,search){
                 row.append($('<td>').text(i));
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td>').append(item.sub_type));
+                // row.append($('<td>').append(item.container_size));
+                // row.append($('<td>').append(item.container_type));
+                // row.append($('<td>').append(item.sub_type));
                 row.append($('<td>').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                row.append($('<td>').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
+                // row.append($('<td>').append(item.driver_name));
+                // row.append($('<td>').append(item.contact_number));
 
                 tbody.append(row);
                 i++;
@@ -486,39 +486,22 @@ $(function () {
 
     $('#gateinForm').validate({
     rules: {
-        container_type: {
+        container_no: {
             required: true,
         },
-        container_size: {
+        vehicle_number: {
             required: true,
         },
-        driver_name: {
-            required: true,
-        },
-        contact_number: {
-            required: true,
-        },
-        sub_type:{
-            required: true,
-        }
-
+        
     },
     messages: {
-        container_type: {
+        container_no: {
             required: "This Field Is Required!",
         },
-        container_size: {
+        vehicle_number: {
             required: "This Field Is Required!",
         },
-        driver_name: {
-            required: "This Field Is Required!",
-        },
-        contact_number: {
-            required: "This Field Is Required!",
-        },
-        sub_type:{
-            required: "This Field Is Required!",
-        }
+        
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {

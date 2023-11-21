@@ -246,142 +246,172 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="form-group">
-                                    <label for="transport_id">Transport</label>
-                                    <select name="transport_id" id="transport_id" class="form-control">
-                                        <option value="">Select Transport</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transport_id">Transport</label>
+                                            <select name="transport_id" id="transport_id" class="form-control">
+                                                <option value="">Select Transport</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transporter_gst">Gst No.</label>
+                                            <input type="text" class="form-control" id="transporter_gst" name="transporter_gst" readonly  placeholder="Enter Transporter GST">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                
-
-                                <div class="form-group">
-                                    <label for="driver_name">Driver Name</label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
-                                </div>
-                                
-
-                                <div class="form-group">
-                                    <label for="contact_number">Contact Number</label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
-                                </div>
-                                <div class="form-group">
-                                    <label for="third_party">Third Party</label>
-                                    <select name="third_party" id="third_party"  class="form-control">
-                                        <option value="no">no</option>
-                                        <option value="yes">yes</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="driver_name">Driver Name</label>
+                                            <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="contact_number">Contact Number</label>
+                                            <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                
-                                <div class="form-group">
-                                    <label for="arrive_from">Arrive From</label>
-                                    <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="third_party">Third Party</label>
+                                            <select name="third_party" id="third_party"  class="form-control">
+                                                <option value="no">no</option>
+                                                <option value="yes">yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="port_name">Port Name</label>
-                                    <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
+                                <div class="row" id="receipt_section" style="display:none">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="receipt_no">Receipt No.</label>
+                                            <input type="text" class="form-control" id="receipt_no" name="receipt_no"  placeholder="Enter Receipt No.">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="amount">Amount</label>
+                                            <input type="text" class="form-control" id="amount" name="amount"  placeholder="Enter amount">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="driver_photo">Driver Photo</label></br>
-                                    <input type="file" id="driver_photo" name="driver_photo" class="form-control">
-                                    <div class="img_prv_box"><span class="driver_photo"></span></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="arrive_from">Arrive From</label>
+                                            <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="port_name">Port Name</label>
+                                            <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="challan">Challan</label></br>
-                                    <input type="file" id="challan" name="challan" class="form-control">
-                                    <div class="img_prv_box"><span class="challan"></span></div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="challan">Challan</label></br>
+                                            <input type="file" id="challan" name="challan" class="form-control">
+                                            <div class="img_prv_box"><span class="challan"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="empty_latter">Empty Latter</label></br>
+                                            <input type="file" id="empty_latter" name="empty_latter" class="form-control">
+                                            <div class="img_prv_box"><span class="empty_latter"></span></div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="driver_license">Driver License</label></br>
-                                    <input type="file" id="driver_license" name="driver_license" class="form-control">
-                                    <div class="img_prv_box"><span class="driver_license"></span></div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="do_copy">D.O. Copy</label></br>
+                                            <input type="file" id="do_copy" name="do_copy" class="form-control">
+                                            <div class="img_prv_box"><span class="do_copy"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="do_no">DO Number</label>
+                                            <input type="text" class="form-control" id="do_no" name="do_no"  placeholder="Enter DO Number">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="do_copy">D.O. Copy</label></br>
-                                    <input type="file" id="do_copy" name="do_copy" class="form-control">
-                                    <div class="img_prv_box"><span class="do_copy"></span></div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="region">Region</label>
+                                            <select name="region" id="region" class="form-control">
+                                                <option value="">Select Region</option>
+                                                <option value="DOMESTIC">DOMESTIC</option>
+                                                <option value="INTERNATIONAL">INTERNATIONAL</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="destuffung">Destuffung</label>
+                                            <select name="destuffung" id="destuffung" class="form-control">
+                                                <option value="">Select destuffung</option>
+                                                <option value="FD">FD</option>
+                                                <option value="OD">OD</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="aadhar">Aadhar Card</label></br>
-                                    <input type="file" id="aadhar" name="aadhar" class="form-control">
-                                    <div class="img_prv_box"><span class="aadhar"></span></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="vessel_name">Vessel Name</label>
+                                            <input type="text" class="form-control" id="vessel_name" name="vessel_name"  placeholder="Enter Vessel Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="voyage">Voyage</label>
+                                            <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="pan">PAN Card</label></br>
-                                    <input type="file" id="pan" name="pan" class="form-control">
-                                    <div class="img_prv_box"><span class="pan"></span></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="return">Reture</label>
+                                            <select name="return" id="return" class="form-control">
+                                                <option value="NO">NO</option>
+                                                <option value="YES">YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="remarks">Remarks</label>
+                                            <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
+                                        </div>
+                                    </div>
                                 </div>
-                                </hr>
-                                
-
-                                
-
-                                
-
-                                <div class="form-group">
-                                    <label for="vessel_name">Vessel Name</label>
-                                    <input type="text" class="form-control" id="vessel_name" name="vessel_name"  placeholder="Enter Vessel Name">
-                                </div>
-
-                                
-
-                                
-
-                                <div class="form-group">
-                                    <label for="voyage">Voyage</label>
-                                    <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="consignee">Consignee / Tranport</label>
-                                    <select name="consignee" id="consignee" class="form-control">
-                                        <option value="">please Select An Option</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="region">Region</label>
-                                    <select name="region" id="region" class="form-control">
-                                        <option value="">Select Region</option>
-                                        <option value="DOMESTIC">DOMESTIC</option>
-                                        <option value="INTERNATIONAL">INTERNATIONAL</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="destuffung">Destuffung</label>
-                                    <select name="destuffung" id="destuffung" class="form-control">
-                                        <option value="">Select destuffung</option>
-                                        <option value="FD">FD</option>
-                                        <option value="OD">OD</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="empty_repositioning">Empty Repositioning</label>
-                                    <select name="empty_repositioning" id="empty_repositioning" class="form-control">
-                                        <option value="">Select Empty Repositioning</option>
-                                        <option value="YES">YES</option>
-                                        <option value="NO">NO</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="er_no">ER Number</label>
-                                    <input type="text" class="form-control" id="er_no" name="er_no"  placeholder="Enter ER Number">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="remarks">Remarks</label>
-                                    <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
-                                </div> -->
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Save and Proceed</button>
@@ -395,6 +425,15 @@
 </div>
 
 <script>
+    $('#third_party').on('change',function(){
+        var check_third_party = $("#third_party").val();
+
+        if(check_third_party == "yes"){
+            $('#receipt_section').show();
+        }else{
+            $('#receipt_section').hide();
+        }
+    })
 
 function validateInput(input) {
     input.style.color = 'black';
@@ -437,9 +476,6 @@ $(document).ready(function () {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-
-
-
     $.ajax({
         type: "post",
         url: "/api/line/get",
@@ -464,29 +500,29 @@ $(document).ready(function () {
         }
     });
 
-    // $.ajax({
-    //     type: "post",
-    //     url: "/api/transport/get",
-    //     headers: {
-    //         'Authorization': 'Bearer ' + checkToken
-    //     },
-    //     data:{
-    //         'user_id':user_id,
-    //         'depo_id':depo_id
-    //     },
-    //     success: function (data) {
-    //         var select = document.getElementById('transport_id');
-    //         data.forEach(function(item) {
-    //             var option = document.createElement('option');
-    //             option.value = item.id;
-    //             option.text = item.name;
-    //             select.appendChild(option);
-    //         });
-    //     },
-    //     error: function (error) {
-    //         console.log(error);
-    //     }
-    // });
+    $.ajax({
+        type: "post",
+        url: "/api/transport/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            var select = document.getElementById('transport_id');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                select.appendChild(option);
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
     
 
     $.ajax({
@@ -512,22 +548,14 @@ $(document).ready(function () {
                 $('.vehicle_img').html('<p>No Image Available</p>');
             }
 
-            if(data.driver_photo){
-                $('.driver_photo').html(`<img src="/uploads/gatein/${data.driver_photo}">`);
-            }else{
-                $('.driver_photo').html('<p>No Image Available</p>');
-            }
+
 
             if(data.challan){
                 $('.challan').html(`<img src="/uploads/gatein/${data.challan}">`);
             }else{
                 $('.challan').html('<p>No Image Available</p>');
             }
-            if(data.driver_license){
-                $('.driver_license').html(`<img src="/uploads/gatein/${data.driver_license}">`);
-            }else{
-                $('.driver_license').html('<p>No Image Available</p>');
-            }
+
 
             if(data.do_copy){
                 $('.do_copy').html(`<img src="/uploads/gatein/${data.do_copy}">`);
@@ -535,24 +563,19 @@ $(document).ready(function () {
                 $('.do_copy').html('<p>No Image Available</p>');
             }
 
-            if(data.aadhar){
-                $('.aadhar').html(`<img src="/uploads/gatein/${data.aadhar}">`);
+            if(data.empty_latter){
+                $('.empty_latter').html(`<img src="/uploads/gatein/${data.empty_latter}">`);
             }else{
-                $('.aadhar').html('<p>No Image Available</p>');
+                $('.empty_latter').html('<p>No Image Available</p>');
             }
 
-            if(data.pan){
-                $('.pan').html(`<img src="/uploads/gatein/${data.pan}">`);
-            }else{
-                $('.pan').html('<p>No Image Available</p>');
-            }
 
             if(data.line_id){
                 getline(data.line_id);
             }
-            // if(data.transport_id){
-            //     getTranport(data.transport_id);
-            // }
+            if(data.transport_id){
+                getTranport(data.transport_id);
+            }
             getverifydata();
 
             $("#container_no").val(data.container_no)
@@ -564,8 +587,17 @@ $(document).ready(function () {
             $("#driver_name").val(data.driver_name)
             $("#vehicle_number").val(data.vehicle_number)
             $("#contact_number").val(data.contact_number)
+            $("#receipt_no").val(data.receipt_no)
+            $("#amount").val(data.amount)
+            $('#do_no').val(data.do_no)
+
             if(data.third_party){
                 $("#third_party").val(data.third_party)
+                if(data.third_party == "yes"){
+                    $('#receipt_section').show();
+                }else{
+                    $('#receipt_section').hide();
+                }
             }else{
                 $("#third_party").val("no")
             }
@@ -637,6 +669,7 @@ function getTranport(id){
         },
         success: function (data) {
             $("#transport_id").val(data.id);
+            $("#transporter_gst").val(data.gst);
         },
         error: function (error) {
             console.log(error);
@@ -673,7 +706,6 @@ function getverifydata(){
             $('#empty_repositioning').val(data.empty_repositioning);
             $('#er_no').val(data.er_no);
             $('#remarks').val(data.remarks);
-
             $('#survayor_date').val(data.survayor_date);
             $('#survayor_time').val(data.survayor_time);
             $('#mfg_date').val(data.mfg_date);
@@ -728,6 +760,15 @@ $(function () {
         var job_work_no = $("#job_work_no").val();
         var sub_lease_unity = $("#sub_lease_unity").val();
 
+        var transport_id = $("#transport_id").val();
+        var driver_name = $("#driver_name").val();
+        var contact_number = $("#contact_number").val();
+        var third_party = $("#third_party").val();
+        var receipt_no = $("#receipt_no").val();
+        var amount = $("#amount").val();
+        var do_no = $("#do_no").val();
+        var returnget = $("#return").val();
+
         newdata = {
             'status_name': status_name,
             'job_work_no': job_work_no,
@@ -736,17 +777,14 @@ $(function () {
             'survayor_date':survayor_date,
             'survayor_time':survayor_time,
             'mfg_date':mfg_date,
-            // 'vessel_name': vessel_name,
+            'vessel_name': vessel_name,
             'grade': grade,
             'sub_lease_unity': sub_lease_unity,
-            // 'voyage': voyage,
-            // 'consignee': consignee,
-            // 'region': region,
-            // 'destuffung': destuffung,
+            'voyage': voyage,
+            'region': region,
+            'destuffung': destuffung,
             'rftype': rftype,
-            // 'empty_repositioning': empty_repositioning,
-            // 'er_no': er_no,
-            // 'remarks': remarks,
+            'remarks': remarks,
             'user_id' :user_id,
             'depo_id': depo_id,
             'gate_in_id' : containerid
@@ -764,22 +802,22 @@ $(function () {
             formData.append('transport_id', transport_id);
             formData.append('inward_date', inward_date);
             formData.append('inward_time', inward_time);
-            // formData.append('driver_name', driver_name);
+            formData.append('driver_name', driver_name);
             formData.append('vehicle_number', vehicle_number);
-            // formData.append('contact_number', contact_number);
-            // formData.append('third_party', third_party);
+            formData.append('contact_number', contact_number);
+            formData.append('third_party', third_party);
             formData.append('line_id', line_id);
-            // formData.append('arrive_from', arrive_from);
-            // formData.append('port_name', port_name);
+            formData.append('arrive_from', arrive_from);
+            formData.append('port_name', port_name);
+            formData.append('receipt_no', receipt_no);
+            formData.append('amount', amount);
+            formData.append('do_no', do_no);
+            formData.append('return', returnget);
             formData.append('user_id', user_id);
             formData.append('depo_id', depo_id);
-
-            // formData.append('driver_photo', $('#driver_photo')[0].files[0]);
-            // formData.append('challan', $('#challan')[0].files[0]);
-            // formData.append('driver_license', $('#driver_license')[0].files[0]);
-            // formData.append('do_copy', $('#do_copy')[0].files[0]);
-            // formData.append('aadhar', $('#aadhar')[0].files[0]);
-            // formData.append('pan', $('#pan')[0].files[0]);
+            formData.append('challan', $('#challan')[0].files[0]);
+            formData.append('do_copy', $('#do_copy')[0].files[0]);
+            formData.append('empty_latter', $('#empty_latter')[0].files[0]);
 
             $.ajax({
                 url: '/api/gatein/update',
@@ -797,13 +835,8 @@ $(function () {
                     // setTimeout(function() {
                     //     callout.remove();
                     // }, 2000);
-                    post('containerverify/create',newdata)
-                        var checkSuperbisor = <?php echo $checkSupervisor?>;
-                    if(checkSuperbisor == 1){
-                        window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
-                    }else{
-                        window.location = `/surveyor/masterserveyor?id=${containerid}`
-                    }
+                    post('containerverify/update',newdata)
+                    window.location = `/inward/executive`
                 },
                 error: function(error) {
                     var finalValue = '';
@@ -935,6 +968,8 @@ $(function () {
     }
   });
 });
+
+
 </script>
 
 @endsection

@@ -91,12 +91,24 @@
                                         <th>Action</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
-                                        <!-- <th>Container Size</th> -->
-                                        <!-- <th>Container Type</th> -->
                                         <th>Vehicle No.</th>
                                         <th>Vehicle image</th>
-                                        <!-- <th>Driver Name</th> -->
-                                        <!-- <th>Driver Contact</th> -->
+                                        <th>Inward Date</th>
+                                        <th>Inward Time</th>
+                                        <th>Survey Date</th>
+                                        <th>Survey Time</th>
+                                        <th>Line Name</th>
+                                        <th>Container Size</th>
+                                        <th>Container Type</th>
+                                        <th>Container Sub Type</th>
+                                        <th>Status</th>
+                                        <th>Grade</th>
+                                        <th>Gross Weight</th>
+                                        <th>Tare Weight</th>
+                                        <th>Mfg Date</th>
+                                        <th>Rf Type</th>
+                                        <th>Job Work No.</th>
+                                        <th>Sub-Lease Unity</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -136,7 +148,7 @@ function filterByDate(){
 
     $.ajax({
         type: "post",
-        url: "/api/gatein/filterByDate",
+        url: "/api/gatein/filterByDateSurvey",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -176,18 +188,26 @@ function filterByDate(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                // row.append($('<td>').append(item.inward_no));
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
-                // row.append($('<td>').append(item.container_size));
-                // row.append($('<td>').append(item.container_type));
                 row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                // row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                // row.append($('<td>').append(item.contact_number));
-                
-                
-
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.inward_time));
+                row.append($('<td>').append(item.survayor_date));
+                row.append($('<td>').append(item.survayor_time));
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.gross_weight));
+                row.append($('<td>').append(item.tare_weight));
+                row.append($('<td>').append(item.mfg_date));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.job_work_no));
+                row.append($('<td>').append(item.sub_lease_unity));
                 tbody.append(row);
                 i++;
             });
@@ -256,7 +276,7 @@ function filterByDate(){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-                window.location = `/surveyor/containershow?id=${dataId}`
+                window.location = `/inward/executiveshow?id=${dataId}`
             });
         },
         error: function(error) {
@@ -272,11 +292,11 @@ function refreshTable(page,search){
     var depo_id = localStorage.getItem('depo_id');
 
     if(page){
-        url = `/api/gatein/getInspectionData?page=${page}`;
+        url = `/api/gatein/getInspectionDataSurvey?page=${page}`;
     }else if(search){
-        url = `/api/gatein/getInspectionData?search=${search}`;
+        url = `/api/gatein/getInspectionDataSurvey?search=${search}`;
     }else{
-        url= `/api/gatein/getInspectionData`;
+        url= `/api/gatein/getInspectionDataSurvey`;
     }
 
     $.ajax({
@@ -311,7 +331,6 @@ function refreshTable(page,search){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                // row.append($('<td>').append(item.inward_no));
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -322,15 +341,24 @@ function refreshTable(page,search){
                 row.append(td);
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
-                // row.append($('<td>').append(item.container_size));
-                // row.append($('<td>').append(item.container_type));
                 row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                // row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                // row.append($('<td>').append(item.contact_number));
-                
-                
-
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.inward_time));
+                row.append($('<td>').append(item.survayor_date));
+                row.append($('<td>').append(item.survayor_time));
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.gross_weight));
+                row.append($('<td>').append(item.tare_weight));
+                row.append($('<td>').append(item.mfg_date));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.job_work_no));
+                row.append($('<td>').append(item.sub_lease_unity));
                 tbody.append(row);
                 i++;
             });
@@ -399,7 +427,7 @@ function refreshTable(page,search){
 
             $('.view-button').click(function() {
                 var dataId = $(this).data('id');
-                window.location = `/surveyor/containershow?id=${dataId}`
+                window.location = `/inward/executiveshow?id=${dataId}`
             });
         },
         error: function(error) {
