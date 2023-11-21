@@ -243,6 +243,40 @@ class GateInController extends Controller
             $line = MasterLine::where('id',$gateIn->line_id)->first();
             $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
 
+            if($line){
+                $line_name = $line->name;
+                $is_assigned = "Assigned";
+            }else{
+                $line_name = '';
+                $is_assigned = "Not Assigned";
+            }
+
+            if($surveyour){
+                $survayor_date = $surveyour->survayor_date;
+                $survayor_time = $surveyour->survayor_time;
+                $status_name = $surveyour->status_name;
+                $grade = $surveyour->grade;
+                $gross_weight = $surveyour->gross_weight;
+                $tare_weight = $surveyour->tare_weight;
+                $mfg_date = $surveyour->mfg_date;
+                $rftype = $surveyour->rftype;
+                $job_work_no = $surveyour->job_work_no;
+                $sub_lease_unity = $surveyour->sub_lease_unity;
+            }else{
+                $survayor_date = '';
+                $survayor_time = '';
+                $status_name = '';
+                $grade = '';
+                $gross_weight = '';
+                $tare_weight = '';
+                $mfg_date = '';
+                $rftype = '';
+                $job_work_no = '';
+                $sub_lease_unity = '';
+            }
+
+            
+
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
                 'container_img' => $gateIn->container_img,
@@ -250,20 +284,24 @@ class GateInController extends Controller
                 'vehicle_img' => $gateIn->vehicle_img,
                 'inward_date' => $gateIn->inward_date,
                 'inward_time' => $gateIn->inward_time,
-                'line_name' => $line->name,
+
+                'line_name' => $line_name,
+
                 'container_size' => $gateIn->container_size,
                 'container_type' => $gateIn->container_type,
                 'sub_type' => $gateIn->sub_type,
-                'survayor_date' => $surveyour->survayor_date,
-                'survayor_time' => $surveyour->survayor_time,
-                'status_name' => $surveyour->status_name,
-                'grade' => $surveyour->grade,
-                'gross_weight' => $surveyour->gross_weight,
-                'tare_weight' => $surveyour->tare_weight,
-                'mfg_date' => $surveyour->mfg_date,
-                'rftype' => $surveyour->rftype,
-                'job_work_no' => $surveyour->job_work_no,
-                'sub_lease_unity' => $surveyour->sub_lease_unity,
+
+                'survayor_date' => $survayor_date,
+                'survayor_time' => $survayor_time,
+                'status_name' => $status_name,
+                'grade' => $grade,
+                'gross_weight' => $gross_weight,
+                'tare_weight' => $tare_weight,
+                'mfg_date' => $mfg_date,
+                'rftype' => $rftype,
+                'job_work_no' => $job_work_no,
+                'sub_lease_unity' => $sub_lease_unity,
+                'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
             

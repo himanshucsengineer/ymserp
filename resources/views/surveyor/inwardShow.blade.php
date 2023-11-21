@@ -26,12 +26,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Inspect Container</h1>
+                    <h1 class="m-0">Inward Container</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Inspect Container</li>
+                        <li class="breadcrumb-item active">Inward Container</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -398,7 +398,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="return">Reture</label>
+                                            <label for="return">Return</label>
                                             <select name="return" id="return" class="form-control">
                                                 <option value="NO">NO</option>
                                                 <option value="YES">YES</option>
@@ -412,9 +412,24 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="payment">Payment Method</label>
+                                            <select name="payment" id="payment" class="form-control">
+                                                <option value="Cash">Cash</option>
+                                                <option value="UPI">UPI</option>
+                                                <option value="Net Banking">Net Banking</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="Card">Card Payment</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Save and Proceed</button>
+                                <button type="submit" class="btn btn-primary">Save and Print</button>
                             </div>
                         </form>
                     </div>
@@ -706,10 +721,17 @@ function getverifydata(){
             $('#empty_repositioning').val(data.empty_repositioning);
             $('#er_no').val(data.er_no);
             $('#remarks').val(data.remarks);
-            $('#survayor_date').val(data.survayor_date);
-            $('#survayor_time').val(data.survayor_time);
+            if(data.survayor_date){
+                $('#survayor_date').val(data.survayor_date);
+            }else{
+                $('#survayor_date').val('');
+            }
+            if(data.survayor_time){
+                $('#survayor_time').val(data.survayor_time);
+            }else{
+                $('#survayor_time').val('');
+            }
             $('#mfg_date').val(data.mfg_date);
-
         },
         error: function (error) {
             console.log(error);
@@ -768,7 +790,14 @@ $(function () {
         var amount = $("#amount").val();
         var do_no = $("#do_no").val();
         var returnget = $("#return").val();
-
+        var arrive_from = $("#arrive_from").val();
+        var port_name = $("#port_name").val();
+        var region = $("#region").val();
+        var destuffung = $("#destuffung").val();
+        var vessel_name = $("#vessel_name").val();
+        var voyage = $("#voyage").val();
+        var remarks = $("#remarks").val();
+        var payment = $("#payment").val();
         newdata = {
             'status_name': status_name,
             'job_work_no': job_work_no,
@@ -836,7 +865,8 @@ $(function () {
                     //     callout.remove();
                     // }, 2000);
                     post('containerverify/create',newdata)
-                    window.location = `/inward/executive`
+                    // window.location = `/inward/executive`
+                    location.href= `/print/thirdparty?gatein=${containerid}&type=lolo&p_type=${payment}`
                 },
                 error: function(error) {
                     var finalValue = '';

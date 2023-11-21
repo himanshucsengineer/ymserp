@@ -49,12 +49,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Inspection</h1>
+                    <h1 class="m-0">Inward</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Inspection</li>
+                        <li class="breadcrumb-item active">Inward</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -89,6 +89,7 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Action</th>
+                                        <th>Status</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Vehicle No.</th>
@@ -178,16 +179,17 @@ function filterByDate(){
                     vehicle_img = "No Imgae Available";
                 }
 
+                
                 var row = $('<tr>');
-                row.append($('<td>').text(i));
-                var viewButton = $('<span>')
-                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id) 
-                    .attr('class', 'view-button');
-
-                var td = $('<td>');
-                td.append(viewButton);
-                row.append(td);
+                    row.append($('<td>').text(i));
+                    var viewButton = $('<span>')
+                        .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
+                        .attr('data-id', item.id) 
+                        .attr('class', 'view-button');
+                    var td = $('<td>');
+                    td.append(viewButton);
+                    row.append(td);
+                row.append($('<td>').append(item.is_assigned));
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));

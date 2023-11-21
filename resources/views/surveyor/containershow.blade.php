@@ -114,7 +114,6 @@
                                             <label for="container_size">Container Size</label>
                                             <select name="container_size" id="container_size" class="form-control">
                                                 <option value="">Select Container Size</option>
-                                                <option value="10">10</option>
                                                 <option value="20">20</option>
                                                 <option value="40">40</option>
                                                 <option value="45">45</option>
@@ -245,143 +244,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <div class="form-group">
-                                    <label for="transport_id">Transport</label>
-                                    <select name="transport_id" id="transport_id" class="form-control">
-                                        <option value="">Select Transport</option>
-                                    </select>
-                                </div>
-
-                                
-
-                                <div class="form-group">
-                                    <label for="driver_name">Driver Name</label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
-                                </div>
-                                
-
-                                <div class="form-group">
-                                    <label for="contact_number">Contact Number</label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
-                                </div>
-                                <div class="form-group">
-                                    <label for="third_party">Third Party</label>
-                                    <select name="third_party" id="third_party"  class="form-control">
-                                        <option value="no">no</option>
-                                        <option value="yes">yes</option>
-                                    </select>
-                                </div>
-
-                                
-                                <div class="form-group">
-                                    <label for="arrive_from">Arrive From</label>
-                                    <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="port_name">Port Name</label>
-                                    <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="driver_photo">Driver Photo</label></br>
-                                    <input type="file" id="driver_photo" name="driver_photo" class="form-control">
-                                    <div class="img_prv_box"><span class="driver_photo"></span></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="challan">Challan</label></br>
-                                    <input type="file" id="challan" name="challan" class="form-control">
-                                    <div class="img_prv_box"><span class="challan"></span></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="driver_license">Driver License</label></br>
-                                    <input type="file" id="driver_license" name="driver_license" class="form-control">
-                                    <div class="img_prv_box"><span class="driver_license"></span></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="do_copy">D.O. Copy</label></br>
-                                    <input type="file" id="do_copy" name="do_copy" class="form-control">
-                                    <div class="img_prv_box"><span class="do_copy"></span></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="aadhar">Aadhar Card</label></br>
-                                    <input type="file" id="aadhar" name="aadhar" class="form-control">
-                                    <div class="img_prv_box"><span class="aadhar"></span></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="pan">PAN Card</label></br>
-                                    <input type="file" id="pan" name="pan" class="form-control">
-                                    <div class="img_prv_box"><span class="pan"></span></div>
-                                </div>
-                                </hr>
-                                
-
-                                
-
-                                
-
-                                <div class="form-group">
-                                    <label for="vessel_name">Vessel Name</label>
-                                    <input type="text" class="form-control" id="vessel_name" name="vessel_name"  placeholder="Enter Vessel Name">
-                                </div>
-
-                                
-
-                                
-
-                                <div class="form-group">
-                                    <label for="voyage">Voyage</label>
-                                    <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="consignee">Consignee / Tranport</label>
-                                    <select name="consignee" id="consignee" class="form-control">
-                                        <option value="">please Select An Option</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="region">Region</label>
-                                    <select name="region" id="region" class="form-control">
-                                        <option value="">Select Region</option>
-                                        <option value="DOMESTIC">DOMESTIC</option>
-                                        <option value="INTERNATIONAL">INTERNATIONAL</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="destuffung">Destuffung</label>
-                                    <select name="destuffung" id="destuffung" class="form-control">
-                                        <option value="">Select destuffung</option>
-                                        <option value="FD">FD</option>
-                                        <option value="OD">OD</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="empty_repositioning">Empty Repositioning</label>
-                                    <select name="empty_repositioning" id="empty_repositioning" class="form-control">
-                                        <option value="">Select Empty Repositioning</option>
-                                        <option value="YES">YES</option>
-                                        <option value="NO">NO</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="er_no">ER Number</label>
-                                    <input type="text" class="form-control" id="er_no" name="er_no"  placeholder="Enter ER Number">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="remarks">Remarks</label>
-                                    <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
-                                </div> -->
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Save and Proceed</button>
@@ -463,32 +325,7 @@ $(document).ready(function () {
             console.log(error);
         }
     });
-
-    // $.ajax({
-    //     type: "post",
-    //     url: "/api/transport/get",
-    //     headers: {
-    //         'Authorization': 'Bearer ' + checkToken
-    //     },
-    //     data:{
-    //         'user_id':user_id,
-    //         'depo_id':depo_id
-    //     },
-    //     success: function (data) {
-    //         var select = document.getElementById('transport_id');
-    //         data.forEach(function(item) {
-    //             var option = document.createElement('option');
-    //             option.value = item.id;
-    //             option.text = item.name;
-    //             select.appendChild(option);
-    //         });
-    //     },
-    //     error: function (error) {
-    //         console.log(error);
-    //     }
-    // });
     
-
     $.ajax({
         type: "POST",
         url: "/api/gatein/getDataById",
@@ -550,9 +387,6 @@ $(document).ready(function () {
             if(data.line_id){
                 getline(data.line_id);
             }
-            // if(data.transport_id){
-            //     getTranport(data.transport_id);
-            // }
             getverifydata();
 
             $("#container_no").val(data.container_no)
@@ -575,33 +409,7 @@ $(document).ready(function () {
         error: function (error) {
             console.log(error);
         }
-    });
-
-    // $.ajax({
-    //     type: "post",
-    //     url: "/api/transport/get",
-    //     headers: {
-    //         'Authorization': 'Bearer ' + checkToken
-    //     },
-    //     data:{
-    //         'user_id':user_id,
-    //         'depo_id':depo_id
-    //     },
-    //     success: function (data) {
-    //         var select = document.getElementById('consignee');
-    //         data.forEach(function(item) {
-    //             var option = document.createElement('option');
-    //             option.value = item.id;
-    //             option.text = item.name;
-    //             select.appendChild(option);
-    //         });
-    //     },
-    //     error: function (error) {
-    //         console.log(error);
-    //     }
-    // });
-
-    
+    });  
 
 });
 
@@ -674,8 +482,18 @@ function getverifydata(){
             $('#er_no').val(data.er_no);
             $('#remarks').val(data.remarks);
 
-            $('#survayor_date').val(data.survayor_date);
-            $('#survayor_time').val(data.survayor_time);
+            if(data.survayor_date){
+                $('#survayor_date').val(data.survayor_date);
+            }else{
+                $('#survayor_date').val('<?php echo date('Y-m-d')?>'); 
+            }
+
+            if(data.survayor_time){
+                $('#survayor_time').val(data.survayor_time);
+            }else{
+                $('#survayor_time').val('<?php echo date('H:i:s')?>'); 
+            }
+
             $('#mfg_date').val(data.mfg_date);
 
         },
@@ -752,6 +570,8 @@ $(function () {
             'gate_in_id' : containerid
         }
 
+        console.log(newdata);
+
 
 
             var formData = new FormData();
@@ -761,7 +581,7 @@ $(function () {
             formData.append('container_size', container_size);
             formData.append('container_type', container_type);
             formData.append('sub_type', sub_type);
-            formData.append('transport_id', transport_id);
+            // formData.append('transport_id', transport_id);
             formData.append('inward_date', inward_date);
             formData.append('inward_time', inward_time);
             // formData.append('driver_name', driver_name);
@@ -799,6 +619,7 @@ $(function () {
                     // }, 2000);
                     post('containerverify/create',newdata)
                         var checkSuperbisor = <?php echo $checkSupervisor?>;
+                        // window.location = `/surveyor/inspection`
                     if(checkSuperbisor == 1){
                         window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
                     }else{
