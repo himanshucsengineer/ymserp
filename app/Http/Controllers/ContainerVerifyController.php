@@ -100,7 +100,7 @@ class ContainerVerifyController extends Controller
      * @param  \App\Models\ContainerVerify  $containerVerify
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContainerVerifyRequest $request, ContainerVerify $containerVerify)
+    public function update(Request $request)
     {
         //
     }

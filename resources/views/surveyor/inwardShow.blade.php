@@ -835,7 +835,7 @@ $(function () {
                     // setTimeout(function() {
                     //     callout.remove();
                     // }, 2000);
-                    post('containerverify/update',newdata)
+                    post('containerverify/create',newdata)
                     window.location = `/inward/executive`
                 },
                 error: function(error) {
