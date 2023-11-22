@@ -39,9 +39,56 @@ class OutwardOfficerController extends Controller
         return view('invoice.central');
     }
 
+    public function get(Request $request)
+    {
+        if($request->user_id == 1){
+            return OutwardOfficer::get();
+        }else{
+            return OutwardOfficer::where('depo_id',$request->depo_id)->get();
+        }
+    }
 
-    public function outward_print(){
-        return view('print.outward');
+    public function gatepass_print(Request $request){
+        $id = $request->id;
+        $outwardData = OutwardOfficer::where('id',$id)->first();
+        $linedata = MasterLine::where('id',$outwardData->line_id)->first();
+        $transporter = MasterTransport::where('id',$outwardData->transport_id)->first();
+
+        $data['gate_pass'] = array(
+            'transporter' => $transporter->name,
+            'licence_no' => $outwardData->licence_no,
+            'aadhar_no' => $outwardData->aadhar_no,
+            'line_name' => $linedata->name,
+
+            'shippers' => $outwardData->shippers,
+            'pan_no' => $outwardData->pan_no,
+            'seal_no' => $outwardData->seal_no,
+
+        );
+
+        return view('print.gatepass',$data);
+    }
+
+    public function outward_print(Request $request){
+        $id = $request->id;
+        $outwardData = OutwardOfficer::where('id',$id)->first();
+        $linedata = MasterLine::where('id',$outwardData->line_id)->first();
+        $transporter = MasterTransport::where('id',$outwardData->transport_id)->first();
+
+        $data['receipt_data'] = array(
+            'do_no' => $outwardData->do_no,
+            'challan_no' => $outwardData->challan_no,
+            'line_name' => $linedata->name,
+            'transporter' => $transporter->name,
+            'container_type' => $outwardData->container_type,
+            'container_size' => $outwardData->container_size,
+            'grade' => $outwardData->grade,
+            'status' => $outwardData->status_name,
+            'container_no' => $outwardData->container_no,
+
+        );
+
+        return view('print.outward',$data);
     }
 
     public function numberToWord($num = ''){
@@ -166,98 +213,90 @@ class OutwardOfficerController extends Controller
     public function store(Request $request)
     {
 
-        $getGetInData = GateIn::where('id',$request->gate_in_id)->first();
+        $rules=[
+            'do_no'=>[
+                'required',
+                'unique:outward_officers,do_no'
+            ],
+        ];
 
-        if($request->gate_out_id == ''){
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('do_no')){
+                $validationFormate->do_no = $messages->first('do_no');
+            }
+
+            $validationError[] = $validationFormate;
+
             return response()->json([
                 'status' => "error",
-                'message' => 'Driver Contact No Is Required!'
-            ], 500);
-        }else{
-            if($request->vehical_no == ''){
-                return response()->json([
-                    'status' => "error",
-                    'message' => 'Vehicle Number Is Required'
-                ], 500);   
-            }
-        }
-
-        if($getGetInData->third_party == "yes"){
-            if($request->receipt == ''){
-                return response()->json([
-                    'status' => "error",
-                    'message' => 'Receipt Is Required'
-                ], 500);
-            }
-            if($request->cash == ''){
-                return response()->json([
-                    'status' => "error",
-                    'message' => 'Cash Amount Is Required'
-                ], 500);
-            }
+                'message' => $validationError
+            ], 400);
         }
 
 
-        if ($request->hasFile('do_image')) {
-            $do_image = $request->file('do_image');
-            $do_image_name = time() . '_' . $do_image->getClientOriginalName();
-            $do_image->move(public_path('uploads/outward'), $do_image_name);
+        if ($request->hasFile('do_copy')) {
+            $do_copy = $request->file('do_copy');
+            $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
+            $do_copy->move(public_path('uploads/outward'), $do_copy_name);
         }else{
-            $do_image_name = '';
+            $do_copy_name = '';
         }
 
-        if ($request->hasFile('driver_license_image')) {
-            $driver_license_image = $request->file('driver_license_image');
-            $driver_license_image_name = time() . '_' . $driver_license_image->getClientOriginalName();
-            $driver_license_image->move(public_path('uploads/outward'), $driver_license_image_name);
+        if ($request->hasFile('challan_copy')) {
+            $challan_copy = $request->file('challan_copy');
+            $challan_copy_name = time() . '_' . $challan_copy->getClientOriginalName();
+            $challan_copy->move(public_path('uploads/outward'), $challan_copy_name);
         }else{
-            $driver_license_image_name = '';
+            $challan_copy_name = '';
         }
 
-        if ($request->hasFile('driver_aadhar_image')) {
-            $driver_aadhar_image = $request->file('driver_aadhar_image');
-            $driver_aadhar_image_name = time() . '_' . $driver_aadhar_image->getClientOriginalName();
-            $driver_aadhar_image->move(public_path('uploads/outward'), $driver_aadhar_image_name);
+        if ($request->hasFile('driver_copy')) {
+            $driver_copy = $request->file('driver_copy');
+            $driver_copy_name = time() . '_' . $driver_copy->getClientOriginalName();
+            $driver_copy->move(public_path('uploads/outward'), $driver_copy_name);
         }else{
-            $driver_aadhar_image_name = '';
+            $driver_copy_name = '';
         }
 
 
         $createLine = OutwardOfficer::create([
-            'gate_in_id'=> $request->gate_in_id,
-            'gate_out_id'=> $request->gate_out_id,
-            'do_number'=> $request->do_number,
-            'driver_license'=> $request->driver_license,
-            'driver_aadhar'=> $request->driver_aadhar,
-            'Transporter_name'=> $request->transport_id,
-            'destination'=> $request->destination,
-            'shippers'=> $request->shippers,
-            'vessel'=> $request->vessel,
-            'voyage'=> $request->voyage,
-            'port_name'=> $request->port_name,
-            'seal_no'=> $request->seal_no,
-            'vent_seal_no'=> $request->vent_seal_no,
-            'temprature'=> $request->temprature,
-            'receipt_no'=> $request->receipt,
-            'cash'=> $request->cash,
-            'remark'=> $request->remarks,
+            'do_no'=> $request->do_no,
+            'challan_no'=> $request->challan_no,
+            'line_id'=> $request->line_id,
+            'transport_id'=> $request->transport_id,
+            'container_type'=> $request->container_type,
+            'container_size'=> $request->container_size,
+            'sub_type'=> $request->sub_type,
+            'grade'=> $request->grade,
+            'status_name'=> $request->status_name,
+            'driver_name'=> $request->driver_name,
+            'vehicle_no'=> $request->vehicle_no,
+            'container_no'=> $request->container_no,
+            
             'createdby' => $request->user_id,
             'depo_id' => $request->depo_id,
-            'do_image' => $do_image_name,
-            'driver_aadhar_image' => $driver_aadhar_image_name,
-            'driver_license_image' =>$driver_license_image_name
+            'do_copy' => $do_copy_name,
+            'challan_copy' => $challan_copy_name,
+            'driver_copy' =>$driver_copy_name
         ]);
 
-        $gateoutDetails = Gateout::find($request->gate_out_id);
-        $gateoutDetails->vehicle_number = is_null($request->vehical_no) ? $gateoutDetails->vehicle_number : $request->vehical_no;
-        $gateoutDetails->status = '1';
-        $gateoutDetails  = $gateoutDetails->save();
+        // $gateoutDetails = Gateout::find($request->gate_out_id);
+        // $gateoutDetails->vehicle_number = is_null($request->vehical_no) ? $gateoutDetails->vehicle_number : $request->vehical_no;
+        // $gateoutDetails->status = '1';
+        // $gateoutDetails  = $gateoutDetails->save();
 
         
         if($createLine){
             return response()->json([
                 'status' => "success",
-                'message' => "Added Successfully"
+                'message' => "Added Successfully",
+                'data' => $createLine
             ], 200);
         }else{
             return response()->json([
@@ -267,6 +306,64 @@ class OutwardOfficerController extends Controller
         }
 
 
+
+    }
+
+
+    public function genrateGatePass(Request $request){
+        if ($request->hasFile('licence_copy')) {
+            $licence_copy = $request->file('licence_copy');
+            $licence_copy_name = time() . '_' . $licence_copy->getClientOriginalName();
+            $licence_copy->move(public_path('uploads/outward'), $licence_copy_name);
+        }else{
+            $licence_copy_name = '';
+        }
+
+        if ($request->hasFile('aadhar_copy')) {
+            $aadhar_copy = $request->file('aadhar_copy');
+            $aadhar_copy_name = time() . '_' . $aadhar_copy->getClientOriginalName();
+            $aadhar_copy->move(public_path('uploads/outward'), $aadhar_copy_name);
+        }else{
+            $challan_copy_name = '';
+        }
+
+        if ($request->hasFile('pan_copy')) {
+            $pan_copy = $request->file('pan_copy');
+            $pan_copy_name = time() . '_' . $pan_copy->getClientOriginalName();
+            $pan_copy->move(public_path('uploads/outward'), $pan_copy_name);
+        }else{
+            $pan_copy_name = '';
+        }
+
+
+        $gateoutDetails = OutwardOfficer::find($request->receipt_no);
+        $gateoutDetails->consignee_id = is_null($request->consignee_id) ? $gateoutDetails->consignee_id : $request->consignee_id;
+        $gateoutDetails->shippers = is_null($request->shippers) ? $gateoutDetails->shippers : $request->shippers;
+        $gateoutDetails->licence_no = is_null($request->licence_no) ? $gateoutDetails->licence_no : $request->licence_no;
+        $gateoutDetails->aadhar_no = is_null($request->aadhar_no) ? $gateoutDetails->aadhar_no : $request->aadhar_no;
+        $gateoutDetails->pan_no = is_null($request->pan_no) ? $gateoutDetails->pan_no : $request->pan_no;
+        $gateoutDetails->line_id_2 = is_null($request->line_id_2) ? $gateoutDetails->line_id_2 : $request->line_id_2;
+        $gateoutDetails->seal_no = is_null($request->seal_no) ? $gateoutDetails->seal_no : $request->seal_no;
+        $gateoutDetails->updatedby = is_null($request->user_id) ? $gateoutDetails->updatedby : $request->user_id;
+        $gateoutDetails->updatedby = is_null($request->user_id) ? $gateoutDetails->updatedby : $request->user_id;
+        $gateoutDetails->updated_at = date('Y-m-d H:i:s');
+        
+        $gateoutDetails->licence_copy = $licence_copy_name;
+        $gateoutDetails->aadhar_copy = $aadhar_copy_name;
+        $gateoutDetails->pan_copy = $pan_copy_name;
+        $gateoutDetails  = $gateoutDetails->save();
+
+        if($gateoutDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "Genrated Successfully",
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
 
     }
 

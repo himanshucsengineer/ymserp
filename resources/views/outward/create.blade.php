@@ -208,7 +208,17 @@
 
                                 <hr>
 
-                                <form action="">
+                                <form id="gatePassForm">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="receipt_no">Select Receipt No.</label>
+                                                <select name="receipt_no" id="receipt_no" class="form-control">
+                                                    <option value="">Select Receipt No.</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -365,6 +375,29 @@ $(document).ready(function () {
         }
     });
 
+    $.ajax({
+        type: "post",
+        url: "/api/outward/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            var select = document.getElementById('receipt_no');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.id;
+                select.appendChild(option);
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 
 
 });
@@ -478,6 +511,100 @@ $('#status_name').on('change',function(){
  
 
 
+$('#gatePassForm').on('submit',function(e){
+    event.preventDefault();
+
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var receipt_no = $('#receipt_no').val();
+    var consignee_id = $('#consignee_id').val();
+    var shippers = $('#shippers').val();
+    var licence_no = $('#licence_no').val();
+    var aadhar_no = $('#aadhar_no').val();
+    var pan_no = $('#pan_no').val();
+    var line_id_2 = $('#line_id_2').val();
+    var seal_no = $('#seal_no').val();
+
+    if(receipt_no == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Receipt No</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    var formData = new FormData();
+
+        formData.append('receipt_no', receipt_no);
+        formData.append('consignee_id', consignee_id);
+        formData.append('shippers', shippers);
+        formData.append('licence_no', licence_no);
+        formData.append('aadhar_no', aadhar_no);
+        formData.append('pan_no', pan_no);
+        formData.append('line_id_2', line_id_2);
+        formData.append('seal_no', seal_no);
+        formData.append('user_id', user_id);
+        formData.append('depo_id', depo_id);
+
+        if ($('#licence_copy')[0].files && $('#licence_copy')[0].files.length > 0) {
+            formData.append('licence_copy', $('#licence_copy')[0].files[0]);
+        }else{
+            formData.append('licence_copy', '');
+        }
+
+        if ($('#aadhar_copy')[0].files && $('#aadhar_copy')[0].files.length > 0) {
+            formData.append('aadhar_copy', $('#aadhar_copy')[0].files[0]);
+        }else{
+            formData.append('aadhar_copy', '');
+        }
+
+        if ($('#pan_copy')[0].files && $('#pan_copy')[0].files.length > 0) {
+            formData.append('pan_copy', $('#pan_copy')[0].files[0]);
+        }else{
+            formData.append('pan_copy', '');
+        }
+
+
+        $.ajax({
+                url: '/api/outward/genrateGatePass',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+
+                    window.open(`/print/gatepass?id=${receipt_no}`, '_blank');
+                    location.reload();
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            });
+
+})
 
 
 
@@ -519,7 +646,7 @@ $('#outwardForm').on('submit',function(e){
         formData.append('user_id', user_id);
         formData.append('depo_id', depo_id);
 
-        
+
 
         if ($('#do_copy')[0].files && $('#do_copy')[0].files.length > 0) {
             formData.append('do_copy', $('#do_copy')[0].files[0]);
@@ -556,8 +683,8 @@ $('#outwardForm').on('submit',function(e){
                         callout.remove();
                     }, 2000);
 
-                    window.open('/print/outward', '_blank');
-                    // location.href="/outward/view";
+                    window.open(`/print/outward?id=${data.data.id}`, '_blank');
+                    location.reload();
                 },
                 error: function(error) {
                     var finalValue = '';

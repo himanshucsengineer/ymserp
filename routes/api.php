@@ -217,6 +217,9 @@ $api->version('v1', function($api){
         $api->post('/filterByOutStatus', 'App\Http\Controllers\GateInController@filterByOutStatus');
         $api->post('/getInspectionDataOutStatus', 'App\Http\Controllers\GateInController@getInspectionDataOutStatus');
         $api->post('/create', 'App\Http\Controllers\OutwardOfficerController@store');
+        $api->post('/get', 'App\Http\Controllers\OutwardOfficerController@get');
+        $api->post('/genrateGatePass', 'App\Http\Controllers\OutwardOfficerController@genrateGatePass');
+
     });
 
 });

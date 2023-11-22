@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipt</title>
+    <title>Gate Pass</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
         }
-        .receipt-container {
+        .gate-pass-container {
             display: flex;
             justify-content: space-between;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .column {
             flex: 1;
@@ -24,38 +29,40 @@
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
+        }
+        h2 {
+            color: #333;
         }
     </style>
 </head>
 <body>
 <button class="no-print" onclick="printPage()">Print Page</button>
 
-    <h2>Bhavani Shipping (I) Pvt Ltd</h2>
-    <h2>Outward Receipt</h2>
+    <h2>Gate Pass</h2>
 
-    <div class="receipt-container">
+    <div class="gate-pass-container">
         <div class="column">
             <table>
                 <tr>
-                    <th>DO Number</th>
-                    <td><?php echo $receipt_data['do_no']?></td>
+                    <th>Consignee</th>
+                    <td><?php echo $gate_pass['transporter']?></td>
                 </tr>
                 <tr>
-                    <th>Challan Number</th>
-                    <td><?php echo $receipt_data['challan_no']?></td>
+                    <th>License Number</th>
+                    <td><?php echo $gate_pass['licence_no']?></td>
                 </tr>
                 <tr>
-                    <th>Line Name</th>
-                    <td><?php echo $receipt_data['line_name']?></td>
+                    <th>Adhar Card</th>
+                    <td><?php echo $gate_pass['aadhar_no']?></td>
                 </tr>
                 <tr>
-                    <th>Transport / Consignee</th>
-                    <td><?php echo $receipt_data['transporter']?></td>
+                    <th>Line Account or 3rd Party</th>
+                    <td><?php echo $gate_pass['line_name']?></td>
                 </tr>
             </table>
         </div>
@@ -63,24 +70,17 @@
         <div class="column">
             <table>
                 <tr>
-                    <th>Container Type</th>
-                    <td><?php echo $receipt_data['container_type']?></td>
+                    <th>Shipper</th>
+                    <td><?php echo $gate_pass['shippers']?></td>
+                </tr>
+                
+                <tr>
+                    <th>Pan Card</th>
+                    <td><?php echo $gate_pass['pan_no']?></td>
                 </tr>
                 <tr>
-                    <th>Container Size</th>
-                    <td><?php echo $receipt_data['container_size']?></td>
-                </tr>
-                <tr>
-                    <th>Grade</th>
-                    <td><?php echo $receipt_data['grade']?></td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td><?php echo $receipt_data['status']?></td>
-                </tr>
-                <tr>
-                    <th>Container Number</th>
-                    <td><?php echo $receipt_data['container_no']?></td>
+                    <th>Seal Number</th>
+                    <td><?php echo $gate_pass['seal_no']?></td>
                 </tr>
             </table>
         </div>

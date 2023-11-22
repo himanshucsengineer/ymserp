@@ -84,6 +84,7 @@ Route::get('/print/outward', 'App\Http\Controllers\OutwardOfficerController@outw
 Route::get('/print/thirdparty', 'App\Http\Controllers\OutwardOfficerController@thirdparty');
 Route::get('/print/line', 'App\Http\Controllers\OutwardOfficerController@line');
 
+Route::get('/print/gatepass', 'App\Http\Controllers\OutwardOfficerController@gatepass_print');
 
 Route::get('/billing/invoice', 'App\Http\Controllers\OutwardOfficerController@invoice_view');
 Route::get('/billing/centeral', 'App\Http\Controllers\OutwardOfficerController@centeral_view');
