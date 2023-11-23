@@ -302,11 +302,18 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/billing/invoice" class="nav-link">
+                                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                                        <i class="fas fa-money-bill-wave nav-icon"></i>
+                                        <p>Depot Billing</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item" id="inspection">
                                     <a href="/inward/executive" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
-                                        <p>Inward Executive</p>
+                                        <p>Inward Data Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item" id="inspection">
@@ -409,13 +416,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/billing/invoice" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
-                                        <i class="fas fa-money-bill-wave nav-icon"></i>
-                                        <p>Depot Billing</p>
-                                    </a>
-                                </li>
+                                
                                 <li class="nav-item">
                                     <a href="/billing/centeral" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>

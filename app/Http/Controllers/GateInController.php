@@ -116,7 +116,7 @@ class GateInController extends Controller
     }
 
     public function get(){
-        return GateIn::where('third_party','yes')->get();
+        return GateIn::get();
     }
 
 
