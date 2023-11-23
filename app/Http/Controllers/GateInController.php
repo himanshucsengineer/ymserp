@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\MasterEmployee;
 use App\Models\ContainerVerify;
+use App\Models\Transaction;
+use App\Models\MasterTarrif;
+use App\Models\MasterRepair;
+use App\Models\MasterDamage;
+use App\Models\MasterMaterial;
 
 use App\Models\GateIn;
 use App\Models\MasterTransport;
@@ -52,6 +57,58 @@ class GateInController extends Controller
 
     public function inward_executive(){
         return view('surveyor.inwardExexutive');
+    }
+
+    public function printestimate(Request $request){
+        $transactionData = Transaction::where('gatein_id',$request->gatein_id)->get();
+        $getInData = GateIn::where('id',$request->gatein_id)->first();
+        $lineData = MasterLine::where('id',$getInData->line_id)->first();
+        $containerVerifyData = ContainerVerify::where('gate_in_id',$request->gatein_id)->orderby('created_at','desc')->first();
+        $userData = User::where('id',$containerVerifyData->createdby)->first();
+        $survayorDoneName = MasterEmployee::where('id',$userData->employee_id)->first(); 
+
+        $data['container_no'] = $getInData->container_no;
+        $data['line_name'] = $lineData->name;
+        $data['survey_date'] = $containerVerifyData->survayor_date;
+        $data['survey_time'] = $containerVerifyData->survayor_time;
+        $data['survey_done_by'] = $survayorDoneName->firstname . ' ' . $survayorDoneName->lastname;
+        
+        $formetedData = [];
+
+        foreach($transactionData as $transaction){
+            $tarrifData = MasterTarrif::where('id',$transaction->tarrif_id)->first();
+            $damageData = MasterDamage::where('id',$tarrifData->damade_id)->first();
+            $repairData = MasterRepair::where('id',$tarrifData->repair_id)->first();
+            $materialData = MasterMaterial::where('id',$tarrifData->material_id)->first();
+
+            $formetedData[] = [
+                'component_code' => $tarrifData->component_code,
+                'location_code' => $tarrifData->repai_location_code,
+                'unit_of_mesure' => $tarrifData->unit_of_measure,
+                'length' => $tarrifData->dimension_l,
+                'width' => $tarrifData->dimension_w,
+                'height' => $tarrifData->dimension_h,
+                'damage_code' => $damageData->code,
+                'repair_code' => $repairData->repair_code,
+                'material_code' => $materialData->material_code,
+
+                'qty' => $transaction->qty,
+                'labour_hr' => $transaction->labour_hr,
+                'labour_cost' => $transaction->labour_cost,
+                'material_cost' => $transaction->material_cost,
+                'sab_total' => $transaction->sab_total,
+                'gst' => $transaction->gst,
+                'total' => $transaction->total,
+            ];
+        }
+
+        $data['main_data'] = $formetedData;
+
+        // print_r($getIndata[0]->gatein_id);
+        // die;
+
+        return view('print.astimate',$data);
+
     }
 
     public function getDataById(Request $request){

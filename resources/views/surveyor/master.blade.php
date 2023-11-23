@@ -379,7 +379,14 @@ a.open:hover .circle img {
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                                <button data-toggle="modal" data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <button data-toggle="modal" class="btn btn-block btn-outline-success" data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-block btn-outline-success" onclick="printAstimate()">Print</button>
+                                        </div>
+                                    </div>
                                 <div class="card mt-5">
                                     <div class="card-body p-0">
                                         <table class="table table-striped table-responsive">
@@ -483,22 +490,9 @@ function showDoor() {
 }
 
 
-function printastimate(){
-    // var containerid = <?= $getid[0]?>;
-    var checkToken = localStorage.getItem('token');
-    $.ajax({
-        type: "get",
-        url: "/api/gatein/genrateastimate",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        success: function(data) {
-            console.log(data)
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+function printAstimate(){
+    var gatein_id = $('#gateinid').val();
+    location.href= `/print/printestimate?gatein_id=${gatein_id}`;
 }
 
 
