@@ -22,12 +22,12 @@ cursor: pointer;
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Tariff</h1>
+                    <h1 class="m-0 text">Create Tariff</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Tariff</li>
+                        <li class="breadcrumb-item active text">Create Tariff</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -543,6 +543,54 @@ $(document).ready(function () {
 });
 
 $(function () {
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/tarrif/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            $('.text').text('Update Tariff');
+            $("#line_id").val(response.line_id);
+            $("#damade_id").val(response.damade_id);
+            $("#repair_id").val(response.repair_id);
+            $("#material_id").val(response.material_id);
+            $("#container_side").val(response.container_side);
+            $("#hotspot_coor_x").val(response.hotspot_coor_x);
+            $("#hotspot_coor_y").val(response.hotspot_coor_y);
+            $("#repai_location_code").val(response.repai_location_code);
+            $("#unit_of_measure").val(response.unit_of_measure);
+            $("#dimension_l").val(response.dimension_l);
+            $("#dimension_w").val(response.dimension_w);
+            $("#dimension_h").val(response.dimension_h);
+            $("#labour_hour").val(response.labour_hour);
+            $("#labour_cost").val(response.labour_cost);
+            $("#material_cost").val(response.material_cost);
+            $("#tax").val(response.tax);
+            $("#sub_total").val(response.sub_total);
+            $('#tax_cost').val(response.tax_cost);
+            $("#total_cost").val(response.total_cost);
+            $("#component_code").val(response.component_code);
+            $("#desc").val(response.desc);
+            $("#qty").val(response.qty);
+            $('#repair_type').val(response.repair_type);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
@@ -555,19 +603,14 @@ $(function () {
         var container_side = $("#container_side").val();
         var hotspot_coor_x = $("#hotspot_coor_x").val();
         var hotspot_coor_y = $("#hotspot_coor_y").val();
-
-
-
         var repai_location_code = $("#repai_location_code").val();
         var unit_of_measure = $("#unit_of_measure").val();
         var dimension_l = $("#dimension_l").val();
         var dimension_w = $("#dimension_w").val();
-
         var dimension_h = $("#dimension_h").val();
         var labour_hour = $("#labour_hour").val();
         var labour_cost = $("#labour_cost").val();
         var material_cost = $("#material_cost").val();
-
         var tax = $("#tax").val();
         var sub_total = $("#sub_total").val();
         var tax_cost = $('#tax_cost').val();
@@ -577,7 +620,40 @@ $(function () {
         var qty = $("#qty").val();
         var repair_type = $('#repair_type').val();
         
-        
+
+        if(getCateId[1]){
+            const data = {
+                'line_id':line_id,
+                'damade_id':damade_id,
+                'repair_id':repair_id,
+                'material_id':material_id,
+                'repai_location_code':repai_location_code,
+                'unit_of_measure':unit_of_measure,
+                'dimension_l':dimension_l,
+                'dimension_w':dimension_w,
+                'dimension_h':dimension_h,
+                'labour_hour':labour_hour,
+                'labour_cost':labour_cost,
+                'material_cost':material_cost,
+                'tax':tax,
+                'sub_total':sub_total,
+                'tax_cost':tax_cost,
+                'total_cost':total_cost,
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'component_code':component_code,
+                'desc':desc,
+                'qty':qty,
+                'repair_type':repair_type,
+                'hotspot_coor_y':hotspot_coor_y,
+                'hotspot_coor_x':hotspot_coor_x,
+                'container_side':container_side,
+                'id':getCateId[1]
+            }
+
+            post('tarrif/update',data);
+
+        }else{
             const data = {
                 'line_id':line_id,
                 'damade_id':damade_id,
@@ -606,8 +682,10 @@ $(function () {
                 'container_side':container_side
 
             }
-
             post('tarrif/create',data);
+        }
+        window.location = `/tarrif/all`
+            
     }
   });
 

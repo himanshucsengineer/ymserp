@@ -142,6 +142,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'tarrif'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTarrifController@store');
         $api->get('/get', 'App\Http\Controllers\MasterTarrifController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\MasterTarrifController@getbyid');
+        $api->post('/getTarrifData', 'App\Http\Controllers\MasterTarrifController@getTarrifData');
         $api->post('/getbylineid', 'App\Http\Controllers\MasterTarrifController@getbylineid');
         $api->post('/getTarrifByLine', 'App\Http\Controllers\MasterTarrifController@getTarrifByLine');
         $api->post('/checktarrifbycode', 'App\Http\Controllers\MasterTarrifController@checktarrifbycode');

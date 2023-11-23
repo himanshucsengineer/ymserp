@@ -9,6 +9,43 @@
     border:none;
     outline:none;
 }
+#pagination{
+    /* width:100%; */
+    margin-top:1rem;
+    float:right;
+}
+.pagination-btn{
+    border:1px solid #cdcdcd;
+    outline:none;
+    background:white;
+    color:#000;
+    padding:.3rem .7rem;
+}
+.active-btn{
+    background:#63bf84;
+    color:white;
+}
+#search{
+    float: right;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    margin-top:1.7rem;
+}
+.flex_date_range{
+    width:100%;
+    height:auto;
+    display:flex;
+    margin-bottom:1rem;
+}
+.flex_date_range .left{
+    width:50%;
+}
+.flex_date_range .right{
+    width:50%;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,6 +71,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
+                                </div>
+                            </div>
                             <table id="inspectionData" class="table table-bordered table-hover table-responsive">
                                 <thead>
                                     <tr>
@@ -66,6 +111,10 @@
                                    
                                 </tbody>
                             </table>
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6"><div id="pagination"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,30 +133,58 @@ $(document).ready(function() {
 function clearTableBody() {
         $('#table-body').empty();
     }
-function refreshTable(){
-    clearTableBody()
+function refreshTable(page,search){
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+
+    if(page){
+        url = `/api/tarrif/getTarrifData?page=${page}`;
+    }else if(search){
+        url = `/api/tarrif/getTarrifData?search=${search}`;
+    }else{
+        url= `/api/tarrif/getTarrifData`;
+    } 
     $.ajax({
-        type: "get",
-        url: "/api/contractor/get",
+        type: "POST",
+        url: url,
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
         success: function(response) {
+            clearTableBody()
             var tbody = $('#table-body');
 
             var i =1;
-            response.forEach(function(item) {
+            response.data.forEach(function(item) {
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.contractor_code));
-                row.append($('<td>').append(item.fullname));
-                row.append($('<td>').append(item.company));
-                row.append($('<td>').append(item.address));
-                row.append($('<td>').append(item.pincode));
-                row.append($('<td>').append(item.contact));
-                row.append($('<td>').append(item.license));
-                row.append($('<td>').append(item.gst));
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.component_code));
+                row.append($('<td>').append(item.repai_location_code));
+                row.append($('<td>').append(item.container_side));
+                row.append($('<td>').append(item.damage));
+                row.append($('<td>').append(item.repair));
+                row.append($('<td>').append(item.material));
+                row.append($('<td>').append(item.desc));
+                row.append($('<td>').append(item.unit_of_measure));
+                row.append($('<td>').append(item.dimension_l));
+                row.append($('<td>').append(item.dimension_w));
+                row.append($('<td>').append(item.dimension_h));
+                row.append($('<td>').append(item.qty));
+                row.append($('<td>').append(item.repair_type));
+                row.append($('<td>').append(item.labour_hour));
+                row.append($('<td>').append(item.labour_cost));
+                row.append($('<td>').append(item.material_cost));
+                row.append($('<td>').append(item.sub_total));
+                row.append($('<td>').append(item.tax));
+                row.append($('<td>').append(item.tax_cost));
+                row.append($('<td>').append(item.total_cost));
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -127,8 +204,70 @@ function refreshTable(){
                 i++;
             });
 
+            const paginationDiv = document.getElementById("pagination");
+            paginationDiv.innerHTML = "";
+
+            if (response.pagination.last_page > 1) {
+                const startPage = Math.max(response.pagination.current_page - Math.floor(5 / 2), 1);
+                const endPage = Math.min(startPage + 5 - 1, response.pagination.last_page);
+
+                // Create the "Previous" button
+                if (response.pagination.links.prev) {
+                    var splitPrev = response.pagination.links.prev.split('=');
+                    const prevLink = document.createElement("button");
+                    prevLink.textContent = "Previous";
+                    prevLink.className  = "pagination-btn prev";
+                    prevLink.setAttribute("data-id", splitPrev[1]);
+                    prevLink.href = response.pagination.links.prev;
+                    prevLink.addEventListener("click", function() {
+                        refreshTable(prevLink.getAttribute("data-id"))
+                    });
+                    paginationDiv.appendChild(prevLink);
+                }
+
+                // Create page links within the sliding window
+                for (let page = startPage; page <= endPage; page++) {
+                    var splitPage = response.pagination.links.all_pages[page].split('=');
+                    if(splitPage[1] == response.pagination.current_page){
+                        const pageLink = document.createElement("button");
+                        pageLink.textContent = page;
+                        pageLink.className  = "pagination-btn page active-btn";
+                        pageLink.setAttribute("data-id", splitPage[1]);
+                        pageLink.addEventListener("click", function() {
+                            refreshTable(pageLink.getAttribute("data-id"))
+                        });
+                        paginationDiv.appendChild(pageLink);
+                    }else{
+                        const pageLink = document.createElement("button");
+                        pageLink.textContent = page;
+                        pageLink.className  = "pagination-btn page";
+                        pageLink.setAttribute("data-id", splitPage[1]);
+                        pageLink.addEventListener("click", function() {
+                            refreshTable(pageLink.getAttribute("data-id"))
+                        });
+                        paginationDiv.appendChild(pageLink);
+                    }
+                    
+                }
+
+                // Create the "Next" button
+                if (response.pagination.links.next) {
+                    var splitNext = response.pagination.links.next.split('=');
+                    const nextLink = document.createElement("button");
+                    nextLink.textContent = "Next";
+                    nextLink.className  = "pagination-btn next";
+                    nextLink.setAttribute("data-id", splitNext[1]);
+
+                    nextLink.addEventListener("click", function() {
+                        refreshTable(nextLink.getAttribute("data-id"))
+                    });
+                    paginationDiv.appendChild(nextLink);
+                }
+            }
+
             $('.edit-button').click(function() {
-                               
+                var dataId = $(this).data('id');
+                window.location = `/tarrif/create?id=${dataId}`        
             });
 
 
@@ -138,7 +277,7 @@ function refreshTable(){
                 var data = {
                     'id':dataId
                 }
-                // post('contractor/delete',data);
+                post('tarrif/delete',data);
                 refreshTable();
             });
         },
