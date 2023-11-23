@@ -44,6 +44,79 @@ class MasterCategoryController extends Controller
         return MasterCategory::where('id',$request->id)->first();
     }
 
+    public function getCategoryData(Request $request){
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $categoryData = MasterCategory::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $categoryData = MasterCategory::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+        $formetedData = [];
+
+        foreach($categoryData as $category){
+            $formetedData[] = [
+                'name' => $category->name,
+                'id' => $category->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $categoryData->currentPage(),
+                'per_page' => $categoryData->perPage(),
+                'total' => $categoryData->total(),
+                'last_page' => $categoryData->lastPage(),
+                'from' => $categoryData->firstItem(),
+                'to' => $categoryData->lastItem(),
+                'links' => [
+                    'prev' => $categoryData->previousPageUrl(),
+                    'next' => $categoryData->nextPageUrl(),
+                    'all_pages' => $categoryData->getUrlRange(1, $categoryData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
     /**
      * Store a newly created resource in storage.
      *

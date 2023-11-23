@@ -46,16 +46,18 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'contractor'], function($api){
         $api->post('/create','App\Http\Controllers\MasterContractorController@store');
         $api->post('/get', 'App\Http\Controllers\MasterContractorController@get');
+        $api->post('/getContractorData', 'App\Http\Controllers\MasterContractorController@getContractorData');
         $api->post('/getbyid', 'App\Http\Controllers\MasterContractorController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterContractorController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterContractorController@update');
         $api->get('/getall', 'App\Http\Controllers\MasterContractorController@getall');
     });
-
+    
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'category'], function($api){
         $api->post('/create','App\Http\Controllers\MasterCategoryController@store');
         $api->post('/get', 'App\Http\Controllers\MasterCategoryController@get');
+        $api->post('/getCategoryData', 'App\Http\Controllers\MasterCategoryController@getCategoryData');
         $api->post('/getbyid', 'App\Http\Controllers\MasterCategoryController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterCategoryController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterCategoryController@update');
