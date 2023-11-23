@@ -405,7 +405,7 @@ $(function () {
             formData.append('left_img', $('#left_img')[0].files[0]);
             formData.append('front_img', $('#front_img')[0].files[0]);
             formData.append('door_img', $('#door_img')[0].files[0]);
-            formData.append('interior_img', $('#interior_img')[0].files[0]);
+            formData.append('interior_img', $('#interior_img')[0].files[0]); 
                 $.ajax({
                 url: '/api/line/update',
                 type: 'POST',
@@ -422,6 +422,7 @@ $(function () {
                     setTimeout(function() {
                         callout.remove();
                     }, 2000);
+                    window.location = `/line/all`
                 },
                 error: function(error) {
                     var finalValue = '';
@@ -483,6 +484,7 @@ $(function () {
                     setTimeout(function() {
                         callout.remove();
                     }, 2000);
+                    window.location = `/line/all`
                 },
                 error: function(error) {
                     var finalValue = '';
@@ -499,13 +501,17 @@ $(function () {
                     }, 2000);
                 }
             });
-            }
-
-            // Now, you can send formData in an AJAX request
-            
+            }            
 
     }
     });
+
+    var checkUpdate = '';
+    if(getCateId[1]){
+        checkUpdate = false;
+    }else{
+        checkUpdate = true;
+    }
 
     $('#lineForm').validate({
     rules: {
@@ -550,26 +556,26 @@ $(function () {
         },
 
         top_img: {
-            required: true,
+            required: checkUpdate,
         },
         bottom_img: {
-            required: true,
+            required: checkUpdate,
         },
         right_img: {
-            required: true,
+            required: checkUpdate,
         },
         left_img: {
-            required: true,
+            required: checkUpdate,
         },
 
         front_img: {
-            required: true,
+            required: checkUpdate,
         },
         door_img: {
-            required: true,
+            required: checkUpdate,
         },
         interior_img: {
-            required: true,
+            required: checkUpdate,
         },
         'containerType':{
             required: true,
