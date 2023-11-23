@@ -34,27 +34,80 @@ class MasterMaterialController extends Controller
 
     public function getData(Request $request){
 
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
 
         if($request->user_id == 1){
-            $repairData = MasterMaterial::get();
+            $materialData = MasterMaterial::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('material_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
-            $repairData = MasterMaterial::where('depo_id',$request->depo_id)->get();
+            $materialData = MasterMaterial::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('material_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
         }
 
-        $formattedEmployee = [];
-        foreach($repairData as $repair){
-            $damageData = MasterDamage::where('id',$repair->damage_id)->first();
-            $repairData = MasterRepair::where('id',$repair->repiar_id)->first();
+        $formetedData = [];
+        foreach($materialData as $material){
+            $damageData = MasterDamage::where('id',$material->damage_id)->first();
+            $repairData = MasterRepair::where('id',$material->repiar_id)->first();
 
-            $formattedEmployee[] = [
-                'id'=> (int) $repair->id,
+            $formetedData[] = [
+                'id'=> (int) $material->id,
                 'damage_id' => $damageData->code,
                 'repiar_id' => $repairData->repair_code,
-                'material_code' => $repair->material_code,
-                'desc' => $repair->desc 
+                'material_code' => $material->material_code,
+                'desc' => $material->desc 
             ];
         }
-        return $formattedEmployee;
+        return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $materialData->currentPage(),
+                'per_page' => $materialData->perPage(),
+                'total' => $materialData->total(),
+                'last_page' => $materialData->lastPage(),
+                'from' => $materialData->firstItem(),
+                'to' => $materialData->lastItem(),
+                'links' => [
+                    'prev' => $materialData->previousPageUrl(),
+                    'next' => $materialData->nextPageUrl(),
+                    'all_pages' => $materialData->getUrlRange(1, $materialData->lastPage()),
+                ],
+            ],
+        ]); 
     }
 
 

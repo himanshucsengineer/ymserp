@@ -35,24 +35,80 @@ class MasterRepairController extends Controller
 
     public function getData(Request $request){
 
-        if($request->user_id == 1){
-            $repairData = MasterRepair::get();
+
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
         }else{
-            $repairData = MasterRepair::where('depo_id',$request->depo_id)->get();
+            $datalimit = 25;
         }
 
-        $formattedEmployee = [];
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+            $repairData = MasterRepair::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('repair_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $repairData = MasterRepair::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('repair_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+
+        $formetedData = [];
         foreach($repairData as $repair){
             $damageData = MasterDamage::where('id',$repair->damage_id)->first();
 
-            $formattedEmployee[] = [
+            $formetedData[] = [
                 'id'=> (int) $repair->id,
                 'repair_code' => $repair->repair_code,
                 'desc' => $repair->desc,
                 'damage_id' => $damageData->code,
             ];
         }
-        return $formattedEmployee;
+        return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $repairData->currentPage(),
+                'per_page' => $repairData->perPage(),
+                'total' => $repairData->total(),
+                'last_page' => $repairData->lastPage(),
+                'from' => $repairData->firstItem(),
+                'to' => $repairData->lastItem(),
+                'links' => [
+                    'prev' => $repairData->previousPageUrl(),
+                    'next' => $repairData->nextPageUrl(),
+                    'all_pages' => $repairData->getUrlRange(1, $repairData->lastPage()),
+                ],
+            ],
+        ]); 
     }
 
     public function get(Request $request)

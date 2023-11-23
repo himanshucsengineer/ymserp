@@ -45,6 +45,82 @@ class MasterDamageController extends Controller
         return MasterDamage::where('id',$request->id)->first();
     }
 
+    public function getDamageData(Request $request){
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $damageData = MasterDamage::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $damageData = MasterDamage::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+        $formetedData = [];
+
+        foreach($damageData as $damage){
+            $formetedData[] = [
+                'code' => $damage->code,
+                'desc' => $damage->desc,
+                'id' => $damage->id,
+            ];
+            
+        } 
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $damageData->currentPage(),
+                'per_page' => $damageData->perPage(),
+                'total' => $damageData->total(),
+                'last_page' => $damageData->lastPage(),
+                'from' => $damageData->firstItem(),
+                'to' => $damageData->lastItem(),
+                'links' => [
+                    'prev' => $damageData->previousPageUrl(),
+                    'next' => $damageData->nextPageUrl(),
+                    'all_pages' => $damageData->getUrlRange(1, $damageData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
     /**
      * Store a newly created resource in storage.
      *
