@@ -865,8 +865,8 @@ $(function () {
                     //     callout.remove();
                     // }, 2000);
                     post('containerverify/create',newdata)
-                    // window.location = `/inward/executive`
-                    location.href= `/print/thirdparty?gatein=${containerid}&type=lolo&p_type=${payment}`
+                    window.location = `/inward/executive`
+                    // location.href= `/print/thirdparty?gatein=${containerid}&type=lolo&p_type=${payment}`
                 },
                 error: function(error) {
                     var finalValue = '';

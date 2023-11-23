@@ -95,6 +95,11 @@
                                         <option value="">Select Container</option>
                                     </select>
                                 </div>
+                                <div class="col-md-6" id="amount_div" style="display:none">
+                                    <label for="">Amount</label>
+                                    <input type="text" name="amount" id="amount" class="form-control">
+                                    
+                                </div>
                             </div>
 
                             <div class="row mb-4">
@@ -138,7 +143,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" onclick="genrateInvoice()">Genrate Invoice</button>
+                            <button class="btn btn-primary" onclick="genrateInvoice()">Generate Invoice</button>
                         </div>
                     </div>
                 </div>
@@ -238,6 +243,7 @@ $('#third_party').on('change',function(){
     var checkThirdParty = $(this).val();
     if(checkThirdParty == 'yes'){
         $('#container_div').show();
+        $('#amount_div').show();
         $('#depo_div').hide();
         $('#line_div').hide();
         $('#party_div').hide();
@@ -246,17 +252,20 @@ $('#third_party').on('change',function(){
         $('#depo_div').show();
         $('#line_div').show();
         $('#party_div').show();
+        $('#amount_div').hide();
     }else{
         $('#container_div').hide();
         $('#depo_div').hide();
         $('#line_div').hide();
         $('#party_div').hide();
+        $('#amount_div').hide();
     }
 })
 
 function genrateInvoice(){
     var third_party = $('#third_party').val();
     var container_no = $('#container_no').val();
+    var amount = $('#amount').val();
     var depos = $('#depos').val();
     var lines = $('#lines').val();
     var party = $('#party').val();
@@ -289,9 +298,17 @@ function genrateInvoice(){
                 callout.remove();
             }, 2000);
         }
+        if(amount == ''){
+            var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Payment Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+        }
 
-        if(container_no != '' && invoice_type != '' && invoice_type != '' && payment_type != ''){
-            location.href= `/print/thirdparty?gatein=${container_no}&type=${invoice_type}&p_type=${payment_type}`
+        if(container_no != '' && invoice_type != '' && amount != '' && payment_type != ''){
+            location.href= `/print/thirdparty?gatein=${container_no}&type=${invoice_type}&p_type=${payment_type}&amt=${amount}`
         }
     }else{
         if(depos == ''){

@@ -1856,7 +1856,7 @@
             <tr class="row2">
                 <td class="column0 style8 s style10" colspan="6"><span
                         style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">INVOICE.NO. :
-                        Y1/11-2023/00165<br />
+                        <?= $invoice_data['invoice_id']?><br />
                     </span><span style="font-weight:bold; color:#000000; font-family:'Carlito'; font-size:7.5pt">STATE :
                         <?php echo $invoice_data['line_state']?> STATE CODE : <?php echo $invoice_data['line_state_code']?> </span></td>
                 <td class="column6 style11 s style13" colspan="4"><span
