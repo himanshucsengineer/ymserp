@@ -156,6 +156,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transport'], function($api){
         $api->post('/create','App\Http\Controllers\MasterTransportController@store');
         $api->post('/get', 'App\Http\Controllers\MasterTransportController@get');
+        $api->post('/getTransportData', 'App\Http\Controllers\MasterTransportController@getTransportData');
         $api->post('/getbyid', 'App\Http\Controllers\MasterTransportController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterTransportController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterTransportController@update');

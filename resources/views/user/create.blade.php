@@ -65,15 +65,15 @@
                                     <input type="text" class="form-control" id="recovery_number" name="recovery_number" placeholder="Enter Recovery Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ans1">Where did you go to high school/college? <span style="color:red;">*</span></label>
+                                    <label for="ans1">In which city were you born? <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="ans1" name="ans1" placeholder="Enter Ans">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ans2">What city were you bom in? <span style="color:red;">*</span></label>
+                                    <label for="ans2">What is your mother's name? <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="ans2" name="ans2" placeholder="Enter Ans">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ans3">Where is your favrite place to vacation? <span style="color:red;">*</span></label>
+                                    <label for="ans3">What is the name of your favorite childhood friend? <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="ans3" name="ans3" placeholder="Enter Ans">
                                 </div>
                                 <div class="form-group">

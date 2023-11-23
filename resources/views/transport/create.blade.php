@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Transport</h1>
+                    <h1 class="m-0 text">Create Transport</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Transport</li>
+                        <li class="breadcrumb-item active text">Create Transport</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -93,6 +93,41 @@
 
 <script>
 $(function () {
+
+
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var checkToken = localStorage.getItem('token');
+
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/transport/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'id':getCateId[1]
+        },
+        success: function(response) {
+            $('.text').text('Update Transport');
+            $("#name").val(response.name);
+            $("#address").val(response.address);
+            $("#city").val(response.city);
+            $("#state").val(response.state);
+            $("#pincode").val(response.pincode);
+            $("#gst").val(response.gst);
+            $("#pan").val(response.pan);
+            $("#gst_state").val(response.gst_state);
+            $("#state_code").val(response.state_code);
+            $("#is_transport").val(response.is_transport);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
@@ -109,6 +144,25 @@ $(function () {
         var state_code = $("#state_code").val();
         var is_transport = $("#is_transport").val();
 
+        if(getCateId[1]){
+            const data = {
+                'name':name,
+                'address':address,
+                'city':city,
+                'state':state,
+                'pincode':pincode,
+                'gst':gst,
+                'pan':pan,
+                'gst_state':gst_state,
+                'state_code':state_code,
+                'is_transport':is_transport,
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'id' : getCateId[1]
+            }
+            post('transport/update',data);
+
+        }else{
             const data = {
                 'name':name,
                 'address':address,
@@ -124,36 +178,16 @@ $(function () {
                 'depo_id':depo_id,
             }
             post('transport/create',data);
+        }
+
+        window.location = `/transport/all`
+            
     }
   });
 
     $('#transportForm').validate({
     rules: {
         name: {
-            required: true,
-        },
-        address: {
-            required: true,
-        },
-        city: {
-            required: true,
-        },
-        state: {
-            required: true,
-        },
-        pincode: {
-            required: true,
-        },
-        gst: {
-            required: true,
-        },
-        pan: {
-            required: true,
-        },
-        gst_state: {
-            required: true,
-        },
-        state_code: {
             required: true,
         },
         is_transport: {

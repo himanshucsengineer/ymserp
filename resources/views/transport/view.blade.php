@@ -9,6 +9,44 @@
     border:none;
     outline:none;
 }
+
+#pagination{
+    /* width:100%; */
+    margin-top:1rem;
+    float:right;
+}
+.pagination-btn{
+    border:1px solid #cdcdcd;
+    outline:none;
+    background:white;
+    color:#000;
+    padding:.3rem .7rem;
+}
+.active-btn{
+    background:#63bf84;
+    color:white;
+}
+#search{
+    float: right;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    margin-top:1.7rem;
+}
+.flex_date_range{
+    width:100%;
+    height:auto;
+    display:flex;
+    margin-bottom:1rem;
+}
+.flex_date_range .left{
+    width:50%;
+}
+.flex_date_range .right{
+    width:50%;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,12 +54,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Contractor</h1>
+                    <h1 class="m-0">All Transporter</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Contractor</li>
+                        <li class="breadcrumb-item active">All Transporter</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -34,18 +72,28 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
+                                </div>
+                            </div>
                             <table id="inspectionData" class="table table-bordered table-hover table-responsive">
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Code</th>
-                                        <th>Full Name</th>
-                                        <th>Company</th>
+                                        <th>Type</th>
+                                        <th>Name</th>
                                         <th>Address</th>
-                                        <th>Pincode</th>
-                                        <th>Contact</th>
-                                        <th>License </th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Pincode </th>
                                         <th>GST NO.</th>
+                                        <th>Pan No.</th>
+                                        <th>Gst State</th>
+                                        <th>State Code</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -53,6 +101,10 @@
                                    
                                 </tbody>
                             </table>
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6"><div id="pagination"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,30 +123,45 @@ $(document).ready(function() {
 function clearTableBody() {
         $('#table-body').empty();
     }
-function refreshTable(){
-    clearTableBody()
+function refreshTable(page,search){
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+    if(page){
+        url = `/api/transport/getTransportData?page=${page}`;
+    }else if(search){
+        url = `/api/transport/getTransportData?search=${search}`;
+    }else{
+        url= `/api/transport/getTransportData`;
+    }
     $.ajax({
-        type: "get",
-        url: "/api/contractor/get",
+        type: "post",
+        url: url,
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
         success: function(response) {
+            clearTableBody()
             var tbody = $('#table-body');
 
             var i =1;
-            response.forEach(function(item) {
+            response.data.forEach(function(item) {
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.contractor_code));
-                row.append($('<td>').append(item.fullname));
-                row.append($('<td>').append(item.company));
+                row.append($('<td>').append(item.is_transport));
+                row.append($('<td>').append(item.name));
                 row.append($('<td>').append(item.address));
+                row.append($('<td>').append(item.city));
+                row.append($('<td>').append(item.state));
                 row.append($('<td>').append(item.pincode));
-                row.append($('<td>').append(item.contact));
-                row.append($('<td>').append(item.license));
                 row.append($('<td>').append(item.gst));
+                row.append($('<td>').append(item.pan));
+                row.append($('<td>').append(item.gst_state));
+                row.append($('<td>').append(item.state_code));
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -120,56 +187,8 @@ function refreshTable(){
             });
 
             $('.edit-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var inputId = 'input_' + index;
-                    var inputValue = dataCell.text();
-        
-                    var inputField = $('<input>')
-                        .attr({
-                            'id': inputId,
-                            'type': 'text',
-                            'class': 'form-control'
-                        })
-                        .val(inputValue);
-                        dataCell.empty().append(inputField);
-                        
-                });
-                actionCell.find('.edit-button').hide();
-                actionCell.find('.delete-button').hide();
-                actionCell.find('.save-button').show();                
-            });
-
-            $('.save-button').click(function() {
-                var row = $(this).closest('tr');
-                var dataCells = row.find('td').not(':last-child'); // Exclude the last column with actions
-                var actionCell = row.find('td:last-child');
-                var inputFields = row.find('input'); // Select all input fields in the row
-                var inputData = {};
-
-                dataCells.each(function(index) {
-                    var dataCell = $(this);
-                    var newValue = dataCell.find('input').val();
-                    dataCell.empty().text(newValue);
-                });
-
-                inputFields.each(function() {
-                    var inputField = $(this);
-                    var inputId = inputField.attr('id');
-                    var inputValue = inputField.val();
-                    inputData[inputId] = inputValue;
-                });
-
-                // Show "Edit" and "Delete" buttons and hide "Save" button
-                actionCell.find('.edit-button').show();
-                actionCell.find('.delete-button').show();
-                actionCell.find('.save-button').hide();
                 var dataId = $(this).data('id');
-                updateData(dataId,inputData);
-                refreshTable();
+                window.location = `/transport/create?id=${dataId}`     
             });
 
             $('.delete-button').click(function() {
@@ -177,7 +196,7 @@ function refreshTable(){
                 var data = {
                     'id':dataId
                 }
-                post('contractor/delete',data);
+                post('transport/delete',data);
                 refreshTable();
             });
         },
@@ -188,24 +207,7 @@ function refreshTable(){
 }
 
 
-var tbody = $('#tbody');
 
-function updateData(id,inputData){
-    
-    var data = {
-        'contractor_code' : inputData.input_1,
-        'fullname' : inputData.input_2,
-        'company' : inputData.input_3,
-        'address' : inputData.input_4,
-        'pincode' : inputData.input_5,
-        'contact' : inputData.input_6,
-        'license' : inputData.input_7,
-        'gst' : inputData.input_8,
-        'id' : id
-    }
-    console.log(data);
-    post('contractor/update',data);
-}
 
 
 
