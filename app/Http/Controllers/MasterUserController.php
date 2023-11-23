@@ -46,10 +46,60 @@ class MasterUserController extends Controller
 
     public function getData(Request $request){
 
-        if($request->user_id == 1){
-            $getUserData = User::with('roles')->where('id','!=',1)->get();
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
         }else{
-            $getUserData = User::with('roles')->where('id','!=',1)->where('depo_id',$request->depo_id)->get();
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $getUserData = User::with('roles')->where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('username', 'LIKE', '%' . $search . '%')
+                            ->orWhere('recovery_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ans1', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ans2', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ans3', 'LIKE', '%' . $search . '%')
+                            ->orWhere('status', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['id','!=',1],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+            $getUserData = User::with('roles')->where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('username', 'LIKE', '%' . $search . '%')
+                            ->orWhere('recovery_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ans1', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ans2', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ans3', 'LIKE', '%' . $search . '%')
+                            ->orWhere('status', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['id','!=',1],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
         }
  
         $formattedData = []; 
@@ -86,7 +136,22 @@ class MasterUserController extends Controller
 
         }
 
-        return $formattedData;
+        return response()->json([
+            'data' => $formattedData,
+            'pagination' => [
+                'current_page' => $getUserData->currentPage(),
+                'per_page' => $getUserData->perPage(),
+                'total' => $getUserData->total(),
+                'last_page' => $getUserData->lastPage(),
+                'from' => $getUserData->firstItem(),
+                'to' => $getUserData->lastItem(),
+                'links' => [
+                    'prev' => $getUserData->previousPageUrl(),
+                    'next' => $getUserData->nextPageUrl(),
+                    'all_pages' => $getUserData->getUrlRange(1, $getUserData->lastPage()),
+                ],
+            ],
+        ]); 
     }
 
     /**

@@ -47,10 +47,65 @@ class MasterEmployeeController extends Controller
     }
 
     public function getdata(Request $request){
-        if($request->user_id == 1){
-            $employeeData = MasterEmployee::get();
+
+
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
         }else{
-            $employeeData = MasterEmployee::where('depo_id',$request->depo_id)->get();
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+
+
+        if($request->user_id == 1){
+            $employeeData = MasterEmployee::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('employee_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('firstname', 'LIKE', '%' . $search . '%')
+                            ->orWhere('middlename', 'LIKE', '%' . $search . '%')
+                            ->orWhere('lastname', 'LIKE', '%' . $search . '%')
+                            ->orWhere('address', 'LIKE', '%' . $search . '%')
+                            ->orWhere('pincode', 'LIKE', '%' . $search . '%')
+                            ->orWhere('contact', 'LIKE', '%' . $search . '%')
+                            ->orWhere('aadhar', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+            $employeeData = MasterEmployee::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('employee_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('firstname', 'LIKE', '%' . $search . '%')
+                            ->orWhere('middlename', 'LIKE', '%' . $search . '%')
+                            ->orWhere('lastname', 'LIKE', '%' . $search . '%')
+                            ->orWhere('address', 'LIKE', '%' . $search . '%')
+                            ->orWhere('pincode', 'LIKE', '%' . $search . '%')
+                            ->orWhere('contact', 'LIKE', '%' . $search . '%')
+                            ->orWhere('aadhar', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
         }
 
         $formattedEmployee = [];
@@ -70,7 +125,22 @@ class MasterEmployeeController extends Controller
                 'contractor' => $contractorData->fullname,
             ];
         }
-        return $formattedEmployee;
+        return response()->json([
+            'data' => $formattedEmployee,
+            'pagination' => [
+                'current_page' => $employeeData->currentPage(),
+                'per_page' => $employeeData->perPage(),
+                'total' => $employeeData->total(),
+                'last_page' => $employeeData->lastPage(),
+                'from' => $employeeData->firstItem(),
+                'to' => $employeeData->lastItem(),
+                'links' => [
+                    'prev' => $employeeData->previousPageUrl(),
+                    'next' => $employeeData->nextPageUrl(),
+                    'all_pages' => $employeeData->getUrlRange(1, $employeeData->lastPage()),
+                ],
+            ],
+        ]); 
 
     }
 
