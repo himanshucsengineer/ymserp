@@ -309,16 +309,17 @@ $(document).ready(function () {
         hotspotDiv.className = 'hotspot';
 
         const containerRect = imageContainer.getBoundingClientRect();
-        const top = y - containerRect.top;
-        const left = x - containerRect.left;
+        const topPercent = ((y - containerRect.top) / containerRect.height) * 100;
+        const leftPercent = ((x - containerRect.left) / containerRect.width) * 100;
 
-        hotspotDiv.style.top = top + 'px';
-        hotspotDiv.style.left = left + 'px';
+
+        hotspotDiv.style.top = topPercent + '%';
+        hotspotDiv.style.left = leftPercent + '%';
         
         imageContainer.appendChild(hotspotDiv);
 
-        $('#hotspot_coor_x').val(left);
-        $('#hotspot_coor_y').val(top);
+        $('#hotspot_coor_x').val(leftPercent);
+        $('#hotspot_coor_y').val(topPercent);
         $('#container_side').attr('disabled', true);
         $('#modal-xl').modal('hide');
     }
