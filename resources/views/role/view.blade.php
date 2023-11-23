@@ -12,6 +12,43 @@
 .form-control{
     width:200px !important;
 }
+#pagination{
+    /* width:100%; */
+    margin-top:1rem;
+    float:right;
+}
+.pagination-btn{
+    border:1px solid #cdcdcd;
+    outline:none;
+    background:white;
+    color:#000;
+    padding:.3rem .7rem;
+}
+.active-btn{
+    background:#63bf84;
+    color:white;
+}
+#search{
+    float: right;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    margin-top:1.7rem;
+}
+.flex_date_range{
+    width:100%;
+    height:auto;
+    display:flex;
+    margin-bottom:1rem;
+}
+.flex_date_range .left{
+    width:50%;
+}
+.flex_date_range .right{
+    width:50%;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -37,6 +74,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
+                                </div>
+                            </div>
                             <table id="inspectionData" class="table table-bordered table-hover table-responsive w-100">
                                 <thead>
                                     <tr>
@@ -50,7 +95,10 @@
                                    
                                 </tbody>
                             </table>
-                            <div id="pagination"></div>
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6"><div id="pagination"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,16 +116,17 @@ $(document).ready(function() {
 function clearTableBody() {
         $('#table-body').empty();
     }
-function refreshTable(page){
-    clearTableBody()
+function refreshTable(page,search){
     var checkToken = localStorage.getItem('token');
-    var url = '';
 
     if(page){
         url = `/api/role/getwithpermissions?page=${page}`;
+    }else if(search){
+        url = `/api/role/getwithpermissions?search=${search}`;
     }else{
         url= `/api/role/getwithpermissions`;
     }
+
     $.ajax({
         type: "get",
         url: url,
@@ -85,7 +134,7 @@ function refreshTable(page){
             'Authorization': 'Bearer ' + checkToken
         },
         success: function(response) {
-            console.log(response);
+            clearTableBody()
             var tbody = $('#table-body');
 
             var i =1;
@@ -147,14 +196,26 @@ function refreshTable(page){
                 // Create page links within the sliding window
                 for (let page = startPage; page <= endPage; page++) {
                     var splitPage = response.pagination.links.all_pages[page].split('=');
-                    const pageLink = document.createElement("button");
-                    pageLink.textContent = page;
-                    pageLink.className  = "pagination-btn page";
-                    pageLink.setAttribute("data-id", splitPage[1]);
-                    pageLink.addEventListener("click", function() {
-                        refreshTable(pageLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(pageLink);
+                    if(splitPage[1] == response.pagination.current_page){
+                        const pageLink = document.createElement("button");
+                        pageLink.textContent = page;
+                        pageLink.className  = "pagination-btn page active-btn";
+                        pageLink.setAttribute("data-id", splitPage[1]);
+                        pageLink.addEventListener("click", function() {
+                            refreshTable(pageLink.getAttribute("data-id"))
+                        });
+                        paginationDiv.appendChild(pageLink);
+                    }else{
+                        const pageLink = document.createElement("button");
+                        pageLink.textContent = page;
+                        pageLink.className  = "pagination-btn page";
+                        pageLink.setAttribute("data-id", splitPage[1]);
+                        pageLink.addEventListener("click", function() {
+                            refreshTable(pageLink.getAttribute("data-id"))
+                        });
+                        paginationDiv.appendChild(pageLink);
+                    }
+                    
                 }
 
                 // Create the "Next" button

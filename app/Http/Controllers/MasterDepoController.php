@@ -48,6 +48,128 @@ class MasterDepoController extends Controller
     }
 
 
+    public function getDepoData(Request $request){
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $depoData = MasterDepo::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('address', 'LIKE', '%' . $search . '%')
+                            ->orWhere('status', 'LIKE', '%' . $search . '%')
+                            ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                            ->orWhere('email', 'LIKE', '%' . $search . '%')
+                            ->orWhere('tan', 'LIKE', '%' . $search . '%')
+                            ->orWhere('pan', 'LIKE', '%' . $search . '%')
+                            ->orWhere('service_tax', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vattin', 'LIKE', '%' . $search . '%')
+                            ->orWhere('gst', 'LIKE', '%' . $search . '%')
+                            ->orWhere('state', 'LIKE', '%' . $search . '%')
+                            ->orWhere('state_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('billing_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_address', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_phone', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_email', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $depoData = MasterDepo::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('address', 'LIKE', '%' . $search . '%')
+                            ->orWhere('status', 'LIKE', '%' . $search . '%')
+                            ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                            ->orWhere('email', 'LIKE', '%' . $search . '%')
+                            ->orWhere('tan', 'LIKE', '%' . $search . '%')
+                            ->orWhere('pan', 'LIKE', '%' . $search . '%')
+                            ->orWhere('service_tax', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vattin', 'LIKE', '%' . $search . '%')
+                            ->orWhere('gst', 'LIKE', '%' . $search . '%')
+                            ->orWhere('state', 'LIKE', '%' . $search . '%')
+                            ->orWhere('state_code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('billing_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_address', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_phone', 'LIKE', '%' . $search . '%')
+                            ->orWhere('company_email', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+        $formetedData = [];
+
+        foreach($depoData as $depo){
+            $formetedData[] = [
+                'name' => $depo->name,
+                'address' => $depo->address,
+                'status' => $depo->status,
+                'phone' => $depo->phone,
+                'email' => $depo->email,
+                'tan' => $depo->tan,
+                'pan' => $depo->pan,
+                'service_tax' => $depo->service_tax,
+                'vattin' => $depo->vattin,
+                'gst' => $depo->gst,
+                'state' => $depo->state,
+                'state_code' => $depo->state_code,
+                'billing_name' => $depo->billing_name,
+                'company_name' => $depo->company_name,
+                'company_address' => $depo->company_address,
+                'company_phone' => $depo->company_phone,
+                'company_email' => $depo->company_email,
+                'id' => $depo->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $depoData->currentPage(),
+                'per_page' => $depoData->perPage(),
+                'total' => $depoData->total(),
+                'last_page' => $depoData->lastPage(),
+                'from' => $depoData->firstItem(),
+                'to' => $depoData->lastItem(),
+                'links' => [
+                    'prev' => $depoData->previousPageUrl(),
+                    'next' => $depoData->nextPageUrl(),
+                    'all_pages' => $depoData->getUrlRange(1, $depoData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

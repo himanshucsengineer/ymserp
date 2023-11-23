@@ -126,7 +126,6 @@ function clearTableBody() {
         $('#table-body').empty();
     }
 function refreshTable(page,search){
-    clearTableBody()
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
@@ -138,7 +137,7 @@ function refreshTable(page,search){
         url = `/api/contractor/getContractorData?search=${search}`;
     }else{
         url= `/api/contractor/getContractorData`;
-    }
+    } 
 
     $.ajax({
         type: "post",
@@ -151,6 +150,7 @@ function refreshTable(page,search){
             'depo_id':depo_id
         },
         success: function(response) {
+            clearTableBody()
             var tbody = $('#table-body');
 
             var i =1;

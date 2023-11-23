@@ -66,6 +66,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'depo'], function($api){
         $api->post('/create','App\Http\Controllers\MasterDepoController@store');
         $api->post('/get', 'App\Http\Controllers\MasterDepoController@get');
+        $api->post('/getDepoData', 'App\Http\Controllers\MasterDepoController@getDepoData');
         $api->get('/getall', 'App\Http\Controllers\MasterDepoController@getall');
         $api->post('/getbyid', 'App\Http\Controllers\MasterDepoController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterDepoController@destroy');
