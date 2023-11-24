@@ -439,19 +439,19 @@
                                 <li class="nav-item">
                                     <a href="pages/forms/general.html" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Consumption Reports</p>
+                                        <p>Stock</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/forms/advanced.html" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Location Exp Limit Reports</p>
+                                        <p>Issue Material</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/forms/editors.html" class="nav-link">
                                         <i class="fas fa-money-check nav-icon"></i>
-                                        <p>Vendor Payment Confirmation</p>
+                                        <p>Report</p>
                                     </a>
                                 </li>
                             </ul>
@@ -460,7 +460,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-warehouse nav-icon"></i>
                                 <p>
-                                    Depo
+                                Purchases 
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -468,19 +468,52 @@
                                 <li class="nav-item">
                                     <a href="pages/tables/simple.html" class="nav-link">
                                         <i class="fas fa-boxes nav-icon"></i>
-                                        <p>Inventory Action</p>
+                                        <p>Vendor Master</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/tables/data.html" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Inventory Reports</p>
+                                        <p>Product Master</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/tables/jsgrid.html" class="nav-link">
                                         <i class="fas fa-random nav-icon"></i>
-                                        <p>Transactions</p>
+                                        <p>Product Category Master</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="fas fa-random nav-icon"></i>
+                                        <p>Requistion Master</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="fas fa-random nav-icon"></i>
+                                        <p>Indent Genration</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="fas fa-random nav-icon"></i>
+                                        <p>Purchase Order</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="fas fa-random nav-icon"></i>
+                                        <p>Purchase Entry</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="fas fa-random nav-icon"></i>
+                                        <p>Report</p>
                                     </a>
                                 </li>
                             </ul>
