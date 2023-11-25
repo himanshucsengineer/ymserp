@@ -88,76 +88,32 @@
                                     </div>
                                 
                                 </div>
-                                <div class="form-group">
-                                    <label for="container_no">Container Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
-                                    <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn bg-olive active">
+                                    <input type="radio" name="options" id="option_b1" autocomplete="off" checked="" value="with">With Container
+                                    </label>
+                                    <label class="btn bg-olive">
+                                    <input type="radio" name="options" id="option_b2" autocomplete="off"  value="without"> Without Container
+                                    </label>
                                 </div>
-                                <h3 style="text-align:center">OR</h3>
-                                <div class="form-group">
-                                    <label for="container_img">Container Image</label>
-                                    <input type="file" class="form-control" id="container_img" name="container_img" placeholder="Enter Vehicle Number">
-                                    <div class="img_prv_box">
-                                        <img id="container_img_prev" src="" />
+                                <div class="container_div">
+                                    <div class="form-group">
+                                        <label for="container_no">Container Number <span style="color:red;">*</span></label>
+                                        <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
+                                        <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
+                                    </div>
+                                    <h3 style="text-align:center">OR</h3>
+                                    <div class="form-group">
+                                        <label for="container_img">Container Image</label>
+                                        <input type="file" class="form-control" id="container_img" name="container_img" placeholder="Enter Vehicle Number">
+                                        <div class="img_prv_box">
+                                            <img id="container_img_prev" src="" />
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <!-- <div class="form-group">
-                                    <label for="container_type">Container Type <span style="color:red;">*</span></label>
-                                    <select name="container_type" id="container_type" style="font-size:30px; height:50px" class="form-control">
-                                        <option value="">Select Container Type</option>
-                                        <option value="DRY">DRY</option>
-                                        <option value="REEFER">REEFER</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="container_size">Container Size <span style="color:red;">*</span></label>
-                                    <select name="container_size" id="container_size" style="font-size:30px; height:50px" class="form-control">
-                                        <option value="">Select Container Size</option>
-                                        <option value="20">20</option>
-                                        <option value="40">40</option>
-                                        <option value="45">45</option>
-                                    </select>
-                                </div>
-
-
                                 
-                                <div class="form-group">
-                                    <label for="sub_type">Type  <span style="color:red;">*</span></label>
-                                    <select name="sub_type" id="sub_type" class="form-control" style="font-size:30px; height:50px">
-                                        <option value="">Please Select Sub Type</option>
-                                        <option value="DC">DC</option>
-                                        <option value="DV">DV</option>
-                                        <option value="FB">FB</option>
-                                        <option value="FR">FR</option>
-                                        <option value="HC">HC</option>
-                                        <option value="HCOT">HCOT</option>
-                                        <option value="HD">HD</option>
-                                        <option value="HR">HR</option>
-                                        <option value="HT">HT</option>
-                                        <option value="OQ">OQ</option>
-                                        <option value="OT">OT</option>
-                                        <option value="RE">RE</option>
-                                        <option value="RF">RF</option>
-                                        <option value="SHC">SHC</option>
-                                        <option value="SR">SR</option>
-                                        <option value="TK">TK</option>
-                                        <option value="TN">TN</option>
-                                        <option value="VB">VB</option>
-                                        <option value="VT">VT</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="driver_name">Driver Name  </label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name" style="font-size:30px; height:50px" placeholder="Enter Driver Name">
-                                </div>
                                 
-
-                                <div class="form-group">
-                                    <label for="contact_number">Driver Contact Number </label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number" style="font-size:30px; height:50px" placeholder="Enter Contact Number">
-                                </div> -->
-
                                 
 
                             </div>
@@ -169,7 +125,7 @@
                 </div>
             </div>
 
-            <div class="row" style="display:none">
+            <!-- <div class="row" style="display:none">
                 <div class="col-12">
                     <div class="card">
                         <h3 class="mt-2 ml-2">Inward Entry</h3>
@@ -188,14 +144,8 @@
                                         <th>Sr. No.</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
-                                        <!-- <th>Container Size</th>
-                                        <th>Container Type</th>
-                                        <th>Type</th> -->
                                         <th>Vehicle No.</th>
                                         <th>Vehicle image</th>
-                                        <!-- <th>Driver Name</th>
-                                        <th>Driver Contact</th> -->
-                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -210,15 +160,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </div>
 
 <script>
 $(document).ready(function () {
- 
-    refreshTable();
+
+    $('input[name="options"]').on('change', function () {
+            // Get the value of the selected radio button
+            var selectedValue = $('input[name="options"]:checked').val();
+            
+            if(selectedValue == "without"){
+                $('.container_div').hide();
+            }else{
+                $('.container_div').show();
+            }
+        });
+
 // Listen for changes in the file input
 $('#container_img').on('change', function (e) {
     var fileInput = $(this)[0];
@@ -243,135 +203,7 @@ $('#vehicle_img').on('change', function (e) {
 });
 
 });
-function clearTableBody() {
-    $('#table-body').empty();
-}
 
-function refreshTable(page,search){
-    var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-    if(page){
-        url = `/api/gatein/getInspectionData?page=${page}`;
-    }else if(search){
-        url = `/api/gatein/getInspectionData?search=${search}`;
-    }else{
-        url= `/api/gatein/getInspectionData`;
-    }
-
-    $.ajax({
-        type: "post",
-        url: url,
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function(response) {
-            clearTableBody()
-
-            var tbody = $('#table-body');
-
-            var i =1;
-            response.data.forEach(function(item) {
-                var container_img = '';
-                if(item.container_img){
-                    container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
-                }else{
-                    container_img = "No Imgae Available";
-                }
-                var vehicle_img = '';
-                if(item.vehicle_img){
-                    vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
-                }else{
-                    vehicle_img = "No Imgae Available";
-                }
-
-                var row = $('<tr>');
-                row.append($('<td>').text(i));
-                row.append($('<td>').append(item.container_no));
-                row.append($('<td>').append(container_img));
-                // row.append($('<td>').append(item.container_size));
-                // row.append($('<td>').append(item.container_type));
-                // row.append($('<td>').append(item.sub_type));
-                row.append($('<td>').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                // row.append($('<td>').append(item.driver_name));
-                // row.append($('<td>').append(item.contact_number));
-
-                tbody.append(row);
-                i++;
-            });
-
-            const paginationDiv = document.getElementById("pagination");
-            paginationDiv.innerHTML = "";
-
-            if (response.pagination.last_page > 1) {
-                const startPage = Math.max(response.pagination.current_page - Math.floor(5 / 2), 1);
-                const endPage = Math.min(startPage + 5 - 1, response.pagination.last_page);
-
-                // Create the "Previous" button
-                if (response.pagination.links.prev) {
-                    var splitPrev = response.pagination.links.prev.split('=');
-                    const prevLink = document.createElement("button");
-                    prevLink.textContent = "Previous";
-                    prevLink.className  = "pagination-btn prev";
-                    prevLink.setAttribute("data-id", splitPrev[1]);
-                    prevLink.href = response.pagination.links.prev;
-                    prevLink.addEventListener("click", function() {
-                        refreshTable(prevLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(prevLink);
-                }
-
-                // Create page links within the sliding window
-                for (let page = startPage; page <= endPage; page++) {
-                    var splitPage = response.pagination.links.all_pages[page].split('=');
-                    if(splitPage[1] == response.pagination.current_page){
-                        const pageLink = document.createElement("button");
-                        pageLink.textContent = page;
-                        pageLink.className  = "pagination-btn page active-btn";
-                        pageLink.setAttribute("data-id", splitPage[1]);
-                        pageLink.addEventListener("click", function() {
-                            refreshTable(pageLink.getAttribute("data-id"))
-                        });
-                        paginationDiv.appendChild(pageLink);
-                    }else{
-                        const pageLink = document.createElement("button");
-                        pageLink.textContent = page;
-                        pageLink.className  = "pagination-btn page";
-                        pageLink.setAttribute("data-id", splitPage[1]);
-                        pageLink.addEventListener("click", function() {
-                            refreshTable(pageLink.getAttribute("data-id"))
-                        });
-                        paginationDiv.appendChild(pageLink);
-                    }
-                    
-                }
-
-                // Create the "Next" button
-                if (response.pagination.links.next) {
-                    var splitNext = response.pagination.links.next.split('=');
-                    const nextLink = document.createElement("button");
-                    nextLink.textContent = "Next";
-                    nextLink.className  = "pagination-btn next";
-                    nextLink.setAttribute("data-id", splitNext[1]);
-
-                    nextLink.addEventListener("click", function() {
-                        refreshTable(nextLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(nextLink);
-                }
-            }
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-}
 
 
 function validateInput(input) {
@@ -487,9 +319,6 @@ $(function () {
 
     $('#gateinForm').validate({
     rules: {
-        container_no: {
-            required: true,
-        },
         vehicle_number: {
             required: true,
         },
