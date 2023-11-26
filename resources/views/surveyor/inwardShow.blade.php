@@ -78,25 +78,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="container_no">Container Number</label>
-                                            <input type="text" style="text-transform:uppercase;" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
-                                            <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
-                                        </div>
-
-                                        <div class="form-group">
                                             <label for="container_img">Container Image</label>
                                             <div class="img_prv_box"><span class="container_img"></span></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="vehicle_number">Vehicle Number</label>
-                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
-                                        </div>
-                                        <div class="form-group">
                                             <label for="vehicle_img">Vehicle Image</label>
                                             <div class="img_prv_box"><span class="vehicle_img"></span></div>
                                         </div>
+                                        
+                                        
                                     </div>
                                 </div>
 
@@ -111,10 +103,200 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="container_no">Container Number</label>
+                                            <input type="text" style="text-transform:uppercase;" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
+                                            <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="third_party">Third Party</label>
+                                            <select name="third_party" id="third_party"  class="form-control">
+                                                <option value="no">NO</option>
+                                                <option value="yes">YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="vehicle_number">Vehicle Number</label>
+                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transporter_gst">GST No.</label>
+                                            <input type="text" class="form-control" id="transporter_gst" name="transporter_gst" readonly  placeholder="Enter Transporter GST">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transport_id">Consignee</label>
+                                            <select name="transport_id" id="transport_id" class="form-control">
+                                                <option value="">Select Transport</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="payment">Transaction Mode</label>
+                                            <select name="payment" id="payment" class="form-control">
+                                                <option value="Cash">Cash</option>
+                                                <option value="UPI">UPI</option>
+                                                <option value="Net Banking">Net Banking</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="Card">Card Payment</option>
+                                                <option value="Line Account">Line Account</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transaction_reference">Transaction Reference No.</label>
+                                            <input type="text" class="form-control" id="transaction_reference" name="transaction_reference" placeholder="Enter Transaction Reference No.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="arrive_from">Arrive From</label>
+                                            <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="transport_id">Transport</label>
+                                            <select name="transport_id" id="transport_id" class="form-control">
+                                                <option value="">Select Transport</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6"></div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="driver_name">Driver Name</label>
+                                            <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="contact_number">Contact Number</label>
+                                            <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="vessel_name">Vessel Name</label>
+                                            <input type="text" class="form-control" id="vessel_name" name="vessel_name"  placeholder="Enter Vessel Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="voyage">Voyage</label>
+                                            <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="port_name">Port Name</label>
+                                            <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="port_name">ER No.</label>
+                                            <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="empty_latter">Empty Latter</label></br>
+                                            <input type="file" id="empty_latter" name="empty_latter" class="form-control">
+                                            <div class="img_prv_box"><span class="empty_latter"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="challan">Challan</label></br>
+                                            <input type="file" id="challan" name="challan" class="form-control">
+                                            <div class="img_prv_box"><span class="challan"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="third_party">Empty Repositioning</label>
+                                            <select name="third_party" id="third_party"  class="form-control">
+                                                <option value="no">NO</option>
+                                                <option value="yes">YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="return">Return</label>
+                                            <select name="return" id="return" class="form-control">
+                                                <option value="NO">NO</option>
+                                                <option value="YES">YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="return">Tracking Device</label>
+                                            <select name="return" id="return" class="form-control">
+                                                <option value="NO">NO</option>
+                                                <option value="YES">YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="remarks">Remarks</label>
+                                            <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="container_size">Container Size</label>
                                             <select name="container_size" id="container_size" class="form-control">
                                                 <option value="">Select Container Size</option>
-                                                <option value="10">10</option>
                                                 <option value="20">20</option>
                                                 <option value="40">40</option>
                                                 <option value="45">45</option>
@@ -246,51 +428,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="transport_id">Transport</label>
-                                            <select name="transport_id" id="transport_id" class="form-control">
-                                                <option value="">Select Transport</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="transporter_gst">Gst No.</label>
-                                            <input type="text" class="form-control" id="transporter_gst" name="transporter_gst" readonly  placeholder="Enter Transporter GST">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="driver_name">Driver Name</label>
-                                            <input type="text" class="form-control" id="driver_name" name="driver_name"  placeholder="Enter Driver Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="contact_number">Contact Number</label>
-                                            <input type="text" class="form-control" id="contact_number" name="contact_number"  placeholder="Enter Contact Number">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="third_party">Third Party</label>
-                                            <select name="third_party" id="third_party"  class="form-control">
-                                                <option value="no">no</option>
-                                                <option value="yes">yes</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-
                                 <div class="row" id="receipt_section" style="display:none">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -309,40 +446,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="arrive_from">Arrive From</label>
-                                            <input type="text" class="form-control" id="arrive_from" name="arrive_from"  placeholder="Enter Contact Number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="port_name">Port Name</label>
-                                            <input type="text" class="form-control" id="port_name" name="port_name"  placeholder="Enter Contact Number">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="challan">Challan</label></br>
-                                            <input type="file" id="challan" name="challan" class="form-control">
-                                            <div class="img_prv_box"><span class="challan"></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="empty_latter">Empty Latter</label></br>
-                                            <input type="file" id="empty_latter" name="empty_latter" class="form-control">
-                                            <div class="img_prv_box"><span class="empty_latter"></span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label for="do_copy">D.O. Copy</label></br>
                                             <input type="file" id="do_copy" name="do_copy" class="form-control">
                                             <div class="img_prv_box"><span class="do_copy"></span></div>
@@ -355,7 +458,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -383,21 +485,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="vessel_name">Vessel Name</label>
-                                            <input type="text" class="form-control" id="vessel_name" name="vessel_name"  placeholder="Enter Vessel Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="voyage">Voyage</label>
-                                            <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label for="return">Return</label>
                                             <select name="return" id="return" class="form-control">
                                                 <option value="NO">NO</option>
@@ -411,22 +498,8 @@
                                             <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="payment">Payment Method</label>
-                                            <select name="payment" id="payment" class="form-control">
-                                                <option value="Cash">Cash</option>
-                                                <option value="UPI">UPI</option>
-                                                <option value="Net Banking">Net Banking</option>
-                                                <option value="Cheque">Cheque</option>
-                                                <option value="Card">Card Payment</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Save</button>

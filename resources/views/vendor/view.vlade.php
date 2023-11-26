@@ -11,8 +11,7 @@
 }
 .form-control{
     width:200px !important;
-} 
-
+}
 #pagination{
     /* width:100%; */
     margin-top:1rem;
@@ -57,17 +56,18 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Line</h1>
+                    <h1 class="m-0">All User</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Line</li>
+                        <li class="breadcrumb-item active">All User</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+    
 
     <section class="content">
         <div class="container-fluid">
@@ -87,32 +87,16 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Name</th>
-                                        <th>Alise</th>
-                                        <th>Container Type</th>
-                                        <th>Container Size</th>
-                                        <th>Free Days</th>
-                                        <th>Line Budget</th>
-                                        <th>Parking Charges</th>
-                                        <th>Washing Charges</th>
-                                        <th>Lolo Charges</th>
-                                        <th>Tracking Device</th>
-                                        <th>Labour Rate</th>
-                                        <th>Line Address</th>
-                                        <th>Email </th>
-                                        <th>Phone </th>
-                                        <th>Mobile</th>
-                                        <th>GSTIN </th>
-                                        <th>PAN NO</th>
-                                        <th>GST State</th>
-                                        <th>State Code</th>
-                                        <th>Top Image</th>
-                                        <th>Bottom Image</th>
-                                        <th>Right Image</th>
-                                        <th>Left Image</th>
-                                        <th>Front Image</th>
-                                        <th>Door Image</th>
-                                        <th>Interior Image</th>
+                                        <th>Employee Name</th>
+                                        <th>Category Name</th>
+                                        <th>Depo Name</th>
+                                        <th>Login Id</th>
+                                        <th>Role</th>
+                                        <th>Recovery No.</th>
+                                        <th>Ans 1</th>
+                                        <th>Ans 2</th>
+                                        <th>Ans 3</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -135,6 +119,7 @@
 <script>
     
 $(document).ready(function() {
+
     var checkToken = localStorage.getItem('token');
     refreshTable();
 });
@@ -147,13 +132,12 @@ function refreshTable(page,search){
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-
     if(page){
-        url = `/api/line/getLineData?page=${page}`;
+        url = `/api/user/getData?page=${page}`;
     }else if(search){
-        url = `/api/line/getLineData?search=${search}`;
+        url = `/api/user/getData?search=${search}`;
     }else{
-        url= `/api/line/getLineData`;
+        url= `/api/user/getData`;
     } 
 
     $.ajax({
@@ -168,63 +152,34 @@ function refreshTable(page,search){
         },
         success: function(response) {
             clearTableBody()
+
             var tbody = $('#table-body');
 
             var i =1;
             response.data.forEach(function(item) {
 
+                var userStatus = '';
+
+                if(item.status == 1){
+                    userStatus = "Active";
+                }else{
+                    userStatus = "Inactive";
+                }
+
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.name));
-                row.append($('<td>').append(item.alise));
+                row.append($('<td>').append(item.employee_name));
+                row.append($('<td>').append(item.cate_name));
+                row.append($('<td>').append(item.depo_name));
+                row.append($('<td>').append(item.username));
+                row.append($('<td>').append(item.role));
+                row.append($('<td>').append(item.recovery_number));
 
-                row.append($('<td>').append(item.containerType));
-                row.append($('<td>').append(item.containerSize));
+                row.append($('<td>').append(item.ans1));
+                row.append($('<td>').append(item.ans2));
+                row.append($('<td>').append(item.ans3));
+                row.append($('<td>').append(userStatus));
 
-                row.append($('<td>').append(item.free_days));
-                row.append($('<td>').append(item.line_budget));
-                row.append($('<td>').append(item.parking_charges));
-                row.append($('<td>').append(item.washing_charges));
-                row.append($('<td>').append(item.lolo_charges));
-                row.append($('<td>').append(item.tracking_device));
-                row.append($('<td>').append(item.labour_rate));
-
-                row.append($('<td>').append(item.line_address));
-                row.append($('<td>').append(item.email));
-                row.append($('<td>').append(item.phone));
-                row.append($('<td>').append(item.mobile));
-
-                row.append($('<td>').append(item.gst));
-                row.append($('<td>').append(item.pan));
-                row.append($('<td>').append(item.gst_state));
-                row.append($('<td>').append(item.state_code));
-
-                var top_img = $('<a>').attr({'href':'/uploads/line/'+item.top_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(top_img));
-
-                var bottom_img = $('<a>').attr({'href':'/uploads/line/'+item.bottom_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(bottom_img));
-
-                var right_img = $('<a>').attr({'href':'/uploads/line/'+item.right_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(right_img));
-
-                var left_img = $('<a>').attr({'href':'/uploads/line/'+item.left_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(left_img));
-
-                var front_img = $('<a>').attr({'href':'/uploads/line/'+item.front_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(front_img));
-
-                var door_img = $('<a>').attr({'href':'/uploads/line/'+item.door_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(door_img));
-
-                var interior_img = $('<a>').attr({'href':'/uploads/line/'+item.interior_img, 'target':'_blank'}).text("View Image");
-                row.append($('<td>').append(interior_img));
-
-                
-                var editButton = $('<span>')
-                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id) 
-                    .attr('class', 'edit-button');
 
                 var deleteButton = $('<span>')
                     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
@@ -232,7 +187,6 @@ function refreshTable(page,search){
                     .attr('class', 'delete-button')
 
                 var td = $('<td>');
-                td.append(editButton);
                 td.append(deleteButton);
                 row.append(td);
 
@@ -300,18 +254,13 @@ function refreshTable(page,search){
                     paginationDiv.appendChild(nextLink);
                 }
             }
-
-            $('.edit-button').click(function() {
-                var dataId = $(this).data('id');
-                window.location = `/line/create?id=${dataId}` 
-            });
-
+         
             $('.delete-button').click(function() {
                 var dataId = $(this).data('id');
                 var data = {
                     'id':dataId
                 }
-                post('line/delete',data);
+                post('user/delete',data);
                 refreshTable();
             });
         },
@@ -320,6 +269,7 @@ function refreshTable(page,search){
         }
     });
 }
+
 
 
   

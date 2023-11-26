@@ -106,6 +106,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="tracking_device">Traking Device<span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" id="tracking_device" name="tracking_device" placeholder="Enter Tracking Device">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="labour_rate">Labour Rate <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" id="labour_rate" name="labour_rate" placeholder="Enter Labour Rate">
                                 </div>
@@ -334,6 +339,7 @@ $(function () {
             $("#containerSize").val(response.containerSize);
             $("#containerType").val(response.containerType);
             $('#parking_charges').val(response.parking_charges);
+            $('#tracking_device').val(response.tracking_device);
             $('#lolo_charges').val(response.lolo_charges);
             $('#washing_charges').val(response.washing_charges);
             $('#top_img_prev').attr({'src':`/uploads/line/${response.top_img}`});
@@ -373,6 +379,7 @@ $(function () {
         var parking_charges = $('#parking_charges').val();
         var lolo_charges = $('#lolo_charges').val();
         var washing_charges = $('#washing_charges').val();
+        var tracking_device = $('#tracking_device').val();
 
             
 
@@ -392,6 +399,7 @@ $(function () {
             formData.append('email', email);
             formData.append('phone', phone);
             formData.append('mobile', mobile);
+            formData.append('tracking_device', tracking_device);
             formData.append('gst', gst);
             formData.append('pan', pan);
             formData.append('gst_state', gst_state);
@@ -455,6 +463,7 @@ $(function () {
             formData.append('email', email);
             formData.append('phone', phone);
             formData.append('mobile', mobile);
+            formData.append('tracking_device', tracking_device);
             formData.append('gst', gst);
             formData.append('pan', pan);
             formData.append('gst_state', gst_state);
@@ -588,6 +597,9 @@ $(function () {
         },
         'parking_charges' :{
             required: true,
+        },
+        tracking_device:{
+            required: true,
         }
     },
     messages: {
@@ -663,6 +675,9 @@ $(function () {
             required: "This Field is required!",
         },
         'parking_charges' :{
+            required: "This Field is required!",
+        },
+        tracking_device:{
             required: "This Field is required!",
         }
 

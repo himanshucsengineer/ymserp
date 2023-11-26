@@ -92,6 +92,9 @@ Route::get('/print/printestimate', 'App\Http\Controllers\GateInController@printe
 Route::get('/billing/invoice', 'App\Http\Controllers\OutwardOfficerController@invoice_view');
 Route::get('/billing/centeral', 'App\Http\Controllers\OutwardOfficerController@centeral_view');
 
+Route::get('/vendor/create', 'App\Http\Controllers\VendorMasterController@index');
+Route::get('/vendor/all', 'App\Http\Controllers\VendorMasterController@view');
+
 
 
 

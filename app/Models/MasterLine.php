@@ -14,22 +14,18 @@ class MasterLine extends Model
         'door_img',
         'front_img',
         'left_img',
-
         'right_img',
         'bottom_img',
         'top_img',
         'name',
-
         'alise',
         'free_days',
         'labour_rate',
         'line_address',
-
         'email',
         'phone',
         'mobile',
         'gst',
-
         'pan',
         'gst_state',
         'state_code',
@@ -41,7 +37,7 @@ class MasterLine extends Model
         'line_budget',
         'parking_charges',
         'washing_charges',
-        'lolo_charges'
-
+        'lolo_charges',
+        'tracking_device'
     ];
 }

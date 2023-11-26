@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('gst')->nullable();
             $table->string('pan')->nullable();
             $table->string('gst_state')->nullable();
+            $table->string('tracking_device')->nullable();
             $table->string('state_code')->nullable();
             $table->string('top_img')->nullable();
             $table->string('bottom_img')->nullable();

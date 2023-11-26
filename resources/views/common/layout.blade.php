@@ -465,55 +465,142 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/tables/simple.html" class="nav-link">
-                                        <i class="fas fa-boxes nav-icon"></i>
-                                        <p>Vendor Master</p>
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Vendor Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/vendor/create" class="nav-link">
+                                                <p> Create Vendor </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/vendor/all" class="nav-link">
+                                                <p>All Vendors</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/data.html" class="nav-link">
-                                        <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Product Master</p>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Product Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/product/create" class="nav-link">
+                                                <p> Create Product </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/product/all" class="nav-link">
+                                                <p>All Products</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="fas fa-random nav-icon"></i>
-                                        <p>Product Category Master</p>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Product Category <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/category/create" class="nav-link">
+                                                <p> Create Category </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/category/all" class="nav-link">
+                                                <p>All Category</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="fas fa-random nav-icon"></i>
-                                        <p>Requistion Master</p>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Requistion Genration <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/requistion/create" class="nav-link">
+                                                <p> Create Requistion </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/requistion/all" class="nav-link">
+                                                <p>All Requistion</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="fas fa-random nav-icon"></i>
-                                        <p>Indent Genration</p>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Indent Genration <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/indent/create" class="nav-link">
+                                                <p> Create Indent </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/indent/all" class="nav-link">
+                                                <p>All Indent</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="fas fa-random nav-icon"></i>
-                                        <p>Purchase Order</p>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Purchase Order <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/purchaseOrder/create" class="nav-link">
+                                                <p> Create Purchase Order </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/purchaseOrder/all" class="nav-link">
+                                                <p>All Purchase Order</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="fas fa-random nav-icon"></i>
-                                        <p>Purchase Entry</p>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item " id="roles">
+                                    <a href="#" class="nav-link">
+                                        <p>Purchase Entry <i class="fas fa-angle-left right"></i></p>
                                     </a>
+                                    <ul class="nav nav-treeview " id="createrole">
+                                        <li class="nav-item">
+                                            <a href="/purchaseEntry/create" class="nav-link">
+                                                <p> Create Purchase Entry </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item " id="viewrole">
+                                            <a href="/purchaseEntry/all" class="nav-link">
+                                                <p>All Purchase Entry</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-
+                            </ul>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="fas fa-random nav-icon"></i>
-                                        <p>Report</p>
+                                    <a href="/purchase/reports" class="nav-link">
+                                        <p> Reports </p>
                                     </a>
                                 </li>
                             </ul>

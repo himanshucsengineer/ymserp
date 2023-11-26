@@ -15,7 +15,11 @@ class VendorMasterController extends Controller
      */
     public function index()
     {
-        //
+        return view('vendor.create');
+    }
+
+    public function view(){
+        return view('vendor.view');
     }
 
     /**

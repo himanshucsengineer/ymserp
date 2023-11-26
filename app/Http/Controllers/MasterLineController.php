@@ -91,6 +91,7 @@ class MasterLineController extends Controller
                             ->orWhere('parking_charges', 'LIKE', '%' . $search . '%')
                             ->orWhere('washing_charges', 'LIKE', '%' . $search . '%')
                             ->orWhere('lolo_charges', 'LIKE', '%' . $search . '%')
+                            ->orWhere('tracking_device', 'LIKE', '%' . $search . '%')
                             ->get();
                     }
                 }],
@@ -117,6 +118,7 @@ class MasterLineController extends Controller
                             ->orWhere('parking_charges', 'LIKE', '%' . $search . '%')
                             ->orWhere('washing_charges', 'LIKE', '%' . $search . '%')
                             ->orWhere('lolo_charges', 'LIKE', '%' . $search . '%')
+                            ->orWhere('tracking_device', 'LIKE', '%' . $search . '%')
                             ->get();
                     }
                 }],
@@ -128,6 +130,7 @@ class MasterLineController extends Controller
 
         foreach($lineData as $line){
             $formetedData[] = [
+                'tracking_device' => $line->tracking_device,
                 'interior_img' => $line->interior_img,
                 'door_img' => $line->door_img,
                 'front_img' => $line->front_img,
@@ -232,7 +235,7 @@ class MasterLineController extends Controller
             'door_img'=> $doorimgfileName,
             'front_img'=> $frontimgfileName,
             'left_img'=> $leftimgfileName,
-
+            'tracking_device' => $request->tracking_device,
             'right_img'=> $rightimgfileName,
             'bottom_img'=> $bottomimgfileName,
             'top_img'=> $topimgfileName,
@@ -365,6 +368,7 @@ class MasterLineController extends Controller
         $lineDetails->phone = is_null($request->phone) ? $lineDetails->phone : $request->phone;
         $lineDetails->mobile = is_null($request->mobile) ? $lineDetails->mobile : $request->mobile;
         $lineDetails->gst = is_null($request->gst) ? $lineDetails->gst : $request->gst;
+        $lineDetails->tracking_device = is_null($request->tracking_device) ? $lineDetails->tracking_device : $request->tracking_device;
         $lineDetails->pan = is_null($request->pan) ? $lineDetails->pan : $request->pan;
         $lineDetails->gst_state = is_null($request->gst_state) ? $lineDetails->gst_state : $request->gst_state;
         $lineDetails->state_code = is_null($request->state_code) ? $lineDetails->state_code : $request->state_code;
