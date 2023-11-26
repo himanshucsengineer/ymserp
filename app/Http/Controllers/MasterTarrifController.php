@@ -8,7 +8,8 @@ use App\Models\MasterDamage;
 use App\Models\MasterRepair;
 use App\Models\MasterMaterial;
 use App\Models\Transaction;
-
+use App\Models\LocationCode;
+ 
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Routing\Controller;
@@ -122,14 +123,14 @@ class MasterTarrifController extends Controller
             $damageData = MasterDamage::where('id',$tarrif->damade_id)->first();
             $repairData = MasterRepair::where('id',$tarrif->repair_id)->first();
             $materialData = MasterMaterial::where('id',$tarrif->material_id)->first();
-
+            $locationcode = LocationCode::where('id',$tarrif->repai_location_code)->first();
             $formattedData[] = [
                 'id'=> (int) $tarrif->id,
                 'line_name' => $lineData->name,
                 'damage' => $damageData->code,
                 'repair' => $repairData->repair_code,
                 'material' => $materialData->material_code,
-                'repai_location_code' => $tarrif->repai_location_code,
+                'repai_location_code' => $locationcode->code,
                 'unit_of_measure' => $tarrif->unit_of_measure,
                 'dimension_l' => $tarrif->dimension_l,
                 'dimension_w' => $tarrif->dimension_w,
