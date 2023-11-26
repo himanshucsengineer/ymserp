@@ -109,6 +109,16 @@ $api->version('v1', function($api){
 
     });
 
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'location'], function($api){
+        $api->post('/create','App\Http\Controllers\LocationCodeController@store');
+        $api->post('/get', 'App\Http\Controllers\LocationCodeController@get');
+        $api->post('/getLocationData', 'App\Http\Controllers\LocationCodeController@getLocationData');
+        $api->post('/getbyid', 'App\Http\Controllers\LocationCodeController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\LocationCodeController@destroy');
+        $api->post('/update', 'App\Http\Controllers\LocationCodeController@update');
+
+    });
+
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'repair'], function($api){
         $api->post('/create','App\Http\Controllers\MasterRepairController@store');
         $api->post('/get', 'App\Http\Controllers\MasterRepairController@get');

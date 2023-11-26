@@ -808,6 +808,24 @@
                                         </li>
                                     </ul>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <p>Location Code <i class="fas fa-angle-left right"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/location/create" class="nav-link">
+                                                <p>Create Location Code </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/location/all" class="nav-link">
+                                                <p>All Location Code</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">

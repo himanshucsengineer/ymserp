@@ -95,6 +95,9 @@ Route::get('/billing/centeral', 'App\Http\Controllers\OutwardOfficerController@c
 Route::get('/vendor/create', 'App\Http\Controllers\VendorMasterController@index');
 Route::get('/vendor/all', 'App\Http\Controllers\VendorMasterController@view');
 
+Route::get('/location/create', 'App\Http\Controllers\LocationCodeController@index');
+Route::get('/location/all', 'App\Http\Controllers\LocationCodeController@view');
+
 
 
 
