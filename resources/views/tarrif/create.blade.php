@@ -15,6 +15,12 @@ height: 10px;
 border-radius: 50%;
 cursor: pointer;
 }
+.select2-container .select2-selection--single{
+    height:38px !important;
+}
+.select2-container{
+    z-index:100;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -54,8 +60,8 @@ cursor: pointer;
                                 <div class="form-group">
                                     <label for="repai_location_code">Location Code <span style="color:red;">*</span></label>
                                     <select name="repai_location_code" id="repai_location_code" class="form-control">
-                                        <option value="">Select Location Code</option>
-                                        <option value="RH1X">RH1X</option>
+                                        <!-- <option value="">Select Location Code</option> -->
+                                        <!-- <option value="RH1X">RH1X</option>
                                         <option value="RX1N">RX1N</option>
                                         <option value="RX6N">RX6N</option>
                                         <option value="RB1X">RB1X</option>
@@ -131,7 +137,7 @@ cursor: pointer;
                                         <option value="DX1N">DX1N</option>
                                         <option value="DX3N">DX3N</option>
                                         <option value="DX2N">DX2N</option>
-                                        <option value="DX4N">DX4N</option>
+                                        <option value="DX4N">DX4N</option> -->
                                     </select>
                         
                                 </div>
@@ -254,46 +260,67 @@ cursor: pointer;
 
 <script>
 
-// $(document).ready(function () {
-//     $('#dimension_l').select2({
-//         placeholder: 'Select an option',
-//         data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
-//         escapeMarkup: function (markup) {
-//             return markup;
-//         },
-//         language: {
-//             noResults: function () {
-//                 return '<center><button class="addNewButton" onclick="containerType()">Add New</button></center>';
-//             }
-//         }
-//     });
+$(document).ready(function () {
+    refreshLocation()
+});
 
-//     $('#dimension_w').select2({
-//         placeholder: 'Select an option',
-//         data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
-//         escapeMarkup: function (markup) {
-//             return markup;
-//         },
-//         language: {
-//             noResults: function () {
-//                 return '<center><button class="addNewButton" onclick="containerSize()">Add New</button></center>';
-//             }
-//         }
-//     });
 
-//     $('#dimension_h').select2({
-//         placeholder: 'Select an option',
-//         data: [{ id: 1, text: 'Option 1' }, { id: 2, text: 'Option 2' }],
-//         escapeMarkup: function (markup) {
-//             return markup;
-//         },
-//         language: {
-//             noResults: function () {
-//                 return '<center><button class="addNewButton" onclick="containerSize()">Add New</button></center>';
-//             }
-//         }
-//     });
-// });
+function refreshLocation(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var location_codes  = "";
+
+    $.ajax({
+        type: "post",
+        url: "/api/location/get",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            location_codes = data;
+            processLocationCodes(location_codes);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+function processLocationCodes(location_codes){
+
+    var transformedData = location_codes.map(function(item) {
+        return {
+            id: item.id,
+            text: item.code
+        };
+    });
+
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
+
+    $('#repai_location_code').select2({
+        placeholder: 'Select Location Code',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="locationCode()">Add New</button></center>';
+            }
+        }
+    });
+}
+
+function locationCode(){
+    $('#modal-location').modal('show');
+}
 
 $(document).ready(function () {
     const imageContainer = document.getElementById('image-container');
@@ -840,6 +867,35 @@ $(function () {
     }
   });
 });
+
+function createLocation(e){
+    // e.preventDefault();
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var code   = $('#lo_code').val();
+    var desc   = $('#desc').val();
+
+    if(code == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Location Code Is Required</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    const data = {
+                'code':code,
+                'desc':desc,
+                'user_id':user_id,
+                'depo_id':depo_id,
+        }
+    post('location/create',data);
+    refreshLocation()
+    $('#modal-location').modal('hide');
+}
 </script>
 
 
@@ -858,6 +914,33 @@ $(function () {
                             <center><img id="image" src="" style="width:100%" alt="Image" /></center>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-location">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Location Code</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="code">Location Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="lo_code" name="code" placeholder="Enter Location Code">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <input type="text" class="form-control" id="lo_desc" name="desc" placeholder="Enter Description">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="createLocation()">Submit</button>
                 </div>
             </div>
         </div>
