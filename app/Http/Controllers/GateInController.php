@@ -104,9 +104,6 @@ class GateInController extends Controller
 
         $data['main_data'] = $formetedData;
 
-        // print_r($getIndata[0]->gatein_id);
-        // die;
-
         return view('print.astimate',$data);
 
     }
@@ -1328,38 +1325,51 @@ class GateInController extends Controller
             ], 500);
         }
 
-        if($request->container_no == ''  && $container_img_name == ''){
-            $gateintype = "without container";
+        if($request->type == 'without'){
+            $currentDateTime = new \DateTime();
+            $formattedDateTime = $currentDateTime->format('YmdHisu');
+    
+            $inwardNo = $request->depo_id.$formattedDateTime;
+    
+            $createGatein = GateIn::create([
+                'vehicle_img' => $vehicle_img_name,
+                'vehicle_number'=> $request->vehicle_number,
+                'depo_id' => $request->depo_id,
+                'createdby' => $request->user_id,
+                'gateintype' => "Without Container",
+                'inward_no' => $inwardNo,
+                'status' => 'In',
+                'is_approve' => '0',
+                'is_repaired' => '0',
+                'is_estimate_done' => '0',
+                'inward_date' => date('Y-m-d'),
+                'inward_time' => date('H:i:s'),
+            ]);
         }else{
-            $gateintype = "with container";
+            $currentDateTime = new \DateTime();
+            $formattedDateTime = $currentDateTime->format('YmdHisu');
+
+            $inwardNo = $request->depo_id.$formattedDateTime;
+
+            $createGatein = GateIn::create([
+                'container_img' => $container_img_name,
+                'vehicle_img' => $vehicle_img_name,
+                'container_no'=> $request->container_no,
+                'vehicle_number'=> $request->vehicle_number,
+                'depo_id' => $request->depo_id,
+                'createdby' => $request->user_id,
+                'gateintype' => "With Conatiner",
+                'inward_no' => $inwardNo,
+                'status' => 'In',
+                'is_approve' => '0',
+                'is_repaired' => '0',
+                'is_estimate_done' => '0',
+                'inward_date' => date('Y-m-d'),
+                'inward_time' => date('H:i:s'),
+            ]);
         }
 
-        $currentDateTime = new \DateTime();
-        $formattedDateTime = $currentDateTime->format('YmdHisu');
-
-        $inwardNo = $request->depo_id.$formattedDateTime;
-
-        $createGatein = GateIn::create([
-            'container_img' => $container_img_name,
-            'vehicle_img' => $vehicle_img_name,
-            'container_no'=> $request->container_no,
-            // 'container_type'=> $request->container_type,
-            // 'container_size'=> $request->container_size,
-            // 'sub_type'=> $request->sub_type,
-            // 'driver_name'=> $request->driver_name,
-            'vehicle_number'=> $request->vehicle_number,
-            // 'contact_number'=> $request->contact_number,
-            'depo_id' => $request->depo_id,
-            'createdby' => $request->user_id,
-            'gateintype' => $gateintype,
-            'inward_no' => $inwardNo,
-            'status' => 'In',
-            'is_approve' => '0',
-            'is_repaired' => '0',
-            'is_estimate_done' => '0',
-            'inward_date' => date('Y-m-d'),
-            'inward_time' => date('H:i:s'),
-        ]);
+       
 
 
         if($createGatein){

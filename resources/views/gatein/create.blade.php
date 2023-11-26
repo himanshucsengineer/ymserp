@@ -124,43 +124,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="row" style="display:none">
-                <div class="col-12">
-                    <div class="card">
-                        <h3 class="mt-2 ml-2">Inward Entry</h3>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                   
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
-                                </div>
-                            </div>
-                            <table id="inspectionData" class="table table-bordered table-hover table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No.</th>
-                                        <th>Container No.</th>
-                                        <th>Container Image</th>
-                                        <th>Vehicle No.</th>
-                                        <th>Vehicle image</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table-body">
-                                   
-                                </tbody>
-                            </table>
-
-                            <div class="row">
-                                <div class="col-md-6"></div>
-                                <div class="col-md-6"><div id="pagination"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </section>
 </div>
@@ -252,28 +215,15 @@ $(function () {
     $.validator.setDefaults({
     submitHandler: function () {
         var container_no = $("#container_no").val();
-        var container_type = $("#container_type").val();
-        var container_size = $("#container_size").val();
-        var driver_name = $("#driver_name").val();
         var vehicle_number = $("#vehicle_number").val();
-        var contact_number   = $("#contact_number").val();
-        var sub_type = $('#sub_type').val();
-
-
+        var type = $('input[name="options"]:checked').val();
 
             var formData = new FormData();
-
             formData.append('container_no', container_no);
-            formData.append('sub_type', sub_type);
-            formData.append('container_type', container_type);
-            formData.append('container_size', container_size);
-            formData.append('driver_name', driver_name);
             formData.append('vehicle_number', vehicle_number);
-            formData.append('contact_number', contact_number);
-     
+            formData.append('type', type);
             formData.append('user_id', user_id);
             formData.append('depo_id', depo_id);
-
             formData.append('container_img', $('#container_img')[0].files[0]);
             formData.append('vehicle_img', $('#vehicle_img')[0].files[0]);
 
