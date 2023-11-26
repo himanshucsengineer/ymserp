@@ -6,6 +6,13 @@ use App\Models\LocationCode;
 use App\Http\Requests\StoreLocationCodeRequest;
 use App\Http\Requests\UpdateLocationCodeRequest;
 
+use Illuminate\Http\Request;
+use Dingo\Api\Routing\Helpers;
+use Illuminate\Routing\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\Validator;
+use \stdClass;
+
 class LocationCodeController extends Controller
 {
     /**
@@ -13,6 +20,8 @@ class LocationCodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    use Helpers;
+
     public function index()
     {
         return view('location.create');
