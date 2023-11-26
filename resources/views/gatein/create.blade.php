@@ -246,7 +246,6 @@ $(function () {
                     }, 2000);
                     // location.reload();
                     $("#gateinForm")[0].reset();
-                    refreshTable();
                 },
                 error: function(error) {
                     var finalValue = '';
