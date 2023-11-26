@@ -91,12 +91,8 @@
                                         <th>Action</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
-                                        <!-- <th>Container Size</th> -->
-                                        <!-- <th>Container Type</th> -->
                                         <th>Vehicle No.</th>
                                         <th>Vehicle image</th>
-                                        <!-- <th>Driver Name</th> -->
-                                        <!-- <th>Driver Contact</th> -->
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -176,18 +172,10 @@ function filterByDate(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                // row.append($('<td>').append(item.inward_no));
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
-                // row.append($('<td>').append(item.container_size));
-                // row.append($('<td>').append(item.container_type));
                 row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                // row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                // row.append($('<td>').append(item.contact_number));
-                
-                
-
                 tbody.append(row);
                 i++;
             });

@@ -439,13 +439,15 @@ class GateInController extends Controller
 
             $gateInData = GateIn::where([
                 ['status','In'],
-                ['is_estimate_done','0']
+                ['is_estimate_done','0'],
+                ['gateintype','With Container']
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
             $gateInData = GateIn::where([
                 ['status','In'],
                 ['is_estimate_done','0'],
+                ['gateintype','With Container'],
                 ['depo_id',$request->depo_id],
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }
@@ -457,12 +459,7 @@ class GateInController extends Controller
         foreach($gateInData as $gateIn){
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
-                'container_type' => $gateIn->container_type,
-                'sub_type' => $gateIn->sub_type,
-                'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
-                'contact_number' => $gateIn->contact_number,
-                'driver_name' => $gateIn->driver_name,
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
@@ -895,11 +892,7 @@ class GateInController extends Controller
                 [function ($query) use ($request) {
                     if (($search = $request->search)) {
                         $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
-                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
                             ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
-                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
                             ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
                             ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
                             ->get();
@@ -907,6 +900,7 @@ class GateInController extends Controller
                 }],
                 ['status','In'],
                 ['is_estimate_done','0'],
+                ['gateintype','With Container']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -914,11 +908,7 @@ class GateInController extends Controller
                 [function ($query) use ($request) {
                     if (($search = $request->search)) {
                         $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
-                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
                             ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
-                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
                             ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
                             ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
                             ->get();
@@ -927,6 +917,7 @@ class GateInController extends Controller
                 ['status','In'],
                 ['depo_id',$request->depo_id],
                 ['is_estimate_done','0'],
+                ['gateintype','With Container']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
@@ -935,12 +926,7 @@ class GateInController extends Controller
         foreach($gateInData as $gateIn){
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
-                'container_type' => $gateIn->container_type,
-                'sub_type' => $gateIn->sub_type,
-                'container_size' => $gateIn->container_size,
                 'vehicle_number' => $gateIn->vehicle_number,
-                'contact_number' => $gateIn->contact_number,
-                'driver_name' => $gateIn->driver_name,
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,

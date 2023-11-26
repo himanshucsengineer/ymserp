@@ -78,50 +78,30 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="container_img">Container Image</label>
+                                            <div class="img_prv_box"><span class="container_img"></span></div>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="container_no">Container Number</label>
                                             <input type="text" style="text-transform:uppercase;" class="form-control" oninput="validateInput(this)"  maxlength="11" id="container_no" name="container_no" placeholder="Enter Container Number ">
                                             <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="container_img">Container Image</label>
-                                            <div class="img_prv_box"><span class="container_img"></span></div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="vehicle_number">Vehicle Number</label>
-                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
-                                        </div>
                                         <div class="form-group">
                                             <label for="vehicle_img">Vehicle Image</label>
                                             <div class="img_prv_box"><span class="vehicle_img"></span></div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="vehicle_number">Vehicle Number</label>
+                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="vehicle_number" name="vehicle_number"  placeholder="Enter Vehicle Number">
+                                        </div>
+                                        
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="line_id">Line Name <span style="color:red;">*</span></label>
-                                            <select name="line_id" id="line_id" class="form-control">
-                                                <option value="">Select Line</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="container_size">Container Size</label>
-                                            <select name="container_size" id="container_size" class="form-control">
-                                                <option value="">Select Container Size</option>
-                                                <option value="20">20</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -133,6 +113,20 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6" id="container_size_div" style="display:none;">
+                                        <div class="form-group">
+                                            <label for="container_size">Container Size</label>
+                                            <select name="container_size" id="container_size" class="form-control">
+                                                <option value="">Select Container Size</option>
+                                                <option value="20">20</option>
+                                                <option value="40">40</option>
+                                                <option value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="container_sub_type_div" style="display:none;">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sub_type">Sub Type  <span style="color:red;">*</span></label>
@@ -151,9 +145,59 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="gross_weight">Gross Weight</label>
+                                            <input type="number" class="form-control" id="gross_weight" name="gross_weight" placeholder="Enter Gross Weight">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" id="container_tare_weight_div" style="display:none;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="tare_weight">Tare Weight</label>
+                                            <input type="number" class="form-control" id="tare_weight" name="tare_weight" placeholder="Enter Tare Weight">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mfg_date">Mfg Date</label>
+                                            <input type="date" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="container_csc_div" style="display:none;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mfg_date">CSC Details</label>
+                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="line_id">Line Name <span style="color:red;">*</span></label>
+                                            <select name="line_id" id="line_id" class="form-control">
+                                                <option value="">Select Line</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="container_grade_div" style="display:none;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="grade">Grade</label>
+                                            <select name="grade" id="grade" class="form-control">
+                                                <option value="">Select Grade</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="status_name">Status Name</label>
@@ -178,42 +222,9 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="grade">Grade</label>
-                                            <select name="grade" id="grade" class="form-control">
-                                                <option value="">Select Grade</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="gross_weight">Gross Weight</label>
-                                            <input type="number" class="form-control" id="gross_weight" name="gross_weight" placeholder="Enter Gross Weight">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="tare_weight">Tare Weight</label>
-                                            <input type="number" class="form-control" id="tare_weight" name="tare_weight" placeholder="Enter Tare Weight">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="mfg_date">Mfg Date</label>
-                                            <input type="date" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
-                                        </div>
-                                    </div>
+                                
+                                <div class="row" id="container_rf_type_div" style="display:none;">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="rftype">RF Type</label>
@@ -224,23 +235,42 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="job_work_no">Job Work No</label>
-                                            <input type="text" class="form-control" id="job_work_no" name="job_work_no" placeholder="Enter Job Work No">
+                                            <label for="line_id">Make <span style="color:red;">*</span></label>
+                                            <select name="line_id" id="line_id" class="form-control">
+                                                <option value="">Select Line</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="container_model_div" style="display:none;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mfg_date">Model No.</label>
+                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="sub_lease_unity">Sub-Lease Unity</label>
-                                            <select name="sub_lease_unity" id="sub_lease_unity" class="form-control">
-                                                <option value="">select an option</option>
-                                                <option value="yes">yes</option>
-                                                <option value="no">no</option>
-                                            </select>
+                                            <label for="mfg_date">Serial No.</label>
+                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="container_device_div" style="display:none;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mfg_date"> Machinary Mfg Date</label>
+                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mfg_date">Device Status</label>
+                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
                                         </div>
                                     </div>
                                 </div>
@@ -293,15 +323,45 @@ function validateInput(input) {
     }
 }
 
+$('#container_type').on('change',function(){
+    var conainerTyoe = $(this).val();
 
+    if(conainerTyoe == "DRY"){
+        $('#container_size_div').show();
+        $('#container_sub_type_div').show();
+        $('#container_tare_weight_div').show();
+        $('#container_csc_div').show();
+        $('#container_grade_div').show();
+        $('#container_rf_type_div').hide();
+        $('#container_model_div').hide();
+        $('#container_device_div').hide();
+        
+    }else if(conainerTyoe == "REEFER"){
+        $('#container_size_div').show();
+        $('#container_sub_type_div').show();
+        $('#container_tare_weight_div').show();
+        $('#container_csc_div').show();
+        $('#container_grade_div').show();
+        $('#container_rf_type_div').show();
+        $('#container_model_div').show();
+        $('#container_device_div').show();
+    }else{
+        $('#container_size_div').hide();
+        $('#container_sub_type_div').hide();
+        $('#container_tare_weight_div').hide();
+        $('#container_csc_div').hide();
+        $('#container_grade_div').hide();
+        $('#container_rf_type_div').hide();
+        $('#container_model_div').hide();
+        $('#container_device_div').hide();
+    }
+
+})
 $(document).ready(function () {
     var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-
-
-
     $.ajax({
         type: "post",
         url: "/api/line/get",

@@ -258,12 +258,12 @@
                                         <p>Gate In</p>
                                     </a>
                                 </li>
-                                <li class="nav-item " id="gateout">
+                                <!-- <li class="nav-item " id="gateout">
                                     <a href="/gateout/create" class="nav-link">
                                         <i class="fas fa-door-closed nav-icon"></i>
                                         <p>Gate Out</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="nav-item hidden" id="SURVEYOR">
