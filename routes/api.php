@@ -193,10 +193,10 @@ $api->version('v1', function($api){
 
     });
 
-    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
-        $api->post('/create','App\Http\Controllers\ContainerVerifyController@store');
-        $api->post('/getbyid','App\Http\Controllers\ContainerVerifyController@getbyid');
-    });
+    // $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){
+    //     $api->post('/create','App\Http\Controllers\ContainerVerifyController@store');
+    //     $api->post('/getbyid','App\Http\Controllers\ContainerVerifyController@getbyid');
+    // });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'transcation'], function($api){
         $api->post('/create','App\Http\Controllers\TransactionController@store');
