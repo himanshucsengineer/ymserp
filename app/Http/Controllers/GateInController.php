@@ -334,56 +334,33 @@ class GateInController extends Controller
                 $is_assigned = "Not Assigned";
             }
 
-            if($surveyour){
-                $survayor_date = $surveyour->survayor_date;
-                $survayor_time = $surveyour->survayor_time;
-                $status_name = $surveyour->status_name;
-                $grade = $surveyour->grade;
-                $gross_weight = $surveyour->gross_weight;
-                $tare_weight = $surveyour->tare_weight;
-                $mfg_date = $surveyour->mfg_date;
-                $rftype = $surveyour->rftype;
-                $job_work_no = $surveyour->job_work_no;
-                $sub_lease_unity = $surveyour->sub_lease_unity;
-            }else{
-                $survayor_date = '';
-                $survayor_time = '';
-                $status_name = '';
-                $grade = '';
-                $gross_weight = '';
-                $tare_weight = '';
-                $mfg_date = '';
-                $rftype = '';
-                $job_work_no = '';
-                $sub_lease_unity = '';
-            }
-
             
 
             $formetedData[] = [
-                'container_no' => $gateIn->container_no,
-                'container_img' => $gateIn->container_img,
-                'vehicle_number' => $gateIn->vehicle_number,
-                'vehicle_img' => $gateIn->vehicle_img,
                 'inward_date' => $gateIn->inward_date,
                 'inward_time' => $gateIn->inward_time,
-
-                'line_name' => $line_name,
-
-                'container_size' => $gateIn->container_size,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
+                'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
                 'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
                 'sub_type' => $gateIn->sub_type,
-
-                'survayor_date' => $survayor_date,
-                'survayor_time' => $survayor_time,
-                'status_name' => $status_name,
-                'grade' => $grade,
-                'gross_weight' => $gross_weight,
-                'tare_weight' => $tare_weight,
-                'mfg_date' => $mfg_date,
-                'rftype' => $rftype,
-                'job_work_no' => $job_work_no,
-                'sub_lease_unity' => $sub_lease_unity,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'status_name' => $gateIn->status_name,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
                 'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
@@ -1032,26 +1009,31 @@ class GateInController extends Controller
             // $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
 
             $formetedData[] = [
-                'container_no' => $gateIn->container_no,
-                'container_img' => $gateIn->container_img,
-                'vehicle_number' => $gateIn->vehicle_number,
-                'vehicle_img' => $gateIn->vehicle_img,
+                'status_name' => $gateIn->status_name,
                 'inward_date' => $gateIn->inward_date,
                 'inward_time' => $gateIn->inward_time,
-                'line_name' => $line->name,
-                'container_size' => $gateIn->container_size,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
+                'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
                 'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
                 'sub_type' => $gateIn->sub_type,
-                'survayor_date' => $surveyour->survayor_date,
-                'survayor_time' => $surveyour->survayor_time,
-                'status_name' => $surveyour->status_name,
-                'grade' => $surveyour->grade,
-                'gross_weight' => $surveyour->gross_weight,
-                'tare_weight' => $surveyour->tare_weight,
-                'mfg_date' => $surveyour->mfg_date,
-                'rftype' => $surveyour->rftype,
-                'job_work_no' => $surveyour->job_work_no,
-                'sub_lease_unity' => $surveyour->sub_lease_unity,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
+                'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
             
