@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\MasterEmployee;
-use App\Models\ContainerVerify;
+// use App\Models\ContainerVerify;
 use App\Models\Transaction;
 use App\Models\MasterTarrif;
 use App\Models\MasterRepair;
@@ -32,6 +32,10 @@ class GateInController extends Controller
     {
         return view('gatein.create');
     }
+
+    public function containershow(){
+        return view('surveyor.containershow');
+    }
     
     public function inspection()
     {
@@ -41,6 +45,10 @@ class GateInController extends Controller
     public function supervisor_inspection()
     {
         return view('supervisor.inspection');
+    }
+
+    public function masterserveyor(){
+        return view('surveyor.master');
     }
 
     public function maintenance_view(){
@@ -63,7 +71,7 @@ class GateInController extends Controller
         $transactionData = Transaction::where('gatein_id',$request->gatein_id)->get();
         $getInData = GateIn::where('id',$request->gatein_id)->first();
         $lineData = MasterLine::where('id',$getInData->line_id)->first();
-        $containerVerifyData = ContainerVerify::where('gate_in_id',$request->gatein_id)->orderby('created_at','desc')->first();
+        // $containerVerifyData = ContainerVerify::where('gate_in_id',$request->gatein_id)->orderby('created_at','desc')->first();
         $userData = User::where('id',$containerVerifyData->createdby)->first();
         $survayorDoneName = MasterEmployee::where('id',$userData->employee_id)->first(); 
 
@@ -124,7 +132,7 @@ class GateInController extends Controller
         $formetedData = [];
 
         foreach($getIndata as $gateIn){
-            $containerVarify = ContainerVerify::where('gate_in_id',$gateIn->id)->where('grade',$request->grade)->where('status_name',$request->status_name)->get();
+            // $containerVarify = ContainerVerify::where('gate_in_id',$gateIn->id)->where('grade',$request->grade)->where('status_name',$request->status_name)->get();
 
             if(count($containerVarify)>0){
                 $formetedData[] = [
@@ -316,7 +324,7 @@ class GateInController extends Controller
         foreach($gateInData as $gateIn){
 
             $line = MasterLine::where('id',$gateIn->line_id)->first();
-            $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
+            // $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
 
             if($line){
                 $line_name = $line->name;
@@ -440,14 +448,14 @@ class GateInController extends Controller
             $gateInData = GateIn::where([
                 ['status','In'],
                 ['is_estimate_done','0'],
-                ['gateintype','With Container']
+                ['gateintype','With Conatiner']
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
             $gateInData = GateIn::where([
                 ['status','In'],
                 ['is_estimate_done','0'],
-                ['gateintype','With Container'],
+                ['gateintype','With Conatiner'],
                 ['depo_id',$request->depo_id],
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }
@@ -900,7 +908,7 @@ class GateInController extends Controller
                 }],
                 ['status','In'],
                 ['is_estimate_done','0'],
-                ['gateintype','With Container']
+                ['gateintype','With Conatiner']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -917,7 +925,7 @@ class GateInController extends Controller
                 ['status','In'],
                 ['depo_id',$request->depo_id],
                 ['is_estimate_done','0'],
-                ['gateintype','With Container']
+                ['gateintype','With Conatiner']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
@@ -1021,7 +1029,7 @@ class GateInController extends Controller
 
         foreach($gateInData as $gateIn){
             $line = MasterLine::where('id',$gateIn->line_id)->first();
-            $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
+            // $surveyour = ContainerVerify::where('gate_in_id',$gateIn->id)->first();
 
             $formetedData[] = [
                 'container_no' => $gateIn->container_no,
@@ -1404,31 +1412,31 @@ class GateInController extends Controller
 
         
 
-        if ($request->hasFile('challan')) {
-            $challan = $request->file('challan');
-            $challan_name = time() . '_' . $challan->getClientOriginalName();
-            $challan->move(public_path('uploads/gatein'), $challan_name);
-        }else{
-            $challan_name = $gateInDetails->challan;
-        }
+        // if ($request->hasFile('challan')) {
+        //     $challan = $request->file('challan');
+        //     $challan_name = time() . '_' . $challan->getClientOriginalName();
+        //     $challan->move(public_path('uploads/gatein'), $challan_name);
+        // }else{
+        //     $challan_name = $gateInDetails->challan;
+        // }
 
         
 
-        if ($request->hasFile('do_copy')) {
-            $do_copy = $request->file('do_copy');
-            $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
-            $do_copy->move(public_path('uploads/gatein'), $do_copy_name);
-        }else{
-            $do_copy_name = $gateInDetails->do_copy;
-        }
+        // if ($request->hasFile('do_copy')) {
+        //     $do_copy = $request->file('do_copy');
+        //     $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
+        //     $do_copy->move(public_path('uploads/gatein'), $do_copy_name);
+        // }else{
+        //     $do_copy_name = $gateInDetails->do_copy;
+        // }
 
-        if ($request->hasFile('empty_latter')) {
-            $empty_latter = $request->file('empty_latter');
-            $empty_latter_name = time() . '_' . $empty_latter->getClientOriginalName();
-            $empty_latter->move(public_path('uploads/gatein'), $empty_latter_name);
-        }else{
-            $empty_latter_name = $gateInDetails->empty_latter;
-        }
+        // if ($request->hasFile('empty_latter')) {
+        //     $empty_latter = $request->file('empty_latter');
+        //     $empty_latter_name = time() . '_' . $empty_latter->getClientOriginalName();
+        //     $empty_latter->move(public_path('uploads/gatein'), $empty_latter_name);
+        // }else{
+        //     $empty_latter_name = $gateInDetails->empty_latter;
+        // }
 
        
 
@@ -1446,29 +1454,54 @@ class GateInController extends Controller
             $gateInDetails->container_no = is_null($request->container_no) ? $gateInDetails->container_no : $request->container_no;
         }
 
-        $gateInDetails->container_size = is_null($request->container_size) ? $gateInDetails->container_size : $request->container_size;
-        $gateInDetails->sub_type = is_null($request->sub_type) ? $gateInDetails->sub_type : $request->sub_type;
+        $gateInDetails->inward_no = is_null($request->inward_no) ? $gateInDetails->inward_no : $request->inward_no;
+        $gateInDetails->vehicle_number = is_null($request->vehicle_number) ? $gateInDetails->vehicle_number : $request->vehicle_number;
     
-        $gateInDetails->container_type = is_null($request->container_type) ? $gateInDetails->container_type : $request->container_type;
-        $gateInDetails->transport_id = is_null($request->transport_id) ? $gateInDetails->transport_id : $request->transport_id;
         $gateInDetails->inward_date = is_null($request->inward_date) ? $gateInDetails->inward_date : $request->inward_date;
         $gateInDetails->inward_time = is_null($request->inward_time) ? $gateInDetails->inward_time : $request->inward_time;
-        $gateInDetails->driver_name = is_null($request->driver_name) ? $gateInDetails->driver_name : $request->driver_name;
-        $gateInDetails->vehicle_number = is_null($request->vehicle_number) ? $gateInDetails->vehicle_number : $request->vehicle_number;
-        $gateInDetails->contact_number = is_null($request->contact_number) ? $gateInDetails->contact_number : $request->contact_number;
-        $gateInDetails->third_party = is_null($request->third_party) ? $gateInDetails->third_party : $request->third_party;
+        $gateInDetails->survayor_date = is_null($request->survayor_date) ? $gateInDetails->survayor_date : $request->survayor_date;
+        $gateInDetails->survayor_time = is_null($request->survayor_time) ? $gateInDetails->survayor_time : $request->survayor_time;
+        $gateInDetails->container_type = is_null($request->container_type) ? $gateInDetails->container_type : $request->container_type;
+        $gateInDetails->container_size = is_null($request->container_size) ? $gateInDetails->container_size : $request->container_size;
+        $gateInDetails->sub_type = is_null($request->sub_type) ? $gateInDetails->sub_type : $request->sub_type;
+        $gateInDetails->gross_weight = is_null($request->gross_weight) ? $gateInDetails->gross_weight : $request->gross_weight;
+        $gateInDetails->tare_weight = is_null($request->tare_weight) ? $gateInDetails->tare_weight : $request->tare_weight;
+        $gateInDetails->mfg_date = is_null($request->mfg_date) ? $gateInDetails->mfg_date : $request->mfg_date;
+        $gateInDetails->csc_details = is_null($request->csc_details) ? $gateInDetails->csc_details : $request->csc_details;
         $gateInDetails->line_id = is_null($request->line_id) ? $gateInDetails->line_id : $request->line_id;
+        $gateInDetails->grade = is_null($request->grade) ? $gateInDetails->grade : $request->grade;
+        $gateInDetails->status_name = is_null($request->status_name) ? $gateInDetails->status_name : $request->status_name;
+        $gateInDetails->rftype = is_null($request->rftype) ? $gateInDetails->rftype : $request->rftype;
+
+
+        $gateInDetails->make = is_null($request->make) ? $gateInDetails->make : $request->make;
+        $gateInDetails->model_no = is_null($request->model_no) ? $gateInDetails->model_no : $request->model_no;
+        $gateInDetails->serial_no = is_null($request->serial_no) ? $gateInDetails->serial_no : $request->serial_no;
+        $gateInDetails->machine_mfg_date = is_null($request->machine_mfg_date) ? $gateInDetails->machine_mfg_date : $request->machine_mfg_date;
+        $gateInDetails->device_status = is_null($request->device_status) ? $gateInDetails->device_status : $request->device_status;
+        $gateInDetails->third_party = is_null($request->third_party) ? $gateInDetails->third_party : $request->third_party;
+        $gateInDetails->consignee_id = is_null($request->consignee_id) ? $gateInDetails->consignee_id : $request->consignee_id;
+        $gateInDetails->transaction_mode = is_null($request->transaction_mode) ? $gateInDetails->transaction_mode : $request->transaction_mode;
+        $gateInDetails->transaction_ref_no = is_null($request->transaction_ref_no) ? $gateInDetails->transaction_ref_no : $request->transaction_ref_no;
         $gateInDetails->arrive_from = is_null($request->arrive_from) ? $gateInDetails->arrive_from : $request->arrive_from;
+        $gateInDetails->transport_id = is_null($request->transport_id) ? $gateInDetails->transport_id : $request->transport_id;
+        $gateInDetails->driver_name = is_null($request->driver_name) ? $gateInDetails->driver_name : $request->driver_name;
+        $gateInDetails->contact_number = is_null($request->contact_number) ? $gateInDetails->contact_number : $request->contact_number;
+        $gateInDetails->vessel_name = is_null($request->vessel_name) ? $gateInDetails->vessel_name : $request->vessel_name;
+        $gateInDetails->voyage = is_null($request->voyage) ? $gateInDetails->voyage : $request->voyage;
         $gateInDetails->port_name = is_null($request->port_name) ? $gateInDetails->port_name : $request->port_name;
-        $gateInDetails->receipt_no = is_null($request->receipt_no) ? $gateInDetails->receipt_no : $request->receipt_no;
-        $gateInDetails->amount = is_null($request->amount) ? $gateInDetails->amount : $request->amount;
-        $gateInDetails->do_no = is_null($request->do_no) ? $gateInDetails->do_no : $request->do_no;
+        $gateInDetails->er_no = is_null($request->er_no) ? $gateInDetails->er_no : $request->er_no;
+        $gateInDetails->empty_latter = is_null($request->empty_latter) ? $gateInDetails->empty_latter : $request->empty_latter;
+        $gateInDetails->challan = is_null($request->challan) ? $gateInDetails->challan : $request->challan;
+        $gateInDetails->empty_repositioning = is_null($request->empty_repositioning) ? $gateInDetails->empty_repositioning : $request->empty_repositioning;
         $gateInDetails->return = is_null($request->return) ? $gateInDetails->return : $request->return;
+        $gateInDetails->tracking_device = is_null($request->tracking_device) ? $gateInDetails->tracking_device : $request->tracking_device;
+        $gateInDetails->remarks = is_null($request->remarks) ? $gateInDetails->remarks : $request->remarks;
         
         
-        $gateInDetails->challan = $challan_name;
-        $gateInDetails->do_copy = $do_copy_name;
-        $gateInDetails->empty_latter = $empty_latter_name;
+        // $gateInDetails->challan = $challan_name;
+        // $gateInDetails->do_copy = $do_copy_name;
+        // $gateInDetails->empty_latter = $empty_latter_name;
 
         $gateInDetails->updatedby = $request->user_id;
         $gateInDetails->updated_at = date('Y-m-d H:i:s');

@@ -65,9 +65,10 @@ Route::get('/surveyor/reports', 'App\Http\Controllers\GateInController@reports')
 Route::get('/inward/executive', 'App\Http\Controllers\GateInController@inward_executive');
 
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');
-Route::get('/surveyor/containershow', 'App\Http\Controllers\ContainerVerifyController@index');
-Route::get('/inward/executiveshow', 'App\Http\Controllers\ContainerVerifyController@executiveshow');
-Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\ContainerVerifyController@masterserveyor');
+
+Route::get('/surveyor/containershow', 'App\Http\Controllers\GateInController@containershow');
+Route::get('/inward/executiveshow', 'App\Http\Controllers\GateInController@executiveshow');
+Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\GateInController@masterserveyor');
 
 Route::get('/genrateastimate', 'App\Http\Controllers\PdfController@genrateastimate');
 Route::get('/supervisor/inspection', 'App\Http\Controllers\GateInController@supervisor_inspection');

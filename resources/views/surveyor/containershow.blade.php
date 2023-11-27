@@ -171,8 +171,8 @@
                                 <div class="row" id="container_csc_div" style="display:none;">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="mfg_date">CSC Details</label>
-                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                            <label for="csc_details">CSC Details</label>
+                                            <input type="text" class="form-control" id="csc_details" name="csc_details" placeholder="Enter CSC Details">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -237,10 +237,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="line_id">Make <span style="color:red;">*</span></label>
-                                            <select name="line_id" id="line_id" class="form-control">
-                                                <option value="">Select Line</option>
-                                            </select>
+                                            <label for="make">Make <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="make" name="make" placeholder="Enter Make">
                                         </div>
                                     </div>
                                 </div>
@@ -248,14 +246,14 @@
                                 <div class="row" id="container_model_div" style="display:none;">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="mfg_date">Model No.</label>
-                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                            <label for="model_no">Model No.</label>
+                                            <input type="text" class="form-control" id="model_no" name="model_no" placeholder="Enter Model No.">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="mfg_date">Serial No.</label>
-                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                            <label for="serial_no">Serial No.</label>
+                                            <input type="text" class="form-control" id="serial_no" name="serial_no" placeholder="Enter Serial No.">
                                         </div>
                                     </div>
                                 </div>
@@ -263,14 +261,14 @@
                                 <div class="row" id="container_device_div" style="display:none;">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="mfg_date"> Machinary Mfg Date</label>
-                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                            <label for="machine_mfg_date"> Machinary Mfg Date</label>
+                                            <input type="date" class="form-control" id="machine_mfg_date" name="machine_mfg_date" placeholder="Enter Gross Weight">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="mfg_date">Device Status</label>
-                                            <input type="text" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                            <label for="device_status">Device Status</label>
+                                            <input type="text" class="form-control" id="device_status" name="device_status" placeholder="Enter Device Status">
                                         </div>
                                     </div>
                                 </div>
@@ -447,7 +445,7 @@ $(document).ready(function () {
             if(data.line_id){
                 getline(data.line_id);
             }
-            getverifydata();
+            // getverifydata();
 
             $("#container_no").val(data.container_no)
             $("#sub_type").val(data.sub_type)
@@ -586,80 +584,56 @@ $(function () {
     $.validator.setDefaults({
     submitHandler: function () {
 
-
         var inward_date = $("#inward_date").val();
         var inward_time = $("#inward_time").val();
         var survayor_date = $('#survayor_date').val();
         var survayor_time = $('#survayor_time').val();
         var container_no = $("#container_no").val();
         var vehicle_number = $("#vehicle_number").val();
-        var line_id = $("#line_id").val();
-        var container_size = $("#container_size").val();
         var container_type = $("#container_type").val();
+        var container_size = $("#container_size").val();
         var sub_type = $("#sub_type").val();
-        var status_name = $("#status_name").val();
-        var grade = $("#grade").val();
         var gross_weight = $("#gross_weight").val();
         var tare_weight = $("#tare_weight").val();
         var mfg_date = $('#mfg_date').val();
+        var csc_details = $('#csc_details').val();
+        var line_id = $("#line_id").val();
+        var grade = $("#grade").val();
+        var status_name = $("#status_name").val();
         var rftype = $("#rftype").val();
-        var job_work_no = $("#job_work_no").val();
-        var sub_lease_unity = $("#sub_lease_unity").val();
+        var make = $("#make").val();
+        var model_no = $("#model_no").val();
+        var serial_no = $("#serial_no").val();
+        var machine_mfg_date = $("#machine_mfg_date").val();
+        var device_status = $("#device_status").val();
 
-        newdata = {
-            'status_name': status_name,
-            'job_work_no': job_work_no,
+       var newdata = {
+            'inward_date': inward_date,
+            'inward_time': inward_time,
+            'survayor_date': survayor_date,
+            'survayor_time': survayor_time,
+            'container_no':container_no,
+            'vehicle_number':vehicle_number,
+            'container_type':container_type,
+            'container_size': container_size,
+            'sub_type': sub_type,
             'gross_weight': gross_weight,
             'tare_weight': tare_weight,
-            'survayor_date':survayor_date,
-            'survayor_time':survayor_time,
-            'mfg_date':mfg_date,
-            // 'vessel_name': vessel_name,
+            'mfg_date': mfg_date,
+            'csc_details': csc_details,
+            'line_id': line_id,
             'grade': grade,
-            'sub_lease_unity': sub_lease_unity,
-            // 'voyage': voyage,
-            // 'consignee': consignee,
-            // 'region': region,
-            // 'destuffung': destuffung,
+            'status_name': status_name,
             'rftype': rftype,
-            // 'empty_repositioning': empty_repositioning,
-            // 'er_no': er_no,
-            // 'remarks': remarks,
+            'make': make,
+            'model_no': model_no,
+            'serial_no': serial_no,
+            'machine_mfg_date': machine_mfg_date,
+            'device_status': device_status,
             'user_id' :user_id,
             'depo_id': depo_id,
-            'gate_in_id' : containerid
+            'id' : containerid
         }
-
-        console.log(newdata);
-
-
-
-            var formData = new FormData();
-
-            formData.append('container_no', container_no);
-            formData.append('id', containerid);
-            formData.append('container_size', container_size);
-            formData.append('container_type', container_type);
-            formData.append('sub_type', sub_type);
-            // formData.append('transport_id', transport_id);
-            formData.append('inward_date', inward_date);
-            formData.append('inward_time', inward_time);
-            // formData.append('driver_name', driver_name);
-            formData.append('vehicle_number', vehicle_number);
-            // formData.append('contact_number', contact_number);
-            // formData.append('third_party', third_party);
-            formData.append('line_id', line_id);
-            // formData.append('arrive_from', arrive_from);
-            // formData.append('port_name', port_name);
-            formData.append('user_id', user_id);
-            formData.append('depo_id', depo_id);
-
-            // formData.append('driver_photo', $('#driver_photo')[0].files[0]);
-            // formData.append('challan', $('#challan')[0].files[0]);
-            // formData.append('driver_license', $('#driver_license')[0].files[0]);
-            // formData.append('do_copy', $('#do_copy')[0].files[0]);
-            // formData.append('aadhar', $('#aadhar')[0].files[0]);
-            // formData.append('pan', $('#pan')[0].files[0]);
 
             $.ajax({
                 url: '/api/gatein/update',
@@ -667,19 +641,9 @@ $(function () {
                 headers: {
                     'Authorization': 'Bearer ' + checkToken
                 },
-                data: formData,
-                contentType: false,
-                processData: false,
+                data: newdata,
                 success: function(data) {
-                    // var callout = document.createElement('div');
-                    // callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
-                    // document.getElementById('apiMessages').appendChild(callout);
-                    // setTimeout(function() {
-                    //     callout.remove();
-                    // }, 2000);
-                    post('containerverify/create',newdata)
-                        var checkSuperbisor = <?php echo $checkSupervisor?>;
-                        // window.location = `/surveyor/inspection`
+                    var checkSuperbisor = <?php echo $checkSupervisor?>;
                     if(checkSuperbisor == 1){
                         window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
                     }else{
