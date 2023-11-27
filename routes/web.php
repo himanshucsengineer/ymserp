@@ -100,6 +100,9 @@ Route::get('/location/create', 'App\Http\Controllers\LocationCodeController@inde
 Route::get('/location/all', 'App\Http\Controllers\LocationCodeController@view');
 
 
+Route::get('/preadvice/create', 'App\Http\Controllers\PreAdviceController@index');
+Route::get('/preadvice/all', 'App\Http\Controllers\PreAdviceController@view');
+
 
 
 

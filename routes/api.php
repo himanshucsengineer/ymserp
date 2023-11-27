@@ -240,4 +240,8 @@ $api->version('v1', function($api){
 
     });
 
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'preadvice'], function($api){
+        $api->post('/create', 'App\Http\Controllers\PreAdviceController@store');
+    });
+
 });
