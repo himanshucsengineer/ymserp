@@ -64,13 +64,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="survayor_date">Survey Start Date</label>
-                                            <input type="text" class="form-control" id="survayor_date" name="survayor_date" readonly value="<?= date('Y-m-d')?>" placeholder="Enter inward date">
+                                            <input type="text" class="form-control" id="survayor_date" name="survayor_date" readonly value="<?= date('Y-m-d')?>" placeholder="Enter Survey Start Date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="survayor_time">Survey Start Time</label>
-                                            <input type="text" class="form-control" id="survayor_time" name="survayor_time" readonly value="<?= date('H:i:s')?>"  placeholder="Enter inward time">
+                                            <input type="text" class="form-control" id="survayor_time" name="survayor_time" readonly value="<?= date('H:i:s')?>"  placeholder="Enter Survey Start Time">
                                         </div>
                                     </div>
                                 </div>

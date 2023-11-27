@@ -38,6 +38,23 @@ class MasterTransportController extends Controller
         }
     } 
 
+    public function getTransporter(Request $request)
+    {
+        if($request->user_id == 1){
+            return MasterTransport::where('is_transport','transport')->get();
+        }else{
+            return MasterTransport::where('is_transport','transport')->where('depo_id',$request->depo_id)->get();
+        }
+    } 
+
+    public function getConsignee(Request $request){
+        if($request->user_id == 1){
+            return MasterTransport::where('is_transport','consignee')->get();
+        }else{
+            return MasterTransport::where('is_transport','consignee')->where('depo_id',$request->depo_id)->get();
+        }
+    }
+
     public function getall(){
         return MasterTransport::get();
     }

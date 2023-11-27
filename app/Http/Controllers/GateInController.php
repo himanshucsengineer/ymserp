@@ -63,6 +63,10 @@ class GateInController extends Controller
         return view('surveyor.report');
     }
 
+    public function executiveshow(){
+        return view('surveyor.inwardShow');
+    }
+
     public function inward_executive(){
         return view('surveyor.inwardExexutive');
     }
@@ -1394,31 +1398,21 @@ class GateInController extends Controller
 
         
 
-        // if ($request->hasFile('challan')) {
-        //     $challan = $request->file('challan');
-        //     $challan_name = time() . '_' . $challan->getClientOriginalName();
-        //     $challan->move(public_path('uploads/gatein'), $challan_name);
-        // }else{
-        //     $challan_name = $gateInDetails->challan;
-        // }
+        if ($request->hasFile('challan')) {
+            $challan = $request->file('challan');
+            $challan_name = time() . '_' . $challan->getClientOriginalName();
+            $challan->move(public_path('uploads/gatein'), $challan_name);
+        }else{
+            $challan_name = $gateInDetails->challan;
+        }
 
-        
-
-        // if ($request->hasFile('do_copy')) {
-        //     $do_copy = $request->file('do_copy');
-        //     $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
-        //     $do_copy->move(public_path('uploads/gatein'), $do_copy_name);
-        // }else{
-        //     $do_copy_name = $gateInDetails->do_copy;
-        // }
-
-        // if ($request->hasFile('empty_latter')) {
-        //     $empty_latter = $request->file('empty_latter');
-        //     $empty_latter_name = time() . '_' . $empty_latter->getClientOriginalName();
-        //     $empty_latter->move(public_path('uploads/gatein'), $empty_latter_name);
-        // }else{
-        //     $empty_latter_name = $gateInDetails->empty_latter;
-        // }
+        if ($request->hasFile('empty_latter')) {
+            $empty_latter = $request->file('empty_latter');
+            $empty_latter_name = time() . '_' . $empty_latter->getClientOriginalName();
+            $empty_latter->move(public_path('uploads/gatein'), $empty_latter_name);
+        }else{
+            $empty_latter_name = $gateInDetails->empty_latter;
+        }
 
        
 
@@ -1473,17 +1467,12 @@ class GateInController extends Controller
         $gateInDetails->voyage = is_null($request->voyage) ? $gateInDetails->voyage : $request->voyage;
         $gateInDetails->port_name = is_null($request->port_name) ? $gateInDetails->port_name : $request->port_name;
         $gateInDetails->er_no = is_null($request->er_no) ? $gateInDetails->er_no : $request->er_no;
-        $gateInDetails->empty_latter = is_null($request->empty_latter) ? $gateInDetails->empty_latter : $request->empty_latter;
-        $gateInDetails->challan = is_null($request->challan) ? $gateInDetails->challan : $request->challan;
+        $gateInDetails->empty_latter = $empty_latter_name;
+        $gateInDetails->challan = $challan_name;
         $gateInDetails->empty_repositioning = is_null($request->empty_repositioning) ? $gateInDetails->empty_repositioning : $request->empty_repositioning;
         $gateInDetails->return = is_null($request->return) ? $gateInDetails->return : $request->return;
         $gateInDetails->tracking_device = is_null($request->tracking_device) ? $gateInDetails->tracking_device : $request->tracking_device;
         $gateInDetails->remarks = is_null($request->remarks) ? $gateInDetails->remarks : $request->remarks;
-        
-        
-        // $gateInDetails->challan = $challan_name;
-        // $gateInDetails->do_copy = $do_copy_name;
-        // $gateInDetails->empty_latter = $empty_latter_name;
 
         $gateInDetails->updatedby = $request->user_id;
         $gateInDetails->updated_at = date('Y-m-d H:i:s');
