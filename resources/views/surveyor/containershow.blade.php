@@ -394,75 +394,62 @@ $(document).ready(function () {
             'id':containerid
         },
         success: function (data) {
-
-            if(data.container_img){
-                $('.container_img').html(`<img src="/uploads/gatein/${data.container_img}">`);
+            if(data.container_type == "DRY"){
+                $('#container_size_div').show();
+                $('#container_sub_type_div').show();
+                $('#container_tare_weight_div').show();
+                $('#container_csc_div').show();
+                $('#container_grade_div').show();
+                $('#container_rf_type_div').hide();
+                $('#container_model_div').hide();
+                $('#container_device_div').hide();
+                
+            }else if(data.container_type == "REEFER"){
+                $('#container_size_div').show();
+                $('#container_sub_type_div').show();
+                $('#container_tare_weight_div').show();
+                $('#container_csc_div').show();
+                $('#container_grade_div').show();
+                $('#container_rf_type_div').show();
+                $('#container_model_div').show();
+                $('#container_device_div').show();
             }else{
-                $('.container_img').html('<p>No Image Available</p>');
+                $('#container_size_div').hide();
+                $('#container_sub_type_div').hide();
+                $('#container_tare_weight_div').hide();
+                $('#container_csc_div').hide();
+                $('#container_grade_div').hide();
+                $('#container_rf_type_div').hide();
+                $('#container_model_div').hide();
+                $('#container_device_div').hide();
             }
-
-            if(data.vehicle_img){
-                $('.vehicle_img').html(`<img src="/uploads/gatein/${data.vehicle_img}">`);
-            }else{
-                $('.vehicle_img').html('<p>No Image Available</p>');
-            }
-
-            if(data.driver_photo){
-                $('.driver_photo').html(`<img src="/uploads/gatein/${data.driver_photo}">`);
-            }else{
-                $('.driver_photo').html('<p>No Image Available</p>');
-            }
-
-            if(data.challan){
-                $('.challan').html(`<img src="/uploads/gatein/${data.challan}">`);
-            }else{
-                $('.challan').html('<p>No Image Available</p>');
-            }
-            if(data.driver_license){
-                $('.driver_license').html(`<img src="/uploads/gatein/${data.driver_license}">`);
-            }else{
-                $('.driver_license').html('<p>No Image Available</p>');
-            }
-
-            if(data.do_copy){
-                $('.do_copy').html(`<img src="/uploads/gatein/${data.do_copy}">`);
-            }else{
-                $('.do_copy').html('<p>No Image Available</p>');
-            }
-
-            if(data.aadhar){
-                $('.aadhar').html(`<img src="/uploads/gatein/${data.aadhar}">`);
-            }else{
-                $('.aadhar').html('<p>No Image Available</p>');
-            }
-
-            if(data.pan){
-                $('.pan').html(`<img src="/uploads/gatein/${data.pan}">`);
-            }else{
-                $('.pan').html('<p>No Image Available</p>');
-            }
-
+            
             if(data.line_id){
                 getline(data.line_id);
             }
             // getverifydata();
 
-            $("#container_no").val(data.container_no)
-            $("#sub_type").val(data.sub_type)
-            $("#container_type").val(data.container_type)
-            $("#container_size").val(data.container_size)
-            $("#inward_date").val(data.inward_date)
-            $("#inward_time").val(data.inward_time)
-            $("#driver_name").val(data.driver_name)
-            $("#vehicle_number").val(data.vehicle_number)
-            $("#contact_number").val(data.contact_number)
-            if(data.third_party){
-                $("#third_party").val(data.third_party)
-            }else{
-                $("#third_party").val("no")
-            }
-            $("#arrive_from").val(data.arrive_from)
-            $("#port_name").val(data.port_name)
+            $("#inward_date").val(data.inward_date);
+            $("#inward_time").val(data.inward_time);
+            $('#survayor_date').val(data.survayor_date);
+            $('#survayor_time').val(data.survayor_time);
+            $("#container_no").val(data.container_no);
+            $("#vehicle_number").val(data.vehicle_number);
+            $("#container_type").val(data.container_type);
+            $("#container_size").val(data.container_size);
+            $("#sub_type").val(data.sub_type);
+            $("#gross_weight").val(data.gross_weight);
+            $("#tare_weight").val(data.tare_weight);
+            $('#mfg_date').val(data.mfg_date);
+            $('#csc_details').val(data.csc_details);
+            $("#grade").val(data.grade);
+            $("#status_name").val(data.status_name);
+            $("#rftype").val(data.rftype);
+            $("#make").val(data.make);
+            $("#model_no").val(data.model_no);
+            $("#serial_no").val(data.serial_no);
+            $("#machine_mfg_date").val(data.machine_mfg_date);
+            $("#device_status").val(data.device_status);
         },
         error: function (error) {
             console.log(error);
@@ -491,75 +478,7 @@ function getline(id){
     });
 }
 
-function getTranport(id){
-    $.ajax({
-        type: "POST",
-        url: "/api/transport/getbyid",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'id':id
-        },
-        success: function (data) {
-            $("#transport_id").val(data.id);
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
 
-function getverifydata(){
-    var containerid = <?= $getid[0]?>;
-    
-    var checkToken = localStorage.getItem('token'); 
-    $.ajax({
-        type: "POST",
-        url: "/api/containerverify/getbyid",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'gate_in_id':containerid
-        },
-        success: function (data) {
-            $('#status_name').val(data.status_name);
-            $('#job_work_no').val(data.job_work_no);
-            $('#gross_weight').val(data.gross_weight);
-            $('#tare_weight').val(data.tare_weight);
-            $('#vessel_name').val(data.vessel_name);
-            $('#grade').val(data.grade);
-            $('#sub_lease_unity').val(data.sub_lease_unity);
-            $('#voyage').val(data.voyage);
-            $('#consignee').val(data.consignee);
-            $('#region').val(data.region);
-            $('#destuffung').val(data.destuffung);
-            $('#rftype').val(data.rftype);
-            $('#empty_repositioning').val(data.empty_repositioning);
-            $('#er_no').val(data.er_no);
-            $('#remarks').val(data.remarks);
-
-            if(data.survayor_date){
-                $('#survayor_date').val(data.survayor_date);
-            }else{
-                $('#survayor_date').val('<?php echo date('Y-m-d')?>'); 
-            }
-
-            if(data.survayor_time){
-                $('#survayor_time').val(data.survayor_time);
-            }else{
-                $('#survayor_time').val('<?php echo date('H:i:s')?>'); 
-            }
-
-            $('#mfg_date').val(data.mfg_date);
-
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
 
 <?php 
 
