@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PreAdvice;
 use App\Http\Requests\StorePreAdviceRequest;
 use App\Http\Requests\UpdatePreAdviceRequest;
+use App\Models\GateIn;
+use App\Models\DoContainer;
 
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
@@ -39,6 +41,34 @@ class PreAdviceController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $rules=[
+            'do_no'=>[
+                'required',
+                'unique:pre_advice,do_no'
+            ],
+        ];
+
+        
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            $messages = $validator->errors();
+            $validationFormate = new stdClass();
+            
+            if ($messages->has('do_no')){
+                $validationFormate->do_no = $messages->first('do_no');
+            }
+
+            $validationError[] = $validationFormate;
+
+            return response()->json([
+                'status' => "error",
+                'message' => $validationError
+            ], 400);
+        }
+
         $createPreadvice = PreAdvice::create([
             'date'=> $request->date,
             'time'=> $request->time,
@@ -56,11 +86,40 @@ class PreAdviceController extends Controller
             'sub_type'=> $request->sub_type,
             'container_qty'=> $request->container_qty,
             'remarks'=> $request->remarks,
+            'in_cargo'=> $request->in_cargo,
+            'temprature_setting'=> $request->temprature_setting,
+            'humadity_setting'=> $request->humadity_setting,
+            'ventilation_setting'=> $request->ventilation_setting,
+            'traxen_unit'=> $request->traxen_unit,
             'createdby' => $request->user_id,
             'depo_id' => $request->depo_id
         ]);
 
         if($createPreadvice){
+            $gateInData = GateIn::where([
+                ['line_id',$request->line_id],
+                ['container_size',$request->container_size],
+                ['container_type',$request->container_type],
+                ['sub_type',$request->sub_type],
+                ['vessel_name',$request->vessel],
+                ['voyage',$request->voyage],
+                ['status','Ready'],
+            ])->get();
+
+            foreach($gateInData as $gateIn){
+                $createDoContainer = DoContainer::create([
+                    'line_id'=> $gateIn->line_id,
+                    'container_size'=> $gateIn->container_size,
+                    'container_type'=> $gateIn->container_type,
+                    'sub_type'=> $gateIn->sub_type,
+                    'vessel_name'=> $gateIn->vessel_name,
+                    'voyage'=> $gateIn->voyage,
+                    'status'=> $gateIn->status,
+                    'do_no'=> $request->do_no,
+                    'createdby' => $request->user_id,
+                    'depo_id' => $request->depo_id
+                ]);
+            }
             return response()->json([
                 'status' => "success",
                 'message' => "Added Successfully"

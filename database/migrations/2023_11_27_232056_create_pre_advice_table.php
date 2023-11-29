@@ -31,6 +31,11 @@ return new class extends Migration
             $table->string('sub_type')->nullable();
             $table->string('container_qty')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('in_cargo')->nullable();
+            $table->string('temprature_setting')->nullable();
+            $table->string('humadity_setting')->nullable();
+            $table->string('ventilation_setting')->nullable();
+            $table->string('traxen_unit')->nullable();
             $table->string('depo_id')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();

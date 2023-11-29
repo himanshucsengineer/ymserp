@@ -128,6 +128,18 @@ class GateInController extends Controller
         return GateIn::get();
     }
 
+    public function getPreAdviceContainer(Request $request){
+        return GateIn::where([
+            ['line_id',$request->line_id],
+            ['container_size',$request->container_size],
+            ['container_type',$request->container_type],
+            ['sub_type',$request->sub_type],
+            ['vessel_name',$request->vessel],
+            ['voyage',$request->voyage],
+            ['status','Ready'],
+        ])->get();
+    }
+
 
     public function getContainerList(Request $request){
 

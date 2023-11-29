@@ -170,8 +170,45 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="in_cargo">In Cargo</label>
+                                            <input type="text" class="form-control" id="in_cargo" name="in_cargo"  placeholder="Enter In Cargo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="temprature_setting">Temprature Setting</label>
+                                            <input type="text" class="form-control" id="temprature_setting" name="temprature_setting"  placeholder="Enter Temprature Setting">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="humadity_setting">Humadity Setting</label>
+                                            <input type="text" class="form-control" id="humadity_setting" name="humadity_setting"  placeholder="Enter Humadity Setting">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ventilation_setting">Ventilation Setting</label>
+                                            <input type="text" class="form-control" id="ventilation_setting" name="ventilation_setting"  placeholder="Enter Ventilation Setting">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="traxen_unit">Traxen Unit Details</label>
+                                            <input type="text" class="form-control" id="traxen_unit" name="traxen_unit"  placeholder="Enter Traxen Unit Details">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="container_qty">Container Required Quantity</label>
-                                            <input type="text" class="form-control" id="container_qty" name="container_qty"  placeholder="Enter Container Required Quantity">
+                                            <input type="text" class="form-control" onfocusout="myFunction()" id="container_qty" name="container_qty"  placeholder="Enter Container Required Quantity">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -183,10 +220,14 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" id="submit-btn" class="btn btn-primary" disabled>Save and Print</button>
                             </div>
                         </form>
                     </div>
+                    <div class="card">
+                        <ul id="conatinerList"></ul>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -227,6 +268,112 @@ $(document).ready(function () {
 });
 
 
+function myFunction(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var container_required = $(this).val();
+
+    var line_id = $('#line_id').val();
+    // var shipper_name = $("#shipper_name").val();
+    var vessel = $("#vessel").val();
+    var voyage = $("#voyage").val();
+    var container_size = $("#container_size").val();
+    var container_type = $("#container_type").val();
+    var sub_type = $("#sub_type").val();
+
+    if(line_id == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line Name</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(vessel == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">vessel Is Required!</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(voyage == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">voyage Is Required!</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+    if(container_size == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Size</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+    if(container_type == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+    if(sub_type == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Sub Type</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(line_id != '' && vessel!= '' && voyage != '' && container_size != '' && container_type != '' && sub_type != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/gatein/getPreAdviceContainer",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'line_id':line_id,
+                'container_size':container_size,
+                'container_type':container_type,
+                'sub_type':sub_type,
+                'vessel':vessel,
+                'voyage':voyage,
+            },
+            success: function (data) {
+                var count  = data.length;
+                if(container_required == count){
+                    data.forEach(function(item) {
+                        $("#conatinerList").append(`${item.container_no}`);
+                    });
+                    $("#submit-btn").removeAttr("disabled");
+                }else{
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Requirement Can Not Be Full Fill. Only ${count} Container is Available</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+}
+
 
 $(function () {
     
@@ -253,6 +400,11 @@ $(function () {
         var sub_type = $("#sub_type").val();
         var container_qty = $("#container_qty").val();
         var remarks = $("#remarks").val();
+        var in_cargo = $("#in_cargo").val();
+        var temprature_setting = $("#temprature_setting").val();
+        var humadity_setting = $("#humadity_setting").val();
+        var ventilation_setting = $("#ventilation_setting").val();
+        var traxen_unit = $("#traxen_unit").val();
 
         var data = {
             'date': date,
@@ -271,6 +423,11 @@ $(function () {
             'sub_type': sub_type,
             'container_qty': container_qty,
             'remarks': remarks,
+            'in_cargo': in_cargo,
+            'temprature_setting': temprature_setting,
+            'humadity_setting': humadity_setting,
+            'ventilation_setting': ventilation_setting,
+            'traxen_unit': traxen_unit,
             'user_id': user_id,
             'depo_id': depo_id,
         }
