@@ -11,6 +11,7 @@ class DoContainer extends Model
 
     protected $fillable = [
         'line_id',
+        'container_no',
         'container_size',
         'container_type',
         'sub_type',

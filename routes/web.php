@@ -102,6 +102,7 @@ Route::get('/location/all', 'App\Http\Controllers\LocationCodeController@view');
 
 Route::get('/preadvice/create', 'App\Http\Controllers\PreAdviceController@index');
 Route::get('/preadvice/all', 'App\Http\Controllers\PreAdviceController@view');
+Route::get('/preadvise/list', 'App\Http\Controllers\DoContainerController@index');
 
 
 

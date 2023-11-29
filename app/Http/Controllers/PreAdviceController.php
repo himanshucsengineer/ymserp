@@ -109,6 +109,7 @@ class PreAdviceController extends Controller
             foreach($gateInData as $gateIn){
                 $createDoContainer = DoContainer::create([
                     'line_id'=> $gateIn->line_id,
+                    'container_no'=> $gateIn->container_no,
                     'container_size'=> $gateIn->container_size,
                     'container_type'=> $gateIn->container_type,
                     'sub_type'=> $gateIn->sub_type,

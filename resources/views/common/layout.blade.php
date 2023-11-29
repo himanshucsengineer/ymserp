@@ -344,6 +344,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item" id="inspection">
+                                    <a href="/preadvise/list" class="nav-link">
+                                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                                        <i class="fas fa-search-location nav-icon"></i>
+                                        <p>Pre Advice List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item" id="inspection">
                                     <a href="/surveyor/reports" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>

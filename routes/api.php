@@ -246,4 +246,8 @@ $api->version('v1', function($api){
         $api->post('/create', 'App\Http\Controllers\PreAdviceController@store');
     });
 
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'docontainer'], function($api){
+        $api->post('/getlist', 'App\Http\Controllers\DoContainerController@getlist');
+    });
+
 });

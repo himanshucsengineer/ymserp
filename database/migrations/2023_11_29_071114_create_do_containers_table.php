@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('do_containers', function (Blueprint $table) {
             $table->id();
             $table->string('line_id')->nullable();
+            $table->string('container_no')->nullable();
             $table->string('container_size')->nullable();
             $table->string('container_type')->nullable();
             $table->string('sub_type')->nullable();
