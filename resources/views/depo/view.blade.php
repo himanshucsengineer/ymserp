@@ -58,12 +58,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Depo</h1>
+                    <h1 class="m-0">All Depot</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Depo</li>
+                        <li class="breadcrumb-item active">All Depot</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -105,7 +105,7 @@
                                         <th>Company Address</th>
                                         <th>Company Phone</th>
                                         <th>Company Email</th>
-                               
+                                        <th>Invoice Prefix</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -191,6 +191,7 @@ function refreshTable(page,search){
                 row.append($('<td>').append(item.company_address));
                 row.append($('<td>').append(item.company_phone));
                 row.append($('<td>').append(item.company_email));
+                row.append($('<td>').append(item.invoice_prefix));
                 
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')

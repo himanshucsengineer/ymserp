@@ -38,6 +38,17 @@
                     <div class="card card-primary">
                         <form id="outwardForm" novalidate="novalidate">
                             <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="container_no">Container Number</label>
+                                        <input type="text" name="container_no" id="container_no" class="form-control" placeholder="Container No.">
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

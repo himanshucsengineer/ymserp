@@ -139,35 +139,35 @@ class OutwardOfficerController extends Controller
         $gateInid = $request->gatein;
         $invoice_type = $request->type;
         $payment_type = $request->p_type;
-        $amt = $request->amt;
         
         $getGetInData = GateIn::where('id',$gateInid)->first();
         $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
         $line = MasterLine::where('id', $getGetInData->line_id)->where('containerSize',$getGetInData->container_size)->first();
 
+
         if($invoice_type == "lolo"){
             $final_invoice_type= "LIFT-OFF";
             $hsnCode = "9967";
-            // $charges = $amt;
+            $charges = $line->lolo_charges;
         }else if($invoice_type == "parking"){
             $final_invoice_type= "PARKING";
             $hsnCode = "9987";
-            // $charges = $line->parking_charges;
+            $charges = $line->parking_charges;
         }
         else if($invoice_type == "washing"){
             $final_invoice_type= "WASHING";
             $hsnCode = "9987";
-            // $charges = $line->washing_charges;
+            $charges = $line->washing_charges;
         }else if($invoice_type == "repair"){
             $final_invoice_type= "REPAIR";
             $hsnCode = "9987";
         }
 
-        $sgst = (9/100)*$amt;
-        $cgst = (9/100)*$amt;
+        $sgst = (9/100)*$charges;
+        $cgst = (9/100)*$charges;
 
         $totalGst = $cgst + $sgst;
-        $final_amount = $totalGst + $amt;
+        $final_amount = $totalGst + $charges;
 
         $finalAmountInWords = $this->numberToWord($final_amount);;
 
@@ -191,7 +191,7 @@ class OutwardOfficerController extends Controller
             'sub_type' =>$getGetInData->sub_type,
             'hsn_code' => $hsnCode,
             'quantity' => 1,
-            'amount' => number_format($amt, 2),
+            'amount' => number_format($charges, 2),
             'sgst' => number_format($sgst,2),
             'cgst' => number_format($cgst,2),
             'totalgst' => number_format($totalGst,2),

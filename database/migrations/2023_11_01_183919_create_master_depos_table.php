@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('company_address')->nullable();
             $table->string('company_phone')->nullable();
             $table->string('company_email')->nullable();
+            $table->string('invoice_prefix')->nullable();
             $table->timestamps();
         });
     }

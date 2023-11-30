@@ -245,6 +245,9 @@ class MasterLineController extends Controller
             'free_days'=> $request->free_days,
             'labour_rate'=> $request->labour_rate,
             'line_address'=> $request->line_address,
+            'lolo_charges'=> $request->lolo_charges,
+            'washing_charges'=> $request->washing_charges,
+            'parking_charges'=> $request->parking_charges,
 
             'email'=> $request->email,
             'phone'=> $request->phone,

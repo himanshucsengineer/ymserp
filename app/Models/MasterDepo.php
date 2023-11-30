@@ -29,6 +29,7 @@ class MasterDepo extends Model
         'company_name',
         'company_address',
         'company_phone',
-        'company_email'
+        'company_email',
+        'invoice_prefix'
     ];
 }

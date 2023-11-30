@@ -717,17 +717,17 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <p>Depo Master <i class="fas fa-angle-left right"></i></p>
+                                        <p>Depot Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="/depo/create" class="nav-link">
-                                                <p>Create Depo </p>
+                                                <p>Create Depot </p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="/depo/all" class="nav-link">
-                                                <p>All Depo</p>
+                                                <p>All Depot</p>
                                             </a>
                                         </li>
                                     </ul>

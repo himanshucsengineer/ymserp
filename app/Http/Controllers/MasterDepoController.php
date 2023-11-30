@@ -93,6 +93,7 @@ class MasterDepoController extends Controller
                             ->orWhere('company_address', 'LIKE', '%' . $search . '%')
                             ->orWhere('company_phone', 'LIKE', '%' . $search . '%')
                             ->orWhere('company_email', 'LIKE', '%' . $search . '%')
+                            ->orWhere('invoice_prefix', 'LIKE', '%' . $search . '%')
                             ->get();
                     }
                 }],
@@ -119,6 +120,7 @@ class MasterDepoController extends Controller
                             ->orWhere('company_address', 'LIKE', '%' . $search . '%')
                             ->orWhere('company_phone', 'LIKE', '%' . $search . '%')
                             ->orWhere('company_email', 'LIKE', '%' . $search . '%')
+                            ->orWhere('invoice_prefix', 'LIKE', '%' . $search . '%')
                             ->get();
                     }
                 }],
@@ -148,6 +150,7 @@ class MasterDepoController extends Controller
                 'company_phone' => $depo->company_phone,
                 'company_email' => $depo->company_email,
                 'id' => $depo->id,
+                'invoice_prefix' => $depo->invoice_prefix
             ];
             
         }
@@ -188,6 +191,9 @@ class MasterDepoController extends Controller
             'status' =>[
                 'required'
             ],
+            'invoice_prefix' => [
+                'required'
+            ]
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -204,7 +210,9 @@ class MasterDepoController extends Controller
             if ($messages->has('status')){
                 $validationFormate->status = $messages->first('status');
             }
-           
+            if ($messages->has('invoice_prefix')){
+                $validationFormate->invoice_prefix = $messages->first('invoice_prefix');
+            }
            
             $validationError[] = $validationFormate;
 
@@ -234,7 +242,8 @@ class MasterDepoController extends Controller
             'company_address'=> $request->company_address,
             'company_phone'=> $request->company_phone,
             'created_by' => $request->created_by,
-            'depo_id' => $request->depo_id
+            'depo_id' => $request->depo_id,
+            'invoice_prefix' => $request->invoice_prefix
         ]);
 
 
@@ -283,6 +292,9 @@ class MasterDepoController extends Controller
             'status' =>[
                 'required'
             ],
+            'invoice_prefix' => [
+                'required'
+            ]
            
           
         ];
@@ -300,6 +312,9 @@ class MasterDepoController extends Controller
             }
             if ($messages->has('status')){
                 $validationFormate->status = $messages->first('status');
+            }
+            if ($messages->has('invoice_prefix')){
+                $validationFormate->invoice_prefix = $messages->first('invoice_prefix');
             }
            
            
@@ -331,7 +346,8 @@ class MasterDepoController extends Controller
         $contractorDetails->company_address = is_null($request->company_address) ? $contractorDetails->company_address : $request->company_address;
         $contractorDetails->company_phone = is_null($request->company_phone) ? $contractorDetails->company_phone : $request->company_phone;
         $contractorDetails->company_email = is_null($request->company_email) ? $contractorDetails->company_email : $request->company_email;
-
+        $contractorDetails->invoice_prefix = is_null($request->invoice_prefix) ? $contractorDetails->invoice_prefix : $request->invoice_prefix;
+        
         $contractorDetails->updated_by = $request->user_id;
         $contractorDetails->updated_at = date('Y-m-d H:i:s');;
 

@@ -172,7 +172,13 @@ class MasterTarrifController extends Controller
         return MasterTarrif::where('line_id',$request->line_id)->where('repai_location_code',$request->location_code)->get();
     }
     public function getTarrifByLine(Request $request){
-        return MasterTarrif::where('line_id',$request->line_id)->get();
+        $tarrifData = MasterTarrif::where('line_id',$request->line_id)->get();
+        $LocationCode = LocationCode::get();
+        $data =  array(
+            'tarrifData' => $tarrifData,
+            'LocationCode' => $LocationCode,
+        );
+        return $data;
     }
 
     public function checktarrifbycode(Request $request){

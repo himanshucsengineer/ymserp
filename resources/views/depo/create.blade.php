@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text">Create Depo</h1>
+                    <h1 class="m-0 text">Create Depot</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active text">Create Depo</li>
+                        <li class="breadcrumb-item active text">Create Depot</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -100,7 +100,10 @@
                                     <label for="company_email">Company Email</label>
                                     <input type="email" class="form-control" id="company_email" name="company_email" placeholder="Enter Company Email">
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="invoice_prefix">Invoice Prefix</label>
+                                    <input type="text" class="form-control" id="invoice_prefix" name="invoice_prefix" placeholder="Enter Invoice Prefix">
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -151,7 +154,7 @@ $(function () {
             $("#company_name").val(response.company_name);
             $("#company_address").val(response.company_address);
             $("#company_phone").val(response.company_phone);
-            
+            $('#invoice_prefix').val(response.invoice_prefix);
         },
         error: function(error) {
             console.log(error);
@@ -182,7 +185,7 @@ $(function () {
         var company_name = $("#company_name").val();
         var company_address = $("#company_address").val();
         var company_phone = $("#company_phone").val();
-
+        var invoice_prefix = $('#invoice_prefix').val();
 
         if(getCateId[1]){
             const data = {
@@ -205,8 +208,8 @@ $(function () {
                 'company_phone':company_phone,
                 'user_id' : user_id,
                 'depo_id':depo_id,
-                'id':getCateId[1]
-
+                'id':getCateId[1],
+                'invoice_prefix':invoice_prefix
             }
             post('depo/update',data);
 
@@ -231,7 +234,7 @@ $(function () {
                 'company_phone':company_phone,
                 'created_by' : user_id,
                 'depo_id':depo_id,
-
+                'invoice_prefix':invoice_prefix
             }
             post('depo/create',data);
         }
@@ -250,8 +253,10 @@ $(function () {
         },
         status: {
             required: true,
+        },
+        invoice_prefix:{
+            required: true,
         }
-      
     },
     messages: {
         name: {
@@ -297,6 +302,9 @@ $(function () {
         company_email: {
             email:"Enter valid Email"
         },
+        invoice_prefix:{
+            required: "Invoice prefix is required",
+        }
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {

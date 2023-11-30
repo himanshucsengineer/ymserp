@@ -35,7 +35,8 @@ class MasterDepoFactory extends Factory
             'company_name' => 'bhawani group',
             'company_address' => 'mumbai',
             'company_phone' => 1234567890,
-            'company_email' => 'bhawan@gmail.com'
+            'company_email' => 'bhawan@gmail.com',
+            'invoice_prefix' => 'MUN'
         ];
     }
 }

@@ -431,8 +431,17 @@ $(document).ready(function () {
 
             $("#inward_date").val(data.inward_date);
             $("#inward_time").val(data.inward_time);
-            $('#survayor_date').val(data.survayor_date);
-            $('#survayor_time').val(data.survayor_time);
+            if(data.survayor_date != null){
+                console.log('sdfsd')
+                $('#survayor_date').val(data.survayor_date);
+            }else{
+                $('#survayor_date').val("<?= date('Y-m-d')?>");
+            }
+            if(data.survayor_time != null){
+                $('#survayor_time').val(data.survayor_time);
+            }else{
+                $('#survayor_time').val("<?= date('H:i:s')?>");
+            }
             $("#container_no").val(data.container_no);
             $("#vehicle_number").val(data.vehicle_number);
             $("#container_type").val(data.container_type);

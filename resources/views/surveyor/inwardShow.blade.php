@@ -49,13 +49,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="inward_date">Inward Date</label>
-                                            <input type="text" class="form-control" id="inward_date" name="inward_date" readonly value="<?= date('Y-m-d')?>" placeholder="Enter inward date">
+                                            <input type="text" class="form-control" id="inward_date" name="inward_date" readonly placeholder="Enter inward date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="inward_time">Inward Time</label>
-                                            <input type="text" class="form-control" id="inward_time" name="inward_time" readonly value="<?= date('H:i:s')?>"  placeholder="Enter inward time">
+                                            <input type="text" class="form-control" id="inward_time" name="inward_time" readonly  placeholder="Enter inward time">
                                         </div>
                                     </div>
                                 </div>
@@ -64,13 +64,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="survayor_date">Survey Start Date</label>
-                                            <input type="text" class="form-control" id="survayor_date" name="survayor_date" readonly value="<?= date('Y-m-d')?>" placeholder="Enter Survey Start Date">
+                                            <input type="text" class="form-control" id="survayor_date" name="survayor_date" readonly  placeholder="Enter Survey Start Date">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="survayor_time">Survey Start Time</label>
-                                            <input type="text" class="form-control" id="survayor_time" name="survayor_time" readonly value="<?= date('H:i:s')?>"  placeholder="Enter Survey Start Time">
+                                            <input type="text" class="form-control" id="survayor_time" name="survayor_time" readonly  placeholder="Enter Survey Start Time">
                                         </div>
                                     </div>
                                 </div>
@@ -266,10 +266,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="tracking_device">Tracking Device</label>
+                                            <label for="tracking_device">Tracking Device (<span id="track_device_name"></span>)</label>
                                             <select name="tracking_device" id="tracking_device" class="form-control">
-                                                <option value="NO">NO</option>
                                                 <option value="YES">YES</option>
+                                                <option value="NO">NO</option>
                                             </select>
                                         </div>
                                     </div>
@@ -277,6 +277,16 @@
                                         <div class="form-group">
                                             <label for="remarks">Remarks</label>
                                             <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="billing_type">Billing Type</label>
+                                            <select name="billing_type" class="form-control" id="billing_type">
+                                                <option value="">Select Billing Type</option>
+                                                <option value="lolo">Lolo Billing</option>
+                                                <option value="parking">Parking</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -463,8 +473,12 @@ $(document).ready(function () {
             $('#survayor_time').val(data.survayor_time);
             $("#container_no").val(data.container_no);
             $("#vehicle_number").val(data.vehicle_number);
-            $("#third_party").val(data.third_party);
-            $("#transaction_mode").val(data.transaction_mode);
+            if(data.third_party != null){
+                $("#third_party").val(data.third_party);
+            }
+            if(data.transaction_mode != null){
+                $("#transaction_mode").val(data.transaction_mode);
+            }
             $("#transaction_ref_no").val(data.transaction_ref_no);
             $("#arrive_from").val(data.arrive_from);
             $("#driver_name").val(data.driver_name);
@@ -473,9 +487,15 @@ $(document).ready(function () {
             $("#voyage").val(data.voyage);
             $("#port_name").val(data.port_name);
             $("#er_no").val(data.er_no);
-            $("#empty_repositioning").val(data.empty_repositioning);
-            $("#return").val(data.return);
-            $("#tracking_device").val(data.tracking_device);
+            if(data.empty_repositioning != null){
+                $("#empty_repositioning").val(data.empty_repositioning);
+            }
+            if(data.return != null){
+                $("#return").val(data.return);
+            }
+            if(data.tracking_device != null){
+                $("#tracking_device").val(data.tracking_device);
+            }
             $("#remarks").val(data.remarks);
         },
         error: function (error) {
@@ -499,6 +519,7 @@ function getline(id){
         success: function (data) {
             $("#line_id").val(data.id);
             $("#line_gst").val(data.gst);
+            $('#track_device_name').text(data.tracking_device);
         },
         error: function (error) {
             console.log(error);
@@ -590,6 +611,7 @@ $(function () {
         var returnfiled = $("#return").val();
         var tracking_device = $("#tracking_device").val();
         var remarks = $("#remarks").val();
+        var billing_type = $("#billing_type").val();
 
             var formData = new FormData();
 
@@ -630,8 +652,9 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    window.location = `/inward/executive`
-                    // location.href= `/print/thirdparty?gatein=${containerid}&type=lolo&p_type=${payment}`
+                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}`
+                    window.open(printurl, '_blank');
+                    window.location = `/inward/executive`;
                 },
                 error: function(error) {
                     var finalValue = '';
