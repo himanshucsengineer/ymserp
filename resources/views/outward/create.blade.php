@@ -342,7 +342,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="pan_no">Pan Number</label>
+                                            <label for="pan_no">PAN Number</label>
                                             <input type="text" class="form-control" id="pan_no" name="pan_no"
                                                 placeholder="Enter Pan Number ">
                                         </div>
@@ -350,7 +350,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="pan_copy">Pan Photo</label>
+                                            <label for="pan_copy">PAN Photo</label>
                                             <input type="file" class="form-control" id="pan_copy" name="pan_copy"
                                                 placeholder="Enter Container Number ">
                                         </div>
