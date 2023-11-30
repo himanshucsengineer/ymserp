@@ -7,6 +7,9 @@ use App\Models\GateIn;
 use App\Models\Gateout;
 use App\Models\MasterTransport;
 use App\Models\MasterLine;
+use App\Models\InvoiceManagement;
+use App\Models\MasterDepo;
+
 
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
@@ -133,17 +136,36 @@ class OutwardOfficerController extends Controller
             }
             return '';
         }
-
+        
 
     public function thirdparty(Request $request){
+        $current_month = date('m');
+        $current_year = date('Y');
+      
         $gateInid = $request->gatein;
         $invoice_type = $request->type;
         $payment_type = $request->p_type;
+        $depo_id = $request->depo;
+        $third_party = $request->third_party;
+        $user_id = $request->user;
+
         
         $getGetInData = GateIn::where('id',$gateInid)->first();
         $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
         $line = MasterLine::where('id', $getGetInData->line_id)->where('containerSize',$getGetInData->container_size)->first();
+        $depo_data = MasterDepo::where('id',$depo_id)->first();
+        $invoice_prefix = $depo_data->invoice_prefix;
+        $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->get();
 
+
+        if(count($invoiceData) > 0){
+            $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->orderby('created_at','desc')->first();
+            $invoice_count = $invoiceData->invoice_no + 1;
+            $final_invoice_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$invoice_count;
+        }else{
+            $invoice_count = 01;
+            $final_invoice_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$invoice_count;
+        }
 
         if($invoice_type == "lolo"){
             $final_invoice_type= "LIFT-OFF";
@@ -172,7 +194,7 @@ class OutwardOfficerController extends Controller
         $finalAmountInWords = $this->numberToWord($final_amount);;
 
         $data['invoice_data'] = array(
-            'invoice_id' => $getGetInData->id,
+            'invoice_id' => $final_invoice_no,
             'invoice_type' => $final_invoice_type,
             'buyer_name' =>$transporter->name,
             'buyer_address' =>$transporter->address,
@@ -199,6 +221,21 @@ class OutwardOfficerController extends Controller
             'final_amount_in_words' => $finalAmountInWords,
             'payment_type' => $payment_type
         );
+
+        $createInvoice = InvoiceManagement::create([
+            'invoice_no' => $invoice_count,
+            'gate_in_id' => $gateInid,
+            'invoice_type' =>  $invoice_type,
+            'payment_method' => $payment_type,
+            'createdby' => $user_id,
+            'depo_id' => $depo_id,
+            'year' => $current_year,
+            'month' => $current_month,
+            'final_invoice_no' => $final_invoice_no,
+            'third_party' => $third_party,
+            'is_manual' => "no",
+        ]);
+
         return view('print.thirdparty',$data);
     }
 

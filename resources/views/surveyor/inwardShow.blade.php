@@ -652,7 +652,7 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}`
+                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}`
                     window.open(printurl, '_blank');
                     window.location = `/inward/executive`;
                 },
@@ -687,6 +687,9 @@ $(function () {
         line_id:{
             required: true,
         },
+        billing_type:{
+            required: true,
+        }
        
 
     },
