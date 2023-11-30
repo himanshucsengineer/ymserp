@@ -17,14 +17,8 @@ return new class extends Migration
             $table->id();
             
 
-            $table->string('container_no')->nullable();
-            $table->string('container_size')->nullable();
-            $table->string('container_type')->nullable();
-            $table->string('sub_type')->nullable();
-            $table->string('line_id')->nullable();
-            $table->string('repair_completion_date')->nullable();
-            $table->string('inward_date')->nullable();
-            $table->string('do_date')->nullable();
+            $table->string('gate_in_id')->nullable();
+            $table->string('pre_advice_id')->nullable();
             $table->string('transport_id')->nullable();
             $table->string('vhicle_no')->nullable();
             $table->string('destination')->nullable();
@@ -37,6 +31,19 @@ return new class extends Migration
             $table->string('humadity')->nullable();
             $table->string('device_status')->nullable();
             $table->string('amount')->nullable();
+            $table->string('driver_contact')->nullable();
+            $table->string('do_copy')->nullable();
+            $table->string('challan_copy')->nullable();
+            $table->string('challan_no')->nullable();
+            $table->string('driver_name')->nullable();
+            $table->string('driver_copy')->nullable();
+            $table->string('consignee_id')->nullable();
+            $table->string('licence_no')->nullable();
+            $table->string('licence_copy')->nullable();
+            $table->string('aadhar_no')->nullable();
+            $table->string('aadhar_copy')->nullable();
+            $table->string('pan_no')->nullable();
+            $table->string('pan_copy')->nullable();
 
             $table->string('depo_id')->nullable();
             $table->string('createdby')->nullable();

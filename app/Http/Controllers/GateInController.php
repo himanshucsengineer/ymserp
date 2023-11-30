@@ -145,7 +145,7 @@ class GateInController extends Controller
     }
 
     public function getbycontainer(Request $request){
-        $gateindata = GateIn::where('container_no',$request->container_no)->first();
+        $gateindata = GateIn::where('container_no',$request->container_no)->where('status','!=','Out')->first();
         $line_data = MasterLine::where('id',$gateindata->line_id)->first();
 
         $data = array(

@@ -288,14 +288,21 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="driver_copy">Driver Photo</label>
                                             <input type="file" class="form-control" id="driver_copy" name="driver_copy"
                                                 placeholder="Enter Container Number ">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="driver_contact">Driver Contact</label>
+                                            <input type="text" class="form-control" id="driver_contact" name="driver_contact"
+                                                placeholder="Enter Driver Contact">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="consignee_id">Consignee</label>
                                             <select name="consignee_id" id="consignee_id" class="form-control">
@@ -349,6 +356,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <input type="hidden" id="gate_in_id" >
+                                <input type="hidden" id="pre_advice_id" >
                                 <button type="submit" class="btn btn-primary">Save Print Gate Pass</button>
                         </form>
                     </div>
@@ -417,6 +427,7 @@ $('#container_no').on('input',function(){
                 $('#line_name').val(data.line_name);
                 $('#repair_date').val(data.gateindata.repair_updatedat);
                 $('#inward_date').val(data.gateindata.inward_date);
+                $('#gate_in_id').val(data.gateindata.id)
             },
             error: function(error) {
                 console.log(error);
@@ -439,6 +450,7 @@ $('#do_no').on('input',function(){
             },
             success: function(data) {
                 $('#do_date').val(data.date);
+                $('#pre_advice_id').val(data.id);
             },
             error: function(error) {
                 console.log(error);
@@ -525,144 +537,58 @@ $(document).ready(function() {
     });
 });
 
-
-$('#gatePassForm').on('submit', function(e) {
-    event.preventDefault();
-
-    var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-    var receipt_no = $('#receipt_no').val();
-    var consignee_id = $('#consignee_id').val();
-    var shippers = $('#shippers').val();
-    var licence_no = $('#licence_no').val();
-    var aadhar_no = $('#aadhar_no').val();
-    var pan_no = $('#pan_no').val();
-    var line_id_2 = $('#line_id_2').val();
-    var seal_no = $('#seal_no').val();
-
-    if (receipt_no == '') {
-        var callout = document.createElement('div');
-        callout.innerHTML =
-            `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Receipt No</p></div>`;
-        document.getElementById('apiMessages').appendChild(callout);
-        setTimeout(function() {
-            callout.remove();
-        }, 2000);
-    }
-
-    var formData = new FormData();
-
-    formData.append('receipt_no', receipt_no);
-    formData.append('consignee_id', consignee_id);
-    formData.append('shippers', shippers);
-    formData.append('licence_no', licence_no);
-    formData.append('aadhar_no', aadhar_no);
-    formData.append('pan_no', pan_no);
-    formData.append('line_id_2', line_id_2);
-    formData.append('seal_no', seal_no);
-    formData.append('user_id', user_id);
-    formData.append('depo_id', depo_id);
-
-    if ($('#licence_copy')[0].files && $('#licence_copy')[0].files.length > 0) {
-        formData.append('licence_copy', $('#licence_copy')[0].files[0]);
-    } else {
-        formData.append('licence_copy', '');
-    }
-
-    if ($('#aadhar_copy')[0].files && $('#aadhar_copy')[0].files.length > 0) {
-        formData.append('aadhar_copy', $('#aadhar_copy')[0].files[0]);
-    } else {
-        formData.append('aadhar_copy', '');
-    }
-
-    if ($('#pan_copy')[0].files && $('#pan_copy')[0].files.length > 0) {
-        formData.append('pan_copy', $('#pan_copy')[0].files[0]);
-    } else {
-        formData.append('pan_copy', '');
-    }
-
-
-    $.ajax({
-        url: '/api/outward/genrateGatePass',
-        type: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            var callout = document.createElement('div');
-            callout.innerHTML =
-                `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-
-            window.open(`/print/gatepass?id=${receipt_no}`, '_blank');
-            location.reload();
-        },
-        error: function(error) {
-            var finalValue = '';
-            if (Array.isArray(error.responseJSON.message)) {
-                finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-            } else {
-                finalValue = error.responseJSON.message;
-            }
-            var callout = document.createElement('div');
-            callout.innerHTML =
-                `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-        }
-    });
-
-})
-
-
-
 $('#outwardForm').on('submit', function(e) {
     event.preventDefault();
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var do_no = $('#do_no').val();
-    var challan_no = $('#challan_no').val();
-    var line_id = $('#line_id').val();
+    var gate_in_id = $('#gate_in_id').val();
+    var pre_advice_id = $('#pre_advice_id').val();
     var transport_id = $('#transport_id').val();
-    var container_type = $('#container_type').val();
-    var container_size = $('#container_size').val();
-    var sub_type = $('#sub_type').val();
-    var grade = $('#grade').val();
-    var status_name = $('#status_name').val();
-    var driver_name = $('#driver_name').val();
     var vehicle_no = $('#vehicle_no').val();
-    var container_no = $('#container_no').val();
-
+    var destination = $('#destination').val();
+    var seal_no = $('#seal_no').val();
+    var third_party = $('#third_party').val();
+    var port_name = $('#port_name').val();
+    var temprature = $('#temprature').val();
+    var vent_seal_no = $('#vent_seal_no').val();
+    var ventilation = $('#ventilation').val();
+    var humadity = $('#humadity').val();
+    var device_status = $('#device_status').val();
+    var amount = $('#amount').val();
+    var challan_no = $('#challan_no').val();
+    var driver_name = $('#driver_name').val();
+    var consignee_id = $('#consignee_id').val();
+    var licence_no = $('#licence_no').val();
+    var aadhar_no = $('#aadhar_no').val();
+    var pan_no = $('#pan_no').val();
+    var driver_contact = $('#driver_contact').val();
     var formData = new FormData();
 
-    formData.append('do_no', do_no);
-    formData.append('challan_no', challan_no);
-    formData.append('line_id', line_id);
-    formData.append('transport_id', transport_id);
-    formData.append('container_type', container_type);
-    formData.append('container_size', container_size);
-    formData.append('sub_type', sub_type);
-    formData.append('grade', grade);
-    formData.append('status_name', status_name);
-    formData.append('driver_name', driver_name);
-    formData.append('vehicle_no', vehicle_no);
-    formData.append('container_no', container_no);
+    formData.append('gate_in_id',gate_in_id)
+    formData.append('pre_advice_id',pre_advice_id)
+    formData.append('transport_id',transport_id)
+    formData.append('vehicle_no',vehicle_no)
+    formData.append('destination',destination)
+    formData.append('seal_no',seal_no)
+    formData.append('third_party',third_party)
+    formData.append('port_name',port_name)
+    formData.append('temprature',temprature)
+    formData.append('vent_seal_no',vent_seal_no)
+    formData.append('ventilation',ventilation)
+    formData.append('humadity',humadity)
+    formData.append('device_status',device_status)
+    formData.append('amount',amount)
+    formData.append('challan_no',challan_no)
+    formData.append('driver_name',driver_name)
+    formData.append('consignee_id',consignee_id)
+    formData.append('licence_no',licence_no)
+    formData.append('aadhar_no',aadhar_no)
+    formData.append('pan_no',pan_no)
     formData.append('user_id', user_id);
     formData.append('depo_id', depo_id);
-
-
+    formData.append('driver_contact', driver_contact);
 
     if ($('#do_copy')[0].files && $('#do_copy')[0].files.length > 0) {
         formData.append('do_copy', $('#do_copy')[0].files[0]);
@@ -675,11 +601,29 @@ $('#outwardForm').on('submit', function(e) {
     } else {
         formData.append('challan_copy', '');
     }
-
+    
     if ($('#driver_copy')[0].files && $('#driver_copy')[0].files.length > 0) {
         formData.append('driver_copy', $('#driver_copy')[0].files[0]);
     } else {
         formData.append('driver_copy', '');
+    }
+    
+    if ($('#licence_copy')[0].files && $('#licence_copy')[0].files.length > 0) {
+        formData.append('licence_copy', $('#licence_copy')[0].files[0]);
+    } else {
+        formData.append('licence_copy', '');
+    }
+    
+    if ($('#aadhar_copy')[0].files && $('#aadhar_copy')[0].files.length > 0) {
+        formData.append('aadhar_copy', $('#aadhar_copy')[0].files[0]);
+    } else {
+        formData.append('aadhar_copy', '');
+    }
+
+    if ($('#pan_copy')[0].files && $('#pan_copy')[0].files.length > 0) {
+        formData.append('pan_copy', $('#pan_copy')[0].files[0]);
+    } else {
+        formData.append('pan_copy', '');
     }
 
     $.ajax({
@@ -700,7 +644,7 @@ $('#outwardForm').on('submit', function(e) {
                 callout.remove();
             }, 2000);
 
-            window.open(`/print/outward?id=${data.data.id}`, '_blank');
+            window.open(`/print/gatepass?id=${data.gatepassdata.id}`, '_blank');
             location.reload();
         },
         error: function(error) {

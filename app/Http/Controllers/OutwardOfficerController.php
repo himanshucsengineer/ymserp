@@ -9,6 +9,8 @@ use App\Models\MasterTransport;
 use App\Models\MasterLine;
 use App\Models\InvoiceManagement;
 use App\Models\MasterDepo;
+use App\Models\GatePass;
+use App\Models\PreAdvice;
 
 
 use Illuminate\Http\Request;
@@ -53,20 +55,24 @@ class OutwardOfficerController extends Controller
 
     public function gatepass_print(Request $request){
         $id = $request->id;
-        $outwardData = OutwardOfficer::where('id',$id)->first();
-        $linedata = MasterLine::where('id',$outwardData->line_id)->first();
-        $transporter = MasterTransport::where('id',$outwardData->transport_id)->first();
+        $gatePassData = GatePass::where('id',$id)->first();
+        $outwardData = OutwardOfficer::where('id',$gatePassData->outward_id)->first();
+        $gateInData = GateIn::where('id',$outwardData->gate_in_id)->first();
+        $preadviceData = PreAdvice::where('id',$outwardData->pre_advice_id)->first();
 
         $data['gate_pass'] = array(
-            'transporter' => $transporter->name,
-            'licence_no' => $outwardData->licence_no,
-            'aadhar_no' => $outwardData->aadhar_no,
-            'line_name' => $linedata->name,
-
-            'shippers' => $outwardData->shippers,
-            'pan_no' => $outwardData->pan_no,
+            'gate_pass_no' => $gatePassData->final_gate_pass_no,
+            'container_no' => $gateInData->container_no,
+            'container_type' => $gateInData->container_type,
+            'container_size' => $gateInData->container_size,
+            'sub_type' => $gateInData->sub_type,
             'seal_no' => $outwardData->seal_no,
-
+            'driver_name' => $outwardData->driver_name,
+            'driver_photo' => $outwardData->driver_copy,
+            'driver_contact' => $outwardData->driver_contact,
+            'created_at' =>  $gatePassData->created_at,
+            'challan_no' =>  $outwardData->challan_no,
+            'shipper_name' => $preadviceData->shipper_name,
         );
 
         return view('print.gatepass',$data);
@@ -252,33 +258,6 @@ class OutwardOfficerController extends Controller
     public function store(Request $request)
     {
 
-        $rules=[
-            'do_no'=>[
-                'required',
-                'unique:outward_officers,do_no'
-            ],
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if($validator->fails()){
-            $messages = $validator->errors();
-            
-            $validationFormate = new stdClass();
-            
-            if ($messages->has('do_no')){
-                $validationFormate->do_no = $messages->first('do_no');
-            }
-
-            $validationError[] = $validationFormate;
-
-            return response()->json([
-                'status' => "error",
-                'message' => $validationError
-            ], 400);
-        }
-
-
         if ($request->hasFile('do_copy')) {
             $do_copy = $request->file('do_copy');
             $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
@@ -303,39 +282,95 @@ class OutwardOfficerController extends Controller
             $driver_copy_name = '';
         }
 
+        if ($request->hasFile('licence_copy')) {
+            $licence_copy = $request->file('licence_copy');
+            $licence_copy_name = time() . '_' . $licence_copy->getClientOriginalName();
+            $licence_copy->move(public_path('uploads/outward'), $licence_copy_name);
+        }else{
+            $licence_copy_name = '';
+        }
+
+        if ($request->hasFile('aadhar_copy')) {
+            $aadhar_copy = $request->file('aadhar_copy');
+            $aadhar_copy_name = time() . '_' . $aadhar_copy->getClientOriginalName();
+            $aadhar_copy->move(public_path('uploads/outward'), $aadhar_copy_name);
+        }else{
+            $aadhar_copy_name = '';
+        }
+
+        if ($request->hasFile('pan_copy')) {
+            $pan_copy = $request->file('pan_copy');
+            $pan_copy_name = time() . '_' . $pan_copy->getClientOriginalName();
+            $pan_copy->move(public_path('uploads/outward'), $pan_copy_name);
+        }else{
+            $pan_copy_name = '';
+        }
 
         $createLine = OutwardOfficer::create([
-            'do_no'=> $request->do_no,
-            'challan_no'=> $request->challan_no,
-            'line_id'=> $request->line_id,
+            'gate_in_id'=> $request->gate_in_id,
+            'pre_advice_id'=> $request->pre_advice_id,
             'transport_id'=> $request->transport_id,
-            'container_type'=> $request->container_type,
-            'container_size'=> $request->container_size,
-            'sub_type'=> $request->sub_type,
-            'grade'=> $request->grade,
-            'status_name'=> $request->status_name,
+            'vhicle_no'=> $request->vehicle_no,
+            'destination'=> $request->destination,
+            'seal_no'=> $request->seal_no,
+            'third_party'=> $request->third_party,
+            'port_name'=> $request->port_name,
+            'temprature'=> $request->temprature,
+            'vent_seal_no'=> $request->vent_seal_no,
+            'ventilation'=> $request->ventilation,
+            'humadity'=> $request->humadity,
+            'device_status'=> $request->device_status,
+            'amount'=> $request->amount,
+            'challan_no'=> $request->challan_no,
             'driver_name'=> $request->driver_name,
-            'vehicle_no'=> $request->vehicle_no,
-            'container_no'=> $request->container_no,
-            
+            'consignee_id'=> $request->consignee_id,
+            'licence_no'=> $request->licence_no,
+            'aadhar_no'=> $request->aadhar_no,
+            'pan_no'=> $request->pan_no,
+            'driver_contact' => $request->driver_contact,
             'createdby' => $request->user_id,
             'depo_id' => $request->depo_id,
             'do_copy' => $do_copy_name,
             'challan_copy' => $challan_copy_name,
-            'driver_copy' =>$driver_copy_name
+            'driver_copy' =>$driver_copy_name,
+            'licence_copy' =>$licence_copy_name,
+            'aadhar_copy' =>$aadhar_copy_name,
+            'pan_copy' =>$pan_copy_name,
         ]);
 
-        // $gateoutDetails = Gateout::find($request->gate_out_id);
-        // $gateoutDetails->vehicle_number = is_null($request->vehical_no) ? $gateoutDetails->vehicle_number : $request->vehical_no;
-        // $gateoutDetails->status = '1';
-        // $gateoutDetails  = $gateoutDetails->save();
+        $current_month = date('m');
+        $current_year = date('Y');
+        $depo_data = MasterDepo::where('id',$request->depo_id)->first();
+        $invoice_prefix = $depo_data->invoice_prefix;
+        $gatePassData = GatePass::where('depo_id',$request->depo_id)->where('month',$current_month)->where('year',$current_year)->get();
+
+        if(count($gatePassData) > 0){
+            $gateData = GatePass::where('depo_id',$request->depo_id)->where('month',$current_month)->where('year',$current_year)->orderby('created_at','desc')->first();
+            $gate_pass_count = $gateData->gate_pass_no + 1;
+            $final_gate_pass_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$gate_pass_count;
+        }else{
+            $gate_pass_count = 01;
+            $final_gate_pass_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$gate_pass_count;
+        }
+
+
+        $createGatePass = GatePass::create([
+            'gate_pass_no' => $gate_pass_count,
+            'outward_id' => $createLine->id,
+            'year' => $current_year,
+            'month' => $current_month,
+            'final_gate_pass_no' => $final_gate_pass_no,
+            'createdby' => $request->user_id,
+            'depo_id' => $request->depo_id,
+        ]);
 
         
         if($createLine){
             return response()->json([
                 'status' => "success",
                 'message' => "Added Successfully",
-                'data' => $createLine
+                'data' => $createLine,
+                'gatepassdata' => $createGatePass,
             ], 200);
         }else{
             return response()->json([
