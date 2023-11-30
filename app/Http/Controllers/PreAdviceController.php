@@ -104,7 +104,8 @@ class PreAdviceController extends Controller
                 ['vessel_name',$request->vessel],
                 ['voyage',$request->voyage],
                 ['status','Ready'],
-            ])->get();
+                ['grade',$request->grade]
+            ])->orderby('created_at','asc')->get();
 
             foreach($gateInData as $gateIn){
                 $createDoContainer = DoContainer::create([
@@ -117,6 +118,7 @@ class PreAdviceController extends Controller
                     'voyage'=> $gateIn->voyage,
                     'status'=> $gateIn->status,
                     'do_no'=> $request->do_no,
+                    'grade' => $gateIn->grade,
                     'createdby' => $request->user_id,
                     'depo_id' => $request->depo_id
                 ]);

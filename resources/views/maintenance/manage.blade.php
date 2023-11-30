@@ -682,9 +682,10 @@ function updateEstimate(){
                 <h4>Please Choose Outward Container Status</h4>
                 <select name="out_status" id="out_status" class="form-control">
                     <option value="">Select An Option</option>
-                    <option value="ready">Move to Stacking</option>
-                    <option value="out">Ready For Outward</option>
+                    <option value="ready">Available</option>
+                    <option value="reject">Reject</option>
                 </select>
+                <input type="text" id="reject_remark" class="form-control mt-3" style="display:none" placeholder="Enter Remark...">
                 <?php }else{?>
                     <h4>Are You sure you want to submit this report</h4>
                 <?php }?>
@@ -696,5 +697,17 @@ function updateEstimate(){
         </div>
     </div>
 </div>
+
+<script>
+
+$('#out_status').on('change', function(){
+    var out_status = $(this).val();
+    if(out_status == 'reject'){
+        $('#reject_remark').show();
+    }else{
+        $('#reject_remark').hide();
+    }
+})
+</script>
 
 @endsection

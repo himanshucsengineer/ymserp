@@ -104,7 +104,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Inward No.</th>
+                                        <th>Action</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Container Size</th>
@@ -113,7 +113,7 @@
                                         <th>Vehicle image</th>
                                         <th>Driver Name</th>
                                         <th>Driver Contact</th>
-                                        <th>Action</th>
+                                        <th>Inward No.</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -184,16 +184,6 @@ $('#filterbystatus').on('change',function(){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.inward_no));
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-                row.append($('<td>').append(container_img));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
-                
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id)
@@ -203,6 +193,17 @@ $('#filterbystatus').on('change',function(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
+                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
+                row.append($('<td>').append(container_img));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
+                row.append($('<td>').append(vehicle_img));
+                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                
+                
+                row.append($('<td>').append(item.inward_no));
 
                 tbody.append(row);
                 i++;

@@ -34,5 +34,6 @@ class PreAdvice extends Model
         'depo_id',
         'createdby',
         'updatedby',
+        'grade'
     ];
 }

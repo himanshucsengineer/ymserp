@@ -137,7 +137,8 @@ class GateInController extends Controller
             ['vessel_name',$request->vessel],
             ['voyage',$request->voyage],
             ['status','Ready'],
-        ])->get();
+            ['grade',$request->grade]
+        ])->orderby('created_at','asc')->get();
     }
 
 

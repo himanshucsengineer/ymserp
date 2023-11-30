@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('humadity_setting')->nullable();
             $table->string('ventilation_setting')->nullable();
             $table->string('traxen_unit')->nullable();
+            $table->string('grade')->nullable();
             $table->string('depo_id')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();

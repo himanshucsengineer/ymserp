@@ -124,7 +124,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="container_type">Container Type</label>
+                                            <select name="container_type" id="container_type" class="form-control">
+                                                <option value="">Select Container Type</option>
+                                                <option value="DRY">DRY</option>
+                                                <option value="REEFER">REEFER</option>
+                                            </select>
+                                        </div>
                                         
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="container_size">Container Size</label>
                                             <select name="container_size" id="container_size" class="form-control">
@@ -132,19 +145,6 @@
                                                 <option value="20">20</option>
                                                 <option value="40">40</option>
                                                 <option value="45">45</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="container_type">Container Type</label>
-                                            <select name="container_type" id="container_type" class="form-control">
-                                                <option value="">Select Container Type</option>
-                                                <option value="DRY">DRY</option>
-                                                <option value="REEFER">REEFER</option>
                                             </select>
                                         </div>
                                     </div>
@@ -170,51 +170,67 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="grade">Grade</label>
+                                            <select name="grade" id="grade" class="form-control">
+                                                <option value="">Select Grade</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="in_cargo">In Cargo</label>
                                             <input type="text" class="form-control" id="in_cargo" name="in_cargo"  placeholder="Enter In Cargo">
                                         </div>
                                     </div>
+                                    
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="temprature_setting">Temprature Setting</label>
                                             <input type="text" class="form-control" id="temprature_setting" name="temprature_setting"  placeholder="Enter Temprature Setting">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="humadity_setting">Humadity Setting</label>
                                             <input type="text" class="form-control" id="humadity_setting" name="humadity_setting"  placeholder="Enter Humadity Setting">
                                         </div>
                                     </div>
+                                    
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="ventilation_setting">Ventilation Setting</label>
                                             <input type="text" class="form-control" id="ventilation_setting" name="ventilation_setting"  placeholder="Enter Ventilation Setting">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="traxen_unit">Traxen Unit Details</label>
                                             <input type="text" class="form-control" id="traxen_unit" name="traxen_unit"  placeholder="Enter Traxen Unit Details">
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="container_qty">Container Required Quantity</label>
-                                            <input type="text" class="form-control" onfocusout="myFunction()" id="container_qty" name="container_qty"  placeholder="Enter Container Required Quantity">
+                                            <input type="number" class="form-control" onfocusout="getContainerList()" id="container_qty" name="container_qty"  placeholder="Enter Container Required Quantity">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="remarks">Remarks</label>
-                                            <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks">
+                                            <textarea name="remarks" id="remarks" class="form-control" cols="30" rows="1"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -268,20 +284,21 @@ $(document).ready(function () {
 });
 
 
-function myFunction(){
+
+function getContainerList(){
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var container_required = $(this).val();
-
+    var container_required = $('#container_qty').val();
     var line_id = $('#line_id').val();
-    // var shipper_name = $("#shipper_name").val();
+    var grade = $("#grade").val();
     var vessel = $("#vessel").val();
     var voyage = $("#voyage").val();
     var container_size = $("#container_size").val();
     var container_type = $("#container_type").val();
     var sub_type = $("#sub_type").val();
+  
 
     if(line_id == ''){
         var callout = document.createElement('div');
@@ -333,8 +350,15 @@ function myFunction(){
             callout.remove();
         }, 2000);
     }
-
-    if(line_id != '' && vessel!= '' && voyage != '' && container_size != '' && container_type != '' && sub_type != ''){
+    if(grade == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Grade</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+    if(line_id != '' && vessel!= '' && voyage != '' && container_size != '' && container_type != '' && sub_type != '' && grade != ''){
         $.ajax({
             type: "post",
             url: "/api/gatein/getPreAdviceContainer",
@@ -350,6 +374,7 @@ function myFunction(){
                 'sub_type':sub_type,
                 'vessel':vessel,
                 'voyage':voyage,
+                'grade':grade
             },
             success: function (data) {
                 var count  = data.length;
@@ -430,6 +455,7 @@ $(function () {
             'traxen_unit': traxen_unit,
             'user_id': user_id,
             'depo_id': depo_id,
+            'grade':grade
         }
 
         post('preadvice/create',data);

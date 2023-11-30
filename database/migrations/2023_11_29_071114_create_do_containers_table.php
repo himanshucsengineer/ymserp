@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('voyage')->nullable();
             $table->string('status')->nullable();
             $table->string('do_no')->nullable();
+            $table->string('grade')->nullable();
             $table->string('depo_id')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();

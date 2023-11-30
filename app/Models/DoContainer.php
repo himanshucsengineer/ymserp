@@ -18,6 +18,7 @@ class DoContainer extends Model
         'vessel_name',
         'voyage',
         'status',
+        'grade',
         'do_no',
         'depo_id',
         'createdby',
