@@ -178,6 +178,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){
         $api->post('/create','App\Http\Controllers\GateInController@store');
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
+        $api->post('/getbycontainer', 'App\Http\Controllers\GateInController@getbycontainer');
         $api->get('/genrateastimate', 'App\Http\Controllers\GateInController@genrateastimate');
         $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');
         $api->post('/getDataByIdOutward', 'App\Http\Controllers\GateInController@getDataByIdOutward');
@@ -190,7 +191,8 @@ $api->version('v1', function($api){
         $api->post('/updaterepair', 'App\Http\Controllers\GateInController@updaterepair');
         $api->post('/updateout', 'App\Http\Controllers\GateInController@updateout');
         $api->post('/getPreAdviceContainer', 'App\Http\Controllers\GateInController@getPreAdviceContainer');
-
+        
+        $api->post('/geVhicle', 'App\Http\Controllers\GateInController@geVhicle');
         
         $api->post('/filterByDateSurvey', 'App\Http\Controllers\GateInController@filterByDateSurvey');
         $api->post('/getInspectionDataSurvey', 'App\Http\Controllers\GateInController@getInspectionDataSurvey');
@@ -244,6 +246,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'preadvice'], function($api){
         $api->post('/create', 'App\Http\Controllers\PreAdviceController@store');
+        $api->post('/getbydo', 'App\Http\Controllers\PreAdviceController@getbydo');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'docontainer'], function($api){

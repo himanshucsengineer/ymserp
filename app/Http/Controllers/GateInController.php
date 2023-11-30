@@ -128,6 +128,33 @@ class GateInController extends Controller
         return GateIn::get();
     }
 
+    public function geVhicle(Request $request){
+        if($request->user_id == 1){
+            $gateInData = GateIn::where([
+                ['status','!=','Out'],
+                ['gateintype','Without Container']
+            ])->orderby('created_at','desc')->get();
+        }else{
+            $gateInData = GateIn::where([
+                ['status','!=','Out'],
+                ['depo_id',$request->depo_id],
+                ['gateintype','Without Container']
+            ])->orderby('created_at','desc')->get();
+        }
+        return $gateInData;
+    }
+
+    public function getbycontainer(Request $request){
+        $gateindata = GateIn::where('container_no',$request->container_no)->first();
+        $line_data = MasterLine::where('id',$gateindata->line_id)->first();
+
+        $data = array(
+            'line_name' => $line_data->name,
+            'gateindata' => $gateindata,
+        );
+        return $data;
+    }
+
     public function getPreAdviceContainer(Request $request){
         return GateIn::where([
             ['line_id',$request->line_id],

@@ -33,6 +33,10 @@ class PreAdviceController extends Controller
         return view('preadvice.view');
     }
 
+    public function getbydo(Request $request){
+        return PreAdvice::where('do_no',$request->do_no)->first();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
