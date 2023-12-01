@@ -429,13 +429,12 @@
                                         <p>Outward Entry</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="/surveyor/reports" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Reports</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="nav-item hidden" id="BILLING">
