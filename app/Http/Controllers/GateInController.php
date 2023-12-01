@@ -76,13 +76,13 @@ class GateInController extends Controller
         $getInData = GateIn::where('id',$request->gatein_id)->first();
         $lineData = MasterLine::where('id',$getInData->line_id)->first();
         // $containerVerifyData = ContainerVerify::where('gate_in_id',$request->gatein_id)->orderby('created_at','desc')->first();
-        $userData = User::where('id',$containerVerifyData->createdby)->first();
+        $userData = User::where('id',$getInData->updatedby)->first();
         $survayorDoneName = MasterEmployee::where('id',$userData->employee_id)->first(); 
 
         $data['container_no'] = $getInData->container_no;
         $data['line_name'] = $lineData->name;
-        $data['survey_date'] = $containerVerifyData->survayor_date;
-        $data['survey_time'] = $containerVerifyData->survayor_time;
+        $data['survey_date'] = $getInData->survayor_date;
+        $data['survey_time'] = $getInData->survayor_time;
         $data['survey_done_by'] = $survayorDoneName->firstname . ' ' . $survayorDoneName->lastname;
         
         $formetedData = [];

@@ -122,6 +122,9 @@ function clearTableBody() {
 
 function search(){
     var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
     var do_no = $('#do_no').val();
 
     $.ajax({
@@ -141,7 +144,7 @@ function search(){
             var tbody = $('#table-body');
 
             var i =1;
-            response.data.forEach(function(item) {
+            response.forEach(function(item) {
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
                 row.append($('<td>').append(item.line_name));

@@ -691,7 +691,7 @@ function getTarrifByLine(line_id) {
                     $(`#${item.container_side}`).append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
-                    innerDiv.attr({'data-id':locationData.code,'href':'#'})
+                    innerDiv.attr({'data-id':locationData.id,'data-value':locationData.code})
                     newDiv.append(innerDiv);
                     innerDiv.html('<span class="circle small"></span>');
                 })
@@ -699,9 +699,11 @@ function getTarrifByLine(line_id) {
 
             $('.open').click(function() {
                 var dataIdValue = $(this).data('id');
+                var datacodeValue = $(this).data('value');
+
                 var line_id = $('#line_id_no').val();
                 gettarrif(dataIdValue, line_id);
-                $('#side').val(dataIdValue);
+                $('#side').val(datacodeValue);
                 $('#modal-xl').modal('show');
             });
         },
@@ -1419,7 +1421,6 @@ function updateEstimate(){
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
