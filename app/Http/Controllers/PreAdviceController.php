@@ -73,8 +73,6 @@ class PreAdviceController extends Controller
             ], 400);
         }
 
-        return "hiii";
-
         $createPreadvice = PreAdvice::create([
             'date'=> $request->date,
             'time'=> $request->time,
