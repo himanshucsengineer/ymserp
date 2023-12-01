@@ -302,13 +302,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="/billing/invoice" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-money-bill-wave nav-icon"></i>
                                         <p>Depot Billing</p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item" id="inspection">
                                     <a href="/inward/executive" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
