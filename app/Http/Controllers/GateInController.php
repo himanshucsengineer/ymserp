@@ -349,17 +349,31 @@ class GateInController extends Controller
         }
 
         if($request->user_id == 1){
-
-            $gateInData = GateIn::where([
-                ['status','In'],
-                ['is_estimate_done','0']
-            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            if($request->is_inward){
+                $gateInData = GateIn::where([
+                    ['status','In'],
+                ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    ['status','In'],
+                    ['is_estimate_done','0']
+                ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            }
+            
         }else{
-            $gateInData = GateIn::where([
-                ['status','In'],
-                ['is_estimate_done','0'],
-                ['depo_id',$request->depo_id],
-            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            if($request->is_inward){
+                $gateInData = GateIn::where([
+                    ['status','In'],
+                    ['depo_id',$request->depo_id],
+                ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    ['status','In'],
+                    ['is_estimate_done','0'],
+                    ['depo_id',$request->depo_id],
+                ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            }
+            
         }
         
     
@@ -1006,44 +1020,83 @@ class GateInController extends Controller
         }
 
         if($request->user_id == 1){
-
-            $gateInData = GateIn::where([
-                [function ($query) use ($request) {
-                    if (($search = $request->search)) {
-                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
-                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
-                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
-                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
-                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
-                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
-                            ->get();
-                    }
-                }],
-                ['status','In'],
-                ['is_estimate_done','0'],
-            ])->orderby('created_at','desc')->paginate($datalimit);
+            if($request->is_inward){
+                $gateInData = GateIn::where([
+                    [function ($query) use ($request) {
+                        if (($search = $request->search)) {
+                            $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                                ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                                ->get();
+                        }
+                    }],
+                    ['status','In'],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [function ($query) use ($request) {
+                        if (($search = $request->search)) {
+                            $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                                ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                                ->get();
+                        }
+                    }],
+                    ['status','In'],
+                    ['is_estimate_done','0'],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }
+            
         }else{
-
-            $gateInData = GateIn::where([
-                [function ($query) use ($request) {
-                    if (($search = $request->search)) {
-                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_type', 'LIKE', '%' . $search . '%')
-                            ->orWhere('container_size', 'LIKE', '%' . $search . '%')
-                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
-                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
-                            ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
-                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
-                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
-                            ->get();
-                    }
-                }],
-                ['status','In'],
-                ['depo_id',$request->depo_id],
-                ['is_estimate_done','0'],
-            ])->orderby('created_at','desc')->paginate($datalimit);
+            if($request->is_inward){
+                $gateInData = GateIn::where([
+                    [function ($query) use ($request) {
+                        if (($search = $request->search)) {
+                            $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                                ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                                ->get();
+                        }
+                    }],
+                    ['status','In'],
+                    ['depo_id',$request->depo_id],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [function ($query) use ($request) {
+                        if (($search = $request->search)) {
+                            $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_type', 'LIKE', '%' . $search . '%')
+                                ->orWhere('container_size', 'LIKE', '%' . $search . '%')
+                                ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('contact_number', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                                ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                                ->get();
+                        }
+                    }],
+                    ['status','In'],
+                    ['depo_id',$request->depo_id],
+                    ['is_estimate_done','0'],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }
+            
         }
         
         $formetedData = [];

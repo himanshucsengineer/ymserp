@@ -161,7 +161,8 @@ function filterByDate(){
             'user_id':user_id,
             'depo_id':depo_id,
             'startDate':startDate,
-            'endDate':endDate
+            'endDate':endDate,
+            'is_inward' : 1,
         },
         success: function(response) {
             clearTableBody()
@@ -318,7 +319,8 @@ function refreshTable(page,search){
         },
         data:{
             'user_id':user_id,
-            'depo_id':depo_id
+            'depo_id':depo_id,
+            'is_inward' : 1,
         },
         success: function(response) {
             clearTableBody()
