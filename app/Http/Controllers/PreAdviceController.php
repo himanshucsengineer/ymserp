@@ -105,8 +105,8 @@ class PreAdviceController extends Controller
                 ['container_size',$request->container_size],
                 ['container_type',$request->container_type],
                 ['sub_type',$request->sub_type],
-                ['vessel_name',$request->vessel],
-                ['voyage',$request->voyage],
+                // ['vessel_name',$request->vessel],
+                // ['voyage',$request->voyage],
                 ['status','Ready'],
                 ['grade',$request->grade]
             ])->orderby('created_at','asc')->get();
