@@ -308,24 +308,6 @@ function getContainerList(){
             callout.remove();
         }, 2000);
     }
-
-    if(vessel == ''){
-        var callout = document.createElement('div');
-        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">vessel Is Required!</p></div>`;
-        document.getElementById('apiMessages').appendChild(callout);
-        setTimeout(function() {
-            callout.remove();
-        }, 2000);
-    }
-
-    if(voyage == ''){
-        var callout = document.createElement('div');
-        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">voyage Is Required!</p></div>`;
-        document.getElementById('apiMessages').appendChild(callout);
-        setTimeout(function() {
-            callout.remove();
-        }, 2000);
-    }
     if(container_size == ''){
         var callout = document.createElement('div');
         callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Size</p></div>`;
@@ -358,7 +340,7 @@ function getContainerList(){
             callout.remove();
         }, 2000);
     }
-    if(line_id != '' && vessel!= '' && voyage != '' && container_size != '' && container_type != '' && sub_type != '' && grade != ''){
+    if(line_id != '' && container_size != '' && container_type != '' && sub_type != '' && grade != ''){
         $.ajax({
             type: "post",
             url: "/api/gatein/getPreAdviceContainer",
@@ -372,8 +354,8 @@ function getContainerList(){
                 'container_size':container_size,
                 'container_type':container_type,
                 'sub_type':sub_type,
-                'vessel':vessel,
-                'voyage':voyage,
+                // 'vessel':vessel,
+                // 'voyage':voyage,
                 'grade':grade
             },
             success: function (data) {

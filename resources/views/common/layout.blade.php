@@ -315,13 +315,12 @@
                                         <p>Inward Data Entry</p>
                                     </a>
                                 </li>
-                                <li class="nav-item" id="inspection">
+                                <!-- <li class="nav-item" id="inspection">
                                     <a href="/surveyor/reports" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Reports</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
 
