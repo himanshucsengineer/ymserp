@@ -413,6 +413,7 @@ $(function () {
         var humadity_setting = $("#humadity_setting").val();
         var ventilation_setting = $("#ventilation_setting").val();
         var traxen_unit = $("#traxen_unit").val();
+        var grade = $("#grade").val();
 
         var data = {
             'date': date,
@@ -440,7 +441,6 @@ $(function () {
             'depo_id': depo_id,
             'grade':grade
         }
-
         post('preadvice/create',data);
     }
   });
