@@ -449,7 +449,7 @@ $('#do_no').on('input',function(){
                 'do_no': inputValue,
             },
             success: function(data) {
-                $('#do_date').val(data.date);
+                $('#do_date').val(data.do_date);
                 $('#pre_advice_id').val(data.id);
             },
             error: function(error) {
