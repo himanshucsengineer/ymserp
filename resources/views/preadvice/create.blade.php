@@ -359,6 +359,7 @@ function getContainerList(){
                 'grade':grade
             },
             success: function (data) {
+                $("#conatinerList").empty();
                 var count  = data.length;
                 if(container_required == count){
                     data.forEach(function(item) {
