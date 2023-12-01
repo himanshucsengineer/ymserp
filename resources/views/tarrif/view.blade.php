@@ -62,6 +62,12 @@
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
+            <div class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <a href="create"><button type="button" class="btn btn-block btn-outline-success">Add New</button></a>
+                </div>
+            </div>
         </div><!-- /.container-fluid -->
     </div>
 

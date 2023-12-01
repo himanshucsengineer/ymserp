@@ -58,15 +58,21 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Contractor</h1>
+                    <h1 class="m-0">All Employer</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All Contractor</li>
+                        <li class="breadcrumb-item active">All Employer</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
+            <div class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <a href="create"><button type="button" class="btn btn-block btn-outline-success">Add New</button></a>
+                </div>
+            </div>
         </div><!-- /.container-fluid -->
     </div>
 

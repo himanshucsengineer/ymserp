@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text">Create Contractor</h1>
+                    <h1 class="m-0 text">Create Employer</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active text">Create Contractor</li>
+                        <li class="breadcrumb-item active text">Create Employer</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,35 +27,35 @@
                         <form id="contractorForm" novalidate="novalidate">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="contractorcode">Contractor Code <span style="color:red;">*</span></label>
+                                    <label for="contractorcode">Employer Code <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" name="contractorcode" id="contractorcode" placeholder="Enter Contractor Code">
                                 </div>
                                 <div class="form-group">
-                                    <label for="fullname">Contractor Full Name <span style="color:red;">*</span></label>
+                                    <label for="fullname">Employer Full Name <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Enter Full Name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="company">Contractor Company <span style="color:red;">*</span></label>
+                                    <label for="company">Employer Company <span style="color:red;">*</span></label>
                                     <input type="text" class="form-control" name="company" id="company" placeholder="Enter Company">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Contarctor Address</label>
+                                    <label for="address">Employer Address</label>
                                     <input type="text" class="form-control" id="address" placeholder="Enter Address">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pincode">Contractor Pincode</label>
+                                    <label for="pincode">Employer Pincode</label>
                                     <input type="text" class="form-control" id="pincode" placeholder="Enter Contractor pincode">
                                 </div>
                                 <div class="form-group">
-                                    <label for="contact">Contractor Contact</label>
+                                    <label for="contact">Employer Contact</label>
                                     <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Contractor contact">
                                 </div>
                                 <div class="form-group">
-                                    <label for="license">Contractor License</label>
+                                    <label for="license">Employer License</label>
                                     <input type="text" class="form-control" id="license" placeholder="Enter License">
                                 </div>
                                 <div class="form-group">
-                                    <label for="gst">Contractor GST Number</label>
+                                    <label for="gst">Employer GST Number</label>
                                     <input type="text" class="form-control" id="gst" name="gst" placeholder="Enter Contractor GST Number">
                                 </div>
                             </div>

@@ -235,7 +235,7 @@
                with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open" >
                             
-                            <a href="pages/gallery.html" class="nav-link active">
+                            <a href="/dashboard" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                 Dashboard
@@ -681,17 +681,17 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <p>Contractor Master <i class="fas fa-angle-left right"></i></p>
+                                        <p>Employer Master <i class="fas fa-angle-left right"></i></p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="/contractor/create" class="nav-link">
-                                                <p> Create Contractor </p>
+                                                <p> Create Employer </p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="/contractor/all" class="nav-link">
-                                                <p>All Contractor</p>
+                                                <p>All Employer</p>
                                             </a>
                                         </li>
                                     </ul>
