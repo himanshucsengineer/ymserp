@@ -74,7 +74,7 @@
                     
                     
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="flex_date_range">
@@ -92,7 +92,7 @@
                                     <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
                                 </div>
                             </div>
-                            <table id="inspectionData" class="table table-bordered table-hover table-responsive">
+                            <table id="inspectionData" class="table table-bordered table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
