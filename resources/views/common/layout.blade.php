@@ -345,7 +345,7 @@
                                     <a href="/preadvise/list" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
-                                        <p>Pre Advice List</p>
+                                        <p>Pre Advice Outward List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item" id="inspection">
@@ -390,7 +390,7 @@
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
                                 <p>
-                                    Pre Advice
+                                    Pre Advice Outward
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -399,14 +399,14 @@
                                     <a href="/preadvice/create" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
-                                        <p>Preadvice Entry</p>
+                                        <p>Preadvice Outward Entry</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/preadvice/all" class="nav-link">
                                         <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
-                                        <p>All Preadvice</p>
+                                        <p>All Preadvice Outward</p>
                                     </a>
                                 </li>
                             </ul>

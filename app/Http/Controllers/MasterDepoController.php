@@ -184,6 +184,8 @@ class MasterDepoController extends Controller
         $rules=[
             'name'=>[
                 'required',
+                'unique:master_depos,name'
+
             ],
             'address' => [
                 'required'
