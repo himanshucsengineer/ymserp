@@ -298,32 +298,42 @@ a.open:hover .circle img {
                                 <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
                                     aria-labelledby="custom-tabs-three-home-tab">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-4"><button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showRight()">Right</button></div>
-                                                <div class="col-md-4"><button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showLeft()">Left</button></div>
-                                                <div class="col-md-4"><button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showTop()">Top</button></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-4"><button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showBottom()">Bottom</button></div>
-                                                <div class="col-md-4"><button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showFront()">Front</button></div>
-                                                <div class="col-md-4"><button type="button"
+                                        <div class="col-md-1">
+                                            <button type="button"
                                                         class="btn btn-block btn-outline-success"
                                                         onclick="showDoor()">Door</button></div>
+                                            <div class="col-md-2">    
+                                                <button type="button"
+                                                class="btn btn-block btn-outline-success"
+                                                onclick="showLeft()">Left</button>
+                                            </div>
+                                            <div class="col-md-2"> 
+                                                <button type="button"
+                                                        class="btn btn-block btn-outline-success"
+                                                        onclick="showFront()">Front</button></div>
+                                                        <div class="col-md-2">
+                                                        <button type="button"
+                                                        class="btn btn-block btn-outline-success"
+                                                        onclick="showRight()">Right</button>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        <button type="button"
+                                                        class="btn btn-block btn-outline-success"
+                                                        onclick="showInternal()">Internal</button>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                <button type="button"
+                                                        class="btn btn-block btn-outline-success"
+                                                        onclick="showTop()">Top</button>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        <button type="button"
+                                                        class="btn btn-block btn-outline-success"
+                                                        onclick="showBottom()">Bottom</button>
+                                                        </div>
                                             </div>
                                         </div>
+                                       
                                     </div>
                                     <hr>
                                     <div class="row justify-content-center">
@@ -354,6 +364,10 @@ a.open:hover .circle img {
 
                                         <div class="col-md-10" id="door" style="display:none">
                                             <img src="" id="door_img" alt="Image with Hotspots"
+                                                style="width:100%" id="image">
+                                        </div>
+                                        <div class="col-md-10" id="interior" style="display:none">
+                                            <img src="" id="interior_img" alt="Image with Hotspots"
                                                 style="width:100%" id="image">
                                         </div>
                                     </div>
@@ -422,6 +436,8 @@ function showRight() {
     $('#bottom').hide();
     $('#front').hide();
     $('#door').hide();
+    $('#interior').hide();
+
 }
 
 function showLeft() {
@@ -431,6 +447,8 @@ function showLeft() {
     $('#bottom').hide();
     $('#front').hide();
     $('#door').hide();
+    $('#interior').hide();
+
 }
 
 function showTop() {
@@ -440,6 +458,8 @@ function showTop() {
     $('#bottom').hide();
     $('#front').hide();
     $('#door').hide();
+    $('#interior').hide();
+
 }
 
 function showBottom() {
@@ -449,6 +469,8 @@ function showBottom() {
     $('#bottom').show();
     $('#front').hide();
     $('#door').hide();
+    $('#interior').hide();
+
 }
 
 function showFront() {
@@ -458,6 +480,8 @@ function showFront() {
     $('#bottom').hide();
     $('#front').show();
     $('#door').hide();
+    $('#interior').hide();
+
 }
 
 function showDoor() {
@@ -467,8 +491,18 @@ function showDoor() {
     $('#bottom').hide();
     $('#front').hide();
     $('#door').show();
+    $('#interior').hide();
 }
 
+function showInternal(){
+    $('#right').hide();
+    $('#left').hide();
+    $('#top').hide();
+    $('#bottom').hide();
+    $('#front').hide();
+    $('#door').hide();
+    $('#interior').show();
+}
 
 function printAstimate(){
     var gatein_id = $('#gateinid').val();
