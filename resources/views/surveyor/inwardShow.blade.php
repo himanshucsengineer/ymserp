@@ -294,6 +294,12 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="billing_type">Amount</label>
+                                            <input type="text" id="amount" class="form-control" name="amount" placeholder="Amount">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -644,6 +650,49 @@ function getTranport(id){
 ?>
 
 
+$('#billing_type').on('change',function(){
+    var bill_type = $(this).val();
+    var checkToken = localStorage.getItem('token');
+
+    if(bill_type == ''){
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Billing Type</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+
+    if(bill_type != ''){
+        var line_id = $('#line_id').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/line/getbyid",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'id':line_id,
+            },
+            success: function (data) {
+                var amount = ''
+                if(bill_type == 'lolo'){
+                    amount = data.lolo_charges;
+                }else if(bill_type == "parking"){
+                    amount = data.parking_charges;
+                }
+                $("#amount").val(`${amount}`);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+})
+
 
 $(function () {
     
@@ -679,6 +728,8 @@ $(function () {
         var tracking_device = $("#tracking_device").val();
         var remarks = $("#remarks").val();
         var billing_type = $("#billing_type").val();
+        var amount = $("#amount").val();
+
 
             var formData = new FormData();
 
@@ -706,6 +757,7 @@ $(function () {
             formData.append('tracking_device', tracking_device);
             formData.append('remarks', remarks);
             formData.append('id', containerid);
+            // formData.append('amount',amount);
             formData.append('challan', $('#challan')[0].files[0]);
             formData.append('empty_latter', $('#empty_latter')[0].files[0]);
 
@@ -719,7 +771,7 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}`
+                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}$amt=${amount}`
                     window.open(printurl, '_blank');
                     window.location = `/inward/executive`;
                 },

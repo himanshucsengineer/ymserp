@@ -154,6 +154,7 @@ class OutwardOfficerController extends Controller
         $depo_id = $request->depo;
         $third_party = $request->third_party;
         $user_id = $request->user;
+        $amount = $request->amt;
 
         
         $getGetInData = GateIn::where('id',$gateInid)->first();
@@ -176,11 +177,11 @@ class OutwardOfficerController extends Controller
         if($invoice_type == "lolo"){
             $final_invoice_type= "LIFT-OFF";
             $hsnCode = "9967";
-            $charges = $line->lolo_charges;
+            $charges = $amount;
         }else if($invoice_type == "parking"){
             $final_invoice_type= "PARKING";
             $hsnCode = "9987";
-            $charges = $line->parking_charges;
+            $charges = $amount;
         }
         else if($invoice_type == "washing"){
             $final_invoice_type= "WASHING";
