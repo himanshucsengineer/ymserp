@@ -13,6 +13,12 @@
 .img_prv_box img {
     width: 100%;
 }
+.select2-container .select2-selection--single{
+    height:38px !important;
+}
+.select2-container{
+    z-index:100;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -464,53 +470,8 @@ $(document).ready(function() {
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    $.ajax({
-        type: "post",
-        url: "/api/transport/getTransporter",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data: {
-            'user_id': user_id,
-            'depo_id': depo_id
-        },
-        success: function(data) {
-            var select = document.getElementById('transport_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.name;
-                select.appendChild(option);
-            });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-
-    $.ajax({
-        type: "post",
-        url: "/api/transport/getConsignee",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data: {
-            'user_id': user_id,
-            'depo_id': depo_id
-        },
-        success: function(data) {
-            var select_2 = document.getElementById('consignee_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.name;
-                select_2.appendChild(option);
-            });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+    refreshTransporter()
+    refreshConsignee()
 
     $.ajax({
         type: "post",
@@ -536,6 +497,112 @@ $(document).ready(function() {
         }
     });
 });
+
+function refreshConsignee(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+    $.ajax({
+        type: "post",
+        url: "/api/transport/getConsignee",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            processConsignee(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+function refreshTransporter(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+    $.ajax({
+        type: "post",
+        url: "/api/transport/getTransporter",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data:{
+            'user_id':user_id,
+            'depo_id':depo_id
+        },
+        success: function (data) {
+            processTransporter(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+function processConsignee(transporters){
+    var transformedData = transporters.map(function(item) {
+    return {
+        id: item.id,
+        text: item.name
+    };
+});
+
+var blankOption = { id: '', text: '' };
+transformedData.unshift(blankOption);
+
+$('#consignee_id').select2({
+    placeholder: 'Select Consignee',
+    data: transformedData,
+    escapeMarkup: function (markup) {
+        return markup;
+    },
+    language: {
+        noResults: function () {
+            return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createConsigneeModel()">Add New</button></center>';
+        }
+    }
+});
+}
+
+
+function processTransporter(transporters){
+
+var transformedData = transporters.map(function(item) {
+    return {
+        id: item.id,
+        text: item.name
+    };
+});
+
+var blankOption = { id: '', text: '' };
+transformedData.unshift(blankOption);
+
+$('#transport_id').select2({
+    placeholder: 'Select Transporter',
+    data: transformedData,
+    escapeMarkup: function (markup) {
+        return markup;
+    },
+    language: {
+        noResults: function () {
+            return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTransporterModel()">Add New</button></center>';
+        }
+    }
+});
+}
+function createTransporterModel(){
+    $('#modal-transporter').modal('show');
+}
+
+function createConsigneeModel(){
+    $('#modal-consignee').modal('show');
+}
+
 
 $('#outwardForm').on('submit', function(e) {
     event.preventDefault();
@@ -695,6 +762,248 @@ $(function() {
         }
     });
 });
+
+
+function add_transporter(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var name   = $('#name').val();
+    var address   = $('#address').val();
+    var city   = $('#city').val();
+    var state   = $('#state').val();
+    var pincode   = $('#pincode').val();
+    var gst   = $('#gst').val();
+    var pan   = $('#pan').val();
+    var gst_state   = $('#gst_state').val();
+    var state_code   = $('#state_code').val();
+
+    if(name == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Name Is Required</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    const data = {
+                'name':name,
+                'address':address,
+                'city':city,
+                'state':state,
+                'pincode':pincode,
+                'gst':gst,
+                'pan':pan,
+                'gst_state':gst_state,
+                'state_code':state_code,
+                'is_transport':"transport",
+                'user_id':user_id,
+                'depo_id':depo_id,
+        }
+    post('transport/create',data);
+    refreshTransporter()
+    $('#modal-transporter').modal('hide');
+}
+
+function add_consginee(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var name   = $('#name').val();
+    var address   = $('#address').val();
+    var city   = $('#city').val();
+    var state   = $('#state').val();
+    var pincode   = $('#pincode').val();
+    var gst   = $('#gst').val();
+    var pan   = $('#pan').val();
+    var gst_state   = $('#gst_state').val();
+    var state_code   = $('#state_code').val();
+
+    if(name == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Name Is Required</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    const data = {
+                'name':name,
+                'address':address,
+                'city':city,
+                'state':state,
+                'pincode':pincode,
+                'gst':gst,
+                'pan':pan,
+                'gst_state':gst_state,
+                'state_code':state_code,
+                'is_transport':"consignee",
+                'user_id':user_id,
+                'depo_id':depo_id,
+        }
+    post('transport/create',data);
+    refreshConsignee()
+    $('#modal-consignee').modal('hide');
+}
 </script>
+
+
+<div class="modal fade" id="modal-consignee">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Consignee</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Name <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="city">City <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter State">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pincode">Pincode <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter pincode">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gst">GST</label>
+                            <input type="text" class="form-control" id="gst" name="gst" placeholder="Enter GST">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pan">PAN NO. <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="pan" name="pan" placeholder="Enter PAN NO.">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gst_state">GST State</label>
+                            <input type="text" class="form-control" id="gst_state" name="gst_state" placeholder="Enter GST State">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="state_code">State Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="state_code" name="state_code" placeholder="Enter State Code">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="add_consginee()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-transporter">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Transporter</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Name <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="city">City <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter State">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pincode">Pincode <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter pincode">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gst">GST</label>
+                            <input type="text" class="form-control" id="gst" name="gst" placeholder="Enter GST">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pan">PAN NO. <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="pan" name="pan" placeholder="Enter PAN NO.">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gst_state">GST State</label>
+                            <input type="text" class="form-control" id="gst_state" name="gst_state" placeholder="Enter GST State">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="state_code">State Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="state_code" name="state_code" placeholder="Enter State Code">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="add_transporter()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

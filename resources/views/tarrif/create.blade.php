@@ -292,6 +292,7 @@ function refreshLocation(){
     });
 }
 
+
 function processLocationCodes(location_codes){
 
     var transformedData = location_codes.map(function(item) {
