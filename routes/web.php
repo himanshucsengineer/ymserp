@@ -76,8 +76,6 @@ Route::get('/supervisor/inspection', 'App\Http\Controllers\GateInController@supe
 Route::get('/maintenance/view', 'App\Http\Controllers\GateInController@maintenance_view');
 Route::get('/maintenance/manage', 'App\Http\Controllers\GateInController@maintenance_manage');
 
-Route::get('/gateout/create', 'App\Http\Controllers\GateoutController@index');
-
 Route::get('/outward/view', 'App\Http\Controllers\OutwardOfficerController@index');
 Route::get('/outward/manage', 'App\Http\Controllers\OutwardOfficerController@manage');
 

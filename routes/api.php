@@ -220,13 +220,6 @@ $api->version('v1', function($api){
 
     });
 
-    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gateout'], function($api){
-        $api->post('/create','App\Http\Controllers\GateoutController@store');
-        $api->post('/truckEntryData', 'App\Http\Controllers\GateoutController@truckEntryData');
-        $api->post('/get', 'App\Http\Controllers\GateoutController@get');
-        $api->post('/getbyid', 'App\Http\Controllers\GateoutController@getbyid');
-    
-    });
 
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'maintenance'], function($api){
