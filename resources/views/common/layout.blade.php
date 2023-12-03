@@ -283,13 +283,12 @@
                                         <p>Inspection</p>
                                     </a>
                                 </li>
-                                <li class="nav-item" id="inspection">
+                                <!-- <li class="nav-item" id="inspection">
                                     <a href="/surveyor/reports" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Reports</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -348,13 +347,12 @@
                                         <p>Pre Advice Outward List</p>
                                     </a>
                                 </li>
-                                <li class="nav-item" id="inspection">
+                                <!-- <li class="nav-item" id="inspection">
                                     <a href="/surveyor/reports" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Reports</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
 
@@ -375,13 +373,12 @@
                                         <p>Repairing</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="/surveyor/reports" class="nav-link">
-                                        <!-- <i class="far fa-circle nav-icon"></i> -->
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Reports</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
 
@@ -628,13 +625,13 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview">
+                            <!-- <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="/purchase/reports" class="nav-link">
                                         <p> Reports </p>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
                         <li class="nav-item hidden" id="MANAGEMENT">
                             <a href="#" class="nav-link">
