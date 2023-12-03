@@ -159,7 +159,8 @@ class OutwardOfficerController extends Controller
         
         $getGetInData = GateIn::where('id',$gateInid)->first();
         $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
-        $line = MasterLine::where('id', $getGetInData->line_id)->where('containerSize',$getGetInData->container_size)->first();
+        $line = MasterLine::where('id', $getGetInData->line_id)->first();
+        
         $depo_data = MasterDepo::where('id',$depo_id)->first();
         $invoice_prefix = $depo_data->invoice_prefix;
         $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->get();

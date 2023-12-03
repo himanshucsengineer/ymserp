@@ -771,7 +771,7 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}$amt=${amount}`
+                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}&amt=${amount}`
                     window.open(printurl, '_blank');
                     window.location = `/inward/executive`;
                 },
