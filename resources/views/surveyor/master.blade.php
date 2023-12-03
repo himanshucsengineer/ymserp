@@ -1426,6 +1426,8 @@ function createTransaction() {
     if ($('#file1')[0].files[0] && $('#file1')[0].files[0]) {
         var tarrif_id = $('#tarrif_id').val();
         var gatein_id = $('#gateinid').val();
+        var labour_hr = $('#labour_hr').val();
+
         var dimension_h = $('#dimension_h').val();
         var dimension_w = $('#dimension_w').val();
         var dimension_l = $('#dimension_l').val();
