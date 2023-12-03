@@ -13,15 +13,24 @@
 @section('content')
 
 <style>
-    #right{
-        position: relative;
-    }
-.reportinput{
-    width:100px !important;
+#right {
+    position: relative;
 }
-#transaction_total, #transaction_sub_total, #transaction_tax, #transaction_tax_cost, #transaction_material_cost, #transaction_labour_hr, #transaction_labour_cost{
+
+.reportinput {
     width: 100px !important;
 }
+
+#transaction_total,
+#transaction_sub_total,
+#transaction_tax,
+#transaction_tax_cost,
+#transaction_material_cost,
+#transaction_labour_hr,
+#transaction_labour_cost {
+    width: 100px !important;
+}
+
 .hidden {
     display: none;
 }
@@ -276,7 +285,12 @@ a.open:hover .circle img {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                <h4 style="text-transform:uppercase; text-align:center">SIDE: RIGHT | Container Number: <span class="container_no"></span> | MFG DATE: <span class="mfg_date"></span></h4>
+                    <h4 style="text-transform:uppercase; text-align:center">SIDE: <span
+                            id="right_side">RIGHT</span><span id="left_side">LEFT</span><span
+                            id="top_side">TOP</span><span id="bottom_side">BOTTOM</span><span
+                            id="front_side">FRONT</span><span id="door_side">DOOR</span><span
+                            id="internal_side">INTERNAL</span> | Container Number: <span class="container_no"></span> |
+                        MFG DATE: <span class="mfg_date"></span></h4>
                     <div class="card card-primary card-outline card-tabs">
                         <div class="card-header p-0 pt-1 border-bottom-0">
                             <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -299,52 +313,44 @@ a.open:hover .circle img {
                                     aria-labelledby="custom-tabs-three-home-tab">
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showDoor()">Door</button></div>
-                                            <div class="col-md-2">    
-                                                <button type="button"
-                                                class="btn btn-block btn-outline-success"
-                                                onclick="showLeft()">Left</button>
-                                            </div>
-                                            <div class="col-md-2"> 
-                                                <button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showFront()">Front</button></div>
-                                                        <div class="col-md-2">
-                                                        <button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showRight()">Right</button>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                        <button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showInternal()">Internal</button>
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                <button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showTop()">Top</button>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                        <button type="button"
-                                                        class="btn btn-block btn-outline-success"
-                                                        onclick="showBottom()">Bottom</button>
-                                                        </div>
-                                            </div>
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showDoor()">Door</button>
                                         </div>
-                                       
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showLeft()">Left</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showFront()">Front</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showRight()">Right</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showInternal()">Internal</button>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showTop()">Top</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showBottom()">Bottom</button>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row justify-content-center">
                                         <div class="col-md-10" id="right">
-                                            <img src="" id="right_img" alt="Image with Hotspots"
-                                                style="width:100%" id="image">
+                                            <img src="" id="right_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
                                         </div>
 
                                         <div class="col-md-10" id="left" style="display:none">
-                                            <img src="" id="left_img" alt="Image with Hotspots"
-                                                style="width:100%" id="image">
+                                            <img src="" id="left_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
                                         </div>
 
                                         <div class="col-md-10" id="top" style="display:none">
@@ -353,82 +359,103 @@ a.open:hover .circle img {
                                         </div>
 
                                         <div class="col-md-10" id="bottom" style="display:none">
-                                            <img src="" id="bottom_img" alt="Image with Hotspots"
-                                                style="width:100%" id="image">
+                                            <img src="" id="bottom_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
                                         </div>
 
                                         <div class="col-md-10" id="front" style="display:none">
-                                            <img src="" id="front_img" alt="Image with Hotspots"
-                                                style="width:100%" id="image">
+                                            <img src="" id="front_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
                                         </div>
 
                                         <div class="col-md-10" id="door" style="display:none">
-                                            <img src="" id="door_img" alt="Image with Hotspots"
-                                                style="width:100%" id="image">
+                                            <img src="" id="door_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
                                         </div>
                                         <div class="col-md-10" id="interior" style="display:none">
-                                            <img src="" id="interior_img" alt="Image with Hotspots"
-                                                style="width:100%" id="image">
+                                            <img src="" id="interior_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel"
+                                    aria-labelledby="custom-tabs-three-profile-tab">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <button data-toggle="modal" class="btn btn-block btn-outline-success" data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
+                                            <button data-toggle="modal" class="btn btn-block btn-outline-success"
+                                                data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-block btn-outline-success" onclick="printAstimate()">Print</button>
+                                            <button class="btn btn-block btn-outline-success"
+                                                onclick="printAstimate()">Print</button>
                                         </div>
                                     </div>
-                                <div class="card mt-5">
-                                    <div class="card-body p-0">
-                                        <table class="table table-striped table-responsive">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 10px">#</th>
-                                                    <th>Container No.</th>
-                                                    <th>Compoment Code</th>
-                                                    <th>Location Code</th>
-                                                    <th>Damage Code</th>
-                                                    <th>Repair code</th>
-                                                    <th>Material code</th>
-                                                    <th>UOM</th>
-                                                    <th>Width</th>
-                                                    <th>Length</th>
-                                                    <th>Height</th>
-                                                    <th>Quantity</th>
-                                                    <th>Labour Hr.</th>
-                                                    <th>Labour Cost</th>
-                                                    <th>Material Cost</th>
-                                                    <th>Sub Total</th>
-                                                    <th>GST</th>
-                                                    <th>Tax Cost</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Damage Image 1</th>
-                                                    <th>Damage Image 2</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="reporting">
-                                            </tbody>
-                                        </table>
+                                    <div class="card mt-5">
+                                        <div class="card-body p-0">
+                                            <table class="table table-striped table-responsive">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Container No.</th>
+                                                        <th>Compoment Code</th>
+                                                        <th>Location Code</th>
+                                                        <th>Damage Code</th>
+                                                        <th>Repair code</th>
+                                                        <th>Material code</th>
+                                                        <th>UOM</th>
+                                                        <th>Width</th>
+                                                        <th>Length</th>
+                                                        <th>Height</th>
+                                                        <th>Quantity</th>
+                                                        <th>Labour Hr.</th>
+                                                        <th>Labour Cost</th>
+                                                        <th>Material Cost</th>
+                                                        <th>Sub Total</th>
+                                                        <th>GST</th>
+                                                        <th>Tax Cost</th>
+                                                        <th>Total Cost</th>
+                                                        <th>Damage Image 1</th>
+                                                        <th>Damage Image 2</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="reporting">
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <input type="hidden" id="line_id_no">
                 </div>
             </div>
+            <input type="hidden" id="line_id_no">
         </div>
-    </section>
+</div>
+</div>
+</section>
 </div>
 
 
 
 <script>
+$('#right').hide();
+$('#left').hide();
+$('#top').hide();
+$('#bottom').hide();
+$('#front').hide();
+$('#door').show();
+$('#interior').hide();
+$('#door_side').show();
+$('#right_side').hide();
+$('#left_side').hide();
+$('#top_side').hide();
+$('#bottom_side').hide();
+$('#front_side').hide();
+$('#internal_side').hide();
+
 function showRight() {
     $('#right').show();
     $('#left').hide();
@@ -437,7 +464,13 @@ function showRight() {
     $('#front').hide();
     $('#door').hide();
     $('#interior').hide();
-
+    $('#door_side').hide();
+    $('#right_side').show();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
 }
 
 function showLeft() {
@@ -448,6 +481,13 @@ function showLeft() {
     $('#front').hide();
     $('#door').hide();
     $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').show();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
 
 }
 
@@ -459,6 +499,13 @@ function showTop() {
     $('#front').hide();
     $('#door').hide();
     $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').show();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
 
 }
 
@@ -470,6 +517,13 @@ function showBottom() {
     $('#front').hide();
     $('#door').hide();
     $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').show();
+    $('#front_side').hide();
+    $('#internal_side').hide();
 
 }
 
@@ -481,6 +535,13 @@ function showFront() {
     $('#front').show();
     $('#door').hide();
     $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').show();
+    $('#internal_side').hide();
 
 }
 
@@ -492,9 +553,17 @@ function showDoor() {
     $('#front').hide();
     $('#door').show();
     $('#interior').hide();
+    $('#door_side').show();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
+
 }
 
-function showInternal(){
+function showInternal() {
     $('#right').hide();
     $('#left').hide();
     $('#top').hide();
@@ -502,11 +571,19 @@ function showInternal(){
     $('#front').hide();
     $('#door').hide();
     $('#interior').show();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').show();
+
 }
 
-function printAstimate(){
+function printAstimate() {
     var gatein_id = $('#gateinid').val();
-    location.href= `/print/printestimate?gatein_id=${gatein_id}`;
+    location.href = `/print/printestimate?gatein_id=${gatein_id}`;
 }
 
 
@@ -539,146 +616,160 @@ $(document).ready(function() {
         }
     });
 
-        $('#damage_code').on('change',function(){
-            var repair_code = $('#repair_code');
-            repair_code.empty();
-            var repair_code_create = document.getElementById('repair_code');
-            var repair_code_create_option = document.createElement('option');
-            repair_code_create_option.value = '';
-            repair_code_create_option.text = "Select Repair Code";
-            repair_code_create.appendChild(repair_code_create_option);
-            getRepair($(this).val());
-        });
+    $('#damage_code').on('change', function() {
+        var repair_code = $('#repair_code');
+        repair_code.empty();
+        var repair_code_create = document.getElementById('repair_code');
+        var repair_code_create_option = document.createElement('option');
+        repair_code_create_option.value = '';
+        repair_code_create_option.text = "Select Repair Code";
+        repair_code_create.appendChild(repair_code_create_option);
+        getRepair($(this).val());
+    });
 
-        $('#repair_code').on('change',function(){
-            // $('#material_code').removeAttr('readonly');
+    $('#repair_code').on('change', function() {
+        // $('#material_code').removeAttr('readonly');
 
-            var material_code = $('#material_code');
-            material_code.empty();
-            var material_code_create = document.getElementById('material_code');
-            var material_code_create_option = document.createElement('option');
-            material_code_create_option.value = '';
-            material_code_create_option.text = "Select Material Code";
-            material_code_create.appendChild(material_code_create_option);
-            var damage_id = $('#damage_code').val();
-            var repair_id = $(this).val();
-            getMaterial(damage_id,repair_id);
-        });
+        var material_code = $('#material_code');
+        material_code.empty();
+        var material_code_create = document.getElementById('material_code');
+        var material_code_create_option = document.createElement('option');
+        material_code_create_option.value = '';
+        material_code_create_option.text = "Select Material Code";
+        material_code_create.appendChild(material_code_create_option);
+        var damage_id = $('#damage_code').val();
+        var repair_id = $(this).val();
+        getMaterial(damage_id, repair_id);
+    });
 
-        $('#master_length').on('change',function(){
-            $('#master_width').removeAttr('readonly');
-        });
+    $('#master_length').on('change', function() {
+        $('#master_width').removeAttr('readonly');
+    });
 
-        $('#master_width').on('change',function(){
-            $('#master_height').removeAttr('readonly');
-        });
+    $('#master_width').on('change', function() {
+        $('#master_height').removeAttr('readonly');
+    });
 
-        $('#material_code').on('change',function(){
-            var damageCode = $('#damage_code').val();
-            var repairCode = $('#repair_code').val();
-            var materialCode = $('#material_code').val();
+    $('#material_code').on('change', function() {
+        var damageCode = $('#damage_code').val();
+        var repairCode = $('#repair_code').val();
+        var materialCode = $('#material_code').val();
 
-            console.log(damageCode);
+        console.log(damageCode);
 
-            $.ajax({
-                type: "POST",
-                url: "/api/tarrif/checktarrifbycode",
-                headers: {
-                    'Authorization': 'Bearer ' + checkToken
-                },
-                data: {
-                    'damageCode': damageCode,
-                    'repairCode': repairCode,
-                    'materialCode': materialCode,
-                },
-                success: function(data) {
-                    $('#master_length').removeAttr('readonly');
-                },
-                error: function(error) {
-                    var finalValue = '';
-                    if(Array.isArray(error.responseJSON.message)){
-                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-                    }else{
-                        finalValue = error.responseJSON.message;
-                    }
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
-                    $('#damage_code').val('');
-                    $('#repair_code').val('');
-                    $('#material_code').val('');
-                    $('#repair_code').attr({'readonly':'readonly'});
-                    $('#material_code').attr({'readonly':'readonly'});
+        $.ajax({
+            type: "POST",
+            url: "/api/tarrif/checktarrifbycode",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: {
+                'damageCode': damageCode,
+                'repairCode': repairCode,
+                'materialCode': materialCode,
+            },
+            success: function(data) {
+                $('#master_length').removeAttr('readonly');
+            },
+            error: function(error) {
+                var finalValue = '';
+                if (Array.isArray(error.responseJSON.message)) {
+                    finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                } else {
+                    finalValue = error.responseJSON.message;
                 }
-            });
+                var callout = document.createElement('div');
+                callout.innerHTML =
+                    `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                document.getElementById('apiMessages').appendChild(callout);
+                setTimeout(function() {
+                    callout.remove();
+                }, 2000);
+                $('#damage_code').val('');
+                $('#repair_code').val('');
+                $('#material_code').val('');
+                $('#repair_code').attr({
+                    'readonly': 'readonly'
+                });
+                $('#material_code').attr({
+                    'readonly': 'readonly'
+                });
+            }
         });
+    });
 
-        $('#master_height').on('change',function(){
-            var damageCode = $('#damage_code').val();
-            var repairCode = $('#repair_code').val();
-            var materialCode = $('#material_code').val();
+    $('#master_height').on('change', function() {
+        var damageCode = $('#damage_code').val();
+        var repairCode = $('#repair_code').val();
+        var materialCode = $('#material_code').val();
 
-            var master_length = $('#master_length').val();
-            var master_width = $('#master_width').val();
-            var master_height = $('#master_height').val();
+        var master_length = $('#master_length').val();
+        var master_width = $('#master_width').val();
+        var master_height = $('#master_height').val();
 
-            $.ajax({
-                type: "POST",
-                url: "/api/tarrif/checktarrifbydimention",
-                headers: {
-                    'Authorization': 'Bearer ' + checkToken
-                },
-                data: {
-                    'damageCode': damageCode,
-                    'repairCode': repairCode,
-                    'materialCode': materialCode,
-                    'master_length': master_length,
-                    'master_width': master_width,
-                    'master_height': master_height,
-                },
-                success: function(data) {
-                    $("#component_code").val(data[0].component_code);
-                    $("#tarrif_id").val(data[0].id);
-                    $("#labour_hr").val(data[0].labour_hour);
-                    $("#qty").val(data[0].qty);
-                    $("#labour_cost").val(data[0].labour_cost);
-                    $("#material_cost").val(data[0].material_cost);
-                    $("#sab_total").val(data[0].sub_total);
-                    $("#tax_cost").val(data[0].tax_cost);
-                    $("#gst").val(data[0].tax);
-                    $("#total").val(data[0].total_cost);
+        $.ajax({
+            type: "POST",
+            url: "/api/tarrif/checktarrifbydimention",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: {
+                'damageCode': damageCode,
+                'repairCode': repairCode,
+                'materialCode': materialCode,
+                'master_length': master_length,
+                'master_width': master_width,
+                'master_height': master_height,
+            },
+            success: function(data) {
+                $("#component_code").val(data[0].component_code);
+                $("#tarrif_id").val(data[0].id);
+                $("#labour_hr").val(data[0].labour_hour);
+                $("#qty").val(data[0].qty);
+                $("#labour_cost").val(data[0].labour_cost);
+                $("#material_cost").val(data[0].material_cost);
+                $("#sab_total").val(data[0].sub_total);
+                $("#tax_cost").val(data[0].tax_cost);
+                $("#gst").val(data[0].tax);
+                $("#total").val(data[0].total_cost);
+                $("#dimension_h").val(data[0].dimension_h);
+                $("#dimension_w").val(data[0].dimension_w);
+                $("#dimension_l").val(data[0].dimension_l);
 
-                    $('#addButton').removeAttr('disabled');
 
-                },
-                error: function(error) {
-                    var finalValue = '';
-                    if(Array.isArray(error.responseJSON.message)){
-                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-                    }else{
-                        finalValue = error.responseJSON.message;
-                    }
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
-                    $('#master_width').val('');
-                    $('#master_height').val('');
-                    $('#master_length').val('');
-                    $('#master_width').attr({'readonly':'readonly'});
-                    $('#master_height').attr({'readonly':'readonly'});
+                $('#addButton').removeAttr('disabled');
+
+            },
+            error: function(error) {
+                var finalValue = '';
+                if (Array.isArray(error.responseJSON.message)) {
+                    finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                } else {
+                    finalValue = error.responseJSON.message;
                 }
-            });
+                var callout = document.createElement('div');
+                callout.innerHTML =
+                    `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                document.getElementById('apiMessages').appendChild(callout);
+                setTimeout(function() {
+                    callout.remove();
+                }, 2000);
+                $('#master_width').val('');
+                $('#master_height').val('');
+                $('#master_length').val('');
+                $('#master_width').attr({
+                    'readonly': 'readonly'
+                });
+                $('#master_height').attr({
+                    'readonly': 'readonly'
+                });
+            }
         });
+    });
 });
 
 
-function getLineData(line_id){
+function getLineData(line_id) {
     $.ajax({
         type: "POST",
         url: "/api/line/getbyid",
@@ -689,12 +780,24 @@ function getLineData(line_id){
             'id': line_id,
         },
         success: function(data) {
-            $('#right_img').attr({'src':`/uploads/line/${data.right_img}`})
-            $('#left_img').attr({'src':`/uploads/line/${data.left_img}`})
-            $('#top_img').attr({'src':`/uploads/line/${data.top_img}`})
-            $('#bottom_img').attr({'src':`/uploads/line/${data.bottom_img}`})
-            $('#front_img').attr({'src':`/uploads/line/${data.front_img}`})
-            $('#door_img').attr({'src':`/uploads/line/${data.door_img}`})
+            $('#right_img').attr({
+                'src': `/uploads/line/${data.right_img}`
+            })
+            $('#left_img').attr({
+                'src': `/uploads/line/${data.left_img}`
+            })
+            $('#top_img').attr({
+                'src': `/uploads/line/${data.top_img}`
+            })
+            $('#bottom_img').attr({
+                'src': `/uploads/line/${data.bottom_img}`
+            })
+            $('#front_img').attr({
+                'src': `/uploads/line/${data.front_img}`
+            })
+            $('#door_img').attr({
+                'src': `/uploads/line/${data.door_img}`
+            })
         },
         error: function(error) {
             console.log(error);
@@ -714,9 +817,10 @@ function getTarrifByLine(line_id) {
             'line_id': line_id,
         },
         success: function(data) {
-            if(data.tarrifData.length > 0){
+            if (data.tarrifData.length > 0) {
                 data.tarrifData.forEach(function(item) {
-                    var locationData  = data.LocationCode.find(x => x.id == item.repai_location_code);
+                    var locationData = data.LocationCode.find(x => x.id == item
+                        .repai_location_code);
                     var gettop = parseInt(item.hotspot_coor_y) + 32;
                     var getLeft = parseInt(item.hotspot_coor_x) + 9.5;
                     var newDiv = $('<div>');
@@ -725,7 +829,10 @@ function getTarrifByLine(line_id) {
                     $(`#${item.container_side}`).append(newDiv);
                     var innerDiv = $('<a>');
                     innerDiv.addClass('open')
-                    innerDiv.attr({'data-id':locationData.id,'data-value':locationData.code})
+                    innerDiv.attr({
+                        'data-id': locationData.id,
+                        'data-value': locationData.code
+                    })
                     newDiv.append(innerDiv);
                     innerDiv.html('<span class="circle small"></span>');
                 })
@@ -829,17 +936,18 @@ function gettarrif(location_code, line_id) {
         }
     });
 }
+
 function clearTable() {
     const tableBody = document.getElementById("table-body");
     tableBody.innerHTML = ""; // This will remove all rows inside the table body.
 }
 
-function clearreposrtingTable(){
+function clearreposrtingTable() {
     const tableBody = document.getElementById("reporting");
     tableBody.innerHTML = ""; // This will remove all rows inside the table body.
 }
 
-function getTransactionData(){
+function getTransactionData() {
     var gatein_id = $('#gateinid').val();
     var location_code = $('#side').val();
     $.ajax({
@@ -850,13 +958,13 @@ function getTransactionData(){
         },
         data: {
             'location_code': location_code,
-            'gatein_id':gatein_id
+            'gatein_id': gatein_id
         },
         success: function(data) {
             clearTable();
             var tbody = $('#table-body');
-            
-            var i =1;
+
+            var i = 1;
             data.forEach(function(item) {
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
@@ -871,27 +979,71 @@ function getTransactionData(){
                 row.append($('<td>').text(item.tarrifData.dimension_l));
                 row.append($('<td>').text(item.tarrifData.dimension_h));
 
-                var qty = $('<input>').attr({'type':'text', 'id':'transaction_qty', 'readonly':'readonly', 'class':'form-control'}).val(item.qty);
+                var qty = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_qty',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.qty);
                 row.append($('<td>').append(qty));
-                var labour_hr = $('<input>').attr({'type':'text', 'id':'transaction_labour_hr', 'readonly':'readonly', 'class':'form-control'}).val(item.labour_hr);
+                var labour_hr = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_labour_hr',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
-                var labour_cost = $('<input>').attr({'type':'text', 'id':'transaction_labour_cost','readonly':'readonly', 'class':'form-control'}).val(item.labour_cost);
+                var labour_cost = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_labour_cost',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.labour_cost);
                 row.append($('<td>').append(labour_cost));
-                var material_cost = $('<input>').attr({'type':'text', 'id':'transaction_material_cost','readonly':'readonly','class':'form-control'}).val(item.material_cost);
+                var material_cost = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_material_cost',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.material_cost);
                 row.append($('<td>').append(material_cost));
-                var sab_total = $('<input>').attr({'type':'text', 'id':'transaction_sub_total', 'readonly':'readonly', 'class':'form-control'}).val(item.sab_total);
+                var sab_total = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_sub_total',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.sab_total);
                 row.append($('<td>').append(sab_total));
-                var gst = $('<input>').attr({'type':'text', 'id':'transaction_tax', 'readonly':'readonly', 'class':'form-control'}).val(item.gst);
+                var gst = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_tax',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.gst);
                 row.append($('<td>').append(gst));
-                var tax_cost = $('<input>').attr({'type':'text', 'id':'transaction_tax_cost', 'readonly':'readonly', 'class':'form-control'}).val(item.tax_cost);
+                var tax_cost = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_tax_cost',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.tax_cost);
                 row.append($('<td>').append(tax_cost));
-                var total = $('<input>').attr({'type':'text', 'id':'transaction_total', 'readonly':'readonly', 'class':'form-control'}).val(item.total);
+                var total = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'transaction_total',
+                    'readonly': 'readonly',
+                    'class': 'form-control'
+                }).val(item.total);
                 row.append($('<td>').append(total));
                 var file1 = `/uploads/transaction/${item.before_file1}`
-                var before_file1 = $('<img style="width:100px">').attr({'src': file1});
+                var before_file1 = $('<img style="width:100px">').attr({
+                    'src': file1
+                });
                 row.append($('<td>').append(before_file1));
                 var file2 = `/uploads/transaction/${item.before_file2}`
-                var before_file2 = $('<img style="width:100px">').attr({'src': file2});
+                var before_file2 = $('<img style="width:100px">').attr({
+                    'src': file2
+                });
                 row.append($('<td>').append(before_file2));
                 tbody.append(row);
                 i++;
@@ -905,7 +1057,7 @@ function getTransactionData(){
 }
 
 
-function getReportingData(){
+function getReportingData() {
     var gatein_id = $('#gateinid').val();
     $.ajax({
         type: "POST",
@@ -914,13 +1066,13 @@ function getReportingData(){
             'Authorization': 'Bearer ' + checkToken
         },
         data: {
-            'gatein_id':gatein_id
+            'gatein_id': gatein_id
         },
         success: function(data) {
             clearreposrtingTable();
             var tbody = $('#reporting');
-            
-            var i =1;
+
+            var i = 1;
             data.forEach(function(item) {
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
@@ -931,50 +1083,127 @@ function getReportingData(){
                 row.append($('<td>').text(item.repair.repair_code));
                 row.append($('<td>').text(item.material.material_code));
                 row.append($('<td>').text(item.tarrifData.unit_of_measure));
-                row.append($('<td>').text(item.tarrifData.dimension_w));
-                row.append($('<td>').text(item.tarrifData.dimension_l));
-                row.append($('<td>').text(item.tarrifData.dimension_h));
 
-                var qty = $('<input>').attr({'type':'text', 'id':'reporting_qty','readonly':'readonly', 'class':'form-control reportinput'}).val(item.qty);
+                var dimension_w = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_dimension_w',
+                    'readonly': 'readonly',
+                    'class': 'form-control reportinput'
+                }).val(item.tarrifData.dimension_w);
+                row.append($('<td>').append(dimension_w));
+
+                var dimension_l = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_dimension_l',
+                    'readonly': 'readonly',
+                    'class': 'form-control reportinput'
+                }).val(item.tarrifData.dimension_l);
+                row.append($('<td>').append(dimension_l));
+
+                var dimension_h = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_dimension_h',
+                    'readonly': 'readonly',
+                    'class': 'form-control reportinput'
+                }).val(item.tarrifData.dimension_h);
+                row.append($('<td>').append(dimension_h));
+
+                var qty = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_qty',
+                    'readonly': 'readonly',
+                    'class': 'form-control reportinput'
+                }).val(item.qty);
                 row.append($('<td>').append(qty));
-                var labour_hr = $('<input>').attr({'type':'text', 'id':'reporting_labour_hr','readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_hr);
+                var labour_hr = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_labour_hr',
+                    'readonly': 'readonly',
+                    'class': 'form-control reportinput'
+                }).val(item.labour_hr);
                 row.append($('<td>').append(labour_hr));
-                var labour_cost = $('<input>').attr({'type':'text', 'id':'reporting_labour_cost','readonly':'readonly', 'class':'form-control reportinput'}).val(item.labour_cost);
-                var labour_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_labour_cost_text','readonly':'readonly', 'class':'reportinput form-control'}).val(item.labour_cost);
+                var labour_cost = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_labour_cost',
+                    'readonly': 'readonly',
+                    'class': 'form-control reportinput'
+                }).val(item.labour_cost);
+                var labour_cost_text = $('<input>').attr({
+                    'type': 'hidden',
+                    'id': 'reporting_labour_cost_text',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.labour_cost);
                 var labour_cost_td = $('<td>');
                 labour_cost_td.append(labour_cost);
                 labour_cost_td.append(labour_cost_text);
 
                 row.append(labour_cost_td);
-                var material_cost = $('<input>').attr({'type':'text', 'id':'reporting_material_cost','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
-                var material_cost_text = $('<input>').attr({'type':'hidden', 'id':'reporting_material_cost_text','readonly':'readonly','class':'reportinput form-control'}).val(item.material_cost);
+                var material_cost = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_material_cost',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.material_cost);
+                var material_cost_text = $('<input>').attr({
+                    'type': 'hidden',
+                    'id': 'reporting_material_cost_text',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.material_cost);
                 var material_cost_td = $('<td>');
                 material_cost_td.append(material_cost);
                 material_cost_td.append(material_cost_text);
                 row.append(material_cost_td);
-                var sab_total = $('<input>').attr({'type':'text', 'id':'reporting_sub_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.sab_total);
+                var sab_total = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_sub_total',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.sab_total);
                 row.append($('<td>').append(sab_total));
-                var gst = $('<input>').attr({'type':'text', 'id':'reporting_tax', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.gst);
+                var gst = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_tax',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.gst);
                 row.append($('<td>').append(gst));
-                var tax_cost = $('<input>').attr({'type':'text', 'id':'reporting_tax_cost','readonly':'readonly', 'class':'reportinput form-control'}).val(item.tax_cost);
+                var tax_cost = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_tax_cost',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.tax_cost);
                 row.append($('<td>').append(tax_cost));
-                var total = $('<input>').attr({'type':'text', 'id':'reporting_total', 'readonly':'readonly', 'class':'reportinput form-control'}).val(item.total);
+                var total = $('<input>').attr({
+                    'type': 'text',
+                    'id': 'reporting_total',
+                    'readonly': 'readonly',
+                    'class': 'reportinput form-control'
+                }).val(item.total);
                 row.append($('<td>').append(total));
-                
+
                 var file1 = `/uploads/transaction/${item.before_file1}`
-                var before_file1 = $('<img style="width:100px">').attr({'src': file1});
+                var before_file1 = $('<img style="width:100px">').attr({
+                    'src': file1
+                });
                 row.append($('<td>').append(before_file1));
                 var file2 = `/uploads/transaction/${item.before_file2}`
-                var before_file2 = $('<img style="width:100px">').attr({'src': file2});
+                var before_file2 = $('<img style="width:100px">').attr({
+                    'src': file2
+                });
                 row.append($('<td>').append(before_file2));
 
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id) 
+                    .attr('data-id', item.id)
                     .attr('class', 'edit-button');
 
                 var deleteButton = $('<span>')
-                    .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
+                    .html(
+                        '<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>'
+                    )
                     .attr('data-id', item.id)
                     .attr('class', 'delete-button')
                 var saveButton = $('<button style="display:none;">')
@@ -1000,7 +1229,7 @@ function getReportingData(){
                 var labour_cost = parseInt(reporting_labour_hr) * parseInt(reporting_labour_cost);
                 var material_cost = parseInt(reporting_qty) * parseInt(reporting_material_cost);
                 var sub_total = parseInt(labour_cost) + parseInt(material_cost);
-                var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
+                var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
                 $('#reporting_labour_cost').val(labour_cost);
                 $('#reporting_material_cost').val(material_cost);
@@ -1014,7 +1243,7 @@ function getReportingData(){
                 var reporting_labour_cost = $('#reporting_labour_cost').val();
                 var reporting_material_cost = $('#reporting_material_cost').val();
                 var sub_total = parseInt(reporting_labour_cost) + parseInt(reporting_material_cost);
-                var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
+                var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
                 $('#reporting_sub_total').val(sub_total);
                 $('#reporting_tax_cost').val(tax_cost);
@@ -1024,7 +1253,7 @@ function getReportingData(){
             $('#reporting_tax').on('keyup', function() {
                 var reporting_tax = $('#reporting_tax').val();
                 var sub_total = $('#reporting_sub_total').val();
-                var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
+                var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
                 $('#reporting_tax_cost').val(tax_cost);
                 $('#reporting_total').val(total);
@@ -1032,22 +1261,33 @@ function getReportingData(){
 
 
             $('.edit-button').click(function() {
-                $("#reporting_qty").removeAttr("readonly");
-                $("#reporting_labour_hr").removeAttr("readonly");
-                $("#reporting_labour_cost").removeAttr("readonly");
-                $("#reporting_material_cost").removeAttr("readonly");
-                $("#reporting_tax").removeAttr("readonly");
+                // Find the closest row from the clicked button
                 var row = $(this).closest('tr');
+                // Enable editing for the specific inputs within that row
+                row.find("#reporting_qty").removeAttr("readonly");
+                row.find("#reporting_dimension_w").removeAttr("readonly");
+                row.find("#reporting_dimension_l").removeAttr("readonly");
+                row.find("#reporting_dimension_h").removeAttr("readonly");
 
+                row.find("#reporting_labour_hr").removeAttr("readonly");
+                row.find("#reporting_labour_cost").removeAttr("readonly");
+                row.find("#reporting_material_cost").removeAttr("readonly");
+                row.find("#reporting_tax").removeAttr("readonly");
+
+                // Update buttons visibility within the last cell of the row
                 var actionCell = row.find('td:last-child');
-
                 actionCell.find('.edit-button').hide();
                 actionCell.find('.delete-button').hide();
-                actionCell.find('.save-button').show();                
+                actionCell.find('.save-button').show();
             });
+
 
             $('.save-button').click(function() {
                 var reporting_qty = $("#reporting_qty").val();
+                var reporting_dimension_w = $("#reporting_dimension_w").val();
+                var reporting_dimension_l = $("#reporting_dimension_l").val();
+                var reporting_dimension_h = $("#reporting_dimension_h").val();
+
                 var reporting_labour_hr = $("#reporting_labour_hr").val();
                 var reporting_labour_cost = $("#reporting_labour_cost").val();
                 var reporting_material_cost = $("#reporting_material_cost").val();
@@ -1057,32 +1297,35 @@ function getReportingData(){
                 var reporting_total = $("#reporting_total").val();
                 var dataId = $(this).data('id');
                 var data = {
-                    'reporting_qty':reporting_qty,
-                    'reporting_labour_hr':reporting_labour_hr,
-                    'reporting_labour_cost':reporting_labour_cost,
-                    'reporting_material_cost':reporting_material_cost,
-                    'reporting_sub_total':reporting_sub_total,
-                    'reporting_tax_cost':reporting_tax_cost,
-                    'reporting_total':reporting_total,
-                    'reporting_tax':reporting_tax,
-                    'id':dataId
+                    'reporting_qty': reporting_qty,
+                    'reporting_labour_hr': reporting_labour_hr,
+                    'reporting_labour_cost': reporting_labour_cost,
+                    'reporting_material_cost': reporting_material_cost,
+                    'reporting_sub_total': reporting_sub_total,
+                    'reporting_tax_cost': reporting_tax_cost,
+                    'reporting_total': reporting_total,
+                    'reporting_tax': reporting_tax,
+                    'id': dataId,
+                    'reporting_dimension_w':reporting_dimension_w,
+                    'reporting_dimension_l':reporting_dimension_l,
+                    'reporting_dimension_h':reporting_dimension_h,
                 }
-                
+
                 var row = $(this).closest('tr');
                 var actionCell = row.find('td:last-child');
                 actionCell.find('.edit-button').show();
                 actionCell.find('.delete-button').show();
                 actionCell.find('.save-button').hide();
-                post('transcation/update',data);
+                post('transcation/update', data);
                 getReportingData();
             });
 
             $('.delete-button').click(function() {
                 var dataId = $(this).data('id');
                 var data = {
-                    'id':dataId
+                    'id': dataId
                 }
-                post('transcation/delete',data);
+                post('transcation/delete', data);
                 getReportingData();
             });
 
@@ -1104,12 +1347,12 @@ function getDamage(id) {
             'id': id,
         },
         success: function(data) {
-            
+
             var select = document.getElementById('damage_code');
             var option = document.createElement('option');
-                option.value = data.id;
-                option.text = data.code;
-                select.appendChild(option);
+            option.value = data.id;
+            option.text = data.code;
+            select.appendChild(option);
         },
         error: function(error) {
             console.log(error);
@@ -1136,7 +1379,7 @@ function getRepair(id) {
                 option.text = item.repair_code;
                 select.appendChild(option);
             })
-            
+
         },
         error: function(error) {
             console.log(error);
@@ -1144,7 +1387,7 @@ function getRepair(id) {
     });
 }
 
-function getMaterial(damage_id,repair_id) {
+function getMaterial(damage_id, repair_id) {
     $.ajax({
         type: "POST",
         url: "/api/material/get",
@@ -1153,7 +1396,7 @@ function getMaterial(damage_id,repair_id) {
         },
         data: {
             'damage_id': damage_id,
-            'repair_id':repair_id
+            'repair_id': repair_id
         },
         success: function(data) {
             $('#material_code').removeAttr('readonly');
@@ -1164,7 +1407,7 @@ function getMaterial(damage_id,repair_id) {
                 option.text = item.material_code;
                 select.appendChild(option);
             })
-            
+
         },
         error: function(error) {
             console.log(error);
@@ -1175,15 +1418,18 @@ function getMaterial(damage_id,repair_id) {
 
 
 <script>
-function createTransaction(){
+function createTransaction() {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    if($('#file1')[0].files[0] && $('#file1')[0].files[0]){
+    if ($('#file1')[0].files[0] && $('#file1')[0].files[0]) {
         var tarrif_id = $('#tarrif_id').val();
         var gatein_id = $('#gateinid').val();
-        var labour_hr = $('#labour_hr').val();
+        var dimension_h = $('#dimension_h').val();
+        var dimension_w = $('#dimension_w').val();
+        var dimension_l = $('#dimension_l').val();
+
         var qty = $('#qty').val();
         var labour_cost = $('#labour_cost').val();
         var material_cost = $('#material_cost').val();
@@ -1194,59 +1440,66 @@ function createTransaction(){
         var location_code = $('#side').val();
 
         var formData = new FormData();
-            formData.append('tax_cost', tax_cost);
-            formData.append('total', total);
-            formData.append('gst', gst);
-            formData.append('sab_total', sab_total);
-            formData.append('material_cost', material_cost);
-            formData.append('labour_cost', labour_cost);
-            formData.append('qty', qty);
-            formData.append('location_code',location_code);
-            formData.append('labour_hr', labour_hr);
-            formData.append('gatein_id', gatein_id);
-            formData.append('tarrif_id', tarrif_id);
+        formData.append('tax_cost', tax_cost);
+        formData.append('total', total);
+        formData.append('gst', gst);
+        formData.append('sab_total', sab_total);
+        formData.append('material_cost', material_cost);
+        formData.append('labour_cost', labour_cost);
+        formData.append('qty', qty);
+        formData.append('location_code', location_code);
+        formData.append('labour_hr', labour_hr);
+        formData.append('reporting_dimension_h', dimension_h);
+        formData.append('reporting_dimension_w', dimension_w);
+        formData.append('reporting_dimension_l', dimension_l);
 
-            formData.append('before_file1', $('#file1')[0].files[0]);
-            formData.append('before_file2', $('#file2')[0].files[0]);
+        formData.append('gatein_id', gatein_id);
+        formData.append('tarrif_id', tarrif_id);
 
-            $.ajax({
-                url: '/api/transcation/create',
-                type: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + checkToken
-                },
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
-                    getTransactionData();
-                    getReportingData();
-                },
-                error: function(error) {
-                    var finalValue = '';
-                    if(Array.isArray(error.responseJSON.message)){
-                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-                    }else{
-                        finalValue = error.responseJSON.message;
-                    }
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
+        formData.append('before_file1', $('#file1')[0].files[0]);
+        formData.append('before_file2', $('#file2')[0].files[0]);
+
+        $.ajax({
+            url: '/api/transcation/create',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                var callout = document.createElement('div');
+                callout.innerHTML =
+                    `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                document.getElementById('apiMessages').appendChild(callout);
+                setTimeout(function() {
+                    callout.remove();
+                }, 2000);
+                getTransactionData();
+                getReportingData();
+            },
+            error: function(error) {
+                var finalValue = '';
+                if (Array.isArray(error.responseJSON.message)) {
+                    finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                } else {
+                    finalValue = error.responseJSON.message;
                 }
-            });
-        
-    }else{
+                var callout = document.createElement('div');
+                callout.innerHTML =
+                    `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                document.getElementById('apiMessages').appendChild(callout);
+                setTimeout(function() {
+                    callout.remove();
+                }, 2000);
+            }
+        });
+
+    } else {
         var callout = document.createElement('div');
-        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Images</p></div>`;
+        callout.innerHTML =
+            `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Images</p></div>`;
         document.getElementById('apiMessages').appendChild(callout);
         setTimeout(function() {
             callout.remove();
@@ -1254,35 +1507,30 @@ function createTransaction(){
     }
 }
 
-function updateEstimate(){
+function updateEstimate() {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
     var gateinid = $('#estimate_gate_in').val();
     data = {
-        'user_id':user_id,
-        'depo_id':depo_id,
-        'gateinid':gateinid
+        'user_id': user_id,
+        'depo_id': depo_id,
+        'gateinid': gateinid
     }
 
     var checkSuperVisor = <?php echo $checkSupervisor;?>
 
-    if(checkSuperVisor == 1){
-        post('gatein/updateapprove',data);
-        location.href="/supervisor/inspection";
-    }else{
-        post('gatein/updateestimate',data);
-        location.href="/surveyor/inspection";
+    if (checkSuperVisor == 1) {
+        post('gatein/updateapprove', data);
+        location.href = "/supervisor/inspection";
+    } else {
+        post('gatein/updateestimate', data);
+        location.href = "/surveyor/inspection";
     }
 
-    
+
 
 }
-
-
-
-
-
 </script>
 
 
@@ -1324,7 +1572,7 @@ function updateEstimate(){
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Damage code</label>
-                                    <select  class="form-control" id="damage_code">
+                                    <select class="form-control" id="damage_code">
                                         <option value="">Select Damage Code</option>
                                     </select>
                                 </div>
@@ -1363,7 +1611,7 @@ function updateEstimate(){
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Width</label>
-                                    <select readonly  class="form-control" id="master_width">
+                                    <select readonly class="form-control" id="master_width">
                                         <option value="">Select Width</option>
                                     </select>
                                 </div>
@@ -1371,7 +1619,7 @@ function updateEstimate(){
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Height</label>
-                                    <select readonly  class="form-control" id="master_height">
+                                    <select readonly class="form-control" id="master_height">
                                         <option value="">Select Height</option>
                                     </select>
                                 </div>
@@ -1410,7 +1658,11 @@ function updateEstimate(){
                     <input type="hidden" id="gst">
                     <input type="hidden" id="total">
                     <input type="hidden" id="tax_cost">
-                    <button type="button" class="btn btn-primary" onclick="createTransaction()" id="addButton" disabled>Add</button>
+                    <input type="hidden" id="dimension_h">
+                    <input type="hidden" id="dimension_w">
+                    <input type="hidden" id="dimension_l">
+                    <button type="button" class="btn btn-primary" onclick="createTransaction()" id="addButton"
+                        disabled>Add</button>
                 </form>
                 <div class="card mt-5">
                     <div class="card-body p-0">

@@ -136,7 +136,10 @@ class TransactionController extends Controller
             'qty' => $request->qty,
             'before_file1' => $before_file1_Name,
             'before_file2' => $before_file2_Name,
-            'location_code' => $request->location_code
+            'location_code' => $request->location_code,
+            'dimension_h'=> $request->reporting_dimension_h,
+            'dimension_w'=> $request->reporting_dimension_w,
+            'dimension_l'=> $request->reporting_dimension_l,
         ]);
 
         if($createTransaction){
@@ -172,6 +175,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request)
     {
+
         $transactionDetails = Transaction::find($request->id);
         $transactionDetails->labour_hr = is_null($request->reporting_labour_hr) ? $transactionDetails->labour_hr : $request->reporting_labour_hr;
         $transactionDetails->labour_cost =  is_null($request->reporting_labour_cost) ? $transactionDetails->labour_cost : $request->reporting_labour_cost;
@@ -182,6 +186,9 @@ class TransactionController extends Controller
         $transactionDetails->gst = is_null($request->reporting_tax) ? $transactionDetails->gst : $request->reporting_tax;
         $transactionDetails->total = is_null($request->reporting_total) ? $transactionDetails->reporting_total : $request->reporting_total;
         $transactionDetails->qty = is_null($request->reporting_qty) ? $transactionDetails->qty : $request->reporting_qty;
+        $transactionDetails->dimension_h = is_null($request->reporting_dimension_h) ? $transactionDetails->dimension_h : $request->reporting_dimension_h;
+        $transactionDetails->dimension_w = is_null($request->reporting_dimension_w) ? $transactionDetails->dimension_w : $request->reporting_dimension_w;
+        $transactionDetails->dimension_l = is_null($request->reporting_dimension_l) ? $transactionDetails->dimension_l : $request->reporting_dimension_l;
         
         $transactionDetails  = $transactionDetails->save();
 

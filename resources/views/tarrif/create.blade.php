@@ -456,11 +456,12 @@ $(document).ready(function () {
         var labour_cost = $('#labour_cost').val();
         var tax = $('#tax').val();
         var sub_total = parseInt(labour_cost) + parseInt(material_cost);
-        $('#sub_total').val(sub_total);
+
+        $('#sub_total').val(parseFloat(sub_total.toFixed(2)));
         var tax_cost =  (parseInt(tax) / 100 ) * sub_total;
-        $('#tax_cost').val(tax_cost);
+        $('#tax_cost').val(parseFloat(tax_cost.toFixed(2)));
         var total = tax_cost + sub_total;
-        $('#total_cost').val(total);
+        $('#total_cost').val(parseFloat(total.toFixed(2)));
     });
 
 
@@ -525,6 +526,7 @@ $(document).ready(function () {
             'id':inputValue
         },
         success: function (data) {
+            $("#repair_id").empty();
             var select = document.getElementById('repair_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
@@ -555,6 +557,8 @@ $(document).ready(function () {
             'damage_id':damage_id
         },
         success: function (data) {
+            $("#material_id").empty();
+
             var select = document.getElementById('material_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
