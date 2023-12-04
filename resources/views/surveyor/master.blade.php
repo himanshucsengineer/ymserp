@@ -655,8 +655,6 @@ $(document).ready(function() {
         var repairCode = $('#repair_code').val();
         var materialCode = $('#material_code').val();
 
-        console.log(damageCode);
-
         $.ajax({
             type: "POST",
             url: "/api/tarrif/checktarrifbycode",
@@ -797,6 +795,9 @@ function getLineData(line_id) {
             })
             $('#door_img').attr({
                 'src': `/uploads/line/${data.door_img}`
+            })
+            $('#interior_img').attr({
+                'src': `/uploads/line/${data.interior_img}`
             })
         },
         error: function(error) {

@@ -36,7 +36,15 @@ class MasterLineController extends Controller
             return MasterLine::where('depo_id',$request->depo_id)->get();
         }
     }
-
+    public function getbysizetype(Request $request)
+    {
+        if($request->user_id == 1){
+            return MasterLine::where('containerSize', $request->containerSize)->where('containerType', $request->containerType)->get();
+        }else{
+            return MasterLine::where('containerSize', $request->containerSize)->where('containerType', $request->containerType)->where('depo_id',$request->depo_id)->get();
+        }
+    }
+    
     public function getall(){
         return MasterLine::get();
     }

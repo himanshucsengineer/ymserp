@@ -359,34 +359,6 @@ $(document).ready(function () {
     var depo_id = localStorage.getItem('depo_id');
     refreshTransporter()
     refreshConsignee()
-    $.ajax({
-        type: "post",
-        url: "/api/line/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function (data) {
-            var select = document.getElementById('line_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.name;
-                select.appendChild(option);
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-
-    
-
-   
-    
 
     $.ajax({
         type: "POST",
@@ -427,13 +399,13 @@ $(document).ready(function () {
 
 
             if(data.line_id){
-                getline(data.line_id);
+                getline(data.line_id, data.container_type,data.container_size);
             }
             if(data.transport_id){
                 getTranport(data.transport_id);
             }
             if(data.transport_id){
-                getConsignee(data.transport_id);
+                getConsignee(data.consignee_id);
             }
 
             $("#inward_date").val(data.inward_date);
@@ -547,29 +519,28 @@ $('#consignee_id').select2({
 
 
 function processTransporter(transporters){
+    var transformedData = transporters.map(function(item) {
+        return {
+            id: item.id,
+            text: item.name
+        };
+    });
 
-var transformedData = transporters.map(function(item) {
-    return {
-        id: item.id,
-        text: item.name
-    };
-});
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
 
-var blankOption = { id: '', text: '' };
-transformedData.unshift(blankOption);
-
-$('#transport_id').select2({
-    placeholder: 'Select Transporter',
-    data: transformedData,
-    escapeMarkup: function (markup) {
-        return markup;
-    },
-    language: {
-        noResults: function () {
-            return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTransporterModel()">Add New</button></center>';
+    $('#transport_id').select2({
+        placeholder: 'Select Transporter',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTransporterModel()">Add New</button></center>';
+            }
         }
-    }
-});
+    });
 }
 function createTransporterModel(){
     $('#modal-transporter').modal('show');
@@ -579,20 +550,39 @@ function createConsigneeModel(){
     $('#modal-consignee').modal('show');
 }
  
-function getline(id){
+$('#line_id').on('change', function(){
+
+})
+
+
+function getline(id,containerType,containerSize){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
     $.ajax({
         type: "POST",
-        url: "/api/line/getbyid",
+        url: "/api/line/getbysizetype",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
         data:{
-            'id':id
+            'user_id':user_id,
+            'depo_id':depo_id,
+            'containerType':containerType,
+            'containerSize':containerSize
         },
         success: function (data) {
-            $("#line_id").val(data.id);
-            $("#line_gst").val(data.gst);
-            $('#track_device_name').text(data.tracking_device);
+            var select = document.getElementById('line_id');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                select.appendChild(option);
+            });
+            var lineData = data.find(x => x.id == id);
+            $('#line_id').val(lineData.id)
+            $("#line_gst").val(lineData.gst);
+            $('#track_device_name').text(lineData.tracking_device); 
         },
         error: function (error) {
             console.log(error);
@@ -611,7 +601,7 @@ function getConsignee(id){
             'id':id
         },
         success: function (data) {
-            $("#consignee_id").val(data.id);
+            $("#consignee_id").val(data.id).trigger('change');
         },
         error: function (error) {
             console.log(error);
@@ -630,7 +620,7 @@ function getTranport(id){
             'id':id
         },
         success: function (data) {
-            $("#transport_id").val(data.id);
+            $("#transport_id").val(data.id).trigger('change');
         },
         error: function (error) {
             console.log(error);
@@ -914,15 +904,15 @@ function add_transporter(){
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var name   = $('#name').val();
-    var address   = $('#address').val();
-    var city   = $('#city').val();
-    var state   = $('#state').val();
-    var pincode   = $('#pincode').val();
-    var gst   = $('#gst').val();
-    var pan   = $('#pan').val();
-    var gst_state   = $('#gst_state').val();
-    var state_code   = $('#state_code').val();
+    var name   = $('#t_name').val();
+    var address   = $('#t_address').val();
+    var city   = $('#t_city').val();
+    var state   = $('#t_state').val();
+    var pincode   = $('#t_pincode').val();
+    var gst   = $('#t_gst').val();
+    var pan   = $('#t_pan').val();
+    var gst_state   = $('#t_gst_state').val();
+    var state_code   = $('#t_state_code').val();
 
     if(name == ''){
         var callout = document.createElement('div');
@@ -934,21 +924,31 @@ function add_transporter(){
     }
 
     const data = {
-                'name':name,
-                'address':address,
-                'city':city,
-                'state':state,
-                'pincode':pincode,
-                'gst':gst,
-                'pan':pan,
-                'gst_state':gst_state,
-                'state_code':state_code,
-                'is_transport':"transport",
-                'user_id':user_id,
-                'depo_id':depo_id,
+        'name':name,
+        'address':address,
+        'city':city,
+        'state':state,
+        'pincode':pincode,
+        'gst':gst,
+        'pan':pan,
+        'gst_state':gst_state,
+        'state_code':state_code,
+        'is_transport':"transport",
+        'user_id':user_id,
+        'depo_id':depo_id,
         }
     post('transport/create',data);
     refreshTransporter()
+    $('#t_name').val('');
+    $('#t_address').val('');
+    $('#t_city').val('');
+    $('#t_state').val('');
+    $('#t_pincode').val('');
+    $('#t_gst').val('');
+    $('#t_pan').val('');
+    $('#t_gst_state').val('');
+    $('#t_state_code').val('');
+
     $('#modal-transporter').modal('hide');
 }
 
@@ -977,21 +977,30 @@ function add_consginee(){
     }
 
     const data = {
-                'name':name,
-                'address':address,
-                'city':city,
-                'state':state,
-                'pincode':pincode,
-                'gst':gst,
-                'pan':pan,
-                'gst_state':gst_state,
-                'state_code':state_code,
-                'is_transport':"consignee",
-                'user_id':user_id,
-                'depo_id':depo_id,
-        }
+        'name':name,
+        'address':address,
+        'city':city,
+        'state':state,
+        'pincode':pincode,
+        'gst':gst,
+        'pan':pan,
+        'gst_state':gst_state,
+        'state_code':state_code,
+        'is_transport':"consignee",
+        'user_id':user_id,
+        'depo_id':depo_id,
+    }
     post('transport/create',data);
     refreshConsignee()
+    $('#name').val('');
+    $('#address').val('');
+    $('#city').val('');
+    $('#state').val('');
+    $('#pincode').val('');
+    $('#gst').val('');
+    $('#pan').val('');
+    $('#gst_state').val('');
+    $('#state_code').val('');
     $('#modal-consignee').modal('hide');
 }
 
@@ -1085,13 +1094,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                            <input type="text" class="form-control" id="t_name" name="name" placeholder="Enter Name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address">
+                            <input type="text" class="form-control" id="t_address" name="address" placeholder="Enter Address">
                         </div>
                     </div>
                 </div>
@@ -1099,13 +1108,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="city">City <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+                            <input type="text" class="form-control" id="t_city" name="city" placeholder="Enter City">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter State">
+                            <input type="text" class="form-control" id="t_state" name="state" placeholder="Enter State">
                         </div>
                     </div>
                 </div>
@@ -1113,13 +1122,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pincode">Pincode <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter pincode">
+                            <input type="text" class="form-control" id="t_pincode" name="pincode" placeholder="Enter pincode">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="gst">GST</label>
-                            <input type="text" class="form-control" id="gst" name="gst" placeholder="Enter GST">
+                            <input type="text" class="form-control" id="t_gst" name="gst" placeholder="Enter GST">
                         </div>
                     </div>
                 </div>
@@ -1127,13 +1136,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pan">PAN NO. <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="pan" name="pan" placeholder="Enter PAN NO.">
+                            <input type="text" class="form-control" id="t_pan" name="pan" placeholder="Enter PAN NO.">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="gst_state">GST State</label>
-                            <input type="text" class="form-control" id="gst_state" name="gst_state" placeholder="Enter GST State">
+                            <input type="text" class="form-control" id="t_gst_state" name="gst_state" placeholder="Enter GST State">
                         </div>
                     </div>
                 </div>
@@ -1141,7 +1150,7 @@ function add_consginee(){
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="state_code">State Code <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="state_code" name="state_code" placeholder="Enter State Code">
+                            <input type="text" class="form-control" id="t_state_code" name="state_code" placeholder="Enter State Code">
                         </div>
                     </div>
                 </div>

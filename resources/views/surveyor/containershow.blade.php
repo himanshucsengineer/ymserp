@@ -322,9 +322,9 @@ function validateInput(input) {
 }
 
 $('#container_type').on('change',function(){
-    var conainerTyoe = $(this).val();
+    var conainerType = $(this).val();
 
-    if(conainerTyoe == "DRY"){
+    if(conainerType == "DRY"){
         $('#container_size_div').show();
         $('#container_sub_type_div').show();
         $('#container_tare_weight_div').show();
@@ -334,7 +334,7 @@ $('#container_type').on('change',function(){
         $('#container_model_div').hide();
         $('#container_device_div').hide();
         
-    }else if(conainerTyoe == "REEFER"){
+    }else if(conainerType == "REEFER"){ 
         $('#container_size_div').show();
         $('#container_sub_type_div').show();
         $('#container_tare_weight_div').show();
@@ -353,36 +353,60 @@ $('#container_type').on('change',function(){
         $('#container_model_div').hide();
         $('#container_device_div').hide();
     }
-
 })
+
+$('#container_size').on('change',function(){
+    var containerType = $('#container_type').val();
+    var containerSize = $(this).val();
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    if(containerType == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    if(containerType != '' && containerSize != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/line/getbysizetype",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'containerType':containerType,
+                'containerSize':containerSize
+            },
+            success: function (data) {
+                $('#line_id').empty();
+                var select = document.getElementById('line_id');
+                data.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.id;
+                    option.text = item.name;
+                    select.appendChild(option);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+})
+
 $(document).ready(function () {
     var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-    $.ajax({
-        type: "post",
-        url: "/api/line/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function (data) {
-            var select = document.getElementById('line_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.name;
-                select.appendChild(option);
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
+
     
     $.ajax({
         type: "POST",
@@ -425,7 +449,7 @@ $(document).ready(function () {
             }
             
             if(data.line_id){
-                getline(data.line_id);
+                getline(data.line_id, data.container_type,data.container_size);
             }
             // getverifydata();
 
@@ -468,18 +492,34 @@ $(document).ready(function () {
 });
 
  
-function getline(id){
+function getline(id,containerType,containerSize){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
     $.ajax({
         type: "POST",
-        url: "/api/line/getbyid",
+        url: "/api/line/getbysizetype",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
         data:{
-            'id':id
+            'user_id':user_id,
+            'depo_id':depo_id,
+            'containerType':containerType,
+            'containerSize':containerSize
         },
         success: function (data) {
-            $("#line_id").val(data.id);
+            $('#line_id').empty();
+                var select = document.getElementById('line_id');
+                data.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.id;
+                    option.text = item.name;
+                    select.appendChild(option);
+                });
+
+            $('#line_id').val(id)
+                
         },
         error: function (error) {
             console.log(error);

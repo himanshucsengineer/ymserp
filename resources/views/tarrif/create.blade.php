@@ -48,6 +48,24 @@ cursor: pointer;
                         <form id="tarrifForm" novalidate="novalidate">
                             <div class="card-body">
                                 <div class="form-group">
+                                    <label>Container Type <span style="color:red;">*</span></label>
+                                    <select class="form-control" id="containerType" name="containerType">
+                                       <option value="">Select Container Type</option>
+                                       <option value="DRY">DRY</option>
+                                       <option value="REEFER">REEFER</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Container Size <span style="color:red;">*</span></label>
+                                    <select class="form-control" id="containerSize" name="containerSize" >
+                                       <option value="">Select Container Size</option>
+                                       <option value="20">20</option>
+                                       <option value="40">40</option>
+                                       <option value="45">45</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="line_id">Line <span style="color:red;">*</span></label>
                                     <select name="line_id" id="line_id" class="form-control">
                                         <option value="">Select Line</option>
@@ -60,84 +78,7 @@ cursor: pointer;
                                 <div class="form-group">
                                     <label for="repai_location_code">Location Code <span style="color:red;">*</span></label>
                                     <select name="repai_location_code" id="repai_location_code" class="form-control">
-                                        <!-- <option value="">Select Location Code</option> -->
-                                        <!-- <option value="RH1X">RH1X</option>
-                                        <option value="RX1N">RX1N</option>
-                                        <option value="RX6N">RX6N</option>
-                                        <option value="RB1X">RB1X</option>
-                                        <option value="RX2N">RX2N</option>
-                                        <option value="RX7N">RX7N</option>
-                                        <option value="RB2X">RB2X</option>
-                                        <option value="RX3N">RX3N</option>
-                                        <option value="RX8N">RX8N</option>
-                                        <option value="RX4N">RX4N</option>
-                                        <option value="RX9N">RX9N</option>
-                                        <option value="RB3X">RB3X</option>
-                                        <option value="RH2X">RH2X</option>
-                                        <option value="RX5N">RX5N</option>
-                                        <option value="RX0N">RX0N</option>
-                                        <option value="RB4X">RB4X</option>
-                                        <option value="LH1X">LH1X</option>
-                                        <option value="LX1N">LX1N</option>
-                                        <option value="LX6N">LX6N</option>
-                                        <option value="LB1X">LB1X</option>
-                                        <option value="LX2N">LX2N</option>
-                                        <option value="LX7N">LX7N</option>
-                                        <option value="LB2X">LB2X</option>
-                                        <option value="LX3N">LX3N</option>
-                                        <option value="LX8N">LX8N</option>
-                                        <option value="LX4N">LX4N</option>
-                                        <option value="LX9N">LX9N</option>
-                                        <option value="LB3X">LB3X</option>
-                                        <option value="LH2X">LH2X</option>
-                                        <option value="LX5N">LX5N</option>
-                                        <option value="LX0N">LX0N</option>
-                                        <option value="LB4X">LB4X</option>
-
-                                        <option value="TH1X">TH1X</option>
-                                        <option value="TX1N">TX1N</option>
-                                        <option value="TX6N">TX6N</option>
-                                        <option value="TB1X">TB1X</option>
-                                        <option value="TX2N">TX2N</option>
-                                        <option value="TX7N">TX7N</option>
-                                        <option value="TX3N">TX3N</option>
-                                        <option value="TX8N">TX8N</option>
-                                        <option value="TX4N">TX4N</option>
-                                        <option value="TX9N">TX9N</option>
-                                        <option value="TH2X">TH2X</option>
-                                        <option value="TX5N">TX5N</option>
-                                        <option value="TX0N">TX0N</option>
-                                        <option value="TB2X">TB2X</option>
-                                        <option value="BH1X">BH1X</option>
-                                        <option value="BX1N">BX1N</option>
-                                        <option value="BX6N">BX6N</option>
-                                        <option value="BB1X">BB1X</option>
-                                        <option value="BX2N">BX2N</option>
-                                        <option value="BX7N">BX7N</option>
-                                        <option value="BX3N">BX3N</option>
-                                        <option value="BX8N">BX8N</option>
-                                        <option value="BX4N">BX4N</option>
-                                        <option value="BX9N">BX9N</option>
-                                        <option value="BH2X">BH2X</option>
-                                        <option value="BX5N">BX5N</option>
-                                        <option value="BX0N">BX0N</option>
-                                        <option value="BB2X">BB2X</option>
-                                        <option value="FH1X">FH1X</option>
-                                        <option value="FB1X">FB1X</option>
-                                        <option value="FH2X">FH2X</option>
-                                        <option value="FB2X">FB2X</option>
-                                        <option value="FX1N">FX1N</option>
-                                        <option value="FX3N">FX3N</option>
-                                        <option value="FX2N">FX2N</option>
-                                        <option value="FX4N">FX4N</option>
-                                        <option value="DH1X">DH1X</option>
-                                        <option value="DB1X">DB1X</option>
-                                        <option value="DH2X">DH2X</option>
-                                        <option value="DB2X">DB2X</option>
-                                        <option value="DX1N">DX1N</option>
-                                        <option value="DX3N">DX3N</option>
-                                        <option value="DX2N">DX2N</option>
-                                        <option value="DX4N">DX4N</option> -->
+                                        
                                     </select>
                         
                                 </div>
@@ -263,6 +204,53 @@ cursor: pointer;
 $(document).ready(function () {
     refreshLocation()
 });
+
+$('#containerSize').on('change',function(){
+    var containerType = $('#containerType').val();
+    var containerSize = $(this).val();
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    if(containerType == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    if(containerType != '' && containerSize != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/line/getbysizetype",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'containerType':containerType,
+                'containerSize':containerSize
+            },
+            success: function (data) {
+                $('#line_id').empty();
+
+                var select = document.getElementById('line_id');
+                data.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.id;
+                    option.text = item.name;
+                    select.appendChild(option);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+})
 
 
 function refreshLocation(){
@@ -465,29 +453,7 @@ $(document).ready(function () {
     });
 
 
-    $.ajax({
-        type: "post",
-        url: "/api/line/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function (data) {
-            var select = document.getElementById('line_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.name;
-                select.appendChild(option);
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
+    
 
     $.ajax({
         type: "post",

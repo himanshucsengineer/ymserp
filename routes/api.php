@@ -145,6 +145,7 @@ $api->version('v1', function($api){
         $api->post('/delete', 'App\Http\Controllers\MasterLineController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterLineController@update');
         $api->get('/getall', 'App\Http\Controllers\MasterLineController@getall');
+        $api->post('/getbysizetype', 'App\Http\Controllers\MasterLineController@getbysizetype');
 
     }); 
 

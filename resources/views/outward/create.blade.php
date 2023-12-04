@@ -769,15 +769,15 @@ function add_transporter(){
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var name   = $('#name').val();
-    var address   = $('#address').val();
-    var city   = $('#city').val();
-    var state   = $('#state').val();
-    var pincode   = $('#pincode').val();
-    var gst   = $('#gst').val();
-    var pan   = $('#pan').val();
-    var gst_state   = $('#gst_state').val();
-    var state_code   = $('#state_code').val();
+    var name   = $('#t_name').val();
+    var address   = $('#t_address').val();
+    var city   = $('#t_city').val();
+    var state   = $('#t_state').val();
+    var pincode   = $('#t_pincode').val();
+    var gst   = $('#t_gst').val();
+    var pan   = $('#t_pan').val();
+    var gst_state   = $('#t_gst_state').val();
+    var state_code   = $('#t_state_code').val();
 
     if(name == ''){
         var callout = document.createElement('div');
@@ -804,6 +804,15 @@ function add_transporter(){
         }
     post('transport/create',data);
     refreshTransporter()
+    $('#t_name').val('');
+    $('#t_address').val('');
+    $('#t_city').val('');
+    $('#t_state').val('');
+    $('#t_pincode').val('');
+    $('#t_gst').val('');
+    $('#t_pan').val('');
+    $('#t_gst_state').val('');
+    $('#t_state_code').val('');
     $('#modal-transporter').modal('hide');
 }
 
@@ -847,6 +856,15 @@ function add_consginee(){
         }
     post('transport/create',data);
     refreshConsignee()
+    $('#name').val('');
+    $('#address').val('');
+    $('#city').val('');
+    $('#state').val('');
+    $('#pincode').val('');
+    $('#gst').val('');
+    $('#pan').val('');
+    $('#gst_state').val('');
+    $('#state_code').val('');
     $('#modal-consignee').modal('hide');
 }
 </script>
@@ -940,13 +958,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                            <input type="text" class="form-control" id="t_name" name="name" placeholder="Enter Name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address">
+                            <input type="text" class="form-control" id="t_address" name="address" placeholder="Enter Address">
                         </div>
                     </div>
                 </div>
@@ -954,13 +972,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="city">City <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter City">
+                            <input type="text" class="form-control" id="t_city" name="city" placeholder="Enter City">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" name="state" placeholder="Enter State">
+                            <input type="text" class="form-control" id="t_state" name="state" placeholder="Enter State">
                         </div>
                     </div>
                 </div>
@@ -968,13 +986,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pincode">Pincode <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter pincode">
+                            <input type="text" class="form-control" id="t_pincode" name="pincode" placeholder="Enter pincode">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="gst">GST</label>
-                            <input type="text" class="form-control" id="gst" name="gst" placeholder="Enter GST">
+                            <input type="text" class="form-control" id="t_gst" name="gst" placeholder="Enter GST">
                         </div>
                     </div>
                 </div>
@@ -982,13 +1000,13 @@ function add_consginee(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pan">PAN NO. <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="pan" name="pan" placeholder="Enter PAN NO.">
+                            <input type="text" class="form-control" id="t_pan" name="pan" placeholder="Enter PAN NO.">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="gst_state">GST State</label>
-                            <input type="text" class="form-control" id="gst_state" name="gst_state" placeholder="Enter GST State">
+                            <input type="text" class="form-control" id="t_gst_state" name="gst_state" placeholder="Enter GST State">
                         </div>
                     </div>
                 </div>
@@ -996,7 +1014,7 @@ function add_consginee(){
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="state_code">State Code <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="state_code" name="state_code" placeholder="Enter State Code">
+                            <input type="text" class="form-control" id="t_state_code" name="state_code" placeholder="Enter State Code">
                         </div>
                     </div>
                 </div>
