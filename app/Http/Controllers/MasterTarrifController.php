@@ -169,7 +169,38 @@ class MasterTarrifController extends Controller
 
 
     public function getbylineid(Request $request){
-        return MasterTarrif::where('line_id',$request->line_id)->where('repai_location_code',$request->location_code)->get();
+        $damageData = MasterTarrif::select('damade_id')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code)
+        ->distinct()
+        ->get();
+
+        $length = MasterTarrif::select('dimension_l')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code)
+        ->distinct()
+        ->get();
+
+        $width = MasterTarrif::select('dimension_w')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code)
+        ->distinct()
+        ->get();
+
+        $height = MasterTarrif::select('dimension_h')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code)
+        ->distinct()
+        ->get();
+
+        $data = array(
+            'damageData' => $damageData,
+            'length' => $length,
+            'width' => $width,
+            'height' => $height,
+        );
+
+    return $data;
     }
     public function getTarrifByLine(Request $request){
         $tarrifData = MasterTarrif::where('line_id',$request->line_id)->get();

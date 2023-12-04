@@ -906,23 +906,28 @@ function gettarrif(location_code, line_id) {
             master_height_create_option.text = "Select Height";
             master_height_create.appendChild(master_height_create_option);
 
-            data.forEach(function(item) {
+            data.damageData.forEach(function(item) {
                 getDamage(item.damade_id);
-                // getRepair(item.repair_id);
-                // getMaterial(item.material_id);
+            });
 
+            data.length.forEach(function(item) {
                 var master_length = document.getElementById('master_length');
                 var master_length_option = document.createElement('option');
                 master_length_option.value = item.dimension_l;
                 master_length_option.text = item.dimension_l;
                 master_length.appendChild(master_length_option);
+            });
+
+            data.width.forEach(function(item) {
 
                 var master_width = document.getElementById('master_width');
                 var master_width_option = document.createElement('option');
                 master_width_option.value = item.dimension_w;
                 master_width_option.text = item.dimension_w;
                 master_width.appendChild(master_width_option);
+            });
 
+            data.height.forEach(function(item) {
                 var master_height = document.getElementById('master_height');
                 var master_height_option = document.createElement('option');
                 master_height_option.value = item.dimension_h;
@@ -1348,7 +1353,6 @@ function getDamage(id) {
             'id': id,
         },
         success: function(data) {
-
             var select = document.getElementById('damage_code');
             var option = document.createElement('option');
             option.value = data.id;
