@@ -1365,8 +1365,39 @@ class GateInController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+        if($request->vehicle_number && $request->type != '2nd_with'){
+            $getInContainer = GateIn::where('status','In')->where('vehicle_number',$request->vehicle_number)->get();
+            if(count($getInContainer)>0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Vehicle Is Already In Yard!"
+                ], 500);
+            }
+        }
+
+        if($request->vehicle_number && $request->type == '2nd_with'){
+            $getInContainer = GateIn::where('status','In')->where('vehicle_number',$request->vehicle_number)->get();
+            if(count($getInContainer)>2){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Vehicle Is Already In Yard!"
+                ], 500);
+            }
+        }
+
         if($request->container_no){
             $getInContainer = GateIn::where('status','In')->where('container_no',$request->container_no)->get();
+            if(count($getInContainer)>0){
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Container Is Already In Yard!"
+                ], 500);
+            }
+        }
+
+        if($request->two_container_no){
+            $getInContainer = GateIn::where('status','In')->where('container_no',$request->two_container_no)->get();
             if(count($getInContainer)>0){
                 return response()->json([
                     'status' => "error",
@@ -1381,6 +1412,14 @@ class GateInController extends Controller
             $container_img->move(public_path('uploads/gatein'), $container_img_name);
         }else{
             $container_img_name = '';
+        }
+
+        if ($request->hasFile('2nd_container_img')) {
+            $container_img_2 = $request->file('2nd_container_img');
+            $container_img_2_name = time() . '_' . $container_img_2->getClientOriginalName();
+            $container_img_2->move(public_path('uploads/gatein'), $container_img_2_name);
+        }else{
+            $container_img_2_name = '';
         }
 
         if ($request->hasFile('vehicle_img')) {
@@ -1418,6 +1457,51 @@ class GateInController extends Controller
                 'inward_date' => date('Y-m-d'),
                 'inward_time' => date('H:i:s'),
             ]);
+        }else if($request->type == '2nd_with'){
+            $currentDateTime = new \DateTime();
+            $formattedDateTime = $currentDateTime->format('YmdHisu');
+
+            $inwardNo = $request->depo_id.$formattedDateTime;
+
+            $createGatein = GateIn::create([
+                'container_img' => $container_img_name,
+                'vehicle_img' => $vehicle_img_name,
+                'container_no'=> $request->container_no,
+                'vehicle_number'=> $request->vehicle_number,
+                'depo_id' => $request->depo_id,
+                'createdby' => $request->user_id,
+                'gateintype' => "2 Conatiner",
+                'inward_no' => $inwardNo,
+                'status' => 'In',
+                'is_approve' => '0',
+                'is_repaired' => '0',
+                'is_estimate_done' => '0',
+                'inward_date' => date('Y-m-d'),
+                'inward_time' => date('H:i:s'),
+            ]);
+
+            if($createGatein){
+                $currentDateTime2 = new \DateTime();
+            $formattedDateTime2 = $currentDateTime2->format('YmdHisu');
+
+            $inwardNo2 = $request->depo_id.$formattedDateTime2;
+                $createGatein2 = GateIn::create([
+                    'container_img' => $container_img_2_name,
+                    'vehicle_img' => $vehicle_img_name,
+                    'container_no'=> $request->two_container_no,
+                    'vehicle_number'=> $request->vehicle_number,
+                    'depo_id' => $request->depo_id,
+                    'createdby' => $request->user_id,
+                    'gateintype' => "2 Conatiner",
+                    'inward_no' => $inwardNo2,
+                    'status' => 'In',
+                    'is_approve' => '0',
+                    'is_repaired' => '0',
+                    'is_estimate_done' => '0',
+                    'inward_date' => date('Y-m-d'),
+                    'inward_time' => date('H:i:s'),
+                ]);
+            }
         }else{
             $currentDateTime = new \DateTime();
             $formattedDateTime = $currentDateTime->format('YmdHisu');
@@ -1441,9 +1525,6 @@ class GateInController extends Controller
                 'inward_time' => date('H:i:s'),
             ]);
         }
-
-       
-
 
         if($createGatein){
             return response()->json([

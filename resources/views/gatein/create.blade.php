@@ -102,7 +102,7 @@
                                     <input type="radio" name="options" id="option_b2" autocomplete="off"  value="without"> Without Container
                                     </label>
                                     <label class="btn btn-secondary" style="border-radius:2px;">
-                                    <input type="radio" name="options" id="option_b3" autocomplete="off"  value="2nd_without"> 2 Container
+                                    <input type="radio" name="options" id="option_b3" autocomplete="off"  value="2nd_with"> 2 Container
                                     </label>
                                 </div>
                                 <div class="container_div">
@@ -123,16 +123,16 @@
 
                                 <div class="2_container_div" style="display:none;">
                                     <div class="form-group">
-                                        <label for="container_no">2ND Container Number <span style="color:red;">*</span></label>
-                                        <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
-                                        <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
+                                        <label for="2nd_container_no">2ND Container Number <span style="color:red;">*</span></label>
+                                        <input type="text" class="" oninput="validateInput2(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="2nd_container_no" name="2nd_container_no" placeholder="">
+                                        <span id="errorText2" style="color:red; font-size:15px; margin-top: .5rem"></span>
                                     </div>
                                     <h3 style="text-align:center">OR</h3>
                                     <div class="form-group">
-                                        <label for="container_img">Container Image</label>
-                                        <input type="file" class="form-control" id="container_img" name="container_img" placeholder="Enter Vehicle Number">
+                                        <label for="2nd_container_img">Container Image</label>
+                                        <input type="file" class="form-control" id="2nd_container_img" name="2nd_container_img" placeholder="Enter Vehicle Number">
                                         <div class="img_prv_box">
-                                            <img id="container_img_prev" src="" />
+                                            <img id="2nd_container_img_prev" src="" />
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@ $(document).ready(function () {
     if (selectedValue == "without") {
         $('.container_div').hide();
         $('.2_container_div').hide();
-    } else if (selectedValue == "2nd_without") {
+    } else if (selectedValue == "2nd_with") {
         $('.container_div').show();
         $('.2_container_div').show();
     } else {
@@ -179,6 +179,17 @@ $('#container_img').on('change', function (e) {
     }
 });
 
+$('#2nd_container_img').on('change', function (e) {
+    var fileInput = $(this)[0];
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#2nd_container_img_prev').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+});
+
 $('#vehicle_img').on('change', function (e) {
     var fileInput = $(this)[0];
     if (fileInput.files && fileInput.files[0]) {
@@ -194,7 +205,7 @@ $('#vehicle_img').on('change', function (e) {
 
 
 
-function validateInput(input) {
+function validateInput2(input) {
     input.style.color = 'black';
     document.getElementById('errorText').textContent = "";
     const inputField = document.getElementById('container_no');
@@ -229,6 +240,41 @@ function validateInput(input) {
     }
 }
 
+function validateInput(input) {
+    input.style.color = 'black';
+    document.getElementById('errorText2').textContent = "";
+    const inputField = document.getElementById('container_no');
+    inputField.setAttribute('maxlength', '11');
+    const inputValue = input.value;
+
+    let checkFirstChar = isNaN(inputValue);
+    if(checkFirstChar == false){
+    document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+    inputField.setAttribute('maxlength', '1');
+    input.style.color = 'red';
+    }
+
+    if(inputValue.length <= 4){
+    const checkNumber = /\d/; // This regex matches any digit (0-9)
+    let chechkNumberforstart =  checkNumber.test(inputValue);
+    if(chechkNumberforstart){
+        document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+        inputField.setAttribute('maxlength', inputValue.length);
+        input.style.color = 'red';
+    }
+    }
+
+    if(inputValue.length > 4){
+        const part2 = inputValue.substring(4);
+        let checkNumber = isNaN(part2);
+        if(checkNumber == true){
+            document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+            inputField.setAttribute('maxlength', inputValue.length);
+            input.style.color = 'red';
+        }
+    }
+}
+
 
 
 
@@ -241,15 +287,18 @@ $(function () {
     submitHandler: function () {
         var container_no = $("#container_no").val();
         var vehicle_number = $("#vehicle_number").val();
+        var two_container_no = $("#2nd_container_no").val();
         var type = $('input[name="options"]:checked').val();
 
             var formData = new FormData();
             formData.append('container_no', container_no);
+            formData.append('two_container_no', two_container_no);
             formData.append('vehicle_number', vehicle_number);
             formData.append('type', type);
             formData.append('user_id', user_id);
             formData.append('depo_id', depo_id);
             formData.append('container_img', $('#container_img')[0].files[0]);
+            formData.append('2nd_container_img', $('#2nd_container_img')[0].files[0]);
             formData.append('vehicle_img', $('#vehicle_img')[0].files[0]);
 
             // Now, you can send formData in an AJAX request
