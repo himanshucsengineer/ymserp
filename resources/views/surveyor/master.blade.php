@@ -262,6 +262,21 @@ a.open:hover .circle img {
     margin-bottom: 5px;
     box-sizing: content-box;
 }
+
+.flex_btn{
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex_btn .card{
+    width: 14.28%;
+    padding: 0.2rem;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0px;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -311,32 +326,32 @@ a.open:hover .circle img {
                             <div class="tab-content" id="custom-tabs-three-tabContent">
                                 <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
                                     aria-labelledby="custom-tabs-three-home-tab">
-                                    <div class="row">
-                                        <div class="col-md-1">
+                                    <div class="flex_btn">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showDoor()">Door</button>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showLeft()">Left</button>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showFront()">Front</button>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showRight()">Right</button>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showInternal()">Internal</button>
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showTop()">Top</button>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showBottom()">Bottom</button>
                                         </div>
@@ -583,7 +598,8 @@ function showInternal() {
 
 function printAstimate() {
     var gatein_id = $('#gateinid').val();
-    location.href = `/print/printestimate?gatein_id=${gatein_id}`;
+    printurl = `/print/printestimate?gatein_id=${gatein_id}`;
+    window.open(printurl, '_blank');
 }
 
 
@@ -981,9 +997,9 @@ function getTransactionData() {
                 row.append($('<td>').text(item.repair_code));
                 row.append($('<td>').text(item.material_code));
                 row.append($('<td>').text(item.tarrifData.unit_of_measure));
-                row.append($('<td>').text(item.tarrifData.dimension_w));
-                row.append($('<td>').text(item.tarrifData.dimension_l));
-                row.append($('<td>').text(item.tarrifData.dimension_h));
+                row.append($('<td>').text(item.dimension_w));
+                row.append($('<td>').text(item.dimension_l));
+                row.append($('<td>').text(item.dimension_h));
 
                 var qty = $('<input>').attr({
                     'type': 'text',
@@ -1095,7 +1111,7 @@ function getReportingData() {
                     'id': 'reporting_dimension_w',
                     'readonly': 'readonly',
                     'class': 'form-control reportinput'
-                }).val(item.tarrifData.dimension_w);
+                }).val(item.dimension_w);
                 row.append($('<td>').append(dimension_w));
 
                 var dimension_l = $('<input>').attr({
@@ -1103,7 +1119,7 @@ function getReportingData() {
                     'id': 'reporting_dimension_l',
                     'readonly': 'readonly',
                     'class': 'form-control reportinput'
-                }).val(item.tarrifData.dimension_l);
+                }).val(item.dimension_l);
                 row.append($('<td>').append(dimension_l));
 
                 var dimension_h = $('<input>').attr({
@@ -1111,7 +1127,7 @@ function getReportingData() {
                     'id': 'reporting_dimension_h',
                     'readonly': 'readonly',
                     'class': 'form-control reportinput'
-                }).val(item.tarrifData.dimension_h);
+                }).val(item.dimension_h);
                 row.append($('<td>').append(dimension_h));
 
                 var qty = $('<input>').attr({
@@ -1232,16 +1248,18 @@ function getReportingData() {
                 var reporting_tax = $('#reporting_tax').val();
                 var reporting_labour_cost = $('#reporting_labour_cost_text').val();
                 var reporting_material_cost = $('#reporting_material_cost_text').val();
+
                 var labour_cost = parseInt(reporting_labour_hr) * parseInt(reporting_labour_cost);
                 var material_cost = parseInt(reporting_qty) * parseInt(reporting_material_cost);
                 var sub_total = parseInt(labour_cost) + parseInt(material_cost);
                 var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
-                $('#reporting_labour_cost').val(labour_cost);
-                $('#reporting_material_cost').val(material_cost);
-                $('#reporting_sub_total').val(sub_total);
-                $('#reporting_tax_cost').val(tax_cost);
-                $('#reporting_total').val(total);
+
+                $('#reporting_labour_cost').val(labour_cost.toFixed(2));
+                $('#reporting_material_cost').val(material_cost.toFixed(2));
+                $('#reporting_sub_total').val(sub_total.toFixed(2));
+                $('#reporting_tax_cost').val(tax_cost.toFixed(2));
+                $('#reporting_total').val(total.toFixed(2));
             });
 
             $('#reporting_labour_cost, #reporting_material_cost').on('keyup', function() {
@@ -1251,9 +1269,9 @@ function getReportingData() {
                 var sub_total = parseInt(reporting_labour_cost) + parseInt(reporting_material_cost);
                 var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
-                $('#reporting_sub_total').val(sub_total);
-                $('#reporting_tax_cost').val(tax_cost);
-                $('#reporting_total').val(total);
+                $('#reporting_sub_total').val(sub_total.toFixed(2));
+                $('#reporting_tax_cost').val(tax_cost.toFixed(2));
+                $('#reporting_total').val(total.toFixed(2));
             });
 
             $('#reporting_tax').on('keyup', function() {
@@ -1261,8 +1279,8 @@ function getReportingData() {
                 var sub_total = $('#reporting_sub_total').val();
                 var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
-                $('#reporting_tax_cost').val(tax_cost);
-                $('#reporting_total').val(total);
+                $('#reporting_tax_cost').val(tax_cost.toFixed(2));
+                $('#reporting_total').val(total.toFixed(2));
             });
 
 

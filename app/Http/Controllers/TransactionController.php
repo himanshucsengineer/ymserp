@@ -58,7 +58,10 @@ class TransactionController extends Controller
                 'damage' => $damage,
                 'repair' => $repair,
                 'material' => $material,
-                'id' => $transaction->id
+                'id' => $transaction->id,
+                'dimension_h' => $transaction->dimension_h,
+                'dimension_w' => $transaction->dimension_w,
+                'dimension_l' => $transaction->dimension_l,
             ];
         }
         return $formatedData;
@@ -90,8 +93,10 @@ class TransactionController extends Controller
                 'damage_code' => $damage->code,
                 'repair_code' => $repair->repair_code,
                 'material_code' => $material->material_code,
-                'id' => $transaction->id
-
+                'id' => $transaction->id,
+                'dimension_h' => $transaction->dimension_h,
+                'dimension_w' => $transaction->dimension_w,
+                'dimension_l' => $transaction->dimension_l,
             ];
         }
 
@@ -195,7 +200,7 @@ class TransactionController extends Controller
         if($transactionDetails){
             return response()->json([
                 'status' => "success",
-                'message' => "Repair Code Updated Successfully"
+                'message' => "Transaction Updated Successfully"
             ], 200);
         }else{
             return response()->json([

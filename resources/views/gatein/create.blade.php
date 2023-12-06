@@ -49,6 +49,12 @@
 .flex_date_range .right{
     width:50%;
 }
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    background-color:#63bf84;
+    border-color:#63bf84;
+    border-radius:2px;
+}
+
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -89,16 +95,35 @@
                                 
                                 </div>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn bg-olive active">
+                                    <label class="btn btn-secondary active mr-2" style="border-radius:2px;">
                                     <input type="radio" name="options" id="option_b1" autocomplete="off" checked="" value="with">With Container
                                     </label>
-                                    <label class="btn bg-olive">
+                                    <label class="btn btn-secondary mr-2" style="border-radius:2px;">
                                     <input type="radio" name="options" id="option_b2" autocomplete="off"  value="without"> Without Container
+                                    </label>
+                                    <label class="btn btn-secondary" style="border-radius:2px;">
+                                    <input type="radio" name="options" id="option_b3" autocomplete="off"  value="2nd_without"> 2 Container
                                     </label>
                                 </div>
                                 <div class="container_div">
                                     <div class="form-group">
                                         <label for="container_no">Container Number <span style="color:red;">*</span></label>
+                                        <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
+                                        <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
+                                    </div>
+                                    <h3 style="text-align:center">OR</h3>
+                                    <div class="form-group">
+                                        <label for="container_img">Container Image</label>
+                                        <input type="file" class="form-control" id="container_img" name="container_img" placeholder="Enter Vehicle Number">
+                                        <div class="img_prv_box">
+                                            <img id="container_img_prev" src="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="2_container_div" style="display:none;">
+                                    <div class="form-group">
+                                        <label for="container_no">2ND Container Number <span style="color:red;">*</span></label>
                                         <input type="text" class="" oninput="validateInput(this)"  maxlength="11" style="font-size:50px; width:100%; text-transform:uppercase;" id="container_no" name="container_no" placeholder="">
                                         <span id="errorText" style="color:red; font-size:15px; margin-top: .5rem"></span>
                                     </div>
@@ -127,15 +152,20 @@
 $(document).ready(function () {
 
     $('input[name="options"]').on('change', function () {
-            // Get the value of the selected radio button
-            var selectedValue = $('input[name="options"]:checked').val();
-            
-            if(selectedValue == "without"){
-                $('.container_div').hide();
-            }else{
-                $('.container_div').show();
-            }
-        });
+    // Get the value of the selected radio button
+    var selectedValue = $('input[name="options"]:checked').val();
+
+    if (selectedValue == "without") {
+        $('.container_div').hide();
+        $('.2_container_div').hide();
+    } else if (selectedValue == "2nd_without") {
+        $('.container_div').show();
+        $('.2_container_div').show();
+    } else {
+        $('.2_container_div').hide();
+        $('.container_div').show();
+    }
+});
 
 // Listen for changes in the file input
 $('#container_img').on('change', function (e) {
