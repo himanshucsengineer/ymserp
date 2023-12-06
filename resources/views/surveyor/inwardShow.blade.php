@@ -720,7 +720,6 @@ $(function () {
         var billing_type = $("#billing_type").val();
         var amount = $("#amount").val();
 
-
             var formData = new FormData();
 
             formData.append('inward_date', inward_date);

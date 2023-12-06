@@ -62,6 +62,8 @@ Route::get('/permission/all', 'App\Http\Controllers\PermissionController@all');
 Route::get('/gatein/create', 'App\Http\Controllers\GateInController@index');
 
 Route::get('/surveyor/reports', 'App\Http\Controllers\GateInController@reports');
+Route::get('/inward/reports', 'App\Http\Controllers\GateInController@inward_reports');
+
 Route::get('/inward/executive', 'App\Http\Controllers\GateInController@inward_executive');
 
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');

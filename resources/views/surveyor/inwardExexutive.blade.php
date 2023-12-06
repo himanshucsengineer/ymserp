@@ -105,15 +105,6 @@
                                         <th>Tare Weight</th>
                                         <th>Mfg Date</th>
                                         <th>CSC Details</th>
-                                        <th>Line Name</th>
-                                        <th>Grade</th>
-                                        <th>Status</th>
-                                        <th>Rf Type</th>
-                                        <th>Make</th>
-                                        <th>Model No.</th>
-                                        <th>Serial No.</th>
-                                        <th>Machinary Mfg Date</th>
-                                        <th>Device Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -210,15 +201,7 @@ function filterByDate(){
                 row.append($('<td>').append(item.tare_weight));
                 row.append($('<td>').append(item.mfg_date));
                 row.append($('<td>').append(item.csc_details));
-                row.append($('<td>').append(item.line_name));
-                row.append($('<td>').append(item.grade));
-                row.append($('<td>').append(item.status_name));
-                row.append($('<td>').append(item.rftype));
-                row.append($('<td>').append(item.make));
-                row.append($('<td>').append(item.model_no));
-                row.append($('<td>').append(item.serial_no));
-                row.append($('<td>').append(item.machine_mfg_date));
-                row.append($('<td>').append(item.device_status));
+
 
                 tbody.append(row);
                 i++;

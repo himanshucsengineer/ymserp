@@ -197,6 +197,8 @@ $api->version('v1', function($api){
         
         $api->post('/filterByDateSurvey', 'App\Http\Controllers\GateInController@filterByDateSurvey');
         $api->post('/getInspectionDataSurvey', 'App\Http\Controllers\GateInController@getInspectionDataSurvey');
+        $api->post('/filterByDateSurveyor', 'App\Http\Controllers\GateInController@filterByDateSurveyor');
+        $api->post('/getInspectionDataSurveyor', 'App\Http\Controllers\GateInController@getInspectionDataSurveyor');
 
     });
 
