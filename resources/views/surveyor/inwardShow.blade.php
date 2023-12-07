@@ -99,6 +99,30 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label for="container_type">Container Type</label>
+                                            <select name="container_type" id="container_type" class="form-control">
+                                                <option value="">Select Container Type</option>
+                                                <option value="DRY">DRY</option>
+                                                <option value="REEFER">REEFER</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="container_size_div">
+                                        <div class="form-group">
+                                            <label for="container_size">Container Size</label>
+                                            <select name="container_size" id="container_size" class="form-control">
+                                                <option value="">Select Container Size</option>
+                                                <option value="20">20</option>
+                                                <option value="40">40</option>
+                                                <option value="45">45</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="line_id">Line Name <span style="color:red;">*</span></label>
                                             <select name="line_id" id="line_id" class="form-control">
                                                 <option value="">Select Line</option>
@@ -351,6 +375,51 @@ function validateInput(input) {
     }
 }
 
+$('#container_size').on('change',function(){
+    var containerType = $('#container_type').val();
+    var containerSize = $(this).val();
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    if(containerType == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    if(containerType != '' && containerSize != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/line/getbysizetype",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'containerType':containerType,
+                'containerSize':containerSize
+            },
+            success: function (data) {
+                $('#line_id').empty();
+                var select = document.getElementById('line_id');
+                data.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.id;
+                    option.text = item.name;
+                    select.appendChild(option);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+})
 
 $(document).ready(function () {
     var containerid = <?= $getid[0]?>;
@@ -693,6 +762,8 @@ $(function () {
     
     $.validator.setDefaults({
     submitHandler: function () {
+        var container_type = $("#container_type").val();
+        var container_size = $("#container_size").val();
 
         var inward_date = $("#inward_date").val();
         var inward_time = $("#inward_time").val();
@@ -721,6 +792,8 @@ $(function () {
         var amount = $("#amount").val();
 
             var formData = new FormData();
+            formData.append('container_type', container_type);
+            formData.append('container_size', container_size);
 
             formData.append('inward_date', inward_date);
             formData.append('inward_time', inward_time);
