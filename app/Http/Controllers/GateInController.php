@@ -269,8 +269,7 @@ class GateInController extends Controller
 
         if($request->user_id == 1){
 
-            $gateInData = GateIn::where([
-            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            $gateInData = GateIn::whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
             $gateInData = GateIn::where([
@@ -283,20 +282,83 @@ class GateInController extends Controller
         $formetedData = [];
 
         foreach($gateInData as $gateIn){
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $consignee = MasterTransport::where('id',$request->consignee_id)->first();
+            $transporter = MasterTransport::where('id',$request->transport_id)->first();
+
+
+            if($consignee){
+                $consinee_name = $consignee->name;
+            }else{
+                $consinee_name = '';
+            }
+
+            if($transporter){
+                $transporter_name = $transporter->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($line){
+                $line_name = $line->name;
+                $is_assigned = "Assigned";
+            }else{
+                $line_name = '';
+                $is_assigned = "Not Assigned";
+            }
+
+            
+
             $formetedData[] = [
-                'container_no' => $gateIn->container_no,
-                'container_type' => $gateIn->container_type,
-                'sub_type' => $gateIn->sub_type,
-                'container_size' => $gateIn->container_size,
-                'vehicle_number' => $gateIn->vehicle_number,
-                'contact_number' => $gateIn->contact_number,
-                'driver_name' => $gateIn->driver_name,
                 'inward_no' => $gateIn->inward_no,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
                 'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'sub_type' => $gateIn->sub_type,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'status_name' => $gateIn->status_name,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
+                'third_party' => $gateIn->third_party,
+                'consinee_name' => $consinee_name,
+                'transaction_mode' => $gateIn->transaction_mode,
+                'transaction_ref_no' => $gateIn->transaction_ref_no,
+                'transporter_name' => $transporter_name,
+                'driver_name' => $gateIn->driver_name,
+                'contact_number' => $gateIn->contact_number,
+                'vessel_name' => $gateIn->vessel_name,
+                'voyage' => $gateIn->voyage,
+                'port_name' => $gateIn->port_name,
+                'er_no' => $gateIn->er_no,
+                'empty_latter' => $gateIn->empty_latter,
+                'challan' => $gateIn->challan,
+                'empty_repositioning' => $gateIn->empty_repositioning,
+                'return' => $gateIn->return,
+                'tracking_device' => $gateIn->tracking_device,
+                'remarks' => $gateIn->remarks,
                 'is_repaired' => $gateIn->is_repaired,
+
+                'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
+            
             
         }
     	return response()->json([
@@ -954,7 +1016,6 @@ class GateInController extends Controller
             $datalimit = 25;
         }
 
-
         if($request->status == "Gate In"){
             $field = "status";
             $value = "In";
@@ -1116,20 +1177,83 @@ class GateInController extends Controller
         $formetedData = [];
 
         foreach($gateInData as $gateIn){
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $consignee = MasterTransport::where('id',$request->consignee_id)->first();
+            $transporter = MasterTransport::where('id',$request->transport_id)->first();
+
+
+            if($consignee){
+                $consinee_name = $consignee->name;
+            }else{
+                $consinee_name = '';
+            }
+
+            if($transporter){
+                $transporter_name = $transporter->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($line){
+                $line_name = $line->name;
+                $is_assigned = "Assigned";
+            }else{
+                $line_name = '';
+                $is_assigned = "Not Assigned";
+            }
+
+            
+
             $formetedData[] = [
-                'container_no' => $gateIn->container_no,
-                'container_type' => $gateIn->container_type,
-                'sub_type' => $gateIn->sub_type,
-                'container_size' => $gateIn->container_size,
-                'vehicle_number' => $gateIn->vehicle_number,
-                'contact_number' => $gateIn->contact_number,
-                'driver_name' => $gateIn->driver_name,
                 'inward_no' => $gateIn->inward_no,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
                 'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'sub_type' => $gateIn->sub_type,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'status_name' => $gateIn->status_name,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
+                'third_party' => $gateIn->third_party,
+                'consinee_name' => $consinee_name,
+                'transaction_mode' => $gateIn->transaction_mode,
+                'transaction_ref_no' => $gateIn->transaction_ref_no,
+                'transporter_name' => $transporter_name,
+                'driver_name' => $gateIn->driver_name,
+                'contact_number' => $gateIn->contact_number,
+                'vessel_name' => $gateIn->vessel_name,
+                'voyage' => $gateIn->voyage,
+                'port_name' => $gateIn->port_name,
+                'er_no' => $gateIn->er_no,
+                'empty_latter' => $gateIn->empty_latter,
+                'challan' => $gateIn->challan,
+                'empty_repositioning' => $gateIn->empty_repositioning,
+                'return' => $gateIn->return,
+                'tracking_device' => $gateIn->tracking_device,
+                'remarks' => $gateIn->remarks,
                 'is_repaired' => $gateIn->is_repaired,
+ 
+                'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
+            
             
         }
     	return response()->json([

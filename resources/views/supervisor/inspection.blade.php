@@ -107,12 +107,45 @@
                                         <th>Action</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
-                                        <th>Container Size</th>
-                                        <th>Container Type</th>
                                         <th>Vehicle No.</th>
                                         <th>Vehicle image</th>
+                                        <th>Inward Date</th>
+                                        <th>Inward Time</th>
+                                        <th>Surveyor Date</th>
+                                        <th>Surveyor Time</th>
+                                        <th>Container Type</th>
+                                        <th>Container Size</th>
+                                        <th>Sub Type</th>
+                                        <th>Gross Weight</th>
+                                        <th>Tare Weight</th>
+                                        <th>Mfg Date</th>
+                                        <th>Csc Details</th>
+                                        <th>Line</th>
+                                        <th>Grade</th>
+                                        <th>Status Name</th>
+                                        <th>RF Type</th>
+                                        <th>Make</th>
+                                        <th>Model No.</th>
+                                        <th>Serial No.</th>
+                                        <th>Machine Mfg. Date</th>
+                                        <th>Device Status</th>
+                                        <th>Third Party</th>
+                                        <th>Consignee</th>
+                                        <th>Transaction Mode</th>
+                                        <th>Transaction Ref. No.</th>
+                                        <th>Transporter</th>
                                         <th>Driver Name</th>
-                                        <th>Driver Contact</th>
+                                        <th>Contact No.</th>
+                                        <th>Vessel Name</th>
+                                        <th>Voyage</th>
+                                        <th>Port Name</th>
+                                        <th>Er No.</th>
+                                        <th>Empty Latter</th>
+                                        <th>Challan</th>
+                                        <th>Empty Repositioning</th>
+                                        <th>Return</th>
+                                        <th>Tracking Device</th>
+                                        <th>Remark</th>
                                         <th>Inward No.</th>
                                     </tr>
                                 </thead>
@@ -182,27 +215,75 @@ $('#filterbystatus').on('change',function(){
                     vehicle_img = "No Imgae Available";
                 }
 
+                var challan = '';
+                if(item.challan){
+                    challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
+                }else{
+                    challan = "No Imgae Available";
+                }
+
+                var empty_latter = '';
+                if(item.empty_latter){
+                    empty_latter = $('<a>').attr({'href':'/uploads/gatein/'+item.empty_latter, 'target':'_blank'}).text("View Image");
+                }else{
+                    empty_latter = "No Imgae Available";
+                }
+
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id)
+                    .attr('data-id', item.id) 
                     .attr('data-value',item.is_repaired) 
                     .attr('class', 'view-button');
 
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
+
+                row.append($('<td  style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
+                row.append($('<td  style="text-transform:uppercase;">').append(item.vehicle_number));
+                row.append($('<td>').append(vehicle_img));
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.inward_time));
+                row.append($('<td>').append(item.survayor_date));
+                row.append($('<td>').append(item.survayor_time));
                 row.append($('<td>').append(item.container_size));
                 row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
+                
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.gross_weight));
+                row.append($('<td>').append(item.tare_weight));
+                row.append($('<td>').append(item.mfg_date));
+                row.append($('<td>').append(item.csc_details));
+
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.make));
+                row.append($('<td>').append(item.model_no));
+                row.append($('<td>').append(item.serial_no));
+                row.append($('<td>').append(item.machine_mfg_date));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.consinee_name));
+                row.append($('<td>').append(item.transaction_mode));
+                row.append($('<td>').append(item.transaction_ref_no));
+                row.append($('<td>').append(item.transporter_name));
+                row.append($('<td>').append(item.driver_name));
                 row.append($('<td>').append(item.contact_number));
-                
-                
+                row.append($('<td>').append(item.vessel_name));
+                row.append($('<td>').append(item.voyage));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.er_no));
+                row.append($('<td>').append(empty_latter));
+                row.append($('<td>').append(challan));
+                row.append($('<td>').append(item.empty_repositioning));
+                row.append($('<td>').append(item.return));
+                row.append($('<td>').append(item.tracking_device));
+                row.append($('<td>').append(item.remarks));
                 row.append($('<td>').append(item.inward_no));
 
                 tbody.append(row);
@@ -313,6 +394,8 @@ function filterByDate(){
 
             var i =1;
             response.data.forEach(function(item) {
+
+
                 var container_img = '';
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
@@ -326,18 +409,22 @@ function filterByDate(){
                     vehicle_img = "No Imgae Available";
                 }
 
+                var challan = '';
+                if(item.challan){
+                    challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
+                }else{
+                    challan = "No Imgae Available";
+                }
+
+                var empty_latter = '';
+                if(item.empty_latter){
+                    empty_latter = $('<a>').attr({'href':'/uploads/gatein/'+item.empty_latter, 'target':'_blank'}).text("View Image");
+                }else{
+                    empty_latter = "No Imgae Available";
+                }
+
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.inward_no));
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-                row.append($('<td>').append(container_img));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
-                
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -347,6 +434,51 @@ function filterByDate(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
+
+                row.append($('<td  style="text-transform:uppercase;">').append(item.container_no));
+                row.append($('<td>').append(container_img));
+                row.append($('<td  style="text-transform:uppercase;">').append(item.vehicle_number));
+                row.append($('<td>').append(vehicle_img));
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.inward_time));
+                row.append($('<td>').append(item.survayor_date));
+                row.append($('<td>').append(item.survayor_time));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.gross_weight));
+                row.append($('<td>').append(item.tare_weight));
+                row.append($('<td>').append(item.mfg_date));
+                row.append($('<td>').append(item.csc_details));
+
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.make));
+                row.append($('<td>').append(item.model_no));
+                row.append($('<td>').append(item.serial_no));
+                row.append($('<td>').append(item.machine_mfg_date));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.consinee_name));
+                row.append($('<td>').append(item.transaction_mode));
+                row.append($('<td>').append(item.transaction_ref_no));
+                row.append($('<td>').append(item.transporter_name));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                row.append($('<td>').append(item.vessel_name));
+                row.append($('<td>').append(item.voyage));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.er_no));
+                row.append($('<td>').append(empty_latter));
+                row.append($('<td>').append(challan));
+                row.append($('<td>').append(item.empty_repositioning));
+                row.append($('<td>').append(item.return));
+                row.append($('<td>').append(item.tracking_device));
+                row.append($('<td>').append(item.remarks));
+                row.append($('<td>').append(item.inward_no));
 
                 tbody.append(row);
                 i++;
@@ -474,18 +606,22 @@ function refreshTable(page,search){
                     vehicle_img = "No Imgae Available";
                 }
 
+                var challan = '';
+                if(item.challan){
+                    challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
+                }else{
+                    challan = "No Imgae Available";
+                }
+
+                var empty_latter = '';
+                if(item.empty_latter){
+                    empty_latter = $('<a>').attr({'href':'/uploads/gatein/'+item.empty_latter, 'target':'_blank'}).text("View Image");
+                }else{
+                    empty_latter = "No Imgae Available";
+                }
+
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.inward_no));
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-                row.append($('<td>').append(container_img));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
-                
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -495,6 +631,51 @@ function refreshTable(page,search){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
+
+                row.append($('<td  style="text-transform:uppercase;">').append(item.container_no));
+                row.append($('<td>').append(container_img));
+                row.append($('<td  style="text-transform:uppercase;">').append(item.vehicle_number));
+                row.append($('<td>').append(vehicle_img));
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.inward_time));
+                row.append($('<td>').append(item.survayor_date));
+                row.append($('<td>').append(item.survayor_time));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.container_type));
+                
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.gross_weight));
+                row.append($('<td>').append(item.tare_weight));
+                row.append($('<td>').append(item.mfg_date));
+                row.append($('<td>').append(item.csc_details));
+
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.make));
+                row.append($('<td>').append(item.model_no));
+                row.append($('<td>').append(item.serial_no));
+                row.append($('<td>').append(item.machine_mfg_date));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.consinee_name));
+                row.append($('<td>').append(item.transaction_mode));
+                row.append($('<td>').append(item.transaction_ref_no));
+                row.append($('<td>').append(item.transporter_name));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                row.append($('<td>').append(item.vessel_name));
+                row.append($('<td>').append(item.voyage));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.er_no));
+                row.append($('<td>').append(empty_latter));
+                row.append($('<td>').append(challan));
+                row.append($('<td>').append(item.empty_repositioning));
+                row.append($('<td>').append(item.return));
+                row.append($('<td>').append(item.tracking_device));
+                row.append($('<td>').append(item.remarks));
+                row.append($('<td>').append(item.inward_no));
 
                 tbody.append(row);
                 i++;
