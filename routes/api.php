@@ -199,7 +199,8 @@ $api->version('v1', function($api){
         $api->post('/getInspectionDataSurvey', 'App\Http\Controllers\GateInController@getInspectionDataSurvey');
         $api->post('/filterByDateSurveyor', 'App\Http\Controllers\GateInController@filterByDateSurveyor');
         $api->post('/getInspectionDataSurveyor', 'App\Http\Controllers\GateInController@getInspectionDataSurveyor');
-
+        $api->post('/filterByDateInward', 'App\Http\Controllers\GateInController@filterByDateInward');
+        $api->post('/getInspectionDataInward', 'App\Http\Controllers\GateInController@getInspectionDataInward');
     });
 
     // $api->group([ 'middleware' => 'api.auth', 'prefix'=>'containerverify'], function($api){

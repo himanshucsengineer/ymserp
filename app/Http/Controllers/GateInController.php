@@ -317,6 +317,163 @@ class GateInController extends Controller
         ]); 
     }
 
+
+    public function filterByDateInward(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->startDate != '' && $request->endDate ==  ''){
+            $startDate = $request->startDate;
+            $endDate = date('Y-m-d');
+        }else if($request->startDate == '' && $request->endDate !=  ''){
+            $endDate = $request->endDate;
+            $startDate = date('Y-m-d');
+        }else if($request->startDate != '' && $request->endDate !=  ''){
+            $startDate = $request->startDate;
+            $endDate = $request->endDate;
+        }
+
+        if($request->user_id == 1){
+            $gateInData = GateIn::where([
+                ['status','In'],
+                ['return','!=', null],
+                ['is_approve','0'],
+                ['is_repaired','0'],
+                ['gateintype','!=','Without Container']
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+            $gateInData = GateIn::where([
+                ['status','In'],
+                ['return','!=', null],
+                ['is_approve','0'],
+                ['is_repaired','0'],
+                ['gateintype','!=','Without Container'],
+                ['depo_id',$request->depo_id],
+            ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+            
+        }
+        
+    
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $consignee = MasterTransport::where('id',$request->consignee_id)->first();
+            $transporter = MasterTransport::where('id',$request->transport_id)->first();
+
+
+            if($consignee){
+                $consinee_name = $consignee->name;
+            }else{
+                $consinee_name = '';
+            }
+
+            if($transporter){
+                $transporter_name = $transporter->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($line){
+                $line_name = $line->name;
+                $is_assigned = "Assigned";
+            }else{
+                $line_name = '';
+                $is_assigned = "Not Assigned";
+            }
+
+            
+
+            $formetedData[] = [
+                'inward_no' => $gateIn->inward_no,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
+                'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'sub_type' => $gateIn->sub_type,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'status_name' => $gateIn->status_name,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
+                'third_party' => $gateIn->third_party,
+                'consinee_name' => $consinee_name,
+                'transaction_mode' => $gateIn->transaction_mode,
+                'transaction_ref_no' => $gateIn->transaction_ref_no,
+                'transporter_name' => $transporter_name,
+                'driver_name' => $gateIn->driver_name,
+                'contact_number' => $gateIn->contact_number,
+                'vessel_name' => $gateIn->vessel_name,
+                'voyage' => $gateIn->voyage,
+                'port_name' => $gateIn->port_name,
+                'er_no' => $gateIn->er_no,
+                'empty_latter' => $gateIn->empty_latter,
+                'challan' => $gateIn->challan,
+                'empty_repositioning' => $gateIn->empty_repositioning,
+                'return' => $gateIn->return,
+                'tracking_device' => $gateIn->tracking_device,
+                'remarks' => $gateIn->remarks,
+
+
+                'is_assigned' => $is_assigned, 
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
     public function filterByDateSurvey(Request $request){
         
         $datalimit = '';
@@ -1172,6 +1329,170 @@ class GateInController extends Controller
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
+
+
+    public function getInspectionDataInward(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->user_id == 1){
+
+            $gateInData = GateIn::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['status','In'],
+                ['return','!=', null],
+                ['is_approve','0'],
+                ['is_repaired','0'],
+                ['gateintype','!=','Without Container']
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $gateInData = GateIn::where([
+                [function ($query) use ($request) {
+                    if (($search = $request->search)) {
+                        $query->orWhere('container_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vehicle_number', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('inward_time', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+                ['status','In'],
+                ['return','!=', null],
+                ['is_approve','0'],
+                ['is_repaired','0'],
+                ['gateintype','!=','Without Container']
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $consignee = MasterTransport::where('id',$request->consignee_id)->first();
+            $transporter = MasterTransport::where('id',$request->transport_id)->first();
+
+
+            if($consignee){
+                $consinee_name = $consignee->name;
+            }else{
+                $consinee_name = '';
+            }
+
+            if($transporter){
+                $transporter_name = $transporter->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($line){
+                $line_name = $line->name;
+                $is_assigned = "Assigned";
+            }else{
+                $line_name = '';
+                $is_assigned = "Not Assigned";
+            }
+
+            
+
+            $formetedData[] = [
+                'inward_no' => $gateIn->inward_no,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
+                'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'sub_type' => $gateIn->sub_type,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'status_name' => $gateIn->status_name,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
+                'third_party' => $gateIn->third_party,
+                'consinee_name' => $consinee_name,
+                'transaction_mode' => $gateIn->transaction_mode,
+                'transaction_ref_no' => $gateIn->transaction_ref_no,
+                'transporter_name' => $transporter_name,
+                'driver_name' => $gateIn->driver_name,
+                'contact_number' => $gateIn->contact_number,
+                'vessel_name' => $gateIn->vessel_name,
+                'voyage' => $gateIn->voyage,
+                'port_name' => $gateIn->port_name,
+                'er_no' => $gateIn->er_no,
+                'empty_latter' => $gateIn->empty_latter,
+                'challan' => $gateIn->challan,
+                'empty_repositioning' => $gateIn->empty_repositioning,
+                'return' => $gateIn->return,
+                'tracking_device' => $gateIn->tracking_device,
+                'remarks' => $gateIn->remarks,
+
+
+                'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
             

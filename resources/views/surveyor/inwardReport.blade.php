@@ -105,6 +105,32 @@
                                         <th>Tare Weight</th>
                                         <th>Mfg Date</th>
                                         <th>Csc Details</th>
+                                        <th>Line</th>
+                                        <th>Grade</th>
+                                        <th>Status Name</th>
+                                        <th>RF Type</th>
+                                        <th>Make</th>
+                                        <th>Model No.</th>
+                                        <th>Serial No.</th>
+                                        <th>Machine Mfg. Date</th>
+                                        <th>Device Status</th>
+                                        <th>Third Party</th>
+                                        <th>Consignee</th>
+                                        <th>Transaction Mode</th>
+                                        <th>Transaction Ref. No.</th>
+                                        <th>Transporter</th>
+                                        <th>Driver Name</th>
+                                        <th>Contact No.</th>
+                                        <th>Vessel Name</th>
+                                        <th>Voyage</th>
+                                        <th>Port Name</th>
+                                        <th>Er No.</th>
+                                        <th>Empty Latter</th>
+                                        <th>Challan</th>
+                                        <th>Empty Repositioning</th>
+                                        <th>Return</th>
+                                        <th>Tracking Device</th>
+                                        <th>Remark</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -144,7 +170,7 @@ function filterByDate(){
 
     $.ajax({
         type: "post",
-        url: "/api/gatein/filterByDateSurveyor",
+        url: "/api/gatein/filterByDateInward",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -172,6 +198,20 @@ function filterByDate(){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
                     vehicle_img = "No Imgae Available";
+                }
+
+                var challan = '';
+                if(item.challan){
+                    challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
+                }else{
+                    challan = "No Imgae Available";
+                }
+
+                var empty_latter = '';
+                if(item.empty_latter){
+                    empty_latter = $('<a>').attr({'href':'/uploads/gatein/'+item.empty_latter, 'target':'_blank'}).text("View Image");
+                }else{
+                    empty_latter = "No Imgae Available";
                 }
 
                 var row = $('<tr>');
@@ -202,6 +242,33 @@ function filterByDate(){
                 row.append($('<td>').append(item.tare_weight));
                 row.append($('<td>').append(item.mfg_date));
                 row.append($('<td>').append(item.csc_details));
+
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.make));
+                row.append($('<td>').append(item.model_no));
+                row.append($('<td>').append(item.serial_no));
+                row.append($('<td>').append(item.machine_mfg_date));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.consinee_name));
+                row.append($('<td>').append(item.transaction_mode));
+                row.append($('<td>').append(item.transaction_ref_no));
+                row.append($('<td>').append(item.transporter_name));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                row.append($('<td>').append(item.vessel_name));
+                row.append($('<td>').append(item.voyage));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.er_no));
+                row.append($('<td>').append(empty_latter));
+                row.append($('<td>').append(challan));
+                row.append($('<td>').append(item.empty_repositioning));
+                row.append($('<td>').append(item.return));
+                row.append($('<td>').append(item.tracking_device));
+                row.append($('<td>').append(item.remarks));
 
                 tbody.append(row);
                 i++;
@@ -287,11 +354,11 @@ function refreshTable(page,search){
     var depo_id = localStorage.getItem('depo_id');
 
     if(page){
-        url = `/api/gatein/getInspectionDataSurveyor?page=${page}`;
+        url = `/api/gatein/getInspectionDataInward?page=${page}`;
     }else if(search){
-        url = `/api/gatein/getInspectionDataSurveyor?search=${search}`;
+        url = `/api/gatein/getInspectionDataInward?search=${search}`;
     }else{
-        url= `/api/gatein/getInspectionDataSurveyor`;
+        url= `/api/gatein/getInspectionDataInward`;
     }
 
     $.ajax({
@@ -324,6 +391,20 @@ function refreshTable(page,search){
                     vehicle_img = "No Imgae Available";
                 }
 
+                var challan = '';
+                if(item.challan){
+                    challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
+                }else{
+                    challan = "No Imgae Available";
+                }
+
+                var empty_latter = '';
+                if(item.empty_latter){
+                    empty_latter = $('<a>').attr({'href':'/uploads/gatein/'+item.empty_latter, 'target':'_blank'}).text("View Image");
+                }else{
+                    empty_latter = "No Imgae Available";
+                }
+
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
                 // var viewButton = $('<span>')
@@ -352,6 +433,33 @@ function refreshTable(page,search){
                 row.append($('<td>').append(item.tare_weight));
                 row.append($('<td>').append(item.mfg_date));
                 row.append($('<td>').append(item.csc_details));
+
+                row.append($('<td>').append(item.line_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.rftype));
+                row.append($('<td>').append(item.make));
+                row.append($('<td>').append(item.model_no));
+                row.append($('<td>').append(item.serial_no));
+                row.append($('<td>').append(item.machine_mfg_date));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.consinee_name));
+                row.append($('<td>').append(item.transaction_mode));
+                row.append($('<td>').append(item.transaction_ref_no));
+                row.append($('<td>').append(item.transporter_name));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(item.contact_number));
+                row.append($('<td>').append(item.vessel_name));
+                row.append($('<td>').append(item.voyage));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.er_no));
+                row.append($('<td>').append(empty_latter));
+                row.append($('<td>').append(challan));
+                row.append($('<td>').append(item.empty_repositioning));
+                row.append($('<td>').append(item.return));
+                row.append($('<td>').append(item.tracking_device));
+                row.append($('<td>').append(item.remarks));
 
                 tbody.append(row);
                 i++;
