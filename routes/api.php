@@ -248,6 +248,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'docontainer'], function($api){
         $api->post('/getlist', 'App\Http\Controllers\DoContainerController@getlist');
+    });
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'product-category'], function($api){
         $api->post('/create','App\Http\Controllers\CategoryMasterController@store');
         $api->get('/getCategoryData', 'App\Http\Controllers\CategoryMasterController@getCategoryData');
