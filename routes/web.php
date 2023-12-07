@@ -69,7 +69,7 @@ Route::get('/inward/executive', 'App\Http\Controllers\GateInController@inward_ex
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');
 
 Route::get('/surveyor/containershow', 'App\Http\Controllers\GateInController@containershow');
-Route::get('/inward/executiveshow', 'App\Http\Controllers\GateInController@executiveshow');
+Route::get('/inward/executiveshow', 'App\Http\Controllers\GateInControlledr@executiveshow');
 Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\GateInController@masterserveyor');
 
 Route::get('/genrateastimate', 'App\Http\Controllers\PdfController@genrateastimate');
@@ -104,6 +104,8 @@ Route::get('/preadvice/create', 'App\Http\Controllers\PreAdviceController@index'
 Route::get('/preadvice/all', 'App\Http\Controllers\PreAdviceController@view');
 Route::get('/preadvise/list', 'App\Http\Controllers\DoContainerController@index');
 
+Route::get('/product_category/create', 'App\Http\Controllers\CategoryMasterController@index');
+Route::get('/product_category/all', 'App\Http\Controllers\CategoryMasterController@all');
 
 
 

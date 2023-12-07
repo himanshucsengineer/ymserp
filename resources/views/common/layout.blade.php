@@ -484,7 +484,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item hidden" id="DEPOS">
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-warehouse nav-icon"></i>
                                 <p>
@@ -537,12 +537,12 @@
                                     </a>
                                     <ul class="nav nav-treeview " id="createrole">
                                         <li class="nav-item">
-                                            <a href="/category/create" class="nav-link">
+                                            <a href="/product_category/create" class="nav-link">
                                                 <p> Create Category </p>
                                             </a>
                                         </li>
                                         <li class="nav-item " id="viewrole">
-                                            <a href="/category/all" class="nav-link">
+                                            <a href="/product_category/all" class="nav-link">
                                                 <p>All Category</p>
                                             </a>
                                         </li>

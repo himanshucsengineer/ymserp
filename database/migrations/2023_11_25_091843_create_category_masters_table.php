@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('category_masters', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->longtext('desc')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
