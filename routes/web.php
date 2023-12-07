@@ -109,5 +109,3 @@ Route::get('/product_category/all', 'App\Http\Controllers\CategoryMasterControll
 
 
 
-
-

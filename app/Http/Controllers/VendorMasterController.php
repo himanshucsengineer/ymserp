@@ -164,6 +164,10 @@ class VendorMasterController extends Controller
         ]); 
     }
 
+    public function getbyid(Request $request){
+        return VendorMaster::where('id',$request->id)->first();
+    }
+
     /**
      * Display the specified resource.
      *

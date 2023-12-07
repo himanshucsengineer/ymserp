@@ -56,12 +56,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All User</h1>
+                    <h1 class="m-0">All Vendors</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">All User</li>
+                        <li class="breadcrumb-item active">All Vendors</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -93,16 +93,25 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Employee Name</th>
-                                        <th>Category Name</th>
-                                        <th>Depo Name</th>
-                                        <th>Login Id</th>
-                                        <th>Role</th>
-                                        <th>Recovery No.</th>
-                                        <th>Ans 1</th>
-                                        <th>Ans 2</th>
-                                        <th>Ans 3</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Country</th>
+                                        <th>Pincode</th>
+                                        <th>Email</th>
+                                        <th>Mobile No.</th>
+                                        <th>TIN No.</th>
+                                        <th>GST No.</th>
+                                        <th>Payment Terms</th>
+                                        <th>Payment Method</th>
+                                        <th>Account No.</th>
+                                        <th>IFSC Code</th>
+                                        <th>Branch</th>
+                                        <th>Account Holder Name</th>
+                                        <th>Currency</th>
+                                        <th>Vendor Type</th>
+                                        <th>Credit Limit</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -135,26 +144,20 @@ function clearTableBody() {
     }
 function refreshTable(page,search){
     var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
 
     if(page){
-        url = `/api/user/getData?page=${page}`;
+        url = `/api/vendor/getVendorData?page=${page}`;
     }else if(search){
-        url = `/api/user/getData?search=${search}`;
+        url = `/api/vendor/getVendorData?search=${search}`;
     }else{
-        url= `/api/user/getData`;
+        url= `/api/vendor/getVendorData`;
     } 
 
     $.ajax({
-        type: "post",
+        type: "get",
         url: url,
         headers: {
             'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
         },
         success: function(response) {
             clearTableBody()
@@ -164,28 +167,32 @@ function refreshTable(page,search){
             var i =1;
             response.data.forEach(function(item) {
 
-                var userStatus = '';
-
-                if(item.status == 1){
-                    userStatus = "Active";
-                }else{
-                    userStatus = "Inactive";
-                }
-
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.employee_name));
-                row.append($('<td>').append(item.cate_name));
-                row.append($('<td>').append(item.depo_name));
-                row.append($('<td>').append(item.username));
-                row.append($('<td>').append(item.role));
-                row.append($('<td>').append(item.recovery_number));
+                row.append($('<td>').append(item.name));
+                row.append($('<td>').append(item.address));
+                row.append($('<td>').append(item.city));
+                row.append($('<td>').append(item.state));
+                row.append($('<td>').append(item.country));
+                row.append($('<td>').append(item.pincode));
+                row.append($('<td>').append(item.email));
+                row.append($('<td>').append(item.mob_no));
+                row.append($('<td>').append(item.tin_no));
+                row.append($('<td>').append(item.gst_no));
+                row.append($('<td>').append(item.payment_terms));
+                row.append($('<td>').append(item.payment_method));
+                row.append($('<td>').append(item.account_no));
+                row.append($('<td>').append(item.ifsc_code));
+                row.append($('<td>').append(item.branch));
+                row.append($('<td>').append(item.account_holder_name));
+                row.append($('<td>').append(item.currency));
+                row.append($('<td>').append(item.vendor_type));
+                row.append($('<td>').append(item.credit_limit));
 
-                row.append($('<td>').append(item.ans1));
-                row.append($('<td>').append(item.ans2));
-                row.append($('<td>').append(item.ans3));
-                row.append($('<td>').append(userStatus));
-
+                var editButton = $('<span>')
+                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
+                    .attr('data-id', item.id) 
+                    .attr('class', 'edit-button');
 
                 var deleteButton = $('<span>')
                     .html('<i class="fas fa-trash-alt" style="color:#f21515c4; margin-left:5px; cursor:pointer;"></i>')
@@ -193,6 +200,7 @@ function refreshTable(page,search){
                     .attr('class', 'delete-button')
 
                 var td = $('<td>');
+                td.append(editButton);
                 td.append(deleteButton);
                 row.append(td);
 
@@ -260,13 +268,18 @@ function refreshTable(page,search){
                     paginationDiv.appendChild(nextLink);
                 }
             }
+
+            $('.edit-button').click(function() {
+                var dataId = $(this).data('id');
+                window.location = `/vendor/create?id=${dataId}`
+            });
          
             $('.delete-button').click(function() {
                 var dataId = $(this).data('id');
                 var data = {
                     'id':dataId
                 }
-                post('user/delete',data);
+                post('vendor/delete',data);
                 refreshTable();
             });
         },
