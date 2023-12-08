@@ -493,6 +493,11 @@ $(document).ready(function () {
         },
         success: function (data) {
             $("#repair_id").empty();
+            var select1 = document.getElementById('repair_id');
+            var option1 = document.createElement('option');
+            option1.value = "";
+            option1.text = "Please Select Repair Code";
+            select1.appendChild(option1);
             var select = document.getElementById('repair_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
@@ -523,7 +528,14 @@ $(document).ready(function () {
             'damage_id':damage_id
         },
         success: function (data) {
-            $("#material_id").empty();
+            $("#material_id").empty(); 
+
+            var select1 = document.getElementById('material_id');
+            var option1 = document.createElement('option');
+            option1.value = "";
+            option1.text = "Please Select Material Code";
+            select1.appendChild(option1);
+      
 
             var select = document.getElementById('material_id');
             data.forEach(function(item) {

@@ -88,8 +88,8 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <!-- <th>Action</th> -->
-                                        <th>Inward No.</th>
+                                        <th>Action</th>
+                                        <!-- <th>Inward No.</th> -->
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Vehicle No.</th>
@@ -176,15 +176,15 @@ function filterByDate(){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                // var viewButton = $('<span>')
-                //     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                //     .attr('data-id', item.id) 
-                //     .attr('class', 'view-button');
+                var viewButton = $('<span>')
+                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
+                    .attr('data-id', item.id) 
+                    .attr('class', 'view-button');
 
-                // var td = $('<td>');
-                // td.append(viewButton);
-                // row.append(td);
-                row.append($('<td>').append(item.inward_no));
+                var td = $('<td>');
+                td.append(viewButton);
+                row.append(td);
+                // row.append($('<td>').append(item.inward_no));
 
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));
@@ -326,15 +326,15 @@ function refreshTable(page,search){
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                // var viewButton = $('<span>')
-                //     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                //     .attr('data-id', item.id) 
-                //     .attr('class', 'view-button');
+                var viewButton = $('<span>')
+                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
+                    .attr('data-id', item.id) 
+                    .attr('class', 'view-button');
 
-                // var td = $('<td>');
-                // td.append(viewButton);
-                // row.append(td);
-                row.append($('<td>').append(item.inward_no));
+                var td = $('<td>');
+                td.append(viewButton);
+                row.append(td);
+                // row.append($('<td>').append(item.inward_no));
 
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));

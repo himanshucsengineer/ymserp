@@ -89,7 +89,7 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <!-- <th>Action</th> -->
-                                        <th>Inward No.</th>
+                                        <!-- <th>Inward No.</th> -->
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Vehicle No.</th>
@@ -224,7 +224,7 @@ function filterByDate(){
                 // var td = $('<td>');
                 // td.append(viewButton);
                 // row.append(td);
-                row.append($('<td>').append(item.inward_no));
+                // row.append($('<td>').append(item.inward_no));
 
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));
@@ -415,7 +415,7 @@ function refreshTable(page,search){
                 // var td = $('<td>');
                 // td.append(viewButton);
                 // row.append(td);
-                row.append($('<td>').append(item.inward_no));
+                // row.append($('<td>').append(item.inward_no));
 
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));

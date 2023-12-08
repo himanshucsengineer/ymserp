@@ -290,10 +290,15 @@ $(function () {
         var two_container_no = $("#2nd_container_no").val();
         var type = $('input[name="options"]:checked').val();
 
+        var contariner_one = container_no.toUpperCase();
+        var contariner_two = two_container_no.toUpperCase();
+        var vehicle_number_finel = vehicle_number.toUpperCase();
+
+
             var formData = new FormData();
-            formData.append('container_no', container_no);
-            formData.append('two_container_no', two_container_no);
-            formData.append('vehicle_number', vehicle_number);
+            formData.append('container_no', contariner_one);
+            formData.append('two_container_no', contariner_two);
+            formData.append('vehicle_number', vehicle_number_finel);
             formData.append('type', type);
             formData.append('user_id', user_id);
             formData.append('depo_id', depo_id);

@@ -69,7 +69,7 @@ Route::get('/inward/executive', 'App\Http\Controllers\GateInController@inward_ex
 Route::get('/surveyor/inspection', 'App\Http\Controllers\GateInController@inspection');
 
 Route::get('/surveyor/containershow', 'App\Http\Controllers\GateInController@containershow');
-Route::get('/inward/executiveshow', 'App\Http\Controllers\GateInControlledr@executiveshow');
+Route::get('/inward/executiveshow', 'App\Http\Controllers\GateInController@executiveshow');
 Route::get('/surveyor/masterserveyor', 'App\Http\Controllers\GateInController@masterserveyor');
 
 Route::get('/genrateastimate', 'App\Http\Controllers\PdfController@genrateastimate');
