@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('third_party')->nullable();
             $table->string('is_manual')->nullable();
             $table->string('final_invoice_no')->nullable();
+            $table->string('amount')->nullable();
+
             $table->timestamps();
         });
     }

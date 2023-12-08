@@ -22,6 +22,7 @@ class InvoiceManagement extends Model
         'final_invoice_no',
         'third_party',
         'is_manual',
+        'amount'
     ];
     
     

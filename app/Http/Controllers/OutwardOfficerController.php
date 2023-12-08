@@ -241,6 +241,7 @@ class OutwardOfficerController extends Controller
             'month' => $current_month,
             'final_invoice_no' => $final_invoice_no,
             'third_party' => $third_party,
+            'amount' => $amount,
             'is_manual' => "no",
         ]);
 

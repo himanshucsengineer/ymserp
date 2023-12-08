@@ -819,7 +819,7 @@ $(function () {
             formData.append('tracking_device', tracking_device);
             formData.append('remarks', remarks);
             formData.append('id', containerid);
-            // formData.append('amount',amount);
+            formData.append('amount',amount);
             formData.append('challan', $('#challan')[0].files[0]);
             formData.append('empty_latter', $('#empty_latter')[0].files[0]);
 
