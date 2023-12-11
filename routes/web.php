@@ -107,5 +107,7 @@ Route::get('/preadvise/list', 'App\Http\Controllers\DoContainerController@index'
 Route::get('/product_category/create', 'App\Http\Controllers\CategoryMasterController@index');
 Route::get('/product_category/all', 'App\Http\Controllers\CategoryMasterController@all');
 
+Route::get('/gateout/create', 'App\Http\Controllers\GateInController@gateoutindex');
+
 
 

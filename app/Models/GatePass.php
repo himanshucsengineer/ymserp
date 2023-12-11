@@ -18,5 +18,6 @@ class GatePass extends Model
         'year',
         'month',
         'final_gate_pass_no',
+        'amount'
     ];
 }

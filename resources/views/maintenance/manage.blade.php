@@ -285,7 +285,13 @@ a.open:hover .circle img {
                         <div class="card-body">
                             <div class="tab-content" id="custom-tabs-three-tabContent">
                                 <div class="tab-pane fade active show" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                                <button data-toggle="modal" data-target="#modal-default"><?php if($checkSupervisor == 1){ echo "Submit";}else{echo "Save Repair Report";}?></button>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    <button class="btn btn-block btn-outline-success" data-toggle="modal" data-target="#modal-default"><?php if($checkSupervisor == 1){ echo "Submit";}else{echo "Save Repair Report";}?></button>
+
+                                    </div>
+                                </div>
+                                
                                 <div class="card mt-5">
                                     <div class="card-body p-0">
                                         <table class="table table-striped table-responsive">
@@ -315,7 +321,7 @@ a.open:hover .circle img {
                                                     <th>Actual Material Used</th>
                                                     <th>Repair Photo 1</th>
                                                     <th>Repair Photo 2</th>
-                                                    <!-- <th>Action</th> -->
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="reporting">
@@ -438,20 +444,42 @@ function getReportingData(){
                 row.append($('<td>').append(before_file2)); 
                 var checkSupervisor = "<?php echo $checkSupervisor?>";
                 if(checkSupervisor == 1){
-                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.qty);
+                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
                     row.append($('<td>').append(actual_amterial));
-                    var repair_photo1 = $('<input>').attr({'type':'file', 'id':'repair_photo1', 'class':'reportinput form-control'});
-                    row.append($('<td>').append(repair_photo1));
-                    var repair_photo2 = $('<input>').attr({'type':'file', 'id':'repair_photo2', 'class':'reportinput form-control'});
-                    row.append($('<td>').append(repair_photo2));
+                    var afterfile1 = `/uploads/transaction/${item.after_file1}`
+                    
+                    var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
+                    row.append($('<td id="after_file1_td">').append(after_file1)); 
+                    var afterfile2 = `/uploads/transaction/${item.after_file2}`
+                    var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                    row.append($('<td id="after_file2_td">').append(after_file2)); 
                 }else{
-                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'class':'reportinput form-control'}).val(item.qty);
+                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
                     row.append($('<td>').append(actual_amterial));
-                    var repair_photo1 = $('<input>').attr({'type':'file', 'id':'repair_photo1', 'class':'reportinput form-control'});
-                    row.append($('<td>').append(repair_photo1));
-                    var repair_photo2 = $('<input>').attr({'type':'file', 'id':'repair_photo2', 'class':'reportinput form-control'});
-                    row.append($('<td>').append(repair_photo2));
+                    var afterfile1 = `/uploads/transaction/${item.after_file1}`
+                    
+                    var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
+                    row.append($('<td id="after_file1_td">').append(after_file1)); 
+                    var afterfile2 = `/uploads/transaction/${item.after_file2}`
+                    var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                    row.append($('<td id="after_file2_td">').append(after_file2));
                 }
+
+                var editButton = $('<span>')
+                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
+                    .attr('data-id', item.id)
+                    .attr('class', 'edit-button');
+
+                
+                var saveButton = $('<button style="display:none;">')
+                    .text('Save')
+                    .attr('data-id', item.id)
+                    .attr('class', 'save-button btn-primary')
+
+                var td = $('<td>');
+                td.append(editButton);
+                td.append(saveButton);
+                row.append(td);
                 tbody.append(row);
                 i++;
             });
@@ -466,11 +494,11 @@ function getReportingData(){
                 var sub_total = parseInt(labour_cost) + parseInt(material_cost);
                 var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
-                $('#reporting_labour_cost').val(labour_cost);
-                $('#reporting_material_cost').val(material_cost);
-                $('#reporting_sub_total').val(sub_total);
-                $('#reporting_tax_cost').val(tax_cost);
-                $('#reporting_total').val(total);
+                $('#reporting_labour_cost').val(labour_cost.toFixed(2));
+                $('#reporting_material_cost').val(material_cost.toFixed(2));
+                $('#reporting_sub_total').val(sub_total.toFixed(2));
+                $('#reporting_tax_cost').val(tax_cost.toFixed(2));
+                $('#reporting_total').val(total.toFixed(2));
             });
 
             $('#reporting_labour_cost, #reporting_material_cost').on('keyup', function() {
@@ -480,9 +508,9 @@ function getReportingData(){
                 var sub_total = parseInt(reporting_labour_cost) + parseInt(reporting_material_cost);
                 var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
-                $('#reporting_sub_total').val(sub_total);
-                $('#reporting_tax_cost').val(tax_cost);
-                $('#reporting_total').val(total);
+                $('#reporting_sub_total').val(sub_total.toFixed(2));
+                $('#reporting_tax_cost').val(tax_cost.toFixed(2));
+                $('#reporting_total').val(total.toFixed(2));
             });
 
             $('#reporting_tax').on('keyup', function() {
@@ -490,8 +518,27 @@ function getReportingData(){
                 var sub_total = $('#reporting_sub_total').val();
                 var tax_cost = (parseInt(reporting_tax) / 100 ) * parseInt(sub_total)
                 var total = parseInt(tax_cost) + parseInt(sub_total);
-                $('#reporting_tax_cost').val(tax_cost);
-                $('#reporting_total').val(total);
+                $('#reporting_tax_cost').val(tax_cost.toFixed(2));
+                $('#reporting_total').val(total.toFixed(2));
+            });
+
+            $('.edit-button').click(function() {
+                // Find the closest row from the clicked button
+                var row = $(this).closest('tr');
+                // Enable editing for the specific inputs within that row
+                var after_file1 = $('<input>').attr({'type':'file', 'id':'after_file1', 'class':'reportinput form-control'}).val();
+
+
+                row.find("#after_file1_td").empty().append(after_file1);
+                row.find("#actual_amterial").removeAttr("readonly");
+                
+
+
+                // Update buttons visibility within the last cell of the row
+                var actionCell = row.find('td:last-child');
+                actionCell.find('.edit-button').hide();
+                // actionCell.find('.delete-button').hide();
+                actionCell.find('.save-button').show();
             });
 
         },

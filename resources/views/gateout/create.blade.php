@@ -49,6 +49,12 @@
 .flex_date_range .right{
     width:50%;
 }
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    background-color:#63bf84;
+    border-color:#63bf84;
+    border-radius:2px;
+}
+
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -73,78 +79,49 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
-                        <form id="gateinForm" novalidate="novalidate">
+                        <form id="gateoutForm" novalidate="novalidate">
                             <div class="card-body">
-                               
                                 <div class="form-group">
-                                    <label for="vehicle_number">Vehicle Number</label>
-                                    <input type="text" class="" style="font-size:50px; width:100%; text-transform:uppercase;" id="vehicle_number" name="vehicle_number" placeholder="">
+                                    <label for="vehicle_no">Vehicle Number <span style="color:red;">*</span></label>
+                                        <select name="vehicle_number" id="vehicle_no" class="form-control">
+                                                <option value="">Select Containers</option>
+                                        </select>
                                 </div>
-                                <h3 style="text-align:center">OR</h3>
-                                <div class="form-group">
-                                    <label for="vehicle_img">Vehicle Image</label>
-                                    <input type="file" class="form-control" id="vehicle_img" name="vehicle_img" placeholder="Enter Vehicle Number">
-                                    <div class="img_prv_box">
-                                        <img id="vehicle_img_prev" src="" />
+                                
+                                </div>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active mr-2" style="border-radius:2px;">
+                                    <input type="radio" name="options" id="option_b1" autocomplete="off" checked="" value="with">With Container
+                                    </label>
+                                    <label class="btn btn-secondary mr-2" style="border-radius:2px;">
+                                    <input type="radio" name="options" id="option_b2" autocomplete="off"  value="without"> Without Container
+                                    </label>
+                                    <label class="btn btn-secondary" style="border-radius:2px;">
+                                    <input type="radio" name="options" id="option_b3" autocomplete="off"  value="2nd_with"> 2 Container
+                                    </label>
+                                </div>
+                                <div class="container_div">
+                                    <div class="form-group">
+                                        <label for="container_no">Container Number </label>
+                                            <select name="container_no" id="container_no" class="form-control">
+                                                <option value="">Select Containers</option>
+                                            </select>
                                     </div>
-                                
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="driver_name">Driver Name  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name" style="font-size:30px; height:50px" placeholder="Enter Driver Name">
+                                <div class="2_container_div" style="display:none;">
+                                    <div class="form-group">
+                                        <label for="2nd_container_no">2ND Container Number</label>
+                                            <select name="2nd_container_no" id="2nd_container_no" class="form-control">
+                                                <option value="">Select Containers</option>
+                                            </select>
+                                    </div>
                                 </div>
-                                
-
-                                <div class="form-group">
-                                    <label for="contact_number">Driver Contact Number <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="contact_number" name="contact_number" style="font-size:30px; height:50px" placeholder="Enter Contact Number">
-                                </div>                                
-
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <h3 class="mt-2 ml-2">OutWard Entry</h3>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                   
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
-                                </div>
-                            </div>
-                            <table id="inspectionData" class="table table-bordered table-hover table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No.</th>
-                                        <th>Vehicle No.</th>
-                                        <th>Vehicle image</th>
-                                        <th>Driver Name</th>
-                                        <th>Driver Contact</th>
-                                        <th>In Date</th>
-                                        <th>In Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table-body">
-                                   
-                                </tbody>
-                            </table>
-
-                            <div class="row">
-                                <div class="col-md-6"></div>
-                                <div class="col-md-6"><div id="pagination"></div></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -154,142 +131,156 @@
 
 <script>
 $(document).ready(function () {
- 
-    refreshTable();
-
-
-$('#vehicle_img').on('change', function (e) {
-    var fileInput = $(this)[0];
-    if (fileInput.files && fileInput.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#vehicle_img_prev').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-    }
-});
-
-});
-function clearTableBody() {
-    $('#table-body').empty();
-}
-
-function refreshTable(page,search){
-    var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-    if(page){
-        url = `/api/gateout/truckEntryData?page=${page}`;
-    }else if(search){
-        url = `/api/gateout/truckEntryData?search=${search}`;
-    }else{
-        url= `/api/gateout/truckEntryData`;
-    }
 
     $.ajax({
-        type: "post",
-        url: url,
+        type: "get",
+        url: "/api/gatein/getReadyContainers",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function(response) {
-            clearTableBody()
-
-            var tbody = $('#table-body');
-
-            var i =1;
-            response.data.forEach(function(item) {
-                var vehicle_img = '';
-                if(item.vehicle_img){
-                    vehicle_img = $('<a>').attr({'href':'/uploads/gateout/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
-                }else{
-                    vehicle_img = "No Imgae Available";
-                }
-
-                var row = $('<tr>');
-                row.append($('<td>').text(i));
-                row.append($('<td>').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td>').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
-                row.append($('<td>').append(item.in_date));
-                row.append($('<td>').append(item.in_time));
-                tbody.append(row);
-                i++;
+        success: function(data) {
+            var select_2 = document.getElementById('container_no');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.vehicle_number;
+                select_2.appendChild(option);
             });
-
-            const paginationDiv = document.getElementById("pagination");
-            paginationDiv.innerHTML = "";
-
-            if (response.pagination.last_page > 1) {
-                const startPage = Math.max(response.pagination.current_page - Math.floor(5 / 2), 1);
-                const endPage = Math.min(startPage + 5 - 1, response.pagination.last_page);
-
-                // Create the "Previous" button
-                if (response.pagination.links.prev) {
-                    var splitPrev = response.pagination.links.prev.split('=');
-                    const prevLink = document.createElement("button");
-                    prevLink.textContent = "Previous";
-                    prevLink.className  = "pagination-btn prev";
-                    prevLink.setAttribute("data-id", splitPrev[1]);
-                    prevLink.href = response.pagination.links.prev;
-                    prevLink.addEventListener("click", function() {
-                        refreshTable(prevLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(prevLink);
-                }
-
-                // Create page links within the sliding window
-                for (let page = startPage; page <= endPage; page++) {
-                    var splitPage = response.pagination.links.all_pages[page].split('=');
-                    if(splitPage[1] == response.pagination.current_page){
-                        const pageLink = document.createElement("button");
-                        pageLink.textContent = page;
-                        pageLink.className  = "pagination-btn page active-btn";
-                        pageLink.setAttribute("data-id", splitPage[1]);
-                        pageLink.addEventListener("click", function() {
-                            refreshTable(pageLink.getAttribute("data-id"))
-                        });
-                        paginationDiv.appendChild(pageLink);
-                    }else{
-                        const pageLink = document.createElement("button");
-                        pageLink.textContent = page;
-                        pageLink.className  = "pagination-btn page";
-                        pageLink.setAttribute("data-id", splitPage[1]);
-                        pageLink.addEventListener("click", function() {
-                            refreshTable(pageLink.getAttribute("data-id"))
-                        });
-                        paginationDiv.appendChild(pageLink);
-                    }
-                    
-                }
-
-                // Create the "Next" button
-                if (response.pagination.links.next) {
-                    var splitNext = response.pagination.links.next.split('=');
-                    const nextLink = document.createElement("button");
-                    nextLink.textContent = "Next";
-                    nextLink.className  = "pagination-btn next";
-                    nextLink.setAttribute("data-id", splitNext[1]);
-
-                    nextLink.addEventListener("click", function() {
-                        refreshTable(nextLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(nextLink);
-                }
-            }
         },
         error: function(error) {
             console.log(error);
         }
     });
+
+    $.ajax({
+        type: "get",
+        url: "/api/gatein/getReadyContainers",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        success: function(data) {
+            var select_2 = document.getElementById('2nd_container_no');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.vehicle_number;
+                select_2.appendChild(option);
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "/api/gatein/getInVehicle",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        success: function(data) {
+            var select_2 = document.getElementById('vehicle_no');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.vehicle_number;
+                select_2.appendChild(option);
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+    $('input[name="options"]').on('change', function () {
+    // Get the value of the selected radio button
+    var selectedValue = $('input[name="options"]:checked').val();
+
+    if (selectedValue == "without") {
+        $('.container_div').hide();
+        $('.2_container_div').hide();
+    } else if (selectedValue == "2nd_with") {
+        $('.container_div').show();
+        $('.2_container_div').show();
+    } else {
+        $('.2_container_div').hide();
+        $('.container_div').show();
+    }
+});
+
+});
+
+
+
+function validateInput2(input) {
+    input.style.color = 'black';
+    document.getElementById('errorText').textContent = "";
+    const inputField = document.getElementById('container_no');
+    inputField.setAttribute('maxlength', '11');
+    const inputValue = input.value;
+
+    let checkFirstChar = isNaN(inputValue);
+    if(checkFirstChar == false){
+    document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+    inputField.setAttribute('maxlength', '1');
+    input.style.color = 'red';
+    }
+
+    if(inputValue.length <= 4){
+    const checkNumber = /\d/; // This regex matches any digit (0-9)
+    let chechkNumberforstart =  checkNumber.test(inputValue);
+    if(chechkNumberforstart){
+        document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+        inputField.setAttribute('maxlength', inputValue.length);
+        input.style.color = 'red';
+    }
+    }
+
+    if(inputValue.length > 4){
+        const part2 = inputValue.substring(4);
+        let checkNumber = isNaN(part2);
+        if(checkNumber == true){
+            document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+            inputField.setAttribute('maxlength', inputValue.length);
+            input.style.color = 'red';
+        }
+    }
 }
 
+function validateInput(input) {
+    input.style.color = 'black';
+    document.getElementById('errorText2').textContent = "";
+    const inputField = document.getElementById('container_no');
+    inputField.setAttribute('maxlength', '11');
+    const inputValue = input.value;
+
+    let checkFirstChar = isNaN(inputValue);
+    if(checkFirstChar == false){
+    document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+    inputField.setAttribute('maxlength', '1');
+    input.style.color = 'red';
+    }
+
+    if(inputValue.length <= 4){
+    const checkNumber = /\d/; // This regex matches any digit (0-9)
+    let chechkNumberforstart =  checkNumber.test(inputValue);
+    if(chechkNumberforstart){
+        document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+        inputField.setAttribute('maxlength', inputValue.length);
+        input.style.color = 'red';
+    }
+    }
+
+    if(inputValue.length > 4){
+        const part2 = inputValue.substring(4);
+        let checkNumber = isNaN(part2);
+        if(checkNumber == true){
+            document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
+            inputField.setAttribute('maxlength', inputValue.length);
+            input.style.color = 'red';
+        }
+    }
+}
 
 
 
@@ -297,82 +288,51 @@ function refreshTable(page,search){
 $(function () {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
 
     $.validator.setDefaults({
     submitHandler: function () {
-        var driver_name = $("#driver_name").val();
-        var vehicle_number = $("#vehicle_number").val();
-        var contact_number   = $("#contact_number").val();
+        var container_no = $("#container_no").val();
+        var vehicle_number = $("#vehicle_no").val();
+        var two_container_no = $("#2nd_container_no").val();
 
+        var contariner_one = container_no.toUpperCase();
+        var contariner_two = two_container_no.toUpperCase();
+        var vehicle_number_finel = vehicle_number.toUpperCase();
 
-
-            var formData = new FormData();
-            formData.append('driver_name', driver_name);
-            formData.append('vehicle_number', vehicle_number);
-            formData.append('contact_number', contact_number);
-     
-            formData.append('user_id', user_id);
-            formData.append('depo_id', depo_id);
-            formData.append('vehicle_img', $('#vehicle_img')[0].files[0]);
-
-            // Now, you can send formData in an AJAX request
-            $.ajax({
-                url: '/api/gateout/create',
-                type: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + checkToken
-                },
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
-                    // location.reload();
-                    $("#gateinForm")[0].reset();
-                    refreshTable();
-                },
-                error: function(error) {
-                    var finalValue = '';
-                    if(Array.isArray(error.responseJSON.message)){
-                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-                    }else{
-                        finalValue = error.responseJSON.message;
-                    }
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
-                }
-            });
-
+        const data1 = {
+            'user_id': user_id,
+            'gateinid' : contariner_one,
+            'out_status': 'Out'
+        }
+        post('gatein/updateout',data1);
+        const data2 = {
+            'user_id': user_id,
+            'gateinid' : contariner_two,
+            'out_status': 'Out'
+        }
+        post('gatein/updateout',data2);
+        const data3 = {
+            'user_id': user_id,
+            'gateinid' : vehicle_number_finel,
+            'out_status': 'Out'
+        }
+        post('gatein/updateout',data3);
+        location.reload()
     }
   });
 
-    $('#gateinForm').validate({
+    $('#gateoutForm').validate({
     rules: {
-        driver_name: {
+        vehicle_no: {
             required: true,
         },
-        contact_number: {
-            required: true,
-        },
-
+        
     },
     messages: {
-        driver_name: {
+        vehicle_no: {
             required: "This Field Is Required!",
         },
-        contact_number: {
-            required: "This Field Is Required!",
-        },
+        
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {

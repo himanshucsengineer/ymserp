@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('year')->nullable();
             $table->string('month')->nullable();
             $table->string('final_gate_pass_no')->nullable();
+            $table->string('amount')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();

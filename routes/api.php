@@ -179,6 +179,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'gatein'], function($api){
         $api->post('/create','App\Http\Controllers\GateInController@store');
         $api->get('/get', 'App\Http\Controllers\GateInController@get');
+        $api->get('/getReadyContainers', 'App\Http\Controllers\GateInController@getReadyContainers');
+        $api->get('/getInVehicle', 'App\Http\Controllers\GateInController@getInVehicle');
         $api->post('/getbycontainer', 'App\Http\Controllers\GateInController@getbycontainer');
         $api->get('/genrateastimate', 'App\Http\Controllers\GateInController@genrateastimate');
         $api->post('/getDataById', 'App\Http\Controllers\GateInController@getDataById');

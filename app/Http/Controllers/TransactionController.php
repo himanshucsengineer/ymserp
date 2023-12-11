@@ -62,6 +62,7 @@ class TransactionController extends Controller
                 'dimension_h' => $transaction->dimension_h,
                 'dimension_w' => $transaction->dimension_w,
                 'dimension_l' => $transaction->dimension_l,
+                'actual_material' =>$transaction->actual_material
             ];
         }
         return $formatedData;
@@ -81,6 +82,9 @@ class TransactionController extends Controller
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
                 'before_file2'=> $transaction->before_file2,
+                'after_file1'=> $transaction->after_file1,
+                'after_file2'=> $transaction->after_file2,
+
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => $transaction->labour_cost,
                 'material_cost' => $transaction->material_cost,
@@ -89,6 +93,7 @@ class TransactionController extends Controller
                 'tax_cost' => $transaction->tax_cost,
                 'total' => $transaction->total,
                 'qty' => $transaction->qty,
+                'actual_material' =>$transaction->qty,
                 'tarrifData' => $tarrif,
                 'damage_code' => $damage->code,
                 'repair_code' => $repair->repair_code,

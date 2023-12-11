@@ -56,75 +56,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="line_id">Line Name <span style="color:red;">*</span></label>
-                                            <select name="line_id" id="line_id" class="form-control">
-                                                <option value="">Select Line</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="do_no">DO Number</label>
-                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="do_no" name="do_no"  placeholder="Enter DO Number">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="validity_period">Validity Period</label>
-                                            <input type="text" class="form-control" id="validity_period" name="validity_period"  placeholder="Enter Validity Period">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="validity_date">Validity Date</label>
-                                            <input type="date" class="form-control" id="validity_date" name="validity_date"  placeholder="Enter Validity Period">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="shipper_name">Shipper Name</label>
-                                            <input type="text" class="form-control" id="shipper_name" name="shipper_name"  placeholder="Enter Shipper Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="pod">POD (Port Of Discharge)</label>
-                                            <input type="text" class="form-control"  id="pod" name="pod"  placeholder="Enter Port Of Discharge">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="vessel">Vessel Name</label>
-                                            <input type="text" class="form-control" id="vessel" name="vessel"  placeholder="Enter Vessel Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="voyage">Voyage</label>
-                                            <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="do_date">DO Date</label>
-                                            <input type="date" class="form-control" id="do_date" name="do_date" placeholder="Enter Voyage">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label for="container_type">Container Type</label>
                                             <select name="container_type" id="container_type" class="form-control">
                                                 <option value="">Select Container Type</option>
@@ -132,11 +63,7 @@
                                                 <option value="REEFER">REEFER</option>
                                             </select>
                                         </div>
-                                        
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="container_size">Container Size</label>
@@ -148,6 +75,9 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sub_type">Sub Type  <span style="color:red;">*</span></label>
@@ -166,7 +96,74 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="line_id">Line Name <span style="color:red;">*</span></label>
+                                            <select name="line_id" id="line_id" class="form-control">
+                                                <option value="">Select Line</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="do_no">DO Number</label>
+                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="do_no" name="do_no"  placeholder="Enter DO Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="validity_period">Validity Period</label>
+                                            <input type="text" class="form-control" id="validity_period" name="validity_period"  placeholder="Enter Validity Period">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="validity_date">Validity Date</label>
+                                            <input type="date" class="form-control" id="validity_date" name="validity_date"  placeholder="Enter Validity Period">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="shipper_name">Shipper Name</label>
+                                            <input type="text" class="form-control" id="shipper_name" name="shipper_name"  placeholder="Enter Shipper Name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="pod">POD (Port Of Discharge)</label>
+                                            <input type="text" class="form-control"  id="pod" name="pod"  placeholder="Enter Port Of Discharge">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="vessel">Vessel Name</label>
+                                            <input type="text" class="form-control" id="vessel" name="vessel"  placeholder="Enter Vessel Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="voyage">Voyage</label>
+                                            <input type="text" class="form-control" id="voyage" name="voyage" placeholder="Enter Voyage">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="do_date">DO Date</label>
+                                            <input type="date" class="form-control" id="do_date" name="do_date" placeholder="Enter Voyage">
+                                        </div>
+                                    </div>
+                                </div>
+                             
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -177,7 +174,6 @@
                                                 <option value="B">B</option>
                                                 <option value="C">C</option>
                                                 <option value="D">D</option>
-
                                             </select>
                                         </div>
                                     </div>
@@ -241,7 +237,7 @@
                         </form>
                     </div>
                     <div class="card">
-                        <ul id="conatinerList"></ul>
+                        <ol id="conatinerList"></ol>
                     </div>
 
                 </div>
@@ -252,38 +248,51 @@
 
 <script>
 
-$(document).ready(function () {
-    
+$('#container_size').on('change',function(){
+    var containerType = $('#container_type').val();
+    var containerSize = $(this).val();
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-    $.ajax({
-        type: "post",
-        url: "/api/line/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function (data) {
-            var select = document.getElementById('line_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.name;
-                select.appendChild(option);
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
 
-});
+    if(containerType == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
 
-
+    if(containerType != '' && containerSize != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/line/getbysizetype",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'containerType':containerType,
+                'containerSize':containerSize
+            },
+            success: function (data) {
+                $('#line_id').empty();
+                var select = document.getElementById('line_id');
+                data.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.id;
+                    option.text = item.name;
+                    select.appendChild(option);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+})
 
 function getContainerList(){
     var checkToken = localStorage.getItem('token');
@@ -363,7 +372,7 @@ function getContainerList(){
                 var count  = data.length;
                 if(container_required == count){
                     data.forEach(function(item) {
-                        $("#conatinerList").append(`${item.container_no}`);
+                        $("#conatinerList").append(`<li style="font-size:40px">${item.container_no}</li>`);
                     });
                     $("#submit-btn").removeAttr("disabled");
                 }else{

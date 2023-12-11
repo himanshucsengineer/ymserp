@@ -33,6 +33,11 @@ class GateInController extends Controller
         return view('gatein.create');
     }
 
+    public function gateoutindex()
+    {
+        return view('gateout.create');
+    }
+
     public function containershow(){
         return view('surveyor.containershow');
     }
@@ -130,6 +135,20 @@ class GateInController extends Controller
 
     public function get(){
         return GateIn::get();
+    }
+
+    public function getReadyContainers(){
+        $get_container = GateIn::where([
+            ['status','Ready']
+        ])->get();
+        return $get_container;
+    }
+
+    public function getInVehicle(){
+        $get_vehicle = GateIn::where([
+            ['status', '!=' , 'Out']
+        ])->get();
+        return $get_vehicle;
     }
 
     public function geVhicle(Request $request){
@@ -1017,30 +1036,72 @@ class GateInController extends Controller
         }
 
         if($request->status == "Gate In"){
-            $field = "status";
-            $value = "In";
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "0";
+            $field3 = "is_approve";
+            $value3 = "0";
+            $field4 = "is_repaired";
+            $value4 = "0";
         }else if($request->status == "Gate Out"){
-            $field = "status";
-            $value = "Out";
+            $field1 = "status";
+            $value1 = "Out";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "1";
         }else if($request->status == "Inspection Done"){
-            $field = "is_estimate_done";
-            $value = '1';
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "0";
+            $field4 = "is_repaired";
+            $value4 = "0";
         }
         else if($request->status == "Inspection Approved"){
-            $field = "is_approve";
-            $value = '1';
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "0";
         }
         else if($request->status == "Inspection Pending"){
-            $field = "is_estimate_done";
-            $value = '0';
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "0";
+            $field3 = "is_approve";
+            $value3 = "0";
+            $field4 = "is_repaired";
+            $value4 = "0";
         }
         else if($request->status == "Repair Pending"){
-            $field = "is_repaired";
-            $value = '0';
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "0";
         }
         else if($request->status == "Repair Done"){
-            $field = "is_repaired";
-            $value = '1';
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "1";
         }
 
 
@@ -1050,7 +1111,11 @@ class GateInController extends Controller
                 ])->orderby('created_at','desc')->paginate($datalimit);
             }else{
                 $gateInData = GateIn::where([
-                    [$field,$value],
+                    [$field1,$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+
                 ])->orderby('created_at','desc')->paginate($datalimit);
             }
         }else{
@@ -1060,7 +1125,10 @@ class GateInController extends Controller
                 ])->orderby('created_at','desc')->paginate($datalimit);
             }else{
                 $gateInData = GateIn::where([
-                    [$field,$value],
+                    [$field1,$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
                     ['depo_id',$request->depo_id],
                 ])->orderby('created_at','desc')->paginate($datalimit);
             }
