@@ -71,11 +71,22 @@ class MasterEmployeeController extends Controller
             ], 400);
         }
 
+        if($request->search){
+            $contractorData = MasterContractor::where('fullname', 'LIKE', '%' . $request->search . '%')->get();
+            $conTractorId = [];
+            if(count($contractorData)>0){
+                foreach($contractorData as $contractor){
+                    array_push($conTractorId, $contractor->id);
+                }
+            }
+        }else{
+            $conTractorId = [];
+        }
 
 
         if($request->user_id == 1){
             $employeeData = MasterEmployee::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$conTractorId) {
                     if (($search = $request->search)) {
                         $query->orWhere('employee_code', 'LIKE', '%' . $search . '%')
                             ->orWhere('firstname', 'LIKE', '%' . $search . '%')
@@ -85,13 +96,14 @@ class MasterEmployeeController extends Controller
                             ->orWhere('pincode', 'LIKE', '%' . $search . '%')
                             ->orWhere('contact', 'LIKE', '%' . $search . '%')
                             ->orWhere('aadhar', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('contractor_id',$conTractorId)
                             ->get();
                     }
                 }],
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
             $employeeData = MasterEmployee::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$conTractorId) {
                     if (($search = $request->search)) {
                         $query->orWhere('employee_code', 'LIKE', '%' . $search . '%')
                             ->orWhere('firstname', 'LIKE', '%' . $search . '%')
@@ -101,6 +113,7 @@ class MasterEmployeeController extends Controller
                             ->orWhere('pincode', 'LIKE', '%' . $search . '%')
                             ->orWhere('contact', 'LIKE', '%' . $search . '%')
                             ->orWhere('aadhar', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('contractor_id',$conTractorId)
                             ->get();
                     }
                 }],

@@ -75,6 +75,7 @@ class LocationCodeController extends Controller
                 [function ($query) use ($request) {
                     if (($search = $request->search)) {
                         $query->orWhere('code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
                             ->get();
                     }
                 }],
@@ -85,6 +86,7 @@ class LocationCodeController extends Controller
                 [function ($query) use ($request) {
                     if (($search = $request->search)) {
                         $query->orWhere('code', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
                             ->get();
                     }
                 }],

@@ -56,22 +56,48 @@ class MasterMaterialController extends Controller
             ], 400);
         }
 
+        if($request->search){
+            $damageData =  MasterDamage::where('code', 'LIKE', '%' . $request->search . '%')->get();
+            $repairData =  MasterRepair::where('repair_code', 'LIKE', '%' . $request->search . '%')->get();
+
+            $damageId = [];
+            if(count($damageData)>0){
+                foreach($damageData as $damage){
+                    array_push($damageId, $damage->id);
+                }
+            }
+
+            $repairId = [];
+            if(count($repairData)>0){
+                foreach($repairData as $repair){
+                    array_push($repairId, $repair->id);
+                }
+            }
+        }else{
+            $damageId = [];
+            $repairId = [];
+        }
+
         if($request->user_id == 1){
             $materialData = MasterMaterial::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$damageId,$repairId) {
                     if (($search = $request->search)) {
                         $query->orWhere('material_code', 'LIKE', '%' . $search . '%')
                             ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('damage_id',$damageId)
+                            ->orWhereIn('repiar_id',$repairId)
                             ->get();
                     }
                 }],
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
             $materialData = MasterMaterial::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$damageId,$repairId) {
                     if (($search = $request->search)) {
                         $query->orWhere('material_code', 'LIKE', '%' . $search . '%')
                             ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('damage_id',$damageId)
+                            ->orWhereIn('repiar_id',$repairId)
                             ->get();
                     }
                 }],

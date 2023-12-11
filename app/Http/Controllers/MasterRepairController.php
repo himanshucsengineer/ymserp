@@ -58,12 +58,25 @@ class MasterRepairController extends Controller
             ], 400);
         }
 
+        if($request->search){
+            $damageData =  MasterDamage::where('code', 'LIKE', '%' . $request->search . '%')->get();
+            $damageId = [];
+            if(count($damageData)>0){
+                foreach($damageData as $damage){
+                    array_push($damageId, $damage->id);
+                }
+            }
+        }else{
+            $damageId = [];
+        }
+
         if($request->user_id == 1){
             $repairData = MasterRepair::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$damageId) {
                     if (($search = $request->search)) {
                         $query->orWhere('repair_code', 'LIKE', '%' . $search . '%')
                             ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('damage_id',$damageId)
                             ->get();
                     }
                 }],
@@ -71,10 +84,11 @@ class MasterRepairController extends Controller
         }else{
 
             $repairData = MasterRepair::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$damageId) {
                     if (($search = $request->search)) {
                         $query->orWhere('repair_code', 'LIKE', '%' . $search . '%')
                             ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('damage_id',$damageId)
                             ->get();
                     }
                 }],

@@ -65,13 +65,62 @@ class MasterTarrifController extends Controller
         }
 
 
+        if($request->search){
+            $damageData =  MasterDamage::where('code', 'LIKE', '%' . $request->search . '%')->get();
+            $repairData =  MasterRepair::where('repair_code', 'LIKE', '%' . $request->search . '%')->get();
+            $materialData =  MasterMaterial::where('material_code', 'LIKE', '%' . $request->search . '%')->get();
+            $lineData =  MasterLine::where('name', 'LIKE', '%' . $request->search . '%')->get();
+            $locationCodeData = LocationCode::where('code', 'LIKE', '%' . $request->search . '%')->get();
+
+
+            $damageId = [];
+            if(count($damageData)>0){
+                foreach($damageData as $damage){
+                    array_push($damageId, $damage->id);
+                }
+            }
+
+            $repairId = [];
+            if(count($repairData)>0){
+                foreach($repairData as $repair){
+                    array_push($repairId, $repair->id);
+                }
+            }
+
+            $materialId = [];
+            if(count($materialData)>0){
+                foreach($materialData as $material){
+                    array_push($materialId, $material->id);
+                }
+            }
+
+            $lineId = [];
+            if(count($lineData)>0){
+                foreach($lineData as $line){
+                    array_push($lineId, $line->id);
+                }
+            }
+
+            $locationCodeId = [];
+            if(count($locationCodeData)>0){
+                foreach($locationCodeData as $locationCode){
+                    array_push($locationCodeId, $locationCode->id);
+                }
+            }
+        }else{
+            $damageId = [];
+            $repairId = [];
+            $materialId = [];
+            $lineId = [];
+            $locationCodeId = [];
+        }
+
 
         if($request->user_id == 1){
             $tarrifData = MasterTarrif::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$damageId,$repairId,$materialId,$lineId,$locationCodeId) {
                     if (($search = $request->search)) {
-                        $query->orWhere('repai_location_code', 'LIKE', '%' . $search . '%')
-                            ->orWhere('unit_of_measure', 'LIKE', '%' . $search . '%')
+                        $query->orWhere('unit_of_measure', 'LIKE', '%' . $search . '%')
                             ->orWhere('dimension_l', 'LIKE', '%' . $search . '%')
                             ->orWhere('dimension_w', 'LIKE', '%' . $search . '%')
                             ->orWhere('dimension_h', 'LIKE', '%' . $search . '%')
@@ -86,16 +135,21 @@ class MasterTarrifController extends Controller
                             ->orWhere('qty', 'LIKE', '%' . $search . '%')
                             ->orWhere('repair_type', 'LIKE', '%' . $search . '%')
                             ->orWhere('container_side', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('damade_id',$damageId)
+                            ->orWhereIn('repair_id',$repairId)
+                            ->orWhereIn('material_id',$materialId)
+                            ->orWhereIn('line_id',$lineId)
+                            ->orWhereIn('repai_location_code',$locationCodeId)
                             ->get();
                     }
                 }],
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
             $tarrifData = MasterTarrif::where([
-                [function ($query) use ($request) {
+                [function ($query) use ($request,$damageId,$repairId,$materialId,$lineId,$locationCodeId) {
                     if (($search = $request->search)) {
-                        $query->orWhere('repai_location_code', 'LIKE', '%' . $search . '%')
-                            ->orWhere('unit_of_measure', 'LIKE', '%' . $search . '%')
+                        $query->orWhere('unit_of_measure', 'LIKE', '%' . $search . '%')
                             ->orWhere('dimension_l', 'LIKE', '%' . $search . '%')
                             ->orWhere('dimension_w', 'LIKE', '%' . $search . '%')
                             ->orWhere('dimension_h', 'LIKE', '%' . $search . '%')
@@ -110,6 +164,12 @@ class MasterTarrifController extends Controller
                             ->orWhere('qty', 'LIKE', '%' . $search . '%')
                             ->orWhere('repair_type', 'LIKE', '%' . $search . '%')
                             ->orWhere('container_side', 'LIKE', '%' . $search . '%')
+                            ->orWhere('desc', 'LIKE', '%' . $search . '%')
+                            ->orWhereIn('damade_id',$damageId)
+                            ->orWhereIn('repair_id',$repairId)
+                            ->orWhereIn('material_id',$materialId)
+                            ->orWhereIn('line_id',$lineId)
+                            ->orWhereIn('repai_location_code',$locationCodeId)
                             ->get();
                     }
                 }],

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Exports\CategoryExport;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -268,6 +268,14 @@ $api->version('v1', function($api){
         $api->post('/update', 'App\Http\Controllers\VendorMasterController@update');
         $api->post('/getbyid', 'App\Http\Controllers\VendorMasterController@getbyid');
 
+    });
+
+    Route::get('/export-category', function () {
+
+        $fileName = date('Y-m-d-H:i:s')."-category-master.xlsx";
+        $response = Excel::download(new TagExport,$fileName);
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        return $response;
     });
 
 });
