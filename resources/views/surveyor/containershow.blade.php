@@ -8,7 +8,8 @@
 @extends('common.layout')
 
 @section('content')
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <style>
 .img_prv_box{
     margin-top:.5rem;
@@ -163,7 +164,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="mfg_date">Mfg Date</label>
-                                            <input type="date" class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
+                                            <input class="form-control" id="mfg_date" name="mfg_date" placeholder="Enter Gross Weight">
                                         </div>
                                     </div>
                                 </div>
@@ -283,7 +284,15 @@
         </div>
     </section>
 </div>
-
+<script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
+<script>
+  var picker = flatpickr('#mfg_date', {
+    dateFormat: 'MM/yyyy',
+    enableTime: false,
+    altFormat: 'F Y',
+    altInput: true,
+  });
+</script>
 <script>
 
 function validateInput(input) {
