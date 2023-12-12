@@ -39,7 +39,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category_id">Category Name <span style="color:red;">*</span></label>
+                                    <label for="category_id">Department Name <span style="color:red;">*</span></label>
                                     <select multiple="" class="form-control" name="category_id" id="category_id">
                                     </select>
                                 </div>

@@ -155,6 +155,13 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\MasterTarrifController@getbyid');
         $api->post('/getTarrifData', 'App\Http\Controllers\MasterTarrifController@getTarrifData');
         $api->post('/getbylineid', 'App\Http\Controllers\MasterTarrifController@getbylineid');
+        $api->post('/gettarrifdamage', 'App\Http\Controllers\MasterTarrifController@gettarrifdamage');
+        $api->post('/gettarrifrepair', 'App\Http\Controllers\MasterTarrifController@gettarrifrepair');
+        $api->post('/gettarrifmaterial', 'App\Http\Controllers\MasterTarrifController@gettarrifmaterial');
+        $api->post('/gettarriflength', 'App\Http\Controllers\MasterTarrifController@gettarriflength');
+        $api->post('/gettarrifheight', 'App\Http\Controllers\MasterTarrifController@gettarrifheight');
+        $api->post('/gettarrifwidth', 'App\Http\Controllers\MasterTarrifController@gettarrifwidth');
+
         $api->post('/getTarrifByLine', 'App\Http\Controllers\MasterTarrifController@getTarrifByLine');
         $api->post('/checktarrifbycode', 'App\Http\Controllers\MasterTarrifController@checktarrifbycode');
         $api->post('/checktarrifbydimention', 'App\Http\Controllers\MasterTarrifController@checktarrifbydimention');

@@ -447,6 +447,7 @@ a.open:hover .circle img {
                 </div>
             </div>
             <input type="hidden" id="line_id_no">
+            <input type="hidden" id="location_code_id">
         </div>
 </div>
 </div>
@@ -632,6 +633,28 @@ $(document).ready(function() {
         }
     });
 
+    $('#component_code').on('change', function() {
+        var damage_code = $('#damage_code');
+        damage_code.empty();
+        var damage_code_create = document.getElementById('damage_code');
+        var damage_code_create_option = document.createElement('option');
+        damage_code_create_option.value = '';
+        damage_code_create_option.text = "Select Damage Code";
+        damage_code_create.appendChild(damage_code_create_option);
+        
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
+        var component_code = $(this).val();
+
+        var data = {
+            'line_id':line_id,
+            'location_code_id':location_code_id,
+            'component_code':component_code
+        }
+
+        getTarrifDamage(data);
+    });
+
     $('#damage_code').on('change', function() {
         var repair_code = $('#repair_code');
         repair_code.empty();
@@ -640,12 +663,25 @@ $(document).ready(function() {
         repair_code_create_option.value = '';
         repair_code_create_option.text = "Select Repair Code";
         repair_code_create.appendChild(repair_code_create_option);
-        getRepair($(this).val());
+
+
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
+        var component_code = $('#component_code').val();
+        var damage_id = $(this).val();
+
+        var data = {
+            'line_id':line_id,
+            'location_code_id':location_code_id,
+            'component_code':component_code,
+            'damage_id':damage_id,
+        }
+
+        getTarrifRepair(data);
     });
 
     $('#repair_code').on('change', function() {
         // $('#material_code').removeAttr('readonly');
-
         var material_code = $('#material_code');
         material_code.empty();
         var material_code_create = document.getElementById('material_code');
@@ -655,15 +691,20 @@ $(document).ready(function() {
         material_code_create.appendChild(material_code_create_option);
         var damage_id = $('#damage_code').val();
         var repair_id = $(this).val();
-        getMaterial(damage_id, repair_id);
-    });
 
-    $('#master_length').on('change', function() {
-        $('#master_width').removeAttr('readonly');
-    });
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
+        var component_code = $('#component_code').val();
 
-    $('#master_width').on('change', function() {
-        $('#master_height').removeAttr('readonly');
+        var data = {
+            'line_id':line_id,
+            'location_code_id':location_code_id,
+            'component_code':component_code,
+            'damage_id':damage_id,
+            'repair_id':repair_id
+        }
+
+        getTarrifMaterial(data);
     });
 
     $('#material_code').on('change', function() {
@@ -671,46 +712,93 @@ $(document).ready(function() {
         var repairCode = $('#repair_code').val();
         var materialCode = $('#material_code').val();
 
-        $.ajax({
-            type: "POST",
-            url: "/api/tarrif/checktarrifbycode",
-            headers: {
-                'Authorization': 'Bearer ' + checkToken
-            },
-            data: {
-                'damageCode': damageCode,
-                'repairCode': repairCode,
-                'materialCode': materialCode,
-            },
-            success: function(data) {
-                $('#master_length').removeAttr('readonly');
-            },
-            error: function(error) {
-                var finalValue = '';
-                if (Array.isArray(error.responseJSON.message)) {
-                    finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-                } else {
-                    finalValue = error.responseJSON.message;
-                }
-                var callout = document.createElement('div');
-                callout.innerHTML =
-                    `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-                document.getElementById('apiMessages').appendChild(callout);
-                setTimeout(function() {
-                    callout.remove();
-                }, 2000);
-                $('#damage_code').val('');
-                $('#repair_code').val('');
-                $('#material_code').val('');
-                $('#repair_code').attr({
-                    'readonly': 'readonly'
-                });
-                $('#material_code').attr({
-                    'readonly': 'readonly'
-                });
-            }
-        });
+        var master_length = $('#master_length');
+        master_length.empty();
+        var master_length_create = document.getElementById('master_length');
+        var master_length_create_option = document.createElement('option');
+        master_length_create_option.value = '';
+        master_length_create_option.text = "Select Length";
+        master_length_create.appendChild(master_length_create_option);
+
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
+        var component_code = $('#component_code').val();
+
+        var data = {
+            'line_id':line_id,
+            'location_code_id':location_code_id,
+            'component_code':component_code,
+            'damage_id':damageCode,
+            'repair_id':repairCode,
+            'material_id':materialCode
+        }
+        getTarriflength(data);
     });
+
+    $('#master_length').on('change', function() {
+
+        var damageCode = $('#damage_code').val();
+        var repairCode = $('#repair_code').val();
+        var materialCode = $('#material_code').val();
+
+        var master_length = $('#master_width');
+        master_length.empty();
+        var master_length_create = document.getElementById('master_width');
+        var master_length_create_option = document.createElement('option');
+        master_length_create_option.value = '';
+        master_length_create_option.text = "Select Width";
+        master_length_create.appendChild(master_length_create_option);
+
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
+        var component_code = $('#component_code').val();
+        var length = $(this).val();
+
+        var data = {
+            'line_id':line_id,
+            'location_code_id':location_code_id,
+            'component_code':component_code,
+            'damage_id':damageCode,
+            'repair_id':repairCode,
+            'material_id':materialCode,
+            'length':length
+        }
+        getTarrifwidth(data);
+    });
+
+    $('#master_width').on('change', function() {
+        var damageCode = $('#damage_code').val();
+        var repairCode = $('#repair_code').val();
+        var materialCode = $('#material_code').val();
+
+        var master_length = $('#master_height');
+        master_length.empty();
+        var master_length_create = document.getElementById('master_height');
+        var master_length_create_option = document.createElement('option');
+        master_length_create_option.value = '';
+        master_length_create_option.text = "Select Height";
+        master_length_create.appendChild(master_length_create_option);
+
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
+        var component_code = $('#component_code').val();
+        var length = $('#master_length').val();
+        var width = $(this).val();
+
+        var data = {
+            'line_id':line_id,
+            'location_code_id':location_code_id,
+            'component_code':component_code,
+            'damage_id':damageCode,
+            'repair_id':repairCode,
+            'material_id':materialCode,
+            'length':length,
+            'width':width,
+        }
+        getTarrifheight(data);
+    });
+
+    
 
     $('#master_height').on('change', function() {
         var damageCode = $('#damage_code').val();
@@ -720,6 +808,8 @@ $(document).ready(function() {
         var master_length = $('#master_length').val();
         var master_width = $('#master_width').val();
         var master_height = $('#master_height').val();
+        var component_code = $('#component_code').val();
+
 
         $.ajax({
             type: "POST",
@@ -734,9 +824,10 @@ $(document).ready(function() {
                 'master_length': master_length,
                 'master_width': master_width,
                 'master_height': master_height,
+                'component_code':component_code,
             },
             success: function(data) {
-                $("#component_code").val(data[0].component_code);
+                // $("#component_code").val(data[0].component_code);
                 $("#tarrif_id").val(data[0].id);
                 $("#labour_hr").val(data[0].labour_hour);
                 $("#qty").val(data[0].qty);
@@ -749,8 +840,6 @@ $(document).ready(function() {
                 $("#dimension_h").val(data[0].dimension_h);
                 $("#dimension_w").val(data[0].dimension_w);
                 $("#dimension_l").val(data[0].dimension_l);
-
-
                 $('#addButton').removeAttr('disabled');
 
             },
@@ -781,6 +870,143 @@ $(document).ready(function() {
         });
     });
 });
+
+
+function getTarriflength(data){
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/gettarriflength",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: data,
+        success: function(response) {
+            $('#master_length').removeAttr('readonly');
+            response.length.forEach(function(item) {
+                var component_code = document.getElementById('master_length');
+                var component_code_option = document.createElement('option');
+                component_code_option.value = item.dimension_l;
+                component_code_option.text = item.dimension_l;
+                component_code.appendChild(component_code_option);
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function getTarrifheight(data){
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/gettarrifheight",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: data,
+        success: function(response) {
+            $('#master_height').removeAttr('readonly');
+            response.height.forEach(function(item) {
+                var component_code = document.getElementById('master_height');
+                var component_code_option = document.createElement('option');
+                component_code_option.value = item.dimension_h;
+                component_code_option.text = item.dimension_h;
+                component_code.appendChild(component_code_option);
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function getTarrifwidth(data){
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/gettarrifwidth",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: data,
+        success: function(response) {
+            $('#master_width').removeAttr('readonly');
+            response.width.forEach(function(item) {
+                var component_code = document.getElementById('master_width');
+                var component_code_option = document.createElement('option');
+                component_code_option.value = item.dimension_w;
+                component_code_option.text = item.dimension_w;
+                component_code.appendChild(component_code_option);
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+
+function getTarrifRepair(data){
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/gettarrifrepair",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: data,
+        success: function(response) {
+            response.repairData.forEach(function(item) {
+                getRepair(item.repair_id);
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function getTarrifMaterial(data){
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/gettarrifmaterial",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: data,
+        success: function(response) {
+            response.materialData.forEach(function(item) {
+                getMaterial(item.material_id);
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function getTarrifDamage(data){
+    $.ajax({
+        type: "POST",
+        url: "/api/tarrif/gettarrifdamage",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: data,
+        success: function(response) {
+            response.damageData.forEach(function(item) {
+                getDamage(item.damade_id);
+            });
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
 
 
 function getLineData(line_id) {
@@ -858,7 +1084,7 @@ function getTarrifByLine(line_id) {
             $('.open').click(function() {
                 var dataIdValue = $(this).data('id');
                 var datacodeValue = $(this).data('value');
-
+                $('#location_code_id').val(dataIdValue);
                 var line_id = $('#line_id_no').val();
                 gettarrif(dataIdValue, line_id);
                 $('#side').val(datacodeValue);
@@ -884,71 +1110,23 @@ function gettarrif(location_code, line_id) {
         },
         success: function(data) {
             var tarrifData = data;
-            var damage_code = $('#damage_code');
-            damage_code.empty();
 
-            var master_length = $('#master_length');
-            master_length.empty();
+            var component_code = $('#component_code');
+            component_code.empty();
 
-            var master_width = $('#master_width');
-            master_width.empty();
+            var component_code_create = document.getElementById('component_code');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = "Select Component Code";
+            component_code_create.appendChild(component_code_create_option);
 
-            var master_height = $('#master_height');
-            master_height.empty();
-
-
-            var damage_code_create = document.getElementById('damage_code');
-            var damage_code_create_option = document.createElement('option');
-            damage_code_create_option.value = '';
-            damage_code_create_option.text = "Select Damage Code";
-            damage_code_create.appendChild(damage_code_create_option);
-
-
-            var master_length_create = document.getElementById('master_length');
-            var master_length_create_option = document.createElement('option');
-            master_length_create_option.value = '';
-            master_length_create_option.text = "Select Length";
-            master_length_create.appendChild(master_length_create_option);
-
-            var master_width_create = document.getElementById('master_width');
-            var master_width_create_option = document.createElement('option');
-            master_width_create_option.value = '';
-            master_width_create_option.text = "Select Width";
-            master_width_create.appendChild(master_width_create_option);
-
-            var master_height_create = document.getElementById('master_height');
-            var master_height_create_option = document.createElement('option');
-            master_height_create_option.value = '';
-            master_height_create_option.text = "Select Height";
-            master_height_create.appendChild(master_height_create_option);
-
-            data.damageData.forEach(function(item) {
-                getDamage(item.damade_id);
-            });
-
-            data.length.forEach(function(item) {
-                var master_length = document.getElementById('master_length');
-                var master_length_option = document.createElement('option');
-                master_length_option.value = item.dimension_l;
-                master_length_option.text = item.dimension_l;
-                master_length.appendChild(master_length_option);
-            });
-
-            data.width.forEach(function(item) {
-
-                var master_width = document.getElementById('master_width');
-                var master_width_option = document.createElement('option');
-                master_width_option.value = item.dimension_w;
-                master_width_option.text = item.dimension_w;
-                master_width.appendChild(master_width_option);
-            });
-
-            data.height.forEach(function(item) {
-                var master_height = document.getElementById('master_height');
-                var master_height_option = document.createElement('option');
-                master_height_option.value = item.dimension_h;
-                master_height_option.text = item.dimension_h;
-                master_height.appendChild(master_height_option);
+            
+            data.componentData.forEach(function(item) {
+                var component_code = document.getElementById('component_code');
+                var component_code_option = document.createElement('option');
+                component_code_option.value = item.component_code;
+                component_code_option.text = item.component_code;
+                component_code.appendChild(component_code_option);
             });
             getTransactionData();
 
@@ -1371,6 +1549,7 @@ function getDamage(id) {
             'id': id,
         },
         success: function(data) {
+            $('#damage_code').removeAttr('readonly');
             var select = document.getElementById('damage_code');
             var option = document.createElement('option');
             option.value = data.id;
@@ -1386,7 +1565,7 @@ function getDamage(id) {
 function getRepair(id) {
     $.ajax({
         type: "POST",
-        url: "/api/repair/get",
+        url: "/api/repair/getbyid",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
@@ -1395,13 +1574,11 @@ function getRepair(id) {
         },
         success: function(data) {
             $('#repair_code').removeAttr('readonly');
-            data.forEach(function(item) {
-                var select = document.getElementById('repair_code');
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.repair_code;
-                select.appendChild(option);
-            })
+            var select = document.getElementById('repair_code');
+            var option = document.createElement('option');
+            option.value = data.id;
+            option.text = data.repair_code;
+            select.appendChild(option);
 
         },
         error: function(error) {
@@ -1410,26 +1587,23 @@ function getRepair(id) {
     });
 }
 
-function getMaterial(damage_id, repair_id) {
+function getMaterial(id) {
     $.ajax({
         type: "POST",
-        url: "/api/material/get",
+        url: "/api/material/getbyid",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
         data: {
-            'damage_id': damage_id,
-            'repair_id': repair_id
+            'id':id,
         },
         success: function(data) {
             $('#material_code').removeAttr('readonly');
-            data.forEach(function(item) {
                 var select = document.getElementById('material_code');
                 var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.material_code;
+                option.value = data.id;
+                option.text = data.material_code;
                 select.appendChild(option);
-            })
 
         },
         error: function(error) {
@@ -1501,6 +1675,31 @@ function createTransaction() {
                 setTimeout(function() {
                     callout.remove();
                 }, 2000);
+                $('#tarrif_id').val('');
+                $('#gateinid').val('');
+                $('#labour_hr').val('');
+                $('#dimension_h').val('');
+                $('#dimension_w').val('');
+                $('#dimension_l').val('');
+
+                $('#qty').val('');
+                $('#labour_cost').val('');
+                $('#material_cost').val('');
+                $('#sab_total').val('');
+                $('#gst').val('');
+                $('#total').val('');
+                $('#tax_cost').val('');
+                $('#side').val('');
+
+                $('#component_code').val('');
+                $('#side').val('');
+                $('#damage_code').val('');
+                $('#repair_code').val('');
+                $('#material_code').val('');
+                $('#master_length').val('');
+                $('#master_width').val('');
+                $('#master_height').val('');
+
                 getTransactionData();
                 getReportingData();
             },
@@ -1573,7 +1772,9 @@ function updateEstimate() {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Component Code</label>
-                            <input type="text" id="component_code" class="form-control" readonly>
+                            <select name="component_code" id="component_code" class="form-control">
+                                <option value="">Select Component Code</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -1597,7 +1798,7 @@ function updateEstimate() {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Damage code</label>
-                                    <select class="form-control" id="damage_code">
+                                    <select readonly class="form-control" id="damage_code">
                                         <option value="">Select Damage Code</option>
                                     </select>
                                 </div>

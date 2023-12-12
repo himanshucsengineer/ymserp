@@ -227,37 +227,164 @@ class MasterTarrifController extends Controller
         ]); 
     }
 
+    public function gettarrifmaterial(Request $request){
+        $materialData = MasterTarrif::select('material_id')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code_id)
+        ->where('component_code', $request->component_code)
+        ->where('damade_id', $request->damage_id)
+        ->where('repair_id', $request->repair_id)
+        ->distinct()
+        ->get();
 
-    public function getbylineid(Request $request){
+        $data = array(
+            'materialData' => $materialData,
+        );
+
+        return $data;
+    }
+
+    public function gettarrifwidth(Request $request){
+        $widthData = MasterTarrif::select('dimension_w')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code_id)
+        ->where('component_code', $request->component_code)
+        ->where('damade_id', $request->damage_id)
+        ->where('repair_id', $request->repair_id)
+        ->where('material_id', $request->material_id)
+        ->where('dimension_l', $request->length)
+        ->distinct()
+        ->get();
+
+        $data = array(
+            'width' => $widthData,
+        );
+
+        return $data;
+    }
+
+
+    public function gettarrifheight(Request $request){
+        $widthData = MasterTarrif::select('dimension_h')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code_id)
+        ->where('component_code', $request->component_code)
+        ->where('damade_id', $request->damage_id)
+        ->where('repair_id', $request->repair_id)
+        ->where('material_id', $request->material_id)
+        ->where('dimension_l', $request->length)
+        ->where('dimension_w', $request->width)
+        ->distinct()
+        ->get();
+
+        $data = array(
+            'height' => $widthData,
+        );
+
+        return $data;
+    }
+
+    public function gettarriflength(Request $request){
+        $widthData = MasterTarrif::select('dimension_l')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code_id)
+        ->where('component_code', $request->component_code)
+        ->where('damade_id', $request->damage_id)
+        ->where('repair_id', $request->repair_id)
+        ->where('material_id', $request->material_id)
+        ->distinct()
+        ->get();
+
+        $data = array(
+            'length' => $widthData,
+        );
+
+        return $data;
+    }
+
+    public function gettarrifrepair(Request $request){
+        $materialData = MasterTarrif::select('repair_id')
+        ->where('line_id', $request->line_id)
+        ->where('repai_location_code', $request->location_code_id)
+        ->where('component_code', $request->component_code)
+        ->where('damade_id', $request->damage_id)
+        ->distinct()
+        ->get();
+
+        $data = array(
+            'repairData' => $materialData,
+        );
+
+        return $data;
+    }
+
+    public function gettarrifdamage(Request $request){
         $damageData = MasterTarrif::select('damade_id')
         ->where('line_id', $request->line_id)
-        ->where('repai_location_code', $request->location_code)
+        ->where('repai_location_code', $request->location_code_id)
+        ->where('component_code', $request->component_code)
         ->distinct()
         ->get();
 
-        $length = MasterTarrif::select('dimension_l')
-        ->where('line_id', $request->line_id)
-        ->where('repai_location_code', $request->location_code)
-        ->distinct()
-        ->get();
+        $data = array(
+            'damageData' => $damageData,
+        );
 
-        $width = MasterTarrif::select('dimension_w')
-        ->where('line_id', $request->line_id)
-        ->where('repai_location_code', $request->location_code)
-        ->distinct()
-        ->get();
+        return $data;
 
-        $height = MasterTarrif::select('dimension_h')
+    }
+
+
+    public function getbylineid(Request $request){
+        // $damageData = MasterTarrif::select('damade_id')
+        // ->where('line_id', $request->line_id)
+        // ->where('repai_location_code', $request->location_code)
+        // ->distinct()
+        // ->get();
+
+        // $repairData = MasterTarrif::select('repair_id')
+        // ->where('line_id', $request->line_id)
+        // ->where('repai_location_code', $request->location_code)
+        // ->distinct()
+        // ->get();
+        // $materialData = MasterTarrif::select('material_id')
+        // ->where('line_id', $request->line_id)
+        // ->where('repai_location_code', $request->location_code)
+        // ->distinct()
+        // ->get();
+
+        // $length = MasterTarrif::select('dimension_l')
+        // ->where('line_id', $request->line_id)
+        // ->where('repai_location_code', $request->location_code)
+        // ->distinct()
+        // ->get();
+
+        // $width = MasterTarrif::select('dimension_w')
+        // ->where('line_id', $request->line_id)
+        // ->where('repai_location_code', $request->location_code)
+        // ->distinct()
+        // ->get();
+
+        // $height = MasterTarrif::select('dimension_h')
+        // ->where('line_id', $request->line_id)
+        // ->where('repai_location_code', $request->location_code)
+        // ->distinct()
+        // ->get();
+
+        $componentData = MasterTarrif::select('component_code')
         ->where('line_id', $request->line_id)
         ->where('repai_location_code', $request->location_code)
         ->distinct()
         ->get();
 
         $data = array(
-            'damageData' => $damageData,
-            'length' => $length,
-            'width' => $width,
-            'height' => $height,
+            // 'damageData' => $damageData,
+            // 'length' => $length,
+            // 'width' => $width,
+            // 'height' => $height,
+            'componentData' => $componentData,
+            // 'repairData' => $repairData,
+            // 'materialData' => $materialData,
         );
 
     return $data;
@@ -285,7 +412,7 @@ class MasterTarrifController extends Controller
     }
 
     public function checktarrifbydimention(Request $request){
-        $getData =  MasterTarrif::where('damade_id',$request->damageCode)->where('repair_id',$request->repairCode)->where('material_id',$request->materialCode)->where('dimension_l',$request->master_length)->where('dimension_w',$request->master_width)->where('dimension_h',$request->master_height)->get();
+        $getData =  MasterTarrif::where('component_code',$request->component_code)->where('damade_id',$request->damageCode)->where('repair_id',$request->repairCode)->where('material_id',$request->materialCode)->where('dimension_l',$request->master_length)->where('dimension_w',$request->master_width)->where('dimension_h',$request->master_height)->get();
         if(count($getData)>0){
             return $getData;
         }else{
