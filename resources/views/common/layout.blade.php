@@ -96,6 +96,25 @@
             if($.inArray("STORES", permissions) !== -1){
                 $('#STORES').show();
             }
+
+            if($.inArray("INWARD_EXECUTIVE", permissions) !== -1){
+                $('#INWARD_EXECUTIVE').show();
+            }
+            if($.inArray("MAINTENANCE", permissions) !== -1){
+                $('#MAINTENANCE').show();
+            }
+            if($.inArray("PRE_ADVICE", permissions) !== -1){
+                $('#PRE_ADVICE').show();
+            }
+            if($.inArray("OUTWARD_EXECUTIVE", permissions) !== -1){
+                $('#OUTWARD_EXECUTIVE').show();
+            }
+            if($.inArray("PURCHASES", permissions) !== -1){
+                $('#PURCHASES').show();
+            }
+            if($.inArray("SUPERVISOR", permissions) !== -1){
+                $('#SUPERVISOR').show();
+            }
         },
         error: function(error) {
             console.log(error);
@@ -291,7 +310,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="INWARD_EXECUTIVE">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -323,7 +342,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="SUPERVISOR">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -356,7 +375,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="MAINTENANCE">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -382,7 +401,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="PRE_ADVICE">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -409,7 +428,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="OUTWARD_EXECUTIVE">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <i class="fas fa-poll nav-icon"></i>
@@ -484,7 +503,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="PURCHASES">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-warehouse nav-icon"></i>
                                 <p>
@@ -530,8 +549,8 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item " id="roles">
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item ">
                                     <a href="#" class="nav-link">
                                         <p>Product Category <i class="fas fa-angle-left right"></i></p>
                                     </a>
@@ -606,8 +625,8 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item " id="roles">
+                            <ul class="nav nav-treeview" >
+                                <li class="nav-item " >
                                     <a href="#" class="nav-link">
                                         <p>Purchase Entry <i class="fas fa-angle-left right"></i></p>
                                     </a>

@@ -30,22 +30,32 @@ class RolesAndPermissionsSeeder extends Seeder
         $DEPOS = "DEPOS";
         $STORES = "STORES";
 
-
         $BILLING = "BILLING";
         $SURVEYOR = "SURVEYOR";
         $SECURITY = "SECURITY";
         $DASHBOARD = "DASHBOARD";
 
-        //Create driver Permissions
-        Permission::create(['name'=>$MASTERS]);
-        Permission::create(['name'=>$MANAGEMENT]);
-        Permission::create(['name'=>$DEPOS]);
-        Permission::create(['name'=>$STORES]);
+        $inwardExecutive = "INWARD_EXECUTIVE";
+        $maintaininace = "MAINTENANCE";
+        $preadvice = "PRE_ADVICE";
+        $outward = "OUTWARD_EXECUTIVE";
+        $purchase = "PURCHASES";
 
-        Permission::create(['name'=>$BILLING]);
-        Permission::create(['name'=>$SURVEYOR]);
+        $supervisor = "SUPERVISOR";
+
+        //Create driver Permissions
         Permission::create(['name'=>$SECURITY]);
-        Permission::create(['name'=>$DASHBOARD]);
+        Permission::create(['name'=>$SURVEYOR]);
+        Permission::create(['name'=>$inwardExecutive]);
+        Permission::create(['name'=>$supervisor]);
+        Permission::create(['name'=>$maintaininace]);
+        Permission::create(['name'=>$preadvice]);
+        Permission::create(['name'=>$outward]);
+        Permission::create(['name'=>$BILLING]);
+        Permission::create(['name'=>$STORES]);
+        Permission::create(['name'=>$purchase]);
+        Permission::create(['name'=>$MANAGEMENT]);
+        Permission::create(['name' => $MASTERS]);
 
         //roles Available
         $superAdmin = 'super-admin';
