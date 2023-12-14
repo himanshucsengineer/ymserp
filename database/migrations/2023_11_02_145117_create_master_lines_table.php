@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('front_img')->nullable();
             $table->string('door_img')->nullable();
             $table->string('interior_img')->nullable();
+            $table->string('under_img')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();

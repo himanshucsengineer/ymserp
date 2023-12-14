@@ -140,6 +140,8 @@ class MasterLineController extends Controller
             $formetedData[] = [
                 'tracking_device' => $line->tracking_device,
                 'interior_img' => $line->interior_img,
+                'under_img' => $line->under_img,
+
                 'door_img' => $line->door_img,
                 'front_img' => $line->front_img,
                 'left_img' => $line->left_img,
@@ -237,9 +239,16 @@ class MasterLineController extends Controller
             $interiorimgfile->move(public_path('uploads/line'), $interiorimgfileName);
         }
 
+        if ($request->hasFile('under_img')) {
+            $underimgfile = $request->file('under_img');
+            $underimgfileName = time() . '_' . $underimgfile->getClientOriginalName();
+            $underimgfile->move(public_path('uploads/line'), $underimgfileName);
+        }
 
         $createLine = MasterLine::create([
             'interior_img'=> $interiorimgfileName,
+            'under_img'=> $underimgfileName,
+
             'door_img'=> $doorimgfileName,
             'front_img'=> $frontimgfileName,
             'left_img'=> $leftimgfileName,
@@ -364,6 +373,14 @@ class MasterLineController extends Controller
             $interiorimgfileName = $lineDetails->interior_img;
         }
 
+        if ($request->hasFile('under_img')) {
+            $underimgfile = $request->file('under_img');
+            $underimgfileName = time() . '_' . $underimgfile->getClientOriginalName();
+            $underimgfile->move(public_path('uploads/line'), $underimgfileName);
+        }else{
+            $underimgfileName = $lineDetails->under_img;
+        }
+
         $lineDetails->name = is_null($request->name) ? $lineDetails->name : $request->name;
         $lineDetails->lolo_charges = is_null($request->lolo_charges) ? $lineDetails->lolo_charges : $request->lolo_charges;
         $lineDetails->washing_charges =  is_null($request->washing_charges) ? $lineDetails->washing_charges : $request->washing_charges;
@@ -390,6 +407,8 @@ class MasterLineController extends Controller
         $lineDetails->front_img = $frontimgfileName;
         $lineDetails->door_img = $doorimgfileName;
         $lineDetails->interior_img = $interiorimgfileName;
+        $lineDetails->under_img = $underimgfileName;
+
         $lineDetails->updatedby = $request->user_id;
         $lineDetails->updated_at = date('Y-m-d H:i:s');
         $lineDetails  = $lineDetails->save();

@@ -206,6 +206,13 @@
                                         <img id="interior_img_prev" src="" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="under_img">Under Structure Image <span style="color:red;">*</span></label>
+                                    <input type="file" class="form-control" name="under_img" id="under_img">
+                                    <div class="img_prv_box">
+                                        <img id="under_img_prev" src="" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -301,6 +308,16 @@ $(document).ready(function () {
             reader.readAsDataURL(fileInput.files[0]);
         }
     });
+    $('#under_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#under_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
 });
 
 
@@ -349,6 +366,7 @@ $(function () {
             $('#front_img_prev').attr({'src':`/uploads/line/${response.front_img}`});
             $('#door_img_prev').attr({'src':`/uploads/line/${response.door_img}`});
             $('#interior_img_prev').attr({'src':`/uploads/line/${response.interior_img}`});
+            $('#under_img_prev').attr({'src':`/uploads/line/${response.under_img}`});
             $('.text').text('Update Line');
         },
         error: function(error) {
@@ -414,6 +432,7 @@ $(function () {
             formData.append('front_img', $('#front_img')[0].files[0]);
             formData.append('door_img', $('#door_img')[0].files[0]);
             formData.append('interior_img', $('#interior_img')[0].files[0]); 
+            formData.append('under_img', $('#under_img')[0].files[0]); 
                 $.ajax({
                 url: '/api/line/update',
                 type: 'POST',
@@ -477,6 +496,7 @@ $(function () {
             formData.append('front_img', $('#front_img')[0].files[0]);
             formData.append('door_img', $('#door_img')[0].files[0]);
             formData.append('interior_img', $('#interior_img')[0].files[0]);
+            formData.append('under_img', $('#under_img')[0].files[0]); 
                 $.ajax({
                 url: '/api/line/create',
                 type: 'POST',

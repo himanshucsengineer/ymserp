@@ -304,7 +304,8 @@ a.open:hover .circle img {
                             id="right_side">RIGHT</span><span id="left_side">LEFT</span><span
                             id="top_side">TOP</span><span id="bottom_side">BOTTOM</span><span
                             id="front_side">FRONT</span><span id="door_side">DOOR</span><span
-                            id="internal_side">INTERNAL</span> | Container Number: <span class="container_no"></span> |
+                            id="internal_side">INTERNAL</span><span
+                            id="under_side">UNDER STRUCTURE</span> | Container Number: <span class="container_no"></span> |
                         MFG DATE: <span class="mfg_date"></span></h4>
                     <div class="card card-primary card-outline card-tabs">
                         <div class="card-header p-0 pt-1 border-bottom-0">
@@ -318,6 +319,10 @@ a.open:hover .circle img {
                                     <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
                                         href="#custom-tabs-three-profile" role="tab"
                                         aria-controls="custom-tabs-three-profile" aria-selected="false">DETAILS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" 
+                                        href="https//www.google.com/" target="_blank">HELP</a>
                                 </li>
 
                             </ul>
@@ -355,6 +360,10 @@ a.open:hover .circle img {
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showBottom()">Bottom</button>
                                         </div>
+                                        <div class="card">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showUnder()">Under Structure</button>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row justify-content-center">
@@ -389,6 +398,10 @@ a.open:hover .circle img {
                                         </div>
                                         <div class="col-md-10" id="interior" style="display:none">
                                             <img src="" id="interior_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
+                                        </div>
+                                        <div class="col-md-10" id="under" style="display:none">
+                                            <img src="" id="under_img" alt="Image with Hotspots" style="width:100%"
                                                 id="image">
                                         </div>
                                     </div>
@@ -461,6 +474,8 @@ $('#right').hide();
 $('#left').hide();
 $('#top').hide();
 $('#bottom').hide();
+$('#under').hide();
+
 $('#front').hide();
 $('#door').show();
 $('#interior').hide();
@@ -471,6 +486,8 @@ $('#top_side').hide();
 $('#bottom_side').hide();
 $('#front_side').hide();
 $('#internal_side').hide();
+$('#under_side').hide();
+
 
 function showRight() {
     $('#right').show();
@@ -487,6 +504,9 @@ function showRight() {
     $('#bottom_side').hide();
     $('#front_side').hide();
     $('#internal_side').hide();
+    $('#under_side').hide();
+    $('#under').hide();
+
 }
 
 function showLeft() {
@@ -504,7 +524,8 @@ function showLeft() {
     $('#bottom_side').hide();
     $('#front_side').hide();
     $('#internal_side').hide();
-
+    $('#under_side').hide();
+    $('#under').hide();
 }
 
 function showTop() {
@@ -522,7 +543,8 @@ function showTop() {
     $('#bottom_side').hide();
     $('#front_side').hide();
     $('#internal_side').hide();
-
+    $('#under_side').hide();
+    $('#under').hide();
 }
 
 function showBottom() {
@@ -540,7 +562,27 @@ function showBottom() {
     $('#bottom_side').show();
     $('#front_side').hide();
     $('#internal_side').hide();
+    $('#under_side').hide();
+    $('#under').hide();
+}
 
+function showUnder() {
+    $('#right').hide();
+    $('#left').hide();
+    $('#top').hide();
+    $('#bottom').hide();
+    $('#front').hide();
+    $('#door').hide();
+    $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
+    $('#under_side').show();
+    $('#under').show();
 }
 
 function showFront() {
@@ -558,7 +600,8 @@ function showFront() {
     $('#bottom_side').hide();
     $('#front_side').show();
     $('#internal_side').hide();
-
+    $('#under_side').hide();
+    $('#under').hide();
 }
 
 function showDoor() {
@@ -576,7 +619,8 @@ function showDoor() {
     $('#bottom_side').hide();
     $('#front_side').hide();
     $('#internal_side').hide();
-
+    $('#under_side').hide();
+    $('#under').hide();
 }
 
 function showInternal() {
@@ -594,7 +638,8 @@ function showInternal() {
     $('#bottom_side').hide();
     $('#front_side').hide();
     $('#internal_side').show();
-
+    $('#under_side').hide();
+    $('#under').hide();
 }
 
 function printAstimate() {

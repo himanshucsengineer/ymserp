@@ -37,7 +37,13 @@
                                     <select name="permission" multiple="" id="permission" class="form-control">
                                         <option value="MASTERS">MASTERS</option>
                                         <option value="MANAGEMENT">MANAGEMENT</option>
-                                        <option value="DEPOS">DEPOTS</option>
+                                        <option value="INWARD_EXECUTIVE"> INWARD EXECUTIVE</option>
+                                        <option value="MAINTENANCE"> REPAIR AND MAINTENANCE</option>
+                                        <option value="PRE_ADVICE"> PRE ADVICE</option>
+                                        <option value="OUTWARD_EXECUTIVE"> OUTWARD EXECUTIVE</option>
+                                        <option value="PURCHASES" > PURCHASES </option>
+                                        <option value="SUPERVISOR" > SUPERVISOR</option>
+                                        
                                         <option value="STORES">STORES</option>
                                         <option value="BILLING">BILLING</option>
                                         <option value="SURVEYOR">SURVEYOR</option>
