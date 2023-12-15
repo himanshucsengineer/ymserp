@@ -1086,6 +1086,9 @@ function getLineData(line_id) {
             $('#interior_img').attr({
                 'src': `/uploads/line/${data.interior_img}`
             })
+            $('#under_img').attr({
+                'src': `/uploads/line/${data.under_img}`
+            })
         },
         error: function(error) {
             console.log(error);
@@ -1721,7 +1724,6 @@ function createTransaction() {
                     callout.remove();
                 }, 2000);
                 $('#tarrif_id').val('');
-                $('#gateinid').val('');
                 $('#labour_hr').val('');
                 $('#dimension_h').val('');
                 $('#dimension_w').val('');
@@ -1734,10 +1736,8 @@ function createTransaction() {
                 $('#gst').val('');
                 $('#total').val('');
                 $('#tax_cost').val('');
-                $('#side').val('');
 
                 $('#component_code').val('');
-                $('#side').val('');
                 $('#damage_code').val('');
                 $('#repair_code').val('');
                 $('#material_code').val('');

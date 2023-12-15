@@ -324,6 +324,16 @@
                                             <input type="text" id="amount" class="form-control" name="amount" placeholder="Amount">
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="is_included">Tax Included / Excluded</label>
+                                            <select name="is_included" id="is_included" class="form-control">
+                                                <option value="">Please Select An Option</option>
+                                                <option value="included">Included</option>
+                                                <option value="excluded">Excluded</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -619,9 +629,7 @@ function createConsigneeModel(){
     $('#modal-consignee').modal('show');
 }
  
-$('#line_id').on('change', function(){
 
-})
 
 
 function getline(id,containerType,containerSize){
@@ -790,11 +798,12 @@ $(function () {
         var remarks = $("#remarks").val();
         var billing_type = $("#billing_type").val();
         var amount = $("#amount").val();
+        var is_included = $("#is_included").val();
+
 
             var formData = new FormData();
             formData.append('container_type', container_type);
             formData.append('container_size', container_size);
-
             formData.append('inward_date', inward_date);
             formData.append('inward_time', inward_time);
             formData.append('survayor_date', survayor_date);
@@ -820,6 +829,7 @@ $(function () {
             formData.append('remarks', remarks);
             formData.append('id', containerid);
             formData.append('amount',amount);
+            formData.append('is_included',is_included);
             formData.append('challan', $('#challan')[0].files[0]);
             formData.append('empty_latter', $('#empty_latter')[0].files[0]);
 
@@ -833,7 +843,7 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}&amt=${amount}`
+                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}&amt=${amount}&is_included=${is_included}`
                     window.open(printurl, '_blank');
                     window.location = `/inward/executive`;
                 },
@@ -869,6 +879,9 @@ $(function () {
             required: true,
         },
         billing_type:{
+            required: true,
+        },
+        is_included:{
             required: true,
         }
        

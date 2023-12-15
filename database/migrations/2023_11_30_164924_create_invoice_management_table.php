@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('year')->nullable();
             $table->string('month')->nullable();
             $table->string('third_party')->nullable();
+            $table->string('is_included')->nullable();
             $table->string('is_manual')->nullable();
             $table->string('final_invoice_no')->nullable();
             $table->string('amount')->nullable();

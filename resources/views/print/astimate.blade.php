@@ -790,6 +790,9 @@
                 <td class="column13 style18 f"><?= $transaction['gst']?></td>
                 <td class="column14 style18 f"><?= $transaction['total']?></td>
             </tr>
+            <tr class="row8" >
+                <td colspan=16 class="column0 style5 s"><?= $transaction['desc']?></td>
+            </tr>
             <?php }?>
             <tr class="row25">
                 <td class="column0 style2 null"></td>

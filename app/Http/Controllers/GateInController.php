@@ -9,6 +9,7 @@ use App\Models\MasterTarrif;
 use App\Models\MasterRepair;
 use App\Models\MasterDamage;
 use App\Models\MasterMaterial;
+use App\Models\LocationCode;
 
 use App\Models\GateIn;
 use App\Models\MasterTransport;
@@ -101,10 +102,11 @@ class GateInController extends Controller
             $damageData = MasterDamage::where('id',$tarrifData->damade_id)->first();
             $repairData = MasterRepair::where('id',$tarrifData->repair_id)->first();
             $materialData = MasterMaterial::where('id',$tarrifData->material_id)->first();
+            $locationData = LocationCode::where('id',$tarrifData->repai_location_code)->first();
 
             $formetedData[] = [
                 'component_code' => $tarrifData->component_code,
-                'location_code' => $tarrifData->repai_location_code,
+                'location_code' => $locationData->code,
                 'unit_of_mesure' => $tarrifData->unit_of_measure,
                 'length' => $tarrifData->dimension_l,
                 'width' => $tarrifData->dimension_w,
@@ -115,11 +117,12 @@ class GateInController extends Controller
 
                 'qty' => $transaction->qty,
                 'labour_hr' => $transaction->labour_hr,
-                'labour_cost' => $transaction->labour_cost,
-                'material_cost' => $transaction->material_cost,
-                'sab_total' => $transaction->sab_total,
+                'labour_cost' => number_format($transaction->labour_cost, 2),
+                'material_cost' => number_format($transaction->material_cost, 2),
+                'sab_total' => number_format($transaction->sab_total, 2),
                 'gst' => $transaction->gst,
-                'total' => $transaction->total,
+                'total' => number_format($transaction->total, 2),
+                'desc' => $tarrifData->desc
             ];
         }
 

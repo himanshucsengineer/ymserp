@@ -193,13 +193,27 @@ class OutwardOfficerController extends Controller
             $hsnCode = "9987";
         }
 
-        $sgst = (9/100)*$charges;
-        $cgst = (9/100)*$charges;
+        if($request->is_included == "included"){
+            $sgst = (9/100)*$charges;
+            $cgst = (9/100)*$charges;
+    
+            $totalGst = $cgst + $sgst;
+            $amounts = $charges - $totalGst;
+            $final_amount = $charges;
+    
+            $finalAmountInWords = $this->numberToWord($final_amount);
+        }else{
+            $sgst = (9/100)*$charges;
+            $cgst = (9/100)*$charges;
+    
+            $totalGst = $cgst + $sgst;
+            $amounts = $charges ;
+            $final_amount = $charges + $totalGst;
+    
+            $finalAmountInWords = $this->numberToWord($final_amount);
+        }
 
-        $totalGst = $cgst + $sgst;
-        $final_amount = $totalGst + $charges;
-
-        $finalAmountInWords = $this->numberToWord($final_amount);;
+        
 
         $data['invoice_data'] = array(
             'invoice_id' => $final_invoice_no,
@@ -221,7 +235,7 @@ class OutwardOfficerController extends Controller
             'sub_type' =>$getGetInData->sub_type,
             'hsn_code' => $hsnCode,
             'quantity' => 1,
-            'amount' => number_format($charges, 2),
+            'amount' => number_format($amounts, 2),
             'sgst' => number_format($sgst,2),
             'cgst' => number_format($cgst,2),
             'totalgst' => number_format($totalGst,2),
@@ -242,6 +256,7 @@ class OutwardOfficerController extends Controller
             'final_invoice_no' => $final_invoice_no,
             'third_party' => $third_party,
             'amount' => $amount,
+            'is_included' => $request->is_included,
             'is_manual' => "no",
         ]);
 
