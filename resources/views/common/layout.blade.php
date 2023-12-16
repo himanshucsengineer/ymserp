@@ -473,6 +473,46 @@
                                 
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-tree"></i> -->
+                                <i class="fas fa-money-bill nav-icon"></i>
+                                <p>
+                                    Cash Flow
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                
+                                <li class="nav-item">
+                                    <a href="/billing/centeral" class="nav-link">
+                                        <i class="fas fa-book-open nav-icon"></i>
+                                        <p>Central Billing</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-tree"></i> -->
+                                <i class="fas fa-money-bill nav-icon"></i>
+                                <p>
+                                    Reports
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                
+                                <li class="nav-item">
+                                    <a href="/billing/centeral" class="nav-link">
+                                        <i class="fas fa-book-open nav-icon"></i>
+                                        <p>Central Billing</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
                         <li class="nav-item hidden" id="STORES">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-edit"></i> -->

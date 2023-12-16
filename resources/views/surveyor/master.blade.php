@@ -1109,9 +1109,19 @@ function getTarrifByLine(line_id) {
         },
         success: function(data) {
             if (data.tarrifData.length > 0) {
-                data.tarrifData.forEach(function(item) {
+
+                var uniqueEntries = {};
+                $.each(data.tarrifData, function(index, entry) {
+                    var locationCode = entry.repai_location_code;
+                    if (!uniqueEntries[locationCode]) {
+                        uniqueEntries[locationCode] = entry;
+                    }
+                });
+                var resultArray = Object.values(uniqueEntries);
+                resultArray.forEach(function(item) {
                     var locationData = data.LocationCode.find(x => x.id == item
                         .repai_location_code);
+                        
                     var gettop = parseInt(item.hotspot_coor_y) + 32;
                     var getLeft = parseInt(item.hotspot_coor_x) + 9.5;
                     var newDiv = $('<div>');
