@@ -93,6 +93,9 @@ cursor: pointer;
                                         <option value="front">Front</option>
                                         <option value="door">Door</option>
                                         <option value="interior">Interior</option>
+                                        <option value="under">Under</option>
+                                        <option value="roof">Roof</option>
+                                        <option value="floor">Floor</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -411,6 +414,27 @@ $('#container_side').on('change', function (){
                 });
             }else if(side == "interior"){
                 imageUrl = '/uploads/line/' + data.interior_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "under"){
+                imageUrl = '/uploads/line/' + data.under_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "roof"){
+                imageUrl = '/uploads/line/' + data.roof_img;
+                $('#image').attr('src', imageUrl);
+                $('#modal-xl').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }else if(side == "floor"){
+                imageUrl = '/uploads/line/' + data.floor_img;
                 $('#image').attr('src', imageUrl);
                 $('#modal-xl').modal({
                     backdrop: 'static',

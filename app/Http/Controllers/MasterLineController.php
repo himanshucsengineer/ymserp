@@ -141,7 +141,8 @@ class MasterLineController extends Controller
                 'tracking_device' => $line->tracking_device,
                 'interior_img' => $line->interior_img,
                 'under_img' => $line->under_img,
-
+                'roof_img' => $line->roof_img,
+                'floor_img' => $line->floor_img,
                 'door_img' => $line->door_img,
                 'front_img' => $line->front_img,
                 'left_img' => $line->left_img,
@@ -244,11 +245,22 @@ class MasterLineController extends Controller
             $underimgfileName = time() . '_' . $underimgfile->getClientOriginalName();
             $underimgfile->move(public_path('uploads/line'), $underimgfileName);
         }
+        if ($request->hasFile('roof_img')) {
+            $roofimgfile = $request->file('roof_img');
+            $roofimgfileName = time() . '_' . $roofimgfile->getClientOriginalName();
+            $roofimgfile->move(public_path('uploads/line'), $roofimgfileName);
+        }
+        if ($request->hasFile('floor_img')) {
+            $floorimgfile = $request->file('floor_img');
+            $floorimgfileName = time() . '_' . $floorimgfile->getClientOriginalName();
+            $floorimgfile->move(public_path('uploads/line'), $floorimgfileName);
+        }
 
         $createLine = MasterLine::create([
             'interior_img'=> $interiorimgfileName,
             'under_img'=> $underimgfileName,
-
+            'roof_img'=> $roofimgfileName,
+            'floor_img'=> $floorimgfileName,
             'door_img'=> $doorimgfileName,
             'front_img'=> $frontimgfileName,
             'left_img'=> $leftimgfileName,
@@ -381,6 +393,22 @@ class MasterLineController extends Controller
             $underimgfileName = $lineDetails->under_img;
         }
 
+        if ($request->hasFile('roof_img')) {
+            $roofimgfile = $request->file('roof_img');
+            $roofimgfileName = time() . '_' . $roofimgfile->getClientOriginalName();
+            $roofimgfile->move(public_path('uploads/line'), $roofimgfileName);
+        }else{
+            $roofimgfileName = $lineDetails->roof_img;
+        }
+
+        if ($request->hasFile('floor_img')) {
+            $floorimgfile = $request->file('floor_img');
+            $floorimgfileName = time() . '_' . $floorimgfile->getClientOriginalName();
+            $floorimgfile->move(public_path('uploads/line'), $floorimgfileName);
+        }else{
+            $floorimgfileName = $lineDetails->floor_img;
+        }
+
         $lineDetails->name = is_null($request->name) ? $lineDetails->name : $request->name;
         $lineDetails->lolo_charges = is_null($request->lolo_charges) ? $lineDetails->lolo_charges : $request->lolo_charges;
         $lineDetails->washing_charges =  is_null($request->washing_charges) ? $lineDetails->washing_charges : $request->washing_charges;
@@ -408,7 +436,8 @@ class MasterLineController extends Controller
         $lineDetails->door_img = $doorimgfileName;
         $lineDetails->interior_img = $interiorimgfileName;
         $lineDetails->under_img = $underimgfileName;
-
+        $lineDetails->roof_img = $roofimgfileName;
+        $lineDetails->floor_img = $floorimgfileName;
         $lineDetails->updatedby = $request->user_id;
         $lineDetails->updated_at = date('Y-m-d H:i:s');
         $lineDetails  = $lineDetails->save();

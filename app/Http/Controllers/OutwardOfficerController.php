@@ -194,14 +194,12 @@ class OutwardOfficerController extends Controller
         }
 
         if($request->is_included == "included"){
-            $sgst = (9/100)*$charges;
-            $cgst = (9/100)*$charges;
-    
-            $totalGst = $cgst + $sgst;
-            $amounts = $charges - $totalGst;
-            $final_amount = $charges;
-    
-            $finalAmountInWords = $this->numberToWord($final_amount);
+           $amounts=$charges/(1+18/100);
+           $sgst = (9/100)*$amounts;
+           $cgst = (9/100)*$amounts;
+           $totalGst=$charges - $amounts;
+           $final_amount = $charges;
+           $finalAmountInWords = $this->numberToWord($final_amount);
         }else{
             $sgst = (9/100)*$charges;
             $cgst = (9/100)*$charges;

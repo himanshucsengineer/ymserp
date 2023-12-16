@@ -119,9 +119,9 @@
                                             <label for="container_size">Container Size</label>
                                             <select name="container_size" id="container_size" class="form-control">
                                                 <option value="">Select Container Size</option>
-                                                <option value="20">20</option>
-                                                <option value="40">40</option>
-                                                <option value="45">45</option>
+                                                <option value="20">20 Size</option>
+                                                <option value="40">40 Size</option>
+                                                <option value="45">45 Size</option>
                                             </select>
                                         </div>
                                     </div>
@@ -133,16 +133,16 @@
                                             <label for="sub_type">Sub Type  <span style="color:red;">*</span></label>
                                             <select name="sub_type" id="sub_type" class="form-control">
                                                 <option value="">Please Select Sub Type</option>
-                                                <option value="DC">DC</option>
-                                                <option value="DV">DV</option>
-                                                <option value="FB">FB</option>
-                                                <option value="FR">FR</option>
-                                                <option value="HC">HC</option>
-                                                <option value="HR">HR</option>
-                                                <option value="HT">HT</option>
-                                                <option value="OT">OT</option>
-                                                <option value="RE">RE</option>
-                                                <option value="RF">RF</option>
+                                                <option value="DC">DC (  )</option>
+                                                <option value="DV">DV (NORMAL)</option>
+                                                <option value="FB">FB (FLAT BELT)</option>
+                                                <option value="FR">FR (FLAT RACK)</option>
+                                                <option value="HC">HC (HIGH CUBE)</option>
+                                                <option value="HR">HR (REEFER)</option>
+                                                <option value="HT">HT (HAT TOP)</option>
+                                                <option value="OT">OT (OPEN TOP)</option>
+                                                <option value="RE">RE (REEFER)</option>
+                                                <option value="RF">RF (REEFER)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -205,21 +205,21 @@
                                             <select class="form-control" name="status_name" id="status_name">
                                                 <option value="">Select an option</option>
                                                 <option value="DIRECT A/V"> DIRECT A/V </option>
-                                                <option value="AV">AV</option>
-                                                <option value="C/R">C/R</option>
+                                                <option value="AV">AV (AVAILABLE)</option>
+                                                <option value="C/R">C/R </option>
                                                 <option value="DIRECT A/V">DIRECT A/V</option>
                                                 <option value="F/W">F/W</option>
                                                 <option value="H/R">H/R</option>
-                                                <option value="H/W">H/W</option>
-                                                <option value="HDM">HDM</option>
-                                                <option value="L/D">L/D</option>
-                                                <option value="LDM">LDM</option>
-                                                <option value="M/DMG">M/DMG</option>
-                                                <option value="N/W">N/W</option>
-                                                <option value="OK">OK</option>
+                                                <option value="H/W">H/W (HEAVY WASH)</option>
+                                                <option value="HDM">HDM (HEAVY DAMAGE)</option>
+                                                <option value="L/D">L/D (LIGHT DAMAGE)</option>
+                                                <option value="LDM">LDM (LIGHT DAMAGE)</option>
+                                                <option value="M/DMG">M/DMG (MEDIUM DAMAGE)</option>
+                                                <option value="N/W">N/W (NORMAL WASH)</option>
+                                                <option value="OK">OK (OKEY)</option>
                                                 <option value="RF">RF</option>
-                                                <option value="S/0">S/0</option>
-                                                <option value="SW">SW</option>
+                                                <option value="S/0">S/O (SWEEP OUT)</option>
+                                                <option value="SW">SW (STEAM WASH)</option>
                                             </select>
                                         </div>
                                     </div>

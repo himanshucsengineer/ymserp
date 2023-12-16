@@ -305,7 +305,9 @@ a.open:hover .circle img {
                             id="top_side">TOP</span><span id="bottom_side">BOTTOM</span><span
                             id="front_side">FRONT</span><span id="door_side">DOOR</span><span
                             id="internal_side">INTERNAL</span><span
-                            id="under_side">UNDER STRUCTURE</span> | Container Number: <span class="container_no"></span> |
+                            id="under_side">UNDER STRUCTURE</span><span
+                            id="roof_side">ROOF</span><span
+                            id="floor_side">FLOOR</span> | Container Number: <span class="container_no"></span> |
                         MFG DATE: <span class="mfg_date"></span></h4>
                     <div class="card card-primary card-outline card-tabs">
                         <div class="card-header p-0 pt-1 border-bottom-0">
@@ -322,7 +324,7 @@ a.open:hover .circle img {
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" 
-                                        href="https//www.google.com/" target="_blank">HELP</a>
+                                        href="https://help18.mydurable.com/?pt=NjU3YjQ0ZTk0MWM1YzU5NjRlYmEyMzc5OjE3MDI1Nzg1NzEuOTI4OnByZXZpZXc=" target="_blank">HELP</a>
                                 </li>
 
                             </ul>
@@ -362,7 +364,15 @@ a.open:hover .circle img {
                                         </div>
                                         <div class="card">
                                             <button type="button" class="btn btn-block btn-outline-success"
-                                                onclick="showUnder()">Under Structure</button>
+                                                onclick="showUnder()">Under</button>
+                                        </div>
+                                        <div class="card">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showRoof()">Roof</button>
+                                        </div>
+                                        <div class="card">
+                                            <button type="button" class="btn btn-block btn-outline-success"
+                                                onclick="showFloor()">Floor</button>
                                         </div>
                                     </div>
                                     <hr>
@@ -402,6 +412,14 @@ a.open:hover .circle img {
                                         </div>
                                         <div class="col-md-10" id="under" style="display:none">
                                             <img src="" id="under_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
+                                        </div>
+                                        <div class="col-md-10" id="roof" style="display:none">
+                                            <img src="" id="roof_img" alt="Image with Hotspots" style="width:100%"
+                                                id="image">
+                                        </div>
+                                        <div class="col-md-10" id="floor" style="display:none">
+                                            <img src="" id="floor_img" alt="Image with Hotspots" style="width:100%"
                                                 id="image">
                                         </div>
                                     </div>
@@ -487,6 +505,9 @@ $('#bottom_side').hide();
 $('#front_side').hide();
 $('#internal_side').hide();
 $('#under_side').hide();
+$('#roof_side').hide();
+$('#floor_side').hide();
+
 
 
 function showRight() {
@@ -506,7 +527,10 @@ function showRight() {
     $('#internal_side').hide();
     $('#under_side').hide();
     $('#under').hide();
-
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showLeft() {
@@ -526,6 +550,10 @@ function showLeft() {
     $('#internal_side').hide();
     $('#under_side').hide();
     $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showTop() {
@@ -545,6 +573,10 @@ function showTop() {
     $('#internal_side').hide();
     $('#under_side').hide();
     $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showBottom() {
@@ -564,6 +596,10 @@ function showBottom() {
     $('#internal_side').hide();
     $('#under_side').hide();
     $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showUnder() {
@@ -583,6 +619,10 @@ function showUnder() {
     $('#internal_side').hide();
     $('#under_side').show();
     $('#under').show();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showFront() {
@@ -602,6 +642,10 @@ function showFront() {
     $('#internal_side').hide();
     $('#under_side').hide();
     $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showDoor() {
@@ -621,6 +665,10 @@ function showDoor() {
     $('#internal_side').hide();
     $('#under_side').hide();
     $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
 }
 
 function showInternal() {
@@ -640,6 +688,56 @@ function showInternal() {
     $('#internal_side').show();
     $('#under_side').hide();
     $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').hide();
+    $('#floor').hide();
+}
+
+function showRoof() {
+    $('#right').hide();
+    $('#left').hide();
+    $('#top').hide();
+    $('#bottom').hide();
+    $('#front').hide();
+    $('#door').hide();
+    $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
+    $('#under_side').hide();
+    $('#under').hide();
+    $('#roof_side').show();
+    $('#roof').show();
+    $('#floor_side').hide();
+    $('#floor').hide();
+}
+
+function showFloor() {
+    $('#right').hide();
+    $('#left').hide();
+    $('#top').hide();
+    $('#bottom').hide();
+    $('#front').hide();
+    $('#door').hide();
+    $('#interior').hide();
+    $('#door_side').hide();
+    $('#right_side').hide();
+    $('#left_side').hide();
+    $('#top_side').hide();
+    $('#bottom_side').hide();
+    $('#front_side').hide();
+    $('#internal_side').hide();
+    $('#under_side').hide();
+    $('#under').hide();
+    $('#roof_side').hide();
+    $('#roof').hide();
+    $('#floor_side').show();
+    $('#floor').show();
 }
 
 function printAstimate() {
@@ -1088,6 +1186,12 @@ function getLineData(line_id) {
             })
             $('#under_img').attr({
                 'src': `/uploads/line/${data.under_img}`
+            })
+            $('#roof_img').attr({
+                'src': `/uploads/line/${data.roof_img}`
+            })
+            $('#floor_img').attr({
+                'src': `/uploads/line/${data.floor_img}`
             })
         },
         error: function(error) {

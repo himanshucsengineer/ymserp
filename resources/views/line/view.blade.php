@@ -120,6 +120,8 @@
                                         <th>Door Image</th>
                                         <th>Interior Image</th>
                                         <th>Under Structure</th>
+                                        <th>Roof Image</th>
+                                        <th>Floor Image</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -229,6 +231,10 @@ function refreshTable(page,search){
 
                 var under_img = $('<a>').attr({'href':'/uploads/line/'+item.under_img, 'target':'_blank'}).text("View Image");
                 row.append($('<td>').append(under_img));
+                var roof_img = $('<a>').attr({'href':'/uploads/line/'+item.roof_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(roof_img));
+                var floor_img = $('<a>').attr({'href':'/uploads/line/'+item.floor_img, 'target':'_blank'}).text("View Image");
+                row.append($('<td>').append(floor_img));
 
                 
                 var editButton = $('<span>')

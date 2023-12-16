@@ -38,6 +38,8 @@ return new class extends Migration
             $table->string('door_img')->nullable();
             $table->string('interior_img')->nullable();
             $table->string('under_img')->nullable();
+            $table->string('roof_img')->nullable();
+            $table->string('floor_img')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();

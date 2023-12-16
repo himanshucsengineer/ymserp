@@ -12,6 +12,8 @@ class MasterLine extends Model
     protected $fillable = [
         'interior_img',
         'under_img',
+        'roof_img',
+        'floor_img',
         'door_img',
         'front_img',
         'left_img',

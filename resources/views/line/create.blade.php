@@ -213,6 +213,19 @@
                                         <img id="under_img_prev" src="" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="roof_img">Roof Image <span style="color:red;">*</span></label>
+                                    <input type="file" class="form-control" name="roof_img" id="roof_img">
+                                    <div class="img_prv_box">
+                                        <img id="roof_img_prev" src="" />
+                                    </div>
+                                </div><div class="form-group">
+                                    <label for="floor_img">Floor Image <span style="color:red;">*</span></label>
+                                    <input type="file" class="form-control" name="floor_img" id="floor_img">
+                                    <div class="img_prv_box">
+                                        <img id="floor_img_prev" src="" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -318,6 +331,26 @@ $(document).ready(function () {
             reader.readAsDataURL(fileInput.files[0]);
         }
     });
+    $('#roof_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#roof_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+    $('#floor_img').on('change', function (e) {
+        var fileInput = $(this)[0];
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#floor_img_prev').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
 });
 
 
@@ -367,6 +400,8 @@ $(function () {
             $('#door_img_prev').attr({'src':`/uploads/line/${response.door_img}`});
             $('#interior_img_prev').attr({'src':`/uploads/line/${response.interior_img}`});
             $('#under_img_prev').attr({'src':`/uploads/line/${response.under_img}`});
+            $('#roof_img_prev').attr({'src':`/uploads/line/${response.roof_img}`});
+            $('#floor_img_prev').attr({'src':`/uploads/line/${response.floor_img}`});
             $('.text').text('Update Line');
         },
         error: function(error) {
@@ -433,6 +468,8 @@ $(function () {
             formData.append('door_img', $('#door_img')[0].files[0]);
             formData.append('interior_img', $('#interior_img')[0].files[0]); 
             formData.append('under_img', $('#under_img')[0].files[0]); 
+            formData.append('roof_img', $('#roof_img')[0].files[0]); 
+            formData.append('floor_img', $('#floor_img')[0].files[0]); 
                 $.ajax({
                 url: '/api/line/update',
                 type: 'POST',
@@ -497,6 +534,8 @@ $(function () {
             formData.append('door_img', $('#door_img')[0].files[0]);
             formData.append('interior_img', $('#interior_img')[0].files[0]);
             formData.append('under_img', $('#under_img')[0].files[0]); 
+            formData.append('roof_img', $('#roof_img')[0].files[0]); 
+            formData.append('floor_img', $('#floor_img')[0].files[0]); 
                 $.ajax({
                 url: '/api/line/create',
                 type: 'POST',
@@ -606,6 +645,15 @@ $(function () {
         interior_img: {
             required: checkUpdate,
         },
+        under_img: {
+            required: checkUpdate,
+        },
+        roof_img: {
+            required: checkUpdate,
+        },
+        floor_img: {
+            required: checkUpdate,
+        },
         'containerType':{
             required: true,
         },
@@ -684,6 +732,15 @@ $(function () {
         },
         interior_img: {
             required: "Interior Image Is required",
+        },
+        under_img: {
+            required: "Under Image Is required",
+        },
+        roof_img: {
+            required: "Roof Image Is required",
+        },
+        floor_img: {
+            required: "Floor Image Is required",
         },
         'containerType':{
             required: "Container Type Is Required",
