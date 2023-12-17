@@ -285,4 +285,15 @@ $api->version('v1', function($api){
         return $response;
     });
 
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'doblock'], function($api){
+        $api->post('/create','App\Http\Controllers\DoBlockController@store');
+        $api->post('/get', 'App\Http\Controllers\DoBlockController@get');
+        $api->post('/getDoBlockData', 'App\Http\Controllers\DoBlockController@getDoBlockData');
+        $api->post('/getbyid', 'App\Http\Controllers\DoBlockController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\DoBlockController@destroy');
+        $api->post('/update', 'App\Http\Controllers\DoBlockController@update');
+
+    });
+
 });

@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class DoBlock extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+    protected $fillable = [
+        'do_no',
+        'status',
+        'createdby',
+        'updatedby',
+        'depo_id'
+    ];
 }

@@ -109,5 +109,8 @@ Route::get('/product_category/all', 'App\Http\Controllers\CategoryMasterControll
 
 Route::get('/gateout/create', 'App\Http\Controllers\GateInController@gateoutindex');
 
+Route::get('/doblock/create', 'App\Http\Controllers\DoBlockController@index');
+Route::get('/doblock/all', 'App\Http\Controllers\DoBlockController@all');
+
 
 

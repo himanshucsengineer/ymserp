@@ -492,7 +492,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="/doblock/view" class="nav-link">
+                                    <a href="/doblock/all" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>
                                         <p>Report</p>
                                     </a>

@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('do_blocks', function (Blueprint $table) {
             $table->id();
+            $table->string('do_no')->nullable();
+            $table->enum('status',['Block','Unblock'])->nullable();
+            $table->string('createdby')->nullable();
+            $table->string('updatedby')->nullable();
+            $table->string('depo_id')->nullable();
             $table->timestamps();
         });
     }
