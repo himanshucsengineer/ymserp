@@ -203,6 +203,7 @@ $api->version('v1', function($api){
         $api->post('/getPreAdviceContainer', 'App\Http\Controllers\GateInController@getPreAdviceContainer');
         
         $api->post('/geVhicle', 'App\Http\Controllers\GateInController@geVhicle');
+        $api->post('/getRefferContainer', 'App\Http\Controllers\GateInController@getRefferContainer');
         
         $api->post('/filterByDateSurvey', 'App\Http\Controllers\GateInController@filterByDateSurvey');
         $api->post('/getInspectionDataSurvey', 'App\Http\Controllers\GateInController@getInspectionDataSurvey');
@@ -293,6 +294,16 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\DoBlockController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\DoBlockController@destroy');
         $api->post('/update', 'App\Http\Controllers\DoBlockController@update');
+
+    });
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'pti'], function($api){
+        $api->post('/create','App\Http\Controllers\PTIController@store');
+        $api->post('/get', 'App\Http\Controllers\PTIController@get');
+        $api->post('/getPtiData', 'App\Http\Controllers\PTIController@getPtiData');
+        $api->post('/getbyid', 'App\Http\Controllers\PTIController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\PTIController@destroy');
+        $api->post('/update', 'App\Http\Controllers\PTIController@update');
 
     });
 

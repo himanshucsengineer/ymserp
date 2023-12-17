@@ -500,6 +500,34 @@
                                 
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-tree"></i> -->
+                                <i class="fas fa-money-bill nav-icon"></i>
+                                <p>
+                                    PTI
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                
+                                <li class="nav-item">
+                                    <a href="/pti/create" class="nav-link">
+                                        <i class="fas fa-book-open nav-icon"></i>
+                                        <p>PTI Create</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/pti/all" class="nav-link">
+                                        <i class="fas fa-book-open nav-icon"></i>
+                                        <p>Report</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->

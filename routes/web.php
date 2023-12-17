@@ -112,5 +112,7 @@ Route::get('/gateout/create', 'App\Http\Controllers\GateInController@gateoutinde
 Route::get('/doblock/create', 'App\Http\Controllers\DoBlockController@index');
 Route::get('/doblock/all', 'App\Http\Controllers\DoBlockController@all');
 
+Route::get('/pti/create', 'App\Http\Controllers\PTIController@index');
+Route::get('/pti/all', 'App\Http\Controllers\PTIController@all');
 
 

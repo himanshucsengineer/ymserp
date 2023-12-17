@@ -81,6 +81,22 @@ class GateInController extends Controller
         return view('surveyor.inwardReport');
     }
 
+    public function getRefferContainer(Request $request){
+        if($request->user_id == 1){
+            $gateInData = GateIn::where([
+                ['container_type','REEFER'],
+                ['status','!=','Out']
+            ])->orderby('created_at','desc')->get();
+        }else{
+            $gateInData = GateIn::where([
+                ['depo_id',$request->depo_id],
+                ['container_type','REEFER'],
+                ['status','!=','Out']
+            ])->orderby('created_at','desc')->get();
+        }
+        return $gateInData;
+    }
+
     public function printestimate(Request $request){
         $transactionData = Transaction::where('gatein_id',$request->gatein_id)->get();
         $getInData = GateIn::where('id',$request->gatein_id)->first();
