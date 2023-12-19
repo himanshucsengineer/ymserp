@@ -37,6 +37,12 @@ class DoBlockController extends Controller
         }
     }
 
+    public function checkDoNo(Request $request){
+        $dodata =  DoBlock::where('do_no',$request->do_no)->where('status','Block')->get();
+
+        return count($dodata);
+    }
+
     public function getbyid(Request $request){
         return DoBlock::where('id',$request->id)->first();
     }

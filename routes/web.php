@@ -115,4 +115,6 @@ Route::get('/doblock/all', 'App\Http\Controllers\DoBlockController@all');
 Route::get('/pti/create', 'App\Http\Controllers\PTIController@index');
 Route::get('/pti/all', 'App\Http\Controllers\PTIController@all');
 
+Route::get('/report/container', 'App\Http\Controllers\ReportController@container_report_view');
+
 

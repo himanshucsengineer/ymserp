@@ -294,6 +294,7 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\DoBlockController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\DoBlockController@destroy');
         $api->post('/update', 'App\Http\Controllers\DoBlockController@update');
+        $api->post('/checkDoNo', 'App\Http\Controllers\DoBlockController@checkDoNo');
 
     });
 

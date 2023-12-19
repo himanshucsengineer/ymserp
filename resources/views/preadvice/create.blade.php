@@ -112,7 +112,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="do_no">DO Number</label>
-                                            <input type="text" class="form-control" style="text-transform:uppercase;" id="do_no" name="do_no"  placeholder="Enter DO Number">
+                                            <input type="text" class="form-control" onfocusout="checkDoNo()" style="text-transform:uppercase;" id="do_no" name="do_no"  placeholder="Enter DO Number">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -293,6 +293,43 @@ $('#container_size').on('change',function(){
         });
     }
 })
+
+function checkDoNo(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var do_no = $('#do_no').val();
+
+    if(do_no != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/doblock/checkDoNo",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'do_no':do_no,
+            },
+            success: function (data) {
+                if(data > 0){
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Do Is Blocked You Can Not Use This DO No.</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+}
 
 function getContainerList(){
     var checkToken = localStorage.getItem('token');

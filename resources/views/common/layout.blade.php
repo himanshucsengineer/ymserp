@@ -560,9 +560,16 @@
                             <ul class="nav nav-treeview">
                                 
                                 <li class="nav-item">
-                                    <a href="/billing/centeral" class="nav-link">
+                                    <a href="/report/container" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>
-                                        <p>Central Billing</p>
+                                        <p>Container Report</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/report/container-status" class="nav-link">
+                                        <i class="fas fa-book-open nav-icon"></i>
+                                        <p>Container Status Report</p>
                                     </a>
                                 </li>
                                 

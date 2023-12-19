@@ -131,7 +131,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="do_no">D.O. Number</label>
-                                            <input type="text" class="form-control" id="do_no" name="do_no"
+                                            <input type="text" class="form-control" onfocusout="checkDoNo()" id="do_no" name="do_no"
                                                 placeholder="Enter D.O. Number ">
                                         </div>
                                     </div>
@@ -408,6 +408,43 @@ function validateInput(input) {
             input.style.color = 'red';
         }
     }
+}
+
+function checkDoNo(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var do_no = $('#do_no').val();
+
+    if(do_no != ''){
+        $.ajax({
+            type: "post",
+            url: "/api/doblock/checkDoNo",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id,
+                'do_no':do_no,
+            },
+            success: function (data) {
+                if(data > 0){
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Do Is Blocked You Can Not Use This DO No.</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
 }
 
 $('#container_no').on('input',function(){
