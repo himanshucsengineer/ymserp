@@ -249,6 +249,8 @@ $api->version('v1', function($api){
         $api->post('/create', 'App\Http\Controllers\OutwardOfficerController@store');
         $api->post('/get', 'App\Http\Controllers\OutwardOfficerController@get');
         $api->post('/genrateGatePass', 'App\Http\Controllers\OutwardOfficerController@genrateGatePass');
+        $api->post('/getGatePass', 'App\Http\Controllers\OutwardOfficerController@getGatePass');
+        $api->post('/gateoutdata', 'App\Http\Controllers\OutwardOfficerController@gateoutdata');
 
     });
 
@@ -309,4 +311,14 @@ $api->version('v1', function($api){
 
     });
 
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'account'], function($api){
+        $api->post('/create','App\Http\Controllers\AccountManagementController@store');
+        $api->post('/get', 'App\Http\Controllers\AccountManagementController@get');
+        $api->post('/getAccountData', 'App\Http\Controllers\AccountManagementController@getAccountData');
+        $api->post('/getbyid', 'App\Http\Controllers\AccountManagementController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\AccountManagementController@destroy');
+        $api->post('/update', 'App\Http\Controllers\AccountManagementController@update');
+
+    });
 });

@@ -44,6 +44,30 @@ class OutwardOfficerController extends Controller
         return view('invoice.central');
     }
 
+    public function gateoutdata(Request $request){
+        $gatePassData = GatePass::where('id',$request->gate_pass_no)->first();
+       
+
+        $outwardData = OutwardOfficer::where('id',$gatePassData->outward_id)->first();
+        $gateInData = GateIn::where('id',$outwardData->gate_in_id)->first();
+        $vhicleNo = GateIn::where('id',$outwardData->vhicle_no)->first();
+
+        $data = array(
+            'container_no' => $gateInData->container_no,
+            'container_no_id' => $gateInData->id,
+            'vhicleNo' => $vhicleNo->vehicle_number,
+            'vhicleNo_id' => $vhicleNo->id,
+            'driver_name' => $outwardData->driver_name,
+            'driver_contact' => $outwardData->driver_contact,
+            'driver_copy' => $outwardData->driver_copy,
+        );
+        return $data;
+    }
+
+    public function getGatePass(Request $request){
+        return GatePass::where('final_gate_pass_no', 'LIKE', '%' . $request->term . '%')->get();
+    }
+
     public function get(Request $request)
     {
         if($request->user_id == 1){

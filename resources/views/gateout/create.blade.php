@@ -54,7 +54,17 @@
     border-color:#63bf84;
     border-radius:2px;
 }
-
+.select2-container .select2-selection--single{
+    height:38px !important;
+}
+.select2-container{
+    z-index:100;
+}
+.gate_out_div{
+    width:100%;
+    height:auto;
+    padding:1.5rem;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -62,12 +72,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Create Gate Out</h1>
+                    <h1 class="m-0">Create Gate In</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Create Gate Out</li>
+                        <li class="breadcrumb-item active">Create Gate In</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -79,49 +89,42 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
-                        <form id="gateoutForm" novalidate="novalidate">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="vehicle_no">Vehicle Number <span style="color:red;">*</span></label>
-                                        <select name="vehicle_number" id="vehicle_no" class="form-control">
-                                                <option value="">Select Containers</option>
-                                        </select>
-                                </div>
-                                
-                                </div>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active mr-2" style="border-radius:2px;">
-                                    <input type="radio" name="options" id="option_b1" autocomplete="off" checked="" value="with">With Container
-                                    </label>
-                                    <label class="btn btn-secondary mr-2" style="border-radius:2px;">
-                                    <input type="radio" name="options" id="option_b2" autocomplete="off"  value="without"> Without Container
-                                    </label>
-                                    <label class="btn btn-secondary" style="border-radius:2px;">
-                                    <input type="radio" name="options" id="option_b3" autocomplete="off"  value="2nd_with"> 2 Container
-                                    </label>
-                                </div>
-                                <div class="container_div">
-                                    <div class="form-group">
-                                        <label for="container_no">Container Number </label>
-                                            <select name="container_no" id="container_no" class="form-control">
-                                                <option value="">Select Containers</option>
-                                            </select>
-                                    </div>
+                                    <label for="gate_pass_no">Gate Pass No. <span style="color:red;">*</span></label>
+                                    <select name="gate_pass_no" class="form-control" id="gate_pass_no"></select>
                                 </div>
 
-                                <div class="2_container_div" style="display:none;">
-                                    <div class="form-group">
-                                        <label for="2nd_container_no">2ND Container Number</label>
-                                            <select name="2nd_container_no" id="2nd_container_no" class="form-control">
-                                                <option value="">Select Containers</option>
-                                            </select>
+                                <div class="gate_out_div" style="display:none;">
+                                    <div class="row">
+                                        <div class="col-md-6"><h3>Container No:</h3></div>
+                                        <div class="col-md-6" id="container_no"></div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><h3>Vehicle No:</h3></div>
+                                        <div class="col-md-6" id="vehicle_no"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><h3>Driver Name:</h3></div>
+                                        <div class="col-md-6" id="driver_name"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><h3>Driver Contact</h3></div>
+                                        <div class="col-md-6" id="driver_contact"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><h3>Driver Photo</h3></div>
+                                        <div class="col-md-6" id="driver_photo"></div>
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="gate_out_chcked" required>
+                                    <label for="gate_out_chcked" class="custom-control-label">I Have Checked Everything is correct!</label>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button class="btn btn-primary" onclick="gateOutForm()">Submit</button>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -130,223 +133,76 @@
 </div>
 
 <script>
-$(document).ready(function () {
 
-    $.ajax({
-        type: "get",
-        url: "/api/gatein/getReadyContainers",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        success: function(data) {
-            var select_2 = document.getElementById('container_no');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.vehicle_number;
-                select_2.appendChild(option);
-            });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-
-    $.ajax({
-        type: "get",
-        url: "/api/gatein/getReadyContainers",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        success: function(data) {
-            var select_2 = document.getElementById('2nd_container_no');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.vehicle_number;
-                select_2.appendChild(option);
-            });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-
-    $.ajax({
-        type: "get",
-        url: "/api/gatein/getInVehicle",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        success: function(data) {
-            var select_2 = document.getElementById('vehicle_no');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.vehicle_number;
-                select_2.appendChild(option);
-            });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-
-    $('input[name="options"]').on('change', function () {
-    // Get the value of the selected radio button
-    var selectedValue = $('input[name="options"]:checked').val();
-
-    if (selectedValue == "without") {
-        $('.container_div').hide();
-        $('.2_container_div').hide();
-    } else if (selectedValue == "2nd_with") {
-        $('.container_div').show();
-        $('.2_container_div').show();
-    } else {
-        $('.2_container_div').hide();
-        $('.container_div').show();
-    }
-});
-
-});
-
-
-
-function validateInput2(input) {
-    input.style.color = 'black';
-    document.getElementById('errorText').textContent = "";
-    const inputField = document.getElementById('container_no');
-    inputField.setAttribute('maxlength', '11');
-    const inputValue = input.value;
-
-    let checkFirstChar = isNaN(inputValue);
-    if(checkFirstChar == false){
-    document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
-    inputField.setAttribute('maxlength', '1');
-    input.style.color = 'red';
-    }
-
-    if(inputValue.length <= 4){
-    const checkNumber = /\d/; // This regex matches any digit (0-9)
-    let chechkNumberforstart =  checkNumber.test(inputValue);
-    if(chechkNumberforstart){
-        document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
-        inputField.setAttribute('maxlength', inputValue.length);
-        input.style.color = 'red';
-    }
-    }
-
-    if(inputValue.length > 4){
-        const part2 = inputValue.substring(4);
-        let checkNumber = isNaN(part2);
-        if(checkNumber == true){
-            document.getElementById('errorText').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
-            inputField.setAttribute('maxlength', inputValue.length);
-            input.style.color = 'red';
-        }
-    }
-}
-
-function validateInput(input) {
-    input.style.color = 'black';
-    document.getElementById('errorText2').textContent = "";
-    const inputField = document.getElementById('container_no');
-    inputField.setAttribute('maxlength', '11');
-    const inputValue = input.value;
-
-    let checkFirstChar = isNaN(inputValue);
-    if(checkFirstChar == false){
-    document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
-    inputField.setAttribute('maxlength', '1');
-    input.style.color = 'red';
-    }
-
-    if(inputValue.length <= 4){
-    const checkNumber = /\d/; // This regex matches any digit (0-9)
-    let chechkNumberforstart =  checkNumber.test(inputValue);
-    if(chechkNumberforstart){
-        document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
-        inputField.setAttribute('maxlength', inputValue.length);
-        input.style.color = 'red';
-    }
-    }
-
-    if(inputValue.length > 4){
-        const part2 = inputValue.substring(4);
-        let checkNumber = isNaN(part2);
-        if(checkNumber == true){
-            document.getElementById('errorText2').textContent = 'Please Enter Valid Container Number ex: ABCD1234567';
-            inputField.setAttribute('maxlength', inputValue.length);
-            input.style.color = 'red';
-        }
-    }
-}
-
-
-
-
-$(function () {
+$(document).ready(function() {
     var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-
-    $.validator.setDefaults({
-    submitHandler: function () {
-        var container_no = $("#container_no").val();
-        var vehicle_number = $("#vehicle_no").val();
-        var two_container_no = $("#2nd_container_no").val();
-
-        var contariner_one = container_no.toUpperCase();
-        var contariner_two = two_container_no.toUpperCase();
-        var vehicle_number_finel = vehicle_number.toUpperCase();
-
-        const data1 = {
-            'user_id': user_id,
-            'gateinid' : contariner_one,
-            'out_status': 'Out'
-        }
-        post('gatein/updateout',data1);
-        const data2 = {
-            'user_id': user_id,
-            'gateinid' : contariner_two,
-            'out_status': 'Out'
-        }
-        post('gatein/updateout',data2);
-        const data3 = {
-            'user_id': user_id,
-            'gateinid' : vehicle_number_finel,
-            'out_status': 'Out'
-        }
-        post('gatein/updateout',data3);
-        location.reload()
-    }
-  });
-
-    $('#gateoutForm').validate({
-    rules: {
-        vehicle_no: {
-            required: true,
+    $('#gate_pass_no').select2({
+        ajax: {
+            url: '/api/outward/getGatePass',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return {
+                            text: item.final_gate_pass_no,
+                            id: item.id
+                        };
+                    })
+                };
+            },
+            cache: true
         },
-        
-    },
-    messages: {
-        vehicle_no: {
-            required: "This Field Is Required!",
-        },
-        
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
+        minimumInputLength: 2 // Minimum number of characters before making the request
+    });
+
+    $('#gate_pass_no').on('change', function(){
+        var gate_pass_no = $(this).val();
+
+        $.ajax({
+            type: "post",
+            url: "/api/outward/gateoutdata",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'gate_pass_no':gate_pass_no,
+            },
+            success: function (data) {
+                var driver_photo = `/uploads/outward/${data.driver_copy}`;
+                $('#container_no').html(`<h3>${data.container_no}</h3>`);
+                $('#vehicle_no').html(`<h3>${data.vhicleNo}</h3>`);
+                $('#driver_name').html(`<h3>${data.driver_name}</h3>`);
+                $('#driver_contact').html(`<h3>${data.driver_contact}</h3>`);
+                $('#driver_photo').html(`<img src="${driver_photo}" width="200px">`);
+                $('.gate_out_div').show();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    })
+
 });
+
+function gateOutForm(){
+    if ($('#gate_out_chcked').prop('checked')) {
+                console.log('Checkbox is checked');
+    } else {
+        var callout = document.createElement('div');
+        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Click On checkbox</p></div>`;
+        document.getElementById('apiMessages').appendChild(callout);
+        setTimeout(function() {
+            callout.remove();
+        }, 2000);
+    }
+}
+
+
 </script>
 
 @endsection

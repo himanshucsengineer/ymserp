@@ -15,7 +15,12 @@ class CashFlowController extends Controller
      */
     public function index()
     {
-        //
+        return view('cashflow.create');
+    }
+
+    public function all()
+    {
+        return view('cashflow.view');
     }
 
     /**
