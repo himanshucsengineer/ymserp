@@ -156,24 +156,31 @@ class OutwardOfficerController extends Controller
         $user_id = $request->user;
         $amount = $request->amt;
 
-        
         $getGetInData = GateIn::where('id',$gateInid)->first();
         $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
         $line = MasterLine::where('id', $getGetInData->line_id)->first();
-        
-        $depo_data = MasterDepo::where('id',$depo_id)->first();
-        $invoice_prefix = $depo_data->invoice_prefix;
-        $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->get();
 
-
-        if(count($invoiceData) > 0){
-            $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->orderby('created_at','desc')->first();
-            $invoice_count = $invoiceData->invoice_no + 1;
-            $final_invoice_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$invoice_count;
+        if($request->is_update){
+            $invoiceData = InvoiceManagement::where('id',$request->is_update)->first();
+            $final_invoice_no = $invoiceData->final_invoice_no;
         }else{
-            $invoice_count = 01;
-            $final_invoice_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$invoice_count;
+            $depo_data = MasterDepo::where('id',$depo_id)->first();
+            $invoice_prefix = $depo_data->invoice_prefix;
+            $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->get();
+            if(count($invoiceData) > 0){
+                $invoiceData = InvoiceManagement::where('invoice_type',$invoice_type)->where('depo_id',$depo_id)->where('month',$current_month)->where('year',$current_year)->orderby('created_at','desc')->first();
+                $invoice_count = $invoiceData->invoice_no + 1;
+                $final_invoice_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$invoice_count;
+            }else{
+                $invoice_count = 01;
+                $final_invoice_no = $invoice_prefix .'/'.$current_month.'-'.$current_year.'/'.$invoice_count;
+            }
         }
+
+        
+        
+        
+        
 
         if($invoice_type == "lolo"){
             $final_invoice_type= "LIFT-OFF";
@@ -242,22 +249,31 @@ class OutwardOfficerController extends Controller
             'payment_type' => $payment_type
         );
 
-        $createInvoice = InvoiceManagement::create([
-            'invoice_no' => $invoice_count,
-            'gate_in_id' => $gateInid,
-            'invoice_type' =>  $invoice_type,
-            'payment_method' => $payment_type,
-            'createdby' => $user_id,
-            'depo_id' => $depo_id,
-            'year' => $current_year,
-            'month' => $current_month,
-            'final_invoice_no' => $final_invoice_no,
-            'third_party' => $third_party,
-            'amount' => $amount,
-            'is_included' => $request->is_included,
-            'is_manual' => "no",
-        ]);
 
+        if($request->is_update){
+            $invoiceData = InvoiceManagement::find($request->is_update);
+            $invoiceData->payment_method =  is_null($payment_type) ? $invoiceData->payment_method : $payment_type;
+            $invoiceData->amount =  is_null($amount) ? $invoiceData->amount : $amount;
+            $invoiceData->is_included =  is_null($request->is_included) ? $invoiceData->is_included : $request->is_included;
+            $invoiceData  = $invoiceData->save();
+
+        }else{
+            $createInvoice = InvoiceManagement::create([
+                'invoice_no' => $invoice_count,
+                'gate_in_id' => $gateInid,
+                'invoice_type' =>  $invoice_type,
+                'payment_method' => $payment_type,
+                'createdby' => $user_id,
+                'depo_id' => $depo_id,
+                'year' => $current_year,
+                'month' => $current_month,
+                'final_invoice_no' => $final_invoice_no,
+                'third_party' => $third_party,
+                'amount' => $amount,
+                'is_included' => $request->is_included,
+                'is_manual' => "no",
+            ]);
+        }
         return view('print.thirdparty',$data);
     }
 

@@ -224,6 +224,7 @@ $api->version('v1', function($api){
         $api->post('/getbygatein','App\Http\Controllers\TransactionController@getbygatein');
         $api->post('/update', 'App\Http\Controllers\TransactionController@update');
         $api->post('/delete', 'App\Http\Controllers\TransactionController@destroy');
+        $api->post('/getbytype', 'App\Http\Controllers\TransactionController@getbytype');
 
     });
 

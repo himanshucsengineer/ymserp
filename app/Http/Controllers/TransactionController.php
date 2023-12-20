@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\InvoiceManagement;
 
 use App\Models\Transaction;
 use App\Models\MasterTarrif;
@@ -28,6 +29,12 @@ class TransactionController extends Controller
     public function index()
     {
         //
+    }
+
+
+    public function getbytype(Request $request){
+        return InvoiceManagement::where('gate_in_id',$request->gateinid)->where('invoice_type',$request->bill_type)->first();
+
     }
 
     public function getbygatein(Request $request){

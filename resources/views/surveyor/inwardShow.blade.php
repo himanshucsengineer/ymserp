@@ -1,8 +1,12 @@
 <?php $currentUrl = url()->full(); 
     $breakurl = explode('=',$currentUrl);
     $getid = explode('&',$breakurl[1]);
-    // print_r($getid);
-    // die;
+
+    if(isset($getid[1])){
+        $is_update = 1;
+    }else{
+        $is_update = 0;
+    }
 ?>
 
 @extends('common.layout')
@@ -328,13 +332,13 @@
                                         <div class="form-group">
                                             <label for="is_included">Tax Included / Excluded</label>
                                             <select name="is_included" id="is_included" class="form-control">
-                                                <option value="">Please Select An Option</option>
                                                 <option value="included">Included</option>
                                                 <option value="excluded">Excluded</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" id="invoice_id">
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Save</button>
@@ -450,6 +454,8 @@ $(document).ready(function () {
         },
         success: function (data) {
 
+            console.log(data);
+
             if(data.container_img){
                 $('.container_img').html(`<img src="/uploads/gatein/${data.container_img}">`);
             }else{
@@ -461,8 +467,6 @@ $(document).ready(function () {
             }else{
                 $('.vehicle_img').html('<p>No Image Available</p>');
             }
-
-
 
             if(data.challan){
                 $('.challan').html(`<img src="/uploads/gatein/${data.challan}">`);
@@ -649,6 +653,7 @@ function getline(id,containerType,containerSize){
             'containerSize':containerSize
         },
         success: function (data) {
+
             var select = document.getElementById('line_id');
             data.forEach(function(item) {
                 var option = document.createElement('option');
@@ -658,6 +663,8 @@ function getline(id,containerType,containerSize){
             });
             var lineData = data.find(x => x.id == id);
             $('#line_id').val(lineData.id)
+            $('#container_type').val(lineData.containerType)
+            $('#container_size').val(lineData.containerSize)
             $("#line_gst").val(lineData.gst);
             $('#track_device_name').text(lineData.tracking_device); 
         },
@@ -720,6 +727,7 @@ function getTranport(id){
 $('#billing_type').on('change',function(){
     var bill_type = $(this).val();
     var checkToken = localStorage.getItem('token');
+    var gateinid = <?php echo $getid[0]?>;
 
     if(bill_type == ''){
         var callout = document.createElement('div');
@@ -729,34 +737,59 @@ $('#billing_type').on('change',function(){
             callout.remove();
         }, 2000);
     }
-
-    if(bill_type != ''){
-        var line_id = $('#line_id').val();
-
-        $.ajax({
-            type: "POST",
-            url: "/api/line/getbyid",
-            headers: {
-                'Authorization': 'Bearer ' + checkToken
-            },
-            data:{
-                'id':line_id,
-            },
-            success: function (data) {
-                var amount = ''
-                if(bill_type == 'lolo'){
-                    amount = data.lolo_charges;
-                }else if(bill_type == "parking"){
-                    amount = data.parking_charges;
+    var is_update = <?php echo $is_update;?>;
+    if(is_update == 1){
+        if(bill_type != ''){
+            var line_id = $('#line_id').val();
+            $.ajax({
+                type: "POST",
+                url: "/api/transcation/getbytype",
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data:{
+                    'bill_type':bill_type,
+                    'gateinid':gateinid
+                },
+                success: function (data) {
+                    $('#invoice_id').val(data.id);
+                    $("#amount").val(data.amount);
+                },
+                error: function (error) {
+                    console.log(error);
                 }
-                $("#amount").val(`${amount}`);
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
+            });
+        }
+    }else{
+        if(bill_type != ''){
+            var line_id = $('#line_id').val();
 
+            $.ajax({
+                type: "POST",
+                url: "/api/line/getbyid",
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data:{
+                    'id':line_id,
+                },
+                success: function (data) {
+                    var amount = ''
+                    if(bill_type == 'lolo'){
+                        amount = data.lolo_charges;
+                    }else if(bill_type == "parking"){
+                        amount = data.parking_charges;
+                    }
+                    $("#amount").val(`${amount}`);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     }
+
+    
 
 })
 
@@ -799,6 +832,7 @@ $(function () {
         var billing_type = $("#billing_type").val();
         var amount = $("#amount").val();
         var is_included = $("#is_included").val();
+        var invoice_id = $("#invoice_id").val();
 
 
             var formData = new FormData();
@@ -843,7 +877,13 @@ $(function () {
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}&amt=${amount}&is_included=${is_included}`
+                    if(invoice_id != ''){
+                        printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}&amt=${amount}&is_included=${is_included}&is_update=${invoice_id}`
+
+                    }else{
+                        printurl= `/print/thirdparty?gatein=${containerid}&type=${billing_type}&p_type=${transaction_mode}&depo=${depo_id}&third_party=${third_party}&user=${user_id}&amt=${amount}&is_included=${is_included}`
+
+                    }
                     window.open(printurl, '_blank');
                     window.location = `/inward/executive`;
                 },
