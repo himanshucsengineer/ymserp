@@ -38,6 +38,29 @@ class MasterUserController extends Controller
         return User::with('roles')->where('id',$request->id)->first();
     }
 
+    public function getUserList(Request $request){
+        if($request->user_id == 1){
+            $userData = User::where('id','!=',1)->get();
+        }else{
+            $userData = User::where('id','!=',1)->where('depo_id',$request->depo_id)->get();
+        }
+        $formattedData = []; 
+
+        foreach($userData  as $user){
+            $getEmployee = MasterEmployee::where('id',$user->employee_id)->first();
+            $employeeName = $getEmployee->firstname . ' ' .$getEmployee->middlename . ' '. $getEmployee->lastname;
+
+            $formattedData[] = [
+                'id'=> (int) $user->id,
+                'employee_name' => $employeeName,
+                'employee_code' =>  $getEmployee->employee_code
+            ];
+
+        }
+
+        return $formattedData;
+    }
+
 
     public function getemployee(Request $request){
         $get_user =  User::where('id',$request->id)->first();

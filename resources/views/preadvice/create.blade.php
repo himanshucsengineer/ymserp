@@ -93,6 +93,7 @@
                                                 <option value="OT">OT</option>
                                                 <option value="RE">RE</option>
                                                 <option value="RF">RF</option>
+                                                <option value="HD">HD</option>
                                             </select>
                                         </div>
                                     </div>

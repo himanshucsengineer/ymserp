@@ -82,11 +82,12 @@ $api->version('v1', function($api){
         $api->post('/delete', 'App\Http\Controllers\MasterEmployeeController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterEmployeeController@update');
     });
-
+ 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'user'], function($api){
         $api->post('/create','App\Http\Controllers\MasterUserController@store');
         $api->get('/get', 'App\Http\Controllers\MasterUserController@index');
         $api->post('/getData', 'App\Http\Controllers\MasterUserController@getData');
+        $api->post('/getUserList', 'App\Http\Controllers\MasterUserController@getUserList');
         $api->post('/getbyid', 'App\Http\Controllers\MasterUserController@getbyid');
         $api->post('/getemployee', 'App\Http\Controllers\MasterUserController@getemployee');
         $api->post('/delete', 'App\Http\Controllers\MasterUserController@destroy');
@@ -319,6 +320,17 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\AccountManagementController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\AccountManagementController@destroy');
         $api->post('/update', 'App\Http\Controllers\AccountManagementController@update');
+
+    });
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'cashflow'], function($api){
+        $api->post('/calculateamount','App\Http\Controllers\CashFlowController@calculateamount');
+        $api->post('/create','App\Http\Controllers\CashFlowController@store');
+        $api->post('/get', 'App\Http\Controllers\CashFlowController@get');
+        $api->post('/getCashflowData', 'App\Http\Controllers\CashFlowController@getCashflowData');
+        $api->post('/getbyid', 'App\Http\Controllers\CashFlowController@getbyid');
+        $api->post('/delete', 'App\Http\Controllers\CashFlowController@destroy');
+        $api->post('/update', 'App\Http\Controllers\CashFlowController@update');
 
     });
 });

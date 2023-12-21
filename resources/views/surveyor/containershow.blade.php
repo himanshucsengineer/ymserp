@@ -143,6 +143,7 @@
                                                 <option value="OT">OT (OPEN TOP)</option>
                                                 <option value="RE">RE (REEFER)</option>
                                                 <option value="RF">RF (REEFER)</option>
+                                                <option value="HD">HD</option>
                                             </select>
                                         </div>
                                     </div>

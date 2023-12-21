@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('cash_flows', function (Blueprint $table) {
             $table->id();
+            $table->string('account_id')->nullable();
+            $table->string('type')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('transfer_from')->nullable();
+            $table->string('transfer_to')->nullable();
             $table->timestamps();
         });
     }
