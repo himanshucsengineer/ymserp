@@ -121,6 +121,8 @@
                                     <input class="custom-control-input" type="checkbox" id="gate_out_chcked" required>
                                     <label for="gate_out_chcked" class="custom-control-label">I Have Checked Everything is correct!</label>
                                 </div>
+                                <input type="hidden" id="container_no_id">
+                                <input type="hidden" id="vhichle_id">
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary" onclick="gateOutForm()">Submit</button>
@@ -180,6 +182,9 @@ $(document).ready(function() {
                 $('#driver_contact').html(`<h3>${data.driver_contact}</h3>`);
                 $('#driver_photo').html(`<img src="${driver_photo}" width="200px">`);
                 $('.gate_out_div').show();
+
+                $('#vhichle_id').val(data.vhicleNo_id);
+                $('#container_no_id').val(data.container_no_id);
             },
             error: function (error) {
                 console.log(error);
@@ -191,7 +196,23 @@ $(document).ready(function() {
 
 function gateOutForm(){
     if ($('#gate_out_chcked').prop('checked')) {
-                console.log('Checkbox is checked');
+        var vhichle_id = $('#vhichle_id').val(data.vhicleNo_id);
+        var container_no_id = $('#container_no_id').val(data.container_no_id);
+        var is_gate_out_checked = 1;
+        var check_by = localStorage.getItem('user_id');
+
+        var data = {
+            'vhichle_id':vhichle_id,
+            'container_no_id':container_no_id,
+            'is_gate_out_checked':is_gate_out_checked,
+            'check_by':vhichle_id,
+            'is_gate_out':1,
+        }
+
+        post('gatein/update',data);
+        window.reload();
+
+
     } else {
         var callout = document.createElement('div');
         callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Click On checkbox</p></div>`;

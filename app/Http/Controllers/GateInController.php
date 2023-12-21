@@ -2248,8 +2248,39 @@ class GateInController extends Controller
      * @param  \App\Models\GateIn  $gateIn
      * @return \Illuminate\Http\Response
      */
+
+     
     public function update(Request $request)
     {
+
+        if($request->is_gate_out == 1){
+            $vhicleDetails = GateIn::find($request->vhichle_id);
+            $vhicleDetails->status = "Out";
+
+            $containerDetails = GateIn::find($request->container_no_id);
+            $containerDetails->status = "Out";
+            $containerDetails->is_gate_out_checked = $request->is_gate_out_checked;
+            $containerDetails->gate_out_check_by = $request->check_by;
+            $containerDetails->gate_out_date = date('Y-m-d H:i:s');
+
+            $vhicleDetails  = $vhicleDetails->save();
+            $containerDetails  = $containerDetails->save();
+
+            if($vhicleDetails && $containerDetails){
+                return response()->json([
+                    'status' => "success",
+                    'message' => "Gate Out Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Error in submission!"
+                ], 406);
+            }
+
+        }
+
+
         if($request->line_id == ''){
             return response()->json([
                 'status' => "error",

@@ -70,5 +70,8 @@ class GateIn extends Model
         'status_updatedat',
         'status_updatedby',
         'status',
+        'is_gate_out_checked',
+        'gate_out_check_by',
+        'gate_out_date',
     ];
 }
