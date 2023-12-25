@@ -89,7 +89,7 @@
                                     <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
                                 </div>
                             </div>
-                            <table id="inspectionData" class="table table-bordered table-hover  text-nowrap">
+                            <table id="inspectionData" class="table table-bordered table-hover table-responsive  text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>

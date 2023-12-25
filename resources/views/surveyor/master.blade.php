@@ -442,7 +442,7 @@ a.open:hover .circle img {
                                     </div>
                                     <div class="card mt-5">
                                         <div class="card-body p-0">
-                                            <table class="table table-striped table-responsive">
+                                            <table class="table table-striped table-responsive text-nowrap">
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10px">#</th>
@@ -2249,7 +2249,7 @@ function updateEstimate() {
                 </form>
                 <div class="card mt-5">
                     <div class="card-body p-0">
-                        <table class="table table-striped table-responsive">
+                        <table class="table table-striped table-responsive text-nowrap">
                             <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>

@@ -88,7 +88,7 @@
                                 <h3 style="text-align:center">OR</h3>
                                 <div class="form-group">
                                     <label for="vehicle_img">Vehicle Image</label>
-                                    <input type="file" class="form-control" id="vehicle_img" accept="capture=camera,image/*" name="vehicle_img" placeholder="Enter Vehicle Number">
+                                    <input type="file" class="form-control" id="vehicle_img" name="vehicle_img" placeholder="Enter Vehicle Number">
                                     <div class="img_prv_box">
                                         <img id="vehicle_img_prev" src="" />
                                     </div>
