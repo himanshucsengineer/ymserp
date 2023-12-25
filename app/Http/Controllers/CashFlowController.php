@@ -42,10 +42,15 @@ class CashFlowController extends Controller
         $invoice_amount = 0;
         $cash_in_person = 0;
         $submitted_amount = 0;
+        $account_submitted_amount = 0;
 
         $cashInPersonData = CashFlow::where([
             ['type','person'],
             ['transfer_to',$request->user_id],
+        ])->get();
+
+        $submitInAccount = CashFlow::where([
+            ['type','account'],
         ])->get();
 
         $submittedAmountData = CashFlow::where([
@@ -53,6 +58,9 @@ class CashFlowController extends Controller
             ['transfer_from',$request->user_id],
         ])->get();
 
+        foreach($submitInAccount as $InAccount){
+            $account_submitted_amount = $account_submitted_amount + $InAccount['amount'];
+        }
 
         foreach($invoiceData as $invoice){
             $invoice_amount = $invoice_amount + $invoice['amount'];
@@ -67,8 +75,8 @@ class CashFlowController extends Controller
         }
 
         $totalInhand = $invoice_amount + $cash_in_person;
-
-        $remainingamount = $totalInhand - $submitted_amount;
+        $totalsubmittedamount = $account_submitted_amount + $submitted_amount;
+        $remainingamount = $totalInhand - $totalsubmittedamount;
 
         return response()->json([
             'status' => "Success",

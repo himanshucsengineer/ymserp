@@ -277,6 +277,10 @@ a.open:hover .circle img {
     box-shadow: none;
     margin: 0px;
 }
+.select2-container .select2-selection--single{
+    height:38px !important;
+}
+
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -749,6 +753,8 @@ function printAstimate() {
 
 
 $(document).ready(function() {
+
+    
     var containerid = <?= $getid[0]?>;
     var checkToken = localStorage.getItem('token');
     $.ajax({
@@ -1025,12 +1031,36 @@ function getTarriflength(data){
         data: data,
         success: function(response) {
             $('#master_length').removeAttr('readonly');
-            response.length.forEach(function(item) {
-                var component_code = document.getElementById('master_length');
-                var component_code_option = document.createElement('option');
-                component_code_option.value = item.dimension_l;
-                component_code_option.text = item.dimension_l;
-                component_code.appendChild(component_code_option);
+            var component_code = $('#master_length');
+            component_code.empty();
+
+            var component_code_create = document.getElementById('master_length');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = "Select Length";
+            component_code_create.appendChild(component_code_create_option);
+
+            var transformedData = response.length.map(function(item) {
+                return {
+                    id: item.dimension_l,
+                    text: item.dimension_l
+                };
+            });
+
+            var blankOption = { id: '', text: '' };
+            transformedData.unshift(blankOption);
+
+            $('#master_length').select2({
+                placeholder: 'Select An Option',
+                data: transformedData,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                language: {
+                    noResults: function () {
+                        return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+                    }
+                }
             });
 
         },
@@ -1050,12 +1080,36 @@ function getTarrifheight(data){
         data: data,
         success: function(response) {
             $('#master_height').removeAttr('readonly');
-            response.height.forEach(function(item) {
-                var component_code = document.getElementById('master_height');
-                var component_code_option = document.createElement('option');
-                component_code_option.value = item.dimension_h;
-                component_code_option.text = item.dimension_h;
-                component_code.appendChild(component_code_option);
+            var component_code = $('#master_height');
+            component_code.empty();
+
+            var component_code_create = document.getElementById('master_height');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = "Select Height";
+            component_code_create.appendChild(component_code_create_option);
+
+            var transformedData = response.height.map(function(item) {
+                return {
+                    id: item.dimension_h,
+                    text: item.dimension_h
+                };
+            });
+
+            var blankOption = { id: '', text: '' };
+            transformedData.unshift(blankOption);
+
+            $('#master_height').select2({
+                placeholder: 'Select An Option',
+                data: transformedData,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                language: {
+                    noResults: function () {
+                        return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+                    }
+                }
             });
 
         },
@@ -1075,12 +1129,37 @@ function getTarrifwidth(data){
         data: data,
         success: function(response) {
             $('#master_width').removeAttr('readonly');
-            response.width.forEach(function(item) {
-                var component_code = document.getElementById('master_width');
-                var component_code_option = document.createElement('option');
-                component_code_option.value = item.dimension_w;
-                component_code_option.text = item.dimension_w;
-                component_code.appendChild(component_code_option);
+
+            var component_code = $('#master_width');
+            component_code.empty();
+
+            var component_code_create = document.getElementById('master_width');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = "Select Width";
+            component_code_create.appendChild(component_code_create_option);
+
+            var transformedData = response.width.map(function(item) {
+                return {
+                    id: item.dimension_w,
+                    text: item.dimension_w
+                };
+            });
+
+            var blankOption = { id: '', text: '' };
+            transformedData.unshift(blankOption);
+
+            $('#master_width').select2({
+                placeholder: 'Select An Option',
+                data: transformedData,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                language: {
+                    noResults: function () {
+                        return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+                    }
+                }
             });
 
         },
@@ -1213,7 +1292,6 @@ function getTarrifByLine(line_id) {
         },
         success: function(data) {
             if (data.tarrifData.length > 0) {
-
                 var uniqueEntries = {};
                 $.each(data.tarrifData, function(index, entry) {
                     var locationCode = entry.repai_location_code;
@@ -1249,15 +1327,17 @@ function getTarrifByLine(line_id) {
                 $('#location_code_id').val(dataIdValue);
                 var line_id = $('#line_id_no').val();
                 gettarrif(dataIdValue, line_id);
+
                 $('#side').val(datacodeValue);
                 $('#modal-xl').modal('show');
             });
-        },
+        }, 
         error: function(error) {
             console.log(error);
         }
     });
 }
+
 
 function gettarrif(location_code, line_id) {
     $.ajax({
@@ -1271,25 +1351,7 @@ function gettarrif(location_code, line_id) {
             'location_code': location_code
         },
         success: function(data) {
-            var tarrifData = data;
-
-            var component_code = $('#component_code');
-            component_code.empty();
-
-            var component_code_create = document.getElementById('component_code');
-            var component_code_create_option = document.createElement('option');
-            component_code_create_option.value = '';
-            component_code_create_option.text = "Select Component Code";
-            component_code_create.appendChild(component_code_create_option);
-
-            
-            data.componentData.forEach(function(item) {
-                var component_code = document.getElementById('component_code');
-                var component_code_option = document.createElement('option');
-                component_code_option.value = item.component_code;
-                component_code_option.text = item.component_code;
-                component_code.appendChild(component_code_option);
-            });
+            processTarrif(data);
             getTransactionData();
 
         },
@@ -1298,6 +1360,77 @@ function gettarrif(location_code, line_id) {
         }
     });
 }
+
+function processTarrif(data){
+    var component_code = $('#component_code');
+    component_code.empty();
+
+    var component_code_create = document.getElementById('component_code');
+    var component_code_create_option = document.createElement('option');
+    component_code_create_option.value = '';
+    component_code_create_option.text = "Select Component Code";
+    component_code_create.appendChild(component_code_create_option);
+
+    var transformedData = data.componentData.map(function(item) {
+        return {
+            id: item.component_code,
+            text: item.component_code
+        };
+    });
+
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
+
+    $('#component_code').select2({
+        placeholder: 'Select An Option',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+            }
+        }
+    });
+}
+
+function createTarrif(){
+    var select2Instance = $('#component_code').data('select2');
+    if (select2Instance) {
+        select2Instance.destroy();
+    }
+    
+    var damageCode = $('#damage_code').data('select2');
+    if (damageCode) {
+        damageCode.destroy();
+    }
+    
+    var repair_code = $('#repair_code').data('select2');
+    if (repair_code) {
+        repair_code.destroy();
+    }
+    
+    var material_code = $('#material_code').data('select2');
+    if (material_code) {
+        material_code.destroy();
+    }
+    var master_length = $('#master_length').data('select2');
+    if (master_length) {
+        master_length.destroy();
+    }
+    var master_height = $('#master_height').data('select2');
+    if (master_height) {
+        master_height.destroy();
+    }
+    var master_width = $('#master_width').data('select2');
+    if (master_width) {
+        master_width.destroy();
+    }
+    $('#modal-tarrif').modal('show');
+}
+
+
 
 function clearTable() {
     const tableBody = document.getElementById("table-body");
@@ -1712,11 +1845,33 @@ function getDamage(id) {
         },
         success: function(data) {
             $('#damage_code').removeAttr('readonly');
-            var select = document.getElementById('damage_code');
-            var option = document.createElement('option');
-            option.value = data.id;
-            option.text = data.code;
-            select.appendChild(option);
+            var component_code = $('#damage_code');
+           
+
+            var component_code_create = document.getElementById('damage_code');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = 'Select Damage Code';
+            component_code_create.appendChild(component_code_create_option);
+
+            if (!$.isEmptyObject(data)) {
+                var component_code_option = document.createElement('option');
+                component_code_option.value = data.id;
+                component_code_option.text = data.code;
+                component_code_create.appendChild(component_code_option);
+            }
+
+            $('#damage_code').select2({
+                placeholder: 'Select An Option',
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                language: {
+                    noResults: function () {
+                        return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+                    }
+                }
+            });
         },
         error: function(error) {
             console.log(error);
@@ -1736,11 +1891,32 @@ function getRepair(id) {
         },
         success: function(data) {
             $('#repair_code').removeAttr('readonly');
-            var select = document.getElementById('repair_code');
-            var option = document.createElement('option');
-            option.value = data.id;
-            option.text = data.repair_code;
-            select.appendChild(option);
+            var component_code = $('#repair_code');
+
+            var component_code_create = document.getElementById('repair_code');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = 'Select Repair Code';
+            component_code_create.appendChild(component_code_create_option);
+
+            if (!$.isEmptyObject(data)) {
+                var component_code_option = document.createElement('option');
+                component_code_option.value = data.id;
+                component_code_option.text = data.repair_code;
+                component_code_create.appendChild(component_code_option);
+            }
+
+            $('#repair_code').select2({
+                placeholder: 'Select An Option',
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                language: {
+                    noResults: function () {
+                        return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+                    }
+                }
+            });
 
         },
         error: function(error) {
@@ -1761,11 +1937,33 @@ function getMaterial(id) {
         },
         success: function(data) {
             $('#material_code').removeAttr('readonly');
-                var select = document.getElementById('material_code');
-                var option = document.createElement('option');
-                option.value = data.id;
-                option.text = data.material_code;
-                select.appendChild(option);
+
+            var component_code = $('#material_code');
+
+            var component_code_create = document.getElementById('material_code');
+            var component_code_create_option = document.createElement('option');
+            component_code_create_option.value = '';
+            component_code_create_option.text = 'Select Material Code';
+            component_code_create.appendChild(component_code_create_option);
+
+            if (!$.isEmptyObject(data)) {
+                var component_code_option = document.createElement('option');
+                component_code_option.value = data.id;
+                component_code_option.text = data.material_code;
+                component_code_create.appendChild(component_code_option);
+            }
+
+            $('#material_code').select2({
+                placeholder: 'Select An Option',
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                language: {
+                    noResults: function () {
+                        return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+                    }
+                }
+            });
 
         },
         error: function(error) {
@@ -1931,7 +2129,7 @@ function updateEstimate() {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Component Code</label>
-                            <select name="component_code" id="component_code" class="form-control">
+                            <select name="component_code" id="component_code" class="form-control select2">
                                 <option value="">Select Component Code</option>
                             </select>
                         </div>
@@ -2083,6 +2281,20 @@ function updateEstimate() {
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-tarrif">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Tarrif</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <!-- {!! view('tarrif.model') !!} -->
         </div>
     </div>
 </div>
