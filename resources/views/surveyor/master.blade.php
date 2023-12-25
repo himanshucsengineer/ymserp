@@ -2286,7 +2286,7 @@ function updateEstimate() {
 </div>
 
 <div class="modal fade" id="modal-tarrif">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl" style="overflow-y: initial !important">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Create Tarrif</h4>
@@ -2294,7 +2294,9 @@ function updateEstimate() {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div class="modal-body" style="height: 80vh; overflow-y: auto;">
                 <!-- {!! view('tarrif.model') !!} -->
+            </div>
         </div>
     </div>
 </div>

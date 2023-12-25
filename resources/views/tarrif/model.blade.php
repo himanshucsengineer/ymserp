@@ -20,9 +20,7 @@ cursor: pointer;
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        
-    </div>
+    
 
     <section class="content">
         <div class="container-fluid">
@@ -34,146 +32,92 @@ cursor: pointer;
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Container Type <span style="color:red;">*</span></label>
-                                            <select class="form-control" id="containerType" name="containerType">
-                                            <option value="">Select Container Type</option>
-                                            <option value="DRY">DRY</option>
-                                            <option value="REEFER">REEFER</option>
-                                            </select>
+                                            <label for="component_codee">Component Code <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="component_codee" name="component_codee" placeholder="Enter Component Code">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Container Size <span style="color:red;">*</span></label>
-                                            <select class="form-control" id="containerSize" name="containerSize" >
-                                            <option value="">Select Container Size</option>
-                                            <option value="20">20</option>
-                                            <option value="40">40</option>
-                                            <option value="45">45</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="line_id">Line <span style="color:red;">*</span></label>
-                                            <select name="line_id" id="line_id" class="form-control">
-                                                <option value="">Select Line</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="component_code">Component Code <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="component_code" name="component_code" placeholder="Enter Component Code">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="repai_location_code">Location Code <span style="color:red;">*</span></label>
-                                            <select name="repai_location_code" id="repai_location_code" class="form-control select2">
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="container_side">Container Side <span style="color:red;">*</span></label>
-                                            <select name="container_side" id="container_side" class="form-control">
-                                                <option value="">Select Container Side</option>
-                                                <option value="right">Right</option>
-                                                <option value="left">Left</option>
-                                                <option value="top">Top</option>
-                                                <option value="bottom">Bottom</option>
-                                                <option value="front">Front</option>
-                                                <option value="door">Door</option>
-                                                <option value="interior">Interior</option>
-                                                <option value="under">Under</option>
-                                                <option value="roof">Roof</option>
-                                                <option value="floor">Floor</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="damade_id">Demage Code <span style="color:red;">*</span></label>
-                                            <select name="damade_id" id="damade_id" class="form-control">
+                                            <label for="damade_ide">Demage Code <span style="color:red;">*</span></label>
+                                            <select name="damade_ide" id="damade_ide" class="form-control">
                                                 <option value="">Select Demage Code</option>
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="repair_id">Repair Code  <span style="color:red;">*</span></label>
-                                            <select name="repair_id" id="repair_id" class="form-control">
+                                            <label for="repair_ide">Repair Code  <span style="color:red;">*</span></label>
+                                            <select name="repair_ide" id="repair_ide" class="form-control">
                                                 <option value="">Select Repair Code</option>
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="material_id">Material Code <span style="color:red;">*</span></label>
-                                            <select name="material_id" class="form-control" id="material_id">
+                                            <label for="material_ide">Material Code <span style="color:red;">*</span></label>
+                                            <select name="material_ide" class="form-control" id="material_ide">
                                                 <option value="">Select Material Code</option>
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="desc">Description <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="desc" name="desc" placeholder="Enter Description">
+                                            <label for="desce">Description <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="desce" name="desce" placeholder="Enter Description">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="unit_of_measuree">Unit Of Measurement <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="unit_of_measuree" name="unit_of_measuree" placeholder="Enter Unit Of Measurement">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="unit_of_measure">Unit Of Measurement <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="unit_of_measure" name="unit_of_measure" placeholder="Enter Unit Of Measurement">
+                                            <label for="dimension_le">Dimension L <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="dimension_le" name="dimension_le" placeholder="Enter Dimension L">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="dimension_l">Dimension L <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="dimension_l" name="dimension_l" placeholder="Enter Dimension L">
+                                            <label for="dimension_we">Dimension W  <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="dimension_we" name="dimension_we" placeholder="Enter Dimension W">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="dimension_w">Dimension W  <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="dimension_w" name="dimension_w" placeholder="Enter Dimension W">
+                                            <label for="dimension_he">Dimension H <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="dimension_he" name="dimension_he" placeholder="Enter Dimension H">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="dimension_h">Dimension H <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="dimension_h" name="dimension_h" placeholder="Enter Dimension H">
+                                            <label for="qtye">Quantity <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="qtye" name="qtye" placeholder="Enter Quantity">
                                         </div>
                                     </div>
                                 </div>
                                 
-
                                 <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="qty">Quantity <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Quantity">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="repair_type">Repair Type <span style="color:red;">*</span></label>
-                                            <select name="repair_type" id="repair_type" class="form-control">
+                                            <label for="repair_typee">Repair Type <span style="color:red;">*</span></label>
+                                            <select name="repair_typee" id="repair_typee" class="form-control">
                                                 <option value="">Please Select Repair Type</option>
                                                 <option value="repair">Repair</option>
                                                 <option value="pti">PTI</option>
@@ -182,57 +126,62 @@ cursor: pointer;
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="labour_houre">Labour Hour <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="labour_houre" name="labour_houre" placeholder="Enter Labour Hour">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="labour_coste">Labour Cost <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="labour_coste" name="labour_coste" placeholder="Enter Labour Cost">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="material_coste">Material Cost <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="material_coste" name="material_coste" placeholder="Enter Material Cost">
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 
                                 
                                 <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="labour_hour">Labour Hour <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="labour_hour" name="labour_hour" placeholder="Enter Labour Hour">
+                                            <label for="sub_totale">Sub Total  <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="sub_totale" name="sub_totale" readonly placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="labour_cost">Labour Cost <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="labour_cost" name="labour_cost" placeholder="Enter Labour Cost">
+                                            <label for="taxe">Tax (in percentage without %)  <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" id="taxe" name="taxe" placeholder="Enter Tax Percentage">
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
-                                
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="material_cost">Material Cost <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="material_cost" name="material_cost" placeholder="Enter Material Cost">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="sub_total">Sub Total  <span style="color:red;">*</span></label>
-                                            <input type="text" class="form-control" id="sub_total" name="sub_total" readonly placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="form-group">
-                                    <label for="tax">Tax (in percentage without %)  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" id="tax" name="tax" placeholder="Enter Tax Percentage">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tax_cost">Tax Cost <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="tax_cost" name="tax_cost" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="total_cost">Total Cost <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="total_cost" name="total_cost" placeholder="Enter Total Cost">
-                                </div>
-                                <input type="hidden" id="hotspot_coor_x">
-                                <input type="hidden" id="hotspot_coor_y">
 
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="tax_coste">Tax Cost <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" readonly id="tax_coste" name="tax_coste" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="total_coste">Total Cost <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" readonly id="total_coste" name="total_coste" placeholder="Enter Total Cost">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -244,288 +193,21 @@ cursor: pointer;
         </div>
     </section>
 </div>
-
 <script>
 
 $(document).ready(function () {
-    refreshLocation()
+    refreshDamage()
 });
 
-$('#containerSize').on('change',function(){
-    var containerType = $('#containerType').val();
-    var containerSize = $(this).val();
-    var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-    if(containerType == ''){
-        var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-    }
-
-    if(containerType != '' && containerSize != ''){
-        $.ajax({
-            type: "post",
-            url: "/api/line/getbysizetype",
-            headers: {
-                'Authorization': 'Bearer ' + checkToken
-            },
-            data:{
-                'user_id':user_id,
-                'depo_id':depo_id,
-                'containerType':containerType,
-                'containerSize':containerSize
-            },
-            success: function (data) {
-                $('#line_id').empty();
-
-                var select = document.getElementById('line_id');
-                data.forEach(function(item) {
-                    var option = document.createElement('option');
-                    option.value = item.id;
-                    option.text = item.name;
-                    select.appendChild(option);
-                });
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-})
 
 
-function refreshLocation(){
+
+function refreshDamage(){
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
     var location_codes  = "";
-
-    $.ajax({
-        type: "post",
-        url: "/api/location/get",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'user_id':user_id,
-            'depo_id':depo_id
-        },
-        success: function (data) {
-            console.log(data);
-            location_codes = data;
-            processLocationCodes(location_codes);
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
-
-
-function processLocationCodes(location_codes){
-
-    var transformedData = location_codes.map(function(item) {
-        return {
-            id: item.id,
-            text: item.code
-        };
-    });
-
-    var blankOption = { id: '', text: '' };
-    transformedData.unshift(blankOption);
-
-    $('#repai_location_code').select2({
-        placeholder: 'Select Location Code',
-        data: transformedData,
-        escapeMarkup: function (markup) {
-            return markup;
-        },
-        language: {
-            noResults: function () {
-                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="locationCode()">Add New</button></center>';
-            }
-        }
-    });
-}
-
-function locationCode(){
-    var select2Instance = $('#repai_location_code').data('select2');
-    if (select2Instance) {
-        select2Instance.destroy();
-    }
-    $('#modal-location').modal('show');
-}
-
-$(document).ready(function () {
-    const imageContainer = document.getElementById('image-container');
-    const image = document.getElementById('image');
-    imageContainer.addEventListener('click', (e) => {
-        const x = e.clientX - image.getBoundingClientRect().left;
-        const y = e.clientY - image.getBoundingClientRect().top;
-        createHotspot(x, y);
-    });
-
-    function createHotspot(x, y) {
-        const hotspotDiv = document.createElement('div');
-        hotspotDiv.className = 'hotspot';
-
-        const containerRect = imageContainer.getBoundingClientRect();
-        const topPercent = ((y - containerRect.top) / containerRect.height) * 100;
-        const leftPercent = ((x - containerRect.left) / containerRect.width) * 100;
-
-
-        hotspotDiv.style.top = topPercent + '%';
-        hotspotDiv.style.left = leftPercent + '%';
-        
-        imageContainer.appendChild(hotspotDiv);
-
-        $('#hotspot_coor_x').val(leftPercent);
-        $('#hotspot_coor_y').val(topPercent);
-        $('#container_side').attr('disabled', true);
-        $('#modal-hotspot').modal('hide');
-    }
-
-
-});
-
-$('#container_side').on('change', function (){
-
-    var side = $(this).val();
-    var line_id = $('#line_id').val();
-
-    if(!line_id){
-        var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line Name First</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-    }else{
-        $.ajax({
-        type: "post",
-        url: "/api/line/getbyid",
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data:{
-            'id':line_id
-        },
-        success: function (data) {
-            var imageUrl = '';
-            if(side == "right"){
-                imageUrl = '/uploads/line/' + data.right_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "left"){
-                imageUrl = '/uploads/line/' + data.left_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "top"){
-                imageUrl = '/uploads/line/' + data.top_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "bottom"){
-                imageUrl = '/uploads/line/' + data.bottom_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "front"){
-                imageUrl = '/uploads/line/' + data.front_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "door"){
-                imageUrl = '/uploads/line/' + data.door_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "interior"){
-                imageUrl = '/uploads/line/' + data.interior_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "under"){
-                imageUrl = '/uploads/line/' + data.under_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "roof"){
-                imageUrl = '/uploads/line/' + data.roof_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else if(side == "floor"){
-                imageUrl = '/uploads/line/' + data.floor_img;
-                $('#image').attr('src', imageUrl);
-                $('#modal-hotspot').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            }else{
-                var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Choose Correct Option</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-            }
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-    }
-
-});
-
-$(document).ready(function () {
-    var checkToken = localStorage.getItem('token');
-    var user_id = localStorage.getItem('user_id');
-    var depo_id = localStorage.getItem('depo_id');
-
-
-    $('#labour_cost, #material_cost,#tax').on('keyup', function() {
-        var material_cost = $('#material_cost').val();
-        var labour_cost = $('#labour_cost').val();
-        var tax = $('#tax').val();
-        var sub_total = parseInt(labour_cost) + parseInt(material_cost);
-
-        $('#sub_total').val(parseFloat(sub_total.toFixed(2)));
-        var tax_cost =  (parseInt(tax) / 100 ) * sub_total;
-        $('#tax_cost').val(parseFloat(tax_cost.toFixed(2)));
-        var total = tax_cost + sub_total;
-        $('#total_cost').val(parseFloat(total.toFixed(2)));
-    });
-
-
-    
 
     $.ajax({
         type: "post",
@@ -538,23 +220,53 @@ $(document).ready(function () {
             'depo_id':depo_id
         },
         success: function (data) {
-            var select = document.getElementById('damade_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.code;
-                select.appendChild(option);
-            });
+            processDamageCodes(data);
         },
         error: function (error) {
             console.log(error);
         }
     });
+}
 
-    $('#damade_id').change(function() {
-        var inputValue = $(this).val();
 
-        $.ajax({
+function processDamageCodes(data){
+
+    var transformedData = data.map(function(item) {
+        return {
+            id: item.id,
+            text: item.code
+        };
+    });
+
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
+
+    $('#damade_ide').select2({
+        placeholder: 'Select Damage Code',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="damageCode()">Add New</button></center>';
+            }
+        }
+    });
+}
+
+function damageCode(){
+    var select2Instance = $('#damade_ide').data('select2');
+    if (select2Instance) {
+        select2Instance.destroy();
+    }
+    $('#modal-damage').modal('show');
+}
+
+
+function refreshRepair(inputValue){
+    var checkToken = localStorage.getItem('token');
+    $.ajax({
         type: "POST",
         url: "/api/repair/get",
         headers: {
@@ -565,31 +277,52 @@ $(document).ready(function () {
         },
         success: function (data) {
             $("#repair_id").empty();
-            var select1 = document.getElementById('repair_id');
-            var option1 = document.createElement('option');
-            option1.value = "";
-            option1.text = "Please Select Repair Code";
-            select1.appendChild(option1);
-            var select = document.getElementById('repair_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.repair_code;
-                select.appendChild(option);
-            });
+            processRepairCodes(data);
         },
         error: function (error) {
             console.log(error);
         }
     });
+}
 
+function processRepairCodes(data){
+
+    var transformedData = data.map(function(item) {
+        return {
+            id: item.id,
+            text: item.repair_code
+        };
     });
 
-    $('#repair_id').change(function() {
-        var repair_id = $(this).val();
-        var damage_id = $('#damade_id').val();
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
 
-        $.ajax({
+    $('#repair_ide').select2({
+        placeholder: 'Select Repair Code',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="repairsCode()">Add New</button></center>';
+            }
+        }
+    });
+}
+function repairsCode(){
+    var select2Instance = $('#repair_ide').data('select2');
+    if (select2Instance) {
+        select2Instance.destroy();
+    }
+    $('#modal-repair').modal('show');
+}
+
+
+function refreshMaterial(repair_id,damage_id){
+    var checkToken = localStorage.getItem('token');
+
+    $.ajax({
         type: "POST",
         url: "/api/material/get",
         headers: {
@@ -601,61 +334,111 @@ $(document).ready(function () {
         },
         success: function (data) {
             $("#material_id").empty(); 
-
-            var select1 = document.getElementById('material_id');
-            var option1 = document.createElement('option');
-            option1.value = "";
-            option1.text = "Please Select Material Code";
-            select1.appendChild(option1);
-      
-
-            var select = document.getElementById('material_id');
-            data.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item.id;
-                option.text = item.material_code;
-                select.appendChild(option);
-            });
+            processMaterialCodes(data);
         },
         error: function (error) {
             console.log(error);
         }
     });
+}
+
+function processMaterialCodes(data){
+
+    var transformedData = data.map(function(item) {
+        return {
+            id: item.id,
+            text: item.material_code
+        };
+    });
+
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
+
+    $('#material_ide').select2({
+        placeholder: 'Select Material Code',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="repairsMaterial()">Add New</button></center>';
+            }
+        }
+    });
+}
+function repairsMaterial(){
+    var select2Instance = $('#material_ide').data('select2');
+    if (select2Instance) {
+        select2Instance.destroy();
+    }
+    $('#modal-material').modal('show');
+}
+
+$(document).ready(function () {
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    $('#labour_coste, #material_coste,#taxe').on('keyup', function() {
+        var material_cost = $('#material_coste').val();
+        var labour_cost = $('#labour_coste').val();
+        var tax = $('#taxe').val();
+        var sub_total = parseInt(labour_cost) + parseInt(material_cost);
+
+        $('#sub_totale').val(parseFloat(sub_total.toFixed(2)));
+        var tax_cost =  (parseInt(tax) / 100 ) * sub_total;
+        $('#tax_coste').val(parseFloat(tax_cost.toFixed(2)));
+        var total = tax_cost + sub_total;
+        $('#total_coste').val(parseFloat(total.toFixed(2)));
+    });
+
+    $('#damade_ide').change(function() {
+        var inputValue = $(this).val();
+        refreshRepair(inputValue);
+
+    });
+
+    $('#repair_ide').change(function() {
+        var repair_id = $(this).val();
+        var damage_id = $('#damade_ide').val();
+        refreshMaterial(repair_id, damage_id);
 
     });
 });
 
 $(function () {
     var checkToken = localStorage.getItem('token');
-
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
     $.validator.setDefaults({
     submitHandler: function () {
-        var line_id = $("#line_id").val();
-        var damade_id = $("#damade_id").val();
-        var repair_id = $("#repair_id").val();
-        var material_id = $("#material_id").val();
+        var line_id = $('#line_id_no').val();
+        var damade_id = $("#damade_ide").val();
+        var repair_id = $("#repair_ide").val();
+        var material_id = $("#material_ide").val();
+
         var container_side = $("#container_side").val();
         var hotspot_coor_x = $("#hotspot_coor_x").val();
         var hotspot_coor_y = $("#hotspot_coor_y").val();
-        var repai_location_code = $("#repai_location_code").val();
-        var unit_of_measure = $("#unit_of_measure").val();
-        var dimension_l = $("#dimension_l").val();
-        var dimension_w = $("#dimension_w").val();
-        var dimension_h = $("#dimension_h").val();
-        var labour_hour = $("#labour_hour").val();
-        var labour_cost = $("#labour_cost").val();
-        var material_cost = $("#material_cost").val();
-        var tax = $("#tax").val();
-        var sub_total = $("#sub_total").val();
-        var tax_cost = $('#tax_cost').val();
-        var total_cost = $("#total_cost").val();
-        var component_code = $("#component_code").val();
-        var desc = $("#desc").val();
-        var qty = $("#qty").val();
-        var repair_type = $('#repair_type').val();
+        var repai_location_code = $("#location_code_id").val();
+
+        var unit_of_measure = $("#unit_of_measuree").val();
+        var dimension_l = $("#dimension_le").val();
+        var dimension_w = $("#dimension_we").val();
+        var dimension_h = $("#dimension_he").val();
+        var labour_hour = $("#labour_houre").val();
+        var labour_cost = $("#labour_coste").val();
+        var material_cost = $("#material_coste").val();
+        var tax = $("#taxe").val();
+        var sub_total = $("#sub_totale").val();
+        var tax_cost = $('#tax_coste').val();
+        var total_cost = $("#total_coste").val();
+        var component_code = $("#component_codee").val();
+        var desc = $("#desce").val();
+        var qty = $("#qtye").val();
+        var repair_type = $('#repair_typee').val();
 
         const data = {
             'line_id':line_id,
@@ -680,14 +463,12 @@ $(function () {
             'desc':desc,
             'qty':qty,
             'repair_type':repair_type,
-            'hotspot_coor_y':hotspot_coor_y,
-            'hotspot_coor_x':hotspot_coor_x,
-            'container_side':container_side
-
+            'custom_check':1,
         }
+
         post('tarrif/create',data);
         
-        window.reload();
+        location.reload();
             
     }
   });
@@ -843,18 +624,18 @@ $(function () {
   });
 });
 
-function createLocation(e){
+function createDamage(e){
     // e.preventDefault();
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var code   = $('#lo_code').val();
-    var desc   = $('#desc').val();
+    var code   = $('#damage_codee').val();
+    var desc   = $('#damage_desc').val();
 
     if(code == ''){
         var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Location Code Is Required</p></div>`;
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Damage Code Is Required</p></div>`;
             document.getElementById('apiMessages').appendChild(callout);
             setTimeout(function() {
                 callout.remove();
@@ -867,55 +648,151 @@ function createLocation(e){
                 'user_id':user_id,
                 'depo_id':depo_id,
         }
-    post('location/create',data);
-    refreshLocation()
-    $('#modal-location').modal('hide');
+    post('damage/create',data);
+    refreshDamage()
+    $('#modal-damage').modal('hide');
+}
+
+function createRepair(e) {
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var repair_code   = $('#repair_codee').val();
+    var damage_id   = $('#damade_ide').val();
+    var desc   = $('#repair_desc').val();
+
+    if(repair_code == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Repair Code Is Required</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    const data = {
+                'repair_code':repair_code,
+                'damage_id':damage_id,
+                'desc':desc,
+                'user_id':user_id,
+                'depo_id':depo_id,
+        }
+    post('repair/create',data);
+    refreshRepair(damage_id)
+    $('#modal-repair').modal('hide');
+}
+
+function createMaterial(e) {
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+    var material_code   = $('#material_codee').val();
+    var repair_id   = $('#repair_ide').val();
+    var damage_id   = $('#damade_ide').val();
+    var desc   = $('#material_desc').val();
+
+    if(material_code == ''){
+        var callout = document.createElement('div');
+            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Material Code Is Required</p></div>`;
+            document.getElementById('apiMessages').appendChild(callout);
+            setTimeout(function() {
+                callout.remove();
+            }, 2000);
+    }
+
+    const data = {
+                'material_code':material_code,
+                'damage_id':damage_id,
+                'repiar_id':repair_id,
+                'desc':desc,
+                'user_id':user_id,
+                'depo_id':depo_id,
+        }
+    post('material/create',data);
+    refreshMaterial(repair_id,damage_id)
+    $('#modal-material').modal('hide');
 }
 </script>
 
 
 
-
-<div class="modal fade" id="modal-hotspot">
+<div class="modal fade" id="modal-damage">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Hotspot</h4>
+                <h4 class="modal-title">Create Damage Code</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div id="image-container">
-                            <center><img id="image" src="" style="width:100%" alt="Image" /></center>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="damage_codee">Damage Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="damage_codee" name="damage_codee" placeholder="Enter Damage Code">
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="damage_desc">Description</label>
+                            <input type="text" class="form-control" id="damage_desc" name="damage_desc" placeholder="Enter Description">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="createDamage()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modal-location">
+<div class="modal fade" id="modal-repair">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Location Code</h4>
+                <h4 class="modal-title">Create Repair Code</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="code">Location Code <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" id="lo_code" name="code" placeholder="Enter Location Code">
+                            <label for="repair_codee">Repair Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="repair_codee" name="repair_codee" placeholder="Enter Repair Code">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="desc">Description</label>
-                            <input type="text" class="form-control" id="lo_desc" name="desc" placeholder="Enter Description">
+                            <label for="repair_desc">Description</label>
+                            <input type="text" class="form-control" id="repair_desc" name="repair_desc" placeholder="Enter Description">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="createLocation()">Submit</button>
+                    <button type="submit" class="btn btn-primary" onclick="createRepair()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-material">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Material Code</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="material_codee">Material Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="material_codee" name="material_codee" placeholder="Enter Material Code">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="material_desc">Description</label>
+                            <input type="text" class="form-control" id="material_desc" name="material_desc" placeholder="Enter Description">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="createMaterial()">Submit</button>
                 </div>
             </div>
         </div>

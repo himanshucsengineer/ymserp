@@ -430,6 +430,21 @@ class MasterTarrifController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
+        if($request->custom_check == 1){
+            
+            $getTraifData = MasterTarrif::where('repai_location_code', $request->repai_location_code)->first();
+            $hotspot_coor_y = $getTraifData->hotspot_coor_y;
+            $hotspot_coor_x = $getTraifData->hotspot_coor_x;
+            $container_side = $getTraifData->container_side;
+        }else{
+            $hotspot_coor_y = $request->hotspot_coor_y;
+            $hotspot_coor_x = $request->hotspot_coor_x;
+            $container_side = $request->container_side;
+        }
+
         $createTarrif = MasterTarrif::firstOrCreate([
             'line_id'=> $request->line_id,
             'damade_id'=> $request->damade_id,
@@ -453,9 +468,9 @@ class MasterTarrifController extends Controller
             'desc' => $request->desc,
             'qty' => $request->qty,
             'repair_type' => $request->repair_type,
-            'container_side'=>$request->container_side,
-            'hotspot_coor_y'=>$request->hotspot_coor_y,
-            'hotspot_coor_x'=>$request->hotspot_coor_x,
+            'container_side'=>$container_side,
+            'hotspot_coor_y'=>$hotspot_coor_y,
+            'hotspot_coor_x'=>$hotspot_coor_x,
         ]);
 
 
