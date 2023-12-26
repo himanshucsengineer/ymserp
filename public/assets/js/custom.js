@@ -1,7 +1,5 @@
 var checkToken = localStorage.getItem('token');
 var user_id = localStorage.getItem('user_id');
-console.log(checkToken);
-console.log(user_id);
 if(!checkToken){
     window.location.href = '/';
 }

@@ -475,140 +475,122 @@ $(function () {
 
     $('#tarrifForm').validate({
     rules: {
-        line_id: {
+        damade_ide: {
             required: true,
         },
-        damade_id: {
+        repair_ide: {
             required: true,
         },
-        repair_id: {
+        material_ide: {
             required: true,
         },
-        material_id: {
+        unit_of_measuree: {
             required: true,
         },
-
-        repai_location_code: {
+        dimension_le: {
             required: true,
         },
-        unit_of_measure: {
-            required: true,
-        },
-        dimension_l: {
-            required: true,
-        },
-        dimension_w: {
+        dimension_we: {
             required: true,
         },
 
-        dimension_h: {
+        dimension_he: {
             required: true,
         },
-        labour_hour: {
+        labour_houre: {
             required: true,
         },
-        labour_cost: {
+        labour_coste: {
             required: true,
         },
-        material_cost: {
+        material_coste: {
             required: true,
         },
-        tax_cost:{
+        tax_coste:{
             required:true,
         },
 
-        tax: {
+        taxe: {
             required: true,
         },
-        tax_cost: {
+        tax_coste: {
             required: true,
         },
-        sub_total: {
+        sub_totale: {
             required: true,
         },
-        component_code: {
+        component_codee: {
             required: true,
         },
-        desc: {
+        desce: {
             required: true,
         },
-        qty: {
+        qtye: {
             required: true,
         },
-        repair_type: {
+        repair_typee: {
             required: true,
         },
-        container_side:{
-            required: true,
-        }
     },
     messages: {
-        tax_cost:{
+        tax_coste:{
             required:"This Field Is Required",
         },
-        line_id: {
+
+        damade_ide: {
             required: "This Field is required",
         },
-        damade_id: {
+        repair_ide: {
             required: "This Field is required",
         },
-        repair_id: {
-            required: "This Field is required",
-        },
-        material_id: {
+        material_ide: {
             required: "This Field is required",
         },
 
-        repai_location_code: {
+        unit_of_measuree: {
             required: "This Field is required",
         },
-        unit_of_measure: {
+        dimension_le: {
             required: "This Field is required",
         },
-        dimension_l: {
-            required: "This Field is required",
-        },
-        dimension_w: {
+        dimension_we: {
             required: "This Field is required",
         },
 
-        dimension_h: {
+        dimension_he: {
             required: "This Field is required",
         },
-        labour_hour: {
+        labour_houre: {
             required: "This Field is required",
         },
-        labour_cost: {
+        labour_coste: {
             required: "This Field is required",
         },
-        material_cost: {
+        material_coste: {
             required: "This Field is required",
         },
 
-        tax: {
+        taxe: {
             required: "This Field is required",
         },
-        sub_total: {
+        sub_totale: {
             required: "This Field is required",
         },
-        total_cost: {
+        total_coste: {
             required: "This Field is required",
         },
-        component_code: {
+        component_codee: {
             required: "This Field is required",
         },
-        desc: {
+        desce: {
             required: "This Field is required",
         },
-        qty: {
+        qtye: {
             required: "This Field is required",
         },
-        repair_type: {
+        repair_typee: {
             required: "This Field is required",
         },
-        container_side:{
-            required: "This Field is required",
-        }
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {

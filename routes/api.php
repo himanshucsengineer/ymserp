@@ -202,6 +202,7 @@ $api->version('v1', function($api){
         $api->post('/updaterepair', 'App\Http\Controllers\GateInController@updaterepair');
         $api->post('/updateout', 'App\Http\Controllers\GateInController@updateout');
         $api->post('/getPreAdviceContainer', 'App\Http\Controllers\GateInController@getPreAdviceContainer');
+        $api->post('/getContainerReport', 'App\Http\Controllers\GateInController@getContainerReport');
         
         $api->post('/geVhicle', 'App\Http\Controllers\GateInController@geVhicle');
         $api->post('/getRefferContainer', 'App\Http\Controllers\GateInController@getRefferContainer');

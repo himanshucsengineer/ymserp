@@ -24,7 +24,8 @@ class ReportController extends Controller
         return view('report.container');
     }
     
-    public function container_report(Request $request){
+    public function dmr_report_view(){
+        return view('report.dmr');
 
     }
   

@@ -586,7 +586,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                
+                                <li class="nav-item">
+                                    <a href="/report/dmr" class="nav-link">
+                                        <i class="fas fa-book-open nav-icon"></i>
+                                        <p>DMR Report</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="/report/container" class="nav-link">
                                         <i class="fas fa-book-open nav-icon"></i>

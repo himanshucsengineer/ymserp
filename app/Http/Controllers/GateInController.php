@@ -1042,7 +1042,211 @@ class GateInController extends Controller
         ]); 
     }
 
+    public function getContainerReport(Request $request){
+        
+        $datalimit = '';
 
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->report_type == "available"){
+            $field1 = "status";
+            $value1 = "Ready";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "1";
+        }else if($request->report_type == "pending"){
+            $field1 = "status";
+            $value1 = "Ready";
+            $field2 = "is_estimate_done";
+            $value2 = "0";
+            $field3 = "is_approve";
+            $value3 = "0";
+            $field4 = "is_repaired";
+            $value4 = "0";
+        }else if($request->report_type == "done_survey"){
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "0";
+            $field4 = "is_repaired";
+            $value4 = "0";
+        }
+        else if($request->report_type == "pending_survey"){
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "0";
+            $field3 = "is_approve";
+            $value3 = "0";
+            $field4 = "is_repaired";
+            $value4 = "0";
+        }
+        else if($request->report_type == "pending_repair"){
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "0";
+        }
+        else if($request->report_type == "done_repair"){
+            $field1 = "status";
+            $value1 = "In";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "1";
+        }
+
+
+        if($request->user_id == 1){
+
+            if($request->report_type == "pending"){
+                $gateInData = GateIn::where([
+                    [$field1,'!=',$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+    
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [$field1,$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+    
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }
+
+           
+        }else{
+            if($request->report_type == "pending"){
+                $gateInData = GateIn::where([
+                    [$field1,'!=',$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+                    ['depo_id',$request->depo_id],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [$field1,$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+                    ['depo_id',$request->depo_id],
+                ])->orderby('created_at','desc')->paginate($datalimit);
+            }
+            
+        }
+ 
+        $formetedData = [];
+
+        foreach($gateInData as $gateIn){
+            $line = MasterLine::where('id',$gateIn->line_id)->first();
+            $consignee = MasterTransport::where('id',$gateIn->consignee_id)->first();
+            $transporter = MasterTransport::where('id',$gateIn->transport_id)->first();
+
+            if($consignee){
+                $consinee_name = $consignee->name;
+            }else{
+                $consinee_name = '';
+            }
+
+            if($transporter){
+                $transporter_name = $transporter->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($line){
+                $line_name = $line->name;
+            }else{
+                $line_name = '';
+            }
+
+            
+
+            $formetedData[] = [
+                'inward_no' => $gateIn->inward_no,
+                'inward_date' => $gateIn->inward_date,
+                'inward_time' => $gateIn->inward_time,
+                'survayor_date' => $gateIn->survayor_date,
+                'survayor_time' => $gateIn->survayor_time,
+                'container_img' => $gateIn->container_img,
+                'container_no' => $gateIn->container_no,
+                'vehicle_number' => $gateIn->vehicle_number,
+                'vehicle_img' => $gateIn->vehicle_img,
+                'container_type' => $gateIn->container_type,
+                'container_size' => $gateIn->container_size,
+                'sub_type' => $gateIn->sub_type,
+                'gross_weight' => $gateIn->gross_weight,
+                'tare_weight' => $gateIn->tare_weight,
+                'mfg_date' => $gateIn->mfg_date,
+                'csc_details' => $gateIn->csc_details,
+
+                'line_name' => $line_name,
+                'grade' => $gateIn->grade,
+                'status_name' => $gateIn->status_name,
+                'rftype' => $gateIn->rftype,
+                'make' => $gateIn->make,
+                'model_no' => $gateIn->model_no,
+                'serial_no' => $gateIn->serial_no,
+                'machine_mfg_date' => $gateIn->machine_mfg_date,
+                'device_status' => $gateIn->device_status,
+                'third_party' => $gateIn->third_party,
+                'consinee_name' => $consinee_name,
+                'transaction_mode' => $gateIn->transaction_mode,
+                'transaction_ref_no' => $gateIn->transaction_ref_no,
+                'transporter_name' => $transporter_name,
+                'driver_name' => $gateIn->driver_name,
+                'contact_number' => $gateIn->contact_number,
+                'vessel_name' => $gateIn->vessel_name,
+                'voyage' => $gateIn->voyage,
+                'port_name' => $gateIn->port_name,
+                'er_no' => $gateIn->er_no,
+                'empty_latter' => $gateIn->empty_latter,
+                'challan' => $gateIn->challan,
+                'empty_repositioning' => $gateIn->empty_repositioning,
+                'return' => $gateIn->return,
+                'tracking_device' => $gateIn->tracking_device,
+                'remarks' => $gateIn->remarks,
+                'is_repaired' => $gateIn->is_repaired,
+                'id' => $gateIn->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $gateInData->currentPage(),
+                'per_page' => $gateInData->perPage(),
+                'total' => $gateInData->total(),
+                'last_page' => $gateInData->lastPage(),
+                'from' => $gateInData->firstItem(),
+                'to' => $gateInData->lastItem(),
+                'links' => [
+                    'prev' => $gateInData->previousPageUrl(),
+                    'next' => $gateInData->nextPageUrl(),
+                    'all_pages' => $gateInData->getUrlRange(1, $gateInData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
 
     public function filterbystatus(Request $request){
         
