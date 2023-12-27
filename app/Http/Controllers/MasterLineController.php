@@ -36,6 +36,20 @@ class MasterLineController extends Controller
             return MasterLine::where('depo_id',$request->depo_id)->get();
         }
     }
+
+    public function getbyname(Request $request){
+
+        if($request->user_id == 1){
+            return MasterLine::select('name')
+                    ->distinct()
+                    ->get();
+        }else{
+            return MasterLine::select('name')
+                ->where('depo_id', $request->depo_id)
+                ->distinct()
+                ->get();
+        }
+    }
     public function getbysizetype(Request $request)
     {
         if($request->user_id == 1){

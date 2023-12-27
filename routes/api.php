@@ -141,6 +141,7 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'line'], function($api){
         $api->post('/create','App\Http\Controllers\MasterLineController@store');
         $api->post('/get', 'App\Http\Controllers\MasterLineController@get');
+        $api->post('/getbyname', 'App\Http\Controllers\MasterLineController@getbyname');
         $api->post('/getLineData', 'App\Http\Controllers\MasterLineController@getLineData');
         $api->post('/getbyid', 'App\Http\Controllers\MasterLineController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterLineController@destroy');

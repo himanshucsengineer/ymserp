@@ -122,28 +122,6 @@
                         <div class="card-body">
 
                             <div class="row mb-4">
-                                
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Container Type <span style="color:red;">*</span></label>
-                                        <select class="form-control" id="containerType" name="containerType">
-                                        <option value="">Select Container Type</option>
-                                        <option value="DRY">DRY</option>
-                                        <option value="REEFER">REEFER</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6" >
-                                    <div class="form-group">
-                                        <label>Container Size <span style="color:red;">*</span></label>
-                                        <select class="form-control" id="containerSize" name="containerSize" >
-                                        <option value="">Select Container Size</option>
-                                        <option value="20">20</option>
-                                        <option value="40">40</option>
-                                        <option value="45">45</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-md-6" >
                                     <label for="">Line</label>
                                     <select name="lines" id="lines" class="form-control">
@@ -252,42 +230,26 @@
 </div>
 
 <script>
-
-$('#containerSize').on('change',function(){
-    var containerType = $('#containerType').val();
-    var containerSize = $(this).val();
+$(document).ready(function () {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
-
-    if(containerType == ''){
-        var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-    }
-
-    if(containerType != '' && containerSize != ''){
         $.ajax({
             type: "post",
-            url: "/api/line/getbysizetype",
+            url: "/api/line/getbyname",
             headers: {
                 'Authorization': 'Bearer ' + checkToken
             },
             data:{
                 'user_id':user_id,
                 'depo_id':depo_id,
-                'containerType':containerType,
-                'containerSize':containerSize
             },
             success: function (data) {
                 $('#lines').empty();
                 var select = document.getElementById('lines');
                 data.forEach(function(item) {
                     var option = document.createElement('option');
-                    option.value = item.id;
+                    option.value = item.name;
                     option.text = item.name;
                     select.appendChild(option);
                 });
@@ -296,40 +258,18 @@ $('#containerSize').on('change',function(){
                 console.log(error);
             }
         });
-    }
-})
-
+});
 function genrateReport(){
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var line_id = $('#lines').val();
-    var containerType = $('#containerType').val();
-    var containerSize = $('#containerSize').val();
+    var line_name = $('#lines').val();
     var report_type = $('#report_type').val();
 
-    if(line_id == ''){
+    if(line_name == ''){
         var callout = document.createElement('div');
             callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Line</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-    }
-
-    if(containerType == ''){
-        var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Type</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
-    }
-
-    if(containerSize == ''){
-        var callout = document.createElement('div');
-            callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Container Size</p></div>`;
             document.getElementById('apiMessages').appendChild(callout);
             setTimeout(function() {
                 callout.remove();
@@ -346,7 +286,7 @@ function genrateReport(){
     }
 
 
-    if(containerType != '' && containerSize != '' && line_id != '' && report_type != ''){
+    if( line_name != '' && report_type != ''){
         $.ajax({
             type: "post",
             url: "/api/gatein/getContainerReport",
@@ -356,7 +296,7 @@ function genrateReport(){
             data:{
                 'user_id':user_id,
                 'depo_id':depo_id,
-                'line_id':line_id,
+                'line_name':line_name,
                 'report_type':report_type
             },
             success: function (response) {

@@ -288,7 +288,7 @@
 <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
 <script>
   var picker = flatpickr('#mfg_date', {
-    dateFormat: 'MM/yyyy',
+    dateFormat: 'M/Y',
     enableTime: false,
     altFormat: 'F Y',
     altInput: true,
@@ -584,7 +584,7 @@ $(function () {
         var serial_no = $("#serial_no").val();
         var machine_mfg_date = $("#machine_mfg_date").val();
         var device_status = $("#device_status").val();
-
+        console.log(mfg_date);
        var newdata = {
             'inward_date': inward_date,
             'inward_time': inward_time,
@@ -613,36 +613,36 @@ $(function () {
             'id' : containerid
         }
 
-            $.ajax({
-                url: '/api/gatein/update',
-                type: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + checkToken
-                },
-                data: newdata,
-                success: function(data) {
-                    var checkSuperbisor = <?php echo $checkSupervisor?>;
-                    if(checkSuperbisor == 1){
-                        window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
-                    }else{
-                        window.location = `/surveyor/masterserveyor?id=${containerid}`
-                    }
-                },
-                error: function(error) {
-                    var finalValue = '';
-                    if(Array.isArray(error.responseJSON.message)){
-                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-                    }else{
-                        finalValue = error.responseJSON.message;
-                    }
-                    var callout = document.createElement('div');
-                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-                    document.getElementById('apiMessages').appendChild(callout);
-                    setTimeout(function() {
-                        callout.remove();
-                    }, 2000);
-                }
-            });
+            // $.ajax({
+            //     url: '/api/gatein/update',
+            //     type: 'POST',
+            //     headers: {
+            //         'Authorization': 'Bearer ' + checkToken
+            //     },
+            //     data: newdata,
+            //     success: function(data) {
+            //         var checkSuperbisor = <?php echo $checkSupervisor?>;
+            //         if(checkSuperbisor == 1){
+            //             window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
+            //         }else{
+            //             window.location = `/surveyor/masterserveyor?id=${containerid}`
+            //         }
+            //     },
+            //     error: function(error) {
+            //         var finalValue = '';
+            //         if(Array.isArray(error.responseJSON.message)){
+            //             finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+            //         }else{
+            //             finalValue = error.responseJSON.message;
+            //         }
+            //         var callout = document.createElement('div');
+            //         callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+            //         document.getElementById('apiMessages').appendChild(callout);
+            //         setTimeout(function() {
+            //             callout.remove();
+            //         }, 2000);
+            //     }
+            // });
 
         
         

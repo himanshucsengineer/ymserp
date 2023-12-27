@@ -1113,27 +1113,38 @@ class GateInController extends Controller
 
 
         if($request->user_id == 1){
-
-            if($request->report_type == "pending"){
-                $gateInData = GateIn::where([
-                    [$field1,'!=',$value1],
-                    [$field2,$value2],
-                    [$field3,$value3],
-                    [$field4,$value4],
-    
-                ])->orderby('created_at','desc')->paginate($datalimit);
-            }else{
-                $gateInData = GateIn::where([
-                    [$field1,$value1],
-                    [$field2,$value2],
-                    [$field3,$value3],
-                    [$field4,$value4],
-    
-                ])->orderby('created_at','desc')->paginate($datalimit);
+            $lineData = MasterLine::where('name',$request->line_name)->get();
+            $lineId = [];
+            if(count($lineData)>0){
+                foreach($lineData as $lineget){
+                    array_push($lineId, $lineget->id);
+                }
             }
 
-           
+            if($request->report_type == "pending"){
+                $gateInData = GateIn::where([
+                    [$field1,'!=',$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+                ])->WhereIn('line_id',$lineId)->orderby('created_at','desc')->paginate($datalimit);
+            }else{
+                $gateInData = GateIn::where([
+                    [$field1,$value1],
+                    [$field2,$value2],
+                    [$field3,$value3],
+                    [$field4,$value4],
+    
+                ])->WhereIn('line_id',$lineId)->orderby('created_at','desc')->paginate($datalimit);
+            }
         }else{
+            $lineData = MasterLine::where('name',$request->line_name)->where('depo_id',$request->depo_id)->get();
+            $lineId = [];
+            if(count($lineData)>0){
+                foreach($lineData as $lineget){
+                    array_push($lineId, $lineget->id);
+                }
+            }
             if($request->report_type == "pending"){
                 $gateInData = GateIn::where([
                     [$field1,'!=',$value1],
@@ -1141,7 +1152,7 @@ class GateInController extends Controller
                     [$field3,$value3],
                     [$field4,$value4],
                     ['depo_id',$request->depo_id],
-                ])->orderby('created_at','desc')->paginate($datalimit);
+                ])->orWhereIn('line_id',$lineId)->orderby('created_at','desc')->paginate($datalimit);
             }else{
                 $gateInData = GateIn::where([
                     [$field1,$value1],
@@ -1149,7 +1160,7 @@ class GateInController extends Controller
                     [$field3,$value3],
                     [$field4,$value4],
                     ['depo_id',$request->depo_id],
-                ])->orderby('created_at','desc')->paginate($datalimit);
+                ])->orWhereIn('line_id',$lineId)->orderby('created_at','desc')->paginate($datalimit);
             }
             
         }
