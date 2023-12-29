@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();
             $table->string('depo_id')->nullable();
+            $table->string('is_checked')->nullable();
             $table->timestamps();
         });
     }

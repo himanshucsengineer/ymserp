@@ -65,7 +65,7 @@ class OutwardOfficerController extends Controller
     }
 
     public function getGatePass(Request $request){
-        return GatePass::where('final_gate_pass_no', 'LIKE', '%' . $request->term . '%')->get();
+        return GatePass::where('final_gate_pass_no', 'LIKE', '%' . $request->term . '%')->where('is_checked','no')->get();
     }
 
     public function get(Request $request)
@@ -418,6 +418,7 @@ class OutwardOfficerController extends Controller
             'final_gate_pass_no' => $final_gate_pass_no,
             'createdby' => $request->user_id,
             'depo_id' => $request->depo_id,
+            'is_checked' => 'no'
         ]);
 
         

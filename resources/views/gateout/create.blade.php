@@ -193,24 +193,25 @@ $(document).ready(function() {
     })
 
 });
-
+ 
 function gateOutForm(){
     if ($('#gate_out_chcked').prop('checked')) {
-        var vhichle_id = $('#vhichle_id').val(data.vhicleNo_id);
-        var container_no_id = $('#container_no_id').val(data.container_no_id);
+        var vhichle_id = $('#vhichle_id').val();
+        var container_no_id = $('#container_no_id').val();
         var is_gate_out_checked = 1;
         var check_by = localStorage.getItem('user_id');
-
+        var gate_pass_no = $('#gate_pass_no').val();
         var data = {
             'vhichle_id':vhichle_id,
             'container_no_id':container_no_id,
             'is_gate_out_checked':is_gate_out_checked,
             'check_by':vhichle_id,
             'is_gate_out':1,
+            'gate_pass_no':gate_pass_no
         }
 
         post('gatein/update',data);
-        window.reload();
+        location.reload();
 
 
     } else {

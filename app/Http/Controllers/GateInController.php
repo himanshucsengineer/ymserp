@@ -10,6 +10,7 @@ use App\Models\MasterRepair;
 use App\Models\MasterDamage;
 use App\Models\MasterMaterial;
 use App\Models\LocationCode;
+use App\Models\GatePass;
 
 use App\Models\GateIn;
 use App\Models\MasterTransport;
@@ -2539,10 +2540,14 @@ class GateInController extends Controller
             $containerDetails->gate_out_check_by = $request->check_by;
             $containerDetails->gate_out_date = date('Y-m-d H:i:s');
 
+            $gatepassDetails = GatePass::find($request->gate_pass_no);
+            $gatepassDetails->is_checked = "yes";
+            $gatepassDetails  = $gatepassDetails->save();
+
             $vhicleDetails  = $vhicleDetails->save();
             $containerDetails  = $containerDetails->save();
 
-            if($vhicleDetails && $containerDetails){
+            if($vhicleDetails && $containerDetails && $gatepassDetails){
                 return response()->json([
                     'status' => "success",
                     'message' => "Gate Out Successfully"
