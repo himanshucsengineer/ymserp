@@ -476,6 +476,16 @@ $(document).ready(function () {
             }else{
                 $('#survayor_time').val("<?= date('H:i:s')?>");
             }
+
+            var picker = flatpickr('#mfg_date', {
+    dateFormat: 'M/Y',
+    enableTime: false,
+    altFormat: 'F Y',
+    altInput: true,
+  });
+
+  picker.setDate(data.mfg_date);
+
             $("#container_no").val(data.container_no);
             $("#vehicle_number").val(data.vehicle_number);
             $("#container_type").val(data.container_type);
@@ -483,7 +493,7 @@ $(document).ready(function () {
             $("#sub_type").val(data.sub_type);
             $("#gross_weight").val(data.gross_weight);
             $("#tare_weight").val(data.tare_weight);
-            $('#mfg_date').val(data.mfg_date);
+            // $('#mfg_date').val(data.mfg_date);
             $('#csc_details').val(data.csc_details);
             $("#grade").val(data.grade);
             $("#status_name").val(data.status_name);

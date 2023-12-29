@@ -335,4 +335,9 @@ $api->version('v1', function($api){
         $api->post('/update', 'App\Http\Controllers\CashFlowController@update');
 
     });
+
+    $api->group([ 'middleware' => 'api.auth', 'prefix'=>'report'], function($api){
+        $api->post('/getDmrReport','App\Http\Controllers\ReportController@getDmrReport');
+
+    });
 });
