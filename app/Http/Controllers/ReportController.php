@@ -10,6 +10,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Facades\Validator;
 use \stdClass;
 use App\Models\GateIn;
+use App\Models\PreAdvice;
+use App\Models\OutwardOfficer;
 
 use App\Models\MasterLine;
 use App\Models\MasterTransport;
@@ -46,6 +48,11 @@ class ReportController extends Controller
 
         $startDate =  $request->from;
         $endDate =  $request->to;
+
+        $outStartDate = $startDate . ' 00:00:00';
+        $outEndDate = $endDate . ' 23:59:59';
+
+        
         
         if($request->report_type == 'ALL'){
             $getInData = GateIn::where([
@@ -55,6 +62,12 @@ class ReportController extends Controller
             $inventryData =  GateIn::where([
                 ['status','!=','Out']
             ])->whereIn('depo_id',$request->depo_id)->whereIn('line_id',$lineId)->get();
+
+            $gateOutData = GateIn::where([
+                ['status','Out']
+            ])->whereIn('depo_id',$request->depo_id)->whereIn('line_id',$lineId)->whereBetween('gate_out_date', [$outStartDate, $outEndDate])->get();
+            
+    
         
         }else{
             $getInData = GateIn::where([
@@ -66,10 +79,17 @@ class ReportController extends Controller
                 ['status','!=','Out'],
                 ['container_type', $request->report_type]
             ])->whereIn('depo_id',$request->depo_id)->whereIn('line_id',$lineId)->get();
+
+            $gateOutData = GateIn::where([
+                ['status','Out'],
+                ['container_type', $request->report_type]
+            ])->whereIn('depo_id',$request->depo_id)->whereIn('line_id',$lineId)->whereBetween('gate_out_date', [$outStartDate, $outEndDate])->get();
+            
         }
 
         $indataFormate = [];
         $inventoryFormate = [];
+        $outdataFormate = [];
 
         foreach($getInData as $indata){
             if($indata->consignee_id){
@@ -172,9 +192,44 @@ class ReportController extends Controller
             ];
         }
 
+        foreach($gateOutData as $outData){
+            $outwardOfficerData = OutwardOfficer::where('gate_in_id',$outData->id)->first();
+            $preadvice = PreAdvice::where('id', $outwardOfficerData->pre_advice_id)->first();
+
+
+            if($outwardOfficerData->transport_id){
+                $transporter = MasterTransport::where('id',$outwardOfficerData->transport_id)->first();
+                if($transporter){
+                    $transporter_name = $transporter->name;
+                }else{
+                    $transporter_name = '';
+                }
+            }else{
+                $transporter_name = '';
+            }
+            $outdataFormate[] =[
+                'container_no' => $outData->container_no,
+                'container_size' => $outData->container_size,
+                'sub_type' => $outData->sub_type,
+                'inward_date' => $outData->inward_date,
+                'out_date_time' => $outData->gate_out_date,
+                'destination' => $outwardOfficerData->destination,
+                'transporter_name' => $transporter_name,
+                'vhicle_no' => $outwardOfficerData->vhicle_no,
+                'seal_no' => $outwardOfficerData->seal_no,
+                'shipper_name' => $preadvice->shipper_name,
+                'do_no' => $preadvice->do_no,
+                'remarks' => $preadvice->remarks,
+                'vessel' => $preadvice->vessel,
+                'voyage' => $preadvice->voyage,
+                'pod' => $preadvice->pod,
+            ];
+        }
+
         $finalData = array(
             'in_movment' => $indataFormate,
-            'inventory' => $inventoryFormate
+            'inventory' => $inventoryFormate,
+            'out_movment' => $outdataFormate,
         );
 
         return $finalData;

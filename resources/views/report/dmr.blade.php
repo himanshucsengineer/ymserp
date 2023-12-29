@@ -235,14 +235,13 @@
                                                 <th>Container No.</th>
                                                 <th>Size/Type</th>
                                                 <th>In Date</th>
-                                                <th>Out Date </th>
+                                                <th>Out Date Time </th>
                                                 <th>Shipper</th>
                                                 <th>Bkg/Do</th>
                                                 <th>Destination</th>
                                                 <th>Transporter</th>
                                                 <th>Vehical No.</th>
                                                 <th>Seal No.</th>
-                                                <th>OutTime</th>
                                                 <th>Remarks</th>
                                                 <th>Vessel</th>
                                                 <th>Voyage</th>
@@ -422,10 +421,35 @@ function genrateReport(){
                 $('#outmovement-table-body').empty();
                 $('#inventory-table-body').empty();
 
+                var outmovement_table_body = $('#outmovement-table-body');
+                var outmovment =1;
+                response.out_movment.forEach(function(item) {
+                    var sizeType = item.container_size + ' / ' + item.sub_type;
+                    var row = $('<tr>');
+                    row.append($('<td>').text(outmovment));
+                    row.append($('<td>').append(item.container_no));
+                    row.append($('<td>').append(sizeType));
+                    row.append($('<td>').append(item.inward_date));
+                    row.append($('<td>').append(item.out_date_time));
+                    row.append($('<td>').append(item.shipper_name));
+                    row.append($('<td>').append(item.do_no));
+                    row.append($('<td>').append(item.destination));
+                    row.append($('<td>').append(item.transporter_name));
+                    row.append($('<td>').append(item.vhicle_no));
+                    row.append($('<td>').append(item.seal_no));
+                    row.append($('<td>').append(item.remarks));
+                    row.append($('<td>').append(item.vessel));
+                    row.append($('<td>').append(item.voyage));
+                    row.append($('<td>').append(item.pod));
+
+                    outmovement_table_body.append(row);
+                    outmovment++;
+                });
+
+
+
                 var inmovement_table_body = $('#inmovement-table-body');
                 var inmovment =1;
-
-                
                 response.in_movment.forEach(function(item) {
                     var sizeType = item.container_size + ' / ' + item.sub_type;
                     var row = $('<tr>');
