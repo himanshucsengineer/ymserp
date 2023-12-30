@@ -43,37 +43,37 @@
                                 
                                 <div class="form-group">
                                     <label for="name"> Name <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="name" name="name" placeholder="Enter  Name">
+                                    <input type="text" class="form-control"  id="name" name="name" placeholder="Enter  Name">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="address"> Address <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="address" name="address" placeholder="Enter  Address">
+                                    <input type="text" class="form-control"  id="address" name="address" placeholder="Enter  Address">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="city">City  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="city" name="city" placeholder="Enter City ">
+                                    <input type="text" class="form-control"  id="city" name="city" placeholder="Enter City ">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="state">State  <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="state" name="state" placeholder="Enter State ">
+                                    <input type="text" class="form-control"  id="state" name="state" placeholder="Enter State ">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="pincode">PIN Code <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control"  readonly id="pincode" name="pincode" placeholder="Enter PIN Code">
+                                    <input type="text" class="form-control"   id="pincode" name="pincode" placeholder="Enter PIN Code">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="gst_state">GST State <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="gst_state" name="gst_state" placeholder="Enter GST State">
+                                    <input type="text" class="form-control"  id="gst_state" name="gst_state" placeholder="Enter GST State">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="state_code">State Code <span style="color:red;">*</span></label>
-                                    <input type="text" class="form-control" readonly id="state_code" name="state_code" placeholder="Enter State Code">
+                                    <input type="text" class="form-control"  id="state_code" name="state_code" placeholder="Enter State Code">
                                 </div>
                                 <div class="form-group">
                                     <label for="pan">PAN NO <span style="color:red;">*</span></label>
@@ -136,7 +136,7 @@
                             });
                             var final_addr = parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.bno + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.flno + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.bnm + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.st ;
                             $("#gst_state").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.stcd);
-                            $("#name").val(parjson.lstAppSCommonSearchTPResponse[0].lgnm);
+                            $("#name").val(parjson.lstAppSCommonSearchTPResponse[0].tradeNam);
                             $("#address").val(final_addr);
                             $("#city").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.loc);
                             $("#pincode").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.pncd);

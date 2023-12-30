@@ -1175,7 +1175,7 @@ function getTransporter_t(){
                             });
                             var final_addr = parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.bno + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.flno + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.bnm + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.st ;
                             $("#t_gst_state").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.stcd);
-                            $("#t_name").val(parjson.lstAppSCommonSearchTPResponse[0].lgnm);
+                            $("#t_name").val(parjson.lstAppSCommonSearchTPResponse[0].tradeNam);
                             $("#t_address").val(final_addr);
                             $("#t_city").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.loc);
                             $("#t_pincode").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.pncd);
@@ -1239,7 +1239,7 @@ function getTransporter_c(){
                             });
                             var final_addr = parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.bno + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.flno + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.bnm + ', ' + parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.st ;
                             $("#gst_state").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.stcd);
-                            $("#name").val(parjson.lstAppSCommonSearchTPResponse[0].lgnm);
+                            $("#name").val(parjson.lstAppSCommonSearchTPResponse[0].tradeNam);
                             $("#address").val(final_addr);
                             $("#city").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.loc);
                             $("#pincode").val(parjson.lstAppSCommonSearchTPResponse[0].pradr.addr.pncd);
@@ -1279,19 +1279,19 @@ function getTransporter_c(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="name" name="name" placeholder="Enter Name">
+                            <input type="text" class="form-control"  id="name" name="name" placeholder="Enter Name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" readonly id="address" name="address" placeholder="Enter Address">
+                            <input type="text" class="form-control"  id="address" name="address" placeholder="Enter Address">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="city">City <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="city" name="city" placeholder="Enter City">
+                            <input type="text" class="form-control"  id="city" name="city" placeholder="Enter City">
                         </div>
                     </div>
                 </div>
@@ -1300,13 +1300,13 @@ function getTransporter_c(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" readonly id="state" name="state" placeholder="Enter State">
+                            <input type="text" class="form-control"  id="state" name="state" placeholder="Enter State">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="state_code">State Code <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="state_code" name="state_code" placeholder="Enter State Code">
+                            <input type="text" class="form-control"  id="state_code" name="state_code" placeholder="Enter State Code">
                         </div>
                     </div>
                 </div>
@@ -1314,13 +1314,13 @@ function getTransporter_c(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pincode">Pincode <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="pincode" name="pincode" placeholder="Enter pincode">
+                            <input type="text" class="form-control"  id="pincode" name="pincode" placeholder="Enter pincode">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="gst_state">GST State</label>
-                            <input type="text" class="form-control" readonly id="gst_state" name="gst_state" placeholder="Enter GST State">
+                            <input type="text" class="form-control"  id="gst_state" name="gst_state" placeholder="Enter GST State">
                         </div>
                     </div>
                 </div>
@@ -1355,19 +1355,19 @@ function getTransporter_c(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Name <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="t_name" name="name" placeholder="Enter Name">
+                            <input type="text" class="form-control"  id="t_name" name="name" placeholder="Enter Name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" readonly id="t_address" name="address" placeholder="Enter Address">
+                            <input type="text" class="form-control"  id="t_address" name="address" placeholder="Enter Address">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="city">City <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="t_city" name="city" placeholder="Enter City">
+                            <input type="text" class="form-control"  id="t_city" name="city" placeholder="Enter City">
                         </div>
                     </div>
                 </div>
@@ -1376,13 +1376,13 @@ function getTransporter_c(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="state">State</label>
-                            <input type="text" class="form-control" readonly  id="t_state" name="state" placeholder="Enter State">
+                            <input type="text" class="form-control"   id="t_state" name="state" placeholder="Enter State">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="state_code">State Code <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="t_state_code" name="state_code" placeholder="Enter State Code">
+                            <input type="text" class="form-control"  id="t_state_code" name="state_code" placeholder="Enter State Code">
                         </div>
                     </div>
                 </div>
@@ -1390,13 +1390,13 @@ function getTransporter_c(){
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pincode">Pincode <span style="color:red;">*</span></label>
-                            <input type="text" class="form-control" readonly id="t_pincode" name="pincode" placeholder="Enter pincode">
+                            <input type="text" class="form-control"  id="t_pincode" name="pincode" placeholder="Enter pincode">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="gst_state">GST State</label>
-                            <input type="text" class="form-control" readonly id="t_gst_state" name="gst_state" placeholder="Enter GST State">
+                            <input type="text" class="form-control"  id="t_gst_state" name="gst_state" placeholder="Enter GST State">
                         </div>
                     </div>
                 </div>

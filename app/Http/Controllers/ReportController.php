@@ -33,7 +33,10 @@ class ReportController extends Controller
     
     public function dmr_report_view(){
         return view('report.dmr');
+    }
 
+    public function container_status_report_view(){
+        return view('report.containerStatus');
     }
 
     public function getDmrReport(Request $request){

@@ -117,6 +117,7 @@ Route::get('/pti/all', 'App\Http\Controllers\PTIController@all');
 
 Route::get('/report/container', 'App\Http\Controllers\ReportController@container_report_view');
 Route::get('/report/dmr', 'App\Http\Controllers\ReportController@dmr_report_view');
+Route::get('/report/container-status', 'App\Http\Controllers\ReportController@container_status_report_view');
 
 Route::get('/cashflow/create', 'App\Http\Controllers\CashFlowController@index');
 Route::get('/cashflow/all', 'App\Http\Controllers\CashFlowController@all');
