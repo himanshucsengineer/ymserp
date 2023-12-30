@@ -431,13 +431,23 @@ a.open:hover .circle img {
                                 <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel"
                                     aria-labelledby="custom-tabs-three-profile-tab">
                                     <div class="row">
-                                        <div class="col-md-2">
-                                            <button data-toggle="modal" class="btn btn-block btn-outline-success"
-                                                data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <button data-toggle="modal" class="btn btn-block btn-outline-success"
+                                                        data-target="#modal-default"><?php if($checkSupervisor == 0){echo "Save Estimate";}else{ echo "Approved & Ready For Repair";}?></button>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-block btn-outline-success"
+                                                        onclick="printAstimate()">Print</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <button class="btn btn-block btn-outline-success"
-                                                onclick="printAstimate()">Print</button>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-6" id="line_budget"></div>
+                                                <div class="col-md-6" id="total_spend"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card mt-5">
@@ -1272,6 +1282,9 @@ function getLineData(line_id) {
             $('#floor_img').attr({
                 'src': `/uploads/line/${data.floor_img}`
             })
+
+
+            $('#line_budget').html(`<h3>Line Budget : ${data.line_budget}</h3>`);
         },
         error: function(error) {
             console.log(error);
@@ -1566,9 +1579,12 @@ function getReportingData() {
         success: function(data) {
             clearreposrtingTable();
             var tbody = $('#reporting');
+            var total_spend = 0;
 
             var i = 1;
             data.forEach(function(item) {
+                total_spend = total_spend + item.total;
+                
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
                 row.append($('<td>').text($('#modal_container_no').val()));
@@ -1715,6 +1731,9 @@ function getReportingData() {
                 tbody.append(row);
                 i++;
             });
+
+            $('#total_spend').html(`<h3>Total Spend : ${total_spend}</h3>`);
+
             $('#reporting_qty, #reporting_labour_hr').on('keyup', function() {
                 var reporting_qty = $('#reporting_qty').val();
                 var reporting_labour_hr = $('#reporting_labour_hr').val();

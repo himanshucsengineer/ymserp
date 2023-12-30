@@ -11,6 +11,7 @@ use App\Models\MasterDamage;
 use App\Models\MasterMaterial;
 use App\Models\LocationCode;
 use App\Models\GatePass;
+use App\Models\InvoiceManagement;
 
 use App\Models\GateIn;
 use App\Models\MasterTransport;
@@ -482,7 +483,16 @@ class GateInController extends Controller
             $line = MasterLine::where('id',$gateIn->line_id)->first();
             $consignee = MasterTransport::where('id',$request->consignee_id)->first();
             $transporter = MasterTransport::where('id',$request->transport_id)->first();
+            $invoiceData = InvoiceManagement::where([
+                ['gate_in_id', $gateIn->id],
+                ['invoice_type', 'lolo']
+            ])->first();
 
+            if($invoiceData){
+                $amount = $invoiceData->amount;
+            }else{
+                $amount ='';
+            }
 
             if($consignee){
                 $consinee_name = $consignee->name;
@@ -550,8 +560,7 @@ class GateInController extends Controller
                 'return' => $gateIn->return,
                 'tracking_device' => $gateIn->tracking_device,
                 'remarks' => $gateIn->remarks,
-
-
+                'amount' => $amount,
                 'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];
@@ -1911,6 +1920,16 @@ class GateInController extends Controller
             $consignee = MasterTransport::where('id',$request->consignee_id)->first();
             $transporter = MasterTransport::where('id',$request->transport_id)->first();
 
+            $invoiceData = InvoiceManagement::where([
+                ['gate_in_id', $gateIn->id],
+                ['invoice_type', 'lolo']
+            ])->first();
+
+            if($invoiceData){
+                $amount = $invoiceData->amount;
+            }else{
+                $amount ='';
+            }
 
             if($consignee){
                 $consinee_name = $consignee->name;
@@ -1979,7 +1998,7 @@ class GateInController extends Controller
                 'tracking_device' => $gateIn->tracking_device,
                 'remarks' => $gateIn->remarks,
 
-
+                'amount' => $amount,
                 'is_assigned' => $is_assigned, 
                 'id' => $gateIn->id,
             ];

@@ -623,36 +623,36 @@ $(function () {
             'id' : containerid
         }
 
-            // $.ajax({
-            //     url: '/api/gatein/update',
-            //     type: 'POST',
-            //     headers: {
-            //         'Authorization': 'Bearer ' + checkToken
-            //     },
-            //     data: newdata,
-            //     success: function(data) {
-            //         var checkSuperbisor = <?php echo $checkSupervisor?>;
-            //         if(checkSuperbisor == 1){
-            //             window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
-            //         }else{
-            //             window.location = `/surveyor/masterserveyor?id=${containerid}`
-            //         }
-            //     },
-            //     error: function(error) {
-            //         var finalValue = '';
-            //         if(Array.isArray(error.responseJSON.message)){
-            //             finalValue = Object.values(error.responseJSON.message[0]).join(', ');
-            //         }else{
-            //             finalValue = error.responseJSON.message;
-            //         }
-            //         var callout = document.createElement('div');
-            //         callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-            //         document.getElementById('apiMessages').appendChild(callout);
-            //         setTimeout(function() {
-            //             callout.remove();
-            //         }, 2000);
-            //     }
-            // });
+            $.ajax({
+                url: '/api/gatein/update',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: newdata,
+                success: function(data) {
+                    var checkSuperbisor = <?php echo $checkSupervisor?>;
+                    if(checkSuperbisor == 1){
+                        window.location = `/surveyor/masterserveyor?id=${containerid}&supervisor=yes`
+                    }else{
+                        window.location = `/surveyor/masterserveyor?id=${containerid}`
+                    }
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if(Array.isArray(error.responseJSON.message)){
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    }else{
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            });
 
         
         

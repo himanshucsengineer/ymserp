@@ -1048,7 +1048,8 @@ function add_transporter(){
             }, 2000);
     }
 
-    const data = {
+    if(name != ''){
+        const data = {
         'name':name,
         'address':address,
         'city':city,
@@ -1075,6 +1076,9 @@ function add_transporter(){
     $('#t_state_code').val('');
 
     $('#modal-transporter').modal('hide');
+    }
+
+    
 }
 
 function add_consginee(){
@@ -1100,7 +1104,7 @@ function add_consginee(){
                 callout.remove();
             }, 2000);
     }
-
+    if(name != ''){
     const data = {
         'name':name,
         'address':address,
@@ -1127,6 +1131,7 @@ function add_consginee(){
     $('#gst_state').val('');
     $('#state_code').val('');
     $('#modal-consignee').modal('hide');
+}
 }
 
 </script>

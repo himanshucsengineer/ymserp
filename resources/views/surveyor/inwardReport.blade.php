@@ -89,11 +89,9 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Action</th>
-                                        <!-- <th>Inward No.</th> -->
+                                        <th>Amount</th>
                                         <th>Container No.</th>
-                                        <th>Container Image</th>
                                         <th>Vehicle No.</th>
-                                        <th>Vehicle image</th>
                                         <th>Inward Date</th>
                                         <th>Inward Time</th>
                                         <th>Surveyor Date</th>
@@ -187,19 +185,7 @@ function filterByDate(){
 
             var i =1;
             response.data.forEach(function(item) {
-                var container_img = '';
-                if(item.container_img){
-                    container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
-                }else{
-                    container_img = "No Imgae Available";
-                }
-                var vehicle_img = '';
-                if(item.vehicle_img){
-                    vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
-                }else{
-                    vehicle_img = "No Imgae Available";
-                }
-
+                
                 var challan = '';
                 if(item.challan){
                     challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
@@ -224,12 +210,9 @@ function filterByDate(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                // row.append($('<td>').append(item.inward_no));
-
+                row.append($('<td>').append(item.amount));
                 row.append($('<td>').append(item.container_no));
-                row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
                 row.append($('<td>').append(item.inward_date));
                 row.append($('<td>').append(item.inward_time));
                 row.append($('<td>').append(item.survayor_date));
@@ -415,12 +398,10 @@ function refreshTable(page,search){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                // row.append($('<td>').append(item.inward_no));
+                row.append($('<td>').append(item.amount));
 
                 row.append($('<td>').append(item.container_no));
-                row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
                 row.append($('<td>').append(item.inward_date));
                 row.append($('<td>').append(item.inward_time));
                 row.append($('<td>').append(item.survayor_date));
