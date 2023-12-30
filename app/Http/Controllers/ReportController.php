@@ -52,8 +52,6 @@ class ReportController extends Controller
         $outStartDate = $startDate . ' 00:00:00';
         $outEndDate = $endDate . ' 23:59:59';
 
-        
-        
         if($request->report_type == 'ALL'){
             $getInData = GateIn::where([
                 ['status','In']
@@ -120,8 +118,12 @@ class ReportController extends Controller
                 ['payment_method','Cash']
                 ])->first();
 
-            if($invoiceData){
-                $amount = $invoiceData->amount;
+            if(count($invoiceData) > 0){
+                if($invoiceData->amount){
+                    $amount = $invoiceData->amount;
+                }else{
+                    $amount = '';
+                }
                 $receipt_no = $invoiceData->final_invoice_no;
             }
 
