@@ -49,12 +49,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Outward Container</h1>
+                    <h1 class="m-0">Outward Report</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Outward Container</li>
+                        <li class="breadcrumb-item active">Outward Report</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -96,16 +96,43 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Inward No.</th>
-                                        <th>Container No.</th>
-                                        <th>Container Image</th>
-                                        <th>Container Size</th>
-                                        <th>Container Type</th>
-                                        <th>Vehicle No.</th>
-                                        <th>Vehicle image</th>
-                                        <th>Driver Name</th>
-                                        <th>Driver Contact</th>
                                         <th>Action</th>
+                                        <th>Container No.</th>
+                                        <th>Container Type</th>
+                                        <th>Container Size</th>
+                                        <th>Sub Type</th>
+                                        <th>Status Name</th>
+                                        <th>Grade</th>
+                                        <th>Line Name</th>
+                                        <th>Repair Completion Date</th>
+                                        <th>Inward Date</th>
+                                        <th>D.O. Number</th>
+                                        <th>D.O. Date</th>
+                                        <th>Transporters</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Destination</th>
+                                        <th>Seal Number</th>
+                                        <th>Third Party</th>
+                                        <th>Port Name</th>
+                                        <th>Temprature</th>
+                                        <th>Vent Seal No.</th>
+                                        <th>Ventilation</th>
+                                        <th>Humadity</th>
+                                        <th>Device Status</th>
+                                        <th>Amount</th>
+                                        <th>D.O. Photo</th>
+                                        <th>Challan Photo</th>
+                                        <th>Challan Number</th>
+                                        <th>Driver Name</th>
+                                        <th>Driver Photo</th>
+                                        <th>Driver Contact</th>
+                                        <th>Consignee</th>
+                                        <th>Licence Number</th>
+                                        <th>Licence Photo</th>
+                                        <th>Aadhar Number</th>
+                                        <th>Aadhar Photo</th>
+                                        <th>PAN Number</th>
+                                        <th>PAN Photo</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -157,46 +184,100 @@ function filterByDate(){
             'endDate':endDate
         },
         success: function(response) {
+
             clearTableBody()
 
             var tbody = $('#table-body');
 
             var i =1;
             response.data.forEach(function(item) {
-                var container_img = '';
-                if(item.container_img){
-                    container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
+                var do_copy = '';
+                if(item.do_copy){
+                    do_copy = $('<a>').attr({'href':'/uploads/outward/'+item.do_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    do_copy = "No Imgae Available";
                 }
-                var vehicle_img = '';
-                if(item.vehicle_img){
-                    vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
+                var challan_copy = '';
+                if(item.challan_copy){
+                    challan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.challan_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    challan_copy = "No Imgae Available";
+                }
+
+                var driver_copy = '';
+                if(item.driver_copy){
+                    driver_copy = $('<a>').attr({'href':'/uploads/outward/'+item.driver_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    driver_copy = "No Imgae Available";
+                }
+
+                var licence_copy = '';
+                if(item.licence_copy){
+                    licence_copy = $('<a>').attr({'href':'/uploads/outward/'+item.licence_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    licence_copy = "No Imgae Available";
+                }
+
+                var aadhar_copy = '';
+                if(item.aadhar_copy){
+                    aadhar_copy = $('<a>').attr({'href':'/uploads/outward/'+item.aadhar_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    aadhar_copy = "No Imgae Available";
+                }
+
+                var pan_copy = '';
+                if(item.pan_copy){
+                    pan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.pan_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    pan_copy = "No Imgae Available";
                 }
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.inward_no));
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-                row.append($('<td>').append(container_img));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
-                
-                var viewButton = $('<span>')
-                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
+                var editButton = $('<span>')
+                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
-                    .attr('class', 'view-button');
+                    .attr('class', 'edit-button');
 
                 var td = $('<td>');
-                td.append(viewButton);
+                td.append(editButton);
                 row.append(td);
-
+                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td >').append(item.line_name));
+                row.append($('<td>').append(item.repair_updatedat));
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.do_no));
+                row.append($('<td>').append(item.do_date));
+                row.append($('<td>').append(item.transporter));
+                row.append($('<td>').append(item.vhicleNo));
+                row.append($('<td>').append(item.destination));
+                row.append($('<td>').append(item.seal_no));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.temprature));
+                row.append($('<td>').append(item.vent_seal_no));
+                row.append($('<td>').append(item.ventilation));
+                row.append($('<td>').append(item.humadity));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.amount));
+                row.append($('<td>').append(do_copy));
+                row.append($('<td>').append(challan_copy));
+                row.append($('<td>').append(item.challan_no));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(driver_copy));
+                row.append($('<td>').append(item.driver_contact));
+                row.append($('<td>').append(item.consignee));
+                row.append($('<td>').append(item.licence_no));
+                row.append($('<td>').append(licence_copy));
+                row.append($('<td>').append(item.aadhar_no));
+                row.append($('<td>').append(aadhar_copy));
+                row.append($('<td>').append(item.pan_no));
+                row.append($('<td>').append(pan_copy));
                 tbody.append(row);
                 i++;
             });
@@ -262,8 +343,7 @@ function filterByDate(){
                 }
             }
 
-
-            $('.view-button').click(function() {
+            $('.edit-button').click(function() {
                 var dataId = $(this).data('id');
                 window.location = `/outward/manage?id=${dataId}`
             });
@@ -305,40 +385,93 @@ function refreshTable(page,search){
 
             var i =1;
             response.data.forEach(function(item) {
-                var container_img = '';
-                if(item.container_img){
-                    container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
+                var do_copy = '';
+                if(item.do_copy){
+                    do_copy = $('<a>').attr({'href':'/uploads/outward/'+item.do_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    do_copy = "No Imgae Available";
                 }
-                var vehicle_img = '';
-                if(item.vehicle_img){
-                    vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
+                var challan_copy = '';
+                if(item.challan_copy){
+                    challan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.challan_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    challan_copy = "No Imgae Available";
+                }
+
+                var driver_copy = '';
+                if(item.driver_copy){
+                    driver_copy = $('<a>').attr({'href':'/uploads/outward/'+item.driver_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    driver_copy = "No Imgae Available";
+                }
+
+                var licence_copy = '';
+                if(item.licence_copy){
+                    licence_copy = $('<a>').attr({'href':'/uploads/outward/'+item.licence_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    licence_copy = "No Imgae Available";
+                }
+
+                var aadhar_copy = '';
+                if(item.aadhar_copy){
+                    aadhar_copy = $('<a>').attr({'href':'/uploads/outward/'+item.aadhar_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    aadhar_copy = "No Imgae Available";
+                }
+
+                var pan_copy = '';
+                if(item.pan_copy){
+                    pan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.pan_copy, 'target':'_blank'}).text("View Image");
+                }else{
+                    pan_copy = "No Imgae Available";
                 }
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                row.append($('<td>').append(item.inward_no));
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-                row.append($('<td>').append(container_img));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-                row.append($('<td>').append(vehicle_img));
-                row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                row.append($('<td>').append(item.contact_number));
-                
-                var viewButton = $('<span>')
-                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
+                var editButton = $('<span>')
+                    .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
-                    .attr('class', 'view-button');
+                    .attr('class', 'edit-button');
 
                 var td = $('<td>');
-                td.append(viewButton);
+                td.append(editButton);
                 row.append(td);
-
+                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
+                row.append($('<td>').append(item.container_type));
+                row.append($('<td>').append(item.container_size));
+                row.append($('<td>').append(item.sub_type));
+                row.append($('<td>').append(item.status_name));
+                row.append($('<td>').append(item.grade));
+                row.append($('<td >').append(item.line_name));
+                row.append($('<td>').append(item.repair_updatedat));
+                row.append($('<td>').append(item.inward_date));
+                row.append($('<td>').append(item.do_no));
+                row.append($('<td>').append(item.do_date));
+                row.append($('<td>').append(item.transporter));
+                row.append($('<td>').append(item.vhicleNo));
+                row.append($('<td>').append(item.destination));
+                row.append($('<td>').append(item.seal_no));
+                row.append($('<td>').append(item.third_party));
+                row.append($('<td>').append(item.port_name));
+                row.append($('<td>').append(item.temprature));
+                row.append($('<td>').append(item.vent_seal_no));
+                row.append($('<td>').append(item.ventilation));
+                row.append($('<td>').append(item.humadity));
+                row.append($('<td>').append(item.device_status));
+                row.append($('<td>').append(item.amount));
+                row.append($('<td>').append(do_copy));
+                row.append($('<td>').append(challan_copy));
+                row.append($('<td>').append(item.challan_no));
+                row.append($('<td>').append(item.driver_name));
+                row.append($('<td>').append(driver_copy));
+                row.append($('<td>').append(item.driver_contact));
+                row.append($('<td>').append(item.consignee));
+                row.append($('<td>').append(item.licence_no));
+                row.append($('<td>').append(licence_copy));
+                row.append($('<td>').append(item.aadhar_no));
+                row.append($('<td>').append(aadhar_copy));
+                row.append($('<td>').append(item.pan_no));
+                row.append($('<td>').append(pan_copy));
                 tbody.append(row);
                 i++;
             });
@@ -405,7 +538,7 @@ function refreshTable(page,search){
             }
 
 
-            $('.view-button').click(function() {
+            $('.edit-button').click(function() {
                 var dataId = $(this).data('id');
                 window.location = `/outward/manage?id=${dataId}`
             });

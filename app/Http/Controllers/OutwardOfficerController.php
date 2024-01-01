@@ -31,6 +31,7 @@ class OutwardOfficerController extends Controller
     {
         return view('outward.view');
     }
+    
     public function manage()
     {
         return view('outward.create');
@@ -43,6 +44,450 @@ class OutwardOfficerController extends Controller
     public function centeral_view(){
         return view('invoice.central');
     }
+
+
+    public function filterByOutStatus(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->startDate != '' && $request->endDate ==  ''){
+            $startDate = $request->startDate;
+            $endDate = date('Y-m-d');
+        }else if($request->startDate == '' && $request->endDate !=  ''){
+            $endDate = $request->endDate;
+            $startDate = date('Y-m-d');
+        }else if($request->startDate != '' && $request->endDate !=  ''){
+            $startDate = $request->startDate;
+            $endDate = $request->endDate;
+        }
+
+        if($request->user_id == 1){
+            $outwardData = OutwardOfficer::whereBetween('created_at', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+            $outwardData = OutwardOfficer::where([
+                ['depo_id',$request->depo_id],
+            ])->whereBetween('created_at', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
+        }
+        
+        $formetedData = [];
+
+        foreach($outwardData as $outward){
+            $transport_data = MasterTransport::where('id', $outward->transport_id)->first();
+            $consignee_data = MasterTransport::where('id', $outward->consignee_id)->first();
+            $preAdviceData = PreAdvice::where('id', $outward->pre_advice_id)->first();
+            $gateInData = GateIn::where('id',$outward->gate_in_id)->first();
+            $vhicleData = GateIn::where('id',$outward->vhicle_no)->first();
+
+            if($transport_data){
+                $transporter_name =  $transport_data->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($consignee_data){
+                $consignee_name =  $consignee_data->name;
+            }else{
+                $consignee_name = '';
+            }
+
+            if($preAdviceData){
+                $do_no = $preAdviceData->do_no;
+                $do_date = $preAdviceData->do_date;
+            }else{
+                $do_no = '';
+                $do_date = '';
+            }
+
+            if($vhicleData){
+                $vhicleNo = $vhicleData->vehicle_number;
+            }else{
+                $vhicleNo = '';
+            }
+
+            if($gateInData ){
+                $lineData = MasterLine::where('id',$gateInData->line_id)->first();
+
+                $container_no = $gateInData->container_no;
+                $container_size = $gateInData->container_size;
+                $container_type = $gateInData->container_type;
+                $sub_type = $gateInData->sub_type;
+                $status_name = $gateInData->status_name;
+                $grade = $gateInData->grade;
+                $line_name = $lineData->name;
+                $repair_updatedat = $gateInData->repair_updatedat;
+                $inward_date = $gateInData->inward_date;
+            }else{
+                $container_no = '';
+                $container_size = '';
+                $container_type = '';
+                $sub_type = '';
+                $status_name = '';
+                $grade = '';
+                $line_name = '';
+                $repair_updatedat = '';
+                $inward_date ='';
+            }
+
+
+
+            $formetedData[] = [
+                'container_no' => $container_no,
+                'container_type' => $container_type,
+                'container_size' => $container_size,
+                'sub_type' => $sub_type,
+                'status_name' => $status_name,
+                'grade' => $grade,
+                'line_name' => $line_name,
+                'repair_updatedat' => $repair_updatedat,
+                'inward_date' => $inward_date,
+                'do_no' => $do_no,
+                'do_date' => $do_date,
+                'transporter' => $transporter_name,
+                'vhicleNo' => $vhicleNo,
+                'destination' => $outward->destination,
+                'seal_no' => $outward->seal_no,
+                'third_party' => $outward->third_party,
+                'port_name' => $outward->port_name,
+                'temprature' => $outward->temprature,
+                'vent_seal_no' => $outward->vent_seal_no,
+                'ventilation' => $outward->ventilation,
+                'humadity' => $outward->humadity,
+                'device_status' => $outward->device_status,
+                'amount' => $outward->amount,
+                'do_copy' => $outward->do_copy,
+                'challan_copy' => $outward->challan_copy,
+                'challan_no' => $outward->challan_no,
+                'driver_name' => $outward->driver_name,
+                'driver_copy' => $outward->driver_copy,
+                'driver_contact' => $outward->driver_contact,
+                'consignee' => $consignee_name,
+                'licence_no' => $outward->licence_no,
+                'licence_copy' => $outward->licence_copy,
+                'aadhar_no' => $outward->aadhar_no,
+                'aadhar_copy' => $outward->aadhar_copy,
+                'pan_no' => $outward->pan_no,
+                'pan_copy' => $outward->pan_copy,
+                'id' => $outward->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $outwardData->currentPage(),
+                'per_page' => $outwardData->perPage(),
+                'total' => $outwardData->total(),
+                'last_page' => $outwardData->lastPage(),
+                'from' => $outwardData->firstItem(),
+                'to' => $outwardData->lastItem(),
+                'links' => [
+                    'prev' => $outwardData->previousPageUrl(),
+                    'next' => $outwardData->nextPageUrl(),
+                    'all_pages' => $outwardData->getUrlRange(1, $outwardData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
+
+    public function getInspectionDataOutStatus(Request $request){
+        
+        $datalimit = '';
+
+        if($request->page == "*"){
+            $datalimit= 999999999;
+        }else{
+            $datalimit = 25;
+        }
+
+        if($request->search == "undefined" || $request->search == "null" || $request->search == "NULL" || $request->search == "true" || $request->search == "TRUE" || $request->search == "false" || $request->search == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Search Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->page == "undefined" || $request->page == "null" || $request->page == "NULL" || $request->page == "true" || $request->page == "TRUE" || $request->page == "false" || $request->page == "FALSE"){
+            return response()->json([
+                'status' => "error",
+                'message' => 'Page Value Can not be undefined, null and boolean!'
+            ], 400);
+        }
+
+        if($request->search){
+
+            $lineSearch = MasterLine::where('name', 'LIKE', '%' . $request->search . '%')->get();
+            $lineId = [];
+            if(count($lineSearch)>0){
+                foreach($lineSearch as $line){
+                    array_push($lineId, $line->id);
+                }
+            }
+            $gateInSearch = GateIn::orWhere('container_no', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('container_size', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('container_type', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('sub_type', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('status_name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('grade', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('repair_updatedat', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('inward_date', 'LIKE', '%' . $request->search . '%')
+            ->orWhereIn('line_id', $lineId)
+            ->get();
+
+            $gateinId = [];
+            if(count($gateInSearch)>0){
+                foreach($gateInSearch as $gatein){
+                    array_push($gateinId, $gatein->id);
+                }
+            }
+            
+            $vhicleId = [];
+            $vhicleSearch = GateIn::where('vehicle_number', 'LIKE', '%' . $request->search . '%')->get();
+            if(count($vhicleSearch)>0){
+                foreach($vhicleSearch as $vhicle){
+                    array_push($vhicleId, $vhicle->id);
+                }
+            }
+
+            $preadviceSearch = PreAdvice::orWhere('do_no', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('do_date', 'LIKE', '%' . $request->search . '%')
+            ->get();
+
+            $preadviceId = [];
+            if(count($preadviceSearch)>0){
+                foreach($preadviceSearch as $preadvice){
+                    array_push($preadviceId, $preadvice->id);
+                }
+            }
+
+            $transportId = [];
+            $transportSearch = MasterTransport::where('name', 'LIKE', '%' . $request->search . '%')->get();
+            if(count($transportSearch)>0){
+                foreach($transportSearch as $transport){
+                    array_push($transportId, $transport->id);
+                }
+            }
+
+            $consigneeId = [];
+            $consigneeSearch = MasterTransport::where('name', 'LIKE', '%' . $request->search . '%')->get();
+            if(count($consigneeSearch)>0){
+                foreach($consigneeSearch as $consignee){
+                    array_push($consigneeId, $consignee->id);
+                }
+            }
+
+        }else{
+            $gateinId = [];
+            $vhicleId = [];
+            $preadviceId = [];
+            $consigneeId = [];
+            $transportId = [];
+        }
+
+
+        if($request->user_id == 1){
+
+            $outwardData = OutwardOfficer::where([
+                [function ($query) use ($request,$gateinId,$vhicleId,$preadviceId,$consigneeId,$transportId) {
+                    if (($search = $request->search)) {
+                        $query->orWhereIn('gate_in_id',$gateinId)
+                            ->orWhere('pre_advice_id', $preadviceId)
+                            ->orWhere('transport_id', $transportId)
+                            ->orWhere('vhicle_no', $vhicleId)
+                            ->orWhere('destination', 'LIKE', '%' . $search . '%')
+                            ->orWhere('seal_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('third_party', 'LIKE', '%' . $search . '%')
+                            ->orWhere('port_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('temprature', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vent_seal_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ventilation', 'LIKE', '%' . $search . '%')
+                            ->orWhere('humadity', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_contact', 'LIKE', '%' . $search . '%')
+                            ->orWhere('device_status', 'LIKE', '%' . $search . '%')
+                            ->orWhere('amount', 'LIKE', '%' . $search . '%')
+                            ->orWhere('challan_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('consignee_id', $consigneeId)
+                            ->orWhere('licence_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('aadhar_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('pan_no', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }else{
+
+            $outwardData = OutwardOfficer::where([
+                [function ($query) use ($request,$gateinId,$vhicleId,$preadviceId,$consigneeId,$transportId) {
+                    if (($search = $request->search)) {
+                        $query->orWhereIn('gate_in_id',$gateinId)
+                            ->orWhere('pre_advice_id', $preadviceId)
+                            ->orWhere('transport_id', $transportId)
+                            ->orWhere('vhicle_no', $vhicleId)
+                            ->orWhere('destination', 'LIKE', '%' . $search . '%')
+                            ->orWhere('seal_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('third_party', 'LIKE', '%' . $search . '%')
+                            ->orWhere('port_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('temprature', 'LIKE', '%' . $search . '%')
+                            ->orWhere('vent_seal_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('ventilation', 'LIKE', '%' . $search . '%')
+                            ->orWhere('humadity', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_contact', 'LIKE', '%' . $search . '%')
+                            ->orWhere('device_status', 'LIKE', '%' . $search . '%')
+                            ->orWhere('amount', 'LIKE', '%' . $search . '%')
+                            ->orWhere('challan_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('driver_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('consignee_id', $consigneeId)
+                            ->orWhere('licence_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('aadhar_no', 'LIKE', '%' . $search . '%')
+                            ->orWhere('pan_no', 'LIKE', '%' . $search . '%')
+                            ->get();
+                    }
+                }],
+                ['depo_id',$request->depo_id],
+            ])->orderby('created_at','desc')->paginate($datalimit);
+        }
+    
+        $formetedData = [];
+
+        foreach($outwardData as $outward){
+            $transport_data = MasterTransport::where('id', $outward->transport_id)->first();
+            $consignee_data = MasterTransport::where('id', $outward->consignee_id)->first();
+            $preAdviceData = PreAdvice::where('id', $outward->pre_advice_id)->first();
+            $gateInData = GateIn::where('id',$outward->gate_in_id)->first();
+            $vhicleData = GateIn::where('id',$outward->vhicle_no)->first();
+
+            if($transport_data){
+                $transporter_name =  $transport_data->name;
+            }else{
+                $transporter_name = '';
+            }
+
+            if($consignee_data){
+                $consignee_name =  $consignee_data->name;
+            }else{
+                $consignee_name = '';
+            }
+
+            if($preAdviceData){
+                $do_no = $preAdviceData->do_no;
+                $do_date = $preAdviceData->do_date;
+            }else{
+                $do_no = '';
+                $do_date = '';
+            }
+
+            if($vhicleData){
+                $vhicleNo = $vhicleData->vehicle_number;
+            }else{
+                $vhicleNo = '';
+            }
+
+            if($gateInData ){
+                $lineData = MasterLine::where('id',$gateInData->line_id)->first();
+
+                $container_no = $gateInData->container_no;
+                $container_size = $gateInData->container_size;
+                $container_type = $gateInData->container_type;
+                $sub_type = $gateInData->sub_type;
+                $status_name = $gateInData->status_name;
+                $grade = $gateInData->grade;
+                $line_name = $lineData->name;
+                $repair_updatedat = $gateInData->repair_updatedat;
+                $inward_date = $gateInData->inward_date;
+            }else{
+                $container_no = '';
+                $container_size = '';
+                $container_type = '';
+                $sub_type = '';
+                $status_name = '';
+                $grade = '';
+                $line_name = '';
+                $repair_updatedat = '';
+                $inward_date ='';
+            }
+
+
+
+            $formetedData[] = [
+                'container_no' => $container_no,
+                'container_type' => $container_type,
+                'container_size' => $container_size,
+                'sub_type' => $sub_type,
+                'status_name' => $status_name,
+                'grade' => $grade,
+                'line_name' => $line_name,
+                'repair_updatedat' => $repair_updatedat,
+                'inward_date' => $inward_date,
+                'do_no' => $do_no,
+                'do_date' => $do_date,
+                'transporter' => $transporter_name,
+                'vhicleNo' => $vhicleNo,
+                'destination' => $outward->destination,
+                'seal_no' => $outward->seal_no,
+                'third_party' => $outward->third_party,
+                'port_name' => $outward->port_name,
+                'temprature' => $outward->temprature,
+                'vent_seal_no' => $outward->vent_seal_no,
+                'ventilation' => $outward->ventilation,
+                'humadity' => $outward->humadity,
+                'device_status' => $outward->device_status,
+                'amount' => $outward->amount,
+                'do_copy' => $outward->do_copy,
+                'challan_copy' => $outward->challan_copy,
+                'challan_no' => $outward->challan_no,
+                'driver_name' => $outward->driver_name,
+                'driver_copy' => $outward->driver_copy,
+                'driver_contact' => $outward->driver_contact,
+                'consignee' => $consignee_name,
+                'licence_no' => $outward->licence_no,
+                'licence_copy' => $outward->licence_copy,
+                'aadhar_no' => $outward->aadhar_no,
+                'aadhar_copy' => $outward->aadhar_copy,
+                'pan_no' => $outward->pan_no,
+                'pan_copy' => $outward->pan_copy,
+                'id' => $outward->id,
+            ];
+            
+        }
+    	return response()->json([
+            'data' => $formetedData,
+            'pagination' => [
+                'current_page' => $outwardData->currentPage(),
+                'per_page' => $outwardData->perPage(),
+                'total' => $outwardData->total(),
+                'last_page' => $outwardData->lastPage(),
+                'from' => $outwardData->firstItem(),
+                'to' => $outwardData->lastItem(),
+                'links' => [
+                    'prev' => $outwardData->previousPageUrl(),
+                    'next' => $outwardData->nextPageUrl(),
+                    'all_pages' => $outwardData->getUrlRange(1, $outwardData->lastPage()),
+                ],
+            ],
+        ]); 
+    }
+
 
     public function gateoutdata(Request $request){
         $gatePassData = GatePass::where('id',$request->gate_pass_no)->first();
@@ -66,6 +511,11 @@ class OutwardOfficerController extends Controller
 
     public function getGatePass(Request $request){
         return GatePass::where('final_gate_pass_no', 'LIKE', '%' . $request->term . '%')->where('is_checked','no')->get();
+    }
+
+    public function getbyid(Request $request)
+    {
+        return OutwardOfficer::where('id',$request->id)->first();
     }
 
     public function get(Request $request)
@@ -516,9 +966,104 @@ class OutwardOfficerController extends Controller
      * @param  \App\Models\OutwardOfficer  $outwardOfficer
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOutwardOfficerRequest $request, OutwardOfficer $outwardOfficer)
+    public function update(Request $request)
     {
-        //
+        $outwardDetails = OutwardOfficer::find($request->id);
+
+        if ($request->hasFile('do_copy')) {
+            $do_copy = $request->file('do_copy');
+            $do_copy_name = time() . '_' . $do_copy->getClientOriginalName();
+            $do_copy->move(public_path('uploads/outward'), $do_copy_name);
+        }else{
+            $do_copy_name = $outwardDetails->do_copy;
+        }
+
+        if ($request->hasFile('challan_copy')) {
+            $challan_copy = $request->file('challan_copy');
+            $challan_copy_name = time() . '_' . $challan_copy->getClientOriginalName();
+            $challan_copy->move(public_path('uploads/outward'), $challan_copy_name);
+        }else{
+            $challan_copy_name = $outwardDetails->challan_copy;
+        }
+
+        if ($request->hasFile('driver_copy')) {
+            $driver_copy = $request->file('driver_copy');
+            $driver_copy_name = time() . '_' . $driver_copy->getClientOriginalName();
+            $driver_copy->move(public_path('uploads/outward'), $driver_copy_name);
+        }else{
+            $driver_copy_name = $outwardDetails->driver_copy;
+        }
+
+        if ($request->hasFile('licence_copy')) {
+            $licence_copy = $request->file('licence_copy');
+            $licence_copy_name = time() . '_' . $licence_copy->getClientOriginalName();
+            $licence_copy->move(public_path('uploads/outward'), $licence_copy_name);
+        }else{
+            $licence_copy_name = $outwardDetails->licence_copy;
+        }
+
+        if ($request->hasFile('aadhar_copy')) {
+            $aadhar_copy = $request->file('aadhar_copy');
+            $aadhar_copy_name = time() . '_' . $aadhar_copy->getClientOriginalName();
+            $aadhar_copy->move(public_path('uploads/outward'), $aadhar_copy_name);
+        }else{
+            $aadhar_copy_name = $outwardDetails->aadhar_copy;
+        }
+
+        if ($request->hasFile('pan_copy')) {
+            $pan_copy = $request->file('pan_copy');
+            $pan_copy_name = time() . '_' . $pan_copy->getClientOriginalName();
+            $pan_copy->move(public_path('uploads/outward'), $pan_copy_name);
+        }else{
+            $pan_copy_name = $outwardDetails->pan_copy;
+        }
+
+        $outwardDetails->gate_in_id =  is_null($request->gate_in_id) ? $outwardDetails->gate_in_id : $request->gate_in_id;
+        $outwardDetails->pre_advice_id = is_null($request->pre_advice_id) ? $outwardDetails->pre_advice_id : $request->pre_advice_id;
+        $outwardDetails->transport_id = is_null($request->transport_id) ? $outwardDetails->transport_id : $request->transport_id;
+        $outwardDetails->vehicle_no = is_null($request->vehicle_no) ? $outwardDetails->vehicle_no : $request->vehicle_no;
+        $outwardDetails->destination = is_null($request->destination) ? $outwardDetails->destination : $request->destination;
+        $outwardDetails->seal_no = is_null($request->seal_no) ? $outwardDetails->seal_no : $request->seal_no;
+        $outwardDetails->third_party = is_null($request->third_party) ? $outwardDetails->third_party : $request->third_party;
+        $outwardDetails->port_name = is_null($request->port_name) ? $outwardDetails->port_name : $request->port_name;
+        $outwardDetails->temprature = is_null($request->temprature) ? $outwardDetails->temprature : $request->temprature;
+        $outwardDetails->vent_seal_no = is_null($request->vent_seal_no) ? $outwardDetails->vent_seal_no : $request->vent_seal_no;
+        $outwardDetails->ventilation = is_null($request->ventilation) ? $outwardDetails->ventilation : $request->ventilation;
+        $outwardDetails->humadity = is_null($request->humadity) ? $outwardDetails->humadity : $request->humadity;
+        $outwardDetails->device_status = is_null($request->device_status) ? $outwardDetails->device_status : $request->device_status;
+        $outwardDetails->amount = is_null($request->amount) ? $outwardDetails->amount : $request->amount;
+        $outwardDetails->challan_no = is_null($request->challan_no) ? $outwardDetails->challan_no : $request->challan_no;
+        $outwardDetails->driver_name = is_null($request->driver_name) ? $outwardDetails->driver_name : $request->driver_name;
+        $outwardDetails->consignee_id = is_null($request->consignee_id) ? $outwardDetails->consignee_id : $request->consignee_id;
+        $outwardDetails->licence_no = is_null($request->licence_no) ? $outwardDetails->licence_no : $request->licence_no;
+        $outwardDetails->aadhar_no = is_null($request->aadhar_no) ? $outwardDetails->aadhar_no : $request->aadhar_no;
+        $outwardDetails->pan_no = is_null($request->pan_no) ? $outwardDetails->pan_no : $request->pan_no;
+        $outwardDetails->driver_contact = is_null($request->driver_contact) ? $outwardDetails->driver_contact : $request->driver_contact;
+        $outwardDetails->do_copy = $do_copy_name;
+        $outwardDetails->challan_copy = $challan_copy_name;
+        $outwardDetails->driver_copy = $driver_copy_name;
+        $outwardDetails->licence_copy = $licence_copy_name;
+        $outwardDetails->aadhar_copy = $aadhar_copy_name;
+        $outwardDetails->pan_copy = $pan_copy_name;
+        $outwardDetails->updated_at = date('Y-m-d H:i:s');;
+        $outwardDetails  = $outwardDetails->save();
+
+        $gatePassData = GatePass::where('outward_id', $request->id)->first();
+        $outwardData = OutwardOfficer::where('id', $request->id)->first();
+
+        if($outwardDetails){
+            return response()->json([
+                'status' => "success",
+                'message' => "OutWard Updated Successfully",
+                'data' => $outwardData,
+                'gatepassdata' => $gatePassData,
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => "error",
+                'message' => "Error in submission!"
+            ], 500);
+        }
     }
 
     /**

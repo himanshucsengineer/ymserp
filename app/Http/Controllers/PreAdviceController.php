@@ -32,9 +32,12 @@ class PreAdviceController extends Controller
     {
         return view('preadvice.view');
     }
-
+    
     public function getbydo(Request $request){
         return PreAdvice::where('do_no',$request->do_no)->first();
+    }
+    public function getbyid(Request $request){
+        return PreAdvice::where('id',$request->id)->first();
     }
 
     /**

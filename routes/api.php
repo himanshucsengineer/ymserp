@@ -247,19 +247,22 @@ $api->version('v1', function($api){
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'outward'], function($api){
-        $api->post('/filterByOutStatus', 'App\Http\Controllers\GateInController@filterByOutStatus');
-        $api->post('/getInspectionDataOutStatus', 'App\Http\Controllers\GateInController@getInspectionDataOutStatus');
+        $api->post('/filterByOutStatus', 'App\Http\Controllers\OutwardOfficerController@filterByOutStatus');
+        $api->post('/getInspectionDataOutStatus', 'App\Http\Controllers\OutwardOfficerController@getInspectionDataOutStatus');
         $api->post('/create', 'App\Http\Controllers\OutwardOfficerController@store');
         $api->post('/get', 'App\Http\Controllers\OutwardOfficerController@get');
+        $api->post('/getbyid', 'App\Http\Controllers\OutwardOfficerController@getbyid');
         $api->post('/genrateGatePass', 'App\Http\Controllers\OutwardOfficerController@genrateGatePass');
         $api->post('/getGatePass', 'App\Http\Controllers\OutwardOfficerController@getGatePass');
         $api->post('/gateoutdata', 'App\Http\Controllers\OutwardOfficerController@gateoutdata');
+        $api->post('/update', 'App\Http\Controllers\OutwardOfficerController@update');
 
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'preadvice'], function($api){
         $api->post('/create', 'App\Http\Controllers\PreAdviceController@store');
         $api->post('/getbydo', 'App\Http\Controllers\PreAdviceController@getbydo');
+        $api->post('/getbyid', 'App\Http\Controllers\PreAdviceController@getbyid');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'docontainer'], function($api){

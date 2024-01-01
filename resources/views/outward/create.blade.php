@@ -298,7 +298,7 @@
                                         <div class="form-group">
                                             <label for="driver_copy">Driver Photo</label>
                                             <input type="file" class="form-control" id="driver_copy" name="driver_copy"
-                                                placeholder="Enter Container Number ">
+                                                placeholder="Enter Container Number " required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -461,7 +461,6 @@ $('#container_no').on('input',function(){
                 'container_no': inputValue,
             },
             success: function(data) {
-                console.log(data);
                 $('#container_type').val(data.gateindata.container_type);
                 $('#container_size').val(data.gateindata.container_size);
                 $('#sub_type').val(data.gateindata.sub_type);
@@ -478,6 +477,56 @@ $('#container_no').on('input',function(){
         });
     }
 })
+
+function getlinedata(id){
+    var checkToken = localStorage.getItem('token');
+        $.ajax({
+            type: "post",
+            url: "/api/line/getbyid",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: {
+                'id': id,
+            },
+            success: function(data) {
+                $('#line_name').val(data.name);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+}
+
+
+function getContainerData(id){
+    var checkToken = localStorage.getItem('token');
+        $.ajax({
+            type: "post",
+            url: "/api/gatein/getDataById",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: {
+                'id': id,
+            },
+            success: function(data) {
+                getlinedata(data.line_id)
+                $('#container_no').val(data.container_no);
+                $('#container_type').val(data.container_type);
+                $('#container_size').val(data.container_size);
+                $('#sub_type').val(data.sub_type);
+                $('#status_name').val(data.status_name);
+                $('#grade').val(data.grade);
+                $('#repair_date').val(data.repair_updatedat);
+                $('#inward_date').val(data.inward_date);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+}
 
 $('#do_no').on('input',function(){
     const inputValue = $(this).val();
@@ -501,7 +550,30 @@ $('#do_no').on('input',function(){
         });
 })
 
+function getPreadviceData(id){
+    var checkToken = localStorage.getItem('token');
+        $.ajax({
+            type: "post",
+            url: "/api/preadvice/getbyid",
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: {
+                'id': id,
+            },
+            success: function(data) {
+                $('#do_date').val(data.do_date);
+                $('#do_no').val(data.do_no);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+}
+
 $(document).ready(function() {
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
 
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
@@ -510,7 +582,8 @@ $(document).ready(function() {
     refreshTransporter()
     refreshConsignee()
 
-    $.ajax({
+    if(!getCateId[1]){
+        $.ajax({
         type: "post",
         url: "/api/gatein/geVhicle",
         headers: {
@@ -533,6 +606,50 @@ $(document).ready(function() {
             console.log(error);
         }
     });
+    }
+    
+    if(getCateId[1]){
+        $.ajax({
+        type: "post",
+        url: "/api/outward/getbyid",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: {
+            'id': getCateId[1],
+        },
+        success: function(data) {
+            getContainerData(data.gate_in_id)
+            getPreadviceData(data.pre_advice_id)
+            $('#gate_in_id').val(data.gate_in_id);
+            $('#pre_advice_id').val(data.pre_advice_id);
+            $('#transport_id').val(data.transport_id).trigger('change');
+            $('#vehicle_no').val(data.vehicle_no);
+            $('#destination').val(data.destination);
+            $('#seal_no').val(data.seal_no);
+            $('#third_party').val(data.third_party);
+            $('#port_name').val(data.port_name);
+            $('#temprature').val(data.temprature);
+            $('#vent_seal_no').val(data.vent_seal_no);
+            $('#ventilation').val(data.ventilation);
+            $('#humadity').val(data.humadity);
+            $('#device_status').val(data.device_status);
+            $('#amount').val(data.amount);
+            $('#challan_no').val(data.challan_no);
+            $('#driver_name').val(data.driver_name);
+            $('#consignee_id').val(data.consignee_id).trigger('change');
+            $('#licence_no').val(data.licence_no);
+            $('#aadhar_no').val(data.aadhar_no);
+            $('#pan_no').val(data.pan_no);
+            $('#driver_contact').val(data.driver_contact);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
+    
 });
 
 function refreshConsignee(){
@@ -643,6 +760,9 @@ function createConsigneeModel(){
 
 $('#outwardForm').on('submit', function(e) {
     event.preventDefault();
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
@@ -670,119 +790,283 @@ $('#outwardForm').on('submit', function(e) {
     var driver_contact = $('#driver_contact').val();
     var formData = new FormData();
 
-    formData.append('gate_in_id',gate_in_id)
-    formData.append('pre_advice_id',pre_advice_id)
-    formData.append('transport_id',transport_id)
-    formData.append('vehicle_no',vehicle_no)
-    formData.append('destination',destination)
-    formData.append('seal_no',seal_no)
-    formData.append('third_party',third_party)
-    formData.append('port_name',port_name)
-    formData.append('temprature',temprature)
-    formData.append('vent_seal_no',vent_seal_no)
-    formData.append('ventilation',ventilation)
-    formData.append('humadity',humadity)
-    formData.append('device_status',device_status)
-    formData.append('amount',amount)
-    formData.append('challan_no',challan_no)
-    formData.append('driver_name',driver_name)
-    formData.append('consignee_id',consignee_id)
-    formData.append('licence_no',licence_no)
-    formData.append('aadhar_no',aadhar_no)
-    formData.append('pan_no',pan_no)
-    formData.append('user_id', user_id);
-    formData.append('depo_id', depo_id);
-    formData.append('driver_contact', driver_contact);
-
-    if ($('#do_copy')[0].files && $('#do_copy')[0].files.length > 0) {
-        formData.append('do_copy', $('#do_copy')[0].files[0]);
-    } else {
-        formData.append('do_copy', '');
-    }
-
-    if ($('#challan_copy')[0].files && $('#challan_copy')[0].files.length > 0) {
-        formData.append('challan_copy', $('#challan_copy')[0].files[0]);
-    } else {
-        formData.append('challan_copy', '');
-    }
     
-    if ($('#driver_copy')[0].files && $('#driver_copy')[0].files.length > 0) {
-        formData.append('driver_copy', $('#driver_copy')[0].files[0]);
-    } else {
-        formData.append('driver_copy', '');
-    }
-    
-    if ($('#licence_copy')[0].files && $('#licence_copy')[0].files.length > 0) {
-        formData.append('licence_copy', $('#licence_copy')[0].files[0]);
-    } else {
-        formData.append('licence_copy', '');
-    }
-    
-    if ($('#aadhar_copy')[0].files && $('#aadhar_copy')[0].files.length > 0) {
-        formData.append('aadhar_copy', $('#aadhar_copy')[0].files[0]);
-    } else {
-        formData.append('aadhar_copy', '');
-    }
 
-    if ($('#pan_copy')[0].files && $('#pan_copy')[0].files.length > 0) {
-        formData.append('pan_copy', $('#pan_copy')[0].files[0]);
-    } else {
-        formData.append('pan_copy', '');
-    }
+    if(gate_in_id != '' && pre_advice_id != '' && transport_id != '' && vehicle_no != '' && amount != '' && driver_name != '' && consignee_id != '' && driver_contact != ''){
+        if(getCateId[1]){
 
-    $.ajax({
-        url: '/api/outward/create',
-        type: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + checkToken
-        },
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            var callout = document.createElement('div');
-            callout.innerHTML =
-                `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
+            formData.append('gate_in_id',gate_in_id)
+            formData.append('pre_advice_id',pre_advice_id)
+            formData.append('transport_id',transport_id)
+            formData.append('vehicle_no',vehicle_no)
+            formData.append('destination',destination)
+            formData.append('seal_no',seal_no)
+            formData.append('third_party',third_party)
+            formData.append('port_name',port_name)
+            formData.append('temprature',temprature)
+            formData.append('vent_seal_no',vent_seal_no)
+            formData.append('ventilation',ventilation)
+            formData.append('humadity',humadity)
+            formData.append('device_status',device_status)
+            formData.append('amount',amount)
+            formData.append('challan_no',challan_no)
+            formData.append('driver_name',driver_name)
+            formData.append('consignee_id',consignee_id)
+            formData.append('licence_no',licence_no)
+            formData.append('aadhar_no',aadhar_no)
+            formData.append('pan_no',pan_no)
+            formData.append('user_id', user_id);
+            formData.append('depo_id', depo_id);
+            formData.append('driver_contact', driver_contact);
+            formData.append('id', getCateId[1]);
 
-            window.open(`/print/gatepass?id=${data.gatepassdata.id}`, '_blank');
-            location.reload();
-        },
-        error: function(error) {
-            var finalValue = '';
-            if (Array.isArray(error.responseJSON.message)) {
-                finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+            if ($('#do_copy')[0].files && $('#do_copy')[0].files.length > 0) {
+                formData.append('do_copy', $('#do_copy')[0].files[0]);
             } else {
-                finalValue = error.responseJSON.message;
+                formData.append('do_copy', '');
             }
-            var callout = document.createElement('div');
-            callout.innerHTML =
-                `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
-            document.getElementById('apiMessages').appendChild(callout);
-            setTimeout(function() {
-                callout.remove();
-            }, 2000);
+
+            if ($('#challan_copy')[0].files && $('#challan_copy')[0].files.length > 0) {
+                formData.append('challan_copy', $('#challan_copy')[0].files[0]);
+            } else {
+                formData.append('challan_copy', '');
+            }
+            
+            if ($('#driver_copy')[0].files && $('#driver_copy')[0].files.length > 0) {
+                formData.append('driver_copy', $('#driver_copy')[0].files[0]);
+            } else {
+                formData.append('driver_copy', '');
+            }
+            
+            if ($('#licence_copy')[0].files && $('#licence_copy')[0].files.length > 0) {
+                formData.append('licence_copy', $('#licence_copy')[0].files[0]);
+            } else {
+                formData.append('licence_copy', '');
+            }
+            
+            if ($('#aadhar_copy')[0].files && $('#aadhar_copy')[0].files.length > 0) {
+                formData.append('aadhar_copy', $('#aadhar_copy')[0].files[0]);
+            } else {
+                formData.append('aadhar_copy', '');
+            }
+
+            if ($('#pan_copy')[0].files && $('#pan_copy')[0].files.length > 0) {
+                formData.append('pan_copy', $('#pan_copy')[0].files[0]);
+            } else {
+                formData.append('pan_copy', '');
+            }
+
+            $.ajax({
+            url: '/api/outward/update',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                var callout = document.createElement('div');
+                callout.innerHTML =
+                    `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                document.getElementById('apiMessages').appendChild(callout);
+                setTimeout(function() {
+                    callout.remove();
+                }, 2000);
+
+                window.open(`/print/gatepass?id=${data.gatepassdata.id}`, '_blank');
+                location.reload();
+            },
+            error: function(error) {
+                var finalValue = '';
+                if (Array.isArray(error.responseJSON.message)) {
+                    finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                } else {
+                    finalValue = error.responseJSON.message;
+                }
+                var callout = document.createElement('div');
+                callout.innerHTML =
+                    `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                document.getElementById('apiMessages').appendChild(callout);
+                setTimeout(function() {
+                    callout.remove();
+                }, 2000);
+            }
+        });
+        }else{
+
+            formData.append('gate_in_id',gate_in_id)
+            formData.append('pre_advice_id',pre_advice_id)
+            formData.append('transport_id',transport_id)
+            formData.append('vehicle_no',vehicle_no)
+            formData.append('destination',destination)
+            formData.append('seal_no',seal_no)
+            formData.append('third_party',third_party)
+            formData.append('port_name',port_name)
+            formData.append('temprature',temprature)
+            formData.append('vent_seal_no',vent_seal_no)
+            formData.append('ventilation',ventilation)
+            formData.append('humadity',humadity)
+            formData.append('device_status',device_status)
+            formData.append('amount',amount)
+            formData.append('challan_no',challan_no)
+            formData.append('driver_name',driver_name)
+            formData.append('consignee_id',consignee_id)
+            formData.append('licence_no',licence_no)
+            formData.append('aadhar_no',aadhar_no)
+            formData.append('pan_no',pan_no)
+            formData.append('user_id', user_id);
+            formData.append('depo_id', depo_id);
+            formData.append('driver_contact', driver_contact);
+            formData.append('id', getCateId[1]);
+
+            if ($('#do_copy')[0].files && $('#do_copy')[0].files.length > 0) {
+                formData.append('do_copy', $('#do_copy')[0].files[0]);
+            } else {
+                formData.append('do_copy', '');
+            }
+
+            if ($('#challan_copy')[0].files && $('#challan_copy')[0].files.length > 0) {
+                formData.append('challan_copy', $('#challan_copy')[0].files[0]);
+            } else {
+                formData.append('challan_copy', '');
+            }
+            
+            if ($('#driver_copy')[0].files && $('#driver_copy')[0].files.length > 0) {
+                formData.append('driver_copy', $('#driver_copy')[0].files[0]);
+            } else {
+                formData.append('driver_copy', '');
+            }
+            
+            if ($('#licence_copy')[0].files && $('#licence_copy')[0].files.length > 0) {
+                formData.append('licence_copy', $('#licence_copy')[0].files[0]);
+            } else {
+                formData.append('licence_copy', '');
+            }
+            
+            if ($('#aadhar_copy')[0].files && $('#aadhar_copy')[0].files.length > 0) {
+                formData.append('aadhar_copy', $('#aadhar_copy')[0].files[0]);
+            } else {
+                formData.append('aadhar_copy', '');
+            }
+
+            if ($('#pan_copy')[0].files && $('#pan_copy')[0].files.length > 0) {
+                formData.append('pan_copy', $('#pan_copy')[0].files[0]);
+            } else {
+                formData.append('pan_copy', '');
+            }
+            
+            $.ajax({
+                url: '/api/outward/create',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    var callout = document.createElement('div');
+                    callout.innerHTML =
+                        `<div class="callout callout-success"><p style="font-size:13px;">${data.message}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+
+                    window.open(`/print/gatepass?id=${data.gatepassdata.id}`, '_blank');
+                    location.reload();
+                },
+                error: function(error) {
+                    var finalValue = '';
+                    if (Array.isArray(error.responseJSON.message)) {
+                        finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                    } else {
+                        finalValue = error.responseJSON.message;
+                    }
+                    var callout = document.createElement('div');
+                    callout.innerHTML =
+                        `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                    document.getElementById('apiMessages').appendChild(callout);
+                    setTimeout(function() {
+                        callout.remove();
+                    }, 2000);
+                }
+            });
         }
-    });
+    }
+
+    
 })
 
 
 
 $(function() {
-
-
+    var currentURL = window.location.href;
+    var getCateId = currentURL.split('=');
+    var driver_copy = '';
+    if(getCateId[1]){
+        driver_copy = false;
+    }else{
+        driver_copy = true;
+    }
     $('#outwardForm').validate({
         rules: {
-            // vehicle_number:{
-            //     required:true,
-            // }
+            container_no:{
+                required:true,
+            },
+            do_no:{
+                required:true,
+            },
+            transport_id:{
+                required:true,
+            },
+            vehicle_no:{
+                required:true,
+            },
+            amount:{
+                required:true,
+            },
+            driver_name:{
+                required:true,
+            },
+            consignee_id:{
+                required:true,
+            },
+            driver_contact:{
+                required:true,
+            },
+            driver_copy:{
+                required:driver_copy,
+            }
         },
         messages: {
-            vehicle_number: {
-                required: "This Field Is Required",
+            container_no: {
+                required: "Please Enter Container No",
+            },
+            do_no:{
+                required:"Please Enter DO No",
+            },
+            transport_id:{
+                required:"Please Select Transporter",
+            },
+            vehicle_no:{
+                required:"Please Select Vehicle No.",
+            },
+            amount:{
+                required:"Please Enter Amount",
+            },
+            driver_name:{
+                required:"Please Enter Driver Name",
+            },
+            consignee_id:{
+                required:"Please Select Consignee",
+            },
+            driver_contact:{
+                required:"Please Enter Driver Contact",
+            },
+            driver_copy:{
+                required:"Please Upload Driver Photo",
             }
         },
 

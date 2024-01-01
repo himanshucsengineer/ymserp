@@ -176,13 +176,13 @@ class GateInController extends Controller
         if($request->user_id == 1){
             $gateInData = GateIn::where([
                 ['status','!=','Out'],
-                ['gateintype','Without Container']
+['gateintype','Without Container']
             ])->orderby('created_at','desc')->get();
         }else{
             $gateInData = GateIn::where([
                 ['status','!=','Out'],
                 ['depo_id',$request->depo_id],
-                ['gateintype','Without Container']
+['gateintype','Without Container']
             ])->orderby('created_at','desc')->get();
         }
         return $gateInData;
