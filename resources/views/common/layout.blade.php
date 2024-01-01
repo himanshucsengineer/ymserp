@@ -392,12 +392,12 @@
                                         <p>Repairing</p>
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item">
-                                    <a href="/surveyor/reports" class="nav-link">
+                                <li class="nav-item">
+                                    <a href="/maintenance/reports" class="nav-link">
                                         <i class="fas fa-search-location nav-icon"></i>
                                         <p>Reports</p>
                                     </a>
-                                </li> -->
+                                </li>
                             </ul>
                         </li>
 

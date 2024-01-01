@@ -31,6 +31,7 @@ class Transaction extends Model
         'location_code',
         'dimension_h',
         'dimension_w',
-        'dimension_l'
+        'dimension_l',
+        'actual_material'
     ];
 }

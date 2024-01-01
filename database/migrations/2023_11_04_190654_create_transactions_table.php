@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('before_file2')->nullable();
             $table->string('after_file1')->nullable();
             $table->string('after_file2')->nullable();
+            $table->string('actual_material')->nullable();
             $table->string('dimension_h')->nullable();
             $table->string('dimension_w')->nullable();
             $table->string('dimension_l')->nullable();

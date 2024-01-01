@@ -243,6 +243,8 @@ $api->version('v1', function($api){
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'maintenance'], function($api){
         $api->post('/getInspectionDataRepair', 'App\Http\Controllers\GateInController@getInspectionDataRepair');
         $api->post('/filterByDateRepair', 'App\Http\Controllers\GateInController@filterByDateRepair');
+        $api->post('/filterByDateRepairDone', 'App\Http\Controllers\GateInController@filterByDateRepairDone');
+        $api->post('/getInspectionDataRepairDone', 'App\Http\Controllers\GateInController@getInspectionDataRepairDone');
 
     });
 

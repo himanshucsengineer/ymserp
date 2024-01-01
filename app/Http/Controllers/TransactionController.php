@@ -52,6 +52,8 @@ class TransactionController extends Controller
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
                 'before_file2'=> $transaction->before_file2,
+                'after_file1'=> $transaction->after_file1,
+                'after_file2'=> $transaction->after_file2,
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => $transaction->labour_cost,
                 'material_cost' => $transaction->material_cost,
@@ -69,7 +71,7 @@ class TransactionController extends Controller
                 'dimension_h' => $transaction->dimension_h,
                 'dimension_w' => $transaction->dimension_w,
                 'dimension_l' => $transaction->dimension_l,
-                'actual_material' =>$transaction->actual_material
+                'actual_material' => $transaction->actual_material
             ];
         }
         return $formatedData;
@@ -157,6 +159,8 @@ class TransactionController extends Controller
             'dimension_h'=> $request->reporting_dimension_h,
             'dimension_w'=> $request->reporting_dimension_w,
             'dimension_l'=> $request->reporting_dimension_l,
+
+            'actual_material'=> $request->qty,
         ]);
 
         if($createTransaction){
@@ -194,18 +198,38 @@ class TransactionController extends Controller
     {
 
         $transactionDetails = Transaction::find($request->id);
+
+        if ($request->hasFile('after_file1')) {
+            $after_file1 = $request->file('after_file1');
+            $after_file1_Name = time() . '_' . $after_file1->getClientOriginalName();
+            $after_file1->move(public_path('uploads/transaction'), $after_file1_Name);
+        }else{
+            $after_file1_Name = $transactionDetails->after_file1;
+        }
+
+        if ($request->hasFile('after_file2')) {
+            $after_file2 = $request->file('after_file2');
+            $after_file2_Name = time() . '_' . $after_file2->getClientOriginalName();
+            $after_file2->move(public_path('uploads/transaction'), $after_file2_Name);
+        }else{
+            $after_file2_Name = $transactionDetails->after_file2;
+        }
+        
+
         $transactionDetails->labour_hr = is_null($request->reporting_labour_hr) ? $transactionDetails->labour_hr : $request->reporting_labour_hr;
         $transactionDetails->labour_cost =  is_null($request->reporting_labour_cost) ? $transactionDetails->labour_cost : $request->reporting_labour_cost;
         $transactionDetails->material_cost = is_null($request->reporting_material_cost) ? $transactionDetails->material_cost : $request->reporting_material_cost;
-        
         $transactionDetails->sab_total = is_null($request->reporting_sub_total) ? $transactionDetails->sab_total : $request->reporting_sub_total;
         $transactionDetails->tax_cost = is_null($request->reporting_tax_cost) ? $transactionDetails->tax_cost : $request->reporting_tax_cost;
         $transactionDetails->gst = is_null($request->reporting_tax) ? $transactionDetails->gst : $request->reporting_tax;
-        $transactionDetails->total = is_null($request->reporting_total) ? $transactionDetails->reporting_total : $request->reporting_total;
+        $transactionDetails->total = is_null($request->reporting_total) ? $transactionDetails->total : $request->reporting_total;
         $transactionDetails->qty = is_null($request->reporting_qty) ? $transactionDetails->qty : $request->reporting_qty;
         $transactionDetails->dimension_h = is_null($request->reporting_dimension_h) ? $transactionDetails->dimension_h : $request->reporting_dimension_h;
         $transactionDetails->dimension_w = is_null($request->reporting_dimension_w) ? $transactionDetails->dimension_w : $request->reporting_dimension_w;
         $transactionDetails->dimension_l = is_null($request->reporting_dimension_l) ? $transactionDetails->dimension_l : $request->reporting_dimension_l;
+        $transactionDetails->actual_material = is_null($request->actual_material) ? $transactionDetails->actual_material : $request->actual_material;
+        $transactionDetails->after_file1 = $after_file1_Name;
+        $transactionDetails->after_file2 = $after_file2_Name;
         
         $transactionDetails  = $transactionDetails->save();
 

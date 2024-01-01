@@ -16,6 +16,10 @@
 .reportinput{
     width:100px !important;
 }
+
+.reportinput_file{
+    width:300px !important;
+}
 #transaction_total, #transaction_sub_total, #transaction_tax, #transaction_tax_cost, #transaction_material_cost, #transaction_labour_hr, #transaction_labour_cost{
     width: 100px !important;
 }
@@ -441,29 +445,37 @@ function getReportingData(){
                 row.append($('<td>').append(before_file1));
                 var file2 = `/uploads/transaction/${item.before_file2}`
                 var before_file2 = $('<img style="width:100px">').attr({'src': file2});
-                row.append($('<td>').append(before_file2)); 
-                var checkSupervisor = "<?php echo $checkSupervisor?>";
-                if(checkSupervisor == 1){
-                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
-                    row.append($('<td>').append(actual_amterial));
-                    var afterfile1 = `/uploads/transaction/${item.after_file1}`
-                    
-                    var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
-                    row.append($('<td id="after_file1_td">').append(after_file1)); 
-                    var afterfile2 = `/uploads/transaction/${item.after_file2}`
-                    var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
-                    row.append($('<td id="after_file2_td">').append(after_file2)); 
-                }else{
-                    var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
-                    row.append($('<td>').append(actual_amterial));
-                    var afterfile1 = `/uploads/transaction/${item.after_file1}`
-                    
-                    var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
-                    row.append($('<td id="after_file1_td">').append(after_file1)); 
-                    var afterfile2 = `/uploads/transaction/${item.after_file2}`
-                    var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
-                    row.append($('<td id="after_file2_td">').append(after_file2));
-                }
+                row.append($('<td>').append(before_file2));
+                 
+                var actual_material = $('<input>').attr({'type':'text', 'id':'actual_material', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
+                row.append($('<td>').append(actual_material));
+
+                var afterfile1 = `/uploads/transaction/${item.after_file1}`
+                var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
+                row.append($('<td id="after_file1_td">').append(after_file1)); 
+                var afterfile2 = `/uploads/transaction/${item.after_file2}`
+                var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                row.append($('<td id="after_file2_td">').append(after_file2));
+                // var checkSupervisor = "<?php echo $checkSupervisor?>";
+                // if(checkSupervisor == 1){
+                //     var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
+                //     row.append($('<td>').append(actual_amterial));
+                //     var afterfile1 = `/uploads/transaction/${item.after_file1}` 
+                //     var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
+                //     row.append($('<td id="after_file1_td">').append(after_file1)); 
+                //     var afterfile2 = `/uploads/transaction/${item.after_file2}`
+                //     var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                //     row.append($('<td id="after_file2_td">').append(after_file2)); 
+                // }else{
+                //     var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
+                //     row.append($('<td>').append(actual_amterial));
+                //     var afterfile1 = `/uploads/transaction/${item.after_file1}`
+                //     var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
+                //     row.append($('<td id="after_file1_td">').append(after_file1)); 
+                //     var afterfile2 = `/uploads/transaction/${item.after_file2}`
+                //     var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                //     row.append($('<td id="after_file2_td">').append(after_file2));
+                // }
 
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
@@ -523,23 +535,72 @@ function getReportingData(){
             });
 
             $('.edit-button').click(function() {
-                // Find the closest row from the clicked button
                 var row = $(this).closest('tr');
-                // Enable editing for the specific inputs within that row
-                var after_file1 = $('<input>').attr({'type':'file', 'id':'after_file1', 'class':'reportinput form-control'}).val();
-
-
+                row.find("#actual_material").removeAttr("readonly");
+                row.find("#after_file1_td img").hide();
+                row.find("#after_file2_td img").hide();
+                var after_file1 = $('<input>').attr({'type':'file', 'id':'after_file1', 'class':'reportinput_file form-control'});
                 row.find("#after_file1_td").empty().append(after_file1);
-                row.find("#actual_amterial").removeAttr("readonly");
-                
-
-
-                // Update buttons visibility within the last cell of the row
+                var after_file2 = $('<input>').attr({'type':'file', 'id':'after_file2', 'class':'reportinput_file form-control'});
+                row.find("#after_file2_td").empty().append(after_file2);
                 var actionCell = row.find('td:last-child');
                 actionCell.find('.edit-button').hide();
-                // actionCell.find('.delete-button').hide();
                 actionCell.find('.save-button').show();
             });
+
+            // Save button click event
+            $('.save-button').click(function() {
+                var dataId = $(this).data('id');
+                var row = $(this).closest('tr');
+                var actual_material = row.find("#actual_material").val();
+                var newAfterFile1 = row.find("#after_file1")[0].files[0];
+                var newAfterFile2 = row.find("#after_file2")[0].files[0];
+                var formData = new FormData();
+                formData.append('actual_material', actual_material);
+                formData.append('id', dataId);
+                if (newAfterFile1) {
+                    formData.append('after_file1', newAfterFile1);
+                }
+                if (newAfterFile2) {
+                    formData.append('after_file2', newAfterFile2);
+                }
+
+                // Make AJAX request to save data
+                $.ajax({
+                    type: "POST",
+                    url: "/api/transcation/update", // Adjust the URL to your server-side endpoint
+                    headers: {
+                        'Authorization': 'Bearer ' + checkToken
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        var callout = document.createElement('div');
+                        callout.innerHTML = `<div class="callout callout-success"><p style="font-size:13px;">Updated Successfully</p></div>`;
+                        document.getElementById('apiMessages').appendChild(callout);
+                        setTimeout(function() {
+                            callout.remove();
+                        }, 2000);
+                        getReportingData()
+                    },
+                    error: function(error) {
+                        var finalValue = '';
+                        if(Array.isArray(error.responseJSON.message)){
+                            finalValue = Object.values(error.responseJSON.message[0]).join(', ');
+                        }else{
+                            finalValue = error.responseJSON.message;
+                        }
+                        var callout = document.createElement('div');
+                        callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${finalValue}</p></div>`;
+                        document.getElementById('apiMessages').appendChild(callout);
+                        setTimeout(function() {
+                            callout.remove();
+                        }, 2000);
+                    }
+                });
+            });
+
 
         },
         error: function(error) {
