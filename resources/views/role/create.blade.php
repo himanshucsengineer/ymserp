@@ -48,7 +48,11 @@
                                         <option value="BILLING">BILLING</option>
                                         <option value="SURVEYOR">SURVEYOR</option>
                                         <option value="SECURITY">SECURITY</option>
-                                        <!-- <option value="DASHBOARD">DASHBOARD</option> -->
+                                        <option value="DO_MANAGER">DO MANAGER</option>
+                                        <option value="PTI">PTI</option>
+                                        <option value="BANK">BANK</option>
+                                        <option value="CASH_FLOW">CASH FLOW</option>
+                                        <option value="REPORT">REPORT</option>
 
                                     </select>
                                 </div>

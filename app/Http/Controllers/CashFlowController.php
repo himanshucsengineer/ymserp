@@ -49,8 +49,11 @@ class CashFlowController extends Controller
             ['transfer_to',$request->user_id],
         ])->get();
 
+
+
         $submitInAccount = CashFlow::where([
             ['type','account'],
+            ['transfer_from',$request->user_id],
         ])->get();
 
         $submittedAmountData = CashFlow::where([
