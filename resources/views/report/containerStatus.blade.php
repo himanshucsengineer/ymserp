@@ -87,14 +87,17 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Line Name</th>
-                                        <th>Container No.</th>
-                                        <th>Container Size</th>
-                                        <th>Container Type</th>
-                                        <th>Sub Type</th>
-                                        <th>Vessel</th>
-                                        <th>Voyage</th>
                                         <th>Action</th>
+                                        <th>Container No.</th>
+                                        <th>Inward Date</th>
+                                        <th>In Time</th>
+                                        <th>Line Name</th>
+                                        <th>Size</th>
+                                        <th>Type</th>
+                                        <th>Do Number</th>
+                                        <th>Outward Date</th>
+                                        <th>Out Time</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body">
@@ -125,119 +128,21 @@ function search(){
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
 
-    var do_no = $('#do_no').val();
+    var container_no = $('#container_no').val();
 
     $.ajax({
         type: "post",
-        url: "/api/docontainer/getlist",
+        url: "/api/report/container_status_report",
         headers: {
             'Authorization': 'Bearer ' + checkToken
         },
         data:{
             'user_id':user_id,
             'depo_id':depo_id,
-            'do_no':do_no
+            'container_no':container_no
         },
         success: function(response) {
-            clearTableBody()
-
-            var tbody = $('#table-body');
-
-            var i =1;
-            response.forEach(function(item) {
-                var row = $('<tr>');
-                row.append($('<td>').text(i));
-                row.append($('<td>').append(item.line_name));
-                row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-                row.append($('<td>').append(item.container_size));
-                row.append($('<td>').append(item.container_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.sub_type));
-                row.append($('<td style="text-transform:uppercase;">').append(item.vessel));
-                row.append($('<td>').append(item.voyage));
-                
-                var viewButton = $('<span>')
-                    .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                    .attr('data-id', item.id)
-                    .attr('data-value',item.is_repaired) 
-                    .attr('class', 'view-button');
-                var td = $('<td>');
-                td.append(viewButton);
-                row.append(td);
-                tbody.append(row);
-                i++;
-            });
-
-            const paginationDiv = document.getElementById("pagination");
-            paginationDiv.innerHTML = "";
-
-            if (response.pagination.last_page > 1) {
-                const startPage = Math.max(response.pagination.current_page - Math.floor(5 / 2), 1);
-                const endPage = Math.min(startPage + 5 - 1, response.pagination.last_page);
-
-                // Create the "Previous" button
-                if (response.pagination.links.prev) {
-                    var splitPrev = response.pagination.links.prev.split('=');
-                    const prevLink = document.createElement("button");
-                    prevLink.textContent = "Previous";
-                    prevLink.className  = "pagination-btn prev";
-                    prevLink.setAttribute("data-id", splitPrev[1]);
-                    prevLink.href = response.pagination.links.prev;
-                    prevLink.addEventListener("click", function() {
-                        refreshTable(prevLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(prevLink);
-                }
-
-                // Create page links within the sliding window
-                for (let page = startPage; page <= endPage; page++) {
-                    var splitPage = response.pagination.links.all_pages[page].split('=');
-                    if(splitPage[1] == response.pagination.current_page){
-                        const pageLink = document.createElement("button");
-                        pageLink.textContent = page;
-                        pageLink.className  = "pagination-btn page active-btn";
-                        pageLink.setAttribute("data-id", splitPage[1]);
-                        pageLink.addEventListener("click", function() {
-                            refreshTable(pageLink.getAttribute("data-id"))
-                        });
-                        paginationDiv.appendChild(pageLink);
-                    }else{
-                        const pageLink = document.createElement("button");
-                        pageLink.textContent = page;
-                        pageLink.className  = "pagination-btn page";
-                        pageLink.setAttribute("data-id", splitPage[1]);
-                        pageLink.addEventListener("click", function() {
-                            refreshTable(pageLink.getAttribute("data-id"))
-                        });
-                        paginationDiv.appendChild(pageLink);
-                    }
-                    
-                }
-
-                // Create the "Next" button
-                if (response.pagination.links.next) {
-                    var splitNext = response.pagination.links.next.split('=');
-                    const nextLink = document.createElement("button");
-                    nextLink.textContent = "Next";
-                    nextLink.className  = "pagination-btn next";
-                    nextLink.setAttribute("data-id", splitNext[1]);
-
-                    nextLink.addEventListener("click", function() {
-                        refreshTable(nextLink.getAttribute("data-id"))
-                    });
-                    paginationDiv.appendChild(nextLink);
-                }
-            }
-
-
-            // $('.view-button').click(function() {
-            //     var dataId = $(this).data('id');
-            //     var dataValue = $(this).data('value');
-            //     if(dataValue == '1'){
-            //         window.location = `/maintenance/manage?id=${dataId}&supervisor=yes`
-            //     }else{
-            //         window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
-            //     }
-            // });
+            console.log(response);
         },
         error: function(error) {
             console.log(error);

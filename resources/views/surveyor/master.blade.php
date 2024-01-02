@@ -1583,7 +1583,8 @@ function getReportingData() {
 
             var i = 1;
             data.forEach(function(item) {
-                total_spend = total_spend + item.total;
+                var itemTotal = parseFloat(item.total);
+                total_spend = parseFloat((total_spend + itemTotal).toFixed(2));
                 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));

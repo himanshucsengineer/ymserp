@@ -242,5 +242,10 @@ class ReportController extends Controller
        
     }
 
+
+    public function container_status_report(Request $request){
+        $containerData = GateIn::where('container_no',$request->container_no)->get();
+    }
+
   
 }

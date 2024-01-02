@@ -115,6 +115,23 @@
             if($.inArray("SUPERVISOR", permissions) !== -1){
                 $('#SUPERVISOR').show();
             }
+
+            if($.inArray("DO_MANAGER", permissions) !== -1){
+                $('#DO_MANAGER').show();
+            }
+
+            if($.inArray("PTI", permissions) !== -1){
+                $('#PTI').show();
+            }
+            if($.inArray("BANK", permissions) !== -1){
+                $('#BANK').show();
+            }
+            if($.inArray("CASH_FLOW", permissions) !== -1){
+                $('#CASH_FLOW').show();
+            }
+            if($.inArray("REPORT", permissions) !== -1){
+                $('#REPORT').show();
+            }
         },
         error: function(error) {
             console.log(error);
@@ -473,7 +490,7 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="DO_MANAGER">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>
@@ -501,7 +518,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="PTI">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>
@@ -528,7 +545,7 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="BANK">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>
@@ -552,7 +569,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item hidden" id="CASH_FLOW">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>
@@ -576,7 +593,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item" >
+                        <li class="nav-item hidden" id="REPORT">
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>

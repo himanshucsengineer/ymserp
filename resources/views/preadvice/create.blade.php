@@ -401,13 +401,13 @@ function getContainerList(){
                 'container_size':container_size,
                 'container_type':container_type,
                 'sub_type':sub_type,
-                // 'vessel':vessel,
-                // 'voyage':voyage,
+
                 'grade':grade
             },
             success: function (data) {
                 $("#conatinerList").empty();
                 var count  = data.length;
+                console.log(count);
                 if(container_required == count){
                     data.forEach(function(item) {
                         $("#conatinerList").append(`<li style="font-size:40px">${item.container_no}</li>`);

@@ -1194,7 +1194,9 @@ function add_consginee(){
 function getTransporter_t(){
         var gst = $('#t_gst').val();
         if(gst.length ==  15){
-            var stateCode = gst.slice(0, 2);;
+            var stateCode = gst.slice(0, 2);
+            var pan = gst.slice(2, 13);
+
             var payload = {
                     "AppSCommonSearchTPItem":[{
                         "GSTIN":gst
@@ -1227,6 +1229,7 @@ function getTransporter_t(){
                                 });
                                 $("#t_state").val(state_data.state);
                                 $("#t_state_code").val(state_data.state_code);
+                                $("#t_pan").val(pan);
 
                             })
                             .catch(error => {
@@ -1258,7 +1261,8 @@ function getTransporter_t(){
 function getTransporter_c(){
         var gst = $('#gst').val();
         if(gst.length ==  15){
-            var stateCode = gst.slice(0, 2);;
+            var stateCode = gst.slice(0, 2);
+            var pan = gst.slice(2, 13);
             var payload = {
                     "AppSCommonSearchTPItem":[{
                         "GSTIN":gst
@@ -1291,6 +1295,7 @@ function getTransporter_c(){
                                 });
                                 $("#state").val(state_data.state);
                                 $("#state_code").val(state_data.state_code);
+                                $("#pan").val(pan);
 
                             })
                             .catch(error => {

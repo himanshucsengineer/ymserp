@@ -292,6 +292,7 @@
     enableTime: false,
     altFormat: 'F Y',
     altInput: true,
+    disableMobile:true
   });
 </script>
 <script>
@@ -461,12 +462,10 @@ $(document).ready(function () {
             if(data.line_id){
                 getline(data.line_id, data.container_type,data.container_size);
             }
-            // getverifydata();
 
             $("#inward_date").val(data.inward_date);
             $("#inward_time").val(data.inward_time);
             if(data.survayor_date != null){
-                console.log('sdfsd')
                 $('#survayor_date').val(data.survayor_date);
             }else{
                 $('#survayor_date').val("<?= date('Y-m-d')?>");
@@ -478,13 +477,14 @@ $(document).ready(function () {
             }
 
             var picker = flatpickr('#mfg_date', {
-    dateFormat: 'M/Y',
-    enableTime: false,
-    altFormat: 'F Y',
-    altInput: true,
-  });
+                dateFormat: 'M Y',
+                enableTime: false,
+                altFormat: 'F Y',
+                altInput: true,
+                disableMobile:true
+            });
 
-  picker.setDate(data.mfg_date);
+                picker.setDate(data.mfg_date);
 
             $("#container_no").val(data.container_no);
             $("#vehicle_number").val(data.vehicle_number);
@@ -493,7 +493,6 @@ $(document).ready(function () {
             $("#sub_type").val(data.sub_type);
             $("#gross_weight").val(data.gross_weight);
             $("#tare_weight").val(data.tare_weight);
-            // $('#mfg_date').val(data.mfg_date);
             $('#csc_details').val(data.csc_details);
             $("#grade").val(data.grade);
             $("#status_name").val(data.status_name);
