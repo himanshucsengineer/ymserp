@@ -76,6 +76,8 @@
                                 <option value="Inspection Pending">Inpection Pending</option>
                                 <option value="Repair Pending">Repair Pending</option>
                                 <option value="Repair Done">Repair Done</option>
+                                <option value="Available">Available</option>
+                                <option value="Reject">Rejected</option>
                             </select>
                         </div>
                         <div class="col-md-9"></div>

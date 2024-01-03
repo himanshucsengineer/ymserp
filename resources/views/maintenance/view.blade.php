@@ -105,6 +105,7 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Action</th>
+                                        <th>Reject Remark</th>
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Container Size</th>
@@ -143,142 +144,6 @@ $(document).ready(function() {
 function clearTableBody() {
     $('#table-body').empty();
 }
-
-
-// $('#filterbystatus').on('change',function(){
-//     var checkToken = localStorage.getItem('token');
-//     var user_id = localStorage.getItem('user_id');
-//     var depo_id = localStorage.getItem('depo_id');
-//     var status = $(this).val();
-
-//     $.ajax({
-//         type: "post",
-//         url: "/api/supervisor/filterbystatus",
-//         headers: {
-//             'Authorization': 'Bearer ' + checkToken
-//         },
-//         data:{
-//             'user_id':user_id,
-//             'depo_id':depo_id,
-//             'status':status
-//         },
-//         success: function(response) {
-//             clearTableBody()
-
-//             var tbody = $('#table-body');
-
-//             var i =1;
-//             response.data.forEach(function(item) {
-//                 var container_img = '';
-//                 if(item.container_img){
-//                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
-//                 }else{
-//                     container_img = "No Imgae Available";
-//                 }
-//                 var vehicle_img = '';
-//                 if(item.vehicle_img){
-//                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
-//                 }else{
-//                     vehicle_img = "No Imgae Available";
-//                 }
-
-//                 var row = $('<tr>');
-//                 row.append($('<td>').text(i));
-//                 row.append($('<td>').append(item.inward_no));
-//                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
-//                 row.append($('<td>').append(container_img));
-//                 row.append($('<td>').append(item.container_size));
-//                 row.append($('<td>').append(item.container_type));
-//                 row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
-//                 row.append($('<td>').append(vehicle_img));
-//                 row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-//                 row.append($('<td>').append(item.contact_number));
-                
-//                 var viewButton = $('<span>')
-//                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-//                     .attr('data-id', item.id) 
-//                     .attr('class', 'view-button');
-
-//                 var td = $('<td>');
-//                 td.append(viewButton);
-//                 row.append(td);
-
-//                 tbody.append(row);
-//                 i++;
-//             });
-
-//             const paginationDiv = document.getElementById("pagination");
-//             paginationDiv.innerHTML = "";
-
-//             if (response.pagination.last_page > 1) {
-//                 const startPage = Math.max(response.pagination.current_page - Math.floor(5 / 2), 1);
-//                 const endPage = Math.min(startPage + 5 - 1, response.pagination.last_page);
-
-//                 // Create the "Previous" button
-//                 if (response.pagination.links.prev) {
-//                     var splitPrev = response.pagination.links.prev.split('=');
-//                     const prevLink = document.createElement("button");
-//                     prevLink.textContent = "Previous";
-//                     prevLink.className  = "pagination-btn prev";
-//                     prevLink.setAttribute("data-id", splitPrev[1]);
-//                     prevLink.href = response.pagination.links.prev;
-//                     prevLink.addEventListener("click", function() {
-//                         refreshTable(prevLink.getAttribute("data-id"))
-//                     });
-//                     paginationDiv.appendChild(prevLink);
-//                 }
-
-//                 // Create page links within the sliding window
-//                 for (let page = startPage; page <= endPage; page++) {
-//                     var splitPage = response.pagination.links.all_pages[page].split('=');
-//                     if(splitPage[1] == response.pagination.current_page){
-//                         const pageLink = document.createElement("button");
-//                         pageLink.textContent = page;
-//                         pageLink.className  = "pagination-btn page active-btn";
-//                         pageLink.setAttribute("data-id", splitPage[1]);
-//                         pageLink.addEventListener("click", function() {
-//                             refreshTable(pageLink.getAttribute("data-id"))
-//                         });
-//                         paginationDiv.appendChild(pageLink);
-//                     }else{
-//                         const pageLink = document.createElement("button");
-//                         pageLink.textContent = page;
-//                         pageLink.className  = "pagination-btn page";
-//                         pageLink.setAttribute("data-id", splitPage[1]);
-//                         pageLink.addEventListener("click", function() {
-//                             refreshTable(pageLink.getAttribute("data-id"))
-//                         });
-//                         paginationDiv.appendChild(pageLink);
-//                     }
-                    
-//                 }
-
-//                 // Create the "Next" button
-//                 if (response.pagination.links.next) {
-//                     var splitNext = response.pagination.links.next.split('=');
-//                     const nextLink = document.createElement("button");
-//                     nextLink.textContent = "Next";
-//                     nextLink.className  = "pagination-btn next";
-//                     nextLink.setAttribute("data-id", splitNext[1]);
-
-//                     nextLink.addEventListener("click", function() {
-//                         refreshTable(nextLink.getAttribute("data-id"))
-//                     });
-//                     paginationDiv.appendChild(nextLink);
-//                 }
-//             }
-
-
-//             $('.view-button').click(function() {
-//                 var dataId = $(this).data('id');
-//                 window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
-//             });
-//         },
-//         error: function(error) {
-//             console.log(error);
-//         }
-//     });
-// })
 
 function filterByDate(){
     var checkToken = localStorage.getItem('token');
@@ -329,6 +194,7 @@ function filterByDate(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
+                row.append($('<td>').append(item.reject_remark));
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));

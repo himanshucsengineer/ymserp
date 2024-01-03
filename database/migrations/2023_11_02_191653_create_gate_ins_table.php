@@ -76,7 +76,8 @@ return new class extends Migration
             $table->string('is_gate_out_checked')->nullable();
             $table->string('gate_out_check_by')->nullable();
             $table->string('gate_out_date')->nullable();
-            $table->enum('status',['In','Out','Ready']);
+            $table->string('reject_remark')->nullable();
+            $table->enum('status',['In','Out','Ready','Reject']);
             $table->timestamps();
         });
     }

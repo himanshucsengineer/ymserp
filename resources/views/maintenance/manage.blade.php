@@ -617,6 +617,7 @@ function updateEstimate(){
     var depo_id = localStorage.getItem('depo_id');
     var gateinid = $('#estimate_gate_in').val();
     var out_status = $('#out_status').val();
+    var reject_remark = $('#reject_remark').val();
 
     var checkSupervisor = "<?php echo $checkSupervisor?>";
 
@@ -625,7 +626,8 @@ function updateEstimate(){
             'user_id':user_id,
             'depo_id':depo_id,
             'gateinid':gateinid,
-            'out_status':out_status
+            'out_status':out_status,
+            'reject_remark':reject_remark
         }
         post('gatein/updateout',data);
         location.href="/supervisor/inspection";

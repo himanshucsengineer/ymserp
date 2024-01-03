@@ -73,5 +73,6 @@ class GateIn extends Model
         'is_gate_out_checked',
         'gate_out_check_by',
         'gate_out_date',
+        'reject_remark'
     ];
 }

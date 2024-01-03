@@ -952,6 +952,7 @@ class GateInController extends Controller
                 'inward_no' => $gateIn->inward_no,
                 'container_img' => $gateIn->container_img,
                 'vehicle_img' => $gateIn->vehicle_img,
+                'reject_remark' => $gateIn->reject_remark,
                 'id' => $gateIn->id,
             ];
             
@@ -1437,8 +1438,25 @@ class GateInController extends Controller
             $value3 = "1";
             $field4 = "is_repaired";
             $value4 = "1";
+        }else if($request->status == "Available"){
+            $field1 = "status";
+            $value1 = "Ready";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "1";
+        }else if($request->status == "Reject"){
+            $field1 = "status";
+            $value1 = "Reject";
+            $field2 = "is_estimate_done";
+            $value2 = "1";
+            $field3 = "is_approve";
+            $value3 = "1";
+            $field4 = "is_repaired";
+            $value4 = "0";
         }
-
 
         if($request->user_id == 1){
             if($request->status == "All"){
@@ -2946,11 +2964,25 @@ class GateInController extends Controller
 
 
     public function updateout(Request $request){
-        $gateInDetails = GateIn::find($request->gateinid);
-        $gateInDetails->status = $request->out_status;
-        $gateInDetails->status_updatedby = $request->user_id;
-        $gateInDetails->status_updatedat = date('Y-m-d H:i:s');
-        $gateInDetails  = $gateInDetails->save();
+
+        if($request->out_status == 'reject'){
+            $gateInDetails = GateIn::find($request->gateinid);
+            $gateInDetails->status = $request->out_status;
+            $gateInDetails->reject_remark = $request->reject_remark;
+            $gateInDetails->is_repaired = 1;
+            $gateInDetails->status_updatedby = $request->user_id;
+            $gateInDetails->status_updatedat = date('Y-m-d H:i:s');
+            $gateInDetails  = $gateInDetails->save();
+
+        }else{
+            $gateInDetails = GateIn::find($request->gateinid);
+            $gateInDetails->status = $request->out_status;
+            $gateInDetails->status_updatedby = $request->user_id;
+            $gateInDetails->status_updatedat = date('Y-m-d H:i:s');
+            $gateInDetails  = $gateInDetails->save();
+        }
+
+        
 
         if($gateInDetails){
             return response()->json([
