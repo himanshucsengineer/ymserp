@@ -31,8 +31,16 @@ return new class extends Migration
             $table->string('depo_id')->nullable();
             $table->string('before_file1')->nullable();
             $table->string('before_file2')->nullable();
+            $table->string('before_file3')->nullable();
+            $table->string('before_file4')->nullable();
+            $table->string('before_file5')->nullable();
+            $table->string('before_file6')->nullable();
             $table->string('after_file1')->nullable();
             $table->string('after_file2')->nullable();
+            $table->string('after_file3')->nullable();
+            $table->string('after_file4')->nullable();
+            $table->string('after_file5')->nullable();
+            $table->string('after_file6')->nullable();
             $table->string('actual_material')->nullable();
             $table->string('dimension_h')->nullable();
             $table->string('dimension_w')->nullable();

@@ -54,8 +54,17 @@ class TransactionController extends Controller
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
                 'before_file2'=> $transaction->before_file2,
+                'before_file3'=> $transaction->before_file3,
+                'before_file4'=> $transaction->before_file4,
+                'before_file5'=> $transaction->before_file5,
+                'before_file6'=> $transaction->before_file6,
+                
                 'after_file1'=> $transaction->after_file1,
                 'after_file2'=> $transaction->after_file2,
+                'after_file3'=> $transaction->after_file3,
+                'after_file4'=> $transaction->after_file4,
+                'after_file5'=> $transaction->after_file5,
+                'after_file6'=> $transaction->after_file6,
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => $transaction->labour_cost,
                 'material_cost' => $transaction->material_cost,
@@ -94,8 +103,16 @@ class TransactionController extends Controller
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
                 'before_file2'=> $transaction->before_file2,
+                'before_file3'=> $transaction->before_file3,
+                'before_file4'=> $transaction->before_file4,
+                'before_file5'=> $transaction->before_file5,
+                'before_file6'=> $transaction->before_file6,
                 'after_file1'=> $transaction->after_file1,
                 'after_file2'=> $transaction->after_file2,
+                'after_file3'=> $transaction->after_file3,
+                'after_file4'=> $transaction->after_file4,
+                'after_file5'=> $transaction->after_file5,
+                'after_file6'=> $transaction->after_file6,
 
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => $transaction->labour_cost,
@@ -134,12 +151,45 @@ class TransactionController extends Controller
             $before_file1 = $request->file('before_file1');
             $before_file1_Name = time() . '_' . $before_file1->getClientOriginalName();
             $before_file1->move(public_path('uploads/transaction'), $before_file1_Name);
+        }else{
+            $before_file1_Name = '';
         }
 
         if ($request->hasFile('before_file2')) {
             $before_file2 = $request->file('before_file2');
             $before_file2_Name = time() . '_' . $before_file2->getClientOriginalName();
             $before_file2->move(public_path('uploads/transaction'), $before_file2_Name);
+        }else{
+            $before_file2_Name = '';
+        }
+
+        if ($request->hasFile('before_file3')) {
+            $before_file3 = $request->file('before_file3');
+            $before_file3_Name = time() . '_' . $before_file3->getClientOriginalName();
+            $before_file3->move(public_path('uploads/transaction'), $before_file3_Name);
+        }else{
+            $before_file3_Name = '';
+        }
+        if ($request->hasFile('before_file4')) {
+            $before_file4 = $request->file('before_file4');
+            $before_file4_Name = time() . '_' . $before_file4->getClientOriginalName();
+            $before_file4->move(public_path('uploads/transaction'), $before_file4_Name);
+        }else{
+            $before_file4_Name = '';
+        }
+        if ($request->hasFile('before_file5')) {
+            $before_file5 = $request->file('before_file5');
+            $before_file5_Name = time() . '_' . $before_file5->getClientOriginalName();
+            $before_file5->move(public_path('uploads/transaction'), $before_file5_Name);
+        }else{
+            $before_file5_Name = '';
+        }
+        if ($request->hasFile('before_file6')) {
+            $before_file6 = $request->file('before_file6');
+            $before_file6_Name = time() . '_' . $before_file6->getClientOriginalName();
+            $before_file6->move(public_path('uploads/transaction'), $before_file6_Name);
+        }else{
+            $before_file6_Name = '';
         }
 
 
@@ -158,11 +208,14 @@ class TransactionController extends Controller
             'qty' => $request->qty,
             'before_file1' => $before_file1_Name,
             'before_file2' => $before_file2_Name,
+            'before_file3' => $before_file3_Name,
+            'before_file4' => $before_file4_Name,
+            'before_file5' => $before_file5_Name,
+            'before_file6' => $before_file6_Name,
             'location_code' => $request->location_code,
             'dimension_h'=> $request->reporting_dimension_h,
             'dimension_w'=> $request->reporting_dimension_w,
             'dimension_l'=> $request->reporting_dimension_l,
-
             'actual_material'=> $request->qty,
         ]);
 
@@ -217,6 +270,39 @@ class TransactionController extends Controller
         }else{
             $after_file2_Name = $transactionDetails->after_file2;
         }
+
+        if ($request->hasFile('after_file3')) {
+            $after_file3 = $request->file('after_file3');
+            $after_file3_Name = time() . '_' . $after_file3->getClientOriginalName();
+            $after_file3->move(public_path('uploads/transaction'), $after_file3_Name);
+        }else{
+            $after_file3_Name = $transactionDetails->after_file3;
+        }
+
+        if ($request->hasFile('after_file4')) {
+            $after_file4 = $request->file('after_file4');
+            $after_file4_Name = time() . '_' . $after_file4->getClientOriginalName();
+            $after_file4->move(public_path('uploads/transaction'), $after_file4_Name);
+        }else{
+            $after_file4_Name = $transactionDetails->after_file4;
+        }
+
+        if ($request->hasFile('after_file5')) {
+            $after_file5 = $request->file('after_file5');
+            $after_file5_Name = time() . '_' . $after_file5->getClientOriginalName();
+            $after_file5->move(public_path('uploads/transaction'), $after_file5_Name);
+        }else{
+            $after_file5_Name = $transactionDetails->after_file5;
+        }
+
+        if ($request->hasFile('after_file6')) {
+            $after_file6 = $request->file('after_file6');
+            $after_file6_Name = time() . '_' . $after_file6->getClientOriginalName();
+            $after_file6->move(public_path('uploads/transaction'), $after_file6_Name);
+        }else{
+            $after_file6_Name = $transactionDetails->after_file6;
+        }
+
         
 
         $transactionDetails->labour_hr = is_null($request->reporting_labour_hr) ? $transactionDetails->labour_hr : $request->reporting_labour_hr;
@@ -233,6 +319,10 @@ class TransactionController extends Controller
         $transactionDetails->actual_material = is_null($request->actual_material) ? $transactionDetails->actual_material : $request->actual_material;
         $transactionDetails->after_file1 = $after_file1_Name;
         $transactionDetails->after_file2 = $after_file2_Name;
+        $transactionDetails->after_file3 = $after_file3_Name;
+        $transactionDetails->after_file4 = $after_file4_Name;
+        $transactionDetails->after_file5 = $after_file5_Name;
+        $transactionDetails->after_file6 = $after_file6_Name;
         
         $transactionDetails  = $transactionDetails->save();
 

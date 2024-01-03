@@ -322,9 +322,17 @@ a.open:hover .circle img {
                                                     <th>Total Cost</th>
                                                     <th>Damage Image 1</th>
                                                     <th>Damage Image 2</th>
+                                                    <th>Damage Image 3</th>
+                                                    <th>Damage Image 4</th>
+                                                    <th>Damage Image 5</th>
+                                                    <th>Damage Image 6</th>
                                                     <th>Actual Material Used</th>
                                                     <th>Repair Photo 1</th>
                                                     <th>Repair Photo 2</th>
+                                                    <th>Repair Photo 3</th>
+                                                    <th>Repair Photo 4</th>
+                                                    <th>Repair Photo 5</th>
+                                                    <th>Repair Photo 6</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -443,19 +451,107 @@ function getReportingData(){
                 var file1 = `/uploads/transaction/${item.before_file1}`
                 var before_file1 = $('<img style="width:100px">').attr({'src': file1});
                 row.append($('<td>').append(before_file1));
-                var file2 = `/uploads/transaction/${item.before_file2}`
-                var before_file2 = $('<img style="width:100px">').attr({'src': file2});
+                
+                if(item.before_file2){
+                    var file2 = `/uploads/transaction/${item.before_file2}`
+                    var before_file2 = $('<img style="width:100px">').attr({
+                        'src': file2
+                    });
+                }else{
+                    before_file2 = "No Image Available";
+                }
                 row.append($('<td>').append(before_file2));
+
+                if(item.before_file3){
+                    var file3 = `/uploads/transaction/${item.before_file3}`
+                    var before_file3 = $('<img style="width:100px">').attr({
+                        'src': file3
+                    });
+                }else{
+                    before_file3 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file3));
+
+                if(item.before_file4){
+                    var file4 = `/uploads/transaction/${item.before_file4}`
+                    var before_file4 = $('<img style="width:100px">').attr({
+                        'src': file4
+                    });
+                }else{
+                    before_file4 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file4));
+
+                if(item.before_file5){
+                    var file5 = `/uploads/transaction/${item.before_file5}`
+                    var before_file5 = $('<img style="width:100px">').attr({
+                        'src': file5
+                    });
+                }else{
+                    before_file5 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file5));
+
+                if(item.before_file6){
+                    var file6 = `/uploads/transaction/${item.before_file6}`
+                    var before_file6 = $('<img style="width:100px">').attr({
+                        'src': file6
+                    });
+                }else{
+                    before_file6 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file6));
                  
                 var actual_material = $('<input>').attr({'type':'text', 'id':'actual_material', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
                 row.append($('<td>').append(actual_material));
 
-                var afterfile1 = `/uploads/transaction/${item.after_file1}`
-                var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
-                row.append($('<td id="after_file1_td">').append(after_file1)); 
-                var afterfile2 = `/uploads/transaction/${item.after_file2}`
-                var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                if(item.after_file1){
+                    var afterfile1 = `/uploads/transaction/${item.after_file1}`
+                    var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
+                }else{
+                    after_file1 = "No Image Available";
+                }
+                row.append($('<td id="after_file1_td">').append(after_file1));
+
+                if(item.after_file2){
+                    var afterfile2 = `/uploads/transaction/${item.after_file2}`
+                    var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
+                }else{
+                    after_file2 = "No Image Available";
+                }
                 row.append($('<td id="after_file2_td">').append(after_file2));
+
+                if(item.after_file3){
+                    var afterfile3 = `/uploads/transaction/${item.after_file3}`
+                    var after_file3 = $('<img style="width:100px">').attr({'src': afterfile3});
+                }else{
+                    after_file3 = "No Image Available";
+                }
+                row.append($('<td id="after_file3_td">').append(after_file3));
+
+                if(item.after_file4){
+                    var afterfile4 = `/uploads/transaction/${item.after_file4}`
+                    var after_file4 = $('<img style="width:100px">').attr({'src': afterfile4});
+                }else{
+                    after_file4 = "No Image Available";
+                }
+                row.append($('<td id="after_file4_td">').append(after_file4));
+
+                if(item.after_file5){
+                    var afterfile5 = `/uploads/transaction/${item.after_file5}`
+                    var after_file5 = $('<img style="width:100px">').attr({'src': afterfile5});
+                }else{
+                    after_file5 = "No Image Available";
+                }
+                row.append($('<td id="after_file5_td">').append(after_file5));
+
+                if(item.after_file6){
+                    var afterfile6 = `/uploads/transaction/${item.after_file6}`
+                    var after_file6 = $('<img style="width:100px">').attr({'src': afterfile6});
+                }else{
+                    after_file6 = "No Image Available";
+                }
+                row.append($('<td id="after_file6_td">').append(after_file6));
 
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
@@ -519,10 +615,29 @@ function getReportingData(){
                 row.find("#actual_material").removeAttr("readonly");
                 row.find("#after_file1_td img").hide();
                 row.find("#after_file2_td img").hide();
+                row.find("#after_file3_td img").hide();
+                row.find("#after_file4_td img").hide();
+                row.find("#after_file5_td img").hide();
+                row.find("#after_file6_td img").hide();
+
                 var after_file1 = $('<input>').attr({'type':'file', 'id':'after_file1', 'class':'reportinput_file form-control'});
                 row.find("#after_file1_td").empty().append(after_file1);
                 var after_file2 = $('<input>').attr({'type':'file', 'id':'after_file2', 'class':'reportinput_file form-control'});
                 row.find("#after_file2_td").empty().append(after_file2);
+
+                var after_file3 = $('<input>').attr({'type':'file', 'id':'after_file3', 'class':'reportinput_file form-control'});
+                row.find("#after_file3_td").empty().append(after_file3);
+
+                var after_file4 = $('<input>').attr({'type':'file', 'id':'after_file4', 'class':'reportinput_file form-control'});
+                row.find("#after_file4_td").empty().append(after_file4);
+
+                var after_file5 = $('<input>').attr({'type':'file', 'id':'after_file5', 'class':'reportinput_file form-control'});
+                row.find("#after_file5_td").empty().append(after_file5);
+
+                var after_file6 = $('<input>').attr({'type':'file', 'id':'after_file6', 'class':'reportinput_file form-control'});
+                row.find("#after_file6_td").empty().append(after_file6);
+
+
                 var actionCell = row.find('td:last-child');
                 actionCell.find('.edit-button').hide();
                 actionCell.find('.save-button').show();
@@ -535,6 +650,11 @@ function getReportingData(){
                 var actual_material = row.find("#actual_material").val();
                 var newAfterFile1 = row.find("#after_file1")[0].files[0];
                 var newAfterFile2 = row.find("#after_file2")[0].files[0];
+                var newAfterFile3 = row.find("#after_file3")[0].files[0];
+                var newAfterFile4 = row.find("#after_file4")[0].files[0];
+                var newAfterFile5 = row.find("#after_file5")[0].files[0];
+                var newAfterFile6 = row.find("#after_file6")[0].files[0];
+
                 var formData = new FormData();
                 formData.append('actual_material', actual_material);
                 formData.append('id', dataId);
@@ -543,6 +663,22 @@ function getReportingData(){
                 }
                 if (newAfterFile2) {
                     formData.append('after_file2', newAfterFile2);
+                }
+
+                if (newAfterFile3) {
+                    formData.append('after_file3', newAfterFile3);
+                }
+
+                if (newAfterFile4) {
+                    formData.append('after_file4', newAfterFile4);
+                }
+
+                if (newAfterFile5) {
+                    formData.append('after_file5', newAfterFile5);
+                }
+
+                if (newAfterFile6) {
+                    formData.append('after_file6', newAfterFile6);
                 }
 
                 // Make AJAX request to save data

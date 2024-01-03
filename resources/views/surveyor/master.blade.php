@@ -476,6 +476,10 @@ a.open:hover .circle img {
                                                         <th>Total Cost</th>
                                                         <th>Damage Image 1</th>
                                                         <th>Damage Image 2</th>
+                                                        <th>Damage Image 3</th>
+                                                        <th>Damage Image 4</th>
+                                                        <th>Damage Image 5</th>
+                                                        <th>Damage Image 6</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -990,10 +994,10 @@ $(document).ready(function() {
                 $("#qty").val(data[0].qty);
                 $("#labour_cost").val(data[0].labour_cost);
                 $("#material_cost").val(data[0].material_cost);
-                $("#sab_total").val(data[0].sub_total);
-                $("#tax_cost").val(data[0].tax_cost);
+                // $("#sab_total").val(data[0].sub_total);
+                // $("#tax_cost").val(data[0].tax_cost);
                 $("#gst").val(data[0].tax);
-                $("#total").val(data[0].total_cost);
+                // $("#total").val(data[0].total_cost);
                 $("#dimension_h").val(data[0].dimension_h);
                 $("#dimension_w").val(data[0].dimension_w);
                 $("#dimension_l").val(data[0].dimension_l);
@@ -1546,11 +1550,57 @@ function getTransactionData() {
                     'src': file1
                 });
                 row.append($('<td>').append(before_file1));
-                var file2 = `/uploads/transaction/${item.before_file2}`
-                var before_file2 = $('<img style="width:100px">').attr({
-                    'src': file2
-                });
+
+                if(item.before_file2){
+                    var file2 = `/uploads/transaction/${item.before_file2}`
+                    var before_file2 = $('<img style="width:100px">').attr({
+                        'src': file2
+                    });
+                }else{
+                    before_file2 = "No Image Available";
+                }
                 row.append($('<td>').append(before_file2));
+
+                if(item.before_file3){
+                    var file3 = `/uploads/transaction/${item.before_file3}`
+                    var before_file3 = $('<img style="width:100px">').attr({
+                        'src': file3
+                    });
+                }else{
+                    before_file3 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file3));
+
+                if(item.before_file4){
+                    var file4 = `/uploads/transaction/${item.before_file4}`
+                    var before_file4 = $('<img style="width:100px">').attr({
+                        'src': file4
+                    });
+                }else{
+                    before_file4 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file4));
+
+                if(item.before_file5){
+                    var file5 = `/uploads/transaction/${item.before_file5}`
+                    var before_file5 = $('<img style="width:100px">').attr({
+                        'src': file5
+                    });
+                }else{
+                    before_file5 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file5));
+
+                if(item.before_file6){
+                    var file6 = `/uploads/transaction/${item.before_file6}`
+                    var before_file6 = $('<img style="width:100px">').attr({
+                        'src': file6
+                    });
+                }else{
+                    before_file6 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file6));
+
                 tbody.append(row);
                 i++;
             });
@@ -1699,11 +1749,56 @@ function getReportingData() {
                     'src': file1
                 });
                 row.append($('<td>').append(before_file1));
-                var file2 = `/uploads/transaction/${item.before_file2}`
-                var before_file2 = $('<img style="width:100px">').attr({
-                    'src': file2
-                });
+
+                if(item.before_file2){
+                    var file2 = `/uploads/transaction/${item.before_file2}`
+                    var before_file2 = $('<img style="width:100px">').attr({
+                        'src': file2
+                    });
+                }else{
+                    before_file2 = "No Image Available";
+                }
                 row.append($('<td>').append(before_file2));
+
+                if(item.before_file3){
+                    var file3 = `/uploads/transaction/${item.before_file3}`
+                    var before_file3 = $('<img style="width:100px">').attr({
+                        'src': file3
+                    });
+                }else{
+                    before_file3 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file3));
+
+                if(item.before_file4){
+                    var file4 = `/uploads/transaction/${item.before_file4}`
+                    var before_file4 = $('<img style="width:100px">').attr({
+                        'src': file4
+                    });
+                }else{
+                    before_file4 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file4));
+
+                if(item.before_file5){
+                    var file5 = `/uploads/transaction/${item.before_file5}`
+                    var before_file5 = $('<img style="width:100px">').attr({
+                        'src': file5
+                    });
+                }else{
+                    before_file5 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file5));
+
+                if(item.before_file6){
+                    var file6 = `/uploads/transaction/${item.before_file6}`
+                    var before_file6 = $('<img style="width:100px">').attr({
+                        'src': file6
+                    });
+                }else{
+                    before_file6 = "No Image Available";
+                }
+                row.append($('<td>').append(before_file6));
 
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')
@@ -2008,23 +2103,25 @@ function createTransaction() {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
     var depo_id = localStorage.getItem('depo_id');
+    var qty = $('#qty').val();
+    var labour_cost = $('#labour_cost').val();
+    var labour_hr = $('#labour_hr').val();
+    var material_cost = $('#material_cost').val();
+    var gst = $('#gst').val();
 
-    if ($('#file1')[0].files[0] && $('#file1')[0].files[0]) {
+    if ($('#file1')[0].files[0] && qty != '' && labour_cost != '' && labour_hr != '' && material_cost != '' && gst != '') {
         var tarrif_id = $('#tarrif_id').val();
         var gatein_id = $('#gateinid').val();
-        var labour_hr = $('#labour_hr').val();
-
         var dimension_h = $('#dimension_h').val();
         var dimension_w = $('#dimension_w').val();
         var dimension_l = $('#dimension_l').val();
+        var total_material_cost = parseFloat(qty).toFixed(2) * parseFloat(material_cost).toFixed(2);
+        var total_labour_cost = parseFloat(labour_hr).toFixed(2) * parseFloat(labour_cost).toFixed(2);
+        
+        var sab_total = (parseFloat(total_material_cost) + parseFloat(total_labour_cost)).toFixed(2);
 
-        var qty = $('#qty').val();
-        var labour_cost = $('#labour_cost').val();
-        var material_cost = $('#material_cost').val();
-        var sab_total = $('#sab_total').val();
-        var gst = $('#gst').val();
-        var total = $('#total').val();
-        var tax_cost = $('#tax_cost').val();
+        var tax_cost = (gst / 100) * sab_total;
+        var total = (parseFloat(sab_total) + parseFloat(tax_cost)).toFixed(2);
         var location_code = $('#side').val();
 
         var formData = new FormData();
@@ -2032,8 +2129,8 @@ function createTransaction() {
         formData.append('total', total);
         formData.append('gst', gst);
         formData.append('sab_total', sab_total);
-        formData.append('material_cost', material_cost);
-        formData.append('labour_cost', labour_cost);
+        formData.append('material_cost', total_material_cost);
+        formData.append('labour_cost', total_labour_cost);
         formData.append('qty', qty);
         formData.append('location_code', location_code);
         formData.append('labour_hr', labour_hr);
@@ -2046,6 +2143,11 @@ function createTransaction() {
 
         formData.append('before_file1', $('#file1')[0].files[0]);
         formData.append('before_file2', $('#file2')[0].files[0]);
+        formData.append('before_file3', $('#file3')[0].files[0]);
+        formData.append('before_file4', $('#file4')[0].files[0]);
+        formData.append('before_file5', $('#file5')[0].files[0]);
+        formData.append('before_file6', $('#file6')[0].files[0]);
+
 
         $.ajax({
             url: '/api/transcation/create',
@@ -2078,13 +2180,13 @@ function createTransaction() {
                 $('#total').val('');
                 $('#tax_cost').val('');
 
-                $('#component_code').val('');
-                $('#damage_code').val('');
-                $('#repair_code').val('');
-                $('#material_code').val('');
-                $('#master_length').val('');
-                $('#master_width').val('');
-                $('#master_height').val('');
+                $('#component_code').val('').trigger('change');
+                $('#damage_code').val('').trigger('change');
+                $('#repair_code').val('').trigger('change');
+                $('#material_code').val('').trigger('change');
+                $('#master_length').val('').trigger('change');
+                $('#master_width').val('').trigger('change');
+                $('#master_height').val('').trigger('change');
 
                 getTransactionData();
                 getReportingData();
@@ -2109,7 +2211,7 @@ function createTransaction() {
     } else {
         var callout = document.createElement('div');
         callout.innerHTML =
-            `<div class="callout callout-danger"><p style="font-size:13px;">Please Select Images</p></div>`;
+            `<div class="callout callout-danger"><p style="font-size:13px;">Please Select atleat 1 image and fill required fields</p></div>`;
         document.getElementById('apiMessages').appendChild(callout);
         setTimeout(function() {
             callout.remove();
@@ -2243,6 +2345,43 @@ function updateEstimate() {
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="text" id="qty" class="form-control" placeholder="Enter Quantity" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Labour Hr.</label>
+                                    <input type="text" id="labour_hr" class="form-control" placeholder="Enter Labour Hr." required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Labour Cost</label>
+                                    <input type="text" id="labour_cost" class="form-control" placeholder="Enter Labour Cost" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Material Cost</label>
+                                    <input type="text" id="material_cost" class="form-control" placeholder="Enter Material Cost" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>GST</label>
+                                    <input type="text" id="gst" class="form-control" placeholder="Enter GST" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Image 1</label>
@@ -2252,7 +2391,31 @@ function updateEstimate() {
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Image 2</label>
-                                    <input type="file" class="form-control" name="file2" id="file2" required>
+                                    <input type="file" class="form-control" name="file2" id="file2">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image 3</label>
+                                    <input type="file" class="form-control" name="file3" id="file3">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image 4</label>
+                                    <input type="file" class="form-control" name="file4" id="file4" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image 5</label>
+                                    <input type="file" class="form-control" name="file5" id="file5" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image 6</label>
+                                    <input type="file" class="form-control" name="file6" id="file6" >
                                 </div>
                             </div>
                         </div>
@@ -2260,16 +2423,8 @@ function updateEstimate() {
                 </div>
 
                 <form id="create_transaction">
-                    <input type="hidden" id="qty">
                     <input type="hidden" id="gateinid">
                     <input type="hidden" id="tarrif_id">
-                    <input type="hidden" id="labour_hr">
-                    <input type="hidden" id="labour_cost">
-                    <input type="hidden" id="material_cost">
-                    <input type="hidden" id="sab_total">
-                    <input type="hidden" id="gst">
-                    <input type="hidden" id="total">
-                    <input type="hidden" id="tax_cost">
                     <input type="hidden" id="dimension_h">
                     <input type="hidden" id="dimension_w">
                     <input type="hidden" id="dimension_l">
@@ -2302,6 +2457,10 @@ function updateEstimate() {
                                     <th>Total Cost</th>
                                     <th>Damage Image 1</th>
                                     <th>Damage Image 2</th>
+                                    <th>Damage Image 3</th>
+                                    <th>Damage Image 4</th>
+                                    <th>Damage Image 5</th>
+                                    <th>Damage Image 6</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
