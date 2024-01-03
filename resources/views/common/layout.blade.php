@@ -62,10 +62,10 @@
 
         function resetTimer() {
             clearTimeout(inactivityTimeout);
-            inactivityTimeout = setTimeout(logout, 300000); // 3 minutes in milliseconds
+            inactivityTimeout = setTimeout(logoutt, 300000); // 3 minutes in milliseconds
         }
 
-        function logout() {
+        function logoutt() {
             // Redirect to logout endpoint or perform any other logout actions
             localStorage.removeItem('token');
             window.location.href = '/sleep';
@@ -242,6 +242,12 @@
                             <i class="fa fa-user mr-2" aria-hidden="true"></i> My Profile
                         </a>
                         <div class="dropdown-divider"></div>
+
+                        <a href="/change-password" class="dropdown-item">
+                            <i class="fas fa-lock mr-2"></i> Change Password
+                        </a>
+                        <div class="dropdown-divider"></div>
+
                         <a href="#" class="dropdown-item" onClick="logout()">
                             <i class="fas fa-sign-out-alt mr-2"></i> Logout
                         </a>

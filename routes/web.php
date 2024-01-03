@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
 Route::get('/sleep', 'App\Http\Controllers\Auth\AuthController@sleep_view');
+Route::get('/change-password', 'App\Http\Controllers\Auth\AuthController@change_password_view');
+Route::get('/forgot-password', 'App\Http\Controllers\Auth\AuthController@forgot_password_view');
+Route::get('/forgot-username', 'App\Http\Controllers\Auth\AuthController@forgot_username_view');
 
 Route::get('/contractor/create', 'App\Http\Controllers\MasterContractorController@index');
 Route::get('/contractor/all', 'App\Http\Controllers\MasterContractorController@all');

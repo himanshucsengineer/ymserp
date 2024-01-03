@@ -33,6 +33,18 @@ class AuthController extends Controller
         return view('lockscreen');
     }
 
+    public function change_password_view(){
+        return view('changePassword');
+    }
+
+    public function forgot_password_view(){
+        return view('forgotPassword');
+    }
+
+    public function forgot_username_view(){
+        return view('forgotUsername');
+    }
+
     public function checkUser(Request $request){
         $rules=[
             'username'=>[
@@ -219,7 +231,6 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-
         $rules=[
             'current_password'=>[
                 'required'
@@ -227,21 +238,10 @@ class AuthController extends Controller
 
             'new_password' => [
                 'required',
-                'string',
-                Password::min(8)
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
             ],
             'confirm_password' => [
                 'required'
             ],
-            'name' => [
-                'required',
-                'string',
-                'min:3',
-                'max:30'
-            ]
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -262,10 +262,6 @@ class AuthController extends Controller
                 $validationFormate->confirm_password = $messages->first('confirm_password');
             }
 
-            if ($messages->has('name')){
-                $validationFormate->name = $messages->first('name');
-            }
-
             $validationError[] = $validationFormate;
 
             return response()->json([
@@ -276,9 +272,7 @@ class AuthController extends Controller
 
         if(Hash::check($request->current_password, $user->password)){
             if($request->new_password == $request->confirm_password){
-
                 $user->password = $request->new_password;
-                $user->name = $request->name;
                 $user->save();
 
                 if($user){
