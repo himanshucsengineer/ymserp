@@ -57,6 +57,26 @@
 
 
     <script>
+
+        var inactivityTimeout;
+
+        function resetTimer() {
+            clearTimeout(inactivityTimeout);
+            inactivityTimeout = setTimeout(logout, 300000); // 3 minutes in milliseconds
+        }
+
+        function logout() {
+            // Redirect to logout endpoint or perform any other logout actions
+            localStorage.removeItem('token');
+            window.location.href = '/sleep';
+        }
+
+        // Add event listeners to track user activity
+        document.addEventListener('mousemove', resetTimer);
+        document.addEventListener('keydown', resetTimer);
+
+
+
         var checkToken = localStorage.getItem('token');
         var role_id = localStorage.getItem('role');
         var user_id = localStorage.getItem('user_id');

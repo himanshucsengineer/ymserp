@@ -25,12 +25,14 @@ $api->version('v1', function($api){
     $api->group(['prefix' => 'auth'], function($api){
         $api->post('/login','App\Http\Controllers\Auth\AuthController@login');
         $api->post('/checkUser','App\Http\Controllers\Auth\AuthController@checkUser');
+        $api->post('/getuserbyid', 'App\Http\Controllers\MasterUserController@getbyid');
+
         $api->group(['middleware' => 'api.auth'], function($api){
             $api->post('/token/refresh','App\Http\Controllers\Auth\AuthController@refreshtoken');
             $api->post('/change-password','App\Http\Controllers\Auth\AuthController@changepassword');
             $api->post('/logout','App\Http\Controllers\Auth\AuthController@logout');
         });
-    }); 
+    });
 
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'role'], function($api){

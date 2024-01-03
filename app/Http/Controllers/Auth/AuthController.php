@@ -29,6 +29,10 @@ class AuthController extends Controller
 {
     use Helpers;
 
+    public function sleep_view(){
+        return view('lockscreen');
+    }
+
     public function checkUser(Request $request){
         $rules=[
             'username'=>[
