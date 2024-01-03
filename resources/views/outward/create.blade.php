@@ -19,6 +19,31 @@
 .select2-container{
     z-index:100;
 }
+.driver_flex{
+    width:100%;
+    height:auto;
+    display: flex;
+}
+.driver_flex .right{
+    width:88%;
+}
+.driver_flex .right input{
+    border-radius:4px 0px 0px 4px !important;
+}
+.driver_flex .left{
+    padding-top:2rem;
+    width:12%;
+}
+.driver_flex .left #captureButton{
+    width: 100%;
+    height: auto;
+    border: 1px solid #cdcdcd;
+    background: transparent;
+    color: #63bf84;
+    font-size: 1.53rem;
+    cursor:pointer;
+    border-radius:0px 4px 4px 0px ;
+}
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -295,11 +320,19 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="driver_copy">Driver Photo</label>
-                                            <input type="file" class="form-control" id="driver_copy" name="driver_copy"
-                                                placeholder="Enter Container Number " required>
+                                        <div class="driver_flex">
+                                            <div class="right">
+                                            <div class="form-group">
+                                                <label for="driver_copy">Driver Photo</label>
+                                                <input type="file" class="form-control" id="driver_copy" name="driver_copy"
+                                                    placeholder="Enter Container Number " required>
+                                            </div>
+                                            </div>
+                                            <div class="left">
+                                                <div id="captureButton" class="text-center"><i class="fas fa-camera"></i></div>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -374,7 +407,99 @@
     </section>
 </div>
 
+
 <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const captureButton = document.getElementById('captureButton');
+            const webcamVideo = document.getElementById('webcamVideo');
+            const confirmButton = document.getElementById('confirmButton');
+            const discardButton = document.getElementById('discardButton');
+            let hiddenFileInput = document.getElementById('driver_copy');
+
+            captureButton.addEventListener('click', function () {
+                $('#modal-camera').modal('show');
+                // Access the webcam
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        // Display the video element
+                        webcamVideo.srcObject = stream;
+                        webcamVideo.play();
+                        webcamVideo.style.display = 'block';
+
+                        // Hide the capture button
+                        captureButton.style.display = 'none';
+
+                        // Show the confirm and discard buttons
+                        confirmButton.style.display = 'inline-block';
+                        discardButton.style.display = 'inline-block';
+                    })
+                    .catch(function (error) {
+                        console.error('Error accessing webcam:', error);
+                    });
+            });
+
+            confirmButton.addEventListener('click', function () {
+                setTimeout(function () {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = webcamVideo.videoWidth;
+                    canvas.height = webcamVideo.videoHeight;
+                    const context = canvas.getContext('2d');
+                    context.drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
+                    const imageDataURL = canvas.toDataURL('image/png');
+
+                    const newFileInput = document.createElement('input');
+                    newFileInput.type = 'file';
+                    newFileInput.accept = 'image/*';
+                    newFileInput.style.display = 'block';
+                    newFileInput.className  = 'form-control';
+                    const blob = dataURLtoBlob(imageDataURL);
+                    const file = new File([blob], 'captured_image.png', { type: 'image/png' });
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    newFileInput.files = dataTransfer.files;
+
+                    hiddenFileInput.parentNode.replaceChild(newFileInput, hiddenFileInput);
+                    hiddenFileInput = newFileInput;
+
+                    const tracks = webcamVideo.srcObject.getTracks();
+                    tracks.forEach(track => track.stop());
+                    webcamVideo.style.display = 'none';
+                    captureButton.style.display = 'block';
+                    confirmButton.style.display = 'none';
+                    discardButton.style.display = 'none';
+                    $('#modal-camera').modal('hide');
+
+                }, 1000);
+            });
+
+            discardButton.addEventListener('click', function () {
+                $('#modal-camera').modal('hide');
+                const tracks = webcamVideo.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                webcamVideo.style.display = 'none';
+                captureButton.style.display = 'block';
+                confirmButton.style.display = 'none';
+                discardButton.style.display = 'none';
+            });
+
+            // Function to convert data URL to Blob
+            function dataURLtoBlob(dataURL) {
+                const arr = dataURL.split(',');
+                const mime = arr[0].match(/:(.*?);/)[1];
+                const bstr = atob(arr[1]);
+                let n = bstr.length;
+                const u8arr = new Uint8Array(n);
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+                return new Blob([u8arr], { type: mime });
+            }
+        });
+    </script>
+
+
+<script>
+
 function validateInput(input) {
     input.style.color = 'black';
     document.getElementById('errorText').textContent = "";
@@ -1324,6 +1449,22 @@ function getTransporter_c(){
 
 }
 </script>
+
+<div class="modal fade" id="modal-camera">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-body">
+                <video id="webcamVideo" style="width:100%"></video>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" id="discardButton" class="btn btn-default ">Discard</button>
+                <button type="button" id="confirmButton" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 <div class="modal fade" id="modal-consignee">
