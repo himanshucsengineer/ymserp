@@ -593,7 +593,6 @@ $(function () {
         var serial_no = $("#serial_no").val();
         var machine_mfg_date = $("#machine_mfg_date").val();
         var device_status = $("#device_status").val();
-        console.log(mfg_date);
        var newdata = {
             'inward_date': inward_date,
             'inward_time': inward_time,

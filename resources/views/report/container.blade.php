@@ -157,13 +157,7 @@
                 
                     <div class="card">
                         <div class="card-body">
-                            <!-- <div class="row">
-                                <div class="col-md-6">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
-                                </div>
-                            </div>  -->
+    
                             <table id="inspectionData" class="table table-bordered table-hover table-responsive text-nowrap">
                                 <thead>
                                     <tr>
@@ -309,27 +303,27 @@ function genrateReport(){
                     if(item.container_img){
                         container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                     }else{
-                        container_img = "No Imgae Available";
+                        container_img = "No Image Available";
                     }
                     var vehicle_img = '';
                     if(item.vehicle_img){
                         vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                     }else{
-                        vehicle_img = "No Imgae Available";
+                        vehicle_img = "No Image Available";
                     }
 
                     var challan = '';
                     if(item.challan){
                         challan = $('<a>').attr({'href':'/uploads/gatein/'+item.challan, 'target':'_blank'}).text("View Image");
                     }else{
-                        challan = "No Imgae Available";
+                        challan = "No Image Available";
                     }
 
                     var empty_latter = '';
                     if(item.empty_latter){
                         empty_latter = $('<a>').attr({'href':'/uploads/gatein/'+item.empty_latter, 'target':'_blank'}).text("View Image");
                     }else{
-                        empty_latter = "No Imgae Available";
+                        empty_latter = "No Image Available";
                     }
 
                     var row = $('<tr>');

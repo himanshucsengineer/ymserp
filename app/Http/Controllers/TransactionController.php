@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\InvoiceManagement;
+use App\Models\LocationCode;
 
 use App\Models\Transaction;
 use App\Models\MasterTarrif;
@@ -48,6 +49,7 @@ class TransactionController extends Controller
             $damage = MasterDamage::where('id',$tarrif->damade_id)->first();
             $repair = MasterRepair::where('id',$tarrif->repair_id)->first();
             $material = MasterMaterial::where('id',$tarrif->material_id)->first();
+            $location_code = LocationCode::where('id',$tarrif->repai_location_code)->first();
 
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
@@ -71,7 +73,8 @@ class TransactionController extends Controller
                 'dimension_h' => $transaction->dimension_h,
                 'dimension_w' => $transaction->dimension_w,
                 'dimension_l' => $transaction->dimension_l,
-                'actual_material' => $transaction->actual_material
+                'actual_material' => $transaction->actual_material,
+                'repai_location_code' => $location_code->code
             ];
         }
         return $formatedData;

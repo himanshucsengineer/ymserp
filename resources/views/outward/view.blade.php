@@ -195,41 +195,41 @@ function filterByDate(){
                 if(item.do_copy){
                     do_copy = $('<a>').attr({'href':'/uploads/outward/'+item.do_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    do_copy = "No Imgae Available";
+                    do_copy = "No Image Available";
                 }
                 var challan_copy = '';
                 if(item.challan_copy){
                     challan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.challan_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    challan_copy = "No Imgae Available";
+                    challan_copy = "No Image Available";
                 }
 
                 var driver_copy = '';
                 if(item.driver_copy){
                     driver_copy = $('<a>').attr({'href':'/uploads/outward/'+item.driver_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    driver_copy = "No Imgae Available";
+                    driver_copy = "No Image Available";
                 }
 
                 var licence_copy = '';
                 if(item.licence_copy){
                     licence_copy = $('<a>').attr({'href':'/uploads/outward/'+item.licence_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    licence_copy = "No Imgae Available";
+                    licence_copy = "No Image Available";
                 }
 
                 var aadhar_copy = '';
                 if(item.aadhar_copy){
                     aadhar_copy = $('<a>').attr({'href':'/uploads/outward/'+item.aadhar_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    aadhar_copy = "No Imgae Available";
+                    aadhar_copy = "No Image Available";
                 }
 
                 var pan_copy = '';
                 if(item.pan_copy){
                     pan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.pan_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    pan_copy = "No Imgae Available";
+                    pan_copy = "No Image Available";
                 }
 
                 var row = $('<tr>');
@@ -389,41 +389,41 @@ function refreshTable(page,search){
                 if(item.do_copy){
                     do_copy = $('<a>').attr({'href':'/uploads/outward/'+item.do_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    do_copy = "No Imgae Available";
+                    do_copy = "No Image Available";
                 }
                 var challan_copy = '';
                 if(item.challan_copy){
                     challan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.challan_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    challan_copy = "No Imgae Available";
+                    challan_copy = "No Image Available";
                 }
 
                 var driver_copy = '';
                 if(item.driver_copy){
                     driver_copy = $('<a>').attr({'href':'/uploads/outward/'+item.driver_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    driver_copy = "No Imgae Available";
+                    driver_copy = "No Image Available";
                 }
 
                 var licence_copy = '';
                 if(item.licence_copy){
                     licence_copy = $('<a>').attr({'href':'/uploads/outward/'+item.licence_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    licence_copy = "No Imgae Available";
+                    licence_copy = "No Image Available";
                 }
 
                 var aadhar_copy = '';
                 if(item.aadhar_copy){
                     aadhar_copy = $('<a>').attr({'href':'/uploads/outward/'+item.aadhar_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    aadhar_copy = "No Imgae Available";
+                    aadhar_copy = "No Image Available";
                 }
 
                 var pan_copy = '';
                 if(item.pan_copy){
                     pan_copy = $('<a>').attr({'href':'/uploads/outward/'+item.pan_copy, 'target':'_blank'}).text("View Image");
                 }else{
-                    pan_copy = "No Imgae Available";
+                    pan_copy = "No Image Available";
                 }
 
                 var row = $('<tr>');

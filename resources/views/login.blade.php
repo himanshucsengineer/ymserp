@@ -113,7 +113,6 @@
                         $("#loginForm").hide();
                     },
                     error: function (error) {
-                        console.log(error);
                         var callout = document.createElement('div');
                         callout.innerHTML = `<div class="callout callout-danger"><p style="font-size:13px;">${error.responseJSON.message}</p></div>`;
                         document.getElementById('apiMessages').appendChild(callout);

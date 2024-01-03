@@ -153,13 +153,13 @@ function filterByDate(){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');
@@ -288,18 +288,17 @@ function refreshTable(page,search){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                // row.append($('<td>').append(item.inward_no));
                 var viewButton = $('<span>')
                     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
                     .attr('data-id', item.id) 
@@ -310,15 +309,9 @@ function refreshTable(page,search){
                 row.append(td);
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
-                // row.append($('<td>').append(item.container_size));
-                // row.append($('<td>').append(item.container_type));
                 row.append($('<td style="text-transform:uppercase;">').append(item.vehicle_number));
                 row.append($('<td>').append(vehicle_img));
-                // row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
-                // row.append($('<td>').append(item.contact_number));
                 
-                
-
                 tbody.append(row);
                 i++;
             });

@@ -209,7 +209,6 @@ $(function () {
         var category_id = $("#category_id").val();
         var depot_id = $("#depot_id").val();
         var username = $("#loginid").val();
-        console.log(username);
         var password = $("#password").val();
         var c_password = $("#c_password").val();
         var recovery_number = $("#recovery_number").val();

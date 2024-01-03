@@ -840,7 +840,6 @@ $(document).ready(function() {
     });
 
     $('#repair_code').on('change', function() {
-        // $('#material_code').removeAttr('readonly');
         var material_code = $('#material_code');
         material_code.empty();
         var material_code_create = document.getElementById('material_code');
@@ -986,7 +985,6 @@ $(document).ready(function() {
                 'component_code':component_code,
             },
             success: function(data) {
-                // $("#component_code").val(data[0].component_code);
                 $("#tarrif_id").val(data[0].id);
                 $("#labour_hr").val(data[0].labour_hour);
                 $("#qty").val(data[0].qty);
@@ -1590,7 +1588,7 @@ function getReportingData() {
                 row.append($('<td>').text(i));
                 row.append($('<td>').text($('#modal_container_no').val()));
                 row.append($('<td>').text(item.tarrifData.component_code));
-                row.append($('<td>').text(item.tarrifData.repai_location_code));
+                row.append($('<td>').text(item.repai_location_code));
                 row.append($('<td>').text(item.damage.code));
                 row.append($('<td>').text(item.repair.repair_code));
                 row.append($('<td>').text(item.material.material_code));

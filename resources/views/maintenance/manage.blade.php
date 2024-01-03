@@ -456,26 +456,6 @@ function getReportingData(){
                 var afterfile2 = `/uploads/transaction/${item.after_file2}`
                 var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
                 row.append($('<td id="after_file2_td">').append(after_file2));
-                // var checkSupervisor = "<?php echo $checkSupervisor?>";
-                // if(checkSupervisor == 1){
-                //     var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
-                //     row.append($('<td>').append(actual_amterial));
-                //     var afterfile1 = `/uploads/transaction/${item.after_file1}` 
-                //     var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
-                //     row.append($('<td id="after_file1_td">').append(after_file1)); 
-                //     var afterfile2 = `/uploads/transaction/${item.after_file2}`
-                //     var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
-                //     row.append($('<td id="after_file2_td">').append(after_file2)); 
-                // }else{
-                //     var actual_amterial = $('<input>').attr({'type':'text', 'id':'actual_amterial', 'readonly':'readonly','class':'reportinput form-control'}).val(item.actual_material);
-                //     row.append($('<td>').append(actual_amterial));
-                //     var afterfile1 = `/uploads/transaction/${item.after_file1}`
-                //     var after_file1 = $('<img style="width:100px">').attr({'src': afterfile1});
-                //     row.append($('<td id="after_file1_td">').append(after_file1)); 
-                //     var afterfile2 = `/uploads/transaction/${item.after_file2}`
-                //     var after_file2 = $('<img style="width:100px">').attr({'src': afterfile2});
-                //     row.append($('<td id="after_file2_td">').append(after_file2));
-                // }
 
                 var editButton = $('<span>')
                     .html('<i class="far fa-edit" style="color:#15abf2; cursor:pointer;"></i>')

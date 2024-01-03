@@ -65,21 +65,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <!-- <div class="row mb-4">
-                        <div class="col-md-3">
-                            <select name="filterbystatus" id="filterbystatus" class="form-control">
-                                <option value="All">All</option>
-                                <option value="Gate In">Gate In</option>
-                                <option value="Gate Out">Gate Out</option>
-                                <option value="Inspection Done">Inspection Done</option>
-                                <option value="Inspection Approved">Inpection Approved</option>
-                                <option value="Inspection Pending">Inpection Pending</option>
-                                <option value="Repair Pending">Repair Pending</option>
-                                <option value="Repair Done">Repair Done</option>
-                            </select>
-                        </div>
-                        <div class="col-md-9"></div>
-                    </div> -->
                     
                     <div class="card">
                         <div class="card-body table-responsive">
@@ -174,25 +159,17 @@ function filterByDate(){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');
                 row.append($('<td>').text(i));
-                // var viewButton = $('<span>')
-                //     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                //     .attr('data-id', item.id) 
-                //     .attr('class', 'view-button');
-
-                // var td = $('<td>');
-                // td.append(viewButton);
-                // row.append(td);
                 row.append($('<td style="text-transform:uppercase;">').append(item.container_no));
                 row.append($('<td>').append(container_img));
                 row.append($('<td>').append(item.container_size));
@@ -314,13 +291,13 @@ function refreshTable(page,search){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');
@@ -334,15 +311,6 @@ function refreshTable(page,search){
                 row.append($('<td>').append(vehicle_img));
                 row.append($('<td style="text-transform:uppercase;">').append(item.driver_name));
                 row.append($('<td>').append(item.contact_number));
-                
-                // var viewButton = $('<span>')
-                //     .html('<i class="far fa-eye" style="color:#15abf2; cursor:pointer;"></i>')
-                //     .attr('data-id', item.id) 
-                //     .attr('class', 'view-button');
-
-                // var td = $('<td>');
-                // td.append(viewButton);
-                // row.append(td);
 
                 tbody.append(row);
                 i++;

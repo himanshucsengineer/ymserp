@@ -92,7 +92,6 @@ $(function () {
             'id':getCateId[1]
         },
         success: function(response) {
-            console.log(response);
             $('#name').val(response[0].role);
             $('#permission').val(response[0].permissions);
             $('.text').text('Update Role');

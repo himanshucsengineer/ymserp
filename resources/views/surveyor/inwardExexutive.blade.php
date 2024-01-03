@@ -166,13 +166,13 @@ function filterByDate(){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 
@@ -316,13 +316,13 @@ function refreshTable(page,search){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');

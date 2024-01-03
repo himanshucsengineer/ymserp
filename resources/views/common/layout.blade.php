@@ -495,7 +495,7 @@
                                 <!-- <i class="nav-icon fas fa-tree"></i> -->
                                 <i class="fas fa-money-bill nav-icon"></i>
                                 <p>
-                                    Do Manager
+                                    DO Manager
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>

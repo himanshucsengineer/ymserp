@@ -227,17 +227,6 @@ function search(){
                     paginationDiv.appendChild(nextLink);
                 }
             }
-
-
-            // $('.view-button').click(function() {
-            //     var dataId = $(this).data('id');
-            //     var dataValue = $(this).data('value');
-            //     if(dataValue == '1'){
-            //         window.location = `/maintenance/manage?id=${dataId}&supervisor=yes`
-            //     }else{
-            //         window.location = `/surveyor/containershow?id=${dataId}&supervisor=yes`
-            //     }
-            // });
         },
         error: function(error) {
             console.log(error);

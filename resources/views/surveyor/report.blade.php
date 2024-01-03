@@ -89,7 +89,6 @@
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Action</th>
-                                        <!-- <th>Inward No.</th> -->
                                         <th>Container No.</th>
                                         <th>Container Image</th>
                                         <th>Vehicle No.</th>
@@ -165,13 +164,13 @@ function filterByDate(){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');
@@ -184,7 +183,6 @@ function filterByDate(){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                // row.append($('<td>').append(item.inward_no));
 
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));
@@ -315,13 +313,13 @@ function refreshTable(page,search){
                 if(item.container_img){
                     container_img = $('<a>').attr({'href':'/uploads/gatein/'+item.container_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    container_img = "No Imgae Available";
+                    container_img = "No Image Available";
                 }
                 var vehicle_img = '';
                 if(item.vehicle_img){
                     vehicle_img = $('<a>').attr({'href':'/uploads/gatein/'+item.vehicle_img, 'target':'_blank'}).text("View Image");
                 }else{
-                    vehicle_img = "No Imgae Available";
+                    vehicle_img = "No Image Available";
                 }
 
                 var row = $('<tr>');
@@ -334,7 +332,6 @@ function refreshTable(page,search){
                 var td = $('<td>');
                 td.append(viewButton);
                 row.append(td);
-                // row.append($('<td>').append(item.inward_no));
 
                 row.append($('<td>').append(item.container_no));
                 row.append($('<td>').append(container_img));
