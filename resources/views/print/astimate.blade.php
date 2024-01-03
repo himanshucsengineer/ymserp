@@ -736,22 +736,46 @@
             <tr class="row4">
                 <td class="column0 style11 s style11" colspan="15">ESTIMATE SHEET</td>
             </tr>
+
+            <tr class="row5">
+                <td class="column0 style13 s style13" colspan="3">LINE NAME:</td>
+                <td class="column3 style14 s style14" colspan="12"><?php echo $line_name?></td>
+          
+            </tr>
+
             <tr class="row5">
                 <td class="column0 style13 s style13" colspan="3">CONTAINER NUMBER :</td>
                 <td class="column3 style14 s style14" colspan="2"><?php echo $container_no?></td>
                 <td class="column5 style2 null"></td>
                 <td class="column6 style2 null"></td>
-                <td class="column7 style13 s style13" colspan="3">LINE NAME:</td>
-                <td class="column10 style14 s style14" colspan="5"><?php echo $line_name?></td>
+                <td class="column7 style13 s style13" colspan="3">SIZE / TYPE:</td>
+                <td class="column10 style14 s style14" colspan="5"><?php echo $container_size?> / <?php echo $sub_type?></td>
+            </tr>
+            <tr class="row5">
+                <td class="column0 style13 s style13" colspan="3">SURVEY DATE AND TIME: </td>
+                <td class="column3 style14 s style14" colspan="2"><?php echo $survey_date?></td>
+                <td class="column5 style2 n"><?php echo $survey_time?></td>
+                <td class="column6 style2 null"></td>
+                <td class="column7 style13 s style13" colspan="3">SURVEY DONE BY :</td>
+                <td class="column10 style14 s style14" colspan="5"><?php echo $survey_done_by?></td>
+            </tr>
+            <tr class="row5">
+                <td class="column0 style13 s style13" colspan="3">MFG Date :</td>
+                <td class="column3 style14 s style14" colspan="2"><?php echo $mfg_date?></td>
+                <td class="column5 style3 n"></td>
+                <td class="column6 style2 null"></td>
+                <td class="column7 style13 s style13" colspan="3">CSC Details :</td>
+                <td class="column10 style14 s style14" colspan="5"><?php echo $csc_details?></td>
             </tr>
             <tr class="row6">
-                <td class="column0 style13 s style13" colspan="3">SURVEY DATE AND TIME: </td>
-                <td class="column3 style12 n style12" colspan="2"><?php echo $survey_date?></td>
-                <td class="column5 style3 n"><?php echo $survey_time?></td>
+                <td class="column0 style13 s style13" colspan="3">Gross Weight : </td>
+                <td class="column3 style12 n style12" colspan="2"><?php echo $gross_weight?></td>
+                <td class="column5 style3 n"></td>
                 <td class="column6 style2 null"></td>
-                <td class="column7 style15 s style15" colspan="3">SURVEY DONE BY :</td>
-                <td class="column10 style16 s style16" colspan="5"><?php echo $survey_done_by?></td>
+                <td class="column7 style15 s style15" colspan="3">Tare Weight :</td>
+                <td class="column10 style16 s style16" colspan="5"><?php echo $tare_weight?></td>
             </tr>
+
             <tr class="row7">
                 <td class="column0 style4 s">C-CODE</td>
                 <td class="column1 style4 s">L-CODE</td>

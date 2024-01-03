@@ -116,7 +116,13 @@ class GateInController extends Controller
         $data['survey_date'] = $getInData->survayor_date;
         $data['survey_time'] = $getInData->survayor_time;
         $data['survey_done_by'] = $survayorDoneName->firstname . ' ' . $survayorDoneName->lastname;
-        
+        $data['mfg_date'] = $getInData->mfg_date;
+        $data['csc_details'] = $getInData->csc_details;
+        $data['gross_weight'] = $getInData->gross_weight;
+        $data['tare_weight'] = $getInData->tare_weight;
+        $data['container_size'] = $getInData->container_size;
+        $data['sub_type'] = $getInData->sub_type;
+
         $formetedData = [];
 
         foreach($transactionData as $transaction){
@@ -136,7 +142,6 @@ class GateInController extends Controller
                 'damage_code' => $damageData->code,
                 'repair_code' => $repairData->repair_code,
                 'material_code' => $materialData->material_code,
-
                 'qty' => $transaction->qty,
                 'labour_hr' => $transaction->labour_hr,
                 'labour_cost' => number_format($transaction->labour_cost, 2),
