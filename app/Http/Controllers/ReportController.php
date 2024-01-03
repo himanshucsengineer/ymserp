@@ -121,13 +121,16 @@ class ReportController extends Controller
                 ['payment_method','Cash']
                 ])->first();
 
-            if(count($invoiceData) > 0){
+            if($invoiceData){
                 if($invoiceData->amount){
                     $amount = $invoiceData->amount;
                 }else{
                     $amount = '';
                 }
                 $receipt_no = $invoiceData->final_invoice_no;
+            }else{
+                $amount = '';
+                $receipt_no = '';
             }
 
             $indataFormate[] =[

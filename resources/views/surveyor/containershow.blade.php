@@ -659,17 +659,24 @@ $(function () {
     }
   });
 
-
-  
-
     $('#gateinForm').validate({
     rules: {
         
         line_id:{
             required: true,
         },
-       
-
+        sub_type: {
+            required: true,
+        },
+        container_type: {
+            required: true,
+        },
+        container_size: {
+            required: true,
+        },
+        container_no: {
+            required: true,
+        },
     },
     messages: {
         job_work_no: {

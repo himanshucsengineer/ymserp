@@ -318,7 +318,6 @@
                                             <select name="billing_type" class="form-control" id="billing_type">
                                                 <option value="">Select Billing Type</option>
                                                 <option value="lolo">Lolo Billing</option>
-                                                <option value="parking">Parking</option>
                                             </select>
                                         </div>
                                     </div>
@@ -478,6 +477,7 @@ $(document).ready(function () {
                 $('.empty_latter').html('<p>No Image Available</p>');
             }
 
+            getTransactionAmount('lolo',data.id);
 
             if(data.line_id){
                 getline(data.line_id, data.container_type,data.container_size);
@@ -710,6 +710,33 @@ function getTranport(id){
     });
 }
 
+function getTransactionAmount(bill_type,gateinid){
+    var checkToken = localStorage.getItem('token');
+
+    $.ajax({
+                type: "POST",
+                url: "/api/transcation/getbytype",
+                headers: {
+                    'Authorization': 'Bearer ' + checkToken
+                },
+                data:{
+                    'bill_type':bill_type,
+                    'gateinid':gateinid
+                },
+                success: function (data) {
+                    if(data){
+                        $('#invoice_id').val(data.id);
+                        $("#billing_type").val(data.incoice_type);
+                        $("#amount").val(data.amount);
+                        $("#is_included").val(data.is_included);
+                    }
+                    
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+}
 
 
 <?php 
@@ -735,30 +762,7 @@ $('#billing_type').on('change',function(){
             callout.remove();
         }, 2000);
     }
-    var is_update = <?php echo $is_update;?>;
-    if(is_update == 1){
-        if(bill_type != ''){
-            var line_id = $('#line_id').val();
-            $.ajax({
-                type: "POST",
-                url: "/api/transcation/getbytype",
-                headers: {
-                    'Authorization': 'Bearer ' + checkToken
-                },
-                data:{
-                    'bill_type':bill_type,
-                    'gateinid':gateinid
-                },
-                success: function (data) {
-                    $('#invoice_id').val(data.id);
-                    $("#amount").val(data.amount);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-    }else{
+
         if(bill_type != ''){
             var line_id = $('#line_id').val();
 
@@ -784,7 +788,7 @@ $('#billing_type').on('change',function(){
                     console.log(error);
                 }
             });
-        }
+        
     }
 
     
@@ -921,9 +925,14 @@ $(function () {
         },
         is_included:{
             required: true,
-        }
+        },
        
-
+        container_type: {
+            required: true,
+        },
+        container_size: {
+            required: true,
+        },
     },
     messages: {
         job_work_no: {
