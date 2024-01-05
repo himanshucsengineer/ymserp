@@ -994,14 +994,22 @@ $(document).ready(function() {
                 $("#qty").val(data[0].qty);
                 $("#labour_cost").val(data[0].labour_cost);
                 $("#material_cost").val(data[0].material_cost);
-                // $("#sab_total").val(data[0].sub_total);
-                // $("#tax_cost").val(data[0].tax_cost);
+                $("#sub_total").val(data[0].sub_total);
+                $("#tax_cost").val(data[0].tax_cost);
                 $("#gst").val(data[0].tax);
-                // $("#total").val(data[0].total_cost);
+                $("#total").val(data[0].total_cost);
                 $("#dimension_h").val(data[0].dimension_h);
                 $("#dimension_w").val(data[0].dimension_w);
                 $("#dimension_l").val(data[0].dimension_l);
                 $('#addButton').removeAttr('disabled');
+                $('#qty').removeAttr('readonly');
+                $('#labour_cost').removeAttr('readonly');
+                $('#material_cost').removeAttr('readonly');
+                // $('#sub_total').removeAttr('readonly');
+                // $('#tax_cost').removeAttr('readonly');
+                $('#gst').removeAttr('readonly');
+                // $('#total').removeAttr('readonly');
+                $('#labour_hr').removeAttr('readonly');
 
             },
             error: function(error) {
@@ -2099,6 +2107,82 @@ function getMaterial(id) {
 
 
 <script>
+$(document).ready(function() {
+$('#qty, #labour_hr').on('keyup', function() {
+    var reporting_qty = $('#qty').val();
+    var reporting_labour_hr = $('#labour_hr').val();
+    var reporting_tax = $('#gst').val();
+    var reporting_labour_cost = $('#labour_cost').val();
+    var reporting_material_cost = $('#material_cost').val();
+
+    if(reporting_qty == ''){
+        reporting_qty = 1;
+    }else{
+        reporting_qty = reporting_qty;
+    }
+
+    if(reporting_labour_hr == ''){
+        reporting_labour_hr = 1;
+    }else{
+        reporting_labour_hr = reporting_labour_hr;
+    }
+
+    var labour_cost = parseInt(reporting_labour_hr) * parseInt(reporting_labour_cost);
+    var material_cost = parseInt(reporting_qty) * parseInt(reporting_material_cost);
+    var sub_total = parseInt(labour_cost) + parseInt(material_cost);
+    var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
+    var total = parseInt(tax_cost) + parseInt(sub_total);
+
+    $('#labour_cost').val(labour_cost.toFixed(2));
+    $('#material_cost').val(material_cost.toFixed(2));
+    $('#sub_total').val(sub_total.toFixed(2));
+    $('#tax_cost').val(tax_cost.toFixed(2));
+    $('#total').val(total.toFixed(2));
+});
+
+$('#labour_cost, #material_cost').on('keyup', function() {
+    var reporting_tax = $('#gst').val();
+    var reporting_labour_cost = $('#labour_cost').val();
+    var reporting_material_cost = $('#material_cost').val();
+
+    if(reporting_labour_cost == ''){
+        reporting_labour_cost = 0;
+    }else{
+        reporting_labour_cost = reporting_labour_cost;
+    }
+
+    if(reporting_material_cost == ''){
+        reporting_material_cost = 0;
+    }else{
+        reporting_material_cost = reporting_material_cost;
+    }
+
+
+    var sub_total = parseInt(reporting_labour_cost) + parseInt(reporting_material_cost);
+    var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
+    var total = parseInt(tax_cost) + parseInt(sub_total);
+    $('#sub_total').val(sub_total.toFixed(2));
+    $('#tax_cost').val(tax_cost.toFixed(2));
+    $('#total').val(total.toFixed(2));
+});
+
+$('#gst').on('keyup', function() {
+    var reporting_tax = $('#gst').val();
+    var sub_total = $('#sub_total').val();
+
+    if(reporting_tax == ''){
+        reporting_tax = 0;
+    }else{
+        reporting_tax = reporting_tax;
+    }
+
+    var tax_cost = (parseInt(reporting_tax) / 100) * parseInt(sub_total)
+    var total = parseInt(tax_cost) + parseInt(sub_total);
+    $('#tax_cost').val(tax_cost.toFixed(2));
+    $('#total').val(total.toFixed(2));
+});
+
+});
 function createTransaction() {
     var checkToken = localStorage.getItem('token');
     var user_id = localStorage.getItem('user_id');
@@ -2108,6 +2192,9 @@ function createTransaction() {
     var labour_hr = $('#labour_hr').val();
     var material_cost = $('#material_cost').val();
     var gst = $('#gst').val();
+    var sub_total = $('#sub_total').val();
+    var tax_cost = $('#tax_cost').val();
+    var total = $('#total').val();
 
     if ($('#file1')[0].files[0] && qty != '' && labour_cost != '' && labour_hr != '' && material_cost != '' && gst != '') {
         var tarrif_id = $('#tarrif_id').val();
@@ -2115,22 +2202,17 @@ function createTransaction() {
         var dimension_h = $('#dimension_h').val();
         var dimension_w = $('#dimension_w').val();
         var dimension_l = $('#dimension_l').val();
-        var total_material_cost = parseFloat(qty).toFixed(2) * parseFloat(material_cost).toFixed(2);
-        var total_labour_cost = parseFloat(labour_hr).toFixed(2) * parseFloat(labour_cost).toFixed(2);
-        
-        var sab_total = (parseFloat(total_material_cost) + parseFloat(total_labour_cost)).toFixed(2);
 
-        var tax_cost = (gst / 100) * sab_total;
-        var total = (parseFloat(sab_total) + parseFloat(tax_cost)).toFixed(2);
+
         var location_code = $('#side').val();
 
         var formData = new FormData();
         formData.append('tax_cost', tax_cost);
         formData.append('total', total);
         formData.append('gst', gst);
-        formData.append('sab_total', sab_total);
-        formData.append('material_cost', total_material_cost);
-        formData.append('labour_cost', total_labour_cost);
+        formData.append('sab_total', sub_total);
+        formData.append('material_cost', material_cost);
+        formData.append('labour_cost', labour_cost);
         formData.append('qty', qty);
         formData.append('location_code', location_code);
         formData.append('labour_hr', labour_hr);
@@ -2239,9 +2321,6 @@ function updateEstimate() {
         post('gatein/updateestimate', data);
         location.href = "/surveyor/inspection";
     }
-
-
-
 }
 </script>
 
@@ -2348,31 +2427,49 @@ function updateEstimate() {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input type="text" id="qty" class="form-control" placeholder="Enter Quantity" required>
+                                    <input type="text" id="qty" readonly class="form-control" placeholder="Enter Quantity" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Labour Hr.</label>
-                                    <input type="text" id="labour_hr" class="form-control" placeholder="Enter Labour Hr." required>
+                                    <input type="text" id="labour_hr" readonly class="form-control" placeholder="Enter Labour Hr." required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Labour Cost</label>
-                                    <input type="text" id="labour_cost" class="form-control" placeholder="Enter Labour Cost" required>
+                                    <input type="text" id="labour_cost" readonly class="form-control" placeholder="Enter Labour Cost" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Material Cost</label>
-                                    <input type="text" id="material_cost" class="form-control" placeholder="Enter Material Cost" required>
+                                    <input type="text" id="material_cost" readonly class="form-control" placeholder="Enter Material Cost" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Sub Total</label>
+                                    <input type="text" id="sub_total" class="form-control" readonly placeholder="Enter Sub Total" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>GST</label>
-                                    <input type="text" id="gst" class="form-control" placeholder="Enter GST" required>
+                                    <input type="text" id="gst" readonly class="form-control" placeholder="Enter GST" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tax Cost</label>
+                                    <input type="text" id="tax_cost" class="form-control" readonly placeholder="Enter Tax Cost" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Total</label>
+                                    <input type="text" id="total" class="form-control" readonly placeholder="Enter Total" required>
                                 </div>
                             </div>
                         </div>
