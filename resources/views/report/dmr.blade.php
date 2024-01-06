@@ -176,6 +176,12 @@
                 
                     <div class="card">
                         <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-10"></div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-block btn-success" onclick="exportExcel()"><i class="far fa-file-excel mr-2"></i> Export</button>
+                                </div>
+                            </div>
                         <div class="card card-primary card-outline card-tabs">
                         <div class="card-header p-0 pt-1 border-bottom-0">
                             <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
@@ -291,6 +297,58 @@
 </div>
 
 <script>
+
+
+function exportExcel(){
+    var checkToken = localStorage.getItem('token');
+    var line_name = $('#lines').val();
+    var depo_id = $('#depos').val();
+    var from = $('#from').val();
+    var to = $('#to').val();
+    var report_type = $('#report_type').val();
+
+        fetch('/api/report/export-dmr', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
+                'Authorization': 'Bearer ' + checkToken
+            },
+            body: JSON.stringify({
+                line_name: line_name,
+                to: to,
+                from: from,
+                depo_id: depo_id,
+                report_type: report_type
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+            return response.blob();
+        })
+        .then(blob => {
+
+            const currentDateTime = new Date();
+            const formattedDateTime = `${currentDateTime.getDate()}-${currentDateTime.getMonth() + 1}-${currentDateTime.getFullYear()} ${currentDateTime.getHours()}:${currentDateTime.getMinutes()}:${currentDateTime.getSeconds()}.${currentDateTime.getMilliseconds()}`;
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = formattedDateTime + '-dmr_report.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+
+}
+
 
 $(document).ready(function () {
     var checkToken = localStorage.getItem('token');

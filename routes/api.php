@@ -346,6 +346,7 @@ $api->version('v1', function($api){
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'report'], function($api){
         $api->post('/getDmrReport','App\Http\Controllers\ReportController@getDmrReport');
+        $api->post('/export-dmr','App\Http\Controllers\ReportController@dmr_export');
         $api->post('/container_status_report','App\Http\Controllers\ReportController@container_status_report');
 
     });

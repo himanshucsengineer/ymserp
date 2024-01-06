@@ -18,6 +18,11 @@ use App\Models\MasterTransport;
 use App\Models\InvoiceManagement;
 
 
+use App\Exports\DmrExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Response;
+
+
 class ReportController extends Controller
 {
     /**
@@ -37,6 +42,17 @@ class ReportController extends Controller
 
     public function container_status_report_view(){
         return view('report.containerStatus');
+    }
+
+    public function dmr_export(Request $request){
+
+        $requestData = $request->json()->all();
+
+        $currentDateTime = new \DateTime();
+        $formattedDateTime = $currentDateTime->format('Y-m-d H:i:s');
+        return Excel::download(new DmrExport($requestData), $formattedDateTime.'-dmr_report.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
     }
 
     public function getDmrReport(Request $request){
