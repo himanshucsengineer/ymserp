@@ -82,7 +82,11 @@
                         <div class="card-body table-responsive">
                             <div class="row">
                                 <div class="col-md-6">
-                                   
+                                    <div class="row">
+                                        <div class="col-md-3 mt-4">
+                                            <button class="btn btn-block btn-success" onclick="exportExcel()"><i class="far fa-file-excel mr-2"></i> Export</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" id="search" placeholder="search Here..." onkeyup="refreshTable('',this.value)">
@@ -118,6 +122,51 @@ $(document).ready(function() {
     var checkToken = localStorage.getItem('token');
     refreshTable();
 });
+
+function exportExcel(){
+    var checkToken = localStorage.getItem('token');
+    var user_id = localStorage.getItem('user_id');
+    var depo_id = localStorage.getItem('depo_id');
+
+        fetch('/api/category/export-excel', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
+                'Authorization': 'Bearer ' + checkToken
+            },
+            data:{
+                'user_id':user_id,
+                'depo_id':depo_id
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+            return response.blob();
+        })
+        .then(blob => {
+
+            const currentDateTime = new Date();
+            const formattedDateTime = `${currentDateTime.getDate()}-${currentDateTime.getMonth() + 1}-${currentDateTime.getFullYear()} ${currentDateTime.getHours()}:${currentDateTime.getMinutes()}:${currentDateTime.getSeconds()}.${currentDateTime.getMilliseconds()}`;
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = formattedDateTime + '-mastercategory.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+
+}
+
 
 function clearTableBody() {
         $('#table-body').empty();

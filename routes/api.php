@@ -63,6 +63,7 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\MasterCategoryController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\MasterCategoryController@destroy');
         $api->post('/update', 'App\Http\Controllers\MasterCategoryController@update');
+        $api->post('/export-excel', 'App\Http\Controllers\MasterCategoryController@export');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'depo'], function($api){

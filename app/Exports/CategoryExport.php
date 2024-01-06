@@ -5,7 +5,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\Exportable;
-use App\Models\CategoryMaster;
+use App\Models\MasterCategory;
 
 class CategoryExport implements FromCollection, WithHeadings, WithMapping, Responsable
 {
@@ -13,7 +13,7 @@ class CategoryExport implements FromCollection, WithHeadings, WithMapping, Respo
     use Exportable;
 
     public function collection(){
-        return CategoryMaster::all();
+        return MasterCategory::all();
     }
 
     public function headings(): array

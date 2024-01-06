@@ -62,7 +62,7 @@
 
         function resetTimer() {
             clearTimeout(inactivityTimeout);
-            inactivityTimeout = setTimeout(logoutt, 300000); // 3 minutes in milliseconds
+            inactivityTimeout = setTimeout(logoutt, 600000); // 3 minutes in milliseconds
         }
 
         function logoutt() {

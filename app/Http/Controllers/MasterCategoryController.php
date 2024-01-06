@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\CategoryExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Response;
 
 use App\Models\MasterCategory;
 use App\Models\User;
@@ -20,6 +23,16 @@ class MasterCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     use Helpers;
+
+
+    public function export()
+     {
+        $currentDateTime = new \DateTime();
+        $formattedDateTime = $currentDateTime->format('Y-m-d H:i:s');
+        return Excel::download(new CategoryExport, $formattedDateTime.'-mastercategory.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+     }
     public function index()
     {
         return view('category.create');
