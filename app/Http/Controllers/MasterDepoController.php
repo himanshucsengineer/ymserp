@@ -32,11 +32,7 @@ class MasterDepoController extends Controller
 
     public function get(Request $request)
     {
-        if($request->user_id == 1){
             return MasterDepo::get();
-        }else{
-            return MasterDepo::where('depo_id',$request->depo_id)->get();
-        }
     }
 
     public function getall(){
