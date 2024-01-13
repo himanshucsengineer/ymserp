@@ -441,6 +441,9 @@ a.open:hover .circle img {
                                                     <button class="btn btn-block btn-outline-success"
                                                         onclick="printAstimate()">Print</button>
                                                 </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-block btn-success" onclick="exportExcel()"><i class="far fa-file-excel mr-2"></i> Export</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -758,6 +761,47 @@ function showFloor() {
     $('#floor').show();
 }
 
+function exportExcel(){
+    var checkToken = localStorage.getItem('token');
+    var gatein_id = $('#gateinid').val();
+
+        fetch('/api/gatein/export-astimate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
+                'Authorization': 'Bearer ' + checkToken
+            },
+            body: JSON.stringify({
+                gatein_id: gatein_id,
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+            return response.blob();
+        })
+        .then(blob => {
+
+            const currentDateTime = new Date();
+            const formattedDateTime = `${currentDateTime.getDate()}-${currentDateTime.getMonth() + 1}-${currentDateTime.getFullYear()} ${currentDateTime.getHours()}:${currentDateTime.getMinutes()}:${currentDateTime.getSeconds()}.${currentDateTime.getMilliseconds()}`;
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = formattedDateTime + '-astimate_report.xlsx';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+}
+
 function printAstimate() {
     var gatein_id = $('#gateinid').val();
     printurl = `/print/printestimate?gatein_id=${gatein_id}`;
@@ -966,12 +1010,12 @@ $(document).ready(function() {
         var damageCode = $('#damage_code').val();
         var repairCode = $('#repair_code').val();
         var materialCode = $('#material_code').val();
-
         var master_length = $('#master_length').val();
         var master_width = $('#master_width').val();
         var master_height = $('#master_height').val();
         var component_code = $('#component_code').val();
-
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $('#location_code_id').val();
 
         $.ajax({
             type: "POST",
@@ -987,6 +1031,8 @@ $(document).ready(function() {
                 'master_width': master_width,
                 'master_height': master_height,
                 'component_code':component_code,
+                'line_id':line_id,
+                'location_code_id':location_code_id
             },
             success: function(data) {
                 $("#tarrif_id").val(data[0].id);
@@ -1488,7 +1534,7 @@ function getTransactionData() {
                 row.append($('<td>').text(i));
                 row.append($('<td>').text($('#modal_container_no').val()));
                 row.append($('<td>').text(item.tarrifData.component_code));
-                row.append($('<td>').text(item.tarrifData.repai_location_code));
+                row.append($('<td>').text(item.repai_location_code));
                 row.append($('<td>').text(item.damage_code));
                 row.append($('<td>').text(item.repair_code));
                 row.append($('<td>').text(item.material_code));

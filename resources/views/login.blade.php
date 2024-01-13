@@ -67,12 +67,12 @@
                 </form>
                 
 
-                <p class="mb-1">
+                <!-- <p class="mb-1">
                     <a href="/forgot-password">I forgot my password</a>
                 </p>
                 <p class="mb-0">
                     <a href="/forgot-username" class="text-center">I forgot my Username</a>
-                </p>
+                </p> -->
             </div>
             <!-- /.login-card-body -->
         </div>

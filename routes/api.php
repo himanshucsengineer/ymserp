@@ -231,6 +231,7 @@ $api->version('v1', function($api){
         $api->post('/update', 'App\Http\Controllers\TransactionController@update');
         $api->post('/delete', 'App\Http\Controllers\TransactionController@destroy');
         $api->post('/getbytype', 'App\Http\Controllers\TransactionController@getbytype');
+        $api->post('/export-estimate', 'App\Http\Controllers\TransactionController@export_estimate');
 
     });
 

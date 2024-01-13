@@ -19,6 +19,10 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 use \stdClass;
 
+use App\Exports\EstimateExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Response;
+
 class TransactionController extends Controller
 {
     /**
@@ -30,6 +34,16 @@ class TransactionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function export_estimate(Request $request){
+        $requestData = $request->json()->all();
+
+        $currentDateTime = new \DateTime();
+        $formattedDateTime = $currentDateTime->format('Y-m-d H:i:s');
+        return Excel::download(new EstimateExport($requestData), $formattedDateTime.'-estimate_report.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
     }
 
 
@@ -100,6 +114,8 @@ class TransactionController extends Controller
             $damage = MasterDamage::where('id',$tarrif->damade_id)->first();
             $repair = MasterRepair::where('id',$tarrif->repair_id)->first();
             $material = MasterMaterial::where('id',$tarrif->material_id)->first();
+            $location_code = LocationCode::where('id',$tarrif->repai_location_code)->first();
+
             $formatedData[] = [
                 'before_file1'=> $transaction->before_file1,
                 'before_file2'=> $transaction->before_file2,
@@ -131,6 +147,8 @@ class TransactionController extends Controller
                 'dimension_h' => $transaction->dimension_h,
                 'dimension_w' => $transaction->dimension_w,
                 'dimension_l' => $transaction->dimension_l,
+                'repai_location_code' => $location_code->code
+
             ];
         }
 

@@ -412,7 +412,7 @@ class MasterTarrifController extends Controller
     }
 
     public function checktarrifbydimention(Request $request){
-        $getData =  MasterTarrif::where('component_code',$request->component_code)->where('damade_id',$request->damageCode)->where('repair_id',$request->repairCode)->where('material_id',$request->materialCode)->where('dimension_l',$request->master_length)->where('dimension_w',$request->master_width)->where('dimension_h',$request->master_height)->get();
+        $getData =  MasterTarrif::where('repai_location_code',$request->location_code_id)->where('component_code',$request->component_code)->where('damade_id',$request->damageCode)->where('repair_id',$request->repairCode)->where('material_id',$request->materialCode)->where('dimension_l',$request->master_length)->where('dimension_w',$request->master_width)->where('dimension_h',$request->master_height)->where('line_id',$request->line_id)->get();
         if(count($getData)>0){
             return $getData;
         }else{
