@@ -170,7 +170,7 @@ class MasterTransportController extends Controller
      */
     public function store(Request $request)
     {
-        $createTransport = MasterTransport::create([
+        $createTransport = MasterTransport::updateOrCreate([
             'name' => $request->name,
             'address' => $request->address,
             'city' => $request->city,
@@ -189,7 +189,8 @@ class MasterTransportController extends Controller
         if($createTransport){
             return response()->json([
                 'status' => "success",
-                'message' => "Transport Added Successfully"
+                'message' => "Transport Added Successfully",
+                'data' => $createTransport
             ], 200);
         }else{
             return response()->json([

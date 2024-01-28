@@ -113,6 +113,10 @@ class PreAdviceController extends Controller
             ])->orderby('created_at','asc')->get();
 
             foreach($gateInData as $gateIn){
+                $GateInDetails = GateIn::find($gateIn->id);
+                $GateInDetails->do_no = $request->do_no;
+                $GateInDetails  = $GateInDetails->save();
+
                 $createDoContainer = DoContainer::create([
                     'line_id'=> $gateIn->line_id,
                     'container_no'=> $gateIn->container_no,

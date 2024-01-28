@@ -58,6 +58,7 @@ return new class extends Migration
             $table->string('return')->nullable();
             $table->string('tracking_device')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('do_no')->nullable();
             $table->string('gateintype')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();

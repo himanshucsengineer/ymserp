@@ -12,6 +12,7 @@ use App\Models\MasterMaterial;
 use App\Models\LocationCode;
 use App\Models\GatePass;
 use App\Models\InvoiceManagement;
+use App\Models\DoContainer;
 
 use App\Models\GateIn;
 use App\Models\MasterTransport;
@@ -746,7 +747,7 @@ class GateInController extends Controller
                 ['is_estimate_done','1'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner']
+                ['gateintype','!=','Without Container']
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -755,7 +756,7 @@ class GateInController extends Controller
                 ['is_estimate_done','1'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner'],
+                ['gateintype','!=','Without Container'],
                 ['depo_id',$request->depo_id],
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }
@@ -846,7 +847,7 @@ class GateInController extends Controller
                 ['is_estimate_done','0'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner']
+                ['gateintype','!=','Without Container']
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -855,7 +856,7 @@ class GateInController extends Controller
                 ['is_estimate_done','0'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner'],
+                ['gateintype','!=','Without Container'],
                 ['depo_id',$request->depo_id],
             ])->whereBetween('inward_date', [$startDate, $endDate])->orderby('created_at','desc')->paginate($datalimit);
         }
@@ -1802,7 +1803,7 @@ class GateInController extends Controller
                 ['is_estimate_done','1'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner']
+                ['gateintype','!=','Without Container']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -1821,7 +1822,7 @@ class GateInController extends Controller
                 ['is_estimate_done','1'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner']
+                ['gateintype','!=','Without Container']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
@@ -1908,7 +1909,7 @@ class GateInController extends Controller
                 ['is_estimate_done','0'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner']
+                ['gateintype','!=','Without Container']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }else{
 
@@ -1927,7 +1928,7 @@ class GateInController extends Controller
                 ['is_estimate_done','0'],
                 ['is_approve','0'],
                 ['is_repaired','0'],
-                ['gateintype','!=','Without Conatiner']
+                ['gateintype','!=','Without Container']
             ])->orderby('created_at','desc')->paginate($datalimit);
         }
         
@@ -2569,7 +2570,7 @@ class GateInController extends Controller
      */
     public function store(Request $request){
 
-        if($request->vehicle_number && $request->type != '2nd_with'){
+        if($request->vehicle_number){
             $getInContainer = GateIn::where('status','In')->where('vehicle_number',$request->vehicle_number)->get();
             if(count($getInContainer)>0){
                 return response()->json([
@@ -2579,51 +2580,6 @@ class GateInController extends Controller
             }
         }
 
-        if($request->vehicle_number && $request->type == '2nd_with'){
-            $getInContainer = GateIn::where('status','In')->where('vehicle_number',$request->vehicle_number)->get();
-            if(count($getInContainer)>2){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Vehicle Is Already In Yard!"
-                ], 500);
-            }
-        }
-
-        if($request->container_no){
-            $getInContainer = GateIn::where('status','In')->where('container_no',$request->container_no)->get();
-            if(count($getInContainer)>0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Container Is Already In Yard!"
-                ], 500);
-            }
-        }
-
-        if($request->two_container_no){
-            $getInContainer = GateIn::where('status','In')->where('container_no',$request->two_container_no)->get();
-            if(count($getInContainer)>0){
-                return response()->json([
-                    'status' => "error",
-                    'message' => "Container Is Already In Yard!"
-                ], 500);
-            }
-        }
-
-        if ($request->hasFile('container_img')) {
-            $container_img = $request->file('container_img');
-            $container_img_name = time() . '_' . $container_img->getClientOriginalName();
-            $container_img->move(public_path('uploads/gatein'), $container_img_name);
-        }else{
-            $container_img_name = '';
-        }
-
-        if ($request->hasFile('2nd_container_img')) {
-            $container_img_2 = $request->file('2nd_container_img');
-            $container_img_2_name = time() . '_' . $container_img_2->getClientOriginalName();
-            $container_img_2->move(public_path('uploads/gatein'), $container_img_2_name);
-        }else{
-            $container_img_2_name = '';
-        }
 
         if ($request->hasFile('vehicle_img')) {
             $vehicle_img = $request->file('vehicle_img');
@@ -2639,6 +2595,7 @@ class GateInController extends Controller
                 'message' => "Please Fill at least one thing for vhicle"
             ], 500);
         }
+
 
         if($request->type == 'without'){
             $currentDateTime = new \DateTime();
@@ -2660,86 +2617,130 @@ class GateInController extends Controller
                 'inward_date' => date('Y-m-d'),
                 'inward_time' => date('H:i:s'),
             ]);
-        }else if($request->type == '2nd_with'){
-            $currentDateTime = new \DateTime();
-            $formattedDateTime = $currentDateTime->format('YmdHisu');
-
-            $inwardNo = $request->depo_id.$formattedDateTime;
-
-            $createGatein = GateIn::create([
-                'container_img' => $container_img_name,
-                'vehicle_img' => $vehicle_img_name,
-                'container_no'=> $request->container_no,
-                'vehicle_number'=> $request->vehicle_number,
-                'depo_id' => $request->depo_id,
-                'createdby' => $request->user_id,
-                'gateintype' => "2 Conatiner",
-                'inward_no' => $inwardNo,
-                'status' => 'In',
-                'is_approve' => '0',
-                'is_repaired' => '0',
-                'is_estimate_done' => '0',
-                'inward_date' => date('Y-m-d'),
-                'inward_time' => date('H:i:s'),
-            ]);
 
             if($createGatein){
-                $currentDateTime2 = new \DateTime();
-            $formattedDateTime2 = $currentDateTime2->format('YmdHisu');
-
-            $inwardNo2 = $request->depo_id.$formattedDateTime2;
-                $createGatein2 = GateIn::create([
-                    'container_img' => $container_img_2_name,
-                    'vehicle_img' => $vehicle_img_name,
-                    'container_no'=> $request->two_container_no,
-                    'vehicle_number'=> $request->vehicle_number,
-                    'depo_id' => $request->depo_id,
-                    'createdby' => $request->user_id,
-                    'gateintype' => "2 Conatiner",
-                    'inward_no' => $inwardNo2,
-                    'status' => 'In',
-                    'is_approve' => '0',
-                    'is_repaired' => '0',
-                    'is_estimate_done' => '0',
-                    'inward_date' => date('Y-m-d'),
-                    'inward_time' => date('H:i:s'),
-                ]);
+                return response()->json([
+                    'status' => "success",
+                    'message' => "Entered Successfully"
+                ], 200);
+            }else{
+                return response()->json([
+                    'status' => "error",
+                    'message' => "Error in submission!"
+                ], 500);
             }
+
         }else{
-            $currentDateTime = new \DateTime();
-            $formattedDateTime = $currentDateTime->format('YmdHisu');
+            if($request->container_no || $request->container_img){
+                $containerNo = explode(',',$request->container_no);
+                $containerImg = explode(',',$request->container_img);
 
-            $inwardNo = $request->depo_id.$formattedDateTime;
 
-            $createGatein = GateIn::create([
-                'container_img' => $container_img_name,
-                'vehicle_img' => $vehicle_img_name,
-                'container_no'=> $request->container_no,
-                'vehicle_number'=> $request->vehicle_number,
-                'depo_id' => $request->depo_id,
-                'createdby' => $request->user_id,
-                'gateintype' => "With Conatiner",
-                'inward_no' => $inwardNo,
-                'status' => 'In',
-                'is_approve' => '0',
-                'is_repaired' => '0',
-                'is_estimate_done' => '0',
-                'inward_date' => date('Y-m-d'),
-                'inward_time' => date('H:i:s'),
-            ]);
+                $containerImages = [];
+
+for ($i = 0; $i < count($containerImg); $i++) {
+    if ($request->hasFile('container_img')[$i]) {
+        $container_img = $request->file('container_img')[$i];
+        $container_img_name = time() . '_' . $container_img->getClientOriginalName();
+        $container_img->move(public_path('uploads/gatein'), $container_img_name);
+        $containerImages[] = $container_img_name;
+    } else {
+        $containerImages[] = ''; // No file provided, store an empty string
+    }
+}
+
+return $containerImages;
+                // $containerImg = explode(',',$request->container_img);
+
+                // $containerImages = [];
+                // for($j=0; $j<count($containerImg); $j++){
+                //     if($containerImg[$j] != ''){
+                //         $container_img = $request->file('container_img')[$j];
+                //         $container_img_name = time() . '_' . $container_img->getClientOriginalName();
+                //         $container_img->move(public_path('uploads/gatein'), $container_img_name);
+                //         array_push($containerImages,$container_img_name); 
+                //     }else{
+                //         // return "hiii";
+                //         array_push($containerImages,''); 
+                //     }
+                // }
+
+                // return $containerImages;
+
+                
+                // foreach ($request->file('container_img') as $containerImg) {
+                //     $imageName = time() . '_' . $containerImg->getClientOriginalName();
+                //     return $imageName;
+                //     // $containerImg->move(public_path('uploads/gatein'), $imageName);
+                //     $containerImages[] = $containerImg;
+                // }
+                // return $containerImages;
+                
+                for($i=0; $i<count($containerNo); $i++){
+                    $getInContainer = GateIn::where('status','In')->where('container_no',$containerNo[$i])->get();
+                    if(count($getInContainer)>0){
+                        return response()->json([
+                            'status' => "error",
+                            'message' => $containerNo[$i] . " Container Is Already In Yard!"
+                        ], 500);
+                    }
+
+                    if ($request->hasFile('container_img')[$i]) {
+                        $container_img = $request->file('container_img')[$i];
+                        $container_img_name = time() . '_' . $container_img->getClientOriginalName();
+                        $container_img->move(public_path('uploads/gatein'), $container_img_name);
+                    }else{
+                        $container_img_name = '';
+                    }
+
+                    return $container_img_name;
+
+                    if($containerNo[$i] == ''  && $container_img_name == ''){
+                        $p = $i+1;
+                        return response()->json([
+                            'status' => "error",
+                            'message' => $p . " Container Information Is Required"
+                        ], 500);
+                    }
+
+                    $currentDateTime = new \DateTime();
+                    $formattedDateTime = $currentDateTime->format('YmdHisu');
+                    $inwardNo = $request->depo_id.$formattedDateTime;
+        
+                    $createGatein = GateIn::create([
+                        'container_img' => $container_img_name,
+                        'vehicle_img' => $vehicle_img_name,
+                        'container_no'=> $containerNo[$i],
+                        'vehicle_number'=> $request->vehicle_number,
+                        'depo_id' => $request->depo_id,
+                        'createdby' => $request->user_id,
+                        'gateintype' => "With Conatiner",
+                        'inward_no' => $inwardNo,
+                        'status' => 'In',
+                        'is_approve' => '0',
+                        'is_repaired' => '0',
+                        'is_estimate_done' => '0',
+                        'inward_date' => date('Y-m-d'),
+                        'inward_time' => date('H:i:s'),
+                    ]);
+
+                }   
+
+                if($createGatein){
+                    return response()->json([
+                        'status' => "success",
+                        'message' => "Entered Successfully"
+                    ], 200);
+                }else{
+                    return response()->json([
+                        'status' => "error",
+                        'message' => "Error in submission!"
+                    ], 500);
+                }
+            }
         }
 
-        if($createGatein){
-            return response()->json([
-                'status' => "success",
-                'message' => "Entered Successfully"
-            ], 200);
-        }else{
-            return response()->json([
-                'status' => "error",
-                'message' => "Error in submission!"
-            ], 500);
-        }
+        
 
     }
 
@@ -2777,14 +2778,29 @@ class GateInController extends Controller
             $containerDetails->gate_out_check_by = $request->check_by;
             $containerDetails->gate_out_date = date('Y-m-d H:i:s');
 
+            $do_container_details = DoContainer::where([
+                ['container_no',$containerDetails->container_no],
+                ['line_id',$containerDetails->line_id],
+                ['container_size',$containerDetails->container_size],
+                ['container_type',$containerDetails->container_type],
+                ['sub_type',$containerDetails->sub_type],
+                ['status','Ready'],
+            ])->first();
+
+            $docontainerDetails = DoContainer::find($do_container_details->id);
+            $docontainerDetails->status = "Out";
+            $docontainerDetails->gate_out_date = date('Y-m-d H:i:s');
+
+
             $gatepassDetails = GatePass::find($request->gate_pass_no);
             $gatepassDetails->is_checked = "yes";
             $gatepassDetails  = $gatepassDetails->save();
 
             $vhicleDetails  = $vhicleDetails->save();
             $containerDetails  = $containerDetails->save();
+            $docontainerDetails  = $docontainerDetails->save();
 
-            if($vhicleDetails && $containerDetails && $gatepassDetails){
+            if($vhicleDetails && $containerDetails && $gatepassDetails && $docontainerDetails){
                 return response()->json([
                     'status' => "success",
                     'message' => "Gate Out Successfully"

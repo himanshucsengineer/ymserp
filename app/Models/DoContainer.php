@@ -19,6 +19,7 @@ class DoContainer extends Model
         'voyage',
         'status',
         'grade',
+        'gate_out_date',
         'do_no',
         'depo_id',
         'createdby',

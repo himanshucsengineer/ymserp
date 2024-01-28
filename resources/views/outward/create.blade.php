@@ -418,18 +418,12 @@
 
             captureButton.addEventListener('click', function () {
                 $('#modal-camera').modal('show');
-                // Access the webcam
                 navigator.mediaDevices.getUserMedia({ video: true })
                     .then(function (stream) {
-                        // Display the video element
                         webcamVideo.srcObject = stream;
                         webcamVideo.play();
                         webcamVideo.style.display = 'block';
-
-                        // Hide the capture button
                         captureButton.style.display = 'none';
-
-                        // Show the confirm and discard buttons
                         confirmButton.style.display = 'inline-block';
                         discardButton.style.display = 'inline-block';
                     })

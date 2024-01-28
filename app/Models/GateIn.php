@@ -70,6 +70,7 @@ class GateIn extends Model
         'status_updatedat',
         'status_updatedby',
         'status',
+        'do_no',
         'is_gate_out_checked',
         'gate_out_check_by',
         'gate_out_date',

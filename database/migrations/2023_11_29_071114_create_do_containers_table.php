@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('do_no')->nullable();
             $table->string('grade')->nullable();
+            $table->string('gate_out_date')->nullable();
             $table->string('depo_id')->nullable();
             $table->string('createdby')->nullable();
             $table->string('updatedby')->nullable();

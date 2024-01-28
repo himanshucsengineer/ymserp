@@ -615,7 +615,7 @@ class OutwardOfficerController extends Controller
                 return 'Zero';
             }
             return '';
-        }
+    }
         
 
     public function thirdparty(Request $request){
@@ -631,7 +631,7 @@ class OutwardOfficerController extends Controller
         $amount = $request->amt;
 
         $getGetInData = GateIn::where('id',$gateInid)->first();
-        $transporter = MasterTransport::where('id', $getGetInData->transport_id)->first();
+        $transporter = MasterTransport::where('id', $getGetInData->consignee_id)->first();
         $line = MasterLine::where('id', $getGetInData->line_id)->first();
 
         if($request->is_update){
