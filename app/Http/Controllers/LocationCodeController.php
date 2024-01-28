@@ -42,6 +42,17 @@ class LocationCodeController extends Controller
         }
     }
 
+    public function getbylocation(Request $request){
+        return LocationCode::where('id',$request->location_id)->get();
+
+    }
+
+
+    public function getbyline(Request $request)
+    {
+        return LocationCode::get();
+    }
+
     public function getbyid(Request $request){
         return LocationCode::where('id',$request->id)->first();
     }

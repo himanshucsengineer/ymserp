@@ -40,6 +40,7 @@ class Transaction extends Model
         'dimension_h',
         'dimension_w',
         'dimension_l',
-        'actual_material'
+        'actual_material',
+        'desc'
     ];
 }

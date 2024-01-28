@@ -150,7 +150,7 @@ class GateInController extends Controller
                 'sab_total' => number_format($transaction->sab_total, 2),
                 'gst' => $transaction->gst,
                 'total' => number_format($transaction->total, 2),
-                'desc' => $tarrifData->desc
+                'desc' => $transaction->desc
             ];
         }
 

@@ -378,6 +378,11 @@ a.open:hover .circle img {
                                             <button type="button" class="btn btn-block btn-outline-success"
                                                 onclick="showFloor()">Floor</button>
                                         </div>
+
+                                        <div class="card">
+                                            <button type="button" class="btn btn-block btn-success"
+                                                onclick="notStandard()">Wildcard Tariff</button>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row justify-content-center">
@@ -530,6 +535,11 @@ $('#roof_side').hide();
 $('#floor_side').hide();
 
 
+function notStandard(){
+    var line_id = $('#line_id_no').val(); 
+    getLocation(line_id);
+    $('#modal-xl').modal('show');
+}
 
 function showRight() {
     $('#right').show();
@@ -941,6 +951,15 @@ $(document).ready(function() {
         getTarriflength(data);
     });
 
+    $('#side').on('change', function() {
+        var master_length = $('#component_code');
+        master_length.empty();
+        var line_id = $('#line_id_no').val();
+        var location_code_id = $(this).val();
+        $('#location_code_id').val(location_code_id);
+        gettarrif(location_code_id, line_id);
+    });
+
     $('#master_length').on('change', function() {
 
         var damageCode = $('#damage_code').val();
@@ -1047,6 +1066,7 @@ $(document).ready(function() {
                 $("#dimension_h").val(data[0].dimension_h);
                 $("#dimension_w").val(data[0].dimension_w);
                 $("#dimension_l").val(data[0].dimension_l);
+                $("#desc").val(data[0].desc);
                 $('#addButton').removeAttr('disabled');
                 $('#qty').removeAttr('readonly');
                 $('#labour_cost').removeAttr('readonly');
@@ -1394,10 +1414,7 @@ function getTarrifByLine(line_id) {
                 var dataIdValue = $(this).data('id');
                 var datacodeValue = $(this).data('value');
                 $('#location_code_id').val(dataIdValue);
-                var line_id = $('#line_id_no').val();
-                gettarrif(dataIdValue, line_id);
-
-                $('#side').val(datacodeValue);
+                getLocation_hotspot(dataIdValue);
                 $('#modal-xl').modal('show');
             });
         }, 
@@ -1423,6 +1440,55 @@ function gettarrif(location_code, line_id) {
             processTarrif(data);
             getTransactionData();
 
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+
+function getLocation(line_id) {
+    $.ajax({
+        type: "POST",
+        url: "/api/location/getbyline",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: {
+            'line_id': line_id,
+        },
+        success: function(data) {
+            processLocation(data);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function getLocation_hotspot(location_id){
+    $.ajax({
+        type: "POST",
+        url: "/api/location/getbylocation",
+        headers: {
+            'Authorization': 'Bearer ' + checkToken
+        },
+        data: {
+            'location_id': location_id,
+        },
+        success: function(data) {
+            $('#side').empty();
+            var select = document.getElementById('side');
+            data.forEach(function(item) {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.code;
+                select.appendChild(option);
+            });
+            
+            var line_id = $('#line_id_no').val();
+            gettarrif(location_id, line_id);
         },
         error: function(error) {
             console.log(error);
@@ -1459,6 +1525,39 @@ function processTarrif(data){
         language: {
             noResults: function () {
                 return '<center><button class="w-20 btn btn-block btn-outline-success" onclick="createTarrif()">Add New</button></center>';
+            }
+        }
+    });
+}
+
+function processLocation(data){
+    var component_code = $('#side');
+    component_code.empty();
+    var component_code_create = document.getElementById('side');
+    var component_code_create_option = document.createElement('option');
+    component_code_create_option.value = '';
+    component_code_create_option.text = "Select Location Code";
+    component_code_create.appendChild(component_code_create_option);
+
+    var transformedData = data.map(function(item) {
+        return {
+            id: item.id,
+            text: item.code
+        };
+    });
+
+    var blankOption = { id: '', text: '' };
+    transformedData.unshift(blankOption);
+
+    $('#side').select2({
+        placeholder: 'Select An Option',
+        data: transformedData,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        language: {
+            noResults: function () {
+                return '<center>No Result Found!</center>';
             }
         }
     });
@@ -2241,6 +2340,7 @@ function createTransaction() {
     var sub_total = $('#sub_total').val();
     var tax_cost = $('#tax_cost').val();
     var total = $('#total').val();
+    var desc = $('#desc').val();
 
     if ($('#file1')[0].files[0] && qty != '' && labour_cost != '' && labour_hr != '' && material_cost != '' && gst != '') {
         var tarrif_id = $('#tarrif_id').val();
@@ -2265,8 +2365,9 @@ function createTransaction() {
         formData.append('reporting_dimension_h', dimension_h);
         formData.append('reporting_dimension_w', dimension_w);
         formData.append('reporting_dimension_l', dimension_l);
-
+        
         formData.append('gatein_id', gatein_id);
+        formData.append('desc', desc);
         formData.append('tarrif_id', tarrif_id);
 
         formData.append('before_file1', $('#file1')[0].files[0]);
@@ -2384,16 +2485,18 @@ function updateEstimate() {
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Component Code</label>
-                            <select name="component_code" id="component_code" class="form-control select2">
-                                <option value="">Select Component Code</option>
+                            <label>Location Code</label>
+                            <select name="side" id="side" class="form-control select2">
+                                <option value="">Select Location Code</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Location Code</label>
-                            <input type="text" id="side" class="form-control" readonly>
+                            <label>Component Code</label>
+                            <select name="component_code" id="component_code" class="form-control select2">
+                                <option value="">Select Component Code</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -2516,6 +2619,12 @@ function updateEstimate() {
                                 <div class="form-group">
                                     <label>Total</label>
                                     <input type="text" id="total" class="form-control" readonly placeholder="Enter Total" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text" id="desc" class="form-control" placeholder="Enter Description" required>
                                 </div>
                             </div>
                         </div>

@@ -221,6 +221,7 @@ class TransactionController extends Controller
             'sab_total' => $request->sab_total,
             'gst' => $request->gst,
             'total' => $request->total,
+            'desc' => $request->desc,
             'tax_cost' => $request->tax_cost,
             'gatein_id' => $request->gatein_id,
             'qty' => $request->qty,

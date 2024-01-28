@@ -120,6 +120,8 @@ $api->version('v1', function($api){
         $api->post('/getbyid', 'App\Http\Controllers\LocationCodeController@getbyid');
         $api->post('/delete', 'App\Http\Controllers\LocationCodeController@destroy');
         $api->post('/update', 'App\Http\Controllers\LocationCodeController@update');
+        $api->post('/getbyline', 'App\Http\Controllers\LocationCodeController@getbyline');
+        $api->post('/getbylocation', 'App\Http\Controllers\LocationCodeController@getbylocation');
     });
 
     $api->group([ 'middleware' => 'api.auth', 'prefix'=>'repair'], function($api){

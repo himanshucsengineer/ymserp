@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('dimension_h')->nullable();
             $table->string('dimension_w')->nullable();
             $table->string('dimension_l')->nullable();
+            $table->string('desc')->nullable();
             $table->timestamps();
         });
     }
